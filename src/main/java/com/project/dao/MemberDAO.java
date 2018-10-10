@@ -22,19 +22,5 @@ public class MemberDAO {
 		
 	}
 	
-	public void createAuthkey(int mAuthcode, String mEmailId){
-		
-		
-		MemberDTO dto = new MemberDTO();
-		
-		sessionTemplate.update("joinMapper.createAuthkey", dto);
-		
-		dto.setmAuthcode(mAuthcode);
-		dto.setMEmailId(mEmailId);
-	}
-	public void userAuth(String mEmailId) throws Exception {
-
-		sessionTemplate.update(mEmailId);
-	}
 
 }

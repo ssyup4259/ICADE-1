@@ -155,6 +155,7 @@ public class MemberDTO {
     public void setMString(String mString) {
         this.mString = mString;
     }
+
 	
 	
 	
