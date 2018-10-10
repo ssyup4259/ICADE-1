@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -30,5 +31,15 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 		
 		return "home";
 	}
+	
+	@RequestMapping(value="/ji.action")
+	public ModelAndView ji() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("buy/buy");
+		return mav;
+	}
+	
+	
 	
 }

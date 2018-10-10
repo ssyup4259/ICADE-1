@@ -8,7 +8,7 @@
 
 
 <!-- 데이터 입력 -->
-<insert id="insertData" parameterType="com.icade.dto.MemberDTO">
+<insert id="insertData" parameterType="com.project.dto.MemberDTO">
 	insert into member (m_rank, m_id, m_pw, m_name, m_zipcode, m_address1, m_address2, m_email_id, m_email_domain, m_cellphone1, m_cellphone2, m_cellphone3, m_date, m_point)
 	values(#{m_rank}, #{m_id}, #{m_pw}, #{m_name}, #{m_zipcode}, #{m_address1}, #{m_address2}, #{m_email_id}, #{m_email_domain}, #{m_cellphone1}, #{m_cellphone2}, #{m_cellphone3},sysdate,0)
 </insert>
