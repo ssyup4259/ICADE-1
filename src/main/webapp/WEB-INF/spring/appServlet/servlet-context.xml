@@ -28,7 +28,7 @@
 		<beans:property name="maxInMemorySize" value="1024000"/>
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
-	
+		
 	<beans:bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg ref="sessionFactory"/>
 	</beans:bean>
