@@ -14,7 +14,7 @@
 </insert>
 
 <!-- 데이터 수정 -->
-<!-- <update id="updateData" parameterType="com.icade.dto.MemberDTO">
+<!-- <update id="updateData" parameterType="com.project.dto.MemberDTO">
 	update board set name = #{name}, pwd = #{pwd}, email = #{email},
 	subject = #{subject}, content = #{content} where num = #{num}
 </update> -->
