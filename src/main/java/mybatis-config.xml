@@ -24,8 +24,8 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/project/mybatis/tempMapper.xml"/>		
-		<mapper resource="com/project/mybatis/joinMapper.xml"/>		
+		<mapper resource="com/project/mybatis/joinMapper.xml"/>
+		<mapper resource="com/project/mybatis/adminMapper.xml"/>
 	</mappers>
 	
 </configuration>
