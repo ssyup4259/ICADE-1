@@ -17,4 +17,10 @@
 	update Member set m_authcode= #{m_authcode} where m_email_id =#{m_email_id}
 </update>
 
+
+
+
+
+
+
 </mapper>
