@@ -289,5 +289,21 @@ footer {
 	</div>
 
 
+=======
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="<%=cp %>/ji.action">구매하기</a>
+>>>>>>> 5e39aec12a985d0e49af2a7772a33392322b7fcd
 </body>
 </html>
