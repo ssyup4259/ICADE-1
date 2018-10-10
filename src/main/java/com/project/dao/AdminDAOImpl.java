@@ -26,6 +26,21 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void insertGoods(GoodsDTO g_dto) throws Exception  {
 		
+		int maxNum = 0;
+		
+		maxNum = sessionTemplate.selectOne(namespace + ".maxNum");
+		
+		g_dto.setgNum(maxNum + 1);
+		
+		//for문 돌려서 데이터 삽입
+		
+		String gCode;
+		int gCodeNum = 0;
+		
+		gCode = g_dto.getgKindNum() + "-" + gCodeNum + "-" + g_dto.getgDevice() + g_dto.getgColor();
+		
+		g_dto.setgCode(gCode);
+		
 		sessionTemplate.insert(namespace + ".insertGoods", g_dto);
 		
 	}

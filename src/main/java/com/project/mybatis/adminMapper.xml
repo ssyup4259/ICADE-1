@@ -4,11 +4,28 @@
 
 <mapper namespace="com.project.mybatis.adminMapper">
 
+<!-- Num의 최댓값 -->
+<select id="maxNum" resultType="int">
+	select nvl(max(num), 0) from Goods
+</select>
 
 <!-- 데이터 입력 -->
-<insert id="insertGoods" parameterType="com.project.dto.MemberDTO">
-	
+<insert id="insertGoods" parameterType="com.project.dto.GoodsDTO">
+	insert into goods(G_NUM, G_CODE, G_NAME, G_KIND_NUM, G_DEVICE,
+		G_COLOR, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO)
+	values(#{G_NUM}, #{G_CODE}, #{G_NAME], #{G_KIND_NUM}, #{G_DEVICE}, #{G_COLOR},
+		#{G_COUNT}, #{G_PRICE}, 0, #{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO})
 </insert>
+
+<!-- 데이터 수정 -->
+<update id="updateGoods" parameterType="com.project.dto.MemberDTO">
+	
+</update>
+
+<!-- 데이터 삭제 -->
+<delete id="deleteGoods" parameterType="String">
+	delete Goods where g_code = #{g_code}
+</delete>
 
 
 </mapper>
