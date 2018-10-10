@@ -29,7 +29,7 @@
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
 		
-	<beans:bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<!-- <beans:bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg ref="sessionFactory"/>
 	</beans:bean>
 		
@@ -42,10 +42,10 @@
 	
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:TestDB"/>
-		<beans:property name="username" value="suzi"/>
-		<beans:property name="password" value="a123"/>
+		<beans:property name="username" value="ICADE"/>
+		<beans:property name="password" value="123"/>
 		
-	</beans:bean>
+	</beans:bean> -->
 	
 	
 	
