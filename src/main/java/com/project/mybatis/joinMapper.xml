@@ -8,16 +8,13 @@
 
 
 <!-- 데이터 입력 -->
-<insert id="insertData" parameterType="com.icade.dto.MemberDTO">
+<insert id="insertData" parameterType="com.project.dto.MemberDTO">
 	insert into member (m_rank, m_id, m_pw, m_name, m_zipcode, m_address1, m_address2, m_email_id, m_email_domain, m_cellphone1, m_cellphone2, m_cellphone3, m_date, m_point)
 	values(#{m_rank}, #{m_id}, #{m_pw}, #{m_name}, #{m_zipcode}, #{m_address1}, #{m_address2}, #{m_email_id}, #{m_email_domain}, #{m_cellphone1}, #{m_cellphone2}, #{m_cellphone3},sysdate,0)
 </insert>
 
-<!-- 데이터 수정 -->
-<!-- <update id="updateData" parameterType="com.icade.dto.MemberDTO">
-	update board set name = #{name}, pwd = #{pwd}, email = #{email},
-	subject = #{subject}, content = #{content} where num = #{num}
-</update> -->
-
+<update id="createAuthkey">
+	update Member set m_authcode= #{m_authcode} where m_email_id =#{m_email_id}
+</update>
 
 </mapper>
