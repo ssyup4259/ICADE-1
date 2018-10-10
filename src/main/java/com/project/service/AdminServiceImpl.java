@@ -14,47 +14,52 @@ import com.project.dto.OrdersDTO;
 public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
-	private AdminDAO dao;
+	private AdminDAO a_dao;
 
 	@Override
-	public void insertGoods(GoodsDTO g_dto) {
+	public void insertGoods(GoodsDTO g_dto) throws Exception {
 		
-		dao.insertGoods(g_dto);
+		a_dao.insertGoods(g_dto);
 		
 	}
 	@Override
-	public void updateGoods(GoodsDTO g_dto) {
+	public void updateGoods(GoodsDTO g_dto) throws Exception  {
 		
-		dao.updateGoods(g_dto);
-		
-	}
-
-	@Override
-	public void deleteGoods(String g_code) {
-		
-		dao.deleteGoods(g_code);
+		a_dao.updateGoods(g_dto);
 		
 	}
 
 	@Override
-	public List<MemberDTO> memberList() {
+	public void deleteGoods(String g_code) throws Exception  {
 		
-		return dao.memberList();
-		
-	}
-
-	@Override
-	public void authority(String m_id) {
-		
-		dao.authority(m_id);
+		a_dao.deleteGoods(g_code);
 		
 	}
 
 	@Override
-	public List<OrdersDTO> ordersList() {
-
-		return dao.ordersList();
+	public List<MemberDTO> memberList() throws Exception  {
 		
+		return a_dao.memberList();
+		
+	}
+
+	@Override
+	public void authority(String m_id) throws Exception  {
+		
+		a_dao.authority(m_id);
+		
+	}
+
+	@Override
+	public List<OrdersDTO> ordersList() throws Exception  {
+
+		return a_dao.ordersList();
+		
+	}
+	@Override
+	public List<GoodsDTO> goodsList() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
