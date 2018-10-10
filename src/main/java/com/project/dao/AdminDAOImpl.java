@@ -35,11 +35,10 @@ public class AdminDAOImpl implements AdminDAO {
 		//for문 돌려서 데이터 삽입
 		
 		String gCode;
-		int gCodeNum = 0;
 		
-		gCode = g_dto.getgKindNum() + "-" + gCodeNum + "-" + g_dto.getgDevice() + g_dto.getgColor();
+		//gCode = g_dto.getgNum() + "-" + g_dto.getgKindNum() + "-" + g_dto.getgDevice() + "-" + g_dto.getgColor();
 		
-		g_dto.setgCode(gCode);
+		//g_dto.setgCode(gCode);
 		
 		sessionTemplate.insert(namespace + ".insertGoods", g_dto);
 		
