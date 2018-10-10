@@ -10,16 +10,38 @@
 <meta name="Description" content="회원가입" />
 <link rel="stylesheet" href="../resources/css/screen.css" type="text/css" media="screen" />
 <title>회원가입</title>
-<script type="text/javascript">
-//<![CDATA[
-    function check() {
-        var form = document.getElementById("signUpForm");
-        //TODO 유효성 검사
-        return true;
-    }
-//]]>
-</script>          
+  <script type="text/javascript">
+
+  	function sendMail(email) {
+  		
+  		var xhttp = new XMLHttpRequest();
+  		xhttp.onreadystagechange =function(){
+  			if(xhttp.readyState ==4){
+  				if (xhttp.status == 200) {
+					alert("메일을 정상적으로 보냈습니다");
+				}else{
+					alert("올바른 메일 형식이 아닙니다.");
+					
+				}
+  			}
+  			
+  			
+  		};
+  		xhttp.open("POST","sendMail/", true);
+  		xhttp.send("email=" + email);
+  		
+  		
+		return false;
+	}
+  
+ 
+ 
+ 
+</script>      
+ 
+ 
 </head>
+
 <body>
  
 <div id="wrap">
@@ -29,7 +51,7 @@
  
 <!-- 본문 시작 -->
 <h1>회원가입</h1>
-<form id="signUpForm" action="signUp" method="post" onsubmit="return check()">
+<form id="signUpForm" action="" method="post" onsubmit="return check()">
 <table>
 <tr>
     <td style="width: 200px;">이름(Full Name)</td>
@@ -75,6 +97,9 @@
 
  
 </div>
+ 
+ 
+
  
 </body>
 </html>
