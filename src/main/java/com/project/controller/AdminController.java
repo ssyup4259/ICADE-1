@@ -1,5 +1,9 @@
 package com.project.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.util.MyUtil;
 import com.project.dto.GoodsDTO;
@@ -31,13 +37,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.POST)
-	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		int g_num;
-		
-		g_num = service.insertGoods(g_dto);
-		
-		service.insertGoodsDetail(gd_dto, g_num);
+		service.insertGoods(g_dto, gd_dto, req, resp);		
 		
 		return "redirect:admin/goodsList";
 		
