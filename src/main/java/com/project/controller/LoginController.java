@@ -42,9 +42,9 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		
-		//dto = dao.checkInfo(mId);
+		dto = dao.checkInfo(mId);
 		
-		System.out.println(dto.getMId());
+		System.out.println(dto.getM_ID());
 		
 		if(dto==null || dto.equals(null)) {
 			System.out.println("dto가 널일시 뜬다.");
