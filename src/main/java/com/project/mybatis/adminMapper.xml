@@ -13,7 +13,7 @@
 <insert id="insertGoods" parameterType="com.project.dto.GoodsDTO">
 	insert into goods(G_NUM, G_CODE, G_NAME, G_KIND_NUM, G_DEVICE,
 		G_COLOR, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO)
-	values(#{G_NUM}, #{G_CODE}, #{G_NAME], #{G_KIND_NUM}, #{G_DEVICE}, #{G_COLOR},
+	values(#{G_NUM}, #{G_CODE}, #{G_NAME}, #{G_KIND_NUM}, #{G_DEVICE}, #{G_COLOR},
 		#{G_COUNT}, #{G_PRICE}, 0, #{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO})
 </insert>
 
