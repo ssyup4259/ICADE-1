@@ -31,11 +31,11 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		maxNum = sessionTemplate.selectOne(namespace + ".goodsMaxNum");
 		
-		g_dto.setgNum(maxNum + 1);
+		g_dto.setG_NUM(maxNum + 1);
 		
 		sessionTemplate.insert(namespace + ".insertGoods", g_dto);
 		
-		return maxNum;
+		return g_dto.getG_NUM();
 		
 	}
 	

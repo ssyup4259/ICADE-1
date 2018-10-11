@@ -1,93 +1,117 @@
 package com.project.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class GoodsDTO {
 	
 	// 글 번호 게시글 글번호
-    private int gNum;
+    private int G_NUM;
 
     // 상품 이름 상품명
-    private String gName;
+    private String G_NAME;
 
     // 전체 상품 수량 
-    private int gCount;
+    private int G_COUNT;
 
     // 상품 가격 소매가
-    private int gPrice;
+    private int G_PRICE;
 
     // 판매한 개수 판매한상품개수
-    private int gSellcount;
+    private int G_SELLCOUNT;
 
     // 상품설명 상품에대한 판매자의 코멘트
-    private String gContent;
+    private String G_CONTENT;
 
     // 할인율 상품에 대한 할인율
-    private int gDiscount;
+    private String G_DISCOUNT;
 
-    // 상품 사진 
-    private String gPhoto;
+    // 파일
+    private MultipartFile gFile;
+
+	// 상품 사진명 
+    private String G_PHOTO;
     
-	public int getgNum() {
-		return gNum;
+    // 상품 사진 저장명
+    private String G_SAVEFILENAME;
+
+	public int getG_NUM() {
+		return G_NUM;
 	}
 
-	public void setgNum(int gNum) {
-		this.gNum = gNum;
+	public void setG_NUM(int g_NUM) {
+		G_NUM = g_NUM;
 	}
 
-	public String getgName() {
-		return gName;
+	public String getG_NAME() {
+		return G_NAME;
 	}
 
-	public void setgName(String gName) {
-		this.gName = gName;
+	public void setG_NAME(String g_NAME) {
+		G_NAME = g_NAME;
 	}
 
-	public int getgCount() {
-		return gCount;
+	public int getG_COUNT() {
+		return G_COUNT;
 	}
 
-	public void setgCount(int gCount) {
-		this.gCount = gCount;
+	public void setG_COUNT(int g_COUNT) {
+		G_COUNT = g_COUNT;
 	}
 
-	public int getgPrice() {
-		return gPrice;
+	public int getG_PRICE() {
+		return G_PRICE;
 	}
 
-	public void setgPrice(int gPrice) {
-		this.gPrice = gPrice;
+	public void setG_PRICE(int g_PRICE) {
+		G_PRICE = g_PRICE;
 	}
 
-	public int getgSellcount() {
-		return gSellcount;
+	public int getG_SELLCOUNT() {
+		return G_SELLCOUNT;
 	}
 
-	public void setgSellcount(int gSellcount) {
-		this.gSellcount = gSellcount;
+	public void setG_SELLCOUNT(int g_SELLCOUNT) {
+		G_SELLCOUNT = g_SELLCOUNT;
 	}
 
-	public String getgContent() {
-		return gContent;
+	public String getG_CONTENT() {
+		return G_CONTENT;
 	}
 
-	public void setgContent(String gContent) {
-		this.gContent = gContent;
+	public void setG_CONTENT(String g_CONTENT) {
+		G_CONTENT = g_CONTENT;
 	}
 
-	public int getgDiscount() {
-		return gDiscount;
+	public String getG_DISCOUNT() {
+		return G_DISCOUNT;
 	}
 
-	public void setgDiscount(int gDiscount) {
-		this.gDiscount = gDiscount;
+	public void setG_DISCOUNT(String g_DISCOUNT) {
+		G_DISCOUNT = g_DISCOUNT;
 	}
 
-	public String getgPhoto() {
-		return gPhoto;
+	public MultipartFile getgFile() {
+		return gFile;
 	}
 
-	public void setgPhoto(String gPhoto) {
-		this.gPhoto = gPhoto;
+	public void setgFile(MultipartFile gFile) {
+		this.gFile = gFile;
+	}
+
+	public String getG_PHOTO() {
+		return G_PHOTO;
+	}
+
+	public void setG_PHOTO(String g_PHOTO) {
+		G_PHOTO = g_PHOTO;
+	}
+
+	public String getG_SAVEFILENAME() {
+		return G_SAVEFILENAME;
+	}
+
+	public void setG_SAVEFILENAME(String g_SAVEFILENAME) {
+		G_SAVEFILENAME = g_SAVEFILENAME;
 	}
     
 }
