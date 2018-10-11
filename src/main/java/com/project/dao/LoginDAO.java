@@ -1,7 +1,5 @@
 package com.project.dao;
 
-import java.util.HashMap;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +14,17 @@ public class LoginDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 	
-	public boolean checkInfo(HashMap<String, Object> hmap ) {
+	public MemberDTO checkInfo(String mId) {
 		
-		boolean checker = sessionTemplate.selectOne("loginMapper.loginChecker", hmap);
+		System.out.println("LoginDAO:" + mId);
 		
-		return checker;
+		MemberDTO dto = new MemberDTO();
+		
+		dto = sessionTemplate.selectOne("loginMapper.loginChecker",mId);
+		
+		System.out.println("확인용");
+		
+		return dto;
 		
 	}
 
