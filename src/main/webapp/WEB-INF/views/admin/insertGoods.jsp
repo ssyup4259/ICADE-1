@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<!-- 상품등록하기 버튼 submit -->
 <script type="text/javascript">
 
 function sendIt() {
@@ -58,29 +59,83 @@ function sendIt() {
 
 </script>
 
-<script type="text/javascript">
+<!-- 상품종류 셀렉트박스 -->
+<!-- <script type="text/javascript">
 
 function showSub(obj) {
 
     var f = document.myForm;
 
-    if(obj == 1) {
+    if(obj == 900) {
     
         f.SUB1.style.display = "";
         f.SUB2.style.display = "none";
+        f.SUB3.style.display = "none";
 
-    } else if (obj == 2) {
+    } else if (obj == 901) {
 
         f.SUB1.style.display = "none";
         f.SUB2.style.display = "";
+        f.SUB3.style.display = "none";
 
-    } else {
+    } else if (obj == 902) {
     	
     	f.SUB1.style.display = "none";
         f.SUB2.style.display = "none";
+        f.SUB3.style.display = "";
         
-    }
+    } else {
+		
+    	f.SUB1.style.display = "none";
+        f.SUB2.style.display = "none";
+        f.SUB3.style.display = "none";
+    	
+	}
+    
 }
+
+</script> -->
+
+<!-- 체크박스관련 -->
+
+<script type="text/javascript">
+
+//기종 체크박스 선택시 색상 표시
+function toggleShow (checkbox) {
+	
+	var id = document.getElementById(checkbox).value;
+	var divId = "D" + id;
+	
+	var subCats = document.all ? document.all[id] :	document.getElementById ? document.getElementById(id) :	null;
+	
+	if (subCats) {
+		
+		
+		if (document.getElementById(divId).style.display == '' || document.getElementById(divId).style.display == 'none')
+			document.getElementById(divId).style.display = 'block'; 
+		else 
+			document.getElementById(divId).style.display = 'none';
+		
+	}
+	
+}
+
+
+//색상 체크박스 선택시 텍스트박스 활성화
+function enableTextBox(name) {
+	
+	var txtBox = document.getElementById(name);
+	
+	if (txtBox.disabled == true) {
+		txtBox.disabled = false;
+	} else {
+		txtBox.value = "";
+		txtBox.disabled = true;
+	}
+	
+}
+
+
 
 </script>
 
@@ -92,39 +147,64 @@ function showSub(obj) {
 <form action="" name="myForm" method="POST" enctype="multipart/form-data">
 
 상품 종류 : 
-<select onChange="showSub(this.options[this.selectedIndex].value);">
+<!-- <select onChange="showSub(this.options[this.selectedIndex].value);">
 	<option>선택해주세요</option>
-	<option value="1">케이스</option>
-	<option>필름</option>
-	<option value="2">액세서리</option>
-</select>
- 
-<select name="SUB1" style="display: none;">
-	<option value="">선택해주세요</option>
-	<option value="">일반케이스</option>
-	<option value="">주문제작 케이스</option>
-</select>
+	<option value="900">케이스</option>
+	<option value="901">필름</option>
+	<option value="902">액세서리</option>
+</select> -->
 
-<select name="SUB2" style="display: none;">
-	<option value="">선택해주세요</option>
-	<option value="">셀카봉/삼각대</option>
-	<option value="">케이블/충전기</option>
-	<option value="">이어폰</option>
-</select>
+<label><input type="radio" name="GD_KIND_NUM" value="1"/>기본 케이스</label>
+<label><input type="radio" name="GD_KIND_NUM" value="2"/>주문제작 케이스</label>
+
+<!-- <select name="SUB1" style="display: none;">
+	<option>선택해주세요</option>
+	<option value="1">기본 케이스</option>
+	<option value="2">주문제작 케이스</option>
+</select> -->
+
+<label><input type="radio" name="GD_KIND_NUM" value="3"/>필름</label>
+
+<!-- <select name="SUB2" style="display: none;">
+	<option value="3">필름</option>
+</select> -->
+
+<label><input type="radio" name="GD_KIND_NUM" value="4"/>셀카봉/삼각대</label>
+<label><input type="radio" name="GD_KIND_NUM" value="5"/>케이블/충전기</label>
+<label><input type="radio" name="GD_KIND_NUM" value="6"/>이어폰</label>
+
+<!-- <select name="SUB3" style="display: none;">
+	<option>선택해주세요</option>
+	<option value="4">셀카봉/삼각대</option>
+	<option value="5">케이블/충전기</option>
+	<option value="6">이어폰</option>
+</select> -->
+
 <br/>
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE"/> <br/>
 지원 기종 : <br/>
 <label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/><br/>
+
 <c:forEach var="dk_dto" items="${dk_lists}">
 
-	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label><br/>
-	<c:forEach var="gc_dto" items="${gc_lists}">
-		<label><input type="checkbox" name="${gc_dto.GC_CODE}" value="${gc_dto.GC_CODE}"/>${gc_dto.GC_COLOR}</label>
-		<input type="text" name="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" size="3" disabled="disabled"/>		
-	</c:forEach>
+	<label><input type="checkbox" id="${dk_dto.DK_CODE}" name="GD_DEVICE" value="${dk_dto.DK_CODE}" onclick="toggleShow('${dk_dto.DK_CODE}')"/>${dk_dto.DK_NAME}</label><br/>
 	
+	<div id="D${dk_dto.DK_CODE}" class="subCats" style="display: none;">
+	
+		<c:forEach var="gc_dto" items="${gc_lists}">
+		
+			<label>
+			<input type="checkbox" name="GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
+			${gc_dto.GC_COLOR}
+			</label>
+			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="GD_COUNT" size="3" disabled="disabled"/>
+				
+		</c:forEach>
+		
 	<br/><br/>
+	
+	</div>
 
 </c:forEach>
 
