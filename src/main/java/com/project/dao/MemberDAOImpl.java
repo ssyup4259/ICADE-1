@@ -27,4 +27,20 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 
+	@Override
+	public int idCheck(String M_ID) throws Exception {
+
+		return sessionTemplate.selectOne(namespace+".idCheck", M_ID);
+		
+		
+	}
+
+	@Override
+	public int nickCheck(String M_NICKNAME) throws Exception {
+		
+		return sessionTemplate.selectOne(namespace+".nickCheck", M_NICKNAME);
+		
+		
+	}
+
 }
