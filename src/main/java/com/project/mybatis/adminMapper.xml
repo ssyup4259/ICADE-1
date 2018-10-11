@@ -9,6 +9,11 @@
 	select nvl(max(G_NUM), 0) from Goods
 </select>
 
+<!--  -->
+<select id="getDevice" resultType="com.project.dto.DeviceKindDTO">
+	select DK_CODE, DK_NAME from DEVICE_KIND
+</select>
+
 <!-- 상품 등록 -->
 <insert id="insertGoods" parameterType="com.project.dto.GoodsDTO">
 	insert into goods(G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME)
@@ -21,12 +26,12 @@
 		values(#{GD_NUM}, #{GD_CODE}, #{GD_KIND_NUM}, #{GD_DEVICE}, #{GD_COLOR}, #{GD_COUNT}, 0)
 </insert>
 
-<!-- 데이터 수정 -->
+<!-- 상품 수정 -->
 <update id="updateGoods" parameterType="com.project.dto.MemberDTO">
 	
 </update>
 
-<!-- 데이터 삭제 -->
+<!-- 상품 삭제 -->
 <delete id="deleteGoods" parameterType="String">
 	delete Goods where G_CODE = #{G_CODE}
 </delete>

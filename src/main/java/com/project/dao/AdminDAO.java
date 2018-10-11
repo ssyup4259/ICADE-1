@@ -2,6 +2,7 @@ package com.project.dao;
 
 import java.util.List;
 
+import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
@@ -9,6 +10,8 @@ import com.project.dto.OrdersDTO;
 
 public interface AdminDAO {
 	
+	//상품 종류 목록
+	public List<DeviceKindDTO> getDeviceList() throws Exception;	
 	//상품 등록
 	public int insertGoods(GoodsDTO g_dto) throws Exception;
 	//상세 상품 등록

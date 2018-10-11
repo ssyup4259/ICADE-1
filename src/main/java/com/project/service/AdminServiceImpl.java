@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.AdminDAO;
+import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
@@ -25,6 +26,13 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminDAO a_dao;
+	
+	@Override
+	public List<DeviceKindDTO> getDeviceList() throws Exception {
+		
+		return a_dao.getDeviceList();
+		
+	}
 	
 	@Transactional
 	@Override
@@ -86,8 +94,8 @@ public class AdminServiceImpl implements AdminService {
 		
 		g_num = a_dao.insertGoods(g_dto);
 		
-		
 		a_dao.insertGoodsDetail(gd_dto, g_num);
+		
 		
 		
 	}
@@ -130,6 +138,5 @@ public class AdminServiceImpl implements AdminService {
 	public List<GoodsDTO> goodsList() throws Exception {
 		return a_dao.goodsList();
 	}
-	
 
 }

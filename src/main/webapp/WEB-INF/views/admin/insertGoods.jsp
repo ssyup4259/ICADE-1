@@ -12,14 +12,6 @@
 
 <script type="text/javascript">
 
-/* function change() {
-	var f = document.myForm;
-			
-	var fileName = f.gFile.value.replace(/^.*[\\\/]/, '');
-	
-	f.gFile.value = fileName;
-} */
-
 function sendIt() {
 	
 	var f = document.myForm;
@@ -59,30 +51,35 @@ function sendIt() {
         return;
     }
         
-    /* str = f.gColor.value;
-    str = str.trim();
-    if(!str) {
-        alert("상품의 색상을 입력해주세요.");
-        f.gColor.focus();
-        return;
-    }
-    f.gColor.value = str; */
-    
-    
-    
-    /* str = f.gCount.value;
-    str = str.trim();
-    if(!str) {
-        alert("상품의 수량을 입력해주세요.");
-        f.gCount.focus();
-        return;
-    }
-    f.gCount.value = str; */   
-    
-	
 	f.action = "<%=cp%>/admin/insertGoods.action";
 	f.submit();
 	
+}
+
+</script>
+
+<script type="text/javascript">
+
+function showSub(obj) {
+
+    var f = document.myForm;
+
+    if(obj == 1) {
+    
+        f.SUB1.style.display = "";
+        f.SUB2.style.display = "none";
+
+    } else if (obj == 2) {
+
+        f.SUB1.style.display = "none";
+        f.SUB2.style.display = "";
+
+    } else {
+    	
+    	f.SUB1.style.display = "none";
+        f.SUB2.style.display = "none";
+        
+    }
 }
 
 </script>
@@ -94,8 +91,45 @@ function sendIt() {
 
 <form action="" name="myForm" method="POST" enctype="multipart/form-data">
 
+상품 종류 : 
+<select onChange="showSub(this.options[this.selectedIndex].value);">
+	<option>선택해주세요</option>
+	<option value="1">케이스</option>
+	<option>필름</option>
+	<option value="2">액세서리</option>
+</select>
+ 
+<select name="SUB1" style="display: none;">
+	<option value="">선택해주세요</option>
+	<option value="">일반케이스</option>
+	<option value="">주문제작 케이스</option>
+</select>
+
+<select name="SUB2" style="display: none;">
+	<option value="">선택해주세요</option>
+	<option value="">셀카봉/삼각대</option>
+	<option value="">케이블/충전기</option>
+	<option value="">이어폰</option>
+</select>
+<br/>
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE"/> <br/>
+지원 기종 : <br/>
+<label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/>
+<c:forEach var="dk_dto" items="${dk_lists}">
+
+	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label>&nbsp;<br/>
+
+</c:forEach>
+<label><input type="checkbox" name=""  value=""/>아이폰5s</label>&nbsp;
+<label><input type="checkbox" name=""  value=""/>아이폰6/6s</label>&nbsp;
+<label><input type="checkbox" name=""  value=""/>아이폰6s+</label>&nbsp;
+<label><input type="checkbox" name=""  value=""/>아이폰7/7s</label>&nbsp;
+<label><input type="checkbox" name=""  value=""/>아이폰7s+</label>&nbsp;
+<label><input type="checkbox" name=""  value=""/>아이폰8/8s</label>&nbsp;
+<label><input type="checkbox" name=""  value=""/>아이폰8s+</label>&nbsp;
+
+<br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>
 할인율 : <input type="text" name="G_DISCOUNT"/> <br/>
 상품 사진 : 
