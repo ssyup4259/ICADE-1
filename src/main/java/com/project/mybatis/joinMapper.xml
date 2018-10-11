@@ -3,18 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="joinMapper">
+<mapper namespace="com.project.mybatis.joinMapper">
 
 
-
-<!-- 데이터 입력 -->
-<insert id="insertData" parameterType="com.project.dto.MemberDTO">
-	insert into member (m_rank, m_id, m_pw, m_name, m_zipcode, m_address1, m_address2, m_email_id, m_email_domain, m_cellphone1, m_cellphone2, m_cellphone3, m_date, m_point)
-	values(#{m_rank}, #{m_id}, #{m_pw}, #{m_name}, #{m_zipcode}, #{m_address1}, #{m_address2}, #{m_email_id}, #{m_email_domain}, #{m_cellphone1}, #{m_cellphone2}, #{m_cellphone3},sysdate,0)
+<!-- 회원가입 -->
+<insert id="insertMember" parameterType="com.project.dto.MemberDTO" >
+	insert into member (M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_DATE, M_POINT, M_NICKNAME)
+	values(customer, #{M_ID,jdbcType=VARCHAR}, #{M_PW,jdbcType=VARCHAR}, #{M_NAME}, #{M_ZIPCODE}, #{M_ADDRESS1}, #{M_ADDRESS2}, #{M_EMAIL_ID}, #{M_EMAIL_DOMAIN}, #{M_CELLPHONE1}, #{M_CELLPHONE2}, #{M_CELLPHONE3},sysdate,0,#{M_NICKNAME})
 </insert>
-
-<update id="createAuthkey">
-	update Member set m_authcode= #{m_authcode} where m_email_id =#{m_email_id}
-</update>
 
 </mapper>

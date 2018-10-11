@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
@@ -23,6 +24,13 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	public static String namespace = "com.project.mybatis.adminMapper";
+	
+	@Override
+	public List<DeviceKindDTO> getDeviceList() throws Exception {
+		
+		return sessionTemplate.selectList(namespace + ".getDevice");
+		
+	}
 
 	@Override
 	public int insertGoods(GoodsDTO g_dto) throws Exception  {
@@ -43,15 +51,12 @@ public class AdminDAOImpl implements AdminDAO {
 	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception {
 		
 		//상품 번호 세팅
-		gd_dto.setGdNum(g_num);
-		
-		//for문 돌려서 데이터 삽입
-		
+		gd_dto.setGD_NUM(g_num);
 		String gCode;
 		
 		//상품 코드 세팅
-		gCode = gd_dto.getGdNum() + "-" + gd_dto.getGdKindNum() + "-" + gd_dto.getGdDevice() + "-" + gd_dto.getGdColor();		
-		gd_dto.setGdCode(gCode);
+		gCode = gd_dto.getGD_NUM() + "-" + gd_dto.getGD_KINDNUM() + "-" + gd_dto.getGD_DEVICE() + "-" + gd_dto.getGD_COLOR();		
+		gd_dto.setGD_CODE(gCode);
 		
 		sessionTemplate.insert(namespace + ".insertGoodsDetail", gd_dto);
 		
@@ -92,5 +97,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

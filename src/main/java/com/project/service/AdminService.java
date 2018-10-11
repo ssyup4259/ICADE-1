@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
@@ -13,6 +14,8 @@ import com.project.dto.OrdersDTO;
 
 public interface AdminService {
 	
+	//상품 종류 목록
+	public List<DeviceKindDTO> getDeviceList() throws Exception;
 	//상품 등록
 	public void insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception;
 	//상품 수정(재고 수정)
