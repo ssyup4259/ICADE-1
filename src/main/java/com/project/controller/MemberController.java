@@ -29,10 +29,9 @@ public class MemberController {
 		@RequestMapping(value="/join_ok.action",method= {RequestMethod.POST,RequestMethod.GET})
 		public String insertMember(MemberDTO m_dto, HttpServletRequest req, HttpServletResponse resp)throws Exception {
 			
-			
 			memberService.insertMember(m_dto);
 			
-			return "redirect:icade";
+			return "redirect:/";
 		}
 
 		

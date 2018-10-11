@@ -8,8 +8,8 @@
 
 <!-- 회원가입 -->
 <insert id="insertMember" parameterType="com.project.dto.MemberDTO" >
-	insert into member (M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_DATE, M_POINT, M_NICKNAME)
-	values(customer, #{M_ID,jdbcType=VARCHAR}, #{M_PW,jdbcType=VARCHAR}, #{M_NAME}, #{M_ZIPCODE}, #{M_ADDRESS1}, #{M_ADDRESS2}, #{M_EMAIL_ID}, #{M_EMAIL_DOMAIN}, #{M_CELLPHONE1}, #{M_CELLPHONE2}, #{M_CELLPHONE3},sysdate,0,#{M_NICKNAME})
+	insert into member (M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME)
+	values ('customer', #{M_ID}, #{M_PW}, #{M_NAME}, #{M_ZIPCODE}, #{M_ADDRESS1}, #{M_ADDRESS2}, #{M_EMAIL_ID}, #{M_EMAIL_DOMAIN}, #{M_CELLPHONE1}, #{M_CELLPHONE2}, #{M_CELLPHONE3},0,sysdate,#{M_NICKNAME})
 </insert>
 
 </mapper>

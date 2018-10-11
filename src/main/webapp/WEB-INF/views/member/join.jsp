@@ -80,12 +80,12 @@
 }
 	 */
 
-	 <%--
+	 
  	function sendIt() {
 		
 		var f = document.joinForm;
 		
-		str = f.mId.value;
+		/* str = f.mId.value;
 		str = str.trim();
 		if(!str || str.length<=7){
 			alert("아이디를 입력하세요(아이디는 8글자 이상이여야 합니다!).");
@@ -164,10 +164,11 @@
 		if(!checkerbox){
 			alert("이용약관에 동의해 주세요.");
 			return false;
-			}
+			} */
 			
 		f.action = "<%=cp%>/join_ok.action";
 		f.submit();
+		
 	} 
   	/* function sendMail(email) {
   		
@@ -191,7 +192,7 @@
 		return false;
 	} */
 	
-	--%>
+	
 </script>      
  
  
@@ -203,7 +204,7 @@
 <h1>회원가입양식</h1>
  	<span style="font-size:15px;font-weight:300;">icade의 다양한 혜택을 즐기세요</span>
 
-<form id="joinForm" action="" method="post">
+<form name="joinForm" action="" method="post">
 <table>
 
 	<!-- 아이디입력 -->
@@ -212,7 +213,7 @@
 			<h4>아이디</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="${M_ID}" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 			<input type="button" onclick="sendId();" class="btn" value="아이디 중복확인">
 		</td>
 	</tr>
@@ -264,7 +265,7 @@
 			<h4>닉네임</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="닉네임 : 2글자이상 입력하세요" name="M_NICKNAME" value="${M_NICKNAME}" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text" placeholder="닉네임 : 2글자이상 입력하세요" name="M_NICKNAME" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 			<input type="button" onclick="sendId();" class="btn" value="닉네임 중복확인">
 		</td>
 	</tr>
@@ -334,7 +335,7 @@
 	</tr>
 </table>
 <div style="text-align: center;padding-bottom: 15px;">
-    <input type="button" value="회원가입" style="width: 200px;" height="40px" onclick="javascript:location.href='<%=cp%>/join_ok.action'"/>
+    <input type="button" value="회원가입" style="width: 200px;" height="40px" onclick="sendIt();"/>
     <input type="button" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 </div>
 </form>
