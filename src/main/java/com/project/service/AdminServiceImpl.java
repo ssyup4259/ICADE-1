@@ -58,8 +58,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	@Override
 	public List<GoodsDTO> goodsList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return a_dao.goodsList();
 	}
 
 }
