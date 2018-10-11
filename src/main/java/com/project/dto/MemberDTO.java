@@ -33,10 +33,10 @@ public class MemberDTO {
     private String M_CELLPHONE1;
 
     // 회원 전화번호 중간 
-    private int M_CELLPHONE2;
+    private String M_CELLPHONE2;
 
     // 회원 전화번호 끝 
-    private int M_CELLPHONE3;
+    private String M_CELLPHONE3;
 
     // 회원 포인트 
     private int M_POINT;
