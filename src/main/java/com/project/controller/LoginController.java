@@ -37,16 +37,27 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		
-		dto = dao.checkInfo(M_ID);
 		
-		System.out.println("dto의 아이디 " + dto.getM_ID());
+		
+		dto = dao.checkInfo(M_ID); // String에서 맵으로 바꿔야되는데 시간없어서 일단 여기까지함.
 		
 		if(dto==null || dto.equals(null)) {
 			System.out.println("dto가 널일시 뜬다.");
 			
-			return "login/login";
+			String msg = "아이디가 없습니다";
 			
-		}else {
+			req.setAttribute("msg", msg);
+			
+			return "login/login";
+		/*	
+		}else if(dto.getM_PW()!=M_PW && !dto.getM_PW().equals(M_PW)){
+			String msg = "비밀번호가 틀립니다.";
+			
+			req.setAttribute("msg", msg);
+			
+			return "login/login";
+			*/
+		}else{
 			System.out.println("아이디 비번 true 반환시 보인다.");
 			session.setAttribute("userId", M_ID);
 			

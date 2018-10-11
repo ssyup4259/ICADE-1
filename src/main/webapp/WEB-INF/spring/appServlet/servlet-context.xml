@@ -47,6 +47,15 @@
 		
 	</beans:bean> -->
 	
+<!-- 인터셉터 객체 생성 -->
+<!-- Interceptor 설정 -->
+<!-- <interceptors>
+	<interceptor>
+		 <mapping path="/**/*"/>
+		 <beans:bean id="AuthLoginInterceptor" class="com.project.interceptor.LoginInterceptor"/>
+	</interceptor>
+</interceptors>
+ -->	
 	
 	
 	
