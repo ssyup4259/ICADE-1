@@ -121,13 +121,6 @@ function showSub(obj) {
 	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label>&nbsp;<br/>
 
 </c:forEach>
-<label><input type="checkbox" name=""  value=""/>아이폰5s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰6/6s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰6s+</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰7/7s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰7s+</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰8/8s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰8s+</label>&nbsp;
 
 <br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>

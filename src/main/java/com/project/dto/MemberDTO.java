@@ -33,10 +33,10 @@ public class MemberDTO {
     private String M_CELLPHONE1;
 
     // 회원 전화번호 중간 
-    private int M_CELLPHONE2;
+    private String M_CELLPHONE2;
 
     // 회원 전화번호 끝 
-    private int M_CELLPHONE3;
+    private String M_CELLPHONE3;
 
     // 회원 포인트 
     private int M_POINT;
@@ -118,19 +118,19 @@ public class MemberDTO {
 		M_CELLPHONE1 = m_CELLPHONE1;
 	}
 
-	public int getM_CELLPHONE2() {
+	public String getM_CELLPHONE2() {
 		return M_CELLPHONE2;
 	}
 
-	public void setM_CELLPHONE2(int m_CELLPHONE2) {
+	public void setM_CELLPHONE2(String m_CELLPHONE2) {
 		M_CELLPHONE2 = m_CELLPHONE2;
 	}
 
-	public int getM_CELLPHONE3() {
+	public String getM_CELLPHONE3() {
 		return M_CELLPHONE3;
 	}
 
-	public void setM_CELLPHONE3(int m_CELLPHONE3) {
+	public void setM_CELLPHONE3(String m_CELLPHONE3) {
 		M_CELLPHONE3 = m_CELLPHONE3;
 	}
 
