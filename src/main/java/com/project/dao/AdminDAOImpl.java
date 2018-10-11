@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.DeviceKindDTO;
+import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
@@ -27,9 +28,12 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {
-		
 		return sessionTemplate.selectList(namespace + ".getDevice");
-		
+	}
+	
+	@Override
+	public List<GoodsColorDTO> getColorList() throws Exception {
+		return sessionTemplate.selectList(namespace + ".getColor");
 	}
 
 	@Override
@@ -97,7 +101,5 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 }

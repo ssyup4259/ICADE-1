@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.AdminDAO;
 import com.project.dto.DeviceKindDTO;
+import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
@@ -29,9 +30,12 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {
-		
 		return a_dao.getDeviceList();
-		
+	}
+	
+	@Override
+	public List<GoodsColorDTO> getColorList() throws Exception {
+		return a_dao.getColorList();
 	}
 	
 	@Transactional

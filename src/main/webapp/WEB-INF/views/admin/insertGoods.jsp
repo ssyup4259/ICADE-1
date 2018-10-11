@@ -115,19 +115,18 @@ function showSub(obj) {
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE"/> <br/>
 지원 기종 : <br/>
-<label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/>
+<label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/><br/>
 <c:forEach var="dk_dto" items="${dk_lists}">
 
-	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label>&nbsp;<br/>
+	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label><br/>
+	<c:forEach var="gc_dto" items="${gc_lists}">
+		<label><input type="checkbox" name="${gc_dto.GC_CODE}" value="${gc_dto.GC_CODE}"/>${gc_dto.GC_COLOR}</label>
+		<input type="text" name="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" size="3" disabled="disabled"/>		
+	</c:forEach>
+	
+	<br/><br/>
 
 </c:forEach>
-<label><input type="checkbox" name=""  value=""/>아이폰5s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰6/6s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰6s+</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰7/7s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰7s+</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰8/8s</label>&nbsp;
-<label><input type="checkbox" name=""  value=""/>아이폰8s+</label>&nbsp;
 
 <br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>
