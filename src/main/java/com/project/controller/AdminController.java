@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.util.MyUtil;
 import com.project.dto.DeviceKindDTO;
+import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.service.AdminService;
@@ -31,8 +32,10 @@ public class AdminController {
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		List<DeviceKindDTO> dk_lists = service.getDeviceList();
+		List<GoodsColorDTO> gc_lists = service.getColorList();
 		
 		req.setAttribute("dk_lists", dk_lists);
+		req.setAttribute("gc_lists", gc_lists);
 		
 		return "admin/insertGoods";
 		

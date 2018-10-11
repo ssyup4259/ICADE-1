@@ -115,10 +115,16 @@ function showSub(obj) {
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE"/> <br/>
 지원 기종 : <br/>
-<label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/>
+<label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/><br/>
 <c:forEach var="dk_dto" items="${dk_lists}">
 
-	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label>&nbsp;<br/>
+	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label><br/>
+	<c:forEach var="gc_dto" items="${gc_lists}">
+		<label><input type="checkbox" name="${gc_dto.GC_CODE}" value="${gc_dto.GC_CODE}"/>${gc_dto.GC_COLOR}</label>
+		<input type="text" name="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" size="3" disabled="disabled"/>		
+	</c:forEach>
+	
+	<br/><br/>
 
 </c:forEach>
 
