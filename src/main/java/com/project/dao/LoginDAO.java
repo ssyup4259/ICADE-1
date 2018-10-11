@@ -14,13 +14,15 @@ public class LoginDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 	
-	public MemberDTO checkInfo(String mId) {
+	public MemberDTO checkInfo(String M_ID) {
 		
-		System.out.println("LoginDAO:" + mId);
+		System.out.println("LoginDAO:" + M_ID);
 		
 		MemberDTO dto = new MemberDTO();
 		
-		dto = sessionTemplate.selectOne("loginMapper.loginChecker",mId);
+		System.out.println("LoginDAO:" + M_ID);
+		
+		dto = sessionTemplate.selectOne("loginMapper.loginChecker",M_ID);
 		
 		System.out.println("확인용");
 		

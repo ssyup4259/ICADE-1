@@ -6,7 +6,7 @@
 
 <!-- 아이디 비번 체크 -->
 	<select id="loginChecker" parameterType="String" resultType="com.project.dto.MemberDTO">
-		select M_ID, M_PW from member where M_ID = #{m_id}
+		select M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_DATE, M_POINT, M_NICKNAME from member where M_ID = #{M_ID}
 	</select>
 
 </mapper>

@@ -29,22 +29,17 @@ public class LoginController {
 	@RequestMapping(value="/login_ok.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login_ok(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 
-		String mId = (String) req.getParameter("mId");
-		String mPw = (String) req.getParameter("mPw");
+		String M_ID = (String) req.getParameter("M_ID");
+		String M_PW = (String) req.getParameter("M_PW");
 		
-		System.out.println(mId);
-		System.out.println(mPw);
-		
-		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		
-		hmap.put("mId", mId);
-		hmap.put("mPw", mPw);
+		System.out.println(M_ID);
+		System.out.println(M_PW);
 		
 		HttpSession session = req.getSession();
 		
-		dto = dao.checkInfo(mId);
+		dto = dao.checkInfo(M_ID);
 		
-		System.out.println(dto.getM_ID());
+		System.out.println("dto의 아이디 " + dto.getM_ID());
 		
 		if(dto==null || dto.equals(null)) {
 			System.out.println("dto가 널일시 뜬다.");
@@ -53,7 +48,7 @@ public class LoginController {
 			
 		}else {
 			System.out.println("아이디 비번 true 반환시 보인다.");
-			session.setAttribute("userId", mId);
+			session.setAttribute("userId", M_ID);
 			
 			
 			String userId = (String) session.getAttribute("userId");
@@ -67,17 +62,17 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/loginTest.action", method= {RequestMethod.GET,RequestMethod.POST})
-	public String TestHome(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+	public String loginTest(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		System.out.println("여기왔따.");
+		//System.out.println("여기왔따.");
 		
 		HttpSession session = req.getSession();
 		
-		String userId = (String) session.getAttribute("userId");
+		//String userId = (String) session.getAttribute("userId");
 		
-		System.out.println("세션 : " + userId);
+		//System.out.println("세션 : " + userId);
 		
-		session.setAttribute("userId", userId);
+		//session.setAttribute("userId", userId);
 		
 		return "loginTest";
 	}

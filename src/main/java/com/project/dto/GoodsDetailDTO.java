@@ -11,13 +11,8 @@ public class GoodsDetailDTO {
     // 상품 종류번호
     private int GD_KINDNUM;
 
-<<<<<<< HEAD
-    // 지원 기	종 
-    private int gdDevice;
-=======
     // 지원 기종 
     private int GD_DEVICE;
->>>>>>> 8a276c3c5de5af201d5bc00a35b3077e24434c1b
 
     // 색상 코드 
     private int GD_COLOR;

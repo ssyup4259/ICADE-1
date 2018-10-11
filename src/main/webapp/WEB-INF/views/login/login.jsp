@@ -21,8 +21,8 @@
 <table border="1">
 <tr >
 	<td >
-		아이디 : <input type="text" name="mId">
-		비밀번호 : <input type="password" name="mPw">
+		아이디 : <input type="text" name="M_ID">
+		비밀번호 : <input type="password" name="M_PW">
 	</td>
 	<td rowspan="2">
 		<input type="submit" value="로그인">
