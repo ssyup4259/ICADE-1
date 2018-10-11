@@ -11,7 +11,7 @@ public class GoodsDetailDTO {
     // 상품 종류번호
     private int gdKindNum;
 
-    // 지원 기종 
+    // 지원 기	종 
     private int gdDevice;
 
     // 색상 코드 

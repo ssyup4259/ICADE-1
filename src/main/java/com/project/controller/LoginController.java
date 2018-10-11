@@ -23,7 +23,7 @@ public class LoginController {
 	@RequestMapping(value="/login.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login(HttpServletRequest req, HttpServletResponse resp)throws Exception{
 
-		return "loginTest";
+		return "login/login";
 	}
 	
 	@RequestMapping(value="/login_ok.action", method= {RequestMethod.GET,RequestMethod.POST})
@@ -42,19 +42,56 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		
-		dto = dao.checkInfo(mId);
+		//dto = dao.checkInfo(mId);
 		
 		System.out.println(dto.getMId());
 		
 		if(dto==null || dto.equals(null)) {
 			System.out.println("dto가 널일시 뜬다.");
 			
+			return "login/login";
+			
 		}else {
 			System.out.println("아이디 비번 true 반환시 보인다.");
-			session.setAttribute("loginInfo", hmap);
+			session.setAttribute("userId", mId);
+			
+			
+			String userId = (String) session.getAttribute("userId");
+			
+			System.out.println("보낼때" + userId);
+			
+			return "loginTest";
 		}
 		
-		return "home";
+		
 	}
+	
+	@RequestMapping(value="/loginTest.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String TestHome(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		
+		System.out.println("여기왔따.");
+		
+		HttpSession session = req.getSession();
+		
+		String userId = (String) session.getAttribute("userId");
+		
+		System.out.println("세션 : " + userId);
+		
+		session.setAttribute("userId", userId);
+		
+		return "loginTest";
+	}
+	
+	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String logout(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		
+		HttpSession session = req.getSession();
+		
+		session.removeAttribute("userId");
+		
+		return "loginTest";
+	}
+	
+	
 
 }
