@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.util.MyUtil;
 import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.service.AdminService;
 
 @Controller
@@ -30,9 +31,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.POST)
-	public String insertGoods(GoodsDTO g_dto, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		service.insertGoods(g_dto);
+		int g_num;
+		
+		g_num = service.insertGoods(g_dto);
+		
+		service.insertGoodsDetail(gd_dto, g_num);
 		
 		return "redirect:admin/goodsList";
 		

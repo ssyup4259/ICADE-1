@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
 
@@ -17,11 +18,23 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO a_dao;
 
 	@Override
-	public void insertGoods(GoodsDTO g_dto) throws Exception {
+	public int insertGoods(GoodsDTO g_dto) throws Exception {
 		
-		a_dao.insertGoods(g_dto);
+		int g_num;
+		
+		g_num = a_dao.insertGoods(g_dto);
+		
+		return g_num;
 		
 	}
+	
+	@Override
+	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception {
+		
+		a_dao.insertGoodsDetail(gd_dto, g_num);
+		
+	}
+	
 	@Override
 	public void updateGoods(GoodsDTO g_dto) throws Exception  {
 		
@@ -60,5 +73,6 @@ public class AdminServiceImpl implements AdminService {
 	public List<GoodsDTO> goodsList() throws Exception {
 		return a_dao.goodsList();
 	}
+	
 
 }
