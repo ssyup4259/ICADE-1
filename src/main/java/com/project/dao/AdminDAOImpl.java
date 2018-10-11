@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
 
@@ -24,23 +25,35 @@ public class AdminDAOImpl implements AdminDAO {
 	public static String namespace = "com.project.mybatis.adminMapper";
 
 	@Override
-	public void insertGoods(GoodsDTO g_dto) throws Exception  {
+	public int insertGoods(GoodsDTO g_dto) throws Exception  {
 		
 		int maxNum = 0;
 		
-		maxNum = sessionTemplate.selectOne(namespace + ".maxNum");
+		maxNum = sessionTemplate.selectOne(namespace + ".goodsMaxNum");
 		
-		g_dto.setgNum(maxNum + 1);
+		g_dto.setG_NUM(maxNum + 1);
+		
+		sessionTemplate.insert(namespace + ".insertGoods", g_dto);
+		
+		return g_dto.getG_NUM();
+		
+	}
+	
+	@Override
+	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception {
+		
+		//상품 번호 세팅
+		gd_dto.setGdNum(g_num);
 		
 		//for문 돌려서 데이터 삽입
 		
 		String gCode;
 		
-		//gCode = g_dto.getgNum() + "-" + g_dto.getgKindNum() + "-" + g_dto.getgDevice() + "-" + g_dto.getgColor();
+		//상품 코드 세팅
+		gCode = gd_dto.getGdNum() + "-" + gd_dto.getGdKindNum() + "-" + gd_dto.getGdDevice() + "-" + gd_dto.getGdColor();		
+		gd_dto.setGdCode(gCode);
 		
-		//g_dto.setgCode(gCode);
-		
-		sessionTemplate.insert(namespace + ".insertGoods", g_dto);
+		sessionTemplate.insert(namespace + ".insertGoodsDetail", gd_dto);
 		
 	}
 
