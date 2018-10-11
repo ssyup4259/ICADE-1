@@ -5,7 +5,7 @@
 <mapper namespace="loginMapper">
 
 <!-- 아이디 비번 체크 -->
-	<select id="loginChecker" parameterType="com.project.dto.MemberDTO">
+	<select id="loginChecker" parameterType="map">
 		select M_ID, M_PW from member where M_ID = #{m_id} and M_PW = #{m_pw}
 	</select>
 
