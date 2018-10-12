@@ -35,7 +35,15 @@ function allCheckFunc(obj) {
 	var deviceSize = ${dk_lists.size()};
 	
 	for (var i = 1; i < deviceSize; i++) {
-		toggleShow(i);	
+		
+		var divId = 'D'+i;
+		
+		if ($("#checkAll").prop("checked")) {
+			document.getElementById(divId).style.display = 'block';	
+		} else {
+			document.getElementById(divId).style.display = 'none';
+		}
+		
 	}
 	
 }
@@ -237,7 +245,7 @@ function enableTextBox(name) {
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>원 <br/>
 지원 기종 : <br/>
-<label><input type="checkbox" name="checkAll"  value=""/>전체</label>&nbsp;<br/><br/>
+<label><input type="checkbox" name="checkAll"  id="checkAll"/>전체</label>&nbsp;<br/><br/>
 
 <c:forEach var="dk_dto" items="${dk_lists}">
 
