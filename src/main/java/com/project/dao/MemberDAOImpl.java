@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,30 +18,34 @@ public class MemberDAOImpl implements MemberDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) throws SQLException {
 		this.sessionTemplate = sessionTemplate;
 	}
-	
+
 	public static String namespace = "com.project.mybatis.joinMapper";
-	
+
 	@Override
 	public void insertMember(MemberDTO m_dto) throws Exception {
 
-		sessionTemplate.insert(namespace +".insertMember", m_dto);
+		sessionTemplate.insert(namespace + ".insertMember", m_dto);
 
 	}
 
 	@Override
-	public int idCheck(String M_ID) throws Exception {
+	public int idCheck(Map<String, Object> map) throws Exception {
 
-		return sessionTemplate.selectOne(namespace+".idCheck", M_ID);
-		
-		
+		Map<String, Object> resultMap = sessionTemplate.selectOne(namespace + ".idCheck", map);
+
+		int result = Integer.valueOf(String.valueOf(resultMap.get("RESULT")));
+
+		return result;
 	}
 
 	@Override
-	public int nickCheck(String M_NICKNAME) throws Exception {
-		
-		return sessionTemplate.selectOne(namespace+".nickCheck", M_NICKNAME);
-		
-		
+	public int nickCheck(Map<String, Object> map) throws Exception {
+
+		Map<String, Object> resultMap = sessionTemplate.selectOne(namespace + ".nickCheck", map);
+
+		int result = Integer.valueOf(String.valueOf(resultMap.get("RESULT")));
+
+		return result;
 	}
 
 }

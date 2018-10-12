@@ -1,5 +1,7 @@
 package com.project.service;
 
+import java.util.Map;
+
 import com.project.dto.MemberDTO;
 
 public interface MemberService {
@@ -10,9 +12,9 @@ public interface MemberService {
 
 	
 	//아이디 중복체크
-	public int idCheck(String M_ID)throws Exception;
+	public int idCheck(Map<String, Object> map)throws Exception;
 		
 	//닉네임 중복체크
-	public int nickCheck(String M_NICKNAME)throws Exception;
+	public int nickCheck(Map<String, Object> map)throws Exception;
 	
 }

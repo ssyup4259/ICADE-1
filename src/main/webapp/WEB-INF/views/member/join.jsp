@@ -19,54 +19,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-  <script type="text/javascript">
-  function sample6_execDaumPostcode() {
-		new daum.Postcode(
-				{
-					oncomplete : function(data) {
-						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var fullAddr = ''; // 최종 주소 변수
-						var extraAddr = ''; // 조합형 주소 변수
-
-						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-							fullAddr = data.roadAddress;
-
-						} else { // 사용자가 지번 주소를 선택했을 경우(J)
-							fullAddr = data.jibunAddress;
-						}
-
-						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-						if (data.userSelectedType === 'R') {
-							//법정동명이 있을 경우 추가한다.
-							if (data.bname !== '') {
-								extraAddr += data.bname;
-							}
-							// 건물명이 있을 경우 추가한다.
-							if (data.buildingName !== '') {
-								extraAddr += (extraAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
-							// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
-									+ ')' : '');
-						}
-
-						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-						document.getElementById('sample6_address').value = fullAddr;
-
-						// 커서를 상세주소 필드로 이동한다.
-						document.getElementById('sample6_address2').focus();
-					}
-				}).open();
-	}
-</script>
-
-	
 	<script type="text/javascript">
 	/* function sendId() {
 	
@@ -218,9 +170,9 @@
 			<h4>아이디</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
-			<input type="button" class="btn" value="아이디 중복확인"  id="idCheck"/>
+			<input type="text" id="user_Id" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
+		<td><a href="#" id="user_id_checkBtn" class="btn">중복확인</a></td>
 	</tr>
 	
 	<tr height="2">
@@ -344,28 +296,69 @@
     <input type="button" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 </div>
 </form>
-<!--  본문 끝 -->
- 
-        </div><!-- content 끝 -->
-    </div><!--  container 끝 -->
-</div>
+<!-- 본문 끝 -->
 
+<!-- ---------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- 스크립트 부분 -->
 <script >
-//아이디 체크여부 확인(아이디 중복일 경우 = 0, 중복이 아닐경우 =1)
+	$(document).ready(function() {
+		$("#user_id_checkBtn").unbind("click").click(function(e) {
+			e.preventDefault();
+			idCheck();			
+		});
+	});
+	
+function idCheck() {
+	var userId =$("#user_Id").val();
+	
+	if(userId.length <1){
+		alert("아이디를 입력해주시기 바랍니다.");
+	}else{
+		$.ajax({
+			type : "POST",
+			url : "/icade/idcheck.action",
+			data : {"M_ID":"userId"},
+			dataType : "json",
+			error : function (error) {
+				alert("서버가 응답하지 않습니다");
+			},
+			success : function(result) {
+				if (result==0) {
+					$("#user_Id").attr("disabled",true);
+					alert("사용 가능한 아이디입니다");
+				}else if(result==1){
+					alert("이미 존재하는 아이디 입니다.");
+				}else{
+					alert("에러가 발생했습니다.");
+				}
+			}
+		});
+	}
+}
+	
+	
+	
+
+
+ 
+ 
+ 
+</script>
+  <script type="text/javascript">
+/* //아이디 체크여부 확인(아이디 중복일 경우 = 0, 중복이 아닐경우 =1)
 var idCheck= 0;
 
 $(function() {
     //idCheck 버튼을 클릭했을 때 
     $("#idCheck").click(function() {
-        
         //M_ID 를 param.
         var userid =  $("#M_ID").val(); 
-        
         $.ajax({
             async: true,
             type : 'POST',
             data : userid,
-            url : "idcheck.action",
+            url : "/idcheck.action",
             dataType : "json",
             contentType: "application/json; charset=UTF-8",
             success : function(data) {
@@ -395,8 +388,51 @@ $(function() {
             }
         });
     });
-});
- 
+}); */
+  function sample6_execDaumPostcode() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var fullAddr = ''; // 최종 주소 변수
+						var extraAddr = ''; // 조합형 주소 변수
+
+						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							fullAddr = data.roadAddress;
+
+						} else { // 사용자가 지번 주소를 선택했을 경우(J)
+							fullAddr = data.jibunAddress;
+						}
+
+						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+						if (data.userSelectedType === 'R') {
+							//법정동명이 있을 경우 추가한다.
+							if (data.bname !== '') {
+								extraAddr += data.bname;
+							}
+							// 건물명이 있을 경우 추가한다.
+							if (data.buildingName !== '') {
+								extraAddr += (extraAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+									+ ')' : '');
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+						document.getElementById('sample6_address').value = fullAddr;
+
+						// 커서를 상세주소 필드로 이동한다.
+						document.getElementById('sample6_address2').focus();
+					}
+				}).open();
+	}
 </script>
 
 
