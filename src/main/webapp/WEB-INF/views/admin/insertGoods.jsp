@@ -217,7 +217,6 @@ function enableTextBox(name) {
 </select> -->
 
 
-
 <!-- <select name="SUB1" style="display: none;">
 	<option>선택해주세요</option>
 	<option value="1">기본 케이스</option>
@@ -238,7 +237,12 @@ function enableTextBox(name) {
 </select> -->
 
 <c:forEach var="gk_dto" items="${gk_lists}">
-	<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+	<c:if test="${gk_dto.GK_NUM == 1}">
+		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
+	</c:if>
+	<c:if test="${gk_dto.GK_NUM > 1}">
+		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+	</c:if>
 </c:forEach>
 
 <br/>
@@ -256,10 +260,10 @@ function enableTextBox(name) {
 		<c:forEach var="gc_dto" items="${gc_lists}">
 		
 			<label>
-			<input type="checkbox" name="GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
+			<input type="checkbox" name="${dk_dto.DK_CODE}_GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
 			${gc_dto.GC_COLOR}
 			</label>
-			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="${dk_dto.DK_CODE}_GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 				
 		</c:forEach>
 		
