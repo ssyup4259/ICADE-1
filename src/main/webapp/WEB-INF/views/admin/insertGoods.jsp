@@ -217,7 +217,6 @@ function enableTextBox(name) {
 </select> -->
 
 
-
 <!-- <select name="SUB1" style="display: none;">
 	<option>선택해주세요</option>
 	<option value="1">기본 케이스</option>
