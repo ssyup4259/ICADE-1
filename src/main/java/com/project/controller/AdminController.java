@@ -46,7 +46,7 @@ public class AdminController {
 		
 		service.insertGoods(g_dto, gd_dto, req, resp);
 		
-		return "redirect:admin/goodsList";
+		return "redirect:/admin/goodsList.action";
 		
 	}
 	

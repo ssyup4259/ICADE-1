@@ -30,13 +30,9 @@
 
 <h3>상품 목록</h3>
 
+<label><input type="radio" name="GD_KIND_NUM" value="" checked="checked"/>전체</label>
 <c:forEach var="gk_dto" items="${gk_lists}">
-	<c:if test="${gk_dto.GK_NUM == 1}">
-		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
-	</c:if>
-	<c:if test="${gk_dto.GK_NUM > 1}">
-		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
-	</c:if>
+	<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
 </c:forEach>
 	
 <div id="bbsList_header">
