@@ -13,8 +13,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.util.MyUtil;
 import com.project.dto.DeviceKindDTO;
+import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
+import com.project.dto.GoodsKindDTO;
 import com.project.service.AdminService;
 
 @Controller
@@ -24,15 +26,16 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
-	@Autowired
-	MyUtil myUtil;
-	
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.GET)
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
+		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
 		List<DeviceKindDTO> dk_lists = service.getDeviceList();
+		List<GoodsColorDTO> gc_lists = service.getColorList();
 		
+		req.setAttribute("gk_lists", gk_lists);
 		req.setAttribute("dk_lists", dk_lists);
+		req.setAttribute("gc_lists", gc_lists);
 		
 		return "admin/insertGoods";
 		
@@ -44,6 +47,18 @@ public class AdminController {
 		service.insertGoods(g_dto, gd_dto, req, resp);
 		
 		return "redirect:admin/goodsList";
+		
+	}
+	
+	@RequestMapping(value="/goodsList.action", method= {RequestMethod.POST, RequestMethod.GET})
+	public String goodsList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
+		
+		req = service.goodsList(req);
+		req.setAttribute("gk_lists", gk_lists);
+		
+		return "admin/goodsList";
 		
 	}
 	

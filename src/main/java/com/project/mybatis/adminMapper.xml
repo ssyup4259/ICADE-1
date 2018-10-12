@@ -4,14 +4,24 @@
 
 <mapper namespace="com.project.mybatis.adminMapper">
 
-<!-- Num의 최댓값 -->
+<!-- GoodsNum의 최댓값 -->
 <select id="goodsMaxNum" resultType="int">
 	select nvl(max(G_NUM), 0) from Goods
 </select>
 
-<!--  -->
+<!-- 상품 종류 리스트 -->
+<select id="getGoodsKind" resultType="com.project.dto.GoodsKindDTO">
+	select GK_NUM, GK_KIND from GOODS_KIND
+</select>
+
+<!-- 지원기종 리스트 -->
 <select id="getDevice" resultType="com.project.dto.DeviceKindDTO">
 	select DK_CODE, DK_NAME from DEVICE_KIND
+</select>
+
+<!-- 색상 리스트 -->
+<select id="getColor" resultType="com.project.dto.GoodsColorDTO">
+	select GC_CODE, GC_COLOR from GOODS_COLOR
 </select>
 
 <!-- 상품 등록 -->
@@ -25,6 +35,34 @@
 	insert into goods_detail(GD_NUM, GD_CODE, GD_KIND_NUM, GD_DEVICE, GD_COLOR, GD_COUNT, GD_SELLCOUNT)
 		values(#{GD_NUM}, #{GD_CODE}, #{GD_KIND_NUM}, #{GD_DEVICE}, #{GD_COLOR}, #{GD_COUNT}, 0)
 </insert>
+
+<!-- 상세상품 등록 후 Goods테이블의 상품 총 갯수 수정 -->
+<update id="updateGoodsCount" parameterType="com.project.dto.GoodsDTO">
+	update Goods set G_COUNT = #{G_COUNT} where G_NUM = #{G_NUM}
+</update>
+
+<!-- 전체 데이터 갯수 -->
+<select id="getGoodsCount" parameterType="hashMap" resultType="int">
+	select nvl(count(*), 0) from GOODS
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 상품 리스트 출력 -->
+<select id="getGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select DISTINCT GD_KIND_NUM, GK_KIND, G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME from GOODS, GOODS_DETAIL, GOODS_KIND
+	where ${searchKey} like '%' || #{searchValue} || '%' and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 한개의 데이터 -->
+<select id="getReadGoods" parameterType="int" resultType="com.project.dto.GoodsDTO">
+	select G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
+	from GOODS where G_NUM = #{G_NUM}
+</select>
 
 <!-- 상품 수정 -->
 <update id="updateGoods" parameterType="com.project.dto.MemberDTO">

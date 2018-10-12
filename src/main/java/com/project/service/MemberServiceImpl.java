@@ -1,5 +1,7 @@
 package com.project.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,16 @@ public class MemberServiceImpl implements MemberService {
 		m_dao.insertMember(m_dto);
 
 	}
+
+	@Override
+	public int idCheck(Map<String, Object> map) throws Exception {
+		return m_dao.idCheck(map);
+	}
+
+	@Override
+	public int nickCheck(Map<String, Object> map) throws Exception {
+		return m_dao.nickCheck(map);
+	}
+
 
 }

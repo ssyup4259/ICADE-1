@@ -9,7 +9,7 @@ public class GoodsDetailDTO {
     private String GD_CODE;
 
     // 상품 종류번호
-    private int GD_KINDNUM;
+    private int GD_KIND_NUM;
 
     // 지원 기종 
     private int GD_DEVICE;
@@ -39,12 +39,12 @@ public class GoodsDetailDTO {
 		GD_CODE = gD_CODE;
 	}
 
-	public int getGD_KINDNUM() {
-		return GD_KINDNUM;
+	public int getGD_KIND_NUM() {
+		return GD_KIND_NUM;
 	}
 
-	public void setGD_KINDNUM(int gD_KINDNUM) {
-		GD_KINDNUM = gD_KINDNUM;
+	public void setGD_KIND_NUM(int gD_KIND_NUM) {
+		GD_KIND_NUM = gD_KIND_NUM;
 	}
 
 	public int getGD_DEVICE() {

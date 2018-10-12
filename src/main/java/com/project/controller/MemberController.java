@@ -4,16 +4,21 @@ package com.project.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.MemberDTO;
 import com.project.service.MemberService;
+import com.project.util.CommandMap;
 
 @Controller
 public class MemberController {
+	
+	Logger log = Logger.getLogger(this.getClass());
 	
 
 		@Autowired
@@ -33,9 +38,27 @@ public class MemberController {
 			
 			return "redirect:/";
 		}
-
+	/*	@RequestMapping(value="/idcheck.action")
+		@ResponseBody
+		public int idCheck(Map<String, Object> map)throws Exception{
+			
+			int idCheckResult = memberService.idCheck(map);
+			
+			return idCheckResult;
+			
+		}*/
 		
-		
+		@RequestMapping(value="/idcheck.action")
+		@ResponseBody
+		public int idCheck(CommandMap commandMap)throws Exception{
+			
+			int idCheckResult = memberService.idCheck(commandMap.getMap());
+			
+			return idCheckResult;
+			
+		}
+	
+	
 		
 	}
 	
