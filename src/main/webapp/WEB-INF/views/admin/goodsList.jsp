@@ -29,6 +29,15 @@
 <div id="bbsList">
 
 <h3>상품 목록</h3>
+
+<c:forEach var="gk_dto" items="${gk_lists}">
+	<c:if test="${gk_dto.GK_NUM == 1}">
+		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
+	</c:if>
+	<c:if test="${gk_dto.GK_NUM > 1}">
+		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+	</c:if>
+</c:forEach>
 	
 <div id="bbsList_header">
 	<div id="leftHeader">
@@ -50,7 +59,7 @@
 
 <table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
 	<tr>
-		<td>상품 번호</td>
+		<td>상품 종류</td>
 		<td>상품 이름</td>
 		<td>상품 개수</td>
 		<td>상품 가격</td>
@@ -63,8 +72,8 @@
 	
 	<c:forEach var="g_dto" items="${g_lists}">
 		<tr>
-			<td>${g_dto.getG_NUM()}</td>
-			<td>${g_dto.getG_NAME()}</td>
+			<td>${g_dto.getGK_KIND()}</td>
+			<td><a href="#">${g_dto.getG_NAME()}</a></td>
 			<td>${g_dto.getG_COUNT()}</td>
 			<td>${g_dto.getG_PRICE()}</td>
 			<td>${g_dto.getG_SELLCOUNT()}</td>

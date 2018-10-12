@@ -53,7 +53,10 @@ public class AdminController {
 	@RequestMapping(value="/goodsList.action", method= {RequestMethod.POST, RequestMethod.GET})
 	public String goodsList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
+		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
+		
 		req = service.goodsList(req);
+		req.setAttribute("gk_lists", gk_lists);
 		
 		return "admin/goodsList";
 		

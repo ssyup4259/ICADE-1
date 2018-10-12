@@ -51,8 +51,8 @@
 <select id="getGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
 	select * from (
 	select rownum rnum, data.* from (
-	select G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME from GOODS
-	where ${searchKey} like '%' || #{searchValue} || '%' order by G_NUM desc) data)
+	select DISTINCT GD_KIND_NUM, GK_KIND, G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME from GOODS, GOODS_DETAIL, GOODS_KIND
+	where ${searchKey} like '%' || #{searchValue} || '%' and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
