@@ -26,9 +26,6 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
-	@Autowired
-	MyUtil myUtil;
-	
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.GET)
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
@@ -50,6 +47,15 @@ public class AdminController {
 		service.insertGoods(g_dto, gd_dto, req, resp);
 		
 		return "redirect:admin/goodsList";
+		
+	}
+	
+	@RequestMapping(value="/goodsList.action", method= {RequestMethod.POST, RequestMethod.GET})
+	public String goodsList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		req = service.goodsList(req);
+		
+		return "admin/goodsList";
 		
 	}
 	

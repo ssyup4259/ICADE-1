@@ -3,9 +3,12 @@ package com.project.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +25,16 @@ import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
+import com.project.util.MyUtil;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminDAO a_dao;
+	
+	@Autowired
+	MyUtil myUtil;
 	
 	@Override
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
@@ -170,8 +177,76 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	@Override
-	public List<GoodsDTO> goodsList() throws Exception {
-		return a_dao.goodsList();
+	public HttpServletRequest goodsList(HttpServletRequest req) throws Exception {
+		
+		String cp = req.getContextPath();
+		
+		String pageNum = req.getParameter("pageNum");
+		int currentPage = 1;
+		
+		if (pageNum != null)
+			currentPage = Integer.parseInt(pageNum);
+		
+		String searchKey = req.getParameter("searchKey");
+		String searchValue = req.getParameter("searchValue");
+		
+		if (searchKey == null) {
+			
+			searchKey = "G_NAME";
+			searchValue = "";
+			
+		} else {
+			
+			if (req.getMethod().equalsIgnoreCase("GET"))
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			
+		}
+		
+		//전체데이터갯수
+		int dataCount = a_dao.getGoodsCount(searchKey, searchValue);
+		
+		//전체페이지수
+		int numPerPage = 10;
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		
+		if (currentPage > totalPage)
+			currentPage = totalPage;
+		
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+		
+		List<GoodsDTO> g_lists = a_dao.goodsList(start, end, searchKey, searchValue);
+		
+		//페이징 처리
+		String param = "";
+		if (!searchValue.equals("")) {
+			param = "searchKey=" + searchKey;
+			param+= "&searchValue=" 
+				+ URLEncoder.encode(searchValue, "UTF-8");
+		}
+		
+		String listUrl = cp + "/goodsList.action";
+		if (!param.equals("")) {
+			listUrl = listUrl + "?" + param;
+		}
+		
+		String pageIndexList =
+			myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
+		//글보기 주소 정리
+		String articleUrl = 
+			cp + "/goodsDetail.action?pageNum=" + currentPage;
+			
+		if (!param.equals(""))
+			articleUrl = articleUrl + "&" + param;
+		
+		//포워딩 될 페이지에 데이터를 넘긴다
+		req.setAttribute("g_lists", g_lists);
+		req.setAttribute("pageIndexList",pageIndexList);
+		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("articleUrl",articleUrl);
+		
+		return req;
 	}
 
 }
