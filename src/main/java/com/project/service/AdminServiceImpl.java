@@ -19,6 +19,7 @@ import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
+import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
 
@@ -27,6 +28,11 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminDAO a_dao;
+	
+	@Override
+	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
+		return a_dao.getGoodsKindList();
+	}
 	
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {

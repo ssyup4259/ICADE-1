@@ -10,6 +10,70 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- 체크박스 전체 선택 -->
+<script type="text/javascript">
+
+$(function() {
+	
+	$("[name=checkAll]").click(function() {
+		allCheckFunc(this);
+	});
+	
+	$("[name=GD_DEVICE]").each(function() {
+		
+		$(this).click(function(){
+			oneCheckFunc($(this));
+		});
+	});
+});
+
+function allCheckFunc(obj) {
+	$("[name=GD_DEVICE]").prop("checked", $(obj).prop("checked"));
+	
+	var deviceSize = ${dk_lists.size()};
+	
+	for (var i = 1; i < deviceSize; i++) {
+		
+		var divId = 'D'+i;
+		
+		if ($("#checkAll").prop("checked")) {
+			document.getElementById(divId).style.display = 'block';	
+		} else {
+			document.getElementById(divId).style.display = 'none';
+		}
+		
+	}
+	
+}
+
+/* 체크박스 체크시 전체선택 체크 여부 */
+
+function oneCheckFunc(obj) {
+	
+	var allObj = $("[name=checkAll]");
+	var objName = $(obj).attr("name");
+
+	if ($(obj).prop("checked")) {
+		
+		checkBoxLength = $("[name="+ objName +"]").length;
+		checkedLength = $("[name="+ objName +"]:checked").length;
+		
+		if (checkBoxLength == checkedLength) {
+			allObj.prop("checked", true);
+		} else {
+			allObj.prop("checked", false);
+		}
+		
+	} else {
+		allObj.prop("checked", false);
+	}
+}
+
+</script>
+
+<!-- 상품등록하기 버튼 submit -->
 <script type="text/javascript">
 
 function sendIt() {
@@ -58,29 +122,82 @@ function sendIt() {
 
 </script>
 
-<script type="text/javascript">
+<!-- 상품종류 셀렉트박스 -->
+<!-- <script type="text/javascript">
 
 function showSub(obj) {
 
     var f = document.myForm;
 
-    if(obj == 1) {
+    if(obj == 900) {
     
         f.SUB1.style.display = "";
         f.SUB2.style.display = "none";
+        f.SUB3.style.display = "none";
 
-    } else if (obj == 2) {
+    } else if (obj == 901) {
 
         f.SUB1.style.display = "none";
         f.SUB2.style.display = "";
+        f.SUB3.style.display = "none";
 
-    } else {
+    } else if (obj == 902) {
     	
     	f.SUB1.style.display = "none";
         f.SUB2.style.display = "none";
+        f.SUB3.style.display = "";
         
-    }
+    } else {
+		
+    	f.SUB1.style.display = "none";
+        f.SUB2.style.display = "none";
+        f.SUB3.style.display = "none";
+    	
+	}
+    
 }
+
+</script> -->
+
+<!-- 체크박스관련 -->
+<script type="text/javascript">
+
+//기종 체크박스 선택시 색상 표시
+function toggleShow (checkbox) {
+	
+	var id = document.getElementById(checkbox).value;
+	var divId = "D" + id;
+	
+	var subCats = document.all ? document.all[id] :	document.getElementById ? document.getElementById(id) :	null;
+	
+	if (subCats) {
+		
+		
+		if (document.getElementById(divId).style.display == '' || document.getElementById(divId).style.display == 'none')
+			document.getElementById(divId).style.display = 'block'; 
+		else 
+			document.getElementById(divId).style.display = 'none';
+		
+	}
+	
+}
+
+
+//색상 체크박스 선택시 텍스트박스 활성화
+function enableTextBox(name) {
+	
+	var txtBox = document.getElementById(name);
+	
+	if (txtBox.disabled == true) {
+		txtBox.disabled = false;
+	} else {
+		txtBox.value = "";
+		txtBox.disabled = true;
+	}
+	
+}
+
+
 
 </script>
 
@@ -92,45 +209,69 @@ function showSub(obj) {
 <form action="" name="myForm" method="POST" enctype="multipart/form-data">
 
 상품 종류 : 
-<select onChange="showSub(this.options[this.selectedIndex].value);">
+<!-- <select onChange="showSub(this.options[this.selectedIndex].value);">
 	<option>선택해주세요</option>
-	<option value="1">케이스</option>
-	<option>필름</option>
-	<option value="2">액세서리</option>
-</select>
- 
-<select name="SUB1" style="display: none;">
-	<option value="">선택해주세요</option>
-	<option value="">일반케이스</option>
-	<option value="">주문제작 케이스</option>
-</select>
+	<option value="900">케이스</option>
+	<option value="901">필름</option>
+	<option value="902">액세서리</option>
+</select> -->
 
-<select name="SUB2" style="display: none;">
-	<option value="">선택해주세요</option>
-	<option value="">셀카봉/삼각대</option>
-	<option value="">케이블/충전기</option>
-	<option value="">이어폰</option>
-</select>
+
+
+<!-- <select name="SUB1" style="display: none;">
+	<option>선택해주세요</option>
+	<option value="1">기본 케이스</option>
+	<option value="2">주문제작 케이스</option>
+</select> -->
+
+
+<!-- <select name="SUB2" style="display: none;">
+	<option value="3">필름</option>
+</select> -->
+
+
+<!-- <select name="SUB3" style="display: none;">
+	<option>선택해주세요</option>
+	<option value="4">셀카봉/삼각대</option>
+	<option value="5">케이블/충전기</option>
+	<option value="6">이어폰</option>
+</select> -->
+
+<c:forEach var="gk_dto" items="${gk_lists}">
+	<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+</c:forEach>
+
 <br/>
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
-상품 가격 : <input type="text" name="G_PRICE"/> <br/>
+상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>원 <br/>
 지원 기종 : <br/>
-<label><input type="checkbox" name=""  value=""/>전체</label>&nbsp;<br/><br/>
+<label><input type="checkbox" name="checkAll"  id="checkAll"/>전체</label>&nbsp;<br/><br/>
+
 <c:forEach var="dk_dto" items="${dk_lists}">
 
-	<label><input type="checkbox" name="${dk_dto.DK_CODE}" value="${dk_dto.DK_CODE}"/>${dk_dto.DK_NAME}</label><br/>
-	<c:forEach var="gc_dto" items="${gc_lists}">
-		<label><input type="checkbox" name="${gc_dto.GC_CODE}" value="${gc_dto.GC_CODE}"/>${gc_dto.GC_COLOR}</label>
-		<input type="text" name="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" size="3" disabled="disabled"/>		
-	</c:forEach>
+	<label><input type="checkbox" id="${dk_dto.DK_CODE}" name="GD_DEVICE" value="${dk_dto.DK_CODE}" onclick="toggleShow('${dk_dto.DK_CODE}')"/>${dk_dto.DK_NAME}</label><br/>
 	
+	<div id="D${dk_dto.DK_CODE}" class="subCats" style="display: none;">
+	
+		<c:forEach var="gc_dto" items="${gc_lists}">
+		
+			<label>
+			<input type="checkbox" name="GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
+			${gc_dto.GC_COLOR}
+			</label>
+			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+				
+		</c:forEach>
+		
 	<br/><br/>
+	
+	</div>
 
 </c:forEach>
 
 <br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>
-할인율 : <input type="text" name="G_DISCOUNT"/> <br/>
+할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>% <br/>
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요" onchange="change();"/> <br/>
 

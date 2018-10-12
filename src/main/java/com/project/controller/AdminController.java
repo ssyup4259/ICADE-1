@@ -16,6 +16,7 @@ import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
+import com.project.dto.GoodsKindDTO;
 import com.project.service.AdminService;
 
 @Controller
@@ -31,9 +32,11 @@ public class AdminController {
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.GET)
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
+		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
 		List<DeviceKindDTO> dk_lists = service.getDeviceList();
 		List<GoodsColorDTO> gc_lists = service.getColorList();
 		
+		req.setAttribute("gk_lists", gk_lists);
 		req.setAttribute("dk_lists", dk_lists);
 		req.setAttribute("gc_lists", gc_lists);
 		
