@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java"
+ contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -13,8 +14,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Keywords" content="회원가입" />
 <meta name="Description" content="회원가입" />
-<link rel="stylesheet" href="../resources/css/screen.css" type="text/css" media="screen" />
 <title>회원가입</title>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <script type="text/javascript">
   function sample6_execDaumPostcode() {
 		new daum.Postcode(
@@ -61,9 +65,10 @@
 				}).open();
 	}
 </script>
-<script type="text/javascript">
 
-/* function sendId() {
+	
+	<script type="text/javascript">
+	/* function sendId() {
 	
 	var f = document.myForm;
 	
@@ -77,8 +82,8 @@
 	f.mId.value = str;
 	
 	
-}
-	 */
+} */
+	
 
 	 
  	function sendIt() {
@@ -214,7 +219,7 @@
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
-			<input type="button" onclick="sendId();" class="btn" value="아이디 중복확인">
+			<input type="button" class="btn" value="아이디 중복확인"  id="idCheck"/>
 		</td>
 	</tr>
 	
@@ -344,5 +349,56 @@
         </div><!-- content 끝 -->
     </div><!--  container 끝 -->
 </div>
+
+<script >
+//아이디 체크여부 확인(아이디 중복일 경우 = 0, 중복이 아닐경우 =1)
+var idCheck= 0;
+
+$(function() {
+    //idCheck 버튼을 클릭했을 때 
+    $("#idCheck").click(function() {
+        
+        //M_ID 를 param.
+        var userid =  $("#M_ID").val(); 
+        
+        $.ajax({
+            async: true,
+            type : 'POST',
+            data : userid,
+            url : "idcheck.action",
+            dataType : "json",
+            contentType: "application/json; charset=UTF-8",
+            success : function(data) {
+                if (data.cnt > 0) {
+                    
+                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $("#divInputId").addClass("has-error")
+                    $("#divInputId").removeClass("has-success")
+                    $("#M_ID").focus();
+                    
+                
+                } else {
+                    alert("사용가능한 아이디입니다.");
+                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $("#divInputId").addClass("has-success")
+                    $("#divInputId").removeClass("has-error")
+                    $("#M_PW").focus();
+                    //아이디가 중복하지 않으면  idck = 1 
+                    idCheck = 1;
+                    
+                }
+            },
+            error : function(error) {
+                
+                alert("error : " + error);
+            }
+        });
+    });
+});
+ 
+</script>
+
+
 </body>
 </html>
