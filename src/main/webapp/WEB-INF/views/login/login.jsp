@@ -36,6 +36,8 @@
 
 </table>
 
+<a href="join.action">회원가입</a>
+
 </form>
 <br/>
 ${msg }

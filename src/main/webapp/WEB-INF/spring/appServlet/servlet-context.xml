@@ -66,6 +66,16 @@
             <beans:ref bean="loginInterceptor" />            
         </interceptor>
     </interceptors>
+    
+<!-- 인터셉터 객체 생성 -->
+    <beans:bean id="postInterceptor" class="com.project.interceptor.PostInterceptor"></beans:bean>
+<!-- Interceptor 설정 -->    
+    <interceptors>
+        <interceptor>
+            <mapping path="http://192.168.16.18:8080/icade/login_ok.action"/>
+            <beans:ref bean="postInterceptor" />            
+        </interceptor>
+    </interceptors>
 	
 	
 	

@@ -20,11 +20,11 @@ public class LoginDAO {
 		
 		MemberDTO dto = new MemberDTO();
 		
-		System.out.println("LoginDAO:" + M_ID);
+		//System.out.println("LoginDAO:" + M_ID);
 		
 		dto = sessionTemplate.selectOne("com.project.mybatis.loginMapper.loginChecker",M_ID);
 		
-		System.out.println("확인용");
+		//System.out.println("확인용");
 		
 		return dto;
 		
