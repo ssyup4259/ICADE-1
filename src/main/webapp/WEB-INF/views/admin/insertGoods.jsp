@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>상품 등록 화면</title>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 

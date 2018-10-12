@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -29,7 +30,7 @@ public interface AdminService {
 	//상품 삭제
 	public void deleteGoods(String g_code) throws Exception;
 	//상품 리스트
-	public List<GoodsDTO> goodsList() throws Exception;
+	public HttpServletRequest goodsList(HttpServletRequest req) throws Exception;
 	//회원 리스트
 	public List<MemberDTO> memberList() throws Exception;
 	//회원에게 권한 부여
