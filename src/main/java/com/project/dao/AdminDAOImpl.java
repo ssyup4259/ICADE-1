@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -110,9 +111,31 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<GoodsDTO> goodsList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GoodsDTO> goodsList(int start, int end, String searchKey, String searchValue) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("start", start);
+		params.put("end", end);
+		params.put("searchKey", searchKey);
+		params.put("searchValue", searchValue);
+		
+		return sessionTemplate.selectList(namespace + ".getGoodsLists", params);
+		
+	}
+
+	@Override
+	public int getGoodsCount(String searchKey, String searchValue) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("searchKey", searchKey);
+		params.put("searchValue", searchValue);
+		
+		int result = sessionTemplate.selectOne(namespace + ".getGoodsCount", params);
+		
+		return result;
+		
 	}
 
 }

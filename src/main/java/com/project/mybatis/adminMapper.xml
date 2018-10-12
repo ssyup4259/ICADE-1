@@ -41,6 +41,29 @@
 	update Goods set G_COUNT = #{G_COUNT} where G_NUM = #{G_NUM}
 </update>
 
+<!-- 전체 데이터 갯수 -->
+<select id="getGoodsCount" parameterType="hashMap" resultType="int">
+	select nvl(count(*), 0) from GOODS
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 상품 리스트 출력 -->
+<select id="getGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select DISTINCT GD_KIND_NUM, GK_KIND, G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME from GOODS, GOODS_DETAIL, GOODS_KIND
+	where ${searchKey} like '%' || #{searchValue} || '%' and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 한개의 데이터 -->
+<select id="getReadGoods" parameterType="int" resultType="com.project.dto.GoodsDTO">
+	select G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
+	from GOODS where G_NUM = #{G_NUM}
+</select>
+
 <!-- 상품 수정 -->
 <update id="updateGoods" parameterType="com.project.dto.MemberDTO">
 	
