@@ -11,6 +11,7 @@ import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
+import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
 
@@ -25,6 +26,11 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	public static String namespace = "com.project.mybatis.adminMapper";
+	
+	@Override
+	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
+		return sessionTemplate.selectList(namespace + ".getGoodsKind");
+	}
 	
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {

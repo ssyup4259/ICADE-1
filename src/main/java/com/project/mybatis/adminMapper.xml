@@ -9,6 +9,11 @@
 	select nvl(max(G_NUM), 0) from Goods
 </select>
 
+<!-- 상품 종류 리스트 -->
+<select id="getGoodsKind" resultType="com.project.dto.GoodsKindDTO">
+	select GK_NUM, GK_KIND from GOODS_KIND
+</select>
+
 <!-- 지원기종 리스트 -->
 <select id="getDevice" resultType="com.project.dto.DeviceKindDTO">
 	select DK_CODE, DK_NAME from DEVICE_KIND
