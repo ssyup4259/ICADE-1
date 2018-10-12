@@ -48,7 +48,7 @@
 	</div>	
 </div>
 
-<table style="text-align: center;" border="1" cellpadding="0" cellspacing="0">
+<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
 	<tr>
 		<td>상품 번호</td>
 		<td>상품 이름</td>
@@ -57,8 +57,8 @@
 		<td>판매 개수</td>
 		<td>상품 내용</td>
 		<td>할인율</td>
-		<td>원본 파일명</td>
-		<td>저장 파일명</td>
+		<td>섬네일</td>
+		<td>수정/삭제</td>
 	</tr>
 	
 	<c:forEach var="g_dto" items="${g_lists}">
@@ -70,8 +70,12 @@
 			<td>${g_dto.getG_SELLCOUNT()}</td>
 			<td>${g_dto.getG_CONTENT()}</td>
 			<td>${g_dto.getG_DISCOUNT()}</td>
-			<td>${g_dto.getG_PHOTO()}</td>
 			<td>${g_dto.getG_SAVEFILENAME()}</td>
+			<td>
+				<a href="#">수정</a>
+				/
+				<a href="#">삭제</a>
+			</td>
 		</tr>
 	</c:forEach>
 	
