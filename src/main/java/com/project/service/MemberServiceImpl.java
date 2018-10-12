@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(String M_ID) throws Exception {
 		
+
 		return m_dao.idCheck(M_ID);
 		
 	}
