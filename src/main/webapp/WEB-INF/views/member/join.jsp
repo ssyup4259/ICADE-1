@@ -18,9 +18,7 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-	
-		
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<!-- 	/* str = f.mId.value;
 		str = str.trim();
 		if(!str || str.length<=7){
@@ -156,30 +154,40 @@
 	</tr>	
 	
 	<!-- 비밀번호 입력 -->
+	
 	<tr>
 		<td width="100" align="center">
 			<h4>패스워드</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="password" name="M_PW" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="password" name="M_PW" id="pw1"  maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
 	</tr>
 	
-	<!-- 비밀번호 확인 -->
+	
 	<tr height="2">
 		<td colspan="3" bgcolor="#cccccc"></td>
-	</tr>		
+	</tr>	
+	
+	<!-- 비밀번호 확인 -->
 	<tr>
 		<td width="100" align="center">
 		 	<h4>패스워드 확인</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-		 	 <input type="password" name="mPwchk" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+		 	 <input type="password" name="M_PWCorre" id="pw2" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+		 	 <br>
+		 	 <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+		 	 <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 		</td>
 	</tr>
+	
+	
 	<tr height="2">
-		<td colspan="3" bgcolor="#cccccc"></td>
+		<td colspan="3" bgcolor="#cccccc"></td >
 	</tr>
+	
+	
 	<!-- 이름 -->
 	<tr>
 		<td width="100" align="center">
@@ -317,6 +325,41 @@ function idCheck() {
 </script>
 <!-- 아이디 중복확인 끝 -->
 
+<!-- 비밀번호 일치확인 자바스크립트 -->
+<script>
+
+ $(function () {
+	$("#alert-success").hide();
+	$("#alert-danger").hide();
+	$("input").keyup(function() {
+		
+		var pw1 =$("#pw1").val();
+		var pw2 =$("#pw2").val();
+		
+		if (pw1 !="" || pw2 != "") {
+			
+			if (pw1 ==pw2) {
+				
+				$("#alert-success").show();
+				$("#alert-danger").hide();
+				$("#submit").removeAttr("disabled");
+			}else{
+				$("#alert-success").hide();
+				$("#alert-danger").show();
+				$("#submit").attr("disabled",disabled);
+			}
+		}
+	});
+});
+
+
+</script>
+<!-- 비밀번호 일치확인  끝-->
+
+
+
+
+
 <!-- 닉네임 중복확인 시작 -->
 <script >
 $(document).ready(function() {
@@ -325,9 +368,6 @@ $(document).ready(function() {
 		nickCheck();		
 	});
 });
-
-
-
 function nickCheck() {
 	
 	var userNick =$("#user_NickName").val();
