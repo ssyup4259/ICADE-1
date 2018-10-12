@@ -36,6 +36,11 @@
 		values(#{GD_NUM}, #{GD_CODE}, #{GD_KIND_NUM}, #{GD_DEVICE}, #{GD_COLOR}, #{GD_COUNT}, 0)
 </insert>
 
+<!-- 상세상품 등록 후 Goods테이블의 상품 총 갯수 수정 -->
+<update id="updateGoodsCount" parameterType="com.project.dto.GoodsDTO">
+	update Goods set G_COUNT = #{G_COUNT} where G_NUM = #{G_NUM}
+</update>
+
 <!-- 상품 수정 -->
 <update id="updateGoods" parameterType="com.project.dto.MemberDTO">
 	

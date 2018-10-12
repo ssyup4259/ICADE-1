@@ -71,6 +71,13 @@ public class AdminDAOImpl implements AdminDAO {
 		sessionTemplate.insert(namespace + ".insertGoodsDetail", gd_dto);
 		
 	}
+	
+	@Override
+	public void updateGoodsCount(GoodsDTO g_dto) throws Exception {
+		
+		sessionTemplate.update(namespace + ".updateGoodsCount", g_dto);
+		
+	}
 
 	@Override
 	public void updateGoods(GoodsDTO g_dto) throws Exception  {

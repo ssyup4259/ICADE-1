@@ -106,6 +106,8 @@ public class AdminServiceImpl implements AdminService {
 		
 		String[] deviceKind = req.getParameterValues("GD_DEVICE");
 		
+		int count = 0;
+		
 		for (int i = 0; i < deviceKind.length; i++) {
 			
 			gd_dto.setGD_DEVICE(Integer.parseInt(deviceKind[i]));
@@ -120,9 +122,16 @@ public class AdminServiceImpl implements AdminService {
 				gd_dto.setGD_COUNT(Integer.parseInt(goodsCount[j]));
 				a_dao.insertGoodsDetail(gd_dto, g_num);
 				
+				count += gd_dto.getGD_COUNT();
+				
 			}
 			
 		}
+		
+		g_dto.setG_NUM(g_num);
+		g_dto.setG_COUNT(count);
+		
+		a_dao.updateGoodsCount(g_dto);
 		
 	}
 	

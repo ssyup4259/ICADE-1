@@ -22,6 +22,8 @@ public interface AdminDAO {
 	public int insertGoods(GoodsDTO g_dto) throws Exception;
 	//상세 상품 등록
 	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception;
+	//상품 갯수 설정
+	public void updateGoodsCount (GoodsDTO g_dto) throws Exception;
 	//상품 수정(재고 수정)
 	public void updateGoods(GoodsDTO g_dto) throws Exception;
 	//상품 삭제
