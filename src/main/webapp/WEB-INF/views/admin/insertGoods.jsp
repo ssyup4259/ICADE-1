@@ -237,7 +237,12 @@ function enableTextBox(name) {
 </select> -->
 
 <c:forEach var="gk_dto" items="${gk_lists}">
-	<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+	<c:if test="${gk_dto.GK_NUM == 1}">
+		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
+	</c:if>
+	<c:if test="${gk_dto.GK_NUM > 1}">
+		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+	</c:if>
 </c:forEach>
 
 <br/>
