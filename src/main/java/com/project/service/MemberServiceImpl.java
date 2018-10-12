@@ -18,6 +18,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMember(MemberDTO m_dto) throws Exception {
 
+		
+		System.out.println(m_dto);
 		m_dao.insertMember(m_dto);
 
 	}
@@ -29,7 +31,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int nickCheck(Map<String, Object> map) throws Exception {
+		//	public int nickCheck(String M_ID) throws Exception {
 		return m_dao.nickCheck(map);
+		//		return m_dao.nickCheck(M_ID);
 	}
 
 
