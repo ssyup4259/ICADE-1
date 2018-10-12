@@ -65,7 +65,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String gCode;
 		
 		//상품 코드 세팅
-		gCode = gd_dto.getGD_NUM() + "-" + gd_dto.getGD_KINDNUM() + "-" + gd_dto.getGD_DEVICE() + "-" + gd_dto.getGD_COLOR();		
+		gCode = gd_dto.getGD_NUM() + "-" + gd_dto.getGD_KIND_NUM() + "-" + gd_dto.getGD_DEVICE() + "-" + gd_dto.getGD_COLOR();		
 		gd_dto.setGD_CODE(gCode);
 		
 		sessionTemplate.insert(namespace + ".insertGoodsDetail", gd_dto);

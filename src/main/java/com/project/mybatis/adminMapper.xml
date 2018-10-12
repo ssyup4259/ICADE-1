@@ -4,7 +4,7 @@
 
 <mapper namespace="com.project.mybatis.adminMapper">
 
-<!-- Num의 최댓값 -->
+<!-- GoodsNum의 최댓값 -->
 <select id="goodsMaxNum" resultType="int">
 	select nvl(max(G_NUM), 0) from Goods
 </select>

@@ -260,10 +260,10 @@ function enableTextBox(name) {
 		<c:forEach var="gc_dto" items="${gc_lists}">
 		
 			<label>
-			<input type="checkbox" name="GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
+			<input type="checkbox" name="${dk_dto.DK_CODE}_GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
 			${gc_dto.GC_COLOR}
 			</label>
-			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="${dk_dto.DK_CODE}_GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 				
 		</c:forEach>
 		

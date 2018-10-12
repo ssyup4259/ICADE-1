@@ -104,9 +104,25 @@ public class AdminServiceImpl implements AdminService {
 		
 		g_num = a_dao.insertGoods(g_dto);
 		
-		a_dao.insertGoodsDetail(gd_dto, g_num);
+		String[] deviceKind = req.getParameterValues("GD_DEVICE");
 		
-		
+		for (int i = 0; i < deviceKind.length; i++) {
+			
+			gd_dto.setGD_DEVICE(Integer.parseInt(deviceKind[i]));
+			
+			String[] goodsColor = req.getParameterValues(gd_dto.getGD_DEVICE() + "_GD_COLOR");
+			
+			for (int j = 0; j < goodsColor.length; j++) {
+				
+				String[] goodsCount = req.getParameterValues(gd_dto.getGD_DEVICE() + "_GD_COUNT");
+				
+				gd_dto.setGD_COLOR(Integer.parseInt(goodsColor[j]));
+				gd_dto.setGD_COUNT(Integer.parseInt(goodsCount[j]));
+				a_dao.insertGoodsDetail(gd_dto, g_num);
+				
+			}
+			
+		}
 		
 	}
 	
