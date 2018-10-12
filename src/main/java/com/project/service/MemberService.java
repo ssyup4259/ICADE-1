@@ -5,7 +5,11 @@ import com.project.dto.MemberDTO;
 public interface MemberService {
 	
 	//회원가입
-	public void insertMember(MemberDTO m_dto) throws Exception;
+	public int insertMember(MemberDTO m_dto) throws Exception;
+
+	//아이디 중복
+	public int idCheck(String M_ID) throws Exception;
+	public int nickCheck(String M_NICKNAME) throws Exception;
 	
 	
 }
