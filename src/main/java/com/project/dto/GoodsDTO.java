@@ -33,6 +33,28 @@ public class GoodsDTO {
     
     // 상품 사진 저장명
     private String G_SAVEFILENAME;
+    
+    // 상품 종류번호
+    private int GD_KIND_NUM;
+    
+    // 상품 종류
+    private String GK_KIND;
+
+	public int getGD_KIND_NUM() {
+		return GD_KIND_NUM;
+	}
+
+	public void setGD_KIND_NUM(int gD_KIND_NUM) {
+		GD_KIND_NUM = gD_KIND_NUM;
+	}
+
+	public String getGK_KIND() {
+		return GK_KIND;
+	}
+
+	public void setGK_KIND(String gK_KIND) {
+		GK_KIND = gK_KIND;
+	}
 
 	public int getG_NUM() {
 		return G_NUM;
