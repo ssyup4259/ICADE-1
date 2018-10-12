@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.MemberDTO;
@@ -38,23 +39,24 @@ public class MemberController {
 			
 			return "redirect:/";
 		}
-	/*	@RequestMapping(value="/idcheck.action")
-		@ResponseBody
-		public int idCheck(Map<String, Object> map)throws Exception{
-			
-			int idCheckResult = memberService.idCheck(map);
-			
-			return idCheckResult;
-			
-		}*/
-		
+
 		@RequestMapping(value="/idcheck.action")
 		@ResponseBody
 		public int idCheck(CommandMap commandMap)throws Exception{
-			
 			int idCheckResult = memberService.idCheck(commandMap.getMap());
 			
 			return idCheckResult;
+			
+		}
+		
+		@RequestMapping(value="/nickcheck.action")
+		@ResponseBody
+		public int nickCheck(CommandMap commandMap)throws Exception{
+			
+			
+			int nickCheckResult = memberService.nickCheck(commandMap.getMap());
+			
+			return nickCheckResult;
 			
 		}
 	

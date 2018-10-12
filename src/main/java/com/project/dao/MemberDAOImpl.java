@@ -21,9 +21,12 @@ public class MemberDAOImpl implements MemberDAO {
 
 	public static String namespace = "com.project.mybatis.joinMapper";
 
+	
+	
 	@Override
 	public void insertMember(MemberDTO m_dto) throws Exception {
 
+		System.out.println(m_dto);
 		sessionTemplate.insert(namespace + ".insertMember", m_dto);
 
 	}

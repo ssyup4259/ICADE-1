@@ -14,6 +14,7 @@ public interface MemberDAO {
 	
 	//닉네임 중복체크
 	public int nickCheck(Map<String, Object> map)throws Exception;
+	//public int nickCheck(String M_ID)throws Exception;
 	
 	
 }
