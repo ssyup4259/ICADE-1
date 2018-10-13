@@ -8,20 +8,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>상품 재고 수정</title>
 </head>
 <body>
 
 <h3>상품 재고 수정</h3>
+<h1>${g_name}</h1>
+<form action="" method="post" name="myForm">
 
-<c:forEach var="gd_dto" items="${gd_lists}">
-
-	${gd_dto.DK_NAME} <br/>
-		
-	${gd_dto.GC_COLOR} : <input type="text" name="GD_COUNT" value="${gd_dto.GD_COUNT}" size="3"/>개&nbsp;<br/>
+	<c:set var="i" value="plz"/>
 	
-</c:forEach>
- 
+	<c:forEach var="gd_dto" items="${gd_lists}">
+	
+		<c:if test="${i ne gd_dto.DK_NAME}">
+			<br/><br/>${gd_dto.DK_NAME}<br/>
+		</c:if>
+		
+		<c:if test="${i eq gd_dto.DK_NAME}">
+			<br/>
+		</c:if>
+		
+		<c:set var="i" value="${gd_dto.DK_NAME}"/>
+		
+		${gd_dto.GC_COLOR} : <input type="text" name="${gd_dto.GD_CODE}" value="${gd_dto.GD_COUNT}" size="3"/>개&nbsp;
+		
+	</c:forEach>
+	
+	<input type="button" onclick="sendIt()" value="재고 수정"/>
+	<input type="button" onclick="javascript:history.back();" value="취 소"/>
+
+</form>
 
 </body>
 </html>
