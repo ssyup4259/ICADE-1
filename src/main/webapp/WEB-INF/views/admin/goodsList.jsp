@@ -30,14 +30,20 @@
 
 <h3>상품 목록</h3>
 
-<label><input type="radio" name="GD_KIND_NUM" value="" checked="checked"/>전체</label>
-<c:forEach var="gk_dto" items="${gk_lists}">
-	<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
-</c:forEach>
-	
 <div id="bbsList_header">
 	<div id="leftHeader">
 		<form action="" name="searchForm" method="post">
+			<select name="GD_KIND_NUM" class="selectField">
+					<option value="">전체</option>
+				<c:forEach var="gk_dto" items="${gk_lists}">
+					<c:if test="${gdKindNum eq gk_dto.GK_NUM}">
+						<option value="${gk_dto.GK_NUM}" selected="selected">${gk_dto.GK_KIND}</option>
+					</c:if>
+					<c:if test="${gdKindNum ne gk_dto.GK_NUM}">
+						<option value="${gk_dto.GK_NUM}">${gk_dto.GK_KIND}</option>
+					</c:if>
+				</c:forEach>
+			</select>
 			<select name="searchKey" class="selectField">
 				<option value="G_NAME">상품명</option>
 				<option value="G_CONTENT">내용</option>
@@ -79,7 +85,7 @@
 			<td>
 				<a href="#">수정</a>
 				/
-				<a href="#">삭제</a>
+				<a href="<%=cp%>/admin/deleteGoods.action?g_num=${g_dto.getG_NUM()}">삭제</a>
 			</td>
 		</tr>
 	</c:forEach>

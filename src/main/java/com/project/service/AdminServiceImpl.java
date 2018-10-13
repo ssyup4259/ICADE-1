@@ -150,10 +150,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteGoods(String g_code) throws Exception  {
-		
-		a_dao.deleteGoods(g_code);
-		
+	public void deleteGoods(int g_num) throws Exception  {
+		a_dao.deleteGoods(g_num);
 	}
 
 	@Override
@@ -215,12 +213,19 @@ public class AdminServiceImpl implements AdminService {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
-		List<GoodsDTO> g_lists = a_dao.goodsList(start, end, searchKey, searchValue);
+		String gdKindNum = req.getParameter("GD_KIND_NUM");
+		
+		if (gdKindNum == null || gdKindNum.equals("")) {
+			gdKindNum = "";
+		}
+		
+		List<GoodsDTO> g_lists = a_dao.goodsList(start, end, gdKindNum, searchKey, searchValue);
 		
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
-			param = "searchKey=" + searchKey;
+			param = "gdKindNum=" + gdKindNum;
+			param = "&searchKey=" + searchKey;
 			param+= "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
 		}
@@ -245,6 +250,7 @@ public class AdminServiceImpl implements AdminService {
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
 		req.setAttribute("articleUrl",articleUrl);
+		req.setAttribute("gdKindNum", gdKindNum);
 		
 		return req;
 	}

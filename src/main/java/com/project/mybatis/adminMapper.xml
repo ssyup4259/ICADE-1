@@ -11,17 +11,17 @@
 
 <!-- 상품 종류 리스트 -->
 <select id="getGoodsKind" resultType="com.project.dto.GoodsKindDTO">
-	select GK_NUM, GK_KIND from GOODS_KIND
+	select GK_NUM, GK_KIND from GOODS_KIND order by GK_NUM asc
 </select>
 
 <!-- 지원기종 리스트 -->
 <select id="getDevice" resultType="com.project.dto.DeviceKindDTO">
-	select DK_CODE, DK_NAME from DEVICE_KIND
+	select DK_CODE, DK_NAME from DEVICE_KIND order by DK_CODE asc
 </select>
 
 <!-- 색상 리스트 -->
 <select id="getColor" resultType="com.project.dto.GoodsColorDTO">
-	select GC_CODE, GC_COLOR from GOODS_COLOR
+	select GC_CODE, GC_COLOR from GOODS_COLOR order by GC_CODE asc
 </select>
 
 <!-- 상품 등록 -->
@@ -53,7 +53,7 @@
 	select rownum rnum, data.* from (
 	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
 	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND)
-	where ${searchKey} like '%' || #{searchValue} || '%' and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
+	where GD_KIND_NUM like '%' || #{gdKindNum} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
@@ -71,8 +71,8 @@
 </update>
 
 <!-- 상품 삭제 -->
-<delete id="deleteGoods" parameterType="String">
-	delete Goods where G_CODE = #{G_CODE}
+<delete id="deleteGoods" parameterType="int">
+	delete Goods where G_NUM = #{G_NUM}
 </delete>
 
 

@@ -27,9 +27,9 @@ public interface AdminDAO {
 	//상품 수정(재고 수정)
 	public void updateGoods(GoodsDTO g_dto) throws Exception;
 	//상품 삭제
-	public void deleteGoods(String g_code) throws Exception;
+	public void deleteGoods(int g_num) throws Exception;
 	//상품 리스트
-	public List<GoodsDTO> goodsList(int start, int end, String searchKey, String searchValue) throws Exception;
+	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception;
 	//상품 개수 구하기
 	public int getGoodsCount(String searchKey,String searchValue) throws Exception;
 	//회원 리스트

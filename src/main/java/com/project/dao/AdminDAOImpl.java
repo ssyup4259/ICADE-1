@@ -87,9 +87,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void deleteGoods(String g_code) throws Exception  {
-		// TODO Auto-generated method stub
-		
+	public void deleteGoods(int g_num) throws Exception  {
+		sessionTemplate.delete(namespace + ".deleteGoods", g_num);
 	}
 
 	@Override
@@ -111,12 +110,13 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<GoodsDTO> goodsList(int start, int end, String searchKey, String searchValue) throws Exception {
+	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception {
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("start", start);
 		params.put("end", end);
+		params.put("gdKindNum", gdKindNum);
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
 		

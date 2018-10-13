@@ -62,6 +62,17 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping(value="/deleteGoods.action", method= {RequestMethod.POST, RequestMethod.GET})
+	public String deleteGoods(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		int g_num = Integer.parseInt(req.getParameter("g_num"));
+		
+		service.deleteGoods(g_num);
+		
+		return "redirect:/admin/goodsList.action";
+		
+	}
+	
 	
 
 }
