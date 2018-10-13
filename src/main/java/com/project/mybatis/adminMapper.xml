@@ -66,18 +66,6 @@
 	where G_NUM = #{g_num} and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM
 </select>
 
-<!-- 상세상품의 G_NUM별 GD_DEVICE의 수 -->
-<select id="getReadGoodsDetailDevice" parameterType="int" resultType="com.project.dto.GoodsDetailDTO">
-	select DISTINCT GD_DEVICE, DK_NAME  from GOODS_DETAIL, (select DK_CODE, DK_NAME from DEVICE_KIND)
-	where GD_NUM = #{gd_num} and GD_DEVICE = DK_CODE
-	order by GD_DEVICE;
-</select>
-
-<!-- 상세상품의 G_NUM & G_DEVICE별 GD_COLOR와 GD_COUNT의 정보 -->
-<select id="getReadGoodsDetailColorCount" parameterType="map" resultType="com.project.dto.GoodsDetailDTO">
-	select GD_CODE, GD_COUNT from GOODS_DETAIL where GD_NUM = #{gd_num} and GD_DEVICE = #{gd_device};
-</select>
-
 <!-- 상세 상품 한개의 데이터 -->
 <select id="getReadGoodsDetail" parameterType="int" resultType="com.project.dto.GoodsDetailDTO">
 	select GD_NUM, GD_CODE, GD_KIND_NUM, GD_DEVICE, DK_NAME, GD_COLOR, GC_COLOR, GD_COUNT, GD_SELLCOUNT

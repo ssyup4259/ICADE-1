@@ -1,6 +1,5 @@
 package com.project.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.project.dto.DeviceKindDTO;
@@ -25,10 +24,6 @@ public interface AdminDAO {
 	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception;
 	//상품 개수 설정
 	public void updateGoodsCount (GoodsDTO g_dto) throws Exception;
-	//상세상품의 G_NUM별 GD_DEVICE의 수
-	public List<GoodsDetailDTO> getReadGoodsDetailDevice(int g_num) throws Exception;
-	//상세상품의 G_NUM & G_DEVICE별 GD_COLOR와 GD_COUNT의 정보
-	public List<GoodsDetailDTO> getReadGoodsDetailColorCount(HashMap<String, Integer> map) throws Exception;
 	//상품 1개의 정보
 	public GoodsDTO getReadGoods(int g_num) throws Exception;
 	//상품 수정

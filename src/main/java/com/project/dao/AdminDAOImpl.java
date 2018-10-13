@@ -147,18 +147,6 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
-	//상세상품의 G_NUM별 GD_DEVICE의 수
-	@Override
-	public List<GoodsDetailDTO> getReadGoodsDetailDevice(int g_num) throws Exception {
-		return sessionTemplate.selectList(namespace + ".getReadGoodsDetailDevice", g_num);
-	}
-
-	//상세상품의 G_NUM & G_DEVICE별 GD_COLOR와 GD_COUNT의 정보
-	@Override
-	public List<GoodsDetailDTO> getReadGoodsDetailColorCount(HashMap<String, Integer> map) throws Exception {
-		return sessionTemplate.selectList(namespace + ".getReadGoodsDetailColorCount", map);
-	}
-	
 	//상세 상품의 정보
 	@Override
 	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception {
