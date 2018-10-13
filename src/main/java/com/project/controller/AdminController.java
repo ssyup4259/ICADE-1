@@ -42,9 +42,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.POST)
-	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req) throws Exception {
 		
-		service.insertGoods(g_dto, gd_dto, req, resp);
+		service.insertGoods(g_dto, gd_dto, req);
 		
 		return "redirect:/admin/goodsList.action";
 		
@@ -76,16 +76,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.GET)
-	public String updateForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String updateForm(int g_num, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		return "";
+		GoodsDTO g_dto = service.getReadGoods(g_num);
+		
+		req.setAttribute("g_dto", g_dto);
+		
+		return "admin/updateGoods";
 		
 	}
 	
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.POST)
-	public String updateGoods(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		return "";
+		service.updateGoods(g_dto, req);
+		
+		return "redirect:/admin/goodsList.action";
 		
 	}
 	

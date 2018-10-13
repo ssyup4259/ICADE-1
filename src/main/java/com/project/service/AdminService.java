@@ -3,7 +3,6 @@ package com.project.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -24,9 +23,11 @@ public interface AdminService {
 	//색상 목록
 	public List<GoodsColorDTO> getColorList() throws Exception;
 	//상품 등록
-	public void insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception;
-	//상품 수정(재고 수정)
-	public void updateGoods(GoodsDTO g_dto) throws Exception;
+	public void insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req) throws Exception;
+	//상품 1개의 정보
+	public GoodsDTO getReadGoods(int g_num) throws Exception;
+	//상품 수정
+	public void updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req) throws Exception;
 	//상품 삭제
 	public void deleteGoods(int g_num, String path) throws Exception;
 	//상품 리스트

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>상품 등록 화면</title>
+<title>상품 수정 화면</title>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -45,15 +45,7 @@ function sendIt() {
         return;
     }
     f.G_CONTENT.value = str;
-	
-    str = f.gFile.value;
-    str = str.trim();
-    if(!str) {
-        alert("이미지를 선택해주세요.");
-        f.gFile.focus();
-        return;
-    }
-        
+	        
 	f.action = "<%=cp%>/admin/updateGoods.action";
 	f.submit();
 	
@@ -64,17 +56,18 @@ function sendIt() {
 </head>
 <body>
 
-<h3>상품등록 테스트</h3>
+<h3>상품수정 테스트</h3>
 
 <form action="" name="myForm" method="POST" enctype="multipart/form-data">
 
-상품 종류 : ${g_dto.GK_KIND} <br/>
-상품 이름 : <input type="text" name="G_NAME" value="${g_dto.G_NAME}"/> <br/>
-상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.G_PRICE}">원 <br/>
-상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT">${g_dto.G_CONTENT}</textarea> <br/>
-할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.G_DISCOUNT}"/>% <br/>
+<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}"/>
+상품 종류 : ${g_dto.getGK_KIND()} <br/>
+상품 이름 : <input type="text" name="G_NAME" value="${g_dto.getG_NAME()}"/> <br/>
+상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_PRICE()}">원 <br/>
+상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT">${g_dto.getG_CONTENT()}</textarea> <br/>
+할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_DISCOUNT()}"/>% <br/>
 상품 사진 : 
-<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요" value=""/> <br/>
+<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 
 <input type="button" onclick="sendIt()" value="상품수정">
 <input type="button" onclick="javascript:history.back();" value="취 소"/>

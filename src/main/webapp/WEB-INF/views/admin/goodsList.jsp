@@ -83,7 +83,7 @@
 			<td>${g_dto.getG_DISCOUNT()}</td>
 			<td>${g_dto.getG_SAVEFILENAME()}</td>
 			<td>
-				<a href="#">수정</a>
+				<a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a>
 				/
 				<a href="<%=cp%>/admin/deleteGoods.action?g_num=${g_dto.getG_NUM()}">삭제</a>
 			</td>

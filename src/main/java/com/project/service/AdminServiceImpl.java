@@ -36,24 +36,28 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	MyUtil myUtil;
 	
+	//상품 종류 목록
 	@Override
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
 		return a_dao.getGoodsKindList();
 	}
 	
+	//상품 종류 목록
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {
 		return a_dao.getDeviceList();
 	}
 	
+	//색상 목록
 	@Override
 	public List<GoodsColorDTO> getColorList() throws Exception {
 		return a_dao.getColorList();
 	}
 	
+	//상품 등록
 	@Transactional
 	@Override
-	public void insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public void insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req) throws Exception {
 		
 		int g_num;
 		String saveFileName;
@@ -107,7 +111,7 @@ public class AdminServiceImpl implements AdminService {
 				
 			} catch (Exception e) { e.printStackTrace(); }
 			
-		}		
+		}
 		
 		g_num = a_dao.insertGoods(g_dto);
 		
@@ -142,18 +146,94 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
+	//상품 1개의 정보
 	@Override
-	public void updateGoods(GoodsDTO g_dto) throws Exception  {
+	public GoodsDTO getReadGoods(int g_num) throws Exception {
+		return a_dao.getReadGoods(g_num);
+	}
+	
+	//상품 수정
+	@Override
+	public void updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req) throws Exception  {
+		
+		//파일이 NULL이 아닐때 == 사진을 변경하려 할때
+		if (!g_dto.getgFile().isEmpty()) {
+			
+			//기존의 사진 파일 삭제 후 변경된 사진 추가
+			
+			String path = req.getSession().getServletContext().getRealPath("/WEB-INF/files");
+			String saveFileName = a_dao.getReadGoods(g_dto.getG_NUM()).getG_SAVEFILENAME();
+			
+			String filePath = path + File.separator + saveFileName;
+			
+			File f = new File(filePath);
+			
+			if (f.exists()) {
+				
+				f.delete(); //기존의 사진파일 삭제
+				
+				//수정된 사진 파일 물리적으로 추가
+				MultipartFile file = req.getFile("gFile");
+				
+				//원본파일명 세팅
+				g_dto.setG_PHOTO(file.getOriginalFilename());
+				
+				String fileExt = g_dto.getG_PHOTO().substring(g_dto.getG_PHOTO().lastIndexOf("."));
+				if(fileExt == null || fileExt.equals(""))
+					return;
+				
+				String newSaveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+				newSaveFileName += System.nanoTime();
+				
+				newSaveFileName += fileExt;
+				
+				//저장될 파일명 세팅
+				g_dto.setG_SAVEFILENAME(newSaveFileName);
+				
+				if (file.getSize() > 0 || file != null) {
+					
+					try {
+						
+						FileOutputStream fos = new FileOutputStream(path + "/" + newSaveFileName);
+						
+						InputStream is = file.getInputStream();
+						
+						byte[] buffer = new byte[512];
+						
+						while (true) {
+							
+							int data = is.read(buffer, 0, buffer.length);
+							
+							if (data == -1) {
+								break;
+							}
+							
+							fos.write(buffer, 0, data);
+							
+						}
+						
+						is.close();
+						fos.close();
+						
+					} catch (Exception e) { e.printStackTrace(); }
+					
+				}
+				
+			}
+			
+		}
 		
 		a_dao.updateGoods(g_dto);
 		
 	}
 
+	//상품 삭제
 	@Override
 	public void deleteGoods(int g_num, String path) throws Exception  {
 		a_dao.deleteGoods(g_num, path);
 	}
 
+	//회원 리스트
 	@Override
 	public List<MemberDTO> memberList() throws Exception  {
 		
@@ -161,6 +241,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	//회원에게 권한 부여
 	@Override
 	public void authority(String m_id) throws Exception  {
 		
@@ -168,12 +249,15 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	//회원 주문내역 조회
 	@Override
 	public List<OrdersDTO> ordersList() throws Exception  {
 
 		return a_dao.ordersList();
 		
 	}
+	
+	//상품 리스트
 	@Override
 	public HttpServletRequest goodsList(HttpServletRequest req) throws Exception {
 		
@@ -254,5 +338,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		return req;
 	}
+
+	
 
 }

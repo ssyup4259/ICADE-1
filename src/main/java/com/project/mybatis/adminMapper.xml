@@ -61,13 +61,15 @@
 
 <!-- 한개의 데이터 -->
 <select id="getReadGoods" parameterType="int" resultType="com.project.dto.GoodsDTO">
-	select G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
-	from GOODS where G_NUM = #{G_NUM}
+	select G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND)
+	where G_NUM = #{g_num} and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM
 </select>
 
 <!-- 상품 수정 -->
-<update id="updateGoods" parameterType="com.project.dto.MemberDTO">
-	
+<update id="updateGoods" parameterType="com.project.dto.GoodsDTO">
+	update GOODS set G_NAME=#{G_NAME}, G_PRICE=#{G_PRICE}, G_CONTENT=#{G_CONTENT}, G_DISCOUNT=#{G_DISCOUNT}, G_PHOTO=#{G_PHOTO}, G_SAVEFILENAME=#{G_SAVEFILENAME}
+	where G_NUM=#{G_NUM}
 </update>
 
 <!-- 상품 삭제 -->

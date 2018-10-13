@@ -80,11 +80,15 @@ public class AdminDAOImpl implements AdminDAO {
 		sessionTemplate.update(namespace + ".updateGoodsCount", g_dto);
 		
 	}
+	
+	@Override
+	public GoodsDTO getReadGoods(int g_num) throws Exception {
+		return sessionTemplate.selectOne(namespace + ".getReadGoods", g_num);
+	}
 
 	@Override
 	public void updateGoods(GoodsDTO g_dto) throws Exception  {
-		// TODO Auto-generated method stub
-		
+		sessionTemplate.update(namespace + ".updateGoods", g_dto);
 	}
 
 	@Override
