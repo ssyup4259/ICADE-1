@@ -241,6 +241,12 @@ public class AdminServiceImpl implements AdminService {
 		a_dao.deleteGoods(g_num, path);
 	}
 
+	//상세 상품의 정보
+	@Override
+	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception {
+		return a_dao.getReadGoodsDetail(g_num);
+	}
+	
 	//회원 리스트
 	@Override
 	public List<MemberDTO> memberList() throws Exception  {
@@ -346,6 +352,8 @@ public class AdminServiceImpl implements AdminService {
 		
 		return req;
 	}
+
+	
 
 	
 

@@ -105,13 +105,17 @@ public class AdminController {
 	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.GET)
 	public String updateGoodsDetailCountForm(int g_num, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
+		List<GoodsDetailDTO> gd_lists = service.getReadGoodsDetail(g_num);
+		
+		req.setAttribute("gd_lists", gd_lists);
+		
 		return "admin/updateGoodsDetailCount";
 		
 	}
 	
 	//상품 재고 수정(관리자용)
 	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.POST)
-	public String updateGoodsDetailCount(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String updateGoodsDetailCount(GoodsDTO g_dto, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		return "redirect:/admin/goodsList.action";
 		
