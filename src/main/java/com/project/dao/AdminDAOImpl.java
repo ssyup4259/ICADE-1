@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +88,18 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void deleteGoods(int g_num) throws Exception  {
+	public void deleteGoods(int g_num, String path) throws Exception  {
+		
+		GoodsDTO g_dto = sessionTemplate.selectOne(namespace + ".getReadGoods", g_num);
+		
+		String filePath = path + File.separator + g_dto.getG_SAVEFILENAME();
+		
+		File f = new File(filePath);
+		
+		if (f.exists()) {
+			f.delete(); //물리적 파일 삭제
+		}			
+		
 		sessionTemplate.delete(namespace + ".deleteGoods", g_num);
 	}
 

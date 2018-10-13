@@ -150,8 +150,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteGoods(int g_num) throws Exception  {
-		a_dao.deleteGoods(g_num);
+	public void deleteGoods(int g_num, String path) throws Exception  {
+		a_dao.deleteGoods(g_num, path);
 	}
 
 	@Override

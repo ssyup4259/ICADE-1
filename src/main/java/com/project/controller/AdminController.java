@@ -67,12 +67,27 @@ public class AdminController {
 		
 		int g_num = Integer.parseInt(req.getParameter("g_num"));
 		
-		service.deleteGoods(g_num);
+		String path = req.getSession().getServletContext().getRealPath("/WEB-INF/files");
+		
+		service.deleteGoods(g_num, path);
 		
 		return "redirect:/admin/goodsList.action";
 		
 	}
 	
+	@RequestMapping(value="/updateGoods.action", method=RequestMethod.GET)
+	public String updateForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		return "";
+		
+	}
+	
+	@RequestMapping(value="/updateGoods.action", method=RequestMethod.POST)
+	public String updateGoods(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		return "";
+		
+	}
 	
 
 }

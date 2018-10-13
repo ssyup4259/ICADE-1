@@ -96,7 +96,7 @@
 				${pageIndexList }
 			</c:if>
 			<c:if test="${dataCount==0 }">
-				등록된게시물이 없습니다.
+				등록된 상품이 없습니다.
 			</c:if>
 		</td>
 	</tr>
