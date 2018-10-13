@@ -81,7 +81,7 @@
 			<td>${g_dto.getG_SELLCOUNT()}</td>
 			<td>${g_dto.getG_CONTENT()}</td>
 			<td>${g_dto.getG_DISCOUNT()}</td>
-			<td>${g_dto.getG_SAVEFILENAME()}</td>
+			<td><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="100" height="100"/></td>
 			<td>
 				<a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a>
 				/

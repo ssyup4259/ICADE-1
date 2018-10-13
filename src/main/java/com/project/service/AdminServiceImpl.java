@@ -62,7 +62,7 @@ public class AdminServiceImpl implements AdminService {
 		int g_num;
 		String saveFileName;
 		
-		String path = req.getSession().getServletContext().getRealPath("/WEB-INF/files");
+		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
 		
 		File f = new File(path);
 		if (!f.exists()) {
@@ -156,12 +156,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req) throws Exception  {
 		
-		//파일이 NULL이 아닐때 == 사진을 변경하려 할때
+		//파일이 NULL이 아닐 경우 == 사진을 변경하는 경우
 		if (!g_dto.getgFile().isEmpty()) {
 			
 			//기존의 사진 파일 삭제 후 변경된 사진 추가
 			
-			String path = req.getSession().getServletContext().getRealPath("/WEB-INF/files");
+			String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
 			String saveFileName = a_dao.getReadGoods(g_dto.getG_NUM()).getG_SAVEFILENAME();
 			
 			String filePath = path + File.separator + saveFileName;
@@ -220,6 +220,14 @@ public class AdminServiceImpl implements AdminService {
 				}
 				
 			}
+			
+		} else { //파일이 NULL일 경우 = 사진을 변경하지 않을 경우
+			
+			//기존의 정보를 다시 세팅
+			GoodsDTO dto = a_dao.getReadGoods(g_dto.getG_NUM());
+			
+			g_dto.setG_PHOTO(dto.getG_PHOTO());
+			g_dto.setG_SAVEFILENAME(dto.getG_SAVEFILENAME());
 			
 		}
 		

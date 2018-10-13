@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.project.util.MyUtil;
 import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
@@ -56,6 +55,7 @@ public class AdminController {
 		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
 		
 		req = service.goodsList(req);
+		
 		req.setAttribute("gk_lists", gk_lists);
 		
 		return "admin/goodsList";
@@ -67,7 +67,7 @@ public class AdminController {
 		
 		int g_num = Integer.parseInt(req.getParameter("g_num"));
 		
-		String path = req.getSession().getServletContext().getRealPath("/WEB-INF/files");
+		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
 		
 		service.deleteGoods(g_num, path);
 		
