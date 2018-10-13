@@ -14,7 +14,7 @@ public interface AdminDAO {
 	
 	//상품 종류 목록
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception;	
-	//상품 종류 목록
+	//상품 기종 목록
 	public List<DeviceKindDTO> getDeviceList() throws Exception;
 	//색상 목록
 	public List<GoodsColorDTO> getColorList() throws Exception;

@@ -29,21 +29,25 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	public static String namespace = "com.project.mybatis.adminMapper";
 	
+	//상품 종류 목록 (완료)
 	@Override
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
 		return sessionTemplate.selectList(namespace + ".getGoodsKind");
 	}
 	
+	//상품 기종 목록 (완료)
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {
 		return sessionTemplate.selectList(namespace + ".getDevice");
 	}
 	
+	//색상 목록 (완료)
 	@Override
 	public List<GoodsColorDTO> getColorList() throws Exception {
 		return sessionTemplate.selectList(namespace + ".getColor");
 	}
 
+	//상품 등록 (완료)
 	@Override
 	public int insertGoods(GoodsDTO g_dto) throws Exception  {
 		
@@ -59,6 +63,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
+	//상세 상품 등록 (완료)
 	@Override
 	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception {
 		
@@ -74,6 +79,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
+	//상세 상품 등록 후 상품의 개수 설정 (완료)
 	@Override
 	public void updateGoodsCount(GoodsDTO g_dto) throws Exception {
 		
@@ -81,16 +87,19 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
+	//상품 1개의 정보 (완료)
 	@Override
 	public GoodsDTO getReadGoods(int g_num) throws Exception {
 		return sessionTemplate.selectOne(namespace + ".getReadGoods", g_num);
 	}
 
+	//상품 수정 (완료)
 	@Override
 	public void updateGoods(GoodsDTO g_dto) throws Exception  {
 		sessionTemplate.update(namespace + ".updateGoods", g_dto);
 	}
 
+	//상품 삭제 (완료)
 	@Override
 	public void deleteGoods(int g_num, String path) throws Exception  {
 		
@@ -107,27 +116,10 @@ public class AdminDAOImpl implements AdminDAO {
 		sessionTemplate.delete(namespace + ".deleteGoods", g_num);
 	}
 
-	@Override
-	public List<MemberDTO> memberList() throws Exception  {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void authority(String m_id) throws Exception  {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<OrdersDTO> ordersList() throws Exception  {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	//상품 리스트 (완료)
 	@Override
 	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception {
-		
+			
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("start", start);
@@ -137,12 +129,13 @@ public class AdminDAOImpl implements AdminDAO {
 		params.put("searchValue", searchValue);
 		
 		return sessionTemplate.selectList(namespace + ".getGoodsLists", params);
-		
+			
 	}
 
+	//상품 개수 구하기 (완료)
 	@Override
 	public int getGoodsCount(String searchKey, String searchValue) throws Exception {
-		
+			
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("searchKey", searchKey);
@@ -153,5 +146,28 @@ public class AdminDAOImpl implements AdminDAO {
 		return result;
 		
 	}
+	
+	//회원 리스트
+	@Override
+	public List<MemberDTO> memberList() throws Exception  {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//회원에게 권한 부여
+	@Override
+	public void authority(String m_id) throws Exception  {
+		// TODO Auto-generated method stub
+		
+	}
+
+	//회원 주문내역 조회
+	@Override
+	public List<OrdersDTO> ordersList() throws Exception  {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

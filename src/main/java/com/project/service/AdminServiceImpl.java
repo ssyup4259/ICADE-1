@@ -36,25 +36,25 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	MyUtil myUtil;
 	
-	//상품 종류 목록
+	//상품 종류 목록 (완료)
 	@Override
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
 		return a_dao.getGoodsKindList();
 	}
 	
-	//상품 종류 목록
+	//상품 종류 목록 (완료)
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {
 		return a_dao.getDeviceList();
 	}
 	
-	//색상 목록
+	//색상 목록 (완료)
 	@Override
 	public List<GoodsColorDTO> getColorList() throws Exception {
 		return a_dao.getColorList();
 	}
 	
-	//상품 등록
+	//상품 등록 (완료)
 	@Transactional
 	@Override
 	public void insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req) throws Exception {
@@ -146,13 +146,13 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
-	//상품 1개의 정보
+	//상품 1개의 정보 (완료)
 	@Override
 	public GoodsDTO getReadGoods(int g_num) throws Exception {
 		return a_dao.getReadGoods(g_num);
 	}
 	
-	//상품 수정
+	//상품 수정 (완료)
 	@Override
 	public void updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req) throws Exception  {
 		
@@ -235,7 +235,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
-	//상품 삭제
+	//상품 삭제 (완료)
 	@Override
 	public void deleteGoods(int g_num, String path) throws Exception  {
 		a_dao.deleteGoods(g_num, path);

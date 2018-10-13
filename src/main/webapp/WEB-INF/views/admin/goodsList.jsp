@@ -76,7 +76,7 @@
 		<tr>
 			<td>${g_dto.getGK_KIND()}</td>
 			<td><a href="#">${g_dto.getG_NAME()}</a></td>
-			<td>${g_dto.getG_COUNT()}</td>
+			<td><a href="#">${g_dto.getG_COUNT()}</a></td>
 			<td>${g_dto.getG_PRICE()}</td>
 			<td>${g_dto.getG_SELLCOUNT()}</td>
 			<td>${g_dto.getG_CONTENT()}</td>

@@ -25,6 +25,7 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
+	//상품 등록 화면(관리자용)
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.GET)
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
@@ -40,6 +41,7 @@ public class AdminController {
 		
 	}
 	
+	//상품 등록(관리자용)
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.POST)
 	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req) throws Exception {
 		
@@ -49,6 +51,7 @@ public class AdminController {
 		
 	}
 	
+	//상품 리스트(관리자용)
 	@RequestMapping(value="/goodsList.action", method= {RequestMethod.POST, RequestMethod.GET})
 	public String goodsList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
@@ -62,6 +65,7 @@ public class AdminController {
 		
 	}
 	
+	//상품 삭제(관리자용)
 	@RequestMapping(value="/deleteGoods.action", method= {RequestMethod.POST, RequestMethod.GET})
 	public String deleteGoods(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
@@ -75,6 +79,7 @@ public class AdminController {
 		
 	}
 	
+	//상품 수정 화면(관리자용)
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.GET)
 	public String updateForm(int g_num, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
@@ -86,10 +91,27 @@ public class AdminController {
 		
 	}
 	
+	//상품 수정(관리자용)
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.POST)
 	public String updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		service.updateGoods(g_dto, req);
+		
+		return "redirect:/admin/goodsList.action";
+		
+	}
+	
+	//상품 재고 수정 화면(관리자용)
+	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.GET)
+	public String updateGoodsDetailCountForm(int g_num, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		return "admin/updateGoodsDetailCount";
+		
+	}
+	
+	//상품 재고 수정(관리자용)
+	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.POST)
+	public String updateGoodsDetailCount(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		return "redirect:/admin/goodsList.action";
 		
