@@ -9,6 +9,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품 재고 수정</title>
+
+<!-- 재고 수정하기 버튼 submit -->
+<script type="text/javascript">
+
+function sendIt() {
+	
+	var f = document.myForm;
+	        
+	f.action = "<%=cp%>/admin/updateGoodsDetailCount.action";
+	f.submit();
+	
+}
+
+</script>
+
 </head>
 <body>
 
@@ -30,10 +45,11 @@
 		
 		<c:set var="i" value="${gd_dto.DK_NAME}"/>
 		
-		${gd_dto.GC_COLOR} : <input type="text" name="${gd_dto.GD_CODE}" value="${gd_dto.GD_COUNT}" size="3"/>개&nbsp;
+		${gd_dto.GC_COLOR} : <input type="text" name="GD_COUNT" value="${gd_dto.GD_COUNT}" size="3"/>개&nbsp;
+		<input type="hidden" name="GD_CODE" value="${gd_dto.GD_CODE}"/>
 		
 	</c:forEach>
-	
+	<br/><br/>
 	<input type="button" onclick="sendIt()" value="재고 수정"/>
 	<input type="button" onclick="javascript:history.back();" value="취 소"/>
 

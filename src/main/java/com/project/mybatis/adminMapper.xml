@@ -80,6 +80,12 @@
 	where G_NUM=#{G_NUM}
 </update>
 
+<!-- 상세 상품 재고 수정 -->
+<update id="updateGoodsDetailCount" parameterType="map">
+	update GOODS_DETAIL set GD_COUNT=#{gd_count} where GD_CODE=#{gd_code}
+
+</update>
+
 <!-- 상품 삭제 -->
 <delete id="deleteGoods" parameterType="int">
 	delete Goods where G_NUM = #{G_NUM}
