@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -235,10 +236,32 @@ public class AdminServiceImpl implements AdminService {
 		a_dao.deleteGoods(g_num, path);
 	}
 
-	//상세 상품의 정보
+	//상세 상품의 정보 (완료)
 	@Override
 	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception {
 		return a_dao.getReadGoodsDetail(g_num);
+	}
+	
+	//재고 수정 (완료)
+	@Override
+	public void updateGoodsDetailCount(HttpServletRequest req) throws Exception {
+		
+		//배열 형태로 코드와 수량을 받음
+		String[] gd_code = req.getParameterValues("GD_CODE");
+		String[] gd_count = req.getParameterValues("GD_COUNT");
+		
+		//코드,수량 형태로 Map에 넣음
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		
+		for (int i = 0; i < gd_count.length; i++) {
+			
+			hMap.put("gd_code", gd_code[i]);
+			hMap.put("gd_count", gd_count[i]);
+			
+			a_dao.updateGoodsDetailCount(hMap);
+			
+		}
+		
 	}
 	
 	//회원 리스트
@@ -265,7 +288,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
-	//상품 리스트
+	//상품 리스트 (완료)
 	@Override
 	public HttpServletRequest goodsList(HttpServletRequest req) throws Exception {
 		
@@ -346,8 +369,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		return req;
 	}
-
-	
 
 	
 

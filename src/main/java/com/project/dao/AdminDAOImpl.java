@@ -139,10 +139,16 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
-	//상세 상품의 정보
+	//상세 상품의 정보 (완료)
 	@Override
 	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception {
 		return sessionTemplate.selectList(namespace + ".getReadGoodsDetail", g_num);
+	}
+	
+	//재고 수정 (완료)
+	@Override
+	public void updateGoodsDetailCount(HashMap<String, String> hMap) throws Exception {
+		sessionTemplate.update(namespace + ".updateGoodsDetailCount", hMap);
 	}
 	
 	//회원 리스트

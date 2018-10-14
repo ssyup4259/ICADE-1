@@ -1,8 +1,6 @@
 package com.project.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -122,18 +120,7 @@ public class AdminController {
 	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.POST)
 	public String updateGoodsDetailCount(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		//배열 형태로 코드와 수량을 받음
-		String[] gd_code = req.getParameterValues("GD_CODE");
-		String[] gd_count = req.getParameterValues("GD_COUNT");
-		
-		//코드,수량 형태로 Map에 넣음
-		Map<String, Integer> hMap = new HashMap<String, Integer>();
-		
-		for (int i = 0; i < gd_count.length; i++) {
-			hMap.put(gd_code[i], Integer.parseInt(gd_count[i]));
-		}
-		
-		
+		service.updateGoodsDetailCount(req);
 		
 		return "redirect:/admin/goodsList.action";
 		

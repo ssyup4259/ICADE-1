@@ -26,8 +26,8 @@
 
 <!-- 상품 등록 -->
 <insert id="insertGoods" parameterType="com.project.dto.GoodsDTO">
-	insert into goods(G_NUM, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME)
-		values(#{G_NUM}, #{G_NAME}, 0, #{G_PRICE}, 0, #{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO}, #{G_SAVEFILENAME})
+	insert into goods(G_NUM, G_NAME, G_PRICE, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME)
+		values(#{G_NUM}, #{G_NAME}, #{G_PRICE},#{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO}, #{G_SAVEFILENAME})
 </insert>
 
 <!-- 상세상품 등록 -->
