@@ -79,14 +79,6 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
-	//상세 상품 등록 후 상품의 개수 설정 (완료)
-	@Override
-	public void updateGoodsCount(GoodsDTO g_dto) throws Exception {
-		
-		sessionTemplate.update(namespace + ".updateGoodsCount", g_dto);
-		
-	}
-	
 	//상품 1개의 정보 (완료)
 	@Override
 	public GoodsDTO getReadGoods(int g_num) throws Exception {

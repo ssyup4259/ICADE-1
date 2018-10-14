@@ -12,7 +12,7 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-<!-- 상품등록하기 버튼 submit -->
+<!-- 상품수정하기 버튼 submit -->
 <script type="text/javascript">
 
 function sendIt() {

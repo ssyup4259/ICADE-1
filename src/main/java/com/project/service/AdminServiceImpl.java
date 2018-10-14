@@ -138,11 +138,6 @@ public class AdminServiceImpl implements AdminService {
 			
 		}
 		
-		g_dto.setG_NUM(g_num);
-		g_dto.setG_COUNT(count);
-		
-		a_dao.updateGoodsCount(g_dto);
-		
 	}
 	
 	//상품 1개의 정보 (완료)

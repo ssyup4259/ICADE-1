@@ -36,11 +36,6 @@
 		values(#{GD_NUM}, #{GD_CODE}, #{GD_KIND_NUM}, #{GD_DEVICE}, #{GD_COLOR}, #{GD_COUNT}, 0)
 </insert>
 
-<!-- 상세상품 등록 후 Goods테이블의 상품 총 갯수 수정 -->
-<update id="updateGoodsCount" parameterType="com.project.dto.GoodsDTO">
-	update Goods set G_COUNT = #{G_COUNT} where G_NUM = #{G_NUM}
-</update>
-
 <!-- 전체 데이터 갯수 -->
 <select id="getGoodsCount" parameterType="hashMap" resultType="int">
 	select nvl(count(*), 0) from GOODS
@@ -52,8 +47,10 @@
 	select * from (
 	select rownum rnum, data.* from (
 	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
-	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND)
-	where GD_KIND_NUM like '%' || #{gdKindNum} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND),
+	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
+	where GD_KIND_NUM like '%' || #{gdKindNum} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and
+	G_NUM = GD_NUM and G_NUM = GD_NUM2 and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
@@ -62,7 +59,9 @@
 <!-- 상품 한개의 데이터 -->
 <select id="getReadGoods" parameterType="int" resultType="com.project.dto.GoodsDTO">
 	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
-	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND)
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), 
+	(select GK_NUM, GK_KIND from GOODS_KIND), (select sum(GD_COUNT)G_COUNT, 
+	sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL where GD_NUM = #{g_num} group by GD_NUM)
 	where G_NUM = #{g_num} and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM
 </select>
 
@@ -83,7 +82,6 @@
 <!-- 상세 상품 재고 수정 -->
 <update id="updateGoodsDetailCount" parameterType="map">
 	update GOODS_DETAIL set GD_COUNT=#{gd_count} where GD_CODE=#{gd_code}
-
 </update>
 
 <!-- 상품 삭제 -->
