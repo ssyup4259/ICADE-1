@@ -25,6 +25,14 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
+	//관리자 화면
+	@RequestMapping(value="/adminMain.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String adminMain() throws Exception {
+		
+		return "admin/adminMain";
+		
+	}
+	
 	//상품 등록 화면(관리자용)
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.GET)
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -123,6 +131,16 @@ public class AdminController {
 		service.updateGoodsDetailCount(req);
 		
 		return "redirect:/admin/goodsList.action";
+		
+	}
+	
+	//회원 목록 화면
+	@RequestMapping(value="/adminMain.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String memberList() throws Exception {
+		
+		
+		
+		return "admin/memberList";
 		
 	}
 	

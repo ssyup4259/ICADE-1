@@ -27,24 +27,24 @@ public class AdminDAOImpl implements AdminDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 	
-	public static String namespace = "com.project.mybatis.adminMapper";
+	public static String adminMapper = "com.project.mybatis.adminMapper";
 	
 	//상품 종류 목록 (완료)
 	@Override
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception {
-		return sessionTemplate.selectList(namespace + ".getGoodsKind");
+		return sessionTemplate.selectList(adminMapper + ".getGoodsKind");
 	}
 	
 	//상품 기종 목록 (완료)
 	@Override
 	public List<DeviceKindDTO> getDeviceList() throws Exception {
-		return sessionTemplate.selectList(namespace + ".getDevice");
+		return sessionTemplate.selectList(adminMapper + ".getDevice");
 	}
 	
 	//색상 목록 (완료)
 	@Override
 	public List<GoodsColorDTO> getColorList() throws Exception {
-		return sessionTemplate.selectList(namespace + ".getColor");
+		return sessionTemplate.selectList(adminMapper + ".getColor");
 	}
 
 	//상품 등록 (완료)
@@ -53,11 +53,11 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		int maxNum = 0;
 		
-		maxNum = sessionTemplate.selectOne(namespace + ".goodsMaxNum");
+		maxNum = sessionTemplate.selectOne(adminMapper + ".goodsMaxNum");
 		
 		g_dto.setG_NUM(maxNum + 1);
 		
-		sessionTemplate.insert(namespace + ".insertGoods", g_dto);
+		sessionTemplate.insert(adminMapper + ".insertGoods", g_dto);
 		
 		return g_dto.getG_NUM();
 		
@@ -75,27 +75,27 @@ public class AdminDAOImpl implements AdminDAO {
 		gCode = gd_dto.getGD_NUM() + "-" + gd_dto.getGD_KIND_NUM() + "-" + gd_dto.getGD_DEVICE() + "-" + gd_dto.getGD_COLOR();		
 		gd_dto.setGD_CODE(gCode);
 		
-		sessionTemplate.insert(namespace + ".insertGoodsDetail", gd_dto);
+		sessionTemplate.insert(adminMapper + ".insertGoodsDetail", gd_dto);
 		
 	}
 	
 	//상품 1개의 정보 (완료)
 	@Override
 	public GoodsDTO getReadGoods(int g_num) throws Exception {
-		return sessionTemplate.selectOne(namespace + ".getReadGoods", g_num);
+		return sessionTemplate.selectOne(adminMapper + ".getReadGoods", g_num);
 	}
 
 	//상품 수정 (완료)
 	@Override
 	public void updateGoods(GoodsDTO g_dto) throws Exception  {
-		sessionTemplate.update(namespace + ".updateGoods", g_dto);
+		sessionTemplate.update(adminMapper + ".updateGoods", g_dto);
 	}
 
 	//상품 삭제 (완료)
 	@Override
 	public void deleteGoods(int g_num, String path) throws Exception  {
 		
-		GoodsDTO g_dto = sessionTemplate.selectOne(namespace + ".getReadGoods", g_num);
+		GoodsDTO g_dto = sessionTemplate.selectOne(adminMapper + ".getReadGoods", g_num);
 		
 		String filePath = path + File.separator + g_dto.getG_SAVEFILENAME();
 		
@@ -105,7 +105,7 @@ public class AdminDAOImpl implements AdminDAO {
 			f.delete(); //물리적 파일 삭제
 		}			
 		
-		sessionTemplate.delete(namespace + ".deleteGoods", g_num);
+		sessionTemplate.delete(adminMapper + ".deleteGoods", g_num);
 	}
 
 	//상품 리스트 (완료)
@@ -120,7 +120,7 @@ public class AdminDAOImpl implements AdminDAO {
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
 		
-		return sessionTemplate.selectList(namespace + ".getGoodsLists", params);
+		return sessionTemplate.selectList(adminMapper + ".getGoodsLists", params);
 			
 	}
 
@@ -133,7 +133,7 @@ public class AdminDAOImpl implements AdminDAO {
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
 		
-		int result = sessionTemplate.selectOne(namespace + ".getGoodsCount", params);
+		int result = sessionTemplate.selectOne(adminMapper + ".getGoodsCount", params);
 		
 		return result;
 		
@@ -142,13 +142,13 @@ public class AdminDAOImpl implements AdminDAO {
 	//상세 상품의 정보 (완료)
 	@Override
 	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception {
-		return sessionTemplate.selectList(namespace + ".getReadGoodsDetail", g_num);
+		return sessionTemplate.selectList(adminMapper + ".getReadGoodsDetail", g_num);
 	}
 	
 	//재고 수정 (완료)
 	@Override
 	public void updateGoodsDetailCount(HashMap<String, String> hMap) throws Exception {
-		sessionTemplate.update(namespace + ".updateGoodsDetailCount", hMap);
+		sessionTemplate.update(adminMapper + ".updateGoodsDetailCount", hMap);
 	}
 	
 	//회원 리스트
