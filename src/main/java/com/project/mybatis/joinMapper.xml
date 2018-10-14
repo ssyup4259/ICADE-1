@@ -23,4 +23,6 @@
 	Select COUNT(M_NICKNAME) AS RESULT FROM member where M_NICKNAME = #{M_NICKNAME}
 </select>
 
+<!-- 이메일 중복체크 -->
+
 </mapper>

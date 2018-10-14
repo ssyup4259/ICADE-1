@@ -18,117 +18,11 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
+<!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
-	
-		
-	<!-- 	/* str = f.mId.value;
-		str = str.trim();
-		if(!str || str.length<=7){
-			alert("아이디를 입력하세요(아이디는 8글자 이상이여야 합니다!).");
-			f.mId.focus();
-			return;
-			}
-		f.mId.value = str;
-		
-		str = f.mPw.value;
-		str = str.trim();
-		if(!str) {
-			alert("패스워드를 입력하세요!");
-			f.mPw.focus();
-			return;			
-			}
-		f.mPw.value = str;
-		
-		
-		if( f.mPw.value != f.mPw2.value){
-			alert("패스워드가 동일 하지않습니다 확인후 입력하세요!");
-			f.mPw.focus();
-			return;
-			}
-		
-		str = f.mName.value;
-		str = str.trim();
-		if(!str){
-			alert("이름을 입력하세요!");
-			f.mName.focus();
-			return;
-			}
-		f.mName.value = str;
-				
-		var aa=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		str = f.mEmailId.value;
-		str = str.trim();
-		if(!str){
-			alert("이메일을 입력하세요!");
-			f.mEmailId.focus();
-			return;
-			}else if(!str.match(aa)){
-			alert("이메일을 정확히 입력하세요 이메일 주소가 잘못되었습니다!");
-			f.mEmailId.focus();
-			return;	
-				
-			}
-		f.mEmailId.value = str;
-		 
-		str = f.mCellphone1.value;
-		str = str.trim();
-		if(!str){
-			alert("전화번호를 입력하세요!");
-			f.mPh.focus();
-			return;
-			}
-		f.mPh.value = str;
-		
-		str = f.mZipcode.value;
-		if(!str){
-			alert("우편번호를 입력하세요!");
-			f.mZipcode.focus();
-			return;
-			}
-		f.mZipcode.value = str;
-		
-		str = f.mAddress2.value;
-		if(!str){
-			alert("상세주소를 입력하세요!");
-			f.mAddress2.focus();
-			return;
-			}
-		f.mAddress2.value = str;
-		
-		var checkerbox = document.myForm.checker.checked;
-		
-		if(!checkerbox){
-			alert("이용약관에 동의해 주세요.");
-			return false;
-			} */
-			
-	
-  	/* function sendMail(email) {
-  		
-  		var xhttp = new XMLHttpRequest();
-  		xhttp.onreadystagechange =function(){
-  			if(xhttp.readyState ==4){
-  				if (xhttp.status == 200) {
-					alert("메일을 정상적으로 보냈습니다");
-				}else{
-					alert("올바른 메일 형식이 아닙니다.");
-					
-				}
-  			}
-  			
-  			
-  		};
-  		xhttp.open("POST","sendMail/", true);
-  		xhttp.send("email=" + email);
-  		
-  		
-		return false;
-	} */ -->
-	
-	
-</script>      
- 
- 
 </head>
 
 <body>
@@ -199,7 +93,7 @@
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text" id="user_NickName" placeholder="닉네임 : 2글자이상 입력하세요" name="M_NICKNAME" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
-			<td><a href="#" id="user_nickName_checkBtn" class="btn">중복확인</a></td>
+			<td><a href="#" id="user_nickName_checkBtn" class="btn">중복확인</a>
 		</td>
 	</tr>
 	<tr height="2">
@@ -325,8 +219,6 @@ $(document).ready(function() {
 		nickCheck();		
 	});
 });
-
-
 
 function nickCheck() {
 	
