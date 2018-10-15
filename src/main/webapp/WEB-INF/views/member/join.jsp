@@ -19,123 +19,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<!-- 	/* str = f.mId.value;
-		str = str.trim();
-		if(!str || str.length<=7){
-			alert("아이디를 입력하세요(아이디는 8글자 이상이여야 합니다!).");
-			f.mId.focus();
-			return;
-			}
-		f.mId.value = str;
-		
-		str = f.mPw.value;
-		str = str.trim();
-		if(!str) {
-			alert("패스워드를 입력하세요!");
-			f.mPw.focus();
-			return;			
-			}
-		f.mPw.value = str;
-		
-		
-		if( f.mPw.value != f.mPw2.value){
-			alert("패스워드가 동일 하지않습니다 확인후 입력하세요!");
-			f.mPw.focus();
-			return;
-			}
-		
-		str = f.mName.value;
-		str = str.trim();
-		if(!str){
-			alert("이름을 입력하세요!");
-			f.mName.focus();
-			return;
-			}
-		f.mName.value = str;
-				
-		var aa=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		str = f.mEmailId.value;
-		str = str.trim();
-		if(!str){
-			alert("이메일을 입력하세요!");
-			f.mEmailId.focus();
-			return;
-			}else if(!str.match(aa)){
-			alert("이메일을 정확히 입력하세요 이메일 주소가 잘못되었습니다!");
-			f.mEmailId.focus();
-			return;	
-				
-			}
-		f.mEmailId.value = str;
-		 
-		str = f.mCellphone1.value;
-		str = str.trim();
-		if(!str){
-			alert("전화번호를 입력하세요!");
-			f.mPh.focus();
-			return;
-			}
-		f.mPh.value = str;
-		
-		str = f.mZipcode.value;
-		if(!str){
-			alert("우편번호를 입력하세요!");
-			f.mZipcode.focus();
-			return;
-			}
-		f.mZipcode.value = str;
-		
-		str = f.mAddress2.value;
-		if(!str){
-			alert("상세주소를 입력하세요!");
-			f.mAddress2.focus();
-			return;
-			}
-		f.mAddress2.value = str;
-		
-		var checkerbox = document.myForm.checker.checked;
-		
-		if(!checkerbox){
-			alert("이용약관에 동의해 주세요.");
-			return false;
-			} */
-			
-	
-  	/* function sendMail(email) {
-  		
-  		var xhttp = new XMLHttpRequest();
-  		xhttp.onreadystagechange =function(){
-  			if(xhttp.readyState ==4){
-  				if (xhttp.status == 200) {
-					alert("메일을 정상적으로 보냈습니다");
-				}else{
-					alert("올바른 메일 형식이 아닙니다.");
-					
-				}
-  			}
-  			
-  			
-  		};
-  		xhttp.open("POST","sendMail/", true);
-  		xhttp.send("email=" + email);
-  		
-  		
-		return false;
-	} */ -->
-	
-	
-</script>      
- 
- 
-=======
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
+
+<!-- daum api -->
 <!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
 
->>>>>>> 6e93241c0a7edb4d15009b19b05f4771edf3795e
 </head>
+
 
 <body>
 
@@ -335,7 +226,6 @@ function idCheck() {
 
 <!-- 비밀번호 일치확인 자바스크립트 -->
 <script>
-
  $(function () {
 	$("#alert-success").hide();
 	$("#alert-danger").hide();
@@ -359,8 +249,6 @@ function idCheck() {
 		}
 	});
 });
-
-
 </script>
 <!-- 비밀번호 일치확인  끝-->
 
