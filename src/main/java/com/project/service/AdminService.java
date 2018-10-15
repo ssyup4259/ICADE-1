@@ -11,7 +11,6 @@ import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
-import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
 
 public interface AdminService {
