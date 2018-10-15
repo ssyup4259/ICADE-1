@@ -10,9 +10,24 @@
 		</layout>
 	</appender>
 	
+	<!-- console-infolog -->
+	<appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n"/>
+		</layout>	
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.project.icade">
-		<level value="info" />
+		<level value="Debug" />
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<!-- Query Loggers -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="console-infolog"/>
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

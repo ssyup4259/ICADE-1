@@ -22,6 +22,12 @@ public class GoodsDetailDTO {
 
     // 판매한 개수
     private int GD_SELLCOUNT;
+    
+    // 기종 이름
+    private String DK_NAME;
+    
+    // 상품 색상
+    private String GC_COLOR;
 
 	public int getGD_NUM() {
 		return GD_NUM;
@@ -77,6 +83,22 @@ public class GoodsDetailDTO {
 
 	public void setGD_SELLCOUNT(int gD_SELLCOUNT) {
 		GD_SELLCOUNT = gD_SELLCOUNT;
+	}
+
+	public String getDK_NAME() {
+		return DK_NAME;
+	}
+
+	public void setDK_NAME(String dK_NAME) {
+		DK_NAME = dK_NAME;
+	}
+
+	public String getGC_COLOR() {
+		return GC_COLOR;
+	}
+
+	public void setGC_COLOR(String gC_COLOR) {
+		GC_COLOR = gC_COLOR;
 	}
     
 }

@@ -12,67 +12,6 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-<!-- 체크박스 전체 선택 -->
-<script type="text/javascript">
-
-$(function() {
-	
-	$("[name=checkAll]").click(function() {
-		allCheckFunc(this);
-	});
-	
-	$("[name=GD_DEVICE]").each(function() {
-		
-		$(this).click(function(){
-			oneCheckFunc($(this));
-		});
-	});
-});
-
-function allCheckFunc(obj) {
-	$("[name=GD_DEVICE]").prop("checked", $(obj).prop("checked"));
-	
-	var deviceSize = ${dk_lists.size()};
-	
-	for (var i = 1; i < deviceSize; i++) {
-		
-		var divId = 'D'+i;
-		
-		if ($("#checkAll").prop("checked")) {
-			document.getElementById(divId).style.display = 'block';	
-		} else {
-			document.getElementById(divId).style.display = 'none';
-		}
-		
-	}
-	
-}
-
-/* 체크박스 체크시 전체선택 체크 여부 */
-
-function oneCheckFunc(obj) {
-	
-	var allObj = $("[name=checkAll]");
-	var objName = $(obj).attr("name");
-
-	if ($(obj).prop("checked")) {
-		
-		checkBoxLength = $("[name="+ objName +"]").length;
-		checkedLength = $("[name="+ objName +"]:checked").length;
-		
-		if (checkBoxLength == checkedLength) {
-			allObj.prop("checked", true);
-		} else {
-			allObj.prop("checked", false);
-		}
-		
-	} else {
-		allObj.prop("checked", false);
-	}
-}
-
-</script>
-
 <!-- 상품등록하기 버튼 submit -->
 <script type="text/javascript">
 
@@ -249,7 +188,6 @@ function enableTextBox(name) {
 상품 이름 : <input type="text" name="G_NAME"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>원 <br/>
 지원 기종 : <br/>
-<label><input type="checkbox" name="checkAll"  id="checkAll"/>전체</label>&nbsp;<br/><br/>
 
 <c:forEach var="dk_dto" items="${dk_lists}">
 

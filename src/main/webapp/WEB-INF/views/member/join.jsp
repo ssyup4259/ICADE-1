@@ -18,141 +18,11 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
+<!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
-	<script type="text/javascript">
-	/* function sendId() {
-	
-	var f = document.myForm;
-	
-	str = f.mId.value;
-	str = str.trim();
-	if(!str){
-		alert("체크할 아이디를 입력하세요!");
-		f.mId.focus();
-		return;
-		}
-	f.mId.value = str;
-	
-	
-} */
-	
-
-	 
- 	function sendIt() {
-		
-		var f = document.joinForm;
-		
-		/* str = f.mId.value;
-		str = str.trim();
-		if(!str || str.length<=7){
-			alert("아이디를 입력하세요(아이디는 8글자 이상이여야 합니다!).");
-			f.mId.focus();
-			return;
-			}
-		f.mId.value = str;
-		
-		str = f.mPw.value;
-		str = str.trim();
-		if(!str) {
-			alert("패스워드를 입력하세요!");
-			f.mPw.focus();
-			return;			
-			}
-		f.mPw.value = str;
-		
-		
-		if( f.mPw.value != f.mPw2.value){
-			alert("패스워드가 동일 하지않습니다 확인후 입력하세요!");
-			f.mPw.focus();
-			return;
-			}
-		
-		str = f.mName.value;
-		str = str.trim();
-		if(!str){
-			alert("이름을 입력하세요!");
-			f.mName.focus();
-			return;
-			}
-		f.mName.value = str;
-				
-		var aa=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		str = f.mEmailId.value;
-		str = str.trim();
-		if(!str){
-			alert("이메일을 입력하세요!");
-			f.mEmailId.focus();
-			return;
-			}else if(!str.match(aa)){
-			alert("이메일을 정확히 입력하세요 이메일 주소가 잘못되었습니다!");
-			f.mEmailId.focus();
-			return;	
-				
-			}
-		f.mEmailId.value = str;
-		 
-		str = f.mCellphone1.value;
-		str = str.trim();
-		if(!str){
-			alert("전화번호를 입력하세요!");
-			f.mPh.focus();
-			return;
-			}
-		f.mPh.value = str;
-		
-		str = f.mZipcode.value;
-		if(!str){
-			alert("우편번호를 입력하세요!");
-			f.mZipcode.focus();
-			return;
-			}
-		f.mZipcode.value = str;
-		
-		str = f.mAddress2.value;
-		if(!str){
-			alert("상세주소를 입력하세요!");
-			f.mAddress2.focus();
-			return;
-			}
-		f.mAddress2.value = str;
-		
-		var checkerbox = document.myForm.checker.checked;
-		
-		if(!checkerbox){
-			alert("이용약관에 동의해 주세요.");
-			return false;
-			} */
-			
-		f.action = "<%=cp%>/join_ok.action";
-		f.submit();
-		
-	} 
-  	/* function sendMail(email) {
-  		
-  		var xhttp = new XMLHttpRequest();
-  		xhttp.onreadystagechange =function(){
-  			if(xhttp.readyState ==4){
-  				if (xhttp.status == 200) {
-					alert("메일을 정상적으로 보냈습니다");
-				}else{
-					alert("올바른 메일 형식이 아닙니다.");
-					
-				}
-  			}
-  			
-  			
-  		};
-  		xhttp.open("POST","sendMail/", true);
-  		xhttp.send("email=" + email);
-  		
-  		
-		return false;
-	} */
-	
-	
-</script>      
- 
- 
 </head>
 
 <body>
@@ -222,8 +92,8 @@
 			<h4>닉네임</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="닉네임 : 2글자이상 입력하세요" name="M_NICKNAME" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
-			<input type="button" onclick="sendId();" class="btn" value="닉네임 중복확인">
+			<input type="text" id="user_NickName" placeholder="닉네임 : 2글자이상 입력하세요" name="M_NICKNAME" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<td><a href="#" id="user_nickName_checkBtn" class="btn">중복확인</a>
 		</td>
 	</tr>
 	<tr height="2">
@@ -301,6 +171,7 @@
 <!-- ---------------------------------------------------------------------------------------------------------------------- -->
 
 <!-- 스크립트 부분 -->
+<!-- 아이디 중복확인 -->
 <script >
 	$(document).ready(function() {
 		$("#user_id_checkBtn").unbind("click").click(function(e) {
@@ -310,25 +181,25 @@
 	});
 	
 function idCheck() {
+	
 	var userId =$("#user_Id").val();
 	
 	if(userId.length <1){
-		alert("아이디를 입력해주시기 바랍니다.");
+		alert("아이디를 입력해주세요.");
 	}else{
 		$.ajax({
 			type : "POST",
 			url : "/icade/idcheck.action",
-			data : {"M_ID":"userId"},
+			data : {"M_ID":userId},
 			dataType : "json",
 			error : function (error) {
 				alert("서버가 응답하지 않습니다");
 			},
 			success : function(result) {
-				if (result==0) {
-					$("#user_Id").attr("disabled",true);
+				if (result == 0) {
 					alert("사용 가능한 아이디입니다");
-				}else if(result==1){
-					alert("이미 존재하는 아이디 입니다.");
+				}else if(result ==1 ){
+					alert("이미 존재하는 아이디입니다.");
 				}else{
 					alert("에러가 발생했습니다.");
 				}
@@ -336,59 +207,52 @@ function idCheck() {
 		});
 	}
 }
-	
-	
-	
 
-
- 
- 
- 
 </script>
-  <script type="text/javascript">
-/* //아이디 체크여부 확인(아이디 중복일 경우 = 0, 중복이 아닐경우 =1)
-var idCheck= 0;
+<!-- 아이디 중복확인 끝 -->
 
-$(function() {
-    //idCheck 버튼을 클릭했을 때 
-    $("#idCheck").click(function() {
-        //M_ID 를 param.
-        var userid =  $("#M_ID").val(); 
-        $.ajax({
-            async: true,
-            type : 'POST',
-            data : userid,
-            url : "/idcheck.action",
-            dataType : "json",
-            contentType: "application/json; charset=UTF-8",
-            success : function(data) {
-                if (data.cnt > 0) {
-                    
-                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                    $("#divInputId").addClass("has-error")
-                    $("#divInputId").removeClass("has-success")
-                    $("#M_ID").focus();
-                    
-                
-                } else {
-                    alert("사용가능한 아이디입니다.");
-                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                    $("#divInputId").addClass("has-success")
-                    $("#divInputId").removeClass("has-error")
-                    $("#M_PW").focus();
-                    //아이디가 중복하지 않으면  idck = 1 
-                    idCheck = 1;
-                    
-                }
-            },
-            error : function(error) {
-                
-                alert("error : " + error);
-            }
-        });
-    });
-}); */
+<!-- 닉네임 중복확인 시작 -->
+<script >
+$(document).ready(function() {
+	$("#user_nickName_checkBtn").unbind("click").click(function(e) {
+		e.preventDefault();
+		nickCheck();		
+	});
+});
+
+function nickCheck() {
+	
+	var userNick =$("#user_NickName").val();
+	
+	if (userNick.length <1) {
+		alert("닉네임을 입력해주세요.")
+	}else{
+		$.ajax({
+			type : "POST",
+			url : "/icade/nickcheck.action",
+			data : {"M_NICKNAME" : userNick},
+			dataType :"json",
+			error : function(error) {
+				alert("서버가 응답하지 않습니다");
+			},
+			success : function(result) {
+				if (result==0) {
+					alert("사용가능한 닉네임 입니다");
+				}else if(result==1){
+					alert("이미 존재하는 닉네임입니다")
+				}else{
+					alert("에러가 발생했습니다.");					
+				}
+			}
+		});
+	}
+}
+
+</script>
+<!-- 닉네임 중복확인 끝 -->
+
+  <script type="text/javascript">
+
   function sample6_execDaumPostcode() {
 		new daum.Postcode(
 				{
@@ -433,8 +297,16 @@ $(function() {
 					}
 				}).open();
 	}
+  
 </script>
-
-
+<script type="text/javascript">
+			 	function sendIt() {
+					
+					var f = document.joinForm;
+					f.action = "<%=cp%>/join_ok.action";
+					f.submit();
+					
+				} 
+</script>
 </body>
 </html>

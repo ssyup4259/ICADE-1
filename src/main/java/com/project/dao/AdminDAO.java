@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.project.dto.DeviceKindDTO;
@@ -14,7 +15,7 @@ public interface AdminDAO {
 	
 	//상품 종류 목록
 	public List<GoodsKindDTO> getGoodsKindList() throws Exception;	
-	//상품 종류 목록
+	//상품 기종 목록
 	public List<DeviceKindDTO> getDeviceList() throws Exception;
 	//색상 목록
 	public List<GoodsColorDTO> getColorList() throws Exception;
@@ -22,16 +23,20 @@ public interface AdminDAO {
 	public int insertGoods(GoodsDTO g_dto) throws Exception;
 	//상세 상품 등록
 	public void insertGoodsDetail(GoodsDetailDTO gd_dto, int g_num) throws Exception;
-	//상품 갯수 설정
-	public void updateGoodsCount (GoodsDTO g_dto) throws Exception;
-	//상품 수정(재고 수정)
+	//상품 1개의 정보
+	public GoodsDTO getReadGoods(int g_num) throws Exception;
+	//상품 수정
 	public void updateGoods(GoodsDTO g_dto) throws Exception;
 	//상품 삭제
-	public void deleteGoods(String g_code) throws Exception;
+	public void deleteGoods(int g_num, String path) throws Exception;
 	//상품 리스트
-	public List<GoodsDTO> goodsList(int start, int end, String searchKey, String searchValue) throws Exception;
+	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception;
 	//상품 개수 구하기
 	public int getGoodsCount(String searchKey,String searchValue) throws Exception;
+	//상세 상품의 정보
+	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception;
+	//재고 수정
+	public void updateGoodsDetailCount(HashMap<String, String> hMap) throws Exception;
 	//회원 리스트
 	public List<MemberDTO> memberList() throws Exception;
 	//회원에게 권한 부여
