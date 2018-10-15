@@ -19,7 +19,7 @@ public class PostInterceptor extends HandlerInterceptorAdapter {
 		
 		System.out.println(url);
 		
-		super.postHandle(request, response, handler, modelAndView);
+		response.sendRedirect(url);
 	}
 	
 	

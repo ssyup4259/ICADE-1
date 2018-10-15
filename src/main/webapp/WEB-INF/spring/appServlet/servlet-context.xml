@@ -60,29 +60,17 @@
 
 	<interceptors>
 		<interceptor>
-		<mapping path="/**"/>
-		<beans:bean id="loggerInterceptor" class="com.project.logger.LoggerInterceptor"></beans:bean>
+			<mapping path="/**"/>
+			<beans:bean id="loggerInterceptor" class="com.project.logger.LoggerInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/login_ok.action"/>
+			<beans:bean id="postInterceptor" class="com.project.interceptor.PostInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/asdf"/>
+			<beans:bean id="loginInterceptor" class="com.project.interceptor.LoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
-
-<!-- 인터셉터 객체 생성 -->
-    <beans:bean id="loginInterceptor" class="com.project.interceptor.LoginInterceptor"></beans:bean>
-<!-- Interceptor 설정 -->    
-    <interceptors>
-        <interceptor>
-            <mapping path="/test"/>
-            <beans:ref bean="loginInterceptor" />            
-        </interceptor>
-    </interceptors>
-    
-<!-- 인터셉터 객체 생성 -->
-    <beans:bean id="postInterceptor" class="com.project.interceptor.PostInterceptor"></beans:bean>
-<!-- Interceptor 설정 -->    
-    <interceptors>
-        <interceptor>
-            <mapping path="http://192.168.16.18:8080/icade/login_ok.action"/>
-            <beans:ref bean="postInterceptor" />            
-        </interceptor>
-    </interceptors>
 	
 </beans:beans>
