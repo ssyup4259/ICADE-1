@@ -153,9 +153,31 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	//회원 리스트
 	@Override
-	public List<MemberDTO> memberList() throws Exception  {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberDTO> memberList(int start, int end, String searchKey, String searchValue) throws Exception  {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("start", start);
+		params.put("end", end);
+		params.put("searchKey", searchKey);
+		params.put("searchValue", searchValue);
+		
+		return sessionTemplate.selectList(adminMapper + ".getMemberLists", params);
+	}
+	
+	//회원 수 구하기
+	@Override
+	public int getMemberCount(String searchKey, String searchValue) throws Exception {
+
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("searchKey", searchKey);
+		params.put("searchValue", searchValue);
+		
+		int result = sessionTemplate.selectOne(adminMapper + ".getMemberCount", params);
+		
+		return result;
+		
 	}
 
 	//회원에게 권한 부여
@@ -171,5 +193,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

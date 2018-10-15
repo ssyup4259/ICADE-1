@@ -36,7 +36,7 @@
 		values(#{GD_NUM}, #{GD_CODE}, #{GD_KIND_NUM}, #{GD_DEVICE}, #{GD_COLOR}, #{GD_COUNT}, 0)
 </insert>
 
-<!-- 전체 데이터 갯수 -->
+<!-- 상품 전체 데이터 갯수 -->
 <select id="getGoodsCount" parameterType="hashMap" resultType="int">
 	select nvl(count(*), 0) from GOODS
 	where ${searchKey} like '%' || #{searchValue} || '%'
@@ -89,5 +89,25 @@
 	delete Goods where G_NUM = #{G_NUM}
 </delete>
 
+
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ회원 관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+
+<!-- 회원 전체 데이터 갯수 -->
+<select id="getMemberCount" parameterType="hashMap" resultType="int">
+	select nvl(count(*), 0) from Member
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 회원 리스트 출력 -->
+<select id="getMemberLists" parameterType="hashMap" resultType="com.project.dto.MemberDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select M_RANK, M_ID, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME
+	from Member	where ${searchKey} like '%' || #{searchValue} || '%' order by M_DATE desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
 
 </mapper>

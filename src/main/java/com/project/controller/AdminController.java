@@ -16,6 +16,7 @@ import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
+import com.project.dto.MemberDTO;
 import com.project.service.AdminService;
 
 @Controller
@@ -136,9 +137,9 @@ public class AdminController {
 	
 	//회원 목록 화면
 	@RequestMapping(value="/memberList.action", method= {RequestMethod.GET, RequestMethod.POST})
-	public String memberList() throws Exception {
+	public String memberList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		
+		req = service.memberList(req);
 		
 		return "admin/memberList";
 		

@@ -38,7 +38,9 @@ public interface AdminDAO {
 	//재고 수정
 	public void updateGoodsDetailCount(HashMap<String, String> hMap) throws Exception;
 	//회원 리스트
-	public List<MemberDTO> memberList() throws Exception;
+	public List<MemberDTO> memberList(int start, int end, String searchKey, String searchValue) throws Exception;
+	//상품 개수 구하기
+	public int getMemberCount(String searchKey,String searchValue) throws Exception;
 	//회원에게 권한 부여
 	public void	authority(String m_id) throws Exception;
 	//회원 주문내역 조회
