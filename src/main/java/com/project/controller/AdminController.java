@@ -135,7 +135,7 @@ public class AdminController {
 	}
 	
 	//회원 목록 화면
-	@RequestMapping(value="/adminMember.action", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/memberList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String memberList() throws Exception {
 		
 		
