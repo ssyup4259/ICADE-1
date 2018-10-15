@@ -118,15 +118,26 @@
 			<h4>이메일</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="이메일 : Ex)444@naver.com" name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />@
+			<input type="text" placeholder="이메일 : Ex)444@naver.com" id="email" name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
 		
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text" placeholder="이메일 : Ex)444@naver.com" name="M_EMAIL_DOMAIN" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
-		<br>
-		<div></div>		
+		<td>
+			<input type="button" value="인증하기" onclick="checkMail();"/>
+		</td>	
 	</tr>
+	<tr id="joincode">
+		<th>인증번호</th>
+		<td>
+			<input type='number' name="inputCode" id="inputCode" class="form-control" style="margin-right: 10px; width:300px;" placeholder="Enter code"/ >
+			<input type="button" value="확인" class="btn btn-primary btn-sm" onclick="checkJoinCode();">
+		</td>
+	
+	</tr>
+	
+
 	
 	<tr height="3">
 		<td colspan="4" bgcolor="#cccccc"></td>
@@ -341,6 +352,74 @@ function nickCheck() {
 	}
   
 </script>
+
+
+<!-- 이메일 확인 -->
+<script type="text/javascript">
+/* 
+	function checkMail() {
+		var email = document.getElementById("email").value;
+		
+		if (email== "") {
+			
+			alert("메일을 입력해주세요.")
+			
+			return false;
+		}
+		
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechage = function(){
+			
+			
+			if (xhttp.readyState == 4) {
+				
+				var data =JSON.parse(xhttp.responseText);
+				if (data != null) {
+					alert("이미 가입한 메일 입니다.")
+					$("#joincode").css("display" ,"none");
+				}else{
+					sendMail(email);
+					("#joincode").css("display","");
+					7
+				}
+			}
+		};
+		xttp.open("POST", 'checkMail/' , true);
+		xttp.setRequestHeader("Content-Type","application/x-www/form-urlencoded;charset=UTF-8");
+		xttp.send('email=' + email);
+		return false;
+	} */
+	
+	function checkMail(email){
+		
+		var email = document.getElementById("email").value;
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange =function(){
+			if (xhttp.readyState == 4 ) {
+				if (xhttp.status== 200) {
+					alert("메일을 정상적으로 보냈습니다.");
+				}else{
+					alert("올바른 메일 형식이 아닙니다.");
+				}
+				
+			}			
+			
+		};
+		xhttp.open("POST",'/icade/checkCode.action',true);
+		xhttp.setRequestHeader("Content-Type","application/x-www/form-urlencoded;charset=UTF-8")
+		xhttp.send('email=' + email);
+		return false;
+	}
+	
+	function checkJoinCode() {
+		
+		
+	}
+	
+</script>
+
+
+
 
 <!-- 회원가입 완료 -->
 <script type="text/javascript">
