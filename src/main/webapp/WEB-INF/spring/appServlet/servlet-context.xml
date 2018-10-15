@@ -57,7 +57,7 @@
 		
 	</beans:bean> -->
 	
-
+	<!-- 위에서부터 우선순위 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
@@ -68,7 +68,7 @@
 			<beans:bean id="postInterceptor" class="com.project.interceptor.PostInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>
-			<mapping path="/asdf"/>
+			<mapping path="/temp"/>
 			<beans:bean id="loginInterceptor" class="com.project.interceptor.LoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
