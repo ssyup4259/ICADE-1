@@ -17,7 +17,7 @@
 		<a href="<%=cp%>"><input type="button" value="메인페이지"></a>
 	</c:when>
 	<c:otherwise>
-		<h5> ${sessionScope.userId} 님 로그인 되었습니다. </h1>
+		<h5> ${sessionScope.userId} 님 로그인 되었습니다. </h5>
 		<a href="logout.action"><input type="button" value="로그아웃"></a>
 		<a href="<%=cp%>"><input type="button" value="메인페이지"></a>
 	</c:otherwise>
