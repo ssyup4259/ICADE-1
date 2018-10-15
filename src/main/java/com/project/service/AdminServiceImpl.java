@@ -427,9 +427,12 @@ public class AdminServiceImpl implements AdminService {
 
 	//회원에게 권한 부여
 	@Override
-	public void authority(String m_id) throws Exception  {
+	public void authority(HttpServletRequest req) throws Exception  {
 		
-		a_dao.authority(m_id);
+		String m_id = req.getParameter("M_ID");
+		String new_rank = req.getParameter("M_RANK");
+		
+		a_dao.authority(m_id, new_rank);
 		
 	}
 

@@ -12,12 +12,36 @@
 
 <script type="text/javascript">
 
-	function sendIt(){
+	function sendIt() {
 		
 		var f = document.searchForm;
 		
 		f.action = "<%=cp%>/admin/memberList.action";
 		f.submit();
+		
+	}
+	
+	function authorityChange(m_id, m_rank) {
+		
+		var f = document.authorityForm;
+		
+		var new_rank = "";
+		
+		if (m_rank == "customer") {
+			new_rank = "seller";
+		} else if (m_rank == "seller") {
+			new_rank = "customer";
+		}
+		
+		
+		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
+			
+			f.action = "<%=cp%>/admin/authorityChange.action?M_ID=" + m_id + "&M_RANK=" + new_rank;
+			f.submit();
+			
+		} else {
+			return;
+		}
 		
 	}
 
@@ -39,47 +63,52 @@
 	</form>		
 </div>
 
-<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
-	<tr>
-		<td>회원 권한</td>
-		<td>아이디</td>
-		<td>이름</td>
-		<td>닉네임</td>
-		<td>우편번호</td>
-		<td>주소</td>
-		<td>이메일</td>
-		<td>휴대전화</td>
-		<td>포인트</td>
-		<td>가입일</td>
-	</tr>
-	
-	<c:forEach var="m_dto" items="${m_lists}">
-		<tr>
-			<td>${m_dto.getM_RANK()}</td>
-			<td>${m_dto.getM_ID()}</td>
-			<td>${m_dto.getM_NAME()}</td>
-			<td>${m_dto.getM_NICKNAME()}</td>
-			<td>${m_dto.getM_ZIPCODE()}</td>
-			<td>${m_dto.getM_ADDRESS1()} ${m_dto.getM_ADDRESS2()}</td>
-			<td>${m_dto.getM_EMAIL_ID()}@${m_dto.getM_EMAIL_DOMAIN()}</td>
-			<td>${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}</td>
-			<td>${m_dto.getM_POINT()}</td>
-			<td>${m_dto.getM_DATE()}</td>
-		</tr>
-	</c:forEach>
-	
-	<tr>
-		<td colspan="10">
-			<c:if test="${dataCount!=0 }">
-				${pageIndexList }
-			</c:if>
-			<c:if test="${dataCount==0 }">
-				등록된 상품이 없습니다.
-			</c:if>
-		</td>
-	</tr>
+<form action="" method="post" name="authorityForm">
 
-</table>
+	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
+		<tr>
+			<td>회원 권한</td>
+			<td>권한 변경</td>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>닉네임</td>
+			<td>우편번호</td>
+			<td>주소</td>
+			<td>이메일</td>
+			<td>휴대전화</td>
+			<td>포인트</td>
+			<td>가입일</td>
+		</tr>
+		
+		<c:forEach var="m_dto" items="${m_lists}">
+			<tr>
+				<td>${m_dto.getM_RANK()}</td>
+				<td><input type="button" value="권한 변경" onclick="authorityChange('${m_dto.getM_ID()}', '${m_dto.getM_RANK()}')"/></td>
+				<td>${m_dto.getM_ID()}</td>
+				<td>${m_dto.getM_NAME()}</td>
+				<td>${m_dto.getM_NICKNAME()}</td>
+				<td>${m_dto.getM_ZIPCODE()}</td>
+				<td>${m_dto.getM_ADDRESS1()} ${m_dto.getM_ADDRESS2()}</td>
+				<td>${m_dto.getM_EMAIL_ID()}@${m_dto.getM_EMAIL_DOMAIN()}</td>
+				<td>${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}</td>
+				<td>${m_dto.getM_POINT()}</td>
+				<td>${m_dto.getM_DATE()}</td>
+			</tr>
+		</c:forEach>
+		
+		<tr>
+			<td colspan="11">
+				<c:if test="${dataCount!=0 }">
+					${pageIndexList }
+				</c:if>
+				<c:if test="${dataCount==0 }">
+					등록된 상품이 없습니다.
+				</c:if>
+			</td>
+		</tr>
+	
+	</table>
+</form>
 
 </body>
 </html>

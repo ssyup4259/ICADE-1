@@ -42,7 +42,7 @@ public interface AdminDAO {
 	//상품 개수 구하기
 	public int getMemberCount(String searchKey,String searchValue) throws Exception;
 	//회원에게 권한 부여
-	public void	authority(String m_id) throws Exception;
+	public void	authority(String m_id, String new_rank) throws Exception;
 	//회원 주문내역 조회
 	public List<OrdersDTO> ordersList() throws Exception;
 

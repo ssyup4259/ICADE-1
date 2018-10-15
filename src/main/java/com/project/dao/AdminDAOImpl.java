@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,8 +183,14 @@ public class AdminDAOImpl implements AdminDAO {
 
 	//회원에게 권한 부여
 	@Override
-	public void authority(String m_id) throws Exception  {
-		// TODO Auto-generated method stub
+	public void authority(String m_id, String new_rank) throws Exception  {
+		
+		Map<String, String> hMap = new HashMap<String, String>();
+		
+		hMap.put("m_id", m_id);
+		hMap.put("new_rank", new_rank);
+		
+		sessionTemplate.update(adminMapper + ".authorityChange", hMap);
 		
 	}
 

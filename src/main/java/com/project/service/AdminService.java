@@ -38,7 +38,7 @@ public interface AdminService {
 	//회원 리스트
 	public HttpServletRequest memberList(HttpServletRequest req) throws Exception;
 	//회원에게 권한 부여
-	public void	authority(String m_id) throws Exception;
+	public void	authority(HttpServletRequest req) throws Exception;
 	//회원 주문내역 조회
 	public List<OrdersDTO> ordersList() throws Exception;
 
