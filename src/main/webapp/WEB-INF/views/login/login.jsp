@@ -36,9 +36,13 @@
 
 </table>
 
+<a href="join.action">회원가입</a>
+
 </form>
-
-
+<br/>
+${msg }
+<br/>
+<br/>
 <form action="loginTest.action" method="post">
 <input type="submit" value="테스트로가기">
 </form>
