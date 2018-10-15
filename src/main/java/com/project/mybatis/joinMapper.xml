@@ -25,4 +25,8 @@
 
 <!-- 이메일 중복체크 -->
 
+<select id="emailCheck" parameterType="HashMap" resultType="HashMap">
+	SELECT COUNT(*) AS RESULT FROM MEMBER where M_EMAIL_ID=#{M_EMAIL_ID} and M_EMAIL_DOMAIN =#{M_EMAIL_DOMAIN}
+</select>
+
 </mapper>

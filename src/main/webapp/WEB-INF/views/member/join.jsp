@@ -118,15 +118,19 @@
 			<h4>이메일</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="이메일 : Ex)444@naver.com" id="email" name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text"  placeholder="이메일 : Ex)444" id="email1"  name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
 		
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="이메일 : Ex)444@naver.com" name="M_EMAIL_DOMAIN" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text" placeholder="이메일 : Ex)naver.com" id="email2"  name="M_EMAIL_DOMAIN" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
-		<td>
-			<input type="button" value="인증하기" onclick="checkMail();"/>
-		</td>	
+		<td><input type="button" value="인증하기" onclick="checkMail();"/></td>
+		
+		<!-- <td><a href="#" id="user_Email_checkBtn" class="btn">중복확인</a>
+		</td> -->
+		 <br>
+		 <div></div>
+			
 	</tr>
 	<tr id="joincode">
 		<th>인증번호</th>
@@ -356,44 +360,50 @@ function nickCheck() {
 
 <!-- 이메일 확인 -->
 <script type="text/javascript">
-/* 
-	function checkMail() {
-		var email = document.getElementById("email").value;
-		
-		if (email== "") {
-			
-			alert("메일을 입력해주세요.")
-			
-			return false;
-		}
-		
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechage = function(){
-			
-			
-			if (xhttp.readyState == 4) {
-				
-				var data =JSON.parse(xhttp.responseText);
-				if (data != null) {
-					alert("이미 가입한 메일 입니다.")
-					$("#joincode").css("display" ,"none");
+/*
+$(document).ready(function() {
+	$("#user_nickName_checkBtn").unbind("click").click(function(e) {
+		e.preventDefault();
+		nickCheck();		
+	});
+});
+ function nickCheck() {
+	
+	var params = $("#email").val() +""
+	
+	if (userEmail.length <1) {
+		alert("닉네임을 입력해주세요.")
+	}else{
+		$.ajax({
+			type : "POST",
+			url : "/icade/mailcheck.action",
+			data : {"" : userNick},
+			dataType :"json",
+			error : function(error) {
+				alert("서버가 응답하지 않습니다");
+			},
+			success : function(result) {
+				if (result==0) {
+					alert("사용가능한 닉네임 입니다");
+				}else if(result==1){
+					alert("이미 존재하는 닉네임입니다")
 				}else{
-					sendMail(email);
-					("#joincode").css("display","");
-					7
+					alert("에러가 발생했습니다.");					
 				}
 			}
-		};
-		xttp.open("POST", 'checkMail/' , true);
-		xttp.setRequestHeader("Content-Type","application/x-www/form-urlencoded;charset=UTF-8");
-		xttp.send('email=' + email);
-		return false;
-	} */
+		});
+	}
+} */
 	
-	function checkMail(email){
+	function checkMail(email1,email2){
 		
-		var email = document.getElementById("email").value;
+		var email1 =document.getElementById("email1").value; 
+		var email2 =document.getElementById("email2").value; 
+	
+		var email = email1+ "@" + email2; 
+			
 		var xhttp = new XMLHttpRequest();
+		
 		xhttp.onreadystatechange =function(){
 			if (xhttp.readyState == 4 ) {
 				if (xhttp.status== 200) {
@@ -405,9 +415,9 @@ function nickCheck() {
 			}			
 			
 		};
-		xhttp.open("POST",'/icade/checkCode.action',true);
-		xhttp.setRequestHeader("Content-Type","application/x-www/form-urlencoded;charset=UTF-8")
-		xhttp.send('email=' + email);
+		xhttp.open("POST","checkCode.action",true);
+		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8")
+		xhttp.send("email=" + email);
 		return false;
 	}
 	

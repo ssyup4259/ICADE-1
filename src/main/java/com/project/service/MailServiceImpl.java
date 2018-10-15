@@ -1,29 +1,24 @@
 package com.project.service;
 
-
-import java.io.File;
-
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MailServiceImpl implements MailService {
-
+public class MailServiceImpl implements MailService{
 	
-	private JavaMailSender javaMailSender;
-
-	public void setJavaMailSender(JavaMailSender javaMailSender) {
+	private final JavaMailSender javaMailSender;
+	
+	@Autowired
+	  public MailServiceImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
-
-
-
+	
 	@Override
-	public boolean send(String subject, String text, String from, String to, String filePath) {
-		
+	public boolean send(String subject, String text, String from, String to) {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		
 		try {
@@ -34,15 +29,6 @@ public class MailServiceImpl implements MailService {
 			helper.setFrom(from);
 			helper.setTo(to);
 			
-			if (filePath != null) {
-				
-				File file = new File(filePath);
-				
-				if (file.exists()) {
-					helper.addAttachment(file.getName(), new File(filePath));
-				}
-			}
-			
 			javaMailSender.send(message);
 			
 			return true;
@@ -52,12 +38,7 @@ public class MailServiceImpl implements MailService {
 		}
 		
 		return false;
+		
 	}
-	
-	
-
-	
-	
-	
 
 }

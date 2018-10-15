@@ -51,4 +51,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+	@Override
+	public int emailCheck(Map<String, Object> map) throws Exception {
+		
+		Map<String, Object> resultMap = sessionTemplate.selectOne(namespace +".emailCheck",map);
+		
+		int result = Integer.valueOf(String.valueOf(resultMap.get("RESULT")));
+		
+		return result;
+	}
+
 }

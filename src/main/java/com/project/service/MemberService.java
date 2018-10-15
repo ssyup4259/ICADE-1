@@ -13,7 +13,11 @@ public interface MemberService {
 	public int idCheck(Map<String, Object> map)throws Exception;
 		
 	//닉네임 중복체크
-//	public int nickCheck(Map<String, Object> map)throws Exception;
 	public int nickCheck(Map<String, Object> map)throws Exception;
+	
+	//이메일 중복체크
+	//public int emailCheck(Map<String, Object> map)throws Exception;
+	
+
 	
 }

@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,17 @@ import com.project.dto.MemberDTO;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+	
+	
 	@Autowired
 	private MemberDAO m_dao;
+
+	
 
 	@Override
 	public void insertMember(MemberDTO m_dto) throws Exception {
 
 		
-		System.out.println(m_dto);
 		m_dao.insertMember(m_dto);
 
 	}
@@ -31,10 +35,15 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int nickCheck(Map<String, Object> map) throws Exception {
-		//	public int nickCheck(String M_ID) throws Exception {
 		return m_dao.nickCheck(map);
-		//		return m_dao.nickCheck(M_ID);
 	}
+
+	/*@Override
+	public int emailCheck(Map<String, Object> map) throws Exception {
+		return m_dao.emailCheck(map);
+	}*/
+
+
 
 
 }

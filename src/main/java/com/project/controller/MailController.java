@@ -2,13 +2,13 @@ package com.project.controller;
 
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.service.MailService;
@@ -17,16 +17,18 @@ import com.project.service.MailService;
 public class MailController {
 	
 	@Autowired
-	private MailService mailService;
-
-	public void setMailService(MailService mailService) {
-		this.mailService = mailService;
-	}
+	private MailService MailService;
 	
 	
-	@RequestMapping(value="/checkCode.action", method = {RequestMethod.GET, RequestMethod.POST} ,produces ="application/json")
+	@RequestMapping(value="/checkCode.action",method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public boolean sendMail(HttpSession session,@RequestParam String email) {
+	public boolean sendMail(HttpSession session, HttpServletRequest request) {
+		
+		String email = request.getParameter("email");
+		System.out.println(email);
+		
+		
+		
 		
 		int ran = new Random().nextInt(100000) +10000;
 		String joinCode = String.valueOf(ran);
@@ -35,10 +37,11 @@ public class MailController {
 		String subject ="회원가입 인증코드 발급 안내입니다.";
 		StringBuilder sb = new StringBuilder();
 		sb.append("귀하의 인증코드는 " + joinCode + " 입니다.");
-		return mailService.send(subject, sb.toString(), "jo42047014@gmail.com", email, null);
+		
+		//System.out.println(email);
+		return MailService.send(subject, sb.toString(), "jo42047014@gmail.com", email);
 				
 	}
 	
-	
-	
+
 }
