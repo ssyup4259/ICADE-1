@@ -1,13 +1,12 @@
 package com.project.interceptor;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.project.dto.MemberDTO;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
@@ -19,10 +18,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		String localhost = request.getRemoteAddr();
 		
-		String reqUrl = request.getRequestURL().toString();
+		String reqUrl = request.getRequestURL().toString(); // 요청url
 		
-		System.out.println("preHandle : " + reqUrl);
+		//System.out.println("preHandle1 : " + reqUrl);
 		
+		//if문으로 예외처리하여 true를 리턴해서 요청url로 그냥 통과시켜준다.
 		if(reqUrl=="http://"+localhost+":8080/icade/login.action" || reqUrl.equals("http://"+localhost+":8080/icade/login.action")) {
 			return true;
 		}
@@ -41,9 +41,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		//System.out.println("preHandle : " + handler);
 		
-		Object obj = session.getAttribute("userId");
+		MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
         
-        if ( obj == null ){
+        if ( vo == null ){
             // 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
             response.sendRedirect("/icade/login.action");
             return false; // 더이상 컨트롤러 요청으로 가지 않도록 false로 반환함
@@ -53,42 +53,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         // 따라서 true로하면 컨트롤러 uri로 가게 됨.
         return true;
 	}
-	
-	/*
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		
-		HttpSession session = request.getSession(false);
-		
-		String reqUrl = (String) session.getAttribute("reqUrl");
-		
-		String postUrl = request.getRequestURL().toString();
-		
-		String userId = (String) session.getAttribute("userId");
-		
-		Object check = session.getAttribute("postCheck");
-		
-		session.setAttribute("postCheck", "test");
-		
-		System.out.println("----------------------------------postHandel start------------------------------------------");
-		
-		System.out.println("reqUrl : " + reqUrl);
-		
-		System.out.println(session.getAttribute("userId"));
-		
-		if(userId!=null && reqUrl!=null) {
-			System.out.println("if문 1번째");
-			if(postUrl!="http://"+localhost+":8080/icade/login_ok.action" && !postUrl.equals("http://"+localhost+":8080/icade/login.action")){
-				System.out.println("if문 2번째");
-				System.err.println("postUrl : " + postUrl);
-				response.sendRedirect(reqUrl);
-			}
-		}
-		
-		System.out.println("----------------------------------postHandel end------------------------------------------");
-		
-		
-	}*/
 
 }

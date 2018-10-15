@@ -8,16 +8,34 @@
             <pattern>%d{HH:mm:ss.SSS} %-5level %logger[%method:%line] - %msg%n</pattern>
         </encoder>
     </appender>
+    
     <!-- 로그를 찍고자하는 클래스정보를 넣어주면 된다 -->
-    <logger name="com.project.mybatis.adminMapper" level="DEBUG"></logger>
-    <logger name="com.project.mybatis.joinMapper" level="DEBUG"></logger>
-    <!-- MyBatis의 Mapper.xml에 선언된 namespace명을 넣어주면 해당 쿼리가 로그에 남는다. -->
-    <!-- ex> namespase가 "sql.testMapper.my" 인 경우 맨 앞에 sql만 사용하면 sql로 시작되는 모든 namespace mapper 쿼리가 표시됨  -->
-    <logger name="sql" level="DEBUG"></logger>
- 
-    <!--  
-    <logger name="org.springframework.context" level="INFO"></logger>
-    -->
+    <logger name="com.project" level="DEBUG" additivity="false">
+    	<appender-ref ref="console"/>
+    </logger>
+    
+    <logger name="com.project.mybatis" level="OFF" additivity="false">
+    	<appender-ref ref="console"/>
+    </logger>
+    
+    <logger name="jdbc" level="OFF"/>
+    
+    <!-- SQL쿼리문 -->
+	<logger name="jdbc.sqlonly" level="DEBUG"/>
+	
+	<!-- 수행된 시간 정보 -->
+	<logger name="jdbc.sqltiming" level="OFF"/>
+	
+	<!-- ResultSet을 제외한 모든 JDBC 호출 정보 (매우많음 사용 비추천) -->
+	<logger name="jdbc.audit" level="OFF"/>
+	
+	<!-- ResultSet을 포함한 모든 JDBC 호출 정보 (매우많음 사용 비추천) -->
+	<logger name="jdbc.resultset" level="OFF"/>
+	
+	<logger name="jdbc.resultsettable" level="OFF"/>
+	
+	<logger name="jdbc.connection" level="OFF"/>
+
     <!-- 기본 로그 레벨  -->
     <root level="warn">
         <appender-ref ref="console" />

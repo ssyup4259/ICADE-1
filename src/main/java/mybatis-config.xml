@@ -26,6 +26,7 @@
 		<mapper resource="com/project/mybatis/joinMapper.xml"/>
 		<mapper resource="com/project/mybatis/adminMapper.xml"/>
 		<mapper resource="com/project/mybatis/loginMapper.xml"/>
+		<mapper resource="com/project/mybatis/mypageMapper.xml"/>
 	</mappers>
 	
 </configuration>

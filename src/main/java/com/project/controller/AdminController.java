@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,8 @@ import com.project.service.AdminService;
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
+	
+	Logger log = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
 	private AdminService service;
@@ -136,9 +140,9 @@ public class AdminController {
 	
 	//회원 목록 화면
 	@RequestMapping(value="/memberList.action", method= {RequestMethod.GET, RequestMethod.POST})
-	public String memberList() throws Exception {
+	public String memberList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		
+		req = service.memberList(req);
 		
 		return "admin/memberList";
 		

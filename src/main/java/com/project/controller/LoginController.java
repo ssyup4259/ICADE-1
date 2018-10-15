@@ -28,16 +28,18 @@ public class LoginController {
 	
 	@RequestMapping(value="/login_ok.action", method=RequestMethod.POST)
 	public String login_ok(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
-
+		
 		String M_ID = (String) req.getParameter("M_ID");
 		String M_PW = (String) req.getParameter("M_PW");
 		
-		/*System.out.println(M_ID);
-		System.out.println(M_PW);
-		*/
+		//System.out.println(M_ID);
+		//System.out.println(M_PW);
+		
 		HttpSession session = req.getSession();
 		
 		dto = dao.checkInfo(M_ID); // String에서 맵으로 바꿔야되는데 시간없어서 일단 여기까지함.
+		
+		//System.out.println(dto.getM_ID());
 		
 		if(dto==null || dto.equals(null)) {
 			System.out.println("dto가 널일시 뜬다.");
@@ -57,10 +59,10 @@ public class LoginController {
 			
 		}else{
 			//System.out.println("아이디 비번 true 반환시 보인다.");
-			session.setAttribute("userId", M_ID);
+			session.setAttribute("userInfo", dto);
 			
-			//String userId = (String) session.getAttribute("userId");
-			//System.out.println("보낼때" + userId);
+			//MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
+			//System.out.println("보낼때" + vo.getM_ID());
 			
 			return "loginTest";
 		}

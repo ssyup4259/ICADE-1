@@ -15,11 +15,12 @@ public class PostInterceptor extends HandlerInterceptorAdapter {
 	
 		HttpSession session = request.getSession();
 		
+		//pre에서 가려던 주소를 올려준 세션을 받아와서 redirect시킨다.
 		String url = (String)session.getAttribute("reqUrl");
 		
-		System.out.println(url);
+		//System.out.println(url);
 		
-		super.postHandle(request, response, handler, modelAndView);
+		response.sendRedirect(url);
 	}
 	
 	
