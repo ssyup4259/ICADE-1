@@ -141,10 +141,20 @@ public class AdminController {
 	//회원 목록 화면
 	@RequestMapping(value="/memberList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String memberList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		
+
 		req = service.memberList(req);
 		
 		return "admin/memberList";
+		
+	}
+	
+	//회원 권한 변경
+	@RequestMapping(value="/authorityChange.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String authorityChange(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		service.authorityChange(req);
+		
+		return "redirect:/admin/memberList.action";
 		
 	}
 	

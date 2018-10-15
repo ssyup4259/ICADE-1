@@ -32,6 +32,7 @@
 	<!-- ResultSet을 포함한 모든 JDBC 호출 정보 (매우많음 사용 비추천) -->
 	<logger name="jdbc.resultset" level="OFF"/>
 	
+	<!-- 쿼리의 결과를 테이블 형식으로 출력 -->
 	<logger name="jdbc.resultsettable" level="OFF"/>
 	
 	<logger name="jdbc.connection" level="OFF"/>

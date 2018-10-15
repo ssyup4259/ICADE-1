@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,12 +154,13 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	//회원 리스트
 	@Override
-	public List<MemberDTO> memberList(int start, int end, String searchKey, String searchValue) throws Exception  {
+	public List<MemberDTO> memberList(int start, int end, String m_rank, String searchKey, String searchValue) throws Exception  {
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("start", start);
 		params.put("end", end);
+		params.put("m_rank", m_rank);
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
 		
@@ -167,10 +169,11 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	//회원 수 구하기
 	@Override
-	public int getMemberCount(String searchKey, String searchValue) throws Exception {
+	public int getMemberCount(String m_rank, String searchKey, String searchValue) throws Exception {
 
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
+		params.put("m_rank", m_rank);
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
 		
@@ -182,8 +185,14 @@ public class AdminDAOImpl implements AdminDAO {
 
 	//회원에게 권한 부여
 	@Override
-	public void authority(String m_id) throws Exception  {
-		// TODO Auto-generated method stub
+	public void authorityChange(String m_id, String new_rank) throws Exception  {
+		
+		Map<String, String> hMap = new HashMap<String, String>();
+		
+		hMap.put("m_id", m_id);
+		hMap.put("new_rank", new_rank);
+		
+		sessionTemplate.update(adminMapper + ".authorityChange", hMap);
 		
 	}
 
