@@ -57,10 +57,11 @@
 		
 	</beans:bean> -->
 	
-	
-	
-	
-	
-	
+	<interceptors>
+		<interceptor>
+		<mapping path="/**"/>
+		<beans:bean id="loggerInterceptor" class="com.project.logger.LoggerInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

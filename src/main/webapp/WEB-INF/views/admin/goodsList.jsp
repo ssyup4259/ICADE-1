@@ -30,14 +30,20 @@
 
 <h3>상품 목록</h3>
 
-<label><input type="radio" name="GD_KIND_NUM" value="" checked="checked"/>전체</label>
-<c:forEach var="gk_dto" items="${gk_lists}">
-	<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
-</c:forEach>
-	
 <div id="bbsList_header">
 	<div id="leftHeader">
 		<form action="" name="searchForm" method="post">
+			<select name="GD_KIND_NUM" class="selectField">
+					<option value="">전체</option>
+				<c:forEach var="gk_dto" items="${gk_lists}">
+					<c:if test="${gdKindNum eq gk_dto.GK_NUM}">
+						<option value="${gk_dto.GK_NUM}" selected="selected">${gk_dto.GK_KIND}</option>
+					</c:if>
+					<c:if test="${gdKindNum ne gk_dto.GK_NUM}">
+						<option value="${gk_dto.GK_NUM}">${gk_dto.GK_KIND}</option>
+					</c:if>
+				</c:forEach>
+			</select>
 			<select name="searchKey" class="selectField">
 				<option value="G_NAME">상품명</option>
 				<option value="G_CONTENT">내용</option>
@@ -70,16 +76,16 @@
 		<tr>
 			<td>${g_dto.getGK_KIND()}</td>
 			<td><a href="#">${g_dto.getG_NAME()}</a></td>
-			<td>${g_dto.getG_COUNT()}</td>
+			<td><a href="<%=cp%>/admin/updateGoodsDetailCount.action?g_num=${g_dto.getG_NUM()}">${g_dto.getG_COUNT()}</a></td>
 			<td>${g_dto.getG_PRICE()}</td>
 			<td>${g_dto.getG_SELLCOUNT()}</td>
 			<td>${g_dto.getG_CONTENT()}</td>
 			<td>${g_dto.getG_DISCOUNT()}</td>
-			<td>${g_dto.getG_SAVEFILENAME()}</td>
+			<td><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="100" height="100"/></td>
 			<td>
-				<a href="#">수정</a>
+				<a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a>
 				/
-				<a href="#">삭제</a>
+				<a href="<%=cp%>/admin/deleteGoods.action?g_num=${g_dto.getG_NUM()}">삭제</a>
 			</td>
 		</tr>
 	</c:forEach>
@@ -90,7 +96,7 @@
 				${pageIndexList }
 			</c:if>
 			<c:if test="${dataCount==0 }">
-				등록된게시물이 없습니다.
+				등록된 상품이 없습니다.
 			</c:if>
 		</td>
 	</tr>

@@ -19,6 +19,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<!-- 	/* str = f.mId.value;
 		str = str.trim();
 		if(!str || str.length<=7){
@@ -127,6 +128,13 @@
 </script>      
  
  
+=======
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
+<!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+
+>>>>>>> 6e93241c0a7edb4d15009b19b05f4771edf3795e
 </head>
 
 <body>
@@ -207,7 +215,7 @@
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text" id="user_NickName" placeholder="닉네임 : 2글자이상 입력하세요" name="M_NICKNAME" value="" maxlength="10" size="15" style="padding-left:10px; width: 280px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
-			<td><a href="#" id="user_nickName_checkBtn" class="btn">중복확인</a></td>
+			<td><a href="#" id="user_nickName_checkBtn" class="btn">중복확인</a>
 		</td>
 	</tr>
 	<tr height="2">
@@ -447,6 +455,8 @@ function nickCheck() {
 	}
   
 </script>
+
+<!-- 회원가입 완료 -->
 <script type="text/javascript">
 			 	function sendIt() {
 					
