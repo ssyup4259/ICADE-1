@@ -152,7 +152,7 @@ public class AdminController {
 	@RequestMapping(value="/authorityChange.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String authorityChange(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		service.authority(req);
+		service.authorityChange(req);
 		
 		return "redirect:/admin/memberList.action";
 		

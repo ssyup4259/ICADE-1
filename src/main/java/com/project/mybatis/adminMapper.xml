@@ -96,7 +96,7 @@
 <!-- 회원 전체 데이터 갯수 -->
 <select id="getMemberCount" parameterType="hashMap" resultType="int">
 	select nvl(count(*), 0) from Member
-	where ${searchKey} like '%' || #{searchValue} || '%'
+	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%'
 </select>
 
 <!-- 회원 리스트 출력 -->
@@ -104,7 +104,7 @@
 	select * from (
 	select rownum rnum, data.* from (
 	select M_RANK, M_ID, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME
-	from Member	where ${searchKey} like '%' || #{searchValue} || '%' order by M_DATE desc) data)
+	from Member	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%' order by M_DATE desc) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>

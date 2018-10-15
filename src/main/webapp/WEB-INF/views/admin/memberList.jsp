@@ -36,7 +36,7 @@
 		
 		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
 			
-			f.action = "<%=cp%>/admin/authorityChange.action?M_ID=" + m_id + "&M_RANK=" + new_rank;
+			f.action = "<%=cp%>/admin/authorityChange.action?m_id=" + m_id + "&new_rank=" + new_rank;
 			f.submit();
 			
 		} else {
@@ -54,6 +54,25 @@
 
 <div id="leftHeader">
 	<form action="" name="searchForm" method="post">
+	
+		<c:if test="${empty M_RANK}">
+			<label><input type="radio" name="M_RANK" value="" checked="checked"/>전체</label>
+			<label><input type="radio" name="M_RANK" value="customer"/>customer</label>
+			<label><input type="radio" name="M_RANK" value="seller"/>seller</label>
+		</c:if>
+		
+		<c:if test="${M_RANK == 'customer'}">
+			<label><input type="radio" name="M_RANK" value=""/>전체</label>
+			<label><input type="radio" name="M_RANK" value="customer" checked="checked"/>customer</label>
+			<label><input type="radio" name="M_RANK" value="seller"/>seller</label>
+		</c:if>
+		
+		<c:if test="${M_RANK == 'seller'}">
+			<label><input type="radio" name="M_RANK" value=""/>전체</label>
+			<label><input type="radio" name="M_RANK" value="customer"/>customer</label>
+			<label><input type="radio" name="M_RANK" value="seller" checked="checked"/>seller</label>
+		</c:if>
+	
 		<select name="searchKey" class="selectField">
 			<option value="M_ID">아이디</option>
 			<option value="M_NAME">이름</option>

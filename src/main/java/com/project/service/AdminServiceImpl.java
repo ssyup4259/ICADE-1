@@ -370,6 +370,12 @@ public class AdminServiceImpl implements AdminService {
 		if (pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
+		String m_rank = req.getParameter("M_RANK");
+		
+		if (m_rank == null || m_rank.equals("")) {
+			m_rank = "";
+		}
+		
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
 		
@@ -386,7 +392,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		//전체데이터갯수
-		int dataCount = a_dao.getMemberCount(searchKey, searchValue);
+		int dataCount = a_dao.getMemberCount(m_rank, searchKey, searchValue);
 		
 		//전체페이지수
 		int numPerPage = 10;
@@ -398,7 +404,7 @@ public class AdminServiceImpl implements AdminService {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
-		List<MemberDTO> m_lists = a_dao.memberList(start, end, searchKey, searchValue);
+		List<MemberDTO> m_lists = a_dao.memberList(start, end, m_rank, searchKey, searchValue);
 		
 		//페이징 처리
 		String param = "";
@@ -420,6 +426,7 @@ public class AdminServiceImpl implements AdminService {
 		req.setAttribute("m_lists", m_lists);
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("M_RANK", m_rank);
 		
 		return req;
 		
@@ -427,12 +434,12 @@ public class AdminServiceImpl implements AdminService {
 
 	//회원에게 권한 부여
 	@Override
-	public void authority(HttpServletRequest req) throws Exception  {
+	public void authorityChange(HttpServletRequest req) throws Exception  {
 		
-		String m_id = req.getParameter("M_ID");
-		String new_rank = req.getParameter("M_RANK");
+		String m_id = req.getParameter("m_id");
+		String new_rank = req.getParameter("new_rank");
 		
-		a_dao.authority(m_id, new_rank);
+		a_dao.authorityChange(m_id, new_rank);
 		
 	}
 
