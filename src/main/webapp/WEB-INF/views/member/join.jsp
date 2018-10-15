@@ -18,12 +18,15 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<!-- daum api -->
 <!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
 
 </head>
+
 
 <body>
 
@@ -50,30 +53,40 @@
 	</tr>	
 	
 	<!-- 비밀번호 입력 -->
+	
 	<tr>
 		<td width="100" align="center">
 			<h4>패스워드</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="password" name="M_PW" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="password" name="M_PW" id="pw1"  maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
 	</tr>
 	
-	<!-- 비밀번호 확인 -->
+	
 	<tr height="2">
 		<td colspan="3" bgcolor="#cccccc"></td>
-	</tr>		
+	</tr>	
+	
+	<!-- 비밀번호 확인 -->
 	<tr>
 		<td width="100" align="center">
 		 	<h4>패스워드 확인</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-		 	 <input type="password" name="mPwchk" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+		 	 <input type="password" name="M_PWCorre" id="pw2" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+		 	 <br>
+		 	 <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+		 	 <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 		</td>
 	</tr>
+	
+	
 	<tr height="2">
-		<td colspan="3" bgcolor="#cccccc"></td>
+		<td colspan="3" bgcolor="#cccccc"></td >
 	</tr>
+	
+	
 	<!-- 이름 -->
 	<tr>
 		<td width="100" align="center">
@@ -105,15 +118,26 @@
 			<h4>이메일</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="이메일 : Ex)444@naver.com" name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />@
+			<input type="text" placeholder="이메일 : Ex)444@naver.com" id="email" name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
 		
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text" placeholder="이메일 : Ex)444@naver.com" name="M_EMAIL_DOMAIN" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
-		<br>
-		<div></div>		
+		<td>
+			<input type="button" value="인증하기" onclick="checkMail();"/>
+		</td>	
 	</tr>
+	<tr id="joincode">
+		<th>인증번호</th>
+		<td>
+			<input type='number' name="inputCode" id="inputCode" class="form-control" style="margin-right: 10px; width:300px;" placeholder="Enter code"/ >
+			<input type="button" value="확인" class="btn btn-primary btn-sm" onclick="checkJoinCode();">
+		</td>
+	
+	</tr>
+	
+
 	
 	<tr height="3">
 		<td colspan="4" bgcolor="#cccccc"></td>
@@ -241,7 +265,6 @@ function idCheck() {
 </script>
 <!-- 비밀번호 일치확인  끝-->
 
-
 <!-- 닉네임 중복확인 시작 -->
 <script >
 $(document).ready(function() {
@@ -250,7 +273,6 @@ $(document).ready(function() {
 		nickCheck();		
 	});
 });
-
 function nickCheck() {
 	
 	var userNick =$("#user_NickName").val();
@@ -330,6 +352,76 @@ function nickCheck() {
 	}
   
 </script>
+
+
+<!-- 이메일 확인 -->
+<script type="text/javascript">
+/* 
+	function checkMail() {
+		var email = document.getElementById("email").value;
+		
+		if (email== "") {
+			
+			alert("메일을 입력해주세요.")
+			
+			return false;
+		}
+		
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechage = function(){
+			
+			
+			if (xhttp.readyState == 4) {
+				
+				var data =JSON.parse(xhttp.responseText);
+				if (data != null) {
+					alert("이미 가입한 메일 입니다.")
+					$("#joincode").css("display" ,"none");
+				}else{
+					sendMail(email);
+					("#joincode").css("display","");
+					7
+				}
+			}
+		};
+		xttp.open("POST", 'checkMail/' , true);
+		xttp.setRequestHeader("Content-Type","application/x-www/form-urlencoded;charset=UTF-8");
+		xttp.send('email=' + email);
+		return false;
+	} */
+	
+	function checkMail(email){
+		
+		var email = document.getElementById("email").value;
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange =function(){
+			if (xhttp.readyState == 4 ) {
+				if (xhttp.status== 200) {
+					alert("메일을 정상적으로 보냈습니다.");
+				}else{
+					alert("올바른 메일 형식이 아닙니다.");
+				}
+				
+			}			
+			
+		};
+		xhttp.open("POST",'/icade/checkCode.action',true);
+		xhttp.setRequestHeader("Content-Type","application/x-www/form-urlencoded;charset=UTF-8")
+		xhttp.send('email=' + email);
+		return false;
+	}
+	
+	function checkJoinCode() {
+		
+		
+	}
+	
+</script>
+
+
+
+
+<!-- 회원가입 완료 -->
 <script type="text/javascript">
 			 	function sendIt() {
 					

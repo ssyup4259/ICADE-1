@@ -15,12 +15,13 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp ,Object handler )throws Exception{
 		//전처리기 메소드
 		//컨트롤러가 실행되기 전에 실행된다.
-		//현재 실해왼 URI가 무엇인지 알려주는 역할을 하게 된다.
+		//현재 실행된 URI가 무엇인지 알려주는 역할을 하게 된다.
 		
 		if (log.isDebugEnabled()) {
 			
 			log.debug("==========================================start=======================================");
 			log.debug("Request URI\t: " + req.getRequestURI());
+			log.debug("Request getMethod()" + req.getMethod());
 		}
 		
 		return super.preHandle(req, resp, handler);
