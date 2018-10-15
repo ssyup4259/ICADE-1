@@ -123,7 +123,9 @@
 		
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text" placeholder="이메일 : Ex)444@naver.com" name="M_EMAIL_DOMAIN" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
-		</td>		
+		</td>
+		<br>
+		<div></div>		
 	</tr>
 	
 	<tr height="3">
@@ -251,10 +253,6 @@ function idCheck() {
 });
 </script>
 <!-- 비밀번호 일치확인  끝-->
-
-
-
-
 
 <!-- 닉네임 중복확인 시작 -->
 <script >

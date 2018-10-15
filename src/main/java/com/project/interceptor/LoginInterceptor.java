@@ -15,22 +15,24 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
+		
+		String localhost = request.getRemoteAddr();
 		
 		String reqUrl = request.getRequestURL().toString();
 		
 		System.out.println("preHandle : " + reqUrl);
 		
-		if(reqUrl=="http://192.168.16.18:8080/icade/login.action" || reqUrl.equals("http://192.168.16.18:8080/icade/login.action")) {
+		if(reqUrl=="http://"+localhost+":8080/icade/login.action" || reqUrl.equals("http://"+localhost+":8080/icade/login.action")) {
 			return true;
 		}
-		if(reqUrl=="http://192.168.16.18:8080/icade/login_ok.action" || reqUrl.equals("http://192.168.16.18:8080/icade/login_ok.action")) {
+		if(reqUrl=="http://"+localhost+":8080/icade/login_ok.action" || reqUrl.equals("http://"+localhost+":8080/icade/login_ok.action")) {
 			return true;
 		}
-		if(reqUrl=="http://192.168.16.18:8080/icade/" || reqUrl.equals("http://192.168.16.18:8080/icade/")) {
+		if(reqUrl=="http://"+localhost+":8080/icade/" || reqUrl.equals("http://"+localhost+":8080/icade/")) {
 			return true;
 		}
-		if(reqUrl=="http://192.168.16.18:8080/icade/join.action" || reqUrl.equals("http://192.168.16.18:8080/icade/join.action")) {
+		if(reqUrl=="http://"+localhost+":8080/icade/join.action" || reqUrl.equals("http://"+localhost+":8080/icade/join.action")) {
 			return true;
 		}
 		
@@ -77,7 +79,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		if(userId!=null && reqUrl!=null) {
 			System.out.println("if문 1번째");
-			if(postUrl!="http://192.168.16.18:8080/icade/login_ok.action" && !postUrl.equals("http://192.168.16.18:8080/icade/login.action")){
+			if(postUrl!="http://"+localhost+":8080/icade/login_ok.action" && !postUrl.equals("http://"+localhost+":8080/icade/login.action")){
 				System.out.println("if문 2번째");
 				System.err.println("postUrl : " + postUrl);
 				response.sendRedirect(reqUrl);
