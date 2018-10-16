@@ -154,7 +154,9 @@ public class AdminController {
 		
 		service.authorityChange(req);
 		
-		return "redirect:/admin/memberList.action";
+		//권한 변경 후 원래 검색 결과를 뿌려야함....
+		
+		return memberList(req, resp);
 		
 	}
 	

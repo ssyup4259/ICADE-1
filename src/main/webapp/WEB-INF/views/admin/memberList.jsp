@@ -83,7 +83,9 @@
 </div>
 
 <form action="" method="post" name="authorityForm">
-
+<input type="hidden" name="M_RANK" value="${M_RANK}"/>
+<input type="hidden" name="searchKey" value="${searchKey}"/>
+<input type="hidden" name="searchValue" value="${searchValue}"/>
 	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
 		<tr>
 			<td>회원 권한</td>

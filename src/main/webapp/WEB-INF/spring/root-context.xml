@@ -13,7 +13,7 @@
 	
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:/com/project/mybatis/*.xml"/>
 	</bean>
 	<!-- 나중에 문제생기면 이 주석을 풀고 아래 dataSource를 주석처리 하기! 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
