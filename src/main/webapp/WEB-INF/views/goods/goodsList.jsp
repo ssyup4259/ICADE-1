@@ -41,7 +41,10 @@
 <c:set var="i" value="0"/>
 <c:forEach var="g_dto" items="${g_lists}">
 	<div style="float: left;">
-		<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="300" height="300"/><br/>
+		<a href="<%=cp%>/goods/imageTest.action?g_num=${g_dto.getG_NUM()}">
+		<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="300" height="300"/>
+		</a>
+		<br/>
 		${g_dto.getG_NAME()} <br/>
 		남은 수량 : ${g_dto.getG_COUNT()}		
 	</div>

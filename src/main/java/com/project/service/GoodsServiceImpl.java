@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,5 +127,49 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	
+	@Override
+	public GoodsDTO imageTest(HttpServletRequest req) throws Exception {
+		
+		int g_num = Integer.parseInt(req.getParameter("g_num"));
+		
+		GoodsDTO g_dto = a_dao.getReadGoods(g_num);
+		
+		return g_dto;
+	}
+	
+	
+	public HttpServletRequest cookieTest(Cookie[] cookies, HttpServletRequest req) throws Exception {
+		
+		int clength = 0;
+		
+		if (cookies != null) {
+			clength = cookies.length;
+		}
+		
+		String[] cookieName =  new String[clength];
+		String[] cookieValue = new String[clength];
+		
+		Cookie ck = null;
+		
+		if(cookies != null) {
+		     for (int i = 0; i < clength; i++) {
+		    	 
+		    	 GoodsDTO g_dto = new GoodsDTO();
+		    	 
+		         ck = cookies[i];		         
+		         
+		         cookieName[i] = ck.getName();
+		         cookieValue[i] = ck.getValue();
+		      }
+		}
+		
+		req.setAttribute("cookies", cookies);
+		req.setAttribute("clength", clength);
+		req.setAttribute("cookieName", cookieName);
+		req.setAttribute("cookieValue", cookieValue);
+		
+		return null;
+		
+	}
 
 }
