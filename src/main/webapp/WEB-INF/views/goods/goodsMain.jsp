@@ -91,19 +91,65 @@ footer {
 </head>
 <body>
 
-<h3>메인화면 상품 리스트</h3><br/><br/>
+<c:forEach var="gk_dto" items="${gk_lists}">
+	<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>&nbsp;&nbsp;
+</c:forEach>
+<h3>인기 상품 리스트</h3><br/><br/>
 
+<c:set var="i" value="0"/>
 <c:forEach var="g_dto" items="${popularList}">
-	<div class="col-sm-6" style="width: 20%;">
+	
+	<c:if test="${i % 2 == 0}">
+		<div class="row">	
+	</c:if>
+		
+	<div class="col-sm-6" style="width: 20%;" align="center">
 		<div class="panel panel-primary" style="border-color: #A3C838">
 			<div class="panel-heading" style="background-color: #A3C838;">${g_dto.getG_NAME()}</div>
 			<div class="panel-body">
-				<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
+				<a href="#">
+					<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
+				</a>
 			</div>
 			<div class="panel-footer">${g_dto.getG_CONTENT()}</div>
 		</div>
 	</div>
+	
+	<c:if test="${i % 2 == 1 || popularList.size() == i+1}">
+		</div>	
+	</c:if>
+	
+	<c:set var="i" value="${i+1}"/>
+	
 </c:forEach>
+
+
+<h3>최신 상품 리스트</h3><br/><br/>
+<c:set var="i" value="0"/>
+<c:forEach var="g_dto" items="${newList}">
+	
+	<c:if test="${i % 4 == 0}">
+		<div class="row">	
+	</c:if>
+		
+		<div class="panel-body" style="width: 10%; float: left;">
+			<a href="#">
+				<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
+			</a>
+			<br/>
+			${g_dto.getG_NAME()}
+		</div>
+		
+	
+	<c:if test="${i % 4 == 3 || newList.size() == i+1}">
+		</div>	
+	</c:if>
+	
+	<c:set var="i" value="${i+1}"/>
+	
+</c:forEach>
+
+
 
 </body>
 </html>
