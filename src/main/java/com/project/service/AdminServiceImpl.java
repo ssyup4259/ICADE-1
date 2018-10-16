@@ -409,7 +409,8 @@ public class AdminServiceImpl implements AdminService {
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
-			param = "searchKey=" + searchKey;
+			param = "m_rank=" + m_rank;
+			param = "&searchKey=" + searchKey;
 			param+= "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
 		}
@@ -427,6 +428,8 @@ public class AdminServiceImpl implements AdminService {
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
 		req.setAttribute("M_RANK", m_rank);
+		req.setAttribute("searchKey", searchKey);
+		req.setAttribute("searchValue", searchValue);
 		
 		return req;
 		

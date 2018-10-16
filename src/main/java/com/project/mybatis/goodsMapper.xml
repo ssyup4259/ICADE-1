@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mybatis.goodsMapper">
+
+<!-- 상품 전체 데이터 갯수 -->
+<select id="getGoodsCount" parameterType="hashMap" resultType="int">
+	select nvl(count(*), 0) from GOODS
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 인기 상품 리스트 출력 -->
+<select id="getPopularLists" resultType="com.project.dto.GoodsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND),
+	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
+	where G_NUM = GD_NUM and G_NUM = GD_NUM2 and GD_KIND_NUM = GK_NUM order by G_SELLCOUNT desc) data)
+<![CDATA[
+	where rnum >= 1 and rnum <= 4
+]]>
+</select>
+
+<!-- 최신 상품 리스트 출력 -->
+<select id="getNewLists" resultType="com.project.dto.GoodsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND),
+	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
+	where G_NUM = GD_NUM and G_NUM = GD_NUM2 and GD_KIND_NUM = GK_NUM order by G_DATE desc) data)
+<![CDATA[
+	where rnum >= 1 and rnum <= 8
+]]>
+</select>
+
+<!-- 상품 리스트 출력 -->
+<select id="getGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND),
+	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
+	where GD_KIND_NUM like '%' || #{gdKindNum} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and
+	G_NUM = GD_NUM and G_NUM = GD_NUM2 and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+
+</mapper>
