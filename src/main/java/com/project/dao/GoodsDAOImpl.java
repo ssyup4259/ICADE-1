@@ -20,6 +20,19 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	public static String goodsMapper = "com.project.mybatis.goodsMapper";
+	
+	//인기 상품 리스트
+	@Override
+	public List<GoodsDTO> getPopularLists() throws Exception {
+		return sessionTemplate.selectList(goodsMapper + ".getPopularLists");
+	}
+	
+	//최신 상품 리스트
+	@Override
+	public List<GoodsDTO> getNewLists() throws Exception {
+		return sessionTemplate.selectList(goodsMapper + ".getNewLists");
+	}
+	
 
 	@Override
 	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue)
@@ -33,5 +46,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }

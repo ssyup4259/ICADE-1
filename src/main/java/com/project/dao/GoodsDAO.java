@@ -6,6 +6,12 @@ import com.project.dto.GoodsDTO;
 
 public interface GoodsDAO {
 	
+	//인기 상품 리스트
+	public List<GoodsDTO> getPopularLists() throws Exception;
+	
+	//최신 상품 리스트
+	public List<GoodsDTO> getNewLists() throws Exception;
+	
 	//회원용 상품 리스트
 	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception;
 	
