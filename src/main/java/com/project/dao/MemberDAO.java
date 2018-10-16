@@ -1,26 +1,21 @@
 package com.project.dao;
 
-import java.sql.SQLException;
-
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.stereotype.Repository;
+import java.util.Map;
 
 import com.project.dto.MemberDTO;
 
-@Repository
-public class MemberDAO {
+public interface MemberDAO {
 	
-	private SqlSessionTemplate sessionTemplate;
-	
-	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) throws SQLException{
-		this.sessionTemplate = sessionTemplate;
-	}
-	
-	public void insertData(MemberDTO dto){
-		
-		sessionTemplate.insert("joinMapper.insertData", dto);
-		
-	}
-	
+	//회원가입
+	public void insertMember(MemberDTO m_dto)throws Exception;
 
+	//아이디 중복체크
+	public int idCheck(Map<String, Object> map)throws Exception;
+	
+	//닉네임 중복체크
+	public int nickCheck(Map<String, Object> map)throws Exception;
+	//public int nickCheck(String M_ID)throws Exception;
+	
+	public int emailCheck(Map<String, Object> map) throws Exception;
+	
 }

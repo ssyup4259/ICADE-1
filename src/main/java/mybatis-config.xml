@@ -3,7 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
 	<properties>
 		<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:TestDB"/>
@@ -26,6 +25,8 @@
 	<mappers>
 		<mapper resource="com/project/mybatis/joinMapper.xml"/>
 		<mapper resource="com/project/mybatis/adminMapper.xml"/>
+		<mapper resource="com/project/mybatis/loginMapper.xml"/>
+		<mapper resource="com/project/mybatis/mypageMapper.xml"/>
 	</mappers>
 	
 </configuration>

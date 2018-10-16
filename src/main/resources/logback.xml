@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <!-- 로그시간 + 패키지 및 클래스명 + 메소드명 + 메소드내에 로그위치 + 로깅메시지 -->
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger[%method:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- 로그를 찍고자하는 클래스정보를 넣어주면 된다 -->
+    <logger name="com.project" level="DEBUG" additivity="false">
+    	<appender-ref ref="console"/>
+    </logger>
+    
+    <logger name="com.project.mybatis" level="OFF" additivity="false">
+    	<appender-ref ref="console"/>
+    </logger>
+    
+    <logger name="jdbc" level="OFF"/>
+    
+    <!-- SQL쿼리문 -->
+	<logger name="jdbc.sqlonly" level="DEBUG"/>
+	
+	<!-- 수행된 시간 정보 -->
+	<logger name="jdbc.sqltiming" level="OFF"/>
+	
+	<!-- ResultSet을 제외한 모든 JDBC 호출 정보 (매우많음 사용 비추천) -->
+	<logger name="jdbc.audit" level="OFF"/>
+	
+	<!-- ResultSet을 포함한 모든 JDBC 호출 정보 (매우많음 사용 비추천) -->
+	<logger name="jdbc.resultset" level="OFF"/>
+	
+	<!-- 쿼리의 결과를 테이블 형식으로 출력 -->
+	<logger name="jdbc.resultsettable" level="OFF"/>
+	
+	<logger name="jdbc.connection" level="OFF"/>
+
+    <!-- 기본 로그 레벨  -->
+    <root level="warn">
+        <appender-ref ref="console" />
+    </root>
+</configuration>

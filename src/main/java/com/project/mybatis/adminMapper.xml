@@ -4,11 +4,121 @@
 
 <mapper namespace="com.project.mybatis.adminMapper">
 
+<!-- GoodsNum의 최댓값 -->
+<select id="goodsMaxNum" resultType="int">
+	select nvl(max(G_NUM), 0) from Goods
+</select>
 
-<!-- 데이터 입력 -->
-<insert id="insertGoods" parameterType="com.project.dto.MemberDTO">
-	
+<!-- 상품 종류 리스트 -->
+<select id="getGoodsKind" resultType="com.project.dto.GoodsKindDTO">
+	select GK_NUM, GK_KIND from GOODS_KIND order by GK_NUM asc
+</select>
+
+<!-- 지원기종 리스트 -->
+<select id="getDevice" resultType="com.project.dto.DeviceKindDTO">
+	select DK_CODE, DK_NAME from DEVICE_KIND order by DK_CODE asc
+</select>
+
+<!-- 색상 리스트 -->
+<select id="getColor" resultType="com.project.dto.GoodsColorDTO">
+	select GC_CODE, GC_COLOR from GOODS_COLOR order by GC_CODE asc
+</select>
+
+<!-- 상품 등록 -->
+<insert id="insertGoods" parameterType="com.project.dto.GoodsDTO">
+	insert into goods(G_NUM, G_NAME, G_PRICE, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME)
+		values(#{G_NUM}, #{G_NAME}, #{G_PRICE},#{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO}, #{G_SAVEFILENAME})
 </insert>
 
+<!-- 상세상품 등록 -->
+<insert id="insertGoodsDetail" parameterType="com.project.dto.GoodsDetailDTO">
+	insert into goods_detail(GD_NUM, GD_CODE, GD_KIND_NUM, GD_DEVICE, GD_COLOR, GD_COUNT, GD_SELLCOUNT)
+		values(#{GD_NUM}, #{GD_CODE}, #{GD_KIND_NUM}, #{GD_DEVICE}, #{GD_COLOR}, #{GD_COUNT}, 0)
+</insert>
+
+<!-- 상품 전체 데이터 갯수 -->
+<select id="getGoodsCount" parameterType="hashMap" resultType="int">
+	select nvl(count(*), 0) from GOODS
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 상품 리스트 출력 -->
+<select id="getGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND),
+	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
+	where GD_KIND_NUM like '%' || #{gdKindNum} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and
+	G_NUM = GD_NUM and G_NUM = GD_NUM2 and GD_KIND_NUM = GK_NUM order by G_NUM desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 상품 한개의 데이터 -->
+<select id="getReadGoods" parameterType="int" resultType="com.project.dto.GoodsDTO">
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME
+	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), 
+	(select GK_NUM, GK_KIND from GOODS_KIND), (select sum(GD_COUNT)G_COUNT, 
+	sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL where GD_NUM = #{g_num} group by GD_NUM)
+	where G_NUM = #{g_num} and G_NUM = GD_NUM and GD_KIND_NUM = GK_NUM
+</select>
+
+<!-- 상세 상품 한개의 데이터 -->
+<select id="getReadGoodsDetail" parameterType="int" resultType="com.project.dto.GoodsDetailDTO">
+	select GD_NUM, GD_CODE, GD_KIND_NUM, GD_DEVICE, DK_NAME, GD_COLOR, GC_COLOR, GD_COUNT, GD_SELLCOUNT
+	from Goods_Detail, (select DK_CODE, DK_NAME from DEVICE_KIND), (select GC_CODE, GC_COLOR from GOODS_COLOR)
+	where GD_NUM = #{g_num} and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE
+	order by GD_DEVICE, GD_COLOR
+</select>
+
+<!-- 상품 수정 -->
+<update id="updateGoods" parameterType="com.project.dto.GoodsDTO">
+	update GOODS set G_NAME=#{G_NAME}, G_PRICE=#{G_PRICE}, G_CONTENT=#{G_CONTENT}, G_DISCOUNT=#{G_DISCOUNT}, G_PHOTO=#{G_PHOTO}, G_SAVEFILENAME=#{G_SAVEFILENAME}
+	where G_NUM=#{G_NUM}
+</update>
+
+<!-- 상세 상품 재고 수정 -->
+<update id="updateGoodsDetailCount" parameterType="map">
+	update GOODS_DETAIL set GD_COUNT=#{gd_count} where GD_CODE=#{gd_code}
+</update>
+
+<!-- 상품 삭제 -->
+<delete id="deleteGoods" parameterType="int">
+	delete Goods where G_NUM = #{G_NUM}
+</delete>
+
+
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ회원 관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+
+<!-- 회원 전체 데이터 갯수 -->
+<select id="getMemberCount" parameterType="hashMap" resultType="int">
+	select nvl(count(*), 0) from Member
+	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 회원 리스트 출력 -->
+<select id="getMemberLists" parameterType="hashMap" resultType="com.project.dto.MemberDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select M_RANK, M_ID, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME
+	from Member	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%' order by M_DATE desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 회원 한명의 데이터 -->
+<select id="getReadMember" parameterType="String" resultType="com.project.dto.MemberDTO">
+	select M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME
+	from Member where M_ID = #{m_id}
+</select>
+
+<!-- 회원 권한 변경 -->
+<update id="authorityChange" parameterType="map">
+	update Member set M_RANK=#{new_rank} where M_ID=#{m_id}
+</update>
 
 </mapper>

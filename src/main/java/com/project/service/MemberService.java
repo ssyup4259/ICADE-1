@@ -1,22 +1,23 @@
 package com.project.service;
 
-import java.sql.SQLException;
-
-import javax.inject.Inject;
-
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Map;
 
 import com.project.dto.MemberDTO;
-import com.project.service.MailHandler;
-import com.project.service.TempKey;
 
+public interface MemberService {
+	
+	//회원가입
+	public void insertMember(MemberDTO m_dto) throws Exception;
 
+	//아이디 중복체크
+	public int idCheck(Map<String, Object> map)throws Exception;
+		
+	//닉네임 중복체크
+	public int nickCheck(Map<String, Object> map)throws Exception;
+	
+	//이메일 중복체크
+	//public int emailCheck(Map<String, Object> map)throws Exception;
+	
 
-
-@Repository
-public class MemberService {
-
+	
 }

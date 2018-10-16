@@ -15,7 +15,7 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
 	</bean>
-	
+	<!-- 나중에 문제생기면 이 주석을 풀고 아래 dataSource를 주석처리 하기! 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -23,29 +23,40 @@
 		<property name="username" value="ICADE"/>
 		<property name="password" value="123"/>
 	</bean>
+	 -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:TestDB"/>
+		<property name="username" value="ICADE"/>
+		<property name="password" value="123"/>
+	</bean>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="jo42047014@gmail.com" />
-		<property name="password" value="01042047041" />
-
-
-	<!-- email 요청시는 SMTP -->
+		<property name="username" value="hypochrates12@gmail.com" />
+		<property name="password" value="vkxmfktb135" />
+	<!--  email 요청시는 SMTP -->
 		<property name="javaMailProperties">
 			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
-				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
 			</props>
 		</property>
 	</bean>
 	
-	<bean id = "transactionManager" class ="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	<property name = "dataSource" ref = "dataSource"></property>
-	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  		<property name="dataSource" ref="dataSource"></property>
+ 	</bean>
+ 	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
+
+	
+
 	
 </beans>
 	
