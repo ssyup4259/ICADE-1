@@ -16,6 +16,7 @@ public interface MemberDAO {
 	public int nickCheck(Map<String, Object> map)throws Exception;
 	//public int nickCheck(String M_ID)throws Exception;
 	
+	//이메일 중복체크
 	public int emailCheck(Map<String, Object> map) throws Exception;
 	
 }

@@ -55,7 +55,7 @@ public class MemberController {
 			return nickCheckResult;
 			
 		}
-	/*	@RequestMapping(value="/mailcheck.action")
+		@RequestMapping(value="/emailcheck.action")
 		@ResponseBody
 		public int emailCheck(CommandMap commandMap)throws Exception{
 			
@@ -64,8 +64,7 @@ public class MemberController {
 			
 			return emailCheckResult;
 		}
-		*/
-		//@RequestParam("M_EMAIL_ID") String email1 , @RequestParam("M_EMAIL_DOMAIN") String email2
+		
 
 		
 	}
