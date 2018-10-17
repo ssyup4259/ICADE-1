@@ -16,7 +16,7 @@ public interface MemberService {
 	public int nickCheck(Map<String, Object> map)throws Exception;
 	
 	//이메일 중복체크
-	//public int emailCheck(Map<String, Object> map)throws Exception;
+	public int emailCheck(Map<String, Object> map)throws Exception;
 	
 
 	

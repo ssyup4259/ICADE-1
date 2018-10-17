@@ -19,7 +19,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
 		
 		if (log.isDebugEnabled()) {
 			
-			log.debug("==========================================start=======================================");
+			log.debug("==========================================START=======================================");
 			log.debug("Request URI\t: " + req.getRequestURI());
 			log.debug("Request getMethod()" + req.getMethod());
 		}

@@ -38,10 +38,10 @@ public class MemberServiceImpl implements MemberService {
 		return m_dao.nickCheck(map);
 	}
 
-	/*@Override
+	@Override
 	public int emailCheck(Map<String, Object> map) throws Exception {
 		return m_dao.emailCheck(map);
-	}*/
+	}
 
 
 
