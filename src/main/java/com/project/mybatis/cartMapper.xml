@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mybatis.cartMapper">
+
+<!-- 장바구니 개수 구하기 -->
+<select id="getCartCount" resultType="int">
+	select nvl(count(*), 0) from Cart
+</select>
+
+<!-- 장바구니 리스트 -->
+<select id="getCartLists" parameterType="hashMap" resultType="com.project.dto.CartDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select C_NUM, C_CODE, C_ID, C_NAME, C_COUNT from Cart
+	where C_ID = #{c_id} order by C_NUM desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+
+
+</mapper>

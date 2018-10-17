@@ -8,15 +8,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자 화면</title>
+<title>장바구니</title>
 </head>
 <body>
 
-<h3>관리자 화면</h3>
+<h3>장바구니 리스트</h3>
 
-<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a>
-<a href="<%=cp%>/admin/memberList.action">회원 목록</a>
-<a href="<%=cp%>/goods/goodsList.action">회원 상품 목록</a>
+<c:forEach var="c_dto" items="${c_lists}">
+	
+</c:forEach>
+
+<c:if test="${dataCount!=0 }">
+	${pageIndexList }
+</c:if>
+<c:if test="${dataCount==0 }">
+	등록된 상품이 없습니다.
+</c:if>
+
 
 </body>
 </html>
