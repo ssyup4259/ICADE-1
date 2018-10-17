@@ -6,23 +6,29 @@
 <title></title>
 
 <script type="text/javascript">
- function check() {
-	 var form = document.joinCodeForm;
-	 code1 = f.joinCode.value;
-	 code2 = f.inputCode.value;
+
+	function check() {
 		
+		var f = document.joinCodeForm;
+		var joinCode = ${sessionScope.joinCode};
 		
-		alert(code1);
-		alert(code2);
-		
-		if (code1 != "" || code2 != "") {
-			if (code1 == code2) {
-				alert("인증에 성공했습니다.")
-			}else{
-				alert("인증에 실패했습니다.")
-			}
+		if (!f.inputCode.value) {
+			alert("인증번호를 입력하세요");
+			return false;
 		}
-}
+		
+		if (!f.inputCode.value != joinCode) {
+			alert("입력하신 인증번호가 다릅니다.")
+			return false;	
+		}
+		if (!f.inputCode.value == joinCode) {
+			alert("인증완료");
+			
+			self.close();
+		}
+		
+	}
+
 </script>
 </head>
 <body>
@@ -30,16 +36,12 @@
 		<br/><br/>
 		<h5>인증번호 6 자리를 입력하세요</h5>
 		<div class="container">
-			<form method="post" name="joinCodeForm" onsubmit="return check();">
+			<form method="post" name="joinCodeForm" onclick="check();">
 				<input type="text" name="inputCode"/><br><br>
-				<input type="submit" value="Submit"/>
-				<input type="hidden" name="joinCode" value="${sessionScope.joinCode}">
+				<input type="submit" value="인증하기"/>
+				<input type="text" name="joinCode" value="${sessionScope.joinCode}">
 			</form>
-		
 		</div>
-			
-	
 	</center>
-
 </body>
 </html>
