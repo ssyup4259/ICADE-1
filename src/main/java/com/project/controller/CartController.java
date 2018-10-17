@@ -25,12 +25,24 @@ public class CartController {
 		HttpSession session = req.getSession();
 		
 		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
-		//String c_id = m_dto.getM_ID(); session에서 받아오는 값이 없음...
-		String c_id = "123";
+		String c_id = m_dto.getM_ID();
 		
 		c_service.cartList(req, c_id);
 		
 		return "cart/cartList";
+		
+	}
+	
+	//장바구니 추가
+	@RequestMapping(value="/insertCart.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String insertCart(HttpServletRequest req) throws Exception {
+		
+		HttpSession session = req.getSession();
+		
+		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
+		String c_id = m_dto.getM_ID();
+		
+		return "";
 		
 	}
 

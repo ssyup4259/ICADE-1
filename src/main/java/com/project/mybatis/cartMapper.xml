@@ -13,13 +13,15 @@
 <select id="getCartLists" parameterType="hashMap" resultType="com.project.dto.CartDTO">
 	select * from (
 	select rownum rnum, data.* from (
-	select C_NUM, C_CODE, C_ID, C_NAME, C_COUNT from Cart
-	where C_ID = #{c_id} order by C_NUM desc) data)
+	select C_NUM, C_GNUM, C_CODE, C_ID, C_NAME, C_DEVICE, C_COLOR, C_COUNT, C_SAVEFILENAME
+	from Cart, (select G_PRICE as C_PRICE, G_SAVEFILENAME as C_SAVEFILENAME, G_NUM from Goods),
+	(select GD_NUM as C_GNUM, GD_CODE, GD_DEVICE, GD_COLOR from Goods_Detail),
+	(select DK_CODE, DK_NAME as C_DEVICE from DEVICE_KIND), (select GC_CODE, GC_COLOR as C_COLOR from GOODS_COLOR)
+	where C_ID = '123' and C_CODE = GD_CODE and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE and C_GNUM = G_NUM order by C_NUM desc) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
 </select>
-
 
 
 </mapper>

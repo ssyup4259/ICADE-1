@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService {
 		List<CartDTO> c_lists = c_dao.getCartLists(start, end, c_id);
 		
 		//페이징 처리
-		String listUrl = cp + "/cartList.action?c_id=" + c_id;
+		String listUrl = cp + "/cart/cartList.action?c_id=" + c_id;
 		
 		String pageIndexList =
 			myUtil.pageIndexList(currentPage, totalPage, listUrl);
