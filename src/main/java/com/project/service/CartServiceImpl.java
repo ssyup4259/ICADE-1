@@ -38,7 +38,7 @@ public class CartServiceImpl implements CartService {
 		int dataCount = c_dao.getCartCount();
 		
 		//전체페이지수
-		int numPerPage = 10;
+		int numPerPage = 5;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if (currentPage > totalPage)
@@ -59,9 +59,21 @@ public class CartServiceImpl implements CartService {
 		req.setAttribute("c_lists", c_lists);
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("pageNum", pageNum);
 		
 		return req;
 		
+	}
+
+	@Override
+	public String deleteCartItem(int c_num, String pageNum) throws Exception {
+		c_dao.deleteCartItem(c_num, pageNum);
+		return pageNum;
+	}
+
+	@Override
+	public void deleteCartAll(String c_id) throws Exception {
+		c_dao.deleteCartAll(c_id);
 	}
 	
 	

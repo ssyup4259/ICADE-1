@@ -44,4 +44,17 @@ public class CartDAOImpl implements CartDAO {
 		return sessionTemplate.selectOne(cartMapper + ".getCartCount");
 	}
 
+
+	@Override
+	public String deleteCartItem(int c_num, String pageNum) throws Exception {
+		sessionTemplate.delete(cartMapper + ".deleteCartItem", c_num);
+		return pageNum;
+	}
+
+
+	@Override
+	public void deleteCartAll(String c_id) throws Exception {
+		sessionTemplate.delete(cartMapper + ".deleteCartAll", c_id);
+	}
+
 }

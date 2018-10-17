@@ -45,5 +45,33 @@ public class CartController {
 		return "";
 		
 	}
+	
+	//장바구니 개별 비우기
+	@RequestMapping(value="/deleteCartItem.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteCartItem(HttpServletRequest req) throws Exception {
+		
+		int c_num = Integer.parseInt(req.getParameter("c_num"));
+		String pageNum = req.getParameter("pageNum");
+		
+		c_service.deleteCartItem(c_num, pageNum);
+		
+		return cartList(req);
+		
+	}
+	
+	//장바구니 모두 비우기
+	@RequestMapping(value="/deleteCartAll.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteCartAll(HttpServletRequest req) throws Exception {
+		
+		HttpSession session = req.getSession();
+		
+		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
+		String c_id = m_dto.getM_ID();
+		
+		c_service.deleteCartAll(c_id);
+		
+		return "redirect:cartList.action";
+		
+	}
 
 }

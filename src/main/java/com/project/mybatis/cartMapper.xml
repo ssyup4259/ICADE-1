@@ -23,5 +23,14 @@
 ]]>
 </select>
 
+<!-- 장바구니 개별 비우기 -->
+<delete id="deleteCartItem">
+	delete Cart where C_NUM = #{c_num}
+</delete>
+
+<!-- 장바구니 전체 비우기 -->
+<delete id="deleteCartAll">
+	delete Cart where C_ID = #{c_id}
+</delete>
 
 </mapper>
