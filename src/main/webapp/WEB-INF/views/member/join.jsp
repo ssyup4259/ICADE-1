@@ -142,7 +142,6 @@
 	<tr>
 		<td width="100" align="center">
 			<h4>이메일</h4>
-			<input type="text" name="joinCode" id="joinCode" />
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
 			<input type="text"  placeholder="이메일 : Ex)444" id="email1"  name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
@@ -157,7 +156,7 @@
 		
 		<td colspan="1">
 			<input type="button" value="중복확인" id="user_Email_checkBtn" /><br>
-			<input type="button" value="인증하기"  onclick="checkMail();"/>
+			<input type="button" value="인증하기" id=""  onclick="sendMail();"/>
 		</td>
 	</tr>
 	
@@ -166,6 +165,7 @@
 		<th>인증번호</th>
 		
 			<td>
+				<input type="type" name="joinCode" value="${joinCode} ">
 				<input type='number' name="inputCode" id="inputCode" class="" style="height:25px; width:300px;" placeholder="Enter code"/ >
 			</td>
 		
@@ -400,7 +400,7 @@ function nickCheck() {
 </script>
 
 
-<!-- 이메일 중복 확인 , 발송하기 , 이메일 인증코드 비교하기 -->
+<!-- 이메일 중복 확인 -->
 <script>
 
 $("#alert-emailsuccess").hide();
@@ -413,43 +413,6 @@ $(document).ready(function() {
 	});
 });
 
- /* function emailCheck() { 
-	
-	var email1 =$("#email1").val();
-	var email2 =$("#email2").val();
-	
-	var allData = {"M_EMAIL_ID" : email1,"M_EMAIL_DOMAIN" : email2}
-	
-	
-	if (email1.length < 1) {
-		alert("이메일을 입력해주세요")		
-	}
-	if (email2.length < 1) {
-		alert("정확한 형식을 기입해주세요.")
-	}else{
-	 $.ajax({
-			type : "POST",
-			url : "/icade/emailcheck.action",
-			data : allData,
-			dataType :"json",
-			error : function(error) {
-				alert("서버가 응답하지 않습니다");
-			},
-			success : function(result) {
-				if (result==0) {
-					$("#alert-emailsuccess").show();
-					$("#alert-emaildanger").hide();
-				}else if(result==1){
-					$("#alert-emailsuccess").hide();
-					$("#alert-emaildanger").show();
-				}else{
-					alert("에러가 발생했습니다.");					
-				}
-			}
-		});
-	}
-} 
-*/
 
  function emailCheck() { 
 	
@@ -465,7 +428,7 @@ $(document).ready(function() {
 	if (email2.length < 1) {
 		alert("정확한 형식을 기입해주세요.")
 	}else{
-	var promise=  $.ajax({
+	  $.ajax({
 			type : "POST",
 			url : "/icade/emailcheck.action",
 			data : allData,
@@ -490,10 +453,28 @@ $(document).ready(function() {
 		});
 	}
 } 
+ </script>
+ 
+ 
+ <!-- 이메일 보내기 -->
+<script>
 
+/*  $(document).ready(function() {
+	$("#sendmail_btn").unbind("click").click(function(e) {
+		e.preventDefault();
+		sendMail();		
+	});
+});*/
 
- 	function checkMail(email1,email2){
+ 	/* function popUp() {
+		
+		
+		sendMail();
+		
+	}  */
+ 	function sendMail(email1,email2){
  		
+		
 		var email1 =document.getElementById("email1").value; 
 		var email2 =document.getElementById("email2").value; 
 		var email = email1+ "@" + email2;
@@ -505,85 +486,46 @@ $(document).ready(function() {
 				if (xhttp.status== 200) {
 					alert("등록하신 이메일로 인증번호를 발송했습니다.");
 				}else{
-					alert("올바른 메일 형식이 아닙니다.");
+					alert("등록하신 이메일로 인증번호를 발송했습니다.");
 				}
 			}			
 		};
 		xhttp.open("POST","sendMail.action",true);
-		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8")
+		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 		xhttp.send("email=" + email);
+		window.open("sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
+			
 		return false;
-	} 
- 	
-	 function checkJoinCode() {
-		
-		 var f= document.joinForm;
-		 code1 = f.joinCode.value;
-		 code2 = f.inputCode.value;
-			
-			
-			alert(code1);
-			alert(code2);
-			
-			if (code1 != "" || code2 != "") {
-				if (code1 == code2) {
-					alert("인증에 성공했습니다.")
-				}else{
-					alert("인증에 실패했습니다.")
+	}  
+
+		function checkJoinCode() {
+				
+				var f = document.joinForm;
+				var joinCode=f.joinCode.value();
+				
+				if (!f.inputCode.value) {
+					alert("인증번호를 입력하세요");
+					return false;
+				}
+				
+				if (!f.inputCode.value() != joinCode) {
+					f.inputCode.value ="";
+					return false;	
+				}
+				if (!f.inputCode.value() == joinCode) {
+					alert("인증완료");
+					
+					self.close();
+				}
 				
 			}
-	}	 
-} 	 
-
+	
 	
 </script>
-
-<!-- 코드 받아오기 -->
-
-<script >
-/* 
-		$(document).ready(function(){
-			$("#codeCheck").click(function(){
-				var code2 =	$('#inputCode').val();
-			 $.ajax({
-				 type : "POST",
-				 url : "/icade/inputCode.action",
-			     dataType :"text",
-			     error : function(error){
-			    	 console.log(e.responseText);
-			     },
-				 success :function(data){
-					 if (data.joinCode != "" || code2 != "") {
-							if (data.joinCode == code2) {
-								alert("인증에 성공했습니다.")
-							}else{
-								alert("인증에 실패했습니다.")
-					}
-				 }
-				 }	
-			});
-		});
-	});
- */
-
-</script>
-
-
-
-
 <!-- 회원가입 완료 -->
 <script type="text/javascript">
 
- //회원 가입시 기능들 체크하는 스크립트
-/*  $(document).ready(function(){
-	 
-	 $("#singUpBtn").unbind("click").click(function(e) {
-	
-		 e.preventDefault();
-		 fn_signUp();
-	});
-	 
- }); */
+
 	 	function sendIt() {
 					
 					var f = document.joinForm;
