@@ -73,5 +73,23 @@ public class CartController {
 		return "redirect:cartList.action";
 		
 	}
+	
+	//장바구니 수량 수정
+	@RequestMapping(value="/updateCartItem.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String updateCartItem(HttpServletRequest req) throws Exception {
+		
+		String c_code = req.getParameter("c_code");
+		int c_count = Integer.parseInt(req.getParameter("c_count"));
+		
+		
+		String result = c_service.updateCartItem(c_code, c_count);
+		
+		if (result == "false" || result.equals("false")) {
+			req.setAttribute("message", "남아있는 재고의 수량보다 많습니다.");
+		}
+		
+		return cartList(req);
+		
+	}
 
 }

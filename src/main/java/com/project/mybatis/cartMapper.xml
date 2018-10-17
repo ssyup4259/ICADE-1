@@ -13,7 +13,7 @@
 <select id="getCartLists" parameterType="hashMap" resultType="com.project.dto.CartDTO">
 	select * from (
 	select rownum rnum, data.* from (
-	select C_NUM, C_GNUM, C_CODE, C_ID, C_NAME, C_DEVICE, C_COLOR, C_COUNT, C_SAVEFILENAME
+	select C_NUM, C_GNUM, C_CODE, C_ID, C_NAME, C_DEVICE, C_COLOR, C_COUNT, C_SAVEFILENAME, C_PRICE
 	from Cart, (select G_PRICE as C_PRICE, G_SAVEFILENAME as C_SAVEFILENAME, G_NUM from Goods),
 	(select GD_NUM as C_GNUM, GD_CODE, GD_DEVICE, GD_COLOR from Goods_Detail),
 	(select DK_CODE, DK_NAME as C_DEVICE from DEVICE_KIND), (select GC_CODE, GC_COLOR as C_COLOR from GOODS_COLOR)
@@ -24,13 +24,23 @@
 </select>
 
 <!-- 장바구니 개별 비우기 -->
-<delete id="deleteCartItem">
+<delete id="deleteCartItem" parameterType="int">
 	delete Cart where C_NUM = #{c_num}
 </delete>
 
 <!-- 장바구니 전체 비우기 -->
-<delete id="deleteCartAll">
+<delete id="deleteCartAll" parameterType="String">
 	delete Cart where C_ID = #{c_id}
 </delete>
+
+<!-- 장바구니 수량 수정 -->
+<update id="updateCartItem" parameterType="hashMap">
+	update Cart set C_COUNT = #{c_count} where C_CODE = #{c_code}
+</update>
+
+<!-- 상품의 재고수량 조회 -->
+<select id="countGoods" parameterType="String" resultType="int">
+	select GD_COUNT from GOODS_DETAIL where GD_CODE = #{g_code}
+</select>
 
 </mapper>
