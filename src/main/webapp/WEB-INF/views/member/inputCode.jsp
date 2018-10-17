@@ -17,13 +17,12 @@
 			return false;
 		}
 		
-		if (!f.inputCode.value != joinCode) {
+		if (f.inputCode.value != joinCode) {
 			alert("입력하신 인증번호가 다릅니다.")
 			return false;	
 		}
-		if (!f.inputCode.value == joinCode) {
+		if (f.inputCode.value == joinCode) {
 			alert("인증완료");
-			
 			self.close();
 		}
 		
@@ -34,7 +33,7 @@
 <body>
 	<center>
 		<br/><br/>
-		<h5>인증번호 6 자리를 입력하세요</h5>
+		<h5>인증번호를 입력하세요</h5>
 		<div class="container">
 			<form method="post" name="joinCodeForm" onclick="check();">
 				<input type="text" name="inputCode"/><br><br>

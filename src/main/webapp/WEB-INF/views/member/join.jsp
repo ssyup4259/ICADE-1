@@ -3,11 +3,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-
  String cp  = request.getContextPath();
-
-
-
  %>
    
 <!DOCTYPE html>
@@ -16,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Keywords" content="회원가입" />
 <meta name="Description" content="회원가입" />
-<title>회원가입</title>
+<title>아이폰 케이스는 ICADE</title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -40,9 +36,8 @@
 </div>
 
 
-<h3 class=" ">기본정보</h3>
-<p class="required ">
-<img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수"> 필수입력사항</p>
+<h3 class="">기본정보</h3>
+<p class="required "><img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수">필수입력사항</p>
 
 <form name="joinForm" action="" method="post">
 <table>
@@ -151,30 +146,30 @@
 		</td>
 		
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="이메일 : Ex)naver.com" id="email2"  name="M_EMAIL_DOMAIN" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input id="email2" name="M_EMAIL_DOMAIN"  placeholder="이메일 : Ex)naver.com" maxlength="30" style="width: 400px; height: 40px" size="15" type="text" />
+               <!--  <select id="email3" fw-filter="isFill" fw-label="이메일" fw-alone="N" fw-msg="">
+                <option value="" selected="selected">- 이메일 선택 -</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="nate.com">nate.com</option>
+                <option value="hotmail.com">hotmail.com</option>
+                <option value="yahoo.com">yahoo.com</option>
+                <option value="empas.com">empas.com</option>
+                <option value="korea.com">korea.com</option>
+                <option value="dreamwiz.com">dreamwiz.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="etc">직접입력</option>
+                </select> -->
 		</td>
 		
 		<td colspan="1">
 			<input type="button" value="중복확인" id="user_Email_checkBtn" /><br>
 			<input type="button" value="인증하기" id=""  onclick="sendMail();"/>
 		</td>
+		
 	</tr>
 	
-	<tr id="joincode">
 	
-		<th>인증번호</th>
-		
-			<td>
-				<input type="type" name="joinCode" value="${joinCode} ">
-				<input type='number' name="inputCode" id="inputCode" class="" style="height:25px; width:300px;" placeholder="Enter code"/ >
-			</td>
-		
-			<td>
-				<input type="button" id="" value="확인" onclick="checkJoinCode();">
-			</td>
-	
-	</tr>
-
 	<tr height="3">
 		<td colspan="4" bgcolor="#cccccc"></td>
 	</tr>
@@ -498,27 +493,6 @@ $(document).ready(function() {
 		return false;
 	}  
 
-		function checkJoinCode() {
-				
-				var f = document.joinForm;
-				var joinCode=f.joinCode.value();
-				
-				if (!f.inputCode.value) {
-					alert("인증번호를 입력하세요");
-					return false;
-				}
-				
-				if (!f.inputCode.value() != joinCode) {
-					f.inputCode.value ="";
-					return false;	
-				}
-				if (!f.inputCode.value() == joinCode) {
-					alert("인증완료");
-					
-					self.close();
-				}
-				
-			}
 	
 	
 </script>
