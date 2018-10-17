@@ -14,6 +14,16 @@
 
 <h3>장바구니 리스트</h3>
 
+<c:forEach var="c_dto" items="${c_lists}">
+	
+</c:forEach>
+
+<c:if test="${dataCount!=0 }">
+	${pageIndexList }
+</c:if>
+<c:if test="${dataCount==0 }">
+	등록된 상품이 없습니다.
+</c:if>
 
 
 </body>
