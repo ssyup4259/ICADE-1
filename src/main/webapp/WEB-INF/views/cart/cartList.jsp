@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -37,7 +38,51 @@ function getMessage() {
 	
 }
 
+function countUp(g_code) {
+	
+	var count = Number(document.getElementById(g_code).value);
+	
+	count = count + 1;
+	
+	document.getElementById(g_code).value = count;
+	
+}
+
+function countDown(g_code) {
+	
+	var count = Number(document.getElementById(g_code).value);
+	
+	if (count <= 1) {
+		return;
+	}
+	
+	count = count - 1;
+	
+	document.getElementById(g_code).value = count;
+	
+}
+
 </script>
+
+<style type="text/css">
+
+input.up {
+        background: url("<%=cp%>/resources/images/btn_quantity_up.gif") no-repeat;
+        border: none;
+        width: 22px;
+        height: 13px;
+        cursor: pointer;
+}
+
+input.down {
+        background: url("<%=cp%>/resources/images/btn_quantity_down.gif") no-repeat;
+        border: none;
+        width: 22px;
+        height: 13px;
+        cursor: pointer;
+}
+
+</style>
 
 </head>
 <body onload="getMessage();">
@@ -49,10 +94,13 @@ function getMessage() {
 	<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>&nbsp;
 	${c_dto.getC_NAME()}&nbsp;
 	[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
-	${c_dto.getC_PRICE()}원&nbsp;&nbsp;&nbsp;
-	<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개&nbsp;
+	<fmt:formatNumber>${c_dto.getC_PRICE()}</fmt:formatNumber>원&nbsp;&nbsp;&nbsp;
+	<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+	<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
+	<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
+	개&nbsp;
 	<input type="button" value="변경" onclick="updateCartItem('${c_dto.getC_CODE()}')"/>	
-	${c_dto.getC_PRICE() * c_dto.getC_COUNT()}원&nbsp;&nbsp;
+	<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원&nbsp;&nbsp;
 	<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
 	<br/><br/>
 </c:forEach>
