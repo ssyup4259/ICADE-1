@@ -39,19 +39,29 @@
 <h3 class="">기본정보</h3>
 <p class="required "><img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수">필수입력사항</p>
 
-<form name="joinForm" action="" method="post">
+<form name="joinForm" action="" method="post" id="joinForm">
 <table>
 
 	<!-- 아이디입력 -->
 	<tr>
+	
 		<td width="100" align="center">
 			<h4>아이디</h4>
 		</td>
+		
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" id="user_Id" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="" maxlength="10" size="10" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+		
+			<input type="text" id="user_Id" placeholder="아이디 : 8글자이상 입력하세요" name="M_ID" value="" maxlength="30" size="10" 
+			style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px; webkit-ime-mode:disabled" />
+			
 		 <br>
-		 	 <div class="alert alert-idsuccess" id="alert-idsuccess">사용할 수 있는 아이디 입니다</div>
-		 	 <div class="alert alert-iddanger" id="alert-iddanger">사용할 수 없는 아아디 입니다</div>
+		 	 <div class="alert alert-idsuccess" id="alert-idsuccess"><font style="color: blue">사용할 수 있는 아이디 입니다</font></div>
+		 	 <div class="alert alert-iddanger" id="alert-iddanger"><font style="color: red">사용할 수 없는 아이디 입니다</font></div>
+		 	 <div class="alert alert-refresh" id="alert-refresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
+		 	 
+		 	 
+		 	 <input type="hidden" id="checkId" name="checkId" value="">
+		 	 
 		</td>
 		
 	<!-- <td><a href="#" id="user_id_checkBtn" class="btn">중복확인</a></td> -->
@@ -66,6 +76,7 @@
 		<td colspan="3" bgcolor="#cccccc"></td>
 	</tr>	
 	
+	
 	<!-- 비밀번호 입력 -->
 	
 	<tr>
@@ -73,7 +84,9 @@
 			<h4>패스워드</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="password" name="M_PW" id="pw1"  maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="password" name="M_PW" id="pw1"  maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px; webkit-ime-mode:disabled" onkeypress="caps_lock(event);"/>	
+			<br>
+		 	 <div class="alert alert-capslock" id="alert-capslock"><font style="color: red">capslock키가 눌려 있습니다.</font></div>
 		</td>
 	</tr>
 	
@@ -88,7 +101,7 @@
 		 	<h4>패스워드 확인</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-		 	 <input type="password" name="M_PWCorre" id="pw2" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+		 	 <input type="password" name="M_PWCorre" id="pw2" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		 	 <br>
 		 	 <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
 		 	 <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
@@ -107,7 +120,7 @@
 			<h4>이름</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="이름 : Ex)박명성" name="M_NAME" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text" placeholder="이름 : Ex)박명성" name="M_NAME" id="name" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>
 	</tr>
 	<tr height="2">
@@ -119,10 +132,13 @@
 			<h4>닉네임</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" id="user_NickName" placeholder="닉네임 : 2글자 이상 입력하세요" name="M_NICKNAME" value="" maxlength="10" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text" id="user_NickName" placeholder="닉네임 : 2글자 이상 입력하세요" name="M_NICKNAME"  maxlength="30" size="15" 
+			style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px"/>
 				<br>
 		 	 	<div class="alert alert-nicksuccess" id="alert-nicksuccess">사용할 수 있는 닉네임 입니다</div>
 		 	 	<div class="alert alert-nickdanger" id="alert-nickdanger">사용할 수 없는 닉네임 입니다</div>
+		 	 	
+		 	 	 <input type="hidden" id="checkNick" name="checkNick" value="N">
 		 </td>
 		 	 
 		<td>
@@ -138,21 +154,23 @@
 		<td width="100" align="center">
 			<h4>이메일</h4>
 		</td>
-		<td colspan="2" style="padding-left: 5px;">
+		<td colspan="1" style="padding-left: 5px;">
 			<input type="text"  placeholder="이메일 : Ex)444" id="email1"  name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 			<br>
 		 	 <div class="alert alert-emailsuccess" id="alert-emailsuccess">사용할 수 있는 이메일 입니다</div>
 		 	 <div class="alert alert-emaildanger" id="alert-emaildanger">사용할 수 없는 이메일 입니다</div>
+		 	 
+		 	 <input type="hidden" id="checkEmail" name="checkEmail" value="N">
 		</td>
 		
-		<td colspan="2" style="padding-left: 5px;">
+		<td colspan="1" style="padding-left: 5px;">
 			<input id="email2" name="M_EMAIL_DOMAIN"  placeholder="이메일 : Ex)naver.com" maxlength="30" style="width: 400px; height: 40px" size="15" type="text" />
                <!--  <select id="email3" fw-filter="isFill" fw-label="이메일" fw-alone="N" fw-msg="">
                 <option value="" selected="selected">- 이메일 선택 -</option>
                 <option value="naver.com">naver.com</option>
                 <option value="daum.net">daum.net</option>
                 <option value="nate.com">nate.com</option>
-                <option value="hotmail.com">hotmail.com</option>
+                <option value="hotmail.com">hotmail.com</option> 
                 <option value="yahoo.com">yahoo.com</option>
                 <option value="empas.com">empas.com</option>
                 <option value="korea.com">korea.com</option>
@@ -179,15 +197,15 @@
 			<h4>전화번호</h4>
 		</td>
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="전화번호 : ex)010" name="M_CELLPHONE1" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />-
+			<input type="text" id="t1" placeholder="전화번호 : ex)010" name="M_CELLPHONE1" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />-
 		</td>
 		
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="전화번호 : Ex)0000" name="M_CELLPHONE2" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />-
+			<input type="text" id="t2" placeholder="전화번호 : Ex)0000" name="M_CELLPHONE2" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />-
 		</td>
 		
 		<td colspan="2" style="padding-left: 5px;">
-			<input type="text" placeholder="전화번호 : Ex)1234" name="M_CELLPHONE3" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
+			<input type="text" id="t3" placeholder="전화번호 : Ex)1234" name="M_CELLPHONE3" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 		</td>			
 	</tr>
 	
@@ -197,13 +215,13 @@
 	
 	<tr>
 		<td>
-			<input type="button" onclick="sample6_execDaumPostcode()" class="btn" value="우편번호 찾기">
+			<input type="button" onclick="sample6_execDaumPostcode()" class="btn" value="우편번호 찾기" >
 		</td>
 		<td style="padding-left: 5px;">
-			<input type="text" name="M_ZIPCODE" class="form-control" placeholder="우편번호" id="sample6_postcode"  style="padding-left:10px; width: 130px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px">
+			<input type="text" name="M_ZIPCODE" readonly="readonly" class="form-control" placeholder="우편번호" id="sample6_postcode"  style="padding-left:10px; width: 130px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px">
 		</td>
 		<td>
-			<input type="text" name="M_ADDRESS1" class="form-control" placeholder="주소" id="sample6_address" style="padding-left:10px; width: 260px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px">
+			<input type="text" name="M_ADDRESS1"  class="form-control" placeholder="주소" id="sample6_address" style="padding-left:10px; width: 260px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px">
 		</td>
 	</tr>
 	
@@ -227,27 +245,126 @@
 <!-- ---------------------------------------------------------------------------------------------------------------------- -->
 
 <!-- 스크립트 부분 -->
-<!-- 아이디 중복확인 -->
-<script >
 
+<script>
 $("#alert-idsuccess").hide();
 $("#alert-iddanger").hide();
+$("#alert-refresh").hide();
 
+
+$(document).ready(function() {
+	
+		alert($("#checkId").val());
+	$("#checkId,#user_Id").change(function() {
+		
+		alert("아이디 중복검사를 실행해주세요");
+		var checkId=2;
+		$('input[name=checkId]').value(2);
+		
+		if (checkId == 2) {
+			$("#alert-idsuccess").hide();
+			$("#alert-refresh").show();
+		}
+		
+	});
+	
+})
+
+$("#checkNiCK,#user_NickName").change(function() {
+	
+	checkNick = $("#checkNiCK").val();
+	checkNick = "N";
+	
+	
+});
+$("#checkEmail,#email1").change(function() {
+	
+	checkEmail = $("#checkEmail").val();
+	checkEmail = "N";
+	
+	
+});
+
+</script>
+
+
+
+<!-- 아이디확인 -->
+<script >
+	$("#alert-idsuccess").hide();
+	$("#alert-iddanger").hide();
+
+ 	//한글입력방지
+	 $("#user_Id").keyup(function(event){
+	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+	        var inputVal = $(this).val();
+	        $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+	    }
+	}); 
+	//중복체크 버튼을 누를시 이벤트 발생
 	$(document).ready(function() {
 		$("#user_id_checkBtn").unbind("click").click(function(e) {
 			e.preventDefault();
-			idCheck();			
+			idCheck();		
+			
+			function idCheck() {
+				
+				var userId =$("#user_Id").val();
+				//var checkId =$("#checkId").val();
+				
+				//유효성검사
+				if(userId.length <1){
+					alert("아이디를 입력해주세요.");
+				}else if(userId.length<8){
+					alert("아이디는 8자리 이상으로 입력해주세요")
+				}else if(userId.length>16){
+					alert("아이디는 16자리 이하로 입력해주세요")
+				}else{
+					$.ajax({
+						type : "POST",
+						url : "/icade/idcheck.action",
+						data : {"M_ID":userId},
+						dataType : "json",
+						error : function (error) {
+							console.log(error.responseText);
+						},
+						success : function(result) {
+							if (result == 0) {
+								/* $("#alert-idsuccess").show();
+								$("#alert-iddanger").hide(); */
+								
+								
+								//$('input[name=checkId]').attr('value',1);
+								$('input[name=checkId]').value("1");
+								alert(checkId + "아작스");
+							}else if(result ==1 ){
+								$("#alert-idsuccess").hide();
+								$("#alert-iddanger").show();
+								
+							}else{
+								alert("에러가 발생했습니다.");
+							}
+						}
+					});
+				} 	
+			}
 		});
 	});
+
+	alert($("#checkId").val());
 	
-	
-	
-function idCheck() {
+/*function idCheck() {
 	
 	var userId =$("#user_Id").val();
+	//var checkId =$("#checkId").val();
 	
+	//유효성검사
 	if(userId.length <1){
 		alert("아이디를 입력해주세요.");
+	}else if(userId.length<8){
+		alert("아이디는 8자리 이상으로 입력해주세요")
+	}else if(userId.length>16){
+		alert("아이디는 16자리 이하로 입력해주세요")
 	}else{
 		$.ajax({
 			type : "POST",
@@ -255,28 +372,76 @@ function idCheck() {
 			data : {"M_ID":userId},
 			dataType : "json",
 			error : function (error) {
-				alert("서버가 응답하지 않습니다");
+				console.log(error.responseText);
 			},
 			success : function(result) {
 				if (result == 0) {
 					$("#alert-idsuccess").show();
 					$("#alert-iddanger").hide();
+					
+					var checkId ="1";
+					$('input[name=checkId]').attr('value',1);
+					
+					alert(checkId + "아작스");
 				}else if(result ==1 ){
 					$("#alert-idsuccess").hide();
 					$("#alert-iddanger").show();
+					
 				}else{
 					alert("에러가 발생했습니다.");
 				}
 			}
 		});
-	}
+	} 	
 }
-
+*/
 </script>
 <!-- 아이디 중복확인 끝 -->
 
 <!-- 비밀번호 일치확인  -->
 <script>
+//capslock 검사
+
+  $("#alert-capslock").hide();
+
+    function caps_lock(e) {
+            var keyCode = 0;
+            var shiftKey = false;
+            keyCode = e.keyCode;
+            shiftKey = e.shiftKey;
+            if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                    || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+                show_caps_lock();
+                setTimeout("hide_caps_lock()", 3500);
+            } else {
+                hide_caps_lock();
+            }
+        }
+ 
+    function show_caps_lock() {
+         $("#alert-capslock").show();
+    }
+ 
+    function hide_caps_lock() {
+         $("#alert-capslock").hide();
+    }
+    
+	//한글입력방지
+	 $("#pw1").keyup(function(event){
+	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+	        var inputVal = $(this).val();
+	        $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+	    }
+	}); 
+	 $("#pw2").keyup(function(event){
+		    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+		        var inputVal = $(this).val();
+		        $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+		    }
+		}); 
+    
+    
+
  $(function () {
 	$("#alert-success").hide();
 	$("#alert-danger").hide();
@@ -312,12 +477,19 @@ $(document).ready(function() {
 		nickCheck();		
 	});
 });
+
 function nickCheck() {
 	
+	
 	var userNick =$("#user_NickName").val();
+	var checkNick =$("#checkNick").val();
 	
 	if (userNick.length <1) {
 		alert("닉네임을 입력해주세요.")
+	}else if(userNick.length<2){
+		alert("닉네임은 최소 2글자 이상입니다.")
+	}else if(userNick.length>12){
+		alert("닉네임은 12글자 이하입니다.")
 	}else{
 		$.ajax({
 			type : "POST",
@@ -331,6 +503,7 @@ function nickCheck() {
 				if (result==0) {
 					$("#alert-nicksuccess").show();
 					$("#alert-nickdanger").hide();
+					checkNick="Y";
 				}else if(result==1){
 					$("#alert-nicksuccess").hide();
 					$("#alert-nickdanger").show();
@@ -344,6 +517,7 @@ function nickCheck() {
 
 </script>
 <!-- 닉네임 중복확인 끝 -->
+
 
   <script type="text/javascript">
 
@@ -395,7 +569,7 @@ function nickCheck() {
 </script>
 
 
-<!-- 이메일 중복 확인 -->
+<!-- 이메일 중복 정규식 확인 -->
 <script>
 
 $("#alert-emailsuccess").hide();
@@ -404,18 +578,40 @@ $("#alert-emaildanger").hide();
 $(document).ready(function() {
 	$("#user_Email_checkBtn").unbind("click").click(function(e) {
 		e.preventDefault();
-		emailCheck();		
+		check();		
 	});
 });
 
+function check() {		
+
+	var email1 =document.getElementById("email1").value; 
+	var email2 =document.getElementById("email2").value; 
+	var email = email1+ "@" + email2;
+
+	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+			if(exptext.test(email)==false){
+
+		//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
+
+		alert("이메일 형식이 올바르지 않습니다.");
+
+		document.addjoin.email.focus();
+
+		return false;
+
+	}
+
+	emailCheck();
+}
 
  function emailCheck() { 
-	
+
 	var email1 =$("#email1").val();
 	var email2 =$("#email2").val();
+	var checkEmail =$("#checkEmail").val();
 	
 	var allData = {"M_EMAIL_ID" : email1,"M_EMAIL_DOMAIN" : email2}
-	
 	
 	if (email1.length < 1) {
 		alert("이메일을 입력해주세요")		
@@ -438,6 +634,7 @@ $(document).ready(function() {
 				if (result==0) {
 					$("#alert-emailsuccess").show();
 					$("#alert-emaildanger").hide();
+					checkEmail ="Y";
 				}else if(result==1){
 					$("#alert-emailsuccess").hide();
 					$("#alert-emaildanger").show();
@@ -453,20 +650,6 @@ $(document).ready(function() {
  
  <!-- 이메일 보내기 -->
 <script>
-
-/*  $(document).ready(function() {
-	$("#sendmail_btn").unbind("click").click(function(e) {
-		e.preventDefault();
-		sendMail();		
-	});
-});*/
-
- 	/* function popUp() {
-		
-		
-		sendMail();
-		
-	}  */
  	function sendMail(email1,email2){
  		
 		
@@ -492,21 +675,80 @@ $(document).ready(function() {
 			
 		return false;
 	}  
-
-	
-	
 </script>
+
 <!-- 회원가입 완료 -->
-<script type="text/javascript">
+<script "type="text/javascript">
 
+$(document).ready(function(){
+	$("#singUpBtn").unbind("click").click(function(e) {
+		e.preventDefault();
+		signUp();
+	});
+});
 
-	 	function sendIt() {
-					
-					var f = document.joinForm;
-					f.action = "<%=cp%>/join_ok.action";
-					f.submit();
-					
-		} 
+//회원가입 유효성 검사
+function signUp() {
+	
+	if ($("#user_Id").val().length<1) {
+		alert("이름을 작성해주세요");
+		
+	}else if($("#pw1").val().length<1){
+		alert("비밀번호를 작성해주세요");
+		
+	}else if($("#pw2").val().length<1){
+		alert("비밀번호 확인을 작성해주세요");
+		
+	}else if($("#name").val().length<1){
+		alert("이름을 작성해주세요");
+		
+	}else if($("#user_NickName").val().length<1){
+		alert("닉네임을 작성해주세요");
+		
+	}else if($("#email1").val().length<1){
+		alert("이메일을 작성해주세요");
+		
+	}else if($("#email2").val().length<1){
+		alert("이메일을 작성해주세요");
+		
+	}else if($("#t1").val().length<1){
+		alert("전화번호를 작성해주세요");
+		
+	}else if($("#t2").val().length<1){
+		
+		alert("전화번호를 작성해주세요");
+		
+	}else if($("#t3").val().length<1){
+		alert("전화번호를 작성해주세요");
+		
+	}else if($("#sample6_postcode").val().length<1){
+		alert("우편번호를 작성해주세요");
+		
+	}else if($("#sample6_address").val().length<1){
+		alert("상세주소를 작성해주세요");
+		
+	}else if($("#checkId").val() == 2){
+		alert("아이디 중복검사를 해주세요");
+		
+	}else if($("#checkNick").val() == 2){
+		alert("닉네임 중복검사를 해주세요");
+		
+	}else if($("#checkEmail").val() == 2){
+		alert("이메일 중복검사를 해주세요");
+	
+	}else{
+		
+		alert($("#checkId").val());
+		out.print($("#checkId").val());
+		var f = document.joinForm;
+		f.action= "<%=cp%>/join_ok.action";
+		f.submit();
+		
+	}
+}
 </script>
+
+
+
 </body>
 </html>

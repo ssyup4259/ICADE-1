@@ -4,9 +4,11 @@ package com.project.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.service.GoodsService;
 
@@ -37,5 +39,14 @@ public class GoodsController {
 		return "goods/goodsList";
 		
 	}
+	
+	//상품 상세 페이지
+	@RequestMapping(value="goodsArticle.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String goodsArticle(HttpServletRequest req) throws Exception{
 
+		
+		g_service.goodsAarticle(req);
+		
+		return "goods/article";
+	}
 }

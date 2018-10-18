@@ -9,5 +9,8 @@ public interface GoodsService {
 	
 	//상품 리스트
 	public HttpServletRequest goodsList(HttpServletRequest req) throws Exception;
+	
+	//상품 상세페이지
+	public HttpServletRequest goodsAarticle(HttpServletRequest req) throws Exception;
 
 }
