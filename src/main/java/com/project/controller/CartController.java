@@ -1,8 +1,12 @@
 package com.project.controller;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +18,8 @@ import com.project.service.CartService;
 @Controller
 @RequestMapping("/cart/*")
 public class CartController {
+	
+	Logger log = LoggerFactory.getLogger(CartController.class);
 	
 	@Autowired
 	CartService c_service;
@@ -80,15 +86,16 @@ public class CartController {
 		
 		String c_code = req.getParameter("c_code");
 		int c_count = Integer.parseInt(req.getParameter("c_count"));
-		
+		String pageNum = req.getParameter("pageNum");
+		String message = "";
 		
 		String result = c_service.updateCartItem(c_code, c_count);
 		
 		if (result == "false" || result.equals("false")) {
-			req.setAttribute("message", "남아있는 재고의 수량보다 많습니다.");
+			message = URLEncoder.encode("남아있는 재고의 수량보다 많습니다.", "UTF-8");
 		}
 		
-		return cartList(req);
+		return "redirect:cartList.action?pageNum=" + pageNum + "&message=" + message;
 		
 	}
 

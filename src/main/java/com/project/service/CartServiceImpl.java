@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -26,9 +27,21 @@ public class CartServiceImpl implements CartService {
 	public HttpServletRequest cartList(HttpServletRequest req, String c_id) throws Exception {
 		
 		String cp = req.getContextPath();
+		String message = req.getParameter("message");
+		if (req.getParameter("message") == null || req.getParameter("message").equals("")) {
+			
+		} else {
+			message = URLDecoder.decode(req.getParameter("message"), "UTF-8");
+		}
+		
+		
 		
 		String pageNum = req.getParameter("pageNum");
 		int currentPage = 1;
+		
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
 		
 		if (pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
@@ -60,6 +73,7 @@ public class CartServiceImpl implements CartService {
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
 		req.setAttribute("pageNum", pageNum);
+		req.setAttribute("message", message);
 		
 		return req;
 		
