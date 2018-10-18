@@ -3,6 +3,7 @@ package com.project.dao;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,38 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public int getCartCount() throws Exception {
 		return sessionTemplate.selectOne(cartMapper + ".getCartCount");
+	}
+
+
+	@Override
+	public String deleteCartItem(int c_num, String pageNum) throws Exception {
+		sessionTemplate.delete(cartMapper + ".deleteCartItem", c_num);
+		return pageNum;
+	}
+
+
+	@Override
+	public void deleteCartAll(String c_id) throws Exception {
+		sessionTemplate.delete(cartMapper + ".deleteCartAll", c_id);
+	}
+
+
+	@Override
+	public void updateCartItem(String c_code, int c_count) throws Exception {
+		
+		Map<String, String> hMap = new HashMap<String, String>();
+		
+		hMap.put("c_code", c_code);
+		hMap.put("c_count", Integer.toString(c_count));
+		
+		sessionTemplate.update(cartMapper + ".updateCartItem", hMap);
+		
+	}
+
+
+	@Override
+	public int countGoods(String c_code) throws Exception {
+		return sessionTemplate.selectOne(cartMapper + ".countGoods", c_code);
 	}
 
 }

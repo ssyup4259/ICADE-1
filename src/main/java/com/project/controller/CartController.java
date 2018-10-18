@@ -1,8 +1,12 @@
 package com.project.controller;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +18,8 @@ import com.project.service.CartService;
 @Controller
 @RequestMapping("/cart/*")
 public class CartController {
+	
+	Logger log = LoggerFactory.getLogger(CartController.class);
 	
 	@Autowired
 	CartService c_service;
@@ -43,6 +49,53 @@ public class CartController {
 		String c_id = m_dto.getM_ID();
 		
 		return "";
+		
+	}
+	
+	//장바구니 개별 비우기
+	@RequestMapping(value="/deleteCartItem.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteCartItem(HttpServletRequest req) throws Exception {
+		
+		int c_num = Integer.parseInt(req.getParameter("c_num"));
+		String pageNum = req.getParameter("pageNum");
+		
+		c_service.deleteCartItem(c_num, pageNum);
+		
+		return cartList(req);
+		
+	}
+	
+	//장바구니 모두 비우기
+	@RequestMapping(value="/deleteCartAll.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteCartAll(HttpServletRequest req) throws Exception {
+		
+		HttpSession session = req.getSession();
+		
+		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
+		String c_id = m_dto.getM_ID();
+		
+		c_service.deleteCartAll(c_id);
+		
+		return "redirect:cartList.action";
+		
+	}
+	
+	//장바구니 수량 수정
+	@RequestMapping(value="/updateCartItem.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String updateCartItem(HttpServletRequest req) throws Exception {
+		
+		String c_code = req.getParameter("c_code");
+		int c_count = Integer.parseInt(req.getParameter("c_count"));
+		String pageNum = req.getParameter("pageNum");
+		String message = "";
+		
+		String result = c_service.updateCartItem(c_code, c_count);
+		
+		if (result == "false" || result.equals("false")) {
+			message = URLEncoder.encode("남아있는 재고의 수량보다 많습니다.", "UTF-8");
+		}
+		
+		return "redirect:cartList.action?pageNum=" + pageNum + "&message=" + message;
 		
 	}
 

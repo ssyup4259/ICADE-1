@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -26,9 +27,21 @@ public class CartServiceImpl implements CartService {
 	public HttpServletRequest cartList(HttpServletRequest req, String c_id) throws Exception {
 		
 		String cp = req.getContextPath();
+		String message = req.getParameter("message");
+		if (req.getParameter("message") == null || req.getParameter("message").equals("")) {
+			
+		} else {
+			message = URLDecoder.decode(req.getParameter("message"), "UTF-8");
+		}
+		
+		
 		
 		String pageNum = req.getParameter("pageNum");
 		int currentPage = 1;
+		
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
 		
 		if (pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
@@ -38,7 +51,7 @@ public class CartServiceImpl implements CartService {
 		int dataCount = c_dao.getCartCount();
 		
 		//전체페이지수
-		int numPerPage = 10;
+		int numPerPage = 5;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if (currentPage > totalPage)
@@ -59,8 +72,40 @@ public class CartServiceImpl implements CartService {
 		req.setAttribute("c_lists", c_lists);
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("pageNum", pageNum);
+		req.setAttribute("message", message);
 		
 		return req;
+		
+	}
+	
+	
+	//장바구니 개별 비우기
+	@Override
+	public String deleteCartItem(int c_num, String pageNum) throws Exception {
+		c_dao.deleteCartItem(c_num, pageNum);
+		return pageNum;
+	}
+
+	//장바구니 모두 비우기
+	@Override
+	public void deleteCartAll(String c_id) throws Exception {
+		c_dao.deleteCartAll(c_id);
+	}
+
+	//장바구니 수량 수정
+	@Override
+	public String updateCartItem(String c_code, int c_count) throws Exception {
+		
+		int count = c_dao.countGoods(c_code);
+		
+		if (count >= c_count) {
+			c_dao.updateCartItem(c_code, c_count);
+			
+			return "true";
+		}
+		
+		return "false";
 		
 	}
 	
