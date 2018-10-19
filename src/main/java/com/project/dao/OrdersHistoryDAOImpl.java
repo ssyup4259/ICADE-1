@@ -22,7 +22,7 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 
 	
 	@Override
-	public List<Object> selectOrderNum(String O_ID) throws Exception {
+	public List<Integer> selectOrderNum(String O_ID) throws Exception {
 		return sessionTemplate.selectList(ordersHistory + ".selectOrderNum",O_ID);
 	}
 
