@@ -8,7 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>아이폰 케이스는 ICADE</title>
+<!-- 부트스트랩 -->
+
+<%-- <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/sangyeop.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet"> --%>
+
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ -->
+
 </head>
 <body>
 
@@ -17,36 +29,36 @@
 	<div class="content2">
 		<form name="myForm" method="post" action="">
 			<Br> <br> <br> <br>
+			
+			
 			<table width="1000" align="center">
 				<tr>
 					<td colspan="2" align="center">
-						<h1>상품 상세정보</h1>
+						<h1>${DK_NAME}</h1>
 					</td>
 				</tr>
 				<tr>
 					<td width="340">
-						<img src="${imagePath}/${g_dto.gCode}.jpg" width="340" height="300">
+						 <img src="${imagePath}/${g_dto.gCode}.jpg" width="340" height="300"> 
 					</td>
 					<td>
 						<table width="100%" height="300">
 							<tr align="center">
 								<td>상품명</td>
-								<td>${g_dto.gName}</td>
+								<td></td>
 							</tr>
 							<tr align="center">
 								<td>가격</td>
 								<td>
-									<fmt:formatNumber>${g_dto.gPrice}</fmt:formatNumber>
+									<fmt:formatNumber></fmt:formatNumber>
 									원
 								</td>
 							</tr>
 							<tr align="center">
 								<td>상품소개</td>
-								<td>${g_dto.gContent}</td>
 							</tr>
 							<tr align="center">
 								<td>상품크기</td>
-								<td>가로 = ${g_dto.gWidth}cm, 세로 = ${g_dto.gVertical}cm, 높이 = ${g_dto.gHeight}cm</td>
 							</tr>
 							<tr>
 								<td colspan="2" height="2" bgcolor="#b3cccc"></td>
@@ -76,7 +88,7 @@
 						<c:if test="${!empty pageNum}">
 							<br>
 							<div id="btn">
-								<a href="<%=cp %>/ikeloom/list.do?pageNum=${pageNum}&g_room=${g_room}&g_kind_num=${g_kind_num}">
+								<a href="<%=cp %>/list.action?pageNum=${pageNum}&g_room=${g_room}&g_kind_num=${g_kind_num}">
 									<h2>상품목록으로 돌아가기</h2>
 								</a>
 							</div>
@@ -98,6 +110,7 @@
 			</table>
 			<input type="hidden" name="gCode" value="${g_dto.gCode}" />
 		</form>
+		</div>
 
 
 </body>
