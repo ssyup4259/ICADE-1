@@ -84,8 +84,9 @@ public class AdminController {
 		int g_num = Integer.parseInt(req.getParameter("g_num"));
 		
 		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
+		String cPath = req.getSession().getServletContext().getRealPath("/resources/goodsContentImage");
 		
-		service.deleteGoods(g_num, path);
+		service.deleteGoods(g_num, path, cPath);
 		
 		return "redirect:/admin/goodsList.action";
 		

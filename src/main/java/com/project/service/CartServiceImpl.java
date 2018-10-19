@@ -35,7 +35,6 @@ public class CartServiceImpl implements CartService {
 		}
 		
 		
-		
 		String pageNum = req.getParameter("pageNum");
 		int currentPage = 1;
 		
@@ -48,10 +47,10 @@ public class CartServiceImpl implements CartService {
 		
 		
 		//전체데이터갯수
-		int dataCount = c_dao.getCartCount();
+		int dataCount = c_dao.getCartCount(c_id);
 		
 		//전체페이지수
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if (currentPage > totalPage)
@@ -107,6 +106,12 @@ public class CartServiceImpl implements CartService {
 		
 		return "false";
 		
+	}
+
+
+	@Override
+	public CartDTO getCartItem(String c_num) throws Exception {
+		return c_dao.getCartItem(c_num);
 	}
 	
 	

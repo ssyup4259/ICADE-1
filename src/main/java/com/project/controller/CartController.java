@@ -1,10 +1,14 @@
 package com.project.controller;
 
 import java.net.URLEncoder;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.dto.CartDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.CartService;
 
@@ -39,7 +44,7 @@ public class CartController {
 		
 	}
 	
-	//장바구니 추가
+	//장바구니 추가 아직 미완성~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@RequestMapping(value="/insertCart.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String insertCart(HttpServletRequest req) throws Exception {
 		
@@ -96,6 +101,31 @@ public class CartController {
 		}
 		
 		return "redirect:cartList.action?pageNum=" + pageNum + "&message=" + message;
+		
+	}
+	
+	//체크박스 내용 확인
+	@RequestMapping(value="/cartTest.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String cartTest(HttpServletRequest req) throws Exception {
+		
+		if (req.getParameterValues("chk") == null || req.getParameterValues("chk").length < 1) {
+			return "redirect:cartList.action";
+		}
+		
+		String[] c_num = req.getParameterValues("chk");
+		
+		List<CartDTO> c_lists = new ArrayList<CartDTO>();
+		
+		for (int i = 0; i < c_num.length; i++) {
+			CartDTO c_dto = new CartDTO();
+			c_dto = c_service.getCartItem(c_num[i]);
+			
+			c_lists.add(c_dto);
+		}
+		
+		req.setAttribute("c_lists", c_lists);
+		
+		return "cart/cartTest";
 		
 	}
 

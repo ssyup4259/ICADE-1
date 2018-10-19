@@ -26,8 +26,8 @@
 
 <!-- 상품 등록 -->
 <insert id="insertGoods" parameterType="com.project.dto.GoodsDTO">
-	insert into goods(G_NUM, G_NAME, G_PRICE, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE)
-		values(#{G_NUM}, #{G_NAME}, #{G_PRICE},#{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO}, #{G_SAVEFILENAME}, sysdate)
+	insert into goods(G_NUM, G_NAME, G_PRICE, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE, G_CONTENT_ORIGINAL_FILE, G_CONTENT_SAVE_FILE)
+		values(#{G_NUM}, #{G_NAME}, #{G_PRICE},#{G_CONTENT}, #{G_DISCOUNT}, #{G_PHOTO}, #{G_SAVEFILENAME}, sysdate, #{G_CONTENT_ORIGINAL_FILE}, #{G_CONTENT_SAVE_FILE})
 </insert>
 
 <!-- 상세상품 등록 -->
@@ -46,7 +46,8 @@
 <select id="getGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
 	select * from (
 	select rownum rnum, data.* from (
-	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE,
+	G_CONTENT_ORIGINAL_FILE, G_CONTENT_SAVE_FILE
 	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), (select GK_NUM, GK_KIND from GOODS_KIND),
 	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
 	where GD_KIND_NUM like '%' || #{gdKindNum} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and
@@ -58,7 +59,8 @@
 
 <!-- 상품 한개의 데이터 -->
 <select id="getReadGoods" parameterType="int" resultType="com.project.dto.GoodsDTO">
-	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT, G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE
+	select DISTINCT G_NUM, GD_KIND_NUM, GK_KIND, G_NAME, G_COUNT, G_PRICE, G_SELLCOUNT, G_CONTENT,
+	G_DISCOUNT, G_PHOTO, G_SAVEFILENAME, G_DATE, G_CONTENT_ORIGINAL_FILE, G_CONTENT_SAVE_FILE
 	from GOODS, (select GD_NUM, GD_KIND_NUM from GOODS_DETAIL), 
 	(select GK_NUM, GK_KIND from GOODS_KIND), (select sum(GD_COUNT)G_COUNT, 
 	sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL where GD_NUM = #{g_num} group by GD_NUM)
@@ -75,7 +77,8 @@
 
 <!-- 상품 수정 -->
 <update id="updateGoods" parameterType="com.project.dto.GoodsDTO">
-	update GOODS set G_NAME=#{G_NAME}, G_PRICE=#{G_PRICE}, G_CONTENT=#{G_CONTENT}, G_DISCOUNT=#{G_DISCOUNT}, G_PHOTO=#{G_PHOTO}, G_SAVEFILENAME=#{G_SAVEFILENAME}
+	update GOODS set G_NAME=#{G_NAME}, G_PRICE=#{G_PRICE}, G_CONTENT=#{G_CONTENT}, G_DISCOUNT=#{G_DISCOUNT},
+	G_PHOTO=#{G_PHOTO}, G_SAVEFILENAME=#{G_SAVEFILENAME}, G_CONTENT_ORIGINAL_FILE=#{G_CONTENT_ORIGINAL_FILE}, G_CONTENT_SAVE_FILE=#{G_CONTENT_SAVE_FILE}
 	where G_NUM=#{G_NUM}
 </update>
 

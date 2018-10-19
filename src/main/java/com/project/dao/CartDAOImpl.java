@@ -41,8 +41,8 @@ public class CartDAOImpl implements CartDAO {
 	
 	//장바구니에 담은 상품 개수 구하기
 	@Override
-	public int getCartCount() throws Exception {
-		return sessionTemplate.selectOne(cartMapper + ".getCartCount");
+	public int getCartCount(String c_id) throws Exception {
+		return sessionTemplate.selectOne(cartMapper + ".getCartCount", c_id);
 	}
 
 
@@ -75,6 +75,12 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public int countGoods(String c_code) throws Exception {
 		return sessionTemplate.selectOne(cartMapper + ".countGoods", c_code);
+	}
+
+
+	@Override
+	public CartDTO getCartItem(String c_num) throws Exception {
+		return sessionTemplate.selectOne("com.project.mybatis.cartMapper.getCartItem", c_num);
 	}
 
 }
