@@ -52,17 +52,6 @@ public class GoodsController {
 				
 			}
 		}
-			if (lists.size() > 3) { // 값이 3개를 초과하면, 최근 것 3개만 담는다.
-				int start = lists.size()-3;
-				List<String> copyList = new ArrayList<String>();
-				for (int i = start; i < lists.size() ; i++) {
-				copyList.add(lists.get(i));
-				
-			  }
-
-			  lists = copyList;
-			}
-		
 		
 		return lists;
 		
@@ -92,10 +81,27 @@ public class GoodsController {
 	
 	@RequestMapping(value="/imageTest.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String imageTest(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		Cookie[] cookies = req.getCookies();
+		
 		GoodsDTO g_dto = service.imageTest(req);
 		
 		String g_num = Integer.toString(g_dto.getG_NUM());
+		
+		List<String> lists = getCookie(req);
+		
+		Iterator<String> it = lists.iterator();
+		
+		
+		while (it.hasNext()) {
+			String num = it.next();
+			
+			if (num == g_num || num.equals(g_num)) {
+				Cookie setCookie = new Cookie(g_num, null);
+				setCookie.setMaxAge(0);
+				resp.addCookie(setCookie);
+				break;
+			}
+			
+		}
 		
 		Cookie setCookie = new Cookie(g_num, g_num);
 		setCookie.setMaxAge(60*60*24);
@@ -113,26 +119,27 @@ public class GoodsController {
 		List<String> c_lists = new ArrayList<String>();		
 		c_lists = getCookie(req);
 		
-		ListIterator<String> it = c_lists.listIterator();
-		
 		List<GoodsDTO> ck_lists = new ArrayList<GoodsDTO>();
 		
-
+		int count=0;
 		
-		while (it.hasNext()) {
-			
+		for (int i = c_lists.size(); i > 0; i--) {
+				
 			GoodsDTO g_dto = new GoodsDTO();
 			
-			int g_num = Integer.parseInt(it.next());
+			int g_num = Integer.parseInt(c_lists.get(i-1));
+			
 			g_dto = a_service.getReadGoods(g_num);
 		
-		
-				ck_lists.add(g_dto);
-		
+			ck_lists.add(g_dto);
 			
+			count++;
+			
+			if (count == 3) {
+				break;
+			}
+				
 		}
-		
-	
 		
 		req.setAttribute("ck_lists", ck_lists);
 

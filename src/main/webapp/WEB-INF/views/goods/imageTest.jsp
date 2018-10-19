@@ -9,26 +9,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-function OpenWindow() {
-	
-	
-	
-	
-	window.open("<%=cp%>/goods/cookieTest.action","_blank","top=500,left=1500,width=200,heigth=500,resizable=1,scrollbars=yes");
-	
-	
-	
-}
-
-</script>
-
 </head>
-<body onload="OpenWindow()">
-
+<body>
 
 <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}">
-
 
 </body>
 </html>

@@ -30,42 +30,15 @@
 <form action="" name="searchForm" method="post">
 
 <c:forEach var="ck" items="${ck_lists}" varStatus="status">
-<c:if test="${status.index eq ck_lists.size()-1}">
 ${ck_lists}<br/>
 ${status.index}<br/>
 ${ck_lists.size()-1}<br/>
 g_num : ${ck.getG_NUM()}<br/>
 g_name : ${ck.getG_NAME()}<br/>
-<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="300" height="300"><br/><br/>
+<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"><br/><br/>
 <input type="button" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
-</c:if>
 <br/><br/>
 </c:forEach>
-<c:forEach var="ck" items="${ck_lists}" varStatus="status">
-<c:if test="${status.index eq ck_lists.size()-2}">
-${status.index}<br/>
-${ck_lists.size()-1}<br/>
-g_num : ${ck.getG_NUM()}<br/>
-g_name : ${ck.getG_NAME()}<br/>
-<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="300" height="300"><br/><br/>
-<input type="button" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
-</c:if>
-<br/><br/>
-</c:forEach>
-<c:forEach var="ck" items="${ck_lists}" varStatus="status">
-<c:if test="${status.index eq ck_lists.size()-3}">
-${status.index}<br/>
-${ck_lists.size()-1}<br/>
-g_num : ${ck.getG_NUM()}<br/>
-g_name : ${ck.getG_NAME()}<br/>
-<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="300" height="300"><br/><br/>
-<input type="button" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
-</c:if>
-<br/><br/>
-</c:forEach>
-
-
-
 
 </form>
 </body>
