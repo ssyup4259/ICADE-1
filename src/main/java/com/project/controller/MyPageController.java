@@ -16,7 +16,7 @@ import com.project.dto.MemberDTO;
 import com.project.service.MyPageService;
 
 @Controller
-public class MyPageController2 {
+public class MyPageController {
 	
 	@Autowired
 	private MyPageService service;
