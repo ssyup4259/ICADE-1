@@ -27,6 +27,7 @@
 
 </head>
 <body>
+<input type="button" value=" 전체 삭제 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/cookieDelete_ok.action';"/>
 <form action="" name="searchForm" method="post">
 
 <c:forEach var="ck" items="${ck_lists}" varStatus="status">

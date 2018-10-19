@@ -45,9 +45,12 @@
 		<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="300" height="300"/>
 		</a>
 		<br/>
+		<input type="button" value=" 찜하기 " class="btn2" 
+		onclick="<%=cp%>/goods/tagetGoods.action?g_num=${g_dto.getG_NUM()}"/><br>	
 		${g_dto.getG_NAME()} <br/>
 		남은 수량 : ${g_dto.getG_COUNT()}		
 	</div>
+	
 	<c:if test="${i % 4 == 3 || g_lists.size() == i+1}"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></c:if>
 	<c:set var="i" value="${i+1}"/>
 
