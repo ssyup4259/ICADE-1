@@ -27,6 +27,19 @@
 	});
 </script>
 
+<script type="text/javascript">
+
+	function sendIt(){
+		
+		var f = document.searchForm;
+		
+		f.action = "<%=cp%>/goods/goodsList.action";
+		f.submit();
+		
+	}
+
+</script>
+
 
 <style>
 
@@ -94,6 +107,17 @@ footer {
 <c:forEach var="gk_dto" items="${gk_lists}">
 	<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>&nbsp;&nbsp;
 </c:forEach>
+<br/>
+<form action="" name="searchForm" method="post">
+	<input type="hidden" name="GK_KIND_NUM" value="${GK_KIND_NUM}"/>
+	<select name="searchKey" class="selectField">
+		<option value="G_NAME">상품명</option>
+		<option value="G_CONTENT">내용</option>
+	</select>
+	<input type="text" name="searchValue" class="textField">
+	<input type="button" value=" 검색 " class="btn2" onclick="sendIt();"/>
+</form>
+
 <h3>인기 상품 리스트</h3><br/><br/>
 
 <c:set var="i" value="0"/>
