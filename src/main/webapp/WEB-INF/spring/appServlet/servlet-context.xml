@@ -61,11 +61,11 @@
 			<beans:bean id="loggerInterceptor" class="com.project.logger.LoggerInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>
-			<mapping path="/login_ok.action"/>
+			<mapping path="/Templogin_ok.action"/>
 			<beans:bean id="postInterceptor" class="com.project.interceptor.PostInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>
-			<mapping path="/**"/>
+			<mapping path="/Temp"/>
 			<beans:bean id="loginInterceptor" class="com.project.interceptor.LoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
