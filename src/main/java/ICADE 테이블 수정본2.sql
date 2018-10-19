@@ -1,3 +1,6 @@
+exp userid=icade/123 file='D:\icade.dmp'
+imp userid=icade/123 file='D:\icade.dmp'
+
 select * from tab;
 
 DROP TABLE GOODS CASCADE CONSTRAINTS;
