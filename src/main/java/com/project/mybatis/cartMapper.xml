@@ -5,8 +5,8 @@
 <mapper namespace="com.project.mybatis.cartMapper">
 
 <!-- 장바구니 개수 구하기 -->
-<select id="getCartCount" resultType="int">
-	select nvl(count(*), 0) from Cart
+<select id="getCartCount" parameterType="String" resultType="int">
+	select nvl(count(*), 0) from Cart where C_ID = #{c_id}
 </select>
 
 <!-- 장바구니 리스트 -->
@@ -17,10 +17,19 @@
 	from Cart, (select G_PRICE as C_PRICE, G_SAVEFILENAME as C_SAVEFILENAME, G_NUM from Goods),
 	(select GD_NUM as C_GNUM, GD_CODE, GD_DEVICE, GD_COLOR from Goods_Detail),
 	(select DK_CODE, DK_NAME as C_DEVICE from DEVICE_KIND), (select GC_CODE, GC_COLOR as C_COLOR from GOODS_COLOR)
-	where C_ID = '123' and C_CODE = GD_CODE and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE and C_GNUM = G_NUM order by C_NUM desc) data)
+	where C_ID = #{c_id} and C_CODE = GD_CODE and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE and C_GNUM = G_NUM order by C_NUM desc) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
+</select>
+
+<!-- 장바구니 코드로 조회 -->
+<select id="getCartItem" parameterType="String" resultType="com.project.dto.CartDTO">
+	select C_NUM, C_GNUM, C_CODE, C_ID, C_NAME, C_DEVICE, C_COLOR, C_COUNT, C_SAVEFILENAME, C_PRICE
+	from Cart, (select G_PRICE as C_PRICE, G_SAVEFILENAME as C_SAVEFILENAME, G_NUM from Goods),
+	(select GD_NUM as C_GNUM, GD_CODE, GD_DEVICE, GD_COLOR from Goods_Detail),
+	(select DK_CODE, DK_NAME as C_DEVICE from DEVICE_KIND), (select GC_CODE, GC_COLOR as C_COLOR from GOODS_COLOR)
+	where C_NUM = #{c_num} and C_CODE = GD_CODE and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE and C_GNUM = G_NUM
 </select>
 
 <!-- 장바구니 개별 비우기 -->
