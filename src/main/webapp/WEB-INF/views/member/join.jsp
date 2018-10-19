@@ -57,7 +57,7 @@
 		 <br>
 		 	 <div class="alert alert-idsuccess" id="alert-idsuccess"><font style="color: blue">사용할 수 있는 아이디 입니다</font></div>
 		 	 <div class="alert alert-iddanger" id="alert-iddanger"><font style="color: red">사용할 수 없는 아이디 입니다</font></div>
-		 	 <div class="alert alert-refresh" id="alert-refresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
+		 	 <div class="alert alert-idrefresh" id="alert-idrefresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
 		 	 
 		 	 
 		 	 <input type="hidden" id="checkId" name="checkId" value="">
@@ -135,10 +135,11 @@
 			<input type="text" id="user_NickName" placeholder="닉네임 : 2글자 이상 입력하세요" name="M_NICKNAME"  maxlength="30" size="15" 
 			style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px"/>
 				<br>
-		 	 	<div class="alert alert-nicksuccess" id="alert-nicksuccess">사용할 수 있는 닉네임 입니다</div>
-		 	 	<div class="alert alert-nickdanger" id="alert-nickdanger">사용할 수 없는 닉네임 입니다</div>
-		 	 	
-		 	 	 <input type="hidden" id="checkNick" name="checkNick" value="N">
+		 	 	<div class="alert alert-nicksuccess" id="alert-nicksuccess"><font style="color: blue">사용할 수 있는 닉네임 입니다</font></div>
+		 	    <div class="alert alert-nickdanger" id="alert-nickdanger"><font style="color: red">사용할 수 없는 닉네임 입니다</font></div>
+		 	    <div class="alert alert-nickfresh" id="alert-nickfresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
+		 	 
+		 	 	 <input type="hidden" id="checkNick" name="checkNick" value="">
 		 </td>
 		 	 
 		<td>
@@ -157,8 +158,9 @@
 		<td colspan="1" style="padding-left: 5px;">
 			<input type="text"  placeholder="이메일 : Ex)444" id="email1"  name="M_EMAIL_ID" maxlength="30" size="15" style="padding-left:10px; width: 400px; height: 40px; background-color: transparent; color:#5c8a8a; font-family: 'Do Hyeon', sans-serif; font-size: 16px" />
 			<br>
-		 	 <div class="alert alert-emailsuccess" id="alert-emailsuccess">사용할 수 있는 이메일 입니다</div>
-		 	 <div class="alert alert-emaildanger" id="alert-emaildanger">사용할 수 없는 이메일 입니다</div>
+		 	 	<div class="alert alert-emailsuccess" id="alert-emailsuccess"><font style="color: blue">사용할 수 있는 이메일 입니다</font></div>
+		 	    <div class="alert alert-emaildanger" id="alert-emaildanger"><font style="color: red">사용할 수 없는 이메일 입니다</font></div>
+		 	    <div class="alert alert-emailfresh" id="alert-emailfresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
 		 	 
 		 	 <input type="hidden" id="checkEmail" name="checkEmail" value="N">
 		</td>
@@ -236,7 +238,7 @@
 	</tr>
 </table>
 <div style="text-align: center;padding-bottom: 15px;">
-    <input type="button" id="singUpBtn" value="회원가입" style="width: 200px;" height="40px" onclick="sendIt();"/>
+    <input type="button" id="singUpBtn" value="회원가입" style="width: 200px;" height="40px" onclick=""/>
     <input type="button" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 </div>
 </form>
@@ -249,152 +251,116 @@
 <script>
 $("#alert-idsuccess").hide();
 $("#alert-iddanger").hide();
-$("#alert-refresh").hide();
+$("#alert-idrefresh").hide();
+
+$("#alert-nicksuccess").hide();
+$("#alert-nickdanger").hide();
+$("#alert-nickfresh").hide();
+
+$("#alert-emailsuccess").hide();
+$("#alert-emaildanger").hide();
+$("#alert-emailfresh").hide();
 
 
 $(document).ready(function() {
 	
-		alert($("#checkId").val());
-	$("#checkId,#user_Id").change(function() {
+	$("#user_Id").change(function() {
 		
-		alert("아이디 중복검사를 실행해주세요");
-		var checkId=2;
-		$('input[name=checkId]').value(2);
-		
-		if (checkId == 2) {
-			$("#alert-idsuccess").hide();
-			$("#alert-refresh").show();
-		}
+		$('#checkId').val('2');
+		$("#alert-idsuccess").hide();
+		$("#alert-idrefresh").show();
 		
 	});
-	
-})
-
-$("#checkNiCK,#user_NickName").change(function() {
-	
-	checkNick = $("#checkNiCK").val();
-	checkNick = "N";
-	
-	
-});
-$("#checkEmail,#email1").change(function() {
-	
-	checkEmail = $("#checkEmail").val();
-	checkEmail = "N";
-	
-	
 });
 
+$(document).ready(function () {
+	
+	$("#checkNiCK,#user_NickName").change(function() {
+		
+		$('#checkNick').val('2');
+		$("#alert-nicksuccess").hide();
+		$("#alert-nickfresh").show();
+	});
+});
+
+
+$(document).ready(function () {
+	$("#checkEmail,#email1").change(function() {
+		
+		$('#checkEmail').val('2');
+ 		$("#alert-emailsuccess").hide();
+		$("#alert-emailfresh").show();
+	});
+	
+});
 </script>
-
-
 
 <!-- 아이디확인 -->
 <script >
-	$("#alert-idsuccess").hide();
-	$("#alert-iddanger").hide();
-
- 	//한글입력방지
-	 $("#user_Id").keyup(function(event){
-	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
-	        var inputVal = $(this).val();
-	        $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
-	    }
-	}); 
-	//중복체크 버튼을 누를시 이벤트 발생
-	$(document).ready(function() {
-		$("#user_id_checkBtn").unbind("click").click(function(e) {
-			e.preventDefault();
-			idCheck();		
-			
-			function idCheck() {
+		$("#alert-idsuccess").hide();
+		$("#alert-iddanger").hide();
+		$("#alert-refresh").hide();
+	
+	 	//한글입력방지
+		 $("#user_Id").keyup(function(event){
+		    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+		        var inputVal = $(this).val();
+		        $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+		    }
+		}); 
+		//중복체크 버튼을 누를시 이벤트 발생
+		$(document).ready(function() {
+			$("#user_id_checkBtn").unbind("click").click(function(e) {
+				e.preventDefault();
+				idCheck();		
 				
-				var userId =$("#user_Id").val();
-				//var checkId =$("#checkId").val();
-				
-				//유효성검사
-				if(userId.length <1){
-					alert("아이디를 입력해주세요.");
-				}else if(userId.length<8){
-					alert("아이디는 8자리 이상으로 입력해주세요")
-				}else if(userId.length>16){
-					alert("아이디는 16자리 이하로 입력해주세요")
-				}else{
-					$.ajax({
-						type : "POST",
-						url : "/icade/idcheck.action",
-						data : {"M_ID":userId},
-						dataType : "json",
-						error : function (error) {
-							console.log(error.responseText);
-						},
-						success : function(result) {
-							if (result == 0) {
-								/* $("#alert-idsuccess").show();
-								$("#alert-iddanger").hide(); */
-								
-								
-								//$('input[name=checkId]').attr('value',1);
-								$('input[name=checkId]').value("1");
-								alert(checkId + "아작스");
-							}else if(result ==1 ){
-								$("#alert-idsuccess").hide();
-								$("#alert-iddanger").show();
-								
-							}else{
-								alert("에러가 발생했습니다.");
-							}
-						}
-					});
-				} 	
-			}
+		
+			});
 		});
-	});
 
-	alert($("#checkId").val());
 	
-/*function idCheck() {
-	
-	var userId =$("#user_Id").val();
-	//var checkId =$("#checkId").val();
-	
-	//유효성검사
-	if(userId.length <1){
-		alert("아이디를 입력해주세요.");
-	}else if(userId.length<8){
-		alert("아이디는 8자리 이상으로 입력해주세요")
-	}else if(userId.length>16){
-		alert("아이디는 16자리 이하로 입력해주세요")
-	}else{
-		$.ajax({
-			type : "POST",
-			url : "/icade/idcheck.action",
-			data : {"M_ID":userId},
-			dataType : "json",
-			error : function (error) {
-				console.log(error.responseText);
-			},
-			success : function(result) {
-				if (result == 0) {
-					$("#alert-idsuccess").show();
-					$("#alert-iddanger").hide();
-					
-					var checkId ="1";
-					$('input[name=checkId]').attr('value',1);
-					
-					alert(checkId + "아작스");
-				}else if(result ==1 ){
-					$("#alert-idsuccess").hide();
-					$("#alert-iddanger").show();
-					
-				}else{
-					alert("에러가 발생했습니다.");
+	function idCheck() {
+		
+		var userId =$("#user_Id").val();
+		//var checkId =$("#checkId").val();
+		
+		//유효성검사
+		if(userId.length <1){
+			alert("아이디를 입력해주세요.");
+		}else if(userId.length<8){
+			alert("아이디는 8자리 이상으로 입력해주세요")
+		}else if(userId.length>16){
+			alert("아이디는 16자리 이하로 입력해주세요")
+		}else{
+			$.ajax({
+				type : "POST",
+				url : "/icade/idcheck.action",
+				data : {"M_ID":userId},
+				dataType : "json",
+				error : function (error) {
+					console.log(error.responseText);
+				},
+				success : function(result) {
+					if (result == 0) {
+						$("#alert-idsuccess").show();
+						$("#alert-iddanger").hide(); 
+						$("#alert-idrefresh").hide();
+						
+						$('input[id=checkId]').attr('value','1'	);
+						
+						alert(checkId + "아작스");
+					}else if(result ==1 ){
+						$("#alert-idsuccess").hide();
+						$("#alert-iddanger").show();
+						
+					}else{
+						alert("에러가 발생했습니다.");
+					}
 				}
-			}
-		});
-	} 	
-}
-*/
+			});
+		} 	
+	}
+
 </script>
 <!-- 아이디 중복확인 끝 -->
 
@@ -450,8 +416,13 @@ $("#checkEmail,#email1").change(function() {
 		var pw1 =$("#pw1").val();
 		var pw2 =$("#pw2").val();
 		
-		if (pw1 !="" || pw2 != "") {
-			
+		if (pw1.length<1){
+			alert("비밀번호를 입력해주세요");			
+		}else if (pw2.length<1){
+			alert("비밀번호 확인을 입력해주세요");			
+		}else if (pw1.length<8 || pw1.length>16){
+			alert("비밀번호는 8자리 이상 16자리 이하로 작성해주세요");
+		}else if (pw1 !="" || pw2 != ""){		
 			if (pw1 ==pw2) {
 				$("#alert-success").show();
 				$("#alert-danger").hide();
@@ -470,6 +441,7 @@ $("#checkEmail,#email1").change(function() {
 
 $("#alert-nicksuccess").hide();
 $("#alert-nickdanger").hide();
+$("#alert-nickfresh").hide();
 
 $(document).ready(function() {
 	$("#user_nickName_checkBtn").unbind("click").click(function(e) {
@@ -479,7 +451,6 @@ $(document).ready(function() {
 });
 
 function nickCheck() {
-	
 	
 	var userNick =$("#user_NickName").val();
 	var checkNick =$("#checkNick").val();
@@ -503,7 +474,8 @@ function nickCheck() {
 				if (result==0) {
 					$("#alert-nicksuccess").show();
 					$("#alert-nickdanger").hide();
-					checkNick="Y";
+					$("#alert-nickfresh").hide();
+					$('input[id=checkNick]').attr('value','1');
 				}else if(result==1){
 					$("#alert-nicksuccess").hide();
 					$("#alert-nickdanger").show();
@@ -518,7 +490,7 @@ function nickCheck() {
 </script>
 <!-- 닉네임 중복확인 끝 -->
 
-
+<!-- 다음 api를 활용한 주소확인 -->
   <script type="text/javascript">
 
   function sample6_execDaumPostcode() {
@@ -565,15 +537,29 @@ function nickCheck() {
 					}
 				}).open();
 	}
-  
 </script>
 
 
-<!-- 이메일 중복 정규식 확인 -->
+<!-- 이메일 중복 및 정규식 확인 -->
 <script>
+
+
+
 
 $("#alert-emailsuccess").hide();
 $("#alert-emaildanger").hide();
+$("#alert-emailfresh").hide();
+
+/* $(document).ready(function(){
+    $('#email2').change(function(){
+        var email = $('#email2').val(); //id선택자로 email select box값 추출하여 저장
+        if(email == 'custom'){ //selectbox value가 custom이면
+            $("#email").replaceWith("<input type = 'text' id='email' placeholder='직접입력'>");
+            //selectbox 태그를 input 태그로 변경
+        }
+    });
+}); */
+
 
 $(document).ready(function() {
 	$("#user_Email_checkBtn").unbind("click").click(function(e) {
@@ -596,7 +582,7 @@ function check() {
 
 		alert("이메일 형식이 올바르지 않습니다.");
 
-		document.addjoin.email.focus();
+		document.joinForm.email2.focus();
 
 		return false;
 
@@ -634,7 +620,8 @@ function check() {
 				if (result==0) {
 					$("#alert-emailsuccess").show();
 					$("#alert-emaildanger").hide();
-					checkEmail ="Y";
+					$("#alert-emailfresh").hide();
+					$('input[id=checkEmail]').attr('value','1');
 				}else if(result==1){
 					$("#alert-emailsuccess").hide();
 					$("#alert-emaildanger").show();
@@ -646,7 +633,7 @@ function check() {
 	}
 } 
  </script>
- 
+
  
  <!-- 이메일 보내기 -->
 <script>
@@ -677,8 +664,13 @@ function check() {
 	}  
 </script>
 
+<!-- 전화번호 및 주소 확인 -->
+
+
+
+
 <!-- 회원가입 완료 -->
-<script "type="text/javascript">
+<script type="text/javascript">
 
 $(document).ready(function(){
 	$("#singUpBtn").unbind("click").click(function(e) {
@@ -690,42 +682,102 @@ $(document).ready(function(){
 //회원가입 유효성 검사
 function signUp() {
 	
+		var f = document.joinForm;
+		
 	if ($("#user_Id").val().length<1) {
-		alert("이름을 작성해주세요");
+		alert("아이디를 작성해주세요");
+		 $('#user_Id').focus();
+		 
+	}else if(userId.length<8){
+		alert("아이디는 8자리 이상으로 입력해주세요")
+		$('#user_Id').focus();
+		
+	}else if(userId.length>16){
+		alert("아이디는 16자리 이하로 입력해주세요")
+		$('#user_Id').focus();
 		
 	}else if($("#pw1").val().length<1){
 		alert("비밀번호를 작성해주세요");
+		$('#pw1').focus();
+		
+	}else if ($("#pw1").length<8 || $("pw1").length>16){
+		alert("비밀번호는 8자리 이상 16자리 이하로 작성해주세요");
+		$('#pw1').focus();
 		
 	}else if($("#pw2").val().length<1){
 		alert("비밀번호 확인을 작성해주세요");
+		$('#pw2').focus();
 		
 	}else if($("#name").val().length<1){
 		alert("이름을 작성해주세요");
+		$('#name').focus();
+		
+	}else if($("#name").val().length<1){
+		alert("이름을 최소 1자리 이상 입력해주세요.");
+		$('#name').focus();
 		
 	}else if($("#user_NickName").val().length<1){
 		alert("닉네임을 작성해주세요");
+		$('#user_NickName').focus();
+		
+	}else if($("#user_NickName").length<2){
+		alert("닉네임은 최소 2글자 이상입니다.");
+		$('#user_NickName').focus();
+		
+	}else if($("#user_NickName").length>12){
+		alert("닉네임은 12글자 이하입니다.");
+		$('#user_NickName').focus();
 		
 	}else if($("#email1").val().length<1){
 		alert("이메일을 작성해주세요");
+		$('#email1').focus();
 		
 	}else if($("#email2").val().length<1){
 		alert("이메일을 작성해주세요");
+		$('#email1').focus();
 		
 	}else if($("#t1").val().length<1){
 		alert("전화번호를 작성해주세요");
+		$('#t1').focus();
+		
+	}else if($("#t1").val().length<2){
+		alert("전화번호를 최소 한 자리 이상 입력해주세요");
+		$('#t1').focus();
+		
+	}else if($("#t1").val().length>5){
+		alert("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
+		$('#t1').focus();
 		
 	}else if($("#t2").val().length<1){
-		
 		alert("전화번호를 작성해주세요");
+		$('#t2').focus();
+		
+	}else if($("#t2").val().length<2){
+		alert("전화번호를 최소 한 자리 이상 입력해주세요");
+		$('#t1').focus();
+		
+	}else if($("#t2").val().length>5){
+		alert("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
+		$('#t2').focus();
 		
 	}else if($("#t3").val().length<1){
 		alert("전화번호를 작성해주세요");
+		$('#t3').focus();
+		
+	}else if($("#t3").val().length<2){
+		alert("전화번호를 최소 한 자리 이상 입력해주세요");
+		$('#t3').focus();
+		
+	}else if($("#t3").val().length>5){
+		alert("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
+		$('#t3').focus();
 		
 	}else if($("#sample6_postcode").val().length<1){
 		alert("우편번호를 작성해주세요");
 		
 	}else if($("#sample6_address").val().length<1){
 		alert("상세주소를 작성해주세요");
+		$('#sample6_address').focus();
 		
 	}else if($("#checkId").val() == 2){
 		alert("아이디 중복검사를 해주세요");
@@ -738,9 +790,26 @@ function signUp() {
 	
 	}else{
 		
-		alert($("#checkId").val());
-		out.print($("#checkId").val());
-		var f = document.joinForm;
+
+		var email1 =document.getElementById("email1").value; 
+		var email2 =document.getElementById("email2").value; 
+		var email = email1+ "@" + email2;
+		
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+				if(exptext.test(email)==false){
+
+			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
+
+			alert("이메일 형식이 올바르지 않습니다.");
+
+			f.email2.focus();
+
+			return false;
+
+		}
+		
+
 		f.action= "<%=cp%>/join_ok.action";
 		f.submit();
 		
