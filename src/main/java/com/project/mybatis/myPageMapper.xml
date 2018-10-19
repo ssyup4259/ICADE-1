@@ -29,7 +29,7 @@
 
 	<!-- 탈퇴회원 테이블에 데이터 추가 -->
 	<insert id="copyUserData" parameterType="map">
-		insert into leave (L_NUM,L_ID,L_NAME,L_REASON,L_DATE,L_PH) values (#{L_NUM},#{L_ID},#{L_REASON},sysdate,#{L_PH})
+		insert into leave (L_NUM,L_ID,L_NAME,L_REASON,L_DATE,L_PH) values (#{L_NUM},#{L_ID},#{L_NAME},#{L_REASON},sysdate,#{L_PH})
 	</insert>
 
 	<!-- 그리고 맴버테이블의 데이터 삭제 -->
