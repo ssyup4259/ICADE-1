@@ -23,6 +23,7 @@
 		}
 		if (f.inputCode.value == joinCode) {
 			alert("인증완료");
+			opener.document.joinForm.checkNum.value = document.joinCodeForm.CcheckNum.value;
 			self.close();
 		}
 		
@@ -38,7 +39,8 @@
 			<form method="post" name="joinCodeForm" onclick="check();">
 				<input type="text" name="inputCode"/><br><br>
 				<input type="submit" value="인증하기"/>
-				<input type="text" name="joinCode" value="${sessionScope.joinCode}">
+				<input type="hidden" name="joinCode" value="${sessionScope.joinCode}">
+				<input type="hidden" name="CcheckNum" value="1"> 
 			</form>
 		</div>
 	</center>

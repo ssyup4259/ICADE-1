@@ -57,7 +57,7 @@
 		 <br>
 		 	 <div class="alert alert-idsuccess" id="alert-idsuccess"><font style="color: blue">사용할 수 있는 아이디 입니다</font></div>
 		 	 <div class="alert alert-iddanger" id="alert-iddanger"><font style="color: red">사용할 수 없는 아이디 입니다</font></div>
-		 	 <div class="alert alert-idrefresh" id="alert-idrefresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
+		 	 <div class="alert alert-idrefresh" id="alert-idrefresh"><font style="color: red">중복검사를 실행해주세요</font></div>
 		 	 
 		 	 
 		 	 <input type="hidden" id="checkId" name="checkId" value="">
@@ -137,7 +137,7 @@
 				<br>
 		 	 	<div class="alert alert-nicksuccess" id="alert-nicksuccess"><font style="color: blue">사용할 수 있는 닉네임 입니다</font></div>
 		 	    <div class="alert alert-nickdanger" id="alert-nickdanger"><font style="color: red">사용할 수 없는 닉네임 입니다</font></div>
-		 	    <div class="alert alert-nickfresh" id="alert-nickfresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
+		 	    <div class="alert alert-nickfresh" id="alert-nickfresh"><font style="color: red">중복검사를 실행해주세요</font></div>
 		 	 
 		 	 	 <input type="hidden" id="checkNick" name="checkNick" value="">
 		 </td>
@@ -160,10 +160,11 @@
 			<br>
 		 	 	<div class="alert alert-emailsuccess" id="alert-emailsuccess"><font style="color: blue">사용할 수 있는 이메일 입니다</font></div>
 		 	    <div class="alert alert-emaildanger" id="alert-emaildanger"><font style="color: red">사용할 수 없는 이메일 입니다</font></div>
-		 	    <div class="alert alert-emailfresh" id="alert-emailfresh"><font style="color: red">중복검사를 다시 실행해주세요</font></div>
+		 	    <div class="alert alert-emailfresh" id="alert-emailfresh"><font style="color: red">중복검사를 실행해주세요</font></div>
 		 	 
 		 	 <input type="hidden" id="checkEmail" name="checkEmail" value="N">
-		</td>
+		 	 <input type="hidden" id="checkNum" name="checkNum" value="">
+ 		</td>
 		
 		<td colspan="1" style="padding-left: 5px;">
 			<input id="email2" name="M_EMAIL_DOMAIN"  placeholder="이메일 : Ex)naver.com" maxlength="30" style="width: 400px; height: 40px" size="15" type="text" />
@@ -348,7 +349,6 @@ $(document).ready(function () {
 						
 						$('input[id=checkId]').attr('value','1'	);
 						
-						alert(checkId + "아작스");
 					}else if(result ==1 ){
 						$("#alert-idsuccess").hide();
 						$("#alert-iddanger").show();
@@ -416,13 +416,7 @@ $(document).ready(function () {
 		var pw1 =$("#pw1").val();
 		var pw2 =$("#pw2").val();
 		
-		if (pw1.length<1){
-			alert("비밀번호를 입력해주세요");			
-		}else if (pw2.length<1){
-			alert("비밀번호 확인을 입력해주세요");			
-		}else if (pw1.length<8 || pw1.length>16){
-			alert("비밀번호는 8자리 이상 16자리 이하로 작성해주세요");
-		}else if (pw1 !="" || pw2 != ""){		
+		 if (pw1 !="" || pw2 != ""){		
 			if (pw1 ==pw2) {
 				$("#alert-success").show();
 				$("#alert-danger").hide();
@@ -469,6 +463,7 @@ function nickCheck() {
 			dataType :"json",
 			error : function(error) {
 				alert("서버가 응답하지 않습니다");
+				console.log(e.resposneText);
 			},
 			success : function(result) {
 				if (result==0) {
@@ -550,7 +545,7 @@ $("#alert-emailsuccess").hide();
 $("#alert-emaildanger").hide();
 $("#alert-emailfresh").hide();
 
-/* $(document).ready(function(){
+$(document).ready(function(){
     $('#email2').change(function(){
         var email = $('#email2').val(); //id선택자로 email select box값 추출하여 저장
         if(email == 'custom'){ //selectbox value가 custom이면
@@ -558,7 +553,7 @@ $("#alert-emailfresh").hide();
             //selectbox 태그를 input 태그로 변경
         }
     });
-}); */
+});
 
 
 $(document).ready(function() {
@@ -614,9 +609,6 @@ function check() {
 				alert("서버가 응답하지 않습니다");
 			},
 			success : function(result) {
-			
-				
-				
 				if (result==0) {
 					$("#alert-emailsuccess").show();
 					$("#alert-emaildanger").hide();
@@ -658,16 +650,13 @@ function check() {
 		xhttp.open("POST","sendMail.action",true);
 		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 		xhttp.send("email=" + email);
+		
+		//팝업창 열기
 		window.open("sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
 			
 		return false;
 	}  
 </script>
-
-<!-- 전화번호 및 주소 확인 -->
-
-
-
 
 <!-- 회원가입 완료 -->
 <script type="text/javascript">
@@ -688,11 +677,11 @@ function signUp() {
 		alert("아이디를 작성해주세요");
 		 $('#user_Id').focus();
 		 
-	}else if(userId.length<8){
+	}else if($("#user_Id").val().length<8){
 		alert("아이디는 8자리 이상으로 입력해주세요")
 		$('#user_Id').focus();
 		
-	}else if(userId.length>16){
+	}else if($("#user_Id").val().length>16){
 		alert("아이디는 16자리 이하로 입력해주세요")
 		$('#user_Id').focus();
 		
@@ -700,8 +689,12 @@ function signUp() {
 		alert("비밀번호를 작성해주세요");
 		$('#pw1').focus();
 		
-	}else if ($("#pw1").length<8 || $("pw1").length>16){
-		alert("비밀번호는 8자리 이상 16자리 이하로 작성해주세요");
+	}else if ($("#pw1").val().length<8 ){
+		alert("비밀번호는 8자리 이상으로 작성해주세요");
+		$('#pw1').focus(); 
+		
+	}else if($("#pw1").val().length>16){
+		alert("비밀번호는 16자리 이하로 작성해주세요");
 		$('#pw1').focus();
 		
 	}else if($("#pw2").val().length<1){
@@ -720,11 +713,11 @@ function signUp() {
 		alert("닉네임을 작성해주세요");
 		$('#user_NickName').focus();
 		
-	}else if($("#user_NickName").length<2){
+	}else if($("#user_NickName").val().length<2){
 		alert("닉네임은 최소 2글자 이상입니다.");
 		$('#user_NickName').focus();
 		
-	}else if($("#user_NickName").length>12){
+	}else if($("#user_NickName").val().length>12){
 		alert("닉네임은 12글자 이하입니다.");
 		$('#user_NickName').focus();
 		
@@ -787,10 +780,9 @@ function signUp() {
 		
 	}else if($("#checkEmail").val() == 2){
 		alert("이메일 중복검사를 해주세요");
-	
+	}else if($("#checkNum").val() != 1){
+		alert("이메일 인증을 완료해주세요")
 	}else{
-		
-
 		var email1 =document.getElementById("email1").value; 
 		var email2 =document.getElementById("email2").value; 
 		var email = email1+ "@" + email2;

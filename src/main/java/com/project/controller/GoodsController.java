@@ -33,7 +33,7 @@ public class GoodsController {
 	@RequestMapping(value="/goodsList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String goodsLists(HttpServletRequest req) throws Exception {
 		
-		req.setAttribute("GK_KIND_NUM", req.getParameter("GK_KIND_NUM"));
+		//req.setAttribute("GK_KIND_NUM", req.getParameter("GK_KIND_NUM"));
 		g_service.goodsList(req);
 
 		return "goods/goodsList";
@@ -41,12 +41,11 @@ public class GoodsController {
 	}
 	
 	//상품 상세 페이지
-	@RequestMapping(value="goodsArticle.action", method= {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/goodsArticle.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String goodsArticle(HttpServletRequest req) throws Exception{
 
+		g_service.goodsArticle(req);
 		
-		g_service.goodsAarticle(req);
-		
-		return "goods/article";
+		return "goods/goodsArticle";
 	}
 }

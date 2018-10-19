@@ -28,7 +28,7 @@ public interface AdminService {
 	//상품 수정
 	public void updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req) throws Exception;
 	//상품 삭제
-	public void deleteGoods(int g_num, String path) throws Exception;
+	public void deleteGoods(int g_num, String path, String cPath) throws Exception;
 	//상품 리스트
 	public HttpServletRequest goodsList(HttpServletRequest req) throws Exception;
 	//상세 상품의 정보
