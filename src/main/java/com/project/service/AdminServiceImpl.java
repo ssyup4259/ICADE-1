@@ -84,7 +84,14 @@ public class AdminServiceImpl implements AdminService {
 		g_dto.setG_CONTENT_ORIGINAL_FILE(file2.getOriginalFilename());
 		
 		String fileExt = g_dto.getG_PHOTO().substring(g_dto.getG_PHOTO().lastIndexOf("."));
-		String contentFileExt = g_dto.getG_CONTENT_ORIGINAL_FILE().substring(g_dto.getG_CONTENT_ORIGINAL_FILE().lastIndexOf("."));
+		String contentFileExt = "";
+		
+		if (g_dto.getG_CONTENT_ORIGINAL_FILE().lastIndexOf(".") == -1) {
+			
+		} else {
+			contentFileExt = g_dto.getG_CONTENT_ORIGINAL_FILE().substring(g_dto.getG_CONTENT_ORIGINAL_FILE().lastIndexOf("."));
+		}
+		
 		if(fileExt == null || fileExt.equals(""))
 			return;
 		
@@ -92,7 +99,8 @@ public class AdminServiceImpl implements AdminService {
 		saveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
 		saveFileName += System.nanoTime();
 		
-		saveContentFileName = saveFileName;
+		saveContentFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+		saveContentFileName += System.nanoTime();
 		
 		saveFileName += fileExt;
 		saveContentFileName += contentFileExt;
@@ -135,30 +143,36 @@ public class AdminServiceImpl implements AdminService {
 		
 		if (file2.getSize() > 0 || file2 != null) {
 			
-			try {
+			if (g_dto.getG_CONTENT_SAVE_FILE() == null || g_dto.getG_CONTENT_SAVE_FILE().equals("")) {
 				
-				FileOutputStream fos = new FileOutputStream(content_path + "/" + saveContentFileName);
+			} else {
 				
-				InputStream is = file2.getInputStream();
-				
-				byte[] buffer = new byte[512];
-				
-				while (true) {
+				try {
 					
-					int data = is.read(buffer, 0, buffer.length);
+					FileOutputStream fos = new FileOutputStream(content_path + "/" + saveContentFileName);
 					
-					if (data == -1) {
-						break;
+					InputStream is = file2.getInputStream();
+					
+					byte[] buffer = new byte[512];
+					
+					while (true) {
+						
+						int data = is.read(buffer, 0, buffer.length);
+						
+						if (data == -1) {
+							break;
+						}
+						
+						fos.write(buffer, 0, data);
+						
 					}
 					
-					fos.write(buffer, 0, data);
+					is.close();
+					fos.close();
 					
-				}
+				} catch (Exception e) { e.printStackTrace(); }
 				
-				is.close();
-				fos.close();
-				
-			} catch (Exception e) { e.printStackTrace(); }
+			}
 			
 		}
 		
@@ -322,6 +336,7 @@ public class AdminServiceImpl implements AdminService {
 				String newSaveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
 				newSaveFileName += System.nanoTime();
 				
+				
 				newSaveFileName += fileExt;
 				
 				//저장될 파일명 세팅
@@ -368,14 +383,107 @@ public class AdminServiceImpl implements AdminService {
 			
 		}
 		
+		//상품 설명 사진
+		//파일이 NULL이 아닐 경우 == 사진을 변경하는 경우
+		if (!g_dto.getgFile2().isEmpty()) {
+			
+			//기존의 사진 파일 삭제 후 변경된 사진 추가
+			
+			String path = req.getSession().getServletContext().getRealPath("/resources/goodsContentImage");
+			String saveFileName = a_dao.getReadGoods(g_dto.getG_NUM()).getG_CONTENT_SAVE_FILE();
+			
+			String filePath = path + File.separator + saveFileName;
+			
+			File f = new File(filePath);
+			
+			if (f.exists()) {
+				
+				f.delete(); //기존의 사진파일 삭제
+				
+				//수정된 사진 파일 물리적으로 추가
+				MultipartFile file = req.getFile("gFile2");
+				
+				//원본파일명 세팅
+				g_dto.setG_CONTENT_ORIGINAL_FILE(file.getOriginalFilename());
+				
+				String fileExt = "";
+				
+				if (g_dto.getG_CONTENT_ORIGINAL_FILE().lastIndexOf(".") == -1) {
+					
+				} else {
+					fileExt = g_dto.getG_CONTENT_ORIGINAL_FILE().substring(g_dto.getG_CONTENT_ORIGINAL_FILE().lastIndexOf("."));
+				}
+				
+				String newSaveFileName2 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+				newSaveFileName2 += System.nanoTime();
+				
+				newSaveFileName2 += fileExt;
+				
+				if(fileExt == null || fileExt.equals("")) {
+					newSaveFileName2 = "";
+				}
+				
+				//저장될 파일명 세팅
+				g_dto.setG_CONTENT_SAVE_FILE(newSaveFileName2);
+				
+				if (file.getSize() > 0 || file != null) {
+					
+					try {
+						
+						FileOutputStream fos = new FileOutputStream(path + "/" + newSaveFileName2);
+						
+						InputStream is = file.getInputStream();
+						
+						byte[] buffer = new byte[512];
+						
+						while (true) {
+							
+							int data = is.read(buffer, 0, buffer.length);
+							
+							if (data == -1) {
+								break;
+							}
+							
+							fos.write(buffer, 0, data);
+							
+						}
+						
+						is.close();
+						fos.close();
+						
+					} catch (Exception e) { e.printStackTrace(); }
+					
+				}
+				
+			}
+			
+		} else { //파일이 NULL일 경우 = 사진을 변경하지 않을 경우
+			
+			//기존의 정보를 다시 세팅
+			GoodsDTO dto = a_dao.getReadGoods(g_dto.getG_NUM());
+			
+			if (dto.getG_CONTENT_ORIGINAL_FILE() == null || dto.getG_CONTENT_ORIGINAL_FILE().equals("")) {
+				
+				g_dto.setG_CONTENT_ORIGINAL_FILE("");
+				g_dto.setG_CONTENT_SAVE_FILE("");
+				
+			} else {
+				
+				g_dto.setG_CONTENT_ORIGINAL_FILE(dto.getG_CONTENT_ORIGINAL_FILE());
+				g_dto.setG_CONTENT_SAVE_FILE(dto.getG_CONTENT_SAVE_FILE());
+				
+			}
+			
+		}
+		
 		a_dao.updateGoods(g_dto);
 		
 	}
 
 	//상품 삭제 (완료)
 	@Override
-	public void deleteGoods(int g_num, String path) throws Exception  {
-		a_dao.deleteGoods(g_num, path);
+	public void deleteGoods(int g_num, String path, String cPath) throws Exception  {
+		a_dao.deleteGoods(g_num, path, cPath);
 	}
 
 	//상세 상품의 정보 (완료)

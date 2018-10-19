@@ -94,17 +94,24 @@ public class AdminDAOImpl implements AdminDAO {
 
 	//상품 삭제 (완료)
 	@Override
-	public void deleteGoods(int g_num, String path) throws Exception  {
+	public void deleteGoods(int g_num, String path, String cPath) throws Exception  {
 		
 		GoodsDTO g_dto = sessionTemplate.selectOne(adminMapper + ".getReadGoods", g_num);
 		
 		String filePath = path + File.separator + g_dto.getG_SAVEFILENAME();
+		String cFilePath = cPath + File.separator + g_dto.getG_CONTENT_SAVE_FILE();
 		
 		File f = new File(filePath);
 		
 		if (f.exists()) {
 			f.delete(); //물리적 파일 삭제
-		}			
+		}
+		
+		File f2 = new File(cFilePath);
+		
+		if (f2.exists()) {
+			f2.delete(); //물리적 파일 삭제
+		}
 		
 		sessionTemplate.delete(adminMapper + ".deleteGoods", g_num);
 	}

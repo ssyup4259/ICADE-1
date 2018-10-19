@@ -65,6 +65,8 @@ function sendIt() {
 상품 이름 : <input type="text" name="G_NAME" value="${g_dto.getG_NAME()}"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_PRICE()}">원 <br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT">${g_dto.getG_CONTENT()}</textarea> <br/>
+상품 설명 사진 : 
+<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_DISCOUNT()}"/>% <br/>
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
