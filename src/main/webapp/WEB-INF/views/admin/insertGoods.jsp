@@ -61,43 +61,6 @@ function sendIt() {
 
 </script>
 
-<!-- 상품종류 셀렉트박스 -->
-<!-- <script type="text/javascript">
-
-function showSub(obj) {
-
-    var f = document.myForm;
-
-    if(obj == 900) {
-    
-        f.SUB1.style.display = "";
-        f.SUB2.style.display = "none";
-        f.SUB3.style.display = "none";
-
-    } else if (obj == 901) {
-
-        f.SUB1.style.display = "none";
-        f.SUB2.style.display = "";
-        f.SUB3.style.display = "none";
-
-    } else if (obj == 902) {
-    	
-    	f.SUB1.style.display = "none";
-        f.SUB2.style.display = "none";
-        f.SUB3.style.display = "";
-        
-    } else {
-		
-    	f.SUB1.style.display = "none";
-        f.SUB2.style.display = "none";
-        f.SUB3.style.display = "none";
-    	
-	}
-    
-}
-
-</script> -->
-
 <!-- 체크박스관련 -->
 <script type="text/javascript">
 
@@ -148,32 +111,6 @@ function enableTextBox(name) {
 <form action="" name="myForm" method="POST" enctype="multipart/form-data">
 
 상품 종류 : 
-<!-- <select onChange="showSub(this.options[this.selectedIndex].value);">
-	<option>선택해주세요</option>
-	<option value="900">케이스</option>
-	<option value="901">필름</option>
-	<option value="902">액세서리</option>
-</select> -->
-
-
-<!-- <select name="SUB1" style="display: none;">
-	<option>선택해주세요</option>
-	<option value="1">기본 케이스</option>
-	<option value="2">주문제작 케이스</option>
-</select> -->
-
-
-<!-- <select name="SUB2" style="display: none;">
-	<option value="3">필름</option>
-</select> -->
-
-
-<!-- <select name="SUB3" style="display: none;">
-	<option>선택해주세요</option>
-	<option value="4">셀카봉/삼각대</option>
-	<option value="5">케이블/충전기</option>
-	<option value="6">이어폰</option>
-</select> -->
 
 <c:forEach var="gk_dto" items="${gk_lists}">
 	<c:if test="${gk_dto.GK_NUM == 1}">
@@ -213,9 +150,10 @@ function enableTextBox(name) {
 
 <br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>
+상품 설명 사진 : <input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>% <br/>
 상품 사진 : 
-<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요" onchange="change();"/> <br/>
+<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 
 <input type="button" onclick="sendIt()" value="상품등록">
 <input type="reset" value=" 다시입력 " onclick="document.myForm.G_NAME.focus();"/>

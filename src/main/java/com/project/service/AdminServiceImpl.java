@@ -62,28 +62,47 @@ public class AdminServiceImpl implements AdminService {
 		
 		int g_num;
 		String saveFileName;
+		String saveContentFileName;
 		
 		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
+		String content_path = req.getSession().getServletContext().getRealPath("/resources/goodsContentImage");
 		
 		File f = new File(path);
 		if (!f.exists()) {
 			f.mkdirs();
 		}
 		
+		File f2 = new File(content_path);
+		if (!f2.exists()) {
+			f2.mkdirs();
+		}
+		
 		MultipartFile file = req.getFile("gFile");
+		MultipartFile file2 = req.getFile("gFile2");
 		
 		g_dto.setG_PHOTO(file.getOriginalFilename());
+		g_dto.setG_CONTENT_ORIGINAL_FILE(file2.getOriginalFilename());
 		
 		String fileExt = g_dto.getG_PHOTO().substring(g_dto.getG_PHOTO().lastIndexOf("."));
+		String contentFileExt = g_dto.getG_CONTENT_ORIGINAL_FILE().substring(g_dto.getG_CONTENT_ORIGINAL_FILE().lastIndexOf("."));
 		if(fileExt == null || fileExt.equals(""))
 			return;
+		
 		
 		saveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
 		saveFileName += System.nanoTime();
 		
+		saveContentFileName = saveFileName;
+		
 		saveFileName += fileExt;
+		saveContentFileName += contentFileExt;
 		
 		g_dto.setG_SAVEFILENAME(saveFileName);
+		g_dto.setG_CONTENT_SAVE_FILE(saveContentFileName);
+		
+		if(contentFileExt == null || contentFileExt.equals("")) {
+			g_dto.setG_CONTENT_SAVE_FILE("");
+		}
 		
 		if (file.getSize() > 0 || file != null) {
 			
@@ -92,6 +111,35 @@ public class AdminServiceImpl implements AdminService {
 				FileOutputStream fos = new FileOutputStream(path + "/" + saveFileName);
 				
 				InputStream is = file.getInputStream();
+				
+				byte[] buffer = new byte[512];
+				
+				while (true) {
+					
+					int data = is.read(buffer, 0, buffer.length);
+					
+					if (data == -1) {
+						break;
+					}
+					
+					fos.write(buffer, 0, data);
+					
+				}
+				
+				is.close();
+				fos.close();
+				
+			} catch (Exception e) { e.printStackTrace(); }
+			
+		}
+		
+		if (file2.getSize() > 0 || file2 != null) {
+			
+			try {
+				
+				FileOutputStream fos = new FileOutputStream(content_path + "/" + saveContentFileName);
+				
+				InputStream is = file2.getInputStream();
 				
 				byte[] buffer = new byte[512];
 				
