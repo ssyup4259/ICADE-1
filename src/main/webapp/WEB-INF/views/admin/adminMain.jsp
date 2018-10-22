@@ -16,7 +16,6 @@
 
 <a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a>
 <a href="<%=cp%>/admin/memberList.action">회원 목록</a>
-<a href="<%=cp%>/goods/goodsList.action">회원 상품 목록</a>
 
 </body>
 </html>
