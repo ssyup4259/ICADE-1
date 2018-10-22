@@ -23,6 +23,18 @@ public class CartDAOImpl implements CartDAO {
 	
 	public static String cartMapper = "com.project.mybatis.cartMapper";
 
+	//장바구니 추가
+	@Override
+	public void insertCartItem(CartDTO c_dto) throws Exception {
+		
+		int c_num = sessionTemplate.selectOne(cartMapper + ".getMaxNum");
+		
+		c_dto.setC_NUM(c_num + 1);
+		
+		sessionTemplate.insert(cartMapper + ".insertCartItem", c_dto);
+		
+	}
+
 	//장바구니 리스트
 	@Override
 	public List<CartDTO> getCartLists(int start, int end, String c_id) throws Exception {
