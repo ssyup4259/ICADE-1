@@ -8,15 +8,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자 화면</title>
+<title>체크박스 데이터가 넘어오는지</title>
 </head>
 <body>
 
-<h3>관리자 화면</h3>
-
-<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a>
-<a href="<%=cp%>/admin/memberList.action">회원 목록</a>
-<a href="<%=cp%>/goods/goodsList.action">회원 상품 목록</a>
+<c:forEach var="c_dto" items="${c_lists}">
+	<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/><br/>
+	C_CODE : ${c_dto.getC_CODE()}<br/>
+	C_COUNT : ${c_dto.getC_COUNT()}<br/>
+	<br/>
+</c:forEach>
 
 </body>
 </html>

@@ -27,6 +27,9 @@ public class GoodsDTO {
 
     // 파일
     private MultipartFile gFile;
+    
+	// 상품 설명 파일
+    private MultipartFile gFile2;
 
 	// 상품 사진명 
     private String G_PHOTO;
@@ -39,6 +42,36 @@ public class GoodsDTO {
     
     // 상품 종류
     private String GK_KIND;
+    
+    // 상품 내용 이미지 원본 파일명
+    private String G_CONTENT_ORIGINAL_FILE;
+    
+    // 상품 내용 이미지 저장 파일명
+    private String G_CONTENT_SAVE_FILE;
+    
+    public MultipartFile getgFile2() {
+		return gFile2;
+	}
+
+	public void setgFile2(MultipartFile gFile2) {
+		this.gFile2 = gFile2;
+	}
+
+	public String getG_CONTENT_ORIGINAL_FILE() {
+		return G_CONTENT_ORIGINAL_FILE;
+	}
+
+	public void setG_CONTENT_ORIGINAL_FILE(String g_CONTENT_ORIGINAL_FILE) {
+		G_CONTENT_ORIGINAL_FILE = g_CONTENT_ORIGINAL_FILE;
+	}
+
+	public String getG_CONTENT_SAVE_FILE() {
+		return G_CONTENT_SAVE_FILE;
+	}
+
+	public void setG_CONTENT_SAVE_FILE(String g_CONTENT_SAVE_FILE) {
+		G_CONTENT_SAVE_FILE = g_CONTENT_SAVE_FILE;
+	}
 
 	public int getGD_KIND_NUM() {
 		return GD_KIND_NUM;

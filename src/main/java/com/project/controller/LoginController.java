@@ -13,31 +13,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.dao.LoginDAO;
 import com.project.dto.MemberDTO;
+import com.project.service.LoginService;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
-	LoginDAO dao;
+	private LoginService service;
 	
 	@RequestMapping(value="/login.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login(HttpServletRequest req, HttpServletResponse resp)throws Exception{
-
+		System.out.println("login.action");
 		return "login/login";
 	}
 	
 	@RequestMapping(value="/login_ok.action", method=RequestMethod.POST)
-	public String login_ok(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+	public String login_ok(HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		String M_ID = (String) req.getParameter("M_ID");
-		String M_PW = (String) req.getParameter("M_PW");
+		String M_ID = req.getParameter("M_ID");
+		String M_PW = req.getParameter("M_PW");
 		
 		//System.out.println(M_ID);
 		//System.out.println(M_PW);
 		
 		HttpSession session = req.getSession();
-		
-		dto = dao.checkInfo(M_ID); // String에서 맵으로 바꿔야되는데 시간없어서 일단 여기까지함.
+		//System.out.println("service전");
+		MemberDTO dto = service.checkInfo(M_ID);
 		
 		//System.out.println(dto.getM_ID());
 		
@@ -58,7 +59,11 @@ public class LoginController {
 			return "login/login";
 			
 		}else{
+			
 			//System.out.println("아이디 비번 true 반환시 보인다.");
+
+			dto.setM_DATE(dto.getM_DATE().substring(0, 10));
+			
 			session.setAttribute("userInfo", dto);
 			
 			//MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
@@ -75,7 +80,7 @@ public class LoginController {
 		
 		//System.out.println("여기왔따.");
 		
-		HttpSession session = req.getSession();
+		//HttpSession session = req.getSession();
 		
 		//String userId = (String) session.getAttribute("userId");
 		
@@ -89,11 +94,13 @@ public class LoginController {
 	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String logout(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
+		System.out.println("로그아웃 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		
-		session.removeAttribute("userId");
+		session.removeAttribute("userInfo");
 		
-		return "loginTest";
+		return "redirect:/loginTest.action";
 	}
 	
 	

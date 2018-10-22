@@ -35,6 +35,25 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if(reqUrl=="http://"+localhost+":8080/icade/join.action" || reqUrl.equals("http://"+localhost+":8080/icade/join.action")) {
 			return true;
 		}
+		if(reqUrl=="http://"+localhost+":8080/icade/join_ok.action" || reqUrl.equals("http://"+localhost+":8080/icade/join_ok.action")) {
+			return true;
+		}
+		if(reqUrl=="http://"+localhost+":8080/icade/idcheck.action" || reqUrl.equals("http://"+localhost+":8080/icade/idcheck.action")) {
+			return true;
+		}
+		if(reqUrl=="http://"+localhost+":8080/icade/nickcheck.action" || reqUrl.equals("http://"+localhost+":8080/icade/nickcheck.action")) {
+			return true;
+		}
+		if(reqUrl=="http://"+localhost+":8080/icade/emailcheck.action" || reqUrl.equals("http://"+localhost+":8080/icade/emailcheck.action")) {
+			return true;
+		}
+		if(reqUrl=="http://"+localhost+":8080/icade/sendMail.action" || reqUrl.equals("http://"+localhost+":8080/icade/sendMail.action")) {
+			return true;
+		}
+		if(reqUrl=="http://"+localhost+":8080/icade/sendMail_ok.action" || reqUrl.equals("http://"+localhost+":8080/icade/sendMail_ok.action")) {
+			return true;
+		}
+		
 		
 		
 		session.setAttribute("reqUrl", reqUrl);

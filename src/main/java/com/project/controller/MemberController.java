@@ -44,7 +44,6 @@ public class MemberController {
 			return idCheckResult;
 			
 		}
-		
 		@RequestMapping(value="/nickcheck.action")
 		@ResponseBody
 		public int nickCheck(CommandMap commandMap)throws Exception{
@@ -64,9 +63,6 @@ public class MemberController {
 			
 			return emailCheckResult;
 		}
-		
-
-		
 	}
 	
 	

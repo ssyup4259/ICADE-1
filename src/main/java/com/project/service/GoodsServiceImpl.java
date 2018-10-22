@@ -2,13 +2,13 @@ package com.project.service;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.AdminDAO;
 import com.project.dao.GoodsDAO;
@@ -110,7 +110,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		//글보기 주소 정리
 		String articleUrl = 
-			cp + "/goodsDetail.action?pageNum=" + currentPage;
+			cp + "/goodsArticle.action?pageNum=" + currentPage;
 			
 		if (!param.equals(""))
 			articleUrl = articleUrl + "&" + param;
@@ -124,7 +124,37 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		return req;
 	}
-	
-	
 
+
+
+	@Override
+	public HttpServletRequest goodsArticle(HttpServletRequest req) throws Exception {
+		
+		
+		//갖고온 데이터 받기
+		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
+		String pageNum = req.getParameter("pageNum");
+		String searchKey = req.getParameter("searchKey");
+		String searchValue = req.getParameter("searchValue");
+		
+		
+		if(searchKey != null)
+			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		
+		
+		 a_dao.getReadGoodsDetail(G_NUM);
+		
+		String param = "pageNum=" + pageNum;
+		if(searchKey!=null){
+			param += "&searchKey=" + searchKey;
+			param += "&searchValue=" 
+				+ URLEncoder.encode(searchValue, "UTF-8");
+		}
+		
+		req.setAttribute("params", param);
+		req.setAttribute("pageNum", pageNum);
+		
+		
+		return req;
+	}
 }
