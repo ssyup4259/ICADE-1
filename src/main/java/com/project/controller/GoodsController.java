@@ -33,7 +33,6 @@ public class GoodsController {
 	@RequestMapping(value="/goodsList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String goodsLists(HttpServletRequest req) throws Exception {
 		
-		//req.setAttribute("GK_KIND_NUM", req.getParameter("GK_KIND_NUM"));
 		g_service.goodsList(req);
 
 		return "goods/goodsList";

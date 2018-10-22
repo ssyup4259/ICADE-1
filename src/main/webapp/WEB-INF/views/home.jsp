@@ -20,6 +20,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<script type="text/javascript">
+
+	function sendIt(){
+		
+		var f = document.searchForm;
+		
+		f.action = "<%=cp%>/goods/goodsList.action";
+		f.submit();
+		
+	}
+
+</script>
+
 <style type="text/css">
 .sticky {
 	position: sticky;
@@ -38,40 +51,7 @@
 		<img src="/icade/resources/data/img/close.png" onclick="$('.event').slideUp(400);" style="cursor: pointer; vertical-align: middle;">
 	</div>
 
-	<div class="navbar container-fluid sticky" style="z-index: 90;">
-		<ul>
-			<li>
-				<img src="/icade/resources/data/logo/logo2.png" width="140" height="47" style="cursor: pointer;" onclick="';">
-			</li>
-
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn">케이스</a>
-				<div class="dropdown-content">
-					<a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">일반</a> <a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">주문제작</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn">필름</a>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn">악세서리</a>
-				<div class="dropdown-content">
-					<a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">케이블</a> <a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">충전기</a>
-				</div>
-			</li>
-
-			<li style="float: right">
-				<a href="<%=cp%>/ikeloom/created.do">회원가입</a>
-			</li>
-			<li style="float: right">
-				<a href="<%=cp%>/ikeloom/login.do">로그인</a>
-			</li>
-		</ul>
-	</div>
-
-	<div class="container-fluid text-center" style="margin-top: 57px;">
-		<img src="/icade/resources/data/logo/logo1.png">
-	</div>
+	<jsp:include page="./include/header.jsp" flush="false"/>
 
 	<ul class="carousel">
 		<li>
@@ -89,7 +69,15 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
 				<form class="form-inline" action="" name="searchForm" method="post">
-					<input type="hidden" name="GK_KIND_NUM" value="${GK_KIND_NUM}" />
+					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
+					
+					<select name="GK_KIND_NUM" class="sel1" style="width: 100px;">
+						<option value="">전체</option>
+						<c:forEach var="gk_dto" items="${gk_lists}">
+							<option value="${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</option>
+						</c:forEach>
+					</select>
+					
 					<select name="searchKey" class="sel1" style="width: 100px;">
 						<option value="G_NAME">상품명</option>
 						<option value="G_CONTENT">내용</option>
