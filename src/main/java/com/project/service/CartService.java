@@ -3,8 +3,12 @@ package com.project.service;
 import javax.servlet.http.HttpServletRequest;
 
 import com.project.dto.CartDTO;
+import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 
 public interface CartService {
+	
+	public void insertCartItem(String c_id, GoodsDTO g_dto, GoodsDetailDTO gd_dto) throws Exception;
 	
 	//장바구니 리스트
 	HttpServletRequest cartList(HttpServletRequest req, String c_id) throws Exception;

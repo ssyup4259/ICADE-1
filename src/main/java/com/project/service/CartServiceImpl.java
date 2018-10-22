@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.CartDAO;
 import com.project.dto.CartDTO;
+import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.util.MyUtil;
 
 @Service
@@ -21,6 +23,25 @@ public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	MyUtil myUtil;
+	
+	//장바구니 추가
+	@Override
+	public void insertCartItem(String c_id, GoodsDTO g_dto, GoodsDetailDTO gd_dto) throws Exception {
+		
+		CartDTO c_dto = new CartDTO();
+		
+		String c_code = gd_dto.getGD_CODE();
+		String c_name = g_dto.getG_NAME();
+		int c_count = gd_dto.getGD_COUNT();
+		
+		c_dto.setC_ID(c_id);
+		c_dto.setC_CODE(c_code);
+		c_dto.setC_NAME(c_name);
+		c_dto.setC_COUNT(c_count);
+		
+		c_dao.insertCartItem(c_dto);
+		
+	}
 
 	//장바구니 리스트
 	@Override
@@ -113,7 +134,5 @@ public class CartServiceImpl implements CartService {
 	public CartDTO getCartItem(String c_num) throws Exception {
 		return c_dao.getCartItem(c_num);
 	}
-	
-	
 
 }

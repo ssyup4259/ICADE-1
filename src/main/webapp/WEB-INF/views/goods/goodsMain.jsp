@@ -90,7 +90,7 @@ footer {
 
 	<c:forEach var="gk_dto" items="${gk_lists}">
 		<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>&nbsp;&nbsp;
-</c:forEach>
+	</c:forEach>
 	<h3>인기 상품 리스트</h3>
 	<br />
 	<br />

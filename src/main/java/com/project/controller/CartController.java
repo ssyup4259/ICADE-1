@@ -1,14 +1,12 @@
 package com.project.controller;
 
 import java.net.URLEncoder;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.dto.CartDTO;
+import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.CartService;
 
@@ -46,14 +46,16 @@ public class CartController {
 	
 	//장바구니 추가 아직 미완성~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@RequestMapping(value="/insertCart.action", method= {RequestMethod.GET, RequestMethod.POST})
-	public String insertCart(HttpServletRequest req) throws Exception {
+	public String insertCartItem(HttpServletRequest req, GoodsDTO g_dto, GoodsDetailDTO gd_dto) throws Exception {
 		
 		HttpSession session = req.getSession();
 		
 		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
 		String c_id = m_dto.getM_ID();
 		
-		return "";
+		c_service.insertCartItem(c_id, g_dto, gd_dto);
+		
+		return "redirect:goods/goodsArticle.action";
 		
 	}
 	
