@@ -195,8 +195,8 @@ $(function() {
 								<td align="left">
 									<c:if test="${!empty gd_list}">
 										<select name="selectBox" id="product" >
-											<c:forEach var="gd_dto" items="${gd_list}">
-												<option value="${gd_dto.DK_NAME}">${gd_dto.DK_NAME}</option>
+											<c:forEach var="gd_dto" items="${d_list}">
+												<option value="${gd_dto.getDK_NAME()}">${gd_dto.getDK_NAME()}</option>
 											</c:forEach>
 										</select>
 									</c:if>

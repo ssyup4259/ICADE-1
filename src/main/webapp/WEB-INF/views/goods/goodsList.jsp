@@ -95,7 +95,8 @@
 						</c:if>
 
 						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px;">
-							<a href="#"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="width: 100%; height: 380px; border-top-left-radius: 30px; border-top-right-radius: 30px;" alt="Image">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">
+							<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="width: 100%; height: 380px; border-top-left-radius: 30px; border-top-right-radius: 30px;" alt="Image">
 								<div class="caption">
 									<p>${g_dto.getG_NAME()}</p>
 									남은 수량 : ${g_dto.getG_COUNT()}

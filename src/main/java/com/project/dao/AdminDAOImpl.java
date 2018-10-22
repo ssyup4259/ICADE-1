@@ -212,7 +212,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<GoodsDetailDTO> selectReadData(int g_num) throws Exception {
 		
-		List<GoodsDetailDTO> d_list =sessionTemplate.selectList(adminMapper + ".selectReadData",g_num);
+		List<GoodsDetailDTO> d_list = sessionTemplate.selectList(adminMapper + ".selectReadData", g_num);
 		
 		return d_list;
 	}
@@ -224,7 +224,7 @@ public class AdminDAOImpl implements AdminDAO {
 		hMap.put("g_num", g_num);
 		hMap.put("gd_device", gd_device);
 		
-		List<GoodsDetailDTO> dc_list = sessionTemplate.selectList(adminMapper + ".selectReadData",hMap);
+		List<GoodsDetailDTO> dc_list = sessionTemplate.selectList(adminMapper + ".selectReadData", hMap);
 		
 		return dc_list;
 	}
