@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -63,7 +64,4 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return result;
 		
 	}
-
-	
-
 }

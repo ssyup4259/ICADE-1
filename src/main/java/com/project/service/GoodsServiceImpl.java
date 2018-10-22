@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.dao.AdminDAO;
 import com.project.dao.GoodsDAO;
 import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.util.MyUtil;
 
@@ -90,7 +92,6 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 		
 		List<GoodsDTO> g_lists = g_dao.goodsList(start, end, gdKindNum, searchKey, searchValue);
-		
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
@@ -133,19 +134,23 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public HttpServletRequest goodsArticle(HttpServletRequest req) throws Exception {
 		
-		
 		//갖고온 데이터 받기
 		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
+		//int GD_DEVICE = Integer.parseInt(req.getParameter("GD_DEVICE"));
 		String pageNum = req.getParameter("pageNum");
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
 		
-		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		
+		GoodsDTO g_dto = a_dao.getReadGoods(G_NUM);
+		//하나의 상품의 상세정보 읽어오기
+		List<GoodsDetailDTO> gd_list = a_dao.getReadGoodsDetail(G_NUM);
 		
-		 a_dao.getReadGoodsDetail(G_NUM);
+		//셀렉트 박스의 상세정보 읽어오기
+		List<GoodsDetailDTO> d_list =a_dao.selectReadData(G_NUM);
+
 		
 		String param = "pageNum=" + pageNum;
 		if(searchKey!=null){
@@ -156,7 +161,10 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		req.setAttribute("params", param);
 		req.setAttribute("pageNum", pageNum);
-		
+		req.setAttribute("g_dto", g_dto);
+		req.setAttribute("gd_list", gd_list);
+		req.setAttribute("d_list", d_list);
+		//req.setAttribute("dc_list", dc_list);
 		
 		return req;
 	}

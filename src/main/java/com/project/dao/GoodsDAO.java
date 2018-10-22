@@ -3,6 +3,7 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 
 public interface GoodsDAO {
 	
@@ -17,5 +18,7 @@ public interface GoodsDAO {
 	
 	//상품 개수 구하기
 	public int getGoodsCount(String searchKey,String searchValue) throws Exception;
+	
+
 	
 }

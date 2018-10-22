@@ -206,9 +206,31 @@ public class AdminDAOImpl implements AdminDAO {
 	//회원 주문내역 조회
 	@Override
 	public List<OrdersDTO> ordersList() throws Exception  {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<GoodsDetailDTO> selectReadData(int g_num) throws Exception {
+		
+		List<GoodsDetailDTO> d_list =sessionTemplate.selectList(adminMapper + ".selectReadData",g_num);
+		
+		return d_list;
+	}
+
+	@Override
+	public List<GoodsDetailDTO> selectReadDataColor(int g_num, int gd_device) throws Exception {
+		
+		Map<String, Integer> hMap = new HashMap<String, Integer>();
+		hMap.put("g_num", g_num);
+		hMap.put("gd_device", gd_device);
+		
+		List<GoodsDetailDTO> dc_list = sessionTemplate.selectList(adminMapper + ".selectReadData",hMap);
+		
+		return dc_list;
+	}
+
+	
+	
 
 	
 
