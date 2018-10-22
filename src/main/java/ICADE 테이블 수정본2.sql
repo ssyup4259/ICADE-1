@@ -21,6 +21,9 @@ DROP TABLE BOARD_COMMENT CASCADE CONSTRAINTS;
 
 PURGE RECYCLEBIN;
 
+imp userid=icade/123 file='D:\icade.dmp'
+
+
 -- Member Table Create SQL
 CREATE TABLE Member
 (

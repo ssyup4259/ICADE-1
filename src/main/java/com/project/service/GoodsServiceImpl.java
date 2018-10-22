@@ -110,7 +110,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		//글보기 주소 정리
 		String articleUrl = 
-			cp + "/goodsDetail.action?pageNum=" + currentPage;
+			cp + "/goodsArticle.action?pageNum=" + currentPage;
 			
 		if (!param.equals(""))
 			articleUrl = articleUrl + "&" + param;
@@ -128,22 +128,21 @@ public class GoodsServiceImpl implements GoodsService {
 
 
 	@Override
-	public HttpServletRequest goodsAarticle(HttpServletRequest req) throws Exception {
+	public HttpServletRequest goodsArticle(HttpServletRequest req) throws Exception {
 		
 		
 		//갖고온 데이터 받기
-		int GD_NUM = Integer.parseInt(req.getParameter("GD_NUM"));
+		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
 		String pageNum = req.getParameter("pageNum");
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
-		
 		
 		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		
 		
-		a_dao.getReadGoods(GD_NUM);
+		 a_dao.getReadGoodsDetail(G_NUM);
 		
 		String param = "pageNum=" + pageNum;
 		if(searchKey!=null){
@@ -151,7 +150,6 @@ public class GoodsServiceImpl implements GoodsService {
 			param += "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
 		}
-		
 		
 		req.setAttribute("params", param);
 		req.setAttribute("pageNum", pageNum);
