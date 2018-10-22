@@ -123,6 +123,9 @@ public class GoodsServiceImpl implements GoodsService {
 		req.setAttribute("articleUrl",articleUrl);
 		req.setAttribute("gdKindNum", gdKindNum);
 		
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		req.setAttribute("gk_lists", gk_lists);
+		
 		return req;
 	}
 

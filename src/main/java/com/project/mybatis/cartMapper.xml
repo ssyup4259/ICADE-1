@@ -4,6 +4,16 @@
 
 <mapper namespace="com.project.mybatis.cartMapper">
 
+<!-- C_NUM 구하기 -->
+<select id="getMaxNum" resultType="int">
+	select nvl(max(C_NUM), 0) from Cart
+</select>
+
+<!-- 장바구니 추가 -->
+<insert id="insertCartItem" parameterType="com.project.dto.CartDTO">
+	insert into Cart (C_NUM, C_CODE, C_ID, C_NAME, C_COUNT) values(#{C_NUM}, #{C_CODE}, #{C_ID}, #{C_NAME}, #{C_COUNT})
+</insert>
+
 <!-- 장바구니 개수 구하기 -->
 <select id="getCartCount" parameterType="String" resultType="int">
 	select nvl(count(*), 0) from Cart where C_ID = #{c_id}

@@ -1,12 +1,12 @@
-package com.project.dao;
+package com.project.service;
 
 import java.util.List;
 
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrdersDTO;
 
-public interface OrderHistoryDAO {
-	
+public interface OrderHistoryService {
+
 	//주문내역조회
 	public List<Integer> selectOrderNum(String O_ID) throws Exception;
 	
@@ -21,5 +21,5 @@ public interface OrderHistoryDAO {
 	
 	//상품 번호로 저장된 이미지의 saveFileName 받기
 	public String selectSaveFile(int G_NUM) throws Exception;
-
+	
 }
