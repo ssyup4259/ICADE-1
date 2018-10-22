@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
@@ -27,24 +27,10 @@
 	});
 </script>
 
-<script type="text/javascript">
-
-	function sendIt(){
-		
-		var f = document.searchForm;
-		
-		f.action = "<%=cp%>/goods/goodsList.action";
-		f.submit();
-		
-	}
-
-</script>
-
 
 <style>
-
 @import url("varaiable (2)");
-    
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	margin-bottom: 0;
@@ -97,81 +83,70 @@ footer {
 	top: 0px;
 	z-index: 9999;
 }
-
-
 </style>
 <title>메인화면 상품 리스트</title>
 </head>
 <body>
 
-<c:forEach var="gk_dto" items="${gk_lists}">
-	<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>&nbsp;&nbsp;
+	<c:forEach var="gk_dto" items="${gk_lists}">
+		<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>&nbsp;&nbsp;
 </c:forEach>
-<br/>
-<form action="" name="searchForm" method="post">
-	<input type="hidden" name="GK_KIND_NUM" value="${GK_KIND_NUM}"/>
-	<select name="searchKey" class="selectField">
-		<option value="G_NAME">상품명</option>
-		<option value="G_CONTENT">내용</option>
-	</select>
-	<input type="text" name="searchValue" class="textField">
-	<input type="button" value=" 검색 " class="btn2" onclick="sendIt();"/>
-</form>
+	<h3>인기 상품 리스트</h3>
+	<br />
+	<br />
 
-<h3>인기 상품 리스트</h3><br/><br/>
+	<c:set var="i" value="0" />
+	<c:forEach var="g_dto" items="${popularList}">
 
-<c:set var="i" value="0"/>
-<c:forEach var="g_dto" items="${popularList}">
-	
-	<c:if test="${i % 2 == 0}">
-		<div class="row">	
-	</c:if>
-		
-	<div class="col-sm-6" style="width: 20%;" align="center">
-		<div class="panel panel-primary" style="border-color: #A3C838">
-			<div class="panel-heading" style="background-color: #A3C838;">${g_dto.getG_NAME()}</div>
-			<div class="panel-body">
-				<a href="#">
-					<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
-				</a>
+		<c:if test="${i % 2 == 0}">
+			<div class="row">
+		</c:if>
+
+		<div class="col-sm-6" style="width: 20%;" align="center">
+			<div class="panel panel-primary" style="border-color: #A3C838">
+				<div class="panel-heading" style="background-color: #A3C838;">${g_dto.getG_NAME()}</div>
+				<div class="panel-body">
+					<a href="#"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
+					</a>
+				</div>
+				<div class="panel-footer">${g_dto.getG_CONTENT()}</div>
 			</div>
-			<div class="panel-footer">${g_dto.getG_CONTENT()}</div>
 		</div>
-	</div>
-	
-	<c:if test="${i % 2 == 1 || popularList.size() == i+1}">
-		</div>	
-	</c:if>
-	
-	<c:set var="i" value="${i+1}"/>
-	
-</c:forEach>
+
+		<c:if test="${i % 2 == 1 || popularList.size() == i+1}">
+			</div>
+		</c:if>
+
+		<c:set var="i" value="${i+1}" />
+
+	</c:forEach>
 
 
-<h3>최신 상품 리스트</h3><br/><br/>
-<c:set var="i" value="0"/>
-<c:forEach var="g_dto" items="${newList}">
-	
-	<c:if test="${i % 4 == 0}">
-		<div class="row">	
-	</c:if>
-		
+	<h3>최신 상품 리스트</h3>
+	<br />
+	<br />
+	<c:set var="i" value="0" />
+	<c:forEach var="g_dto" items="${newList}">
+
+		<c:if test="${i % 4 == 0}">
+			<div class="row">
+		</c:if>
+
 		<div class="panel-body" style="width: 10%; float: left;">
-			<a href="#">
-				<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
+			<a href="#"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" class="img-responsive" style="width: 100%" alt="Image">
 			</a>
-			<br/>
+			<br />
 			${g_dto.getG_NAME()}
 		</div>
-		
-	
-	<c:if test="${i % 4 == 3 || newList.size() == i+1}">
-		</div>	
-	</c:if>
-	
-	<c:set var="i" value="${i+1}"/>
-	
-</c:forEach>
+
+
+		<c:if test="${i % 4 == 3 || newList.size() == i+1}">
+			</div>
+		</c:if>
+
+		<c:set var="i" value="${i+1}" />
+
+	</c:forEach>
 
 
 
