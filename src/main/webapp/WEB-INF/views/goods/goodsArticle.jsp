@@ -101,11 +101,11 @@ $(function() {
 
 			success: function(data) {
 
-				if(data.dc_list.length > 0) {
+				if(data.gd_list.length > 0) {
 
 					$("#sub").find("option").remove().end().append(select);
 
-					$.each(data.SUB_LIST, function(key, value) {
+					$.each(data.gd_list, function(key, value) {
 
 						$("#sub").append("<option>" + value + "</option>"); 
 
@@ -195,7 +195,7 @@ $(function() {
 								<td align="left">
 									<c:if test="${!empty gd_list}">
 										<select name="selectBox" id="product" >
-											<c:forEach var="gd_dto" items="${gd_list}">
+											<c:forEach var="gd_dto" items="${d_list}">
 												<option value="${gd_dto.DK_NAME}">${gd_dto.DK_NAME}</option>
 											</c:forEach>
 										</select>
