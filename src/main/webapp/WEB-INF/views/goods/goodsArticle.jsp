@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -9,19 +10,139 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>아이폰 케이스는 ICADE</title>
-<!-- 부트스트랩 -->
 
-<%-- <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/sangyeop.css">
-<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet"> --%>
 
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
- -->
+
+
+
+<style type="text/css">
+
+		 { margin:0; padding:0; }
+		ul,li { list-style:none; }
+		a { text-decoration:none; color:#000; }
+		.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
+		.tab li { float:left; width:20%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+		.tab li { display:inline-block; padding:20px; cursor:pointer; }
+		.tab li.on { background-color:#eee; color:#f00; }
+		.tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
+		.tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
+
+</style>
+</head>
+
+
+<!-- 탭 메뉴 적용 -->
+<script>
+		$(function () {	
+			tab('#tab',0);	
+		});
+		
+		function tab(e, num){
+		    var num = num || 0;
+		    var menu = $(e).children();
+		    var con = $(e+'_con').children();
+		    var select = $(menu).eq(num);
+		    var i = num;
+		
+		    select.addClass('on');
+		    con.eq(num).show();
+		
+		    menu.click(function(){
+		        if(select!==null){
+		            select.removeClass("on");
+		            con.eq(i).hide();
+		        }
+		
+		        select = $(this);	
+		        i = $(this).index();
+		
+		        select.addClass('on');
+		        con.eq(i).show();
+		    });
+		}
+
+</script>
+
+
+<!-- 콤보박스 연결 -->
+<script >
+$(function() {
+
+	var select = "<option>:: 선택 ::</option>"; 
+
+	$("#product").change(function() {			
+
+		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
+
+			$("#sub").find("option").remove().end().append(select);
+
+		} else {
+
+			comboChange($(this).val());
+
+		}
+
+	});
+
+	function comboChange() {
+
+		$.ajax({
+
+			type:"post",
+
+			url:"icade/goods/goodsArticle.action",
+
+			datatype: "json",
+
+			data: $("#myForm").serialize(),
+
+			success: function(data) {
+
+				if(data.gd_list.length > 0) {
+
+					$("#sub").find("option").remove().end().append(select);
+
+					$.each(data.gd_list, function(key, value) {
+
+						$("#sub").append("<option>" + value + "</option>"); 
+
+					});
+
+				} else {
+
+					$("#sub").find("option").remove().end().append("<option>-- No sub --</option>");
+
+					return;
+
+				}
+
+			},
+
+			error: function(x, o, e) {
+
+				var msg = "페이지 호출 중 에러 발생 \n" + x.status + " : " + o + " : " + e; 
+
+				alert(msg);
+
+			}				
+
+		});
+
+	}	
+
+});
+
+
+
+</script>
 
 </head>
+
+
+
 <body>
 
 
@@ -34,45 +155,86 @@
 			<table width="1000" align="center">
 				<tr>
 					<td colspan="2" align="center">
-						<h1>${DK_NAME}</h1>
+						<h1>${g_dto.getG_NAME()}</h1>
 					</td>
 				</tr>
 				<tr>
 					<td width="340">
-						 <img src="${imagePath}/${g_dto.gCode}.jpg" width="340" height="300"> 
+						 <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}.jpg" width="340" height="300"> 
 					</td>
 					<td>
 						<table width="100%" height="300">
 							<tr align="center">
 								<td>상품명</td>
-								<td></td>
+								<td align="left">${g_dto.getG_NAME()}</td>
 							</tr>
 							<tr align="center">
-								<td>가격</td>
-								<td>
-									<fmt:formatNumber></fmt:formatNumber>
-									원
+								<td>소비자가</td>
+								<td align="left">${g_dto.getG_CONTENT()}</td>
+							</tr>
+							
+							<tr align="center" onclick="discount();">
+								<td>판매가</td>
+								<td align="left">
+									
+									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
+									
 								</td>
 							</tr>
 							<tr align="center">
-								<td>상품소개</td>
+								<td>적립금</td>
+								<td align="left">
+									<img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg"/><fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>원	
+								</td>
 							</tr>
+							
+							
+							<!--  기종 선택 -->
 							<tr align="center">
-								<td>상품크기</td>
+								<td>기종</td>
+								<td align="left">
+									<c:if test="${!empty gd_list}">
+										<select name="selectBox" id="product" >
+											<c:forEach var="gd_dto" items="${d_list}">
+
+												<option value="${gd_dto.DK_NAME}">${gd_dto.DK_NAME}</option>
+
+											</c:forEach>
+										</select>
+									</c:if>
+								</td>
 							</tr>
+							
+							<!--  색상 선택 -->
+							<tr align="center">
+								<td>색상</td>
+								<td align="left">
+								<select name="sub" id="sub">
+										<option>:: 선택 ::</option>
+								</select>
+								</td>
+							</tr>
+					
+							
+							<tr align="center">
+								<td>총 상품금액</td>
+								<td align="left"></td>
+							</tr>
+							
+							
 							<tr>
 								<td colspan="2" height="2" bgcolor="#b3cccc"></td>
 							</tr>
+							
 							<tr align="center">
 								<td align="center" colspan="2">
-									<input type="hidden" name="productId" value="${g_dto.gNum}">
-									수량 :
-									<input type=button value="◀" class="btn" onClick="UpDownCount('-');" style="text-align:center; height: 30px; width: 30px;">
-									<input type="text" value="1" name="gCount" size="4" maxlength="3" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" 
-									style="text-align: center; border-radius: 8px; border-color: #b3ccccc; color: #5c8a8a; font-size: 16px;" />
-									<input type=button value="▶" class="btn" onClick="UpDownCount('+');" style="text-align:center; height: 30px; width: 30px;">
-									<br /> <font color="red" size="3">재고수량 : <fmt:formatNumber>${g_dto.gCount}</fmt:formatNumber>개
-									</font><br />
+									<input type="hidden" name="productId" value="${g_dto.getG_NUM()}">
+									
+									 <select></select>
+									 
+									
+									<br/>
+									
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
 									<input type="button" value="장바구니에 담기" onclick="insertCart();" class="btn" />
 								</td>
@@ -88,7 +250,7 @@
 						<c:if test="${!empty pageNum}">
 							<br>
 							<div id="btn">
-								<a href="<%=cp %>/list.action?pageNum=${pageNum}&g_room=${g_room}&g_kind_num=${g_kind_num}">
+								<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
 									<h2>상품목록으로 돌아가기</h2>
 								</a>
 							</div>
@@ -98,8 +260,8 @@
 						<c:if test="${empty pageNum}">
 							<br>
 							<div id="btn">
-								<a href="<%=cp%>/ikeloom/list.do?pageNum=1&g_room=bedroom&g_kind_num=10">
-									<h2>상품목록으로 돌아가기</h2>
+					<%-- 			<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
+									<h2>상품목록으로 돌아가기</h2> --%>
 								</a>
 							</div>
 							<br>
@@ -108,10 +270,62 @@
 				</tr>
 
 			</table>
-			<input type="hidden" name="gCode" value="${g_dto.gCode}" />
+			
+			<ul class="tab" id="tab">
+			    <li>상품상세정보</li>
+			    <li>상품구매안내</li>
+			    <li>상품FAQ</li>	
+			    <li>상품사용후기</li>	
+			    <li>관련후기</li>	
+			</ul>
+			
+			<div class="tab_con" id="tab_con">
+			    <div><a href="#preDetail">상품상세정보</a></div>	
+			    <div><a href="#preInfo">상품구매안내</a>
+			    <div><a href="#preQnA">상품FAQ</a></div>
+			    <div><a href="preReview">관련상품</a></div>
+			</div>
+			
 		</form>
 		</div>
 
 
 </body>
+
+<!-- 본문 끝 -->
+
+	<!--  기종 선택 --><%-- 
+							
+							//최후의 수단
+							<tr align="center">
+								<td>기종</td>
+								<td align="left">
+									<c:if test="${!empty gd_list}">
+										<select name="selectBox" id="checkDupl" onclick="checkDupl();">
+											<c:forEach var="gd_dto" items="${gd_list}">
+												<option value="${gd_dto.DK_NAME}&nbsp;${gd_dto.GC_COLOR}">${gd_dto.DK_NAME}${gd_dto.GC_COLOR}</option>
+											</c:forEach>
+										</select>
+									</c:if>
+								</td>
+							</tr> --%>
+							
+
+
+<!-- 스크립트단 -->
+
+	<script type="text/javascript">
+		function discount() {
+			var price = ${g_dto.getG_PRICE()};
+			var discount = ${g_dto.getG_DISCOUNT()};
+			var sellPrice;
+			
+			
+			
+			sellPrice = ${g_dto.getG_PRICE()}-(${g_dto.getG_PRICE()} * ${g_dto.getG_DISCOUNT()}/100);
+			 
+		}
+	
+	</script>
+
 </html>

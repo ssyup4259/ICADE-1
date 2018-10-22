@@ -42,8 +42,4 @@ public class MemberServiceImpl implements MemberService {
 	public int emailCheck(Map<String, Object> map) throws Exception {
 		return m_dao.emailCheck(map);
 	}
-
-
-
-
 }

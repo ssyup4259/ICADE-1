@@ -2,6 +2,8 @@ package com.project.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.project.dto.GoodsDTO;
+
 public interface GoodsService {
 	
 	//메인 호출
