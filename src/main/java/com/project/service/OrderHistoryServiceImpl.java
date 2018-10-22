@@ -3,11 +3,13 @@ package com.project.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.project.dao.OrderHistoryDAO;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrdersDTO;
 
+@Service
 public class OrderHistoryServiceImpl implements OrderHistoryService {
 
 	@Autowired
