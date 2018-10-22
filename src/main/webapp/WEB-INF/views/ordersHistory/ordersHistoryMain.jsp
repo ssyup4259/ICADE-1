@@ -11,30 +11,39 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	$( function() {
-		$( "#history_start_date_button" ).datepicker();
-		showMonthAfterYear:true,
-        showOn:"button",
-        buttonImage:"/common/tbl_st_ca.jpg",
-        buttonImageOnly:true,
-        dateFormat:'yy-mm-dd',
-        nextText:'다음 달',
-        prevText:'이전 달',
-        dayNamesMin:['일','월','화','수','목','금','토'],
-        monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		$( "#history_start_date_button" ).datepicker({
+			dateFormat:'yy/mm/dd',
+			showOn: "both", 
+			buttonImage: "//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif", 
+	        buttonImageOnly: true,
+	        nextText:'다음 달',
+	        prevText:'이전 달',
+	        dayNamesMin:['일','월','화','수','목','금','토'],
+	        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
+			beforeShow: function(input, instance) { 
+		    	$(history_start_date_button).datepicker('setDate', new Date());
+			}
+		});	
 	});
 </script>
 <script type="text/javascript">
 	$( function() {
-		$( "#history_end_date_button" ).datepicker();
+		$( "#history_end_date_button" ).datepicker({
 		showMonthAfterYear:true,
         showOn:"button",
         buttonImage:"/common/tbl_st_ca.jpg",
         buttonImageOnly:true,
+        beforeShow: function(input, instance) { 
+	    	$(history_start_date_button).datepicker('setDate', new Date());
+		},
         dateFormat:'yy-mm-dd',
         nextText:'다음 달',
         prevText:'이전 달',
         dayNamesMin:['일','월','화','수','목','금','토'],
         monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		
+		});
 	});
 </script>
 </head>
@@ -82,12 +91,14 @@
 	        <!-- 기간 지정부분 -->
 	        <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text">
 	        	<!-- 달력 버튼 -->
-	        	<button type="button" class="ui-datepicker-trigger" id="history_start_date_button" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>
+	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>
 	         ~ 
 	        <input id="history_end_date" name="history_end_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-10-19" type="text">
-	        	<button type="button" class="ui-datepicker-trigger" id="history_end_date_button"><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>        
+	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>        
 	        <!-- 조회 버튼 -->
 	        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">
+	        <br/>
+	        <input type="text" id="history_start_date_button">
 </fieldset>
 
 <ul>
