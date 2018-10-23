@@ -2,7 +2,9 @@ package com.project.controller;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dao.AdminDAO;
+import com.project.dao.CartDAO;
 import com.project.dto.CartDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
@@ -34,6 +38,9 @@ public class CartController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	
+	@Autowired
+	CartDAO c_dao;
 	
 	//장바구니 리스트
 	@RequestMapping(value="/cartList.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -100,17 +107,32 @@ public class CartController {
 		String c_code = req.getParameter("c_code");
 		int c_count = Integer.parseInt(req.getParameter("c_count"));
 		String pageNum = req.getParameter("pageNum");
-		String message = "";
 		
-		String result = c_service.updateCartItem(c_code, c_count);
+		c_service.updateCartItem(c_code, c_count);
 		
-		if (result == "false" || result.equals("false")) {
-			message = URLEncoder.encode("남아있는 재고의 수량보다 많습니다.", "UTF-8");
-		}
-		
-		return "redirect:cartList.action?pageNum=" + pageNum + "&message=" + message;
+		return "redirect:cartList.action?pageNum=" + pageNum;
 		
 	}
+	
+	//장바구니 재고 확인
+		@RequestMapping(value="/updateCheck.action", method= {RequestMethod.GET, RequestMethod.POST})
+		@ResponseBody
+		public String updateCheck(HttpServletRequest req) throws Exception {
+			
+			String c_code = req.getParameter("c_code");
+			int c_count = Integer.parseInt(req.getParameter("c_count"));
+			String pageNum = req.getParameter("pageNum");
+			
+			int count = c_dao.countGoods(c_code);
+			
+			if (count >= c_count) {
+				
+				return "true";
+			}
+			
+			return "false";
+			
+		}
 	
 	//체크박스 내용 확인
 	@RequestMapping(value="/cartTest.action", method= {RequestMethod.GET, RequestMethod.POST})

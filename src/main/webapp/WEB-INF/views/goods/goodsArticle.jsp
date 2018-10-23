@@ -180,6 +180,7 @@ $(function() {
 								<td align="left">
 									<c:if test="${!empty gd_list}">
 										<select name="deviceKind" id="product" >
+											<option value="">::기종을 선택하세요::</option>
 											<c:forEach var="gd_dto" items="${d_list}">
 												<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
 											</c:forEach>

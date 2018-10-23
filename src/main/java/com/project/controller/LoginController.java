@@ -101,13 +101,12 @@ public class LoginController {
 	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String logout(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		System.out.println("로그아웃 컨트롤러");
-		
 		HttpSession session = req.getSession();
 		
 		session.removeAttribute("userInfo");
+		session.invalidate();
 		
-		return "redirect:/loginTest.action";
+		return "redirect:/";
 	}
 	
 	@ModelAttribute

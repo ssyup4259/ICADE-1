@@ -115,17 +115,9 @@ public class CartServiceImpl implements CartService {
 
 	//장바구니 수량 수정
 	@Override
-	public String updateCartItem(String c_code, int c_count) throws Exception {
+	public void updateCartItem(String c_code, int c_count) throws Exception {
 		
-		int count = c_dao.countGoods(c_code);
-		
-		if (count >= c_count) {
-			c_dao.updateCartItem(c_code, c_count);
-			
-			return "true";
-		}
-		
-		return "false";
+		c_dao.updateCartItem(c_code, c_count);
 		
 	}
 

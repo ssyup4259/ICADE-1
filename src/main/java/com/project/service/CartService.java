@@ -23,6 +23,6 @@ public interface CartService {
 	public void deleteCartAll(String c_id) throws Exception;
 	
 	//장바구니 수량 수정
-	public String updateCartItem(String c_code, int c_count) throws Exception;
+	public void updateCartItem(String c_code, int c_count) throws Exception;
 
 }
