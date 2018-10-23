@@ -24,7 +24,7 @@
 		ul,li { list-style:none; }
 		a { text-decoration:none; color:#000; }
 		.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
-		.tab li { float:left; width:20%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+		.tab li { float:left; width:25%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
 		.tab li { display:inline-block; padding:20px; cursor:pointer; }
 		.tab li.on { background-color:#eee; color:#f00; }
 		.tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
@@ -253,64 +253,30 @@ $(function() {
 						</c:if>
 					</td>
 				</tr>
-
 			</table>
 			
-			<ul class="tab" id="tab">
-			    <li>상품상세정보</li>
-			    <li>상품구매안내</li>
-			    <li>상품FAQ</li>	
-			    <li>상품사용후기</li>	
-			    <li>관련후기</li>	
-			</ul>
 			
-			<div class="tab_con" id="tab_con">
-			    <div><a href="#preDetail">상품상세정보</a></div>	
-			    <div><a href="#preInfo">상품구매안내</a>
-			    <div><a href="#preQnA">상품FAQ</a></div>
-			    <div><a href="preReview">관련상품</a></div>
-			</div>
+			
+			<div>
+				<div class="tab">
+					<ul class="tab" id="tab">
+					    <li>상품상세정보</li>
+					    <li>상품구매안내</li>
+					    <li>상품사용후기</li>	
+					    <li>관련후기</li>	
+					</ul>
+						<div class="tab_con" id="tab_con">
+						    <div>상품상세정보</a></div>	
+						    <div>상품구매안내</a></div>
+						    <div>상품사용후기</a></div>
+						</div>
+				</div>
+			</div>		
+				
 			
 		</form>
 		</div>
 
 
 </body>
-
-<!-- 본문 끝 -->
-
-	<!--  기종 선택 --><%-- 
-							
-							//최후의 수단
-							<tr align="center">
-								<td>기종</td>
-								<td align="left">
-									<c:if test="${!empty gd_list}">
-										<select name="selectBox" id="checkDupl" onclick="checkDupl();">
-											<c:forEach var="gd_dto" items="${gd_list}">
-												<option value="${gd_dto.DK_NAME}&nbsp;${gd_dto.GC_COLOR}">${gd_dto.DK_NAME}${gd_dto.GC_COLOR}</option>
-											</c:forEach>
-										</select>
-									</c:if>
-								</td>
-							</tr> --%>
-							
-
-
-<!-- 스크립트단 -->
-
-<!-- 	<script type="text/javascript">
-		function discount() {
-			var price = ${g_dto.getG_PRICE()};
-			var discount = ${g_dto.getG_DISCOUNT()};
-			var sellPrice;
-			
-			
-			
-			sellPrice = ${g_dto.getG_PRICE()}-(${g_dto.getG_PRICE()} * ${g_dto.getG_DISCOUNT()}/100);
-			 
-		}
-	
-	</script> -->
-
 </html>

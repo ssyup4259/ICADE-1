@@ -46,11 +46,8 @@ public interface AdminDAO {
 	public void	authorityChange(String m_id, String new_rank) throws Exception;
 	//회원 주문내역 조회
 	public List<OrdersDTO> ordersList() throws Exception;
-	
 	// 셀렉트 박스에서 기종 선택시 
 	public List<GoodsDetailDTO> selectReadData(int g_num) throws Exception;
-		
-	
 	//셀렉트 박스에서 기종 선택시 나타난 색상
 	public List<GoodsDetailDTO> selectReadDataColor(Map<String, Integer> map) throws Exception;
 
