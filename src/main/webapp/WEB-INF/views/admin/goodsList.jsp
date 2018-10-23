@@ -269,11 +269,10 @@ function sendIt() {
 	
 	var f = document.myForm;
 	        
-	f.action = "<%=cp%>
-	/admin/updateGoodsDetailCount.action";
-		f.submit();
+	f.action = "<%=cp%>/admin/updateGoodsDetailCount.action";
+	f.submit();
 
-	}
+}
 </script>
 </head>
 <body>
