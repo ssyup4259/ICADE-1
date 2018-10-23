@@ -84,7 +84,7 @@
 
 <!-- 셀렉트 박스에서 기종 선택시 나타난 색상 -->
 <select id="selectReadDataColor" parameterType="hashMap" resultType="com.project.dto.GoodsDetailDTO">
-	select GC_CODE, GC_COLOR
+	select GD_COLOR, GC_COLOR
 	from Goods_Detail, (select DK_CODE, DK_NAME from DEVICE_KIND), (select GC_CODE, GC_COLOR from GOODS_COLOR)
 	where GD_NUM = #{G_NUM} and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE and GD_DEVICE = #{GD_DEVICE}
 	order by GD_DEVICE, GD_COLOR

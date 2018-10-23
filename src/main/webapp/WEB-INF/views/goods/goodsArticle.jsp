@@ -94,14 +94,19 @@ $(function() {
 			success: function(data)
 			{
 				
-				var dc_list = data;
+				var dc_list = [];
+				
+				dc_list = data;
 				
 				if(dc_list.length > 0) {
+					
 					$("#sub").find("option").remove().end().append(select);
 					
-					for (var i=0; i < dc_list.length; i++) {
-						$("#sub").append("<option value='" + dc_list[i].tGC_CODE + "'" + dc_list[i].GC_COLOR + "</option>"); 
-					}
+					$.each(dc_list, function(key, value) {
+						$("#sub").append("<option value='" + value.gd_COLOR + "'>" + value.gc_COLOR + "</option>");
+						console.log(value);
+					});
+					
 				} else {
 					$("#sub").find("option").remove().end().append("<option>-- No sub --</option>");
 					return;
