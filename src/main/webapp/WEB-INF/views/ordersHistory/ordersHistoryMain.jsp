@@ -47,7 +47,7 @@
 			</div>
 			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
 	        <span class="period">
-	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
+	            <a href="#none" class="btnNormal" 	="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
 	            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" id="oneWeek" alt="1주일"></a>
 	            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" id="oneMonth" alt="1개월"></a>
 	            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" id="threeMonth" alt="3개월"></a>
@@ -62,9 +62,14 @@
 	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>        
 	        <!-- 조회 버튼 -->
 	        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">
+	        
 	        <br/>
 	        <input type="text" id="history_start_date_button" class="" readonly="readonly" size="10" value="" name="searchStartDay">
+	         ~ 
 	        <input type="text" id="history_end_date_button" class="" readonly="readonly" size="10" value="" name="searchLastDay">
+	        
+	        <br/>
+	        <input type="text" id="sdate"> ~ <input type="text" id="edate">
 </fieldset>
 
 <ul>
