@@ -4,6 +4,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -136,7 +137,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		//갖고온 데이터 받기
 		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
-		//int GD_DEVICE = Integer.parseInt(req.getParameter("GD_DEVICE"));
+		
 		String pageNum = req.getParameter("pageNum");
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
@@ -164,8 +165,32 @@ public class GoodsServiceImpl implements GoodsService {
 		req.setAttribute("g_dto", g_dto);
 		req.setAttribute("gd_list", gd_list);
 		req.setAttribute("d_list", d_list);
-		//req.setAttribute("dc_list", dc_list);
 		
+		return req;
+	}
+
+
+
+	@Override
+	public HttpServletRequest colorCheck(HttpServletRequest req) throws Exception {
+		
+		int GD_DEVICE = Integer.parseInt(req.getParameter("GD_DEVICE"));
+		int G_NUM =Integer.parseInt(req.getParameter("G_NUM"));
+		
+		System.out.println(G_NUM);
+		System.out.println(GD_DEVICE);
+		
+		Map<String, Integer> hMap = new HashMap<String, Integer>();
+		
+		hMap.put("G_NUM", G_NUM);
+		hMap.put("GD_DEVICE", GD_DEVICE);
+		hMap.size();
+		
+		List<Map<String, Integer>> dc_list =a_dao.selectReadDataColor(hMap);
+		
+		req.setAttribute("dc_list", dc_list);
+		req.setAttribute("GD_DEVICE", GD_DEVICE);
+		req.setAttribute("G_NUM", G_NUM);
 		return req;
 	}
 }
