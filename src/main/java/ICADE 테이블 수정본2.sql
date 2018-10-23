@@ -186,6 +186,9 @@ CREATE TABLE Order_Detail
     OD_DISCOUNT    NUMBER          NOT NULL
 );
 
+ALTER TABLE Order_Detail MODIFY(OD_DEVICE VARCHAR2(40));
+ALTER TABLE Order_Detail MODIFY(OD_COLOR VARCHAR2(20));
+
 -- Board_Comment Table Create SQL
 CREATE TABLE Board_Comment
 (

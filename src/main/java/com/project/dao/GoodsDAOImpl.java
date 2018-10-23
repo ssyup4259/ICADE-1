@@ -63,7 +63,4 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return result;
 		
 	}
-
-	
-
 }

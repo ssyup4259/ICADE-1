@@ -17,7 +17,4 @@ public interface MemberService {
 	
 	//이메일 중복체크
 	public int emailCheck(Map<String, Object> map)throws Exception;
-	
-
-	
 }
