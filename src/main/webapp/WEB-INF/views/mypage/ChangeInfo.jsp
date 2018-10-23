@@ -49,7 +49,7 @@
 
 <body>
 
-<input type="hidden" id="msg" value="<%=msg%>">
+<input type="hidden" id="msg" value="">
 
 	<!-- 본문 시작 -->
 	<div class="navbar container-fluid sticky" style="z-index: 90;">
@@ -757,6 +757,13 @@ function signUp() {
 			data:{"pw":pw},
             success : function(data) {
             	
+            	if(){
+            		}
+            	}
+            	
+			}
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		}
 	});

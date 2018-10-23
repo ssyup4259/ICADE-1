@@ -122,10 +122,39 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/chanege_check.action", method = {RequestMethod.POST,RequestMethod.GET})
-	public String chanegeInfo_pwck(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public ModelAndView chanegeInfo_pwck(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
+		HttpSession session = request.getSession();
 		
-		return "loginTest";
+		ModelAndView mav = new ModelAndView();
+		
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
+		String pw = request.getParameter("pw");
+		
+		System.out.println(pw);
+		
+		if(pw!=dto.getM_PW() && !pw.equals(dto.getM_PW())) {
+			
+			String msg = "비밀번호가 틀립니다.";
+			
+			mav.addObject("msg",msg);
+			mav.setViewName("/mypage/cancelAuthorization");
+			
+			request.setAttribute("msg", msg);
+			
+			//System.out.println(request.getAttribute("msg"));
+			
+			return mav; 
+		}
+		
+		String msg = "비밀번호가 맞습니다.";
+		
+		mav.addObject("msg",msg);
+		
+		mav.setViewName( "loginTest");
+		
+		return mav;
 		
 	}
 	
@@ -140,8 +169,6 @@ public class MyPageController {
 		//탈퇴버튼 클릭후 나오는 본인확인을 위한 인증 컨트롤러
 		
 		HttpSession session = request.getSession();
-		
-		request.setAttribute("msg", "");
 		
 		String M_PW = dto.getM_PW();
 		
