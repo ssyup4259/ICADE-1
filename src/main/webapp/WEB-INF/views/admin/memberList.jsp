@@ -45,9 +45,7 @@
 		
 		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
 			
-			f.action = "<%=cp%>
-	/admin/authorityChange.action?m_id=" + m_id
-					+ "&new_rank=" + new_rank;
+			f.action = "<%=cp%>/admin/authorityChange.action?m_id=" + m_id + "&new_rank=" + new_rank;
 			f.submit();
 
 		} else {

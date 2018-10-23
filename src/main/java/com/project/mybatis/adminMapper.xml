@@ -122,8 +122,8 @@
 	select * from (
 	select rownum rnum, data.* from (
 	select M_RANK, M_ID, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME
-	from Member	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%' order by M_DATE desc) data)
 <![CDATA[
+	from Member	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and M_RANK <> 'admin' order by M_DATE desc) data)
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
 </select>
