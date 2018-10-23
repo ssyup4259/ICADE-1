@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.project.dao.AdminDAO;
 import com.project.dao.GoodsDAO;
 import com.project.dto.GoodsDTO;
@@ -167,25 +169,18 @@ public class GoodsServiceImpl implements GoodsService {
 
 
 	@Override
-	public HttpServletRequest colorCheck(HttpServletRequest req) throws Exception {
+	public List<GoodsDetailDTO> colorCheck(HttpServletRequest req) throws Exception {
 		
 		int GD_DEVICE = Integer.parseInt(req.getParameter("GD_DEVICE"));
 		int G_NUM =Integer.parseInt(req.getParameter("G_NUM"));
-		
-		System.out.println(G_NUM);
-		System.out.println(GD_DEVICE);
 		
 		Map<String, Integer> hMap = new HashMap<String, Integer>();
 		
 		hMap.put("G_NUM", G_NUM);
 		hMap.put("GD_DEVICE", GD_DEVICE);
-		hMap.size();
 		
-		List<Map<String, Integer>> dc_list =a_dao.selectReadDataColor(hMap);
+		List<GoodsDetailDTO> dc_list = a_dao.selectReadDataColor(hMap);
 		
-		req.setAttribute("dc_list", dc_list);
-		req.setAttribute("GD_DEVICE", GD_DEVICE);
-		req.setAttribute("G_NUM", G_NUM);
-		return req;
+		return dc_list;
 	}
 }

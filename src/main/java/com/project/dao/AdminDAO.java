@@ -52,6 +52,6 @@ public interface AdminDAO {
 		
 	
 	//셀렉트 박스에서 기종 선택시 나타난 색상
-	public List<Map<String, Integer>> selectReadDataColor(Map<String, Integer> map) throws Exception;
+	public List<GoodsDetailDTO> selectReadDataColor(Map<String, Integer> map) throws Exception;
 
 }

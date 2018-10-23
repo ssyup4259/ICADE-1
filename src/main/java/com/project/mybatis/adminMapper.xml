@@ -83,8 +83,8 @@
 </select>
 
 <!-- 셀렉트 박스에서 기종 선택시 나타난 색상 -->
-<select id="selectReadDataColor" parameterType="hashMap" resultType="hashMap">
-	select GD_NUM, GD_DEVICE, DK_NAME, GD_COLOR, GC_COLOR, GD_COUNT, GD_SELLCOUNT
+<select id="selectReadDataColor" parameterType="hashMap" resultType="com.project.dto.GoodsDetailDTO">
+	select GD_COLOR, GC_COLOR
 	from Goods_Detail, (select DK_CODE, DK_NAME from DEVICE_KIND), (select GC_CODE, GC_COLOR from GOODS_COLOR)
 	where GD_NUM = #{G_NUM} and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE and GD_DEVICE = #{GD_DEVICE}
 	order by GD_DEVICE, GD_COLOR
@@ -122,8 +122,8 @@
 	select * from (
 	select rownum rnum, data.* from (
 	select M_RANK, M_ID, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME
-	from Member	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%' order by M_DATE desc) data)
 <![CDATA[
+	from Member	where M_RANK like '%' || #{m_rank} || '%' and ${searchKey} like '%' || #{searchValue} || '%' and M_RANK <> 'admin' order by M_DATE desc) data)
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
 </select>

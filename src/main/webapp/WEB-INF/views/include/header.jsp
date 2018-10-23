@@ -34,13 +34,38 @@
 				</c:forEach>
 			</div>
 		</li>
-
-		<li style="float: right">
-			<a href="<%=cp%>/ikeloom/created.do">회원가입</a>
-		</li>
-		<li style="float: right">
-			<a href="<%=cp%>/ikeloom/login.do">로그인</a>
-		</li>
+		
+		<c:if test="${empty sessionScope.userInfo}">
+		
+			<li style="float: right">
+				<a href="<%=cp%>/join.action">회원가입</a>
+			</li>
+			
+			<li style="float: right">
+				<a href="<%=cp%>/login.action">로그인</a>
+			</li>
+			
+		</c:if>
+		
+		<c:if test="${!empty sessionScope.userInfo}">
+			<li style="float: right">
+				<a href="<%=cp%>/logout.action">로그아웃</a>
+			</li>
+		</c:if>
+		
+		
+		
+		
+		<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
+			<li style="float: right">
+				<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a>
+			</li>
+			
+			<li style="float: right">
+				<a href="<%=cp%>/admin/memberList.action">회원 목록</a>
+			</li>
+		</c:if>
+		
 	</ul>
 </div>
 
