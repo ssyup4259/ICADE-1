@@ -169,25 +169,18 @@ public class GoodsServiceImpl implements GoodsService {
 
 
 	@Override
-	public HttpServletRequest colorCheck(HttpServletRequest req) throws Exception {
+	public List<GoodsDetailDTO> colorCheck(HttpServletRequest req) throws Exception {
 		
 		int GD_DEVICE = Integer.parseInt(req.getParameter("GD_DEVICE"));
 		int G_NUM =Integer.parseInt(req.getParameter("G_NUM"));
-		
-		System.out.println(G_NUM);
-		System.out.println(GD_DEVICE);
 		
 		Map<String, Integer> hMap = new HashMap<String, Integer>();
 		
 		hMap.put("G_NUM", G_NUM);
 		hMap.put("GD_DEVICE", GD_DEVICE);
-		hMap.size();
 		
-		Gson gson = new Gson();
+		List<GoodsDetailDTO> dc_list = a_dao.selectReadDataColor(hMap);
 		
-		List<Map<String, Integer>> dc_list =a_dao.selectReadDataColor(hMap);
-		
-		req.setAttribute("data", dc_list);
-		return req;
+		return dc_list;
 	}
 }

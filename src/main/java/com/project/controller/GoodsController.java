@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.AdminDAO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.service.GoodsService;
 
@@ -57,12 +59,11 @@ public class GoodsController {
 	
 	
 	@RequestMapping(value="/colorCheck.action", method= {RequestMethod.GET,RequestMethod.POST})
-	public String colorArticle(HttpServletRequest req) throws Exception{
+	@ResponseBody
+	public List<GoodsDetailDTO> colorArticle(HttpServletRequest req) throws Exception{
 
-		g_service.colorCheck(req);
+		return g_service.colorCheck(req);
 		
-		
-		return "goods/goodsArticle";
 	}
 	
 	

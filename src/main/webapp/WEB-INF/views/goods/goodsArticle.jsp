@@ -80,12 +80,11 @@ $(function() {
 		}
 	});
 
-	function comboChange() {
+	function comboChange(deviceCode) {
 		
-		var GD_DEVICE = $("#select1").val();
-		var G_NUM =$("#select2").val();
+		var G_NUM = ${g_dto.getG_NUM()};
 		
-		var allData = {"GD_DEVICE":GD_DEVICE, "G_NUM":G_NUM};
+		var allData = {"GD_DEVICE":deviceCode, "G_NUM":G_NUM};
 		
 		$.ajax({
 			type:"post",
@@ -94,32 +93,25 @@ $(function() {
 			data: allData,
 			success: function(data)
 			{
-				var obj = JSON.parse(data);
-				console.log(obj);
-				
-				var returnValue = "GC_COLOR";
-				var returnText = data.GC_COLOR;
-				
-				
-				console.log(obj);
 				
 				var dc_list = data;
 				
 				if(dc_list.length > 0) {
 					$("#sub").find("option").remove().end().append(select);
-					$.each(dc_list, function(key, value) {
-						$("#sub").append("<option>" + value + "</option>"); 
-					});
+					
+					for (var i=0; i < dc_list.length; i++) {
+						$("#sub").append("<option value='" + dc_list[i].tGC_CODE + "'" + dc_list[i].GC_COLOR + "</option>"); 
+					}
 				} else {
 					$("#sub").find("option").remove().end().append("<option>-- No sub --</option>");
 					return;
 				}
 			},
+			
 			error: function() {
 
-				
-
 				alert("안된다");
+				
 			}				
 		});
 	}	
@@ -148,7 +140,7 @@ $(function() {
 				</tr>
 				<tr>
 					<td width="340">
-						 <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}.jpg" width="340" height="300"> 
+						 <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="340" height="300"> 
 					</td>
 					<td>
 						<table width="100%" height="300">
@@ -182,9 +174,9 @@ $(function() {
 								<td>기종</td>
 								<td align="left">
 									<c:if test="${!empty gd_list}">
-										<select name="selectBox" id="product" >
+										<select name="deviceKind" id="product" >
 											<c:forEach var="gd_dto" items="${d_list}">
-												<option id="select1" value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
+												<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
 											</c:forEach>
 										</select>
 									</c:if>

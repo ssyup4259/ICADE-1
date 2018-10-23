@@ -1,9 +1,10 @@
 package com.project.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.gson.Gson;
-import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 
 public interface GoodsService {
 	
@@ -17,5 +18,5 @@ public interface GoodsService {
 	public HttpServletRequest goodsArticle(HttpServletRequest req) throws Exception;
 	
 	//상품 셀렉트 박스 변경
-	public HttpServletRequest colorCheck(HttpServletRequest req) throws Exception;
+	public List<GoodsDetailDTO> colorCheck(HttpServletRequest req) throws Exception;
 }
