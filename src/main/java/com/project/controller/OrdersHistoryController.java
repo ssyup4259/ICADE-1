@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +27,14 @@ public class OrdersHistoryController {
 	@Autowired
 	AdminDAO a_dao;
 	
-	@RequestMapping(value="/orderhistory.action",method=RequestMethod.POST)
-	public ModelAndView ordershistorymain(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
+	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		return "ordersHistory/ordersHistoryMain";
+	}
+	
+	@RequestMapping(value="/orderHistory_ok.action",method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView ordersHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();

@@ -53,7 +53,9 @@
 포 인 트 : ${point} <br/>
 가 입 일 : ${sessionScope.userInfo.getM_DATE()} <br/>
 <br/>
-<a href="changeInfo.action"><input type="button" value="정보수정"></a>&nbsp;<a href="cancelMembership.action"><input type="button" value="회원탈퇴"></a>  
+<a href="changeInfo.action"><input type="button" value="정보수정"></a>&nbsp;<a href="cancelMembership.action"><input type="button" value="회원탈퇴"></a>
+<a href="orderHistory.action"><input type="button" value="주문내역조회"></a>&nbsp;<a href="cancelMembership.action"><input type="button" value="주소록"></a>
+
 
 
 </body>

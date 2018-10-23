@@ -18,15 +18,13 @@
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 <script type="text/javascript">
 	function check() {
 
 		var f = document.joinCodeForm;
-		var joinCode = $
-		{
-			sessionScope.joinCode
-		}
-		;
+		var joinCode = ${sessionScope.joinCode};
 
 		if (!f.inputCode.value) {
 			alert("인증번호를 입력하세요");
@@ -57,8 +55,8 @@
 				<br>
 				<br>
 				<input type="submit" class="btn" value="인증하기" />
-				<input type="hidden" name="joinCode" value="${sessionScope.joinCode}">
-				<input type="hidden" name="CcheckNum" value="1">
+				<input type="text" name="joinCode" value="${sessionScope.joinCode}">
+				<input type="text" name="CcheckNum" value="1">
 			</form>
 		</div>
 	</div>

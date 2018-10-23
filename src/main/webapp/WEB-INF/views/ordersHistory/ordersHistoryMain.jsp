@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
 </head>
 <body>
 
@@ -22,27 +28,45 @@
     </ul>
 </div>
 
-<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm"><div class="xans-element- xans-myshop xans-myshop-orderhistoryhead "><fieldset class="ec-base-box">
-<legend>검색기간설정</legend>
-        <div class="stateSelect ">
-            <select id="order_status" name="order_status" class="fSelect">
-<option value="all">전체 주문처리상태</option>
-<option value="shipped_before">입금전</option>
-<option value="shipped_standby">배송준비중</option>
-<option value="shipped_begin">배송중</option>
-<option value="shipped_complate">배송완료</option>
-<option value="order_cancel">취소</option>
-<option value="order_exchange">교환</option>
-<option value="order_return">반품</option>
-</select>        </div>
-        <span class="period">
-            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" alt="오늘"></a>
-            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2_on.gif" alt="1주일"></a>
-            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3_on.gif" alt="1개월"></a>
-            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4_on.gif" alt="3개월"></a>
-            <a href="#none" class="btnNormal" days="180"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5_on.gif" alt="6개월"></a>
-        </span>
-        <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text"><button type="button" class="ui-datepicker-trigger"><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button> ~ <input id="history_end_date" name="history_end_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-10-19" type="text"><button type="button" class="ui-datepicker-trigger"><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">    </fieldset>
+<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm"><div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
+
+<fieldset class="ec-base-box">
+	<legend>검색기간설정</legend>
+	        <div class="stateSelect ">
+	            <select id="order_status" name="order_status" class="">
+					<option value="all">전체 주문처리상태</option>
+					<option value="shipped_before">입금전</option>
+					<option value="shipped_standby">배송준비중</option>
+					<option value="shipped_begin">배송중</option>
+					<option value="shipped_complate">배송완료</option>
+					<option value="order_cancel">취소</option>
+					<option value="order_exchange">교환</option>
+					<option value="order_return">반품</option>
+				</select>       
+	
+			</div>
+			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
+	        <span class="period">
+	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
+	            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" id="oneWeek" alt="1주일"></a>
+	            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" id="oneMonth" alt="1개월"></a>
+	            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" id="threeMonth" alt="3개월"></a>
+	            <a href="#none" class="btnNormal" days="180"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" id="sixMonth" alt="6개월"></a>
+	        </span>
+	        <!-- 기간 지정부분 -->
+	        <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text">
+	        	<!-- 달력 버튼 -->
+	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>
+	         ~ 
+	        <input id="history_end_date" name="history_end_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-10-19" type="text">
+	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>        
+	        <!-- 조회 버튼 -->
+	        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">
+	        <br/>
+	        <input type="text" id="history_start_date_button" class="" readonly="readonly" size="10" value="" name="searchStartDay">
+	        <input type="text" id="history_end_date_button" class="" readonly="readonly" size="10" value="" name="searchLastDay">
+</fieldset>
+
 <ul>
 <li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
         <li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
@@ -165,6 +189,7 @@
         <hr class="layout"><div id="background"></div>
 
     </div>
+
 
 </body>
 </html>
