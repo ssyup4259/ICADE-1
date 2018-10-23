@@ -90,13 +90,20 @@ $(function() {
 		$.ajax({
 			type:"post",
 			url:"<%=cp%>/goods/colorCheck.action",
-			datatype: "json",
+			datatype:  'json',
 			data: allData,
-			success: function(dc_list) {
+			success: function(data)
+			{
+				var obj = JSON.parse(data);
+				console.log(obj);
 				
-				console.log(dc_list);
-				var dc_list= JSON.parse(dc_list);
-				console.log(dc_list);
+				var returnValue = "GC_COLOR";
+				var returnText = data.GC_COLOR;
+				
+				
+				console.log(obj);
+				
+				var dc_list = data;
 				
 				if(dc_list.length > 0) {
 					$("#sub").find("option").remove().end().append(select);

@@ -220,7 +220,9 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<Map<String, Integer>> selectReadDataColor(Map<String, Integer> map) throws Exception {
 		
-		List<Map<String, Integer>> dc_list = sessionTemplate.selectList(adminMapper + ".selectReadData", map);
+		System.out.println(map.get("GD_DEVICE"));
+		System.out.println(map.size());
+		List<Map<String, Integer>> dc_list = sessionTemplate.selectList(adminMapper + ".selectReadDataColor", map);
 		
 		return dc_list;
 	}

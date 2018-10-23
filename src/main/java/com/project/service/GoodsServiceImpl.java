@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.project.dao.AdminDAO;
 import com.project.dao.GoodsDAO;
 import com.project.dto.GoodsDTO;
@@ -181,11 +183,11 @@ public class GoodsServiceImpl implements GoodsService {
 		hMap.put("GD_DEVICE", GD_DEVICE);
 		hMap.size();
 		
+		Gson gson = new Gson();
+		
 		List<Map<String, Integer>> dc_list =a_dao.selectReadDataColor(hMap);
 		
-		req.setAttribute("dc_list", dc_list);
-		req.setAttribute("GD_DEVICE", GD_DEVICE);
-		req.setAttribute("G_NUM", G_NUM);
+		req.setAttribute("data", dc_list);
 		return req;
 	}
 }

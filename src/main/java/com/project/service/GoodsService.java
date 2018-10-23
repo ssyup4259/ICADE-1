@@ -2,6 +2,7 @@ package com.project.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.project.dto.GoodsDTO;
 
 public interface GoodsService {
