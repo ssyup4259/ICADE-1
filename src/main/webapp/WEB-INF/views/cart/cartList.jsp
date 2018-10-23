@@ -28,6 +28,42 @@ function updateCartItem(c_code) {
 	
 }
 
+
+function updateCheck(c_code, count) {
+	
+	var pageNum = ${pageNum};
+	
+	var allData = {"c_code":c_code, "c_count":$("#" + c_code).val(), "pageNum":pageNum};
+	
+	$.ajax({
+		
+		type:"post",
+		url:"<%=cp%>/cart/updateCheck.action",
+		datatype:  'json',
+		data: allData,
+		success: function(data) {
+			
+			if (data == 'false') {
+				
+				alert("재고 수량 부족");
+				$("#" + c_code).val(count);
+				
+			} else if (data == 'true') {
+				
+				updateCartItem(c_code);
+				
+			}
+			
+		},
+		
+		error: function() {
+
+			alert("안된다");
+			
+		}				
+	});
+}	
+
 function getMessage() {
 	
 	var message = "${message}";
@@ -118,7 +154,7 @@ input[type=checkbox] {
 	<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
 	<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
 	개&nbsp;
-	<input type="button" value="변경" onclick="updateCartItem('${c_dto.getC_CODE()}')"/>	
+	<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})"/>	
 	<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원&nbsp;&nbsp;
 	<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
 	<br/>
