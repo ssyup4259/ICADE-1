@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,99 +10,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
-
-	var inputVal = $( "#history_start_date_button" ).val();
-	var dt = new Date();
-	
-	alert("script실행");
-	
-		if(!inputVal){
-			$(function() {
-				$( "#history_start_date_button" ).datepicker({
-					dateFormat:'yy/mm/dd',
-					showOn: "both", 
-					buttonImage: "//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif", 
-			        buttonImageOnly: true,
-			        maxDate: new Date(),
-			        nextText:'다음 달',
-			        prevText:'이전 달',
-			        dayNamesMin:['일','월','화','수','목','금','토'],
-			        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-					monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
-					beforeShow: function() { 
-						setTimeout(function() {
-				    		$(history_start_date_button).datepicker('setDate', dt);
-						}, 10);
-					}
-				});
-			});
-			alert("if");
-		}
-		
-		
-		
-		$("history_start_date_button").click(function() {
-			$( "#history_start_date_button" ).datepicker({
-				dateFormat:'yy/mm/dd',
-				showOn: "both", 
-				buttonImage: "//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif", 
-		        buttonImageOnly: true,
-		        nextText:'다음 달',
-		        prevText:'이전 달',
-		        dayNamesMin:['일','월','화','수','목','금','토'],
-		        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-				monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12']
-			});
-			alert(inputVal);
-		});
-			
-		
-
-	alert("끝");
-	
-</script>
-<script type="text/javascript">
-
-	$( function() {
-		$( "#history_end_date_button" ).datepicker({
-		showMonthAfterYear:true,
-        showOn:"button",
-        buttonImage:"/common/tbl_st_ca.jpg",
-        buttonImageOnly:true,
-        beforeShow: function(input, instance) { 
-	    	$(history_start_date_button).datepicker('setDate', '+1');
-		},
-        dateFormat:'yy-mm-dd',
-        nextText:'다음 달',
-        prevText:'이전 달',
-        dayNamesMin:['일','월','화','수','목','금','토'],
-        monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-		
-		});
-	});
-</script>
-<script type="text/javascript">
-	
-	var dt = new Date();
-	var year = dt.getFullYear();
-	var month = dt.getMonth()+1;
-	var date = dt.getDate()
-	var inputVal = $( "#history_start_date_button" ).val();
-	
-	var today = year + "/" + month + "/" + date; 
-	
-	/*  $(function() {
-		
-		if(!inputVal){
-			
-			alert("if문");
-			
-			$( "#history_start_date_button" ).val(today);	
-		}
-	}); */
-	 
-</script>
+<script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
 </head>
 <body>
 
@@ -138,11 +47,11 @@
 			</div>
 			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
 	        <span class="period">
-	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" alt="오늘"></a>
-	            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2_on.gif" alt="1주일"></a>
-	            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3_on.gif" alt="1개월"></a>
-	            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4_on.gif" alt="3개월"></a>
-	            <a href="#none" class="btnNormal" days="180"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" offimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" onimage="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5_on.gif" alt="6개월"></a>
+	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
+	            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" id="oneWeek" alt="1주일"></a>
+	            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" id="oneMonth" alt="1개월"></a>
+	            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" id="threeMonth" alt="3개월"></a>
+	            <a href="#none" class="btnNormal" days="180"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" id="sixMonth" alt="6개월"></a>
 	        </span>
 	        <!-- 기간 지정부분 -->
 	        <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text">
@@ -154,7 +63,8 @@
 	        <!-- 조회 버튼 -->
 	        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">
 	        <br/>
-	        <input type="text" id="history_start_date_button">
+	        <input type="text" id="history_start_date_button" class="" readonly="readonly" size="10" value="" name="searchStartDay">
+	        <input type="text" id="history_end_date_button" class="" readonly="readonly" size="10" value="" name="searchLastDay">
 </fieldset>
 
 <ul>
@@ -279,6 +189,7 @@
         <hr class="layout"><div id="background"></div>
 
     </div>
+
 
 </body>
 </html>
