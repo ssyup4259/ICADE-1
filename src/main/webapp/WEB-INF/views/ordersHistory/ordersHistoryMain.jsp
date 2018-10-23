@@ -108,53 +108,20 @@
             </tr></thead>
 <tbody class="center displaynone">
 <tr class="">
-<td class="number displaynone">
-                                        <p><a href="detail.html" class="line">[]</a></p>
-                    <a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
-                    <a href="cancel.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
-                    <a href="exchange.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
-                    <a href="return.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif" alt="반품신청"></a>
-                </td>
-                <td class="thumb"><a href="/product/detail.html"><img src="//img.echosting.cafe24.com/thumb/img_product_small.gif" onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';" alt=""></a></td>
-                <td class="product left top">
-                    <a href="/product/detail.html"><strong></strong></a>
-                    <div class="option displaynone"></div>
-                    <ul class="xans-element- xans-myshop xans-myshop-optionset option"><li class="">
-<strong></strong> (개)</li>
-</ul>
-<p class="gBlank5 displaynone">무이자할부 상품</p>
-                </td>
-                <td></td>
-                <td class="right">
-<strong></strong><div class="displaynone"></div>
-</td>
-                <td class="state">
-                    <p class="txtEm"></p>
-                    <p class="displaynone"><a href="" target=""></a></p>
-                    <p class="displaynone"><a href="#none" class="line" onclick="">[]</a></p>
-                    <a href="/board/product/write.html" class="displaynone"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_comment.gif" alt="구매후기"></a>
-                    <a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract.gif" alt="취소철회"></a>
-                    <a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract2.gif" alt="교환철회"></a>
-                    <a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract3.gif" alt="반품철회"></a>
-                </td>
-                <td>
-                    <p class="displaynone"><a href="#none" class="line" onclick="">[상세정보]</a></p>
-                    <p class="displaynone">-</p>
-                </td>
-            </tr>
-<tr class="">
-<td class="number displaynone">
-                                        <p><a href="detail.html" class="line">[]</a></p>
-                    <a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
-                    <a href="cancel.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
-                    <a href="exchange.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
-                    <a href="return.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif" alt="반품신청"></a>
-                </td>
-                <td class="thumb"><a href="/product/detail.html"><img src="//img.echosting.cafe24.com/thumb/img_product_small.gif" onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';" alt=""></a></td>
-                <td class="product left top">
-                    <a href="/product/detail.html"><strong></strong></a>
-                    <div class="option displaynone"></div>
-                    <ul class="xans-element- xans-myshop xans-myshop-optionset option"><li class="">
+	<td class="number displaynone">
+		<p><a href="detail.html" class="line">[]</a></p>
+			<a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
+			<a href="cancel.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
+			<a href="exchange.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
+			<a href="return.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif" alt="반품신청"></a>
+	</td>
+	<td class="thumb">
+		<a href="/product/detail.html"><img src="//img.echosting.cafe24.com/thumb/img_product_small.gif" onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';" alt=""></a>
+	</td>
+	<td class="product left top">
+		<a href="/product/detail.html"><strong></strong></a>
+		<div class="option displaynone"></div>
+		<ul class="xans-element- xans-myshop xans-myshop-optionset option"><li class="">
 <strong></strong> (개)</li>
 </ul>
 <p class="gBlank5 displaynone">무이자할부 상품</p>

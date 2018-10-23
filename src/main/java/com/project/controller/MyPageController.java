@@ -121,17 +121,27 @@ public class MyPageController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/chanege_check.action", method = {RequestMethod.POST,RequestMethod.GET})
+	public String chanegeInfo_pwck(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		
+		return "loginTest";
+		
+	}
+	
 	@RequestMapping(value="/cancelMembership.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String cancelMembership(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		return "/mypage/cancelAuthorization";
 	}
 	
-	@RequestMapping(value="/cancelCheckStep1.action", method = RequestMethod.POST)
+	@RequestMapping(value="/cancelCheckStep1.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String cancelCheckStep1(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		//탈퇴버튼 클릭후 나오는 본인확인을 위한 인증 컨트롤러
 		
 		HttpSession session = request.getSession();
+		
+		request.setAttribute("msg", "");
 		
 		String M_PW = dto.getM_PW();
 		
@@ -139,8 +149,8 @@ public class MyPageController {
 		
 		String session_PW = vo.getM_PW();
 		
-		System.out.println(M_PW);
-		System.out.println(session_PW);
+		//System.out.println(M_PW);
+		//System.out.println(session_PW);
 		
 		if(M_PW!=session_PW && !M_PW.equals(session_PW)) {
 			

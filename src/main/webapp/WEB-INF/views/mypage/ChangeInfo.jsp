@@ -49,7 +49,7 @@
 
 <body>
 
-<input type="hidden" id="msg" value="${msg }">
+<input type="hidden" id="msg" value="<%=msg%>">
 
 	<!-- 본문 시작 -->
 	<div class="navbar container-fluid sticky" style="z-index: 90;">
@@ -395,6 +395,7 @@ function nickCheck() {
 	}else{
 		$.ajax({
 			type : "POST",
+			async: false,
 			url : "/icade/nickcheck.action",
 			data : {"M_NICKNAME" : userNick},
 			dataType :"json",
@@ -539,6 +540,7 @@ function check() {
 	}else{
 	  $.ajax({
 			type : "POST",
+			async: false,
 			url : "/icade/emailcheck.action",
 			data : allData,
 			dataType :"json",
@@ -744,7 +746,21 @@ function signUp() {
 
 <script type="text/javascript">
 
-	var msg = $("#msg").val();
+		function ajaxJS(){
+
+		var pw = $("#pw1").val();
+
+		$.ajax({
+			url:"chanege_check.action",     //jap2로 id값 전송
+			dataType:"json",	
+			Type:"post",
+			data:{"pw":pw},
+            success : function(data) {
+            	
+			}
+		}
+	});
+	
 	
 	$( function() {
 		
@@ -755,6 +771,5 @@ function signUp() {
 		
 	});
 </script>
-
 </body>
 </html>

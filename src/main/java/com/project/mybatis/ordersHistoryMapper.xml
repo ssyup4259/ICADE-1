@@ -30,8 +30,20 @@
 	</select>
 	
 	
-	
-	
+	<!-- 주문내역 조회 메인에서 상품코드 하나에 몇개의 제품이 있는지 찾기 -->
+	<select id="selectCountOdNum" parameterType="int" resultType="int">
+		select count(OD_NUM) from Order_Detail where OD_NUM = #{OD_NUM} 
+	</select>
+
+	<!-- 주문날짜와 주문상태에 따른 Orders테이블 값 가져오기 -->
+	<select id="selectOrdersCondition" parameterType="map" resultType="com.project.dto.OrdersDTO">
+		select O_NUM,O_ID,O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from Orders
+		where ${serchKey} = #{O_STATUS}
+	<![CDATA[
+	    and O_DATE >=to_date(#{start_date}, 'YYYY-MM-DD' )
+	    and O_DATE < to_date(#{end_date}, 'YYYY-MM-DD')
+	]]>
+	</select> 	
 
 
 </mapper>
