@@ -1,15 +1,19 @@
 package com.project.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.dao.AdminDAO;
+import com.project.dto.GoodsKindDTO;
 import com.project.service.GoodsService;
 
 @Controller
@@ -18,6 +22,9 @@ public class GoodsController {
 	
 	@Autowired
 	GoodsService g_service;
+	
+	@Autowired
+	AdminDAO a_dao;
 	
 	//메인화면 상품 리스트
 	@RequestMapping(value="/goodsMain.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -47,4 +54,27 @@ public class GoodsController {
 		
 		return "goods/goodsArticle";
 	}
+	
+	
+	@RequestMapping(value="/colorCheck.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String colorArticle(HttpServletRequest req) throws Exception{
+
+		g_service.colorCheck(req);
+		
+		
+		return "goods/goodsArticle";
+	}
+	
+	
+	@ModelAttribute
+	HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+		
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		
+		req.setAttribute("gk_lists", gk_lists);
+		
+		return req;
+        
+    }
+	
 }

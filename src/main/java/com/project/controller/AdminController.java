@@ -9,10 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.dao.AdminDAO;
 import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
@@ -28,6 +30,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	AdminDAO a_dao;
 	
 	//관리자 화면
 	@RequestMapping(value="/adminMain.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -161,5 +166,15 @@ public class AdminController {
 		
 	}
 	
+	@ModelAttribute
+	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+		
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		
+		req.setAttribute("gk_lists", gk_lists);
+		
+		return req;
+        
+    }
 
 }

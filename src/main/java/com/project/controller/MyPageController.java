@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,10 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.dao.AdminDAO;
+import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.MyPageService;
 
@@ -20,6 +24,9 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService service;
+	
+	@Autowired
+	AdminDAO a_dao;
 	
 	@RequestMapping(value="/myPage.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String mypage(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -186,6 +193,17 @@ public class MyPageController {
 		
 		return "redirect:/";
 	}
+	
+	@ModelAttribute
+	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+		
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		
+		req.setAttribute("gk_lists", gk_lists);
+		
+		return req;
+        
+    }
 	
 	
 }

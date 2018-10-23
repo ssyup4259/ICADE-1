@@ -14,5 +14,7 @@ public interface GoodsService {
 	
 	//상품 상세페이지
 	public HttpServletRequest goodsArticle(HttpServletRequest req) throws Exception;
-
+	
+	//상품 셀렉트 박스 변경
+	public HttpServletRequest colorCheck(HttpServletRequest req) throws Exception;
 }

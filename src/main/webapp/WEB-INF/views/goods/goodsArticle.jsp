@@ -72,71 +72,51 @@
 $(function() {
 
 	var select = "<option>:: 선택 ::</option>"; 
-
 	$("#product").change(function() {			
-
 		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
-
 			$("#sub").find("option").remove().end().append(select);
-
 		} else {
-
 			comboChange($(this).val());
-
 		}
-
 	});
 
 	function comboChange() {
-
+		
+		var GD_DEVICE = $("#select1").val();
+		var G_NUM =$("#select2").val();
+		
+		var allData = {"GD_DEVICE":GD_DEVICE, "G_NUM":G_NUM};
+		
 		$.ajax({
-
 			type:"post",
-
-			url:"icade/goods/goodsArticle.action",
-
+			url:"<%=cp%>/goods/colorCheck.action",
 			datatype: "json",
-
-			data: $("#myForm").serialize(),
-
-			success: function(data) {
-
-				if(data.gd_list.length > 0) {
-
+			data: allData,
+			success: function(dc_list) {
+				
+				console.log(dc_list);
+				var dc_list= JSON.parse(dc_list);
+				console.log(dc_list);
+				
+				if(dc_list.length > 0) {
 					$("#sub").find("option").remove().end().append(select);
-
-					$.each(data.gd_list, function(key, value) {
-
+					$.each(dc_list, function(key, value) {
 						$("#sub").append("<option>" + value + "</option>"); 
-
 					});
-
 				} else {
-
 					$("#sub").find("option").remove().end().append("<option>-- No sub --</option>");
-
 					return;
-
 				}
-
 			},
+			error: function() {
 
-			error: function(x, o, e) {
+				
 
-				var msg = "페이지 호출 중 에러 발생 \n" + x.status + " : " + o + " : " + e; 
-
-				alert(msg);
-
+				alert("안된다");
 			}				
-
 		});
-
 	}	
-
 });
-
-
-
 </script>
 
 </head>
@@ -146,10 +126,11 @@ $(function() {
 <body>
 
 
-<%-- <jsp:include page="/ikeloom_include/header.jsp" flush="false" /> --%>
 	<div class="content2">
 		<form name="myForm" method="post" action="">
 			<Br> <br> <br> <br>
+			
+			
 			
 			
 			<table width="1000" align="center">
@@ -196,9 +177,7 @@ $(function() {
 									<c:if test="${!empty gd_list}">
 										<select name="selectBox" id="product" >
 											<c:forEach var="gd_dto" items="${d_list}">
-
-												<option value="${gd_dto.DK_NAME}">${gd_dto.DK_NAME}</option>
-
+												<option id="select1" value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
 											</c:forEach>
 										</select>
 									</c:if>
@@ -210,7 +189,7 @@ $(function() {
 								<td>색상</td>
 								<td align="left">
 								<select name="sub" id="sub">
-										<option>:: 선택 ::</option>
+										<option>:: 색상을 선택해주세요 ::</option>
 								</select>
 								</td>
 							</tr>
@@ -237,6 +216,7 @@ $(function() {
 									
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
 									<input type="button" value="장바구니에 담기" onclick="insertCart();" class="btn" />
+									<input type="hidden" name="${g_dto.getG_NUM()}" value="${g_dto.getG_NUM()}"  id="select2">
 								</td>
 							</tr>
 						</table>
@@ -314,7 +294,7 @@ $(function() {
 
 <!-- 스크립트단 -->
 
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		function discount() {
 			var price = ${g_dto.getG_PRICE()};
 			var discount = ${g_dto.getG_DISCOUNT()};
@@ -326,6 +306,6 @@ $(function() {
 			 
 		}
 	
-	</script>
+	</script> -->
 
 </html>

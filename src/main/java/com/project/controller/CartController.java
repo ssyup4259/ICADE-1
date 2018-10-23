@@ -11,12 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.dao.AdminDAO;
 import com.project.dto.CartDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
+import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.CartService;
 
@@ -28,6 +31,9 @@ public class CartController {
 	
 	@Autowired
 	CartService c_service;
+	
+	@Autowired
+	AdminDAO a_dao;
 	
 	//장바구니 리스트
 	@RequestMapping(value="/cartList.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -130,5 +136,16 @@ public class CartController {
 		return "cart/cartTest";
 		
 	}
+	
+	@ModelAttribute
+	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+		
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		
+		req.setAttribute("gk_lists", gk_lists);
+		
+		return req;
+        
+    }
 
 }
