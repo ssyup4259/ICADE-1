@@ -36,11 +36,9 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		List<GoodsDTO> popularList = g_dao.getPopularLists();
 		List<GoodsDTO> newList = g_dao.getNewLists();
-		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		
 		req.setAttribute("popularList", popularList);
 		req.setAttribute("newList", newList);
-		req.setAttribute("gk_lists", gk_lists);
 		
 		return req;
 	}
@@ -123,9 +121,6 @@ public class GoodsServiceImpl implements GoodsService {
 		req.setAttribute("dataCount",dataCount);
 		req.setAttribute("articleUrl",articleUrl);
 		req.setAttribute("gdKindNum", gdKindNum);
-		
-		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
-		req.setAttribute("gk_lists", gk_lists);
 		
 		return req;
 	}

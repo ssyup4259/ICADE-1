@@ -50,41 +50,7 @@
 <body>
 
 	<!-- 본문 시작 -->
-	<div class="navbar container-fluid sticky" style="z-index: 90;">
-		<ul>
-			<li>
-				<img src="/icade/resources/data/logo/logo2.png" width="140" height="47" style="cursor: pointer;" onclick="';">
-			</li>
-
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn">케이스</a>
-				<div class="dropdown-content">
-					<a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">일반</a> <a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">주문제작</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn">필름</a>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn">악세서리</a>
-				<div class="dropdown-content">
-					<a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">케이블</a> <a href="<%=cp%>/ikeloom/list.do?g_room=livingroom&g_kind_num=11">충전기</a>
-				</div>
-			</li>
-
-			<li style="float: right">
-				<a href="<%=cp%>/ikeloom/created.do">회원가입</a>
-			</li>
-			<li style="float: right">
-				<a href="<%=cp%>/ikeloom/login.do">로그인</a>
-			</li>
-		</ul>
-	</div>
-
-	<div class="container-fluid text-center">
-		<img src="/icade/resources/data/logo/logo1.png">
-	</div>
-
+	<jsp:include page="../include/header.jsp" flush="false" />
 
 	<!-- 내용 -->
 	<form name="joinForm" action="" method="post" id="joinForm">

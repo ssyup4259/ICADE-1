@@ -9,10 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.dao.AdminDAO;
+import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.OrderHistoryService;
 
@@ -21,6 +24,9 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	private OrderHistoryService service;
+	
+	@Autowired
+	AdminDAO a_dao;
 	
 	@RequestMapping(value="/orderhistory.action",method=RequestMethod.POST)
 	public ModelAndView ordershistorymain(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -54,6 +60,17 @@ public class OrdersHistoryController {
 		
 		return mav;
 	}
+	
+	@ModelAttribute
+	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+		
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		
+		req.setAttribute("gk_lists", gk_lists);
+		
+		return req;
+        
+    }
 	
 
 }
