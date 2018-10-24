@@ -27,33 +27,12 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>
-	/goods/goodsList.action";
+		f.action = "<%=cp%>/goods/goodsList.action";
 		f.submit();
 
 	}
 </script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		var offset = 220;
-		var duration = 500;
-		jQuery(window).scroll(function() {
-			if (jQuery(this).scrollTop() > offset) {
-				jQuery('.back_to_top').fadeIn(duration);
-			} else {
-				jQuery('.back_to_top').fadeOut(duration);
-			}
-		});
 
-		jQuery('.back_to_top').click(function(event) {
-			event.preventDefault();
-			jQuery('html, body').animate({
-				scrollTop : 0
-			}, duration);
-			return false;
-		})
-	});
-</script>
 <style type="text/css">
 #goodsImage {
 	width: 85%;
