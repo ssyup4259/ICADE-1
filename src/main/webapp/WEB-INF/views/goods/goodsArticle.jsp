@@ -137,7 +137,7 @@
 							<tr align="center">
 								<td>수량</td>
 								<td align="left">
-									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();"/>
 									<input type="button" id="up" class="up" onclick="countUp();"/>
 									<input type="button" id="down" class="down" onclick="countDown();"/>개
 								</td>
@@ -145,8 +145,10 @@
 					
 							
 							<tr align="center">
-								<td>총 상품금액</td>
-								<td align="left"></td>
+									<td>총 상품금액</td>
+									<td align="left">
+									<input border="0" type="text" name="sum" value="${g_dto.getG_PRICE()}" size="11" readonly>원
+									</td>
 							</tr>
 							
 							
@@ -412,6 +414,19 @@ $(function() {
 		});
 	}	
 
+	//금액 자동 계산
+	function change () {
+		
+	var	hm = document.myForm.GD_COUNT;
+	var	sum = document.myForm.sum;
+	var	sell_price =${g_dto.getG_PRICE()};
+		
+			if (hm.value < 0) {
+				hm.value = 0;
+			}
+		sum.value = parseInt(hm.value) * sell_price;
+}  
+	
 </script>
 
 
