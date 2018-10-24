@@ -10,7 +10,7 @@
 <title>상품목록</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -64,10 +64,9 @@ function sendIt() {
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
-	<div class="container-fluid" style="background-color: #F2F1F0;">
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 
 		<div class="container-fluid text-center">
-			<br>
 			<h1>상품 목록</h1>
 			<form action="" name="searchForm" method="post">
 				<select name="GD_KIND_NUM" class="sel">
@@ -136,6 +135,7 @@ function sendIt() {
 			</table>
 		</div>
 	</div>
+	<jsp:include page="../include/footer.jsp" flush="false" />
 
 
 </body>

@@ -34,41 +34,43 @@
 				</c:forEach>
 			</div>
 		</li>
-		
+
 		<c:if test="${empty sessionScope.userInfo}">
-		
+
 			<li style="float: right">
 				<a href="<%=cp%>/join.action">회원가입</a>
 			</li>
-			
+
 			<li style="float: right">
 				<a href="<%=cp%>/login.action">로그인</a>
 			</li>
-			
+
 		</c:if>
-		
+
+		<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
+			<li class="dropdown" style="float: right;">
+				<a href="javascript:void(0)" class="dropbtn">관리자 메뉴</a>
+
+				<div class="dropdown-content">
+					<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a> <a href="<%=cp%>/admin/memberList.action">회원 목록</a>
+				</div>
+			</li>
+		</c:if>
+
 		<c:if test="${!empty sessionScope.userInfo}">
+			<c:if test="${sessionScope.userInfo.getM_RANK() != 'admin'}">
+				<li style="float: right">
+					<a href="<%=cp%>/cart/cartList.action">장바구니</a>
+				</li>
+			</c:if>
 			<li style="float: right">
 				<a href="<%=cp%>/logout.action">로그아웃</a>
 			</li>
-			<li style="float: right">
-				<a href="<%=cp%>/cart/cartList.action">장바구니</a>
+			<li style="float: right;">
+				<a>${sessionScope.userInfo.getM_ID()}님 환영합니다.</a>
 			</li>
 		</c:if>
-		
-		
-		
-		
-		<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
-			<li style="float: right">
-				<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a>
-			</li>
-			
-			<li style="float: right">
-				<a href="<%=cp%>/admin/memberList.action">회원 목록</a>
-			</li>
-		</c:if>
-		
+
 	</ul>
 </div>
 

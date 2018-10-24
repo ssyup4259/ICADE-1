@@ -131,6 +131,7 @@ li.dropdown {
 	-moz-appearance: none;
 	appearance: none;
 	text-align-last: center;
+	cursor: pointer;
 }
 
 .file_input_textbox {
@@ -273,5 +274,41 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 .sticky2 {
 	position: sticky;
 	top: 3px;
+}
+
+/* 링크스타일 */
+a:link {
+    color: #8F9493;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #8F9493;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #A3C838;
+}
+
+a:active {
+    color: #A3C838;
+}
+
+.back_to_top {
+	position: fixed;
+	bottom: 10px;
+	left: 90%;
+	text-decoration: none;
+	padding: auto;
+	display: none;
+	z-index: 998;
+}
+#opacity {
+	opacity: 0.8;
+}
+
+#opacity:hover {
+	opacity: 1.0;
 }
 
