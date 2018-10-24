@@ -54,6 +54,27 @@ public class CartController {
 		
 	}
 	
+	//장바구니 추가전 동일 품목있는지 체크 (완성)
+	@RequestMapping(value="/insertCheck.action", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public boolean insertCheck(HttpServletRequest req) throws Exception {
+		
+		HttpSession session = req.getSession();
+		
+		String g_num = req.getParameter("G_NUM");
+		String gd_kind_num = req.getParameter("GD_KIND_NUM");
+		String gd_device = req.getParameter("GD_DEVICE");
+		String gd_color = req.getParameter("GD_COLOR");
+		
+		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
+		String c_id = m_dto.getM_ID();
+		
+		String c_code = g_num + "-" + gd_kind_num + "-" + gd_device + "-" + gd_color;
+		
+		return c_dao.insertCartCheck(c_id, c_code);
+		
+	}
+	
 	//장바구니 추가 (완성)
 	@RequestMapping(value="/insertCart.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String insertCartItem(HttpServletRequest req, GoodsDTO g_dto, GoodsDetailDTO gd_dto) throws Exception {

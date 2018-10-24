@@ -23,6 +23,25 @@ public class CartDAOImpl implements CartDAO {
 	
 	public static String cartMapper = "com.project.mybatis.cartMapper";
 
+	//장바구니 추가 전 동일품목여부 조회 (완성)
+	@Override
+	public boolean insertCartCheck(String c_id, String c_code) throws Exception {
+		
+		Map<String, String> hMap = new HashMap<String, String>();
+		
+		hMap.put("c_id", c_id);
+		hMap.put("c_code", c_code);
+		
+		int flag = sessionTemplate.selectOne(cartMapper + ".insertCartCheck", hMap);
+		
+		if (flag > 0) {
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
 	//장바구니 추가 (완성)
 	@Override
 	public void insertCartItem(CartDTO c_dto) throws Exception {

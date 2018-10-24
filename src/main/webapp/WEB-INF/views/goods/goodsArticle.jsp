@@ -137,6 +137,7 @@ $(function() {
 		});
 	}	
 });
+
 </script>
 
 
@@ -166,6 +167,7 @@ $(function() {
 		
 	}
 	
+	//장바구니에 추가
 	function insertCart() {
 		
 		var f = document.myForm;
@@ -174,6 +176,39 @@ $(function() {
 		f.submit();
 		
 	}
+	
+	//장바구니에 추가 전 동일품목여부 조회
+	function insertCheck() {
+		
+		var allData = $("#myForm").serialize();
+		
+		$.ajax({
+			
+			type:"post",
+			url:"<%=cp%>/cart/insertCheck.action",
+			datatype:  'json',
+			data: allData,
+			success: function(data) {
+				
+				if (data == true) {
+					
+					insertCart();
+					
+				} else if (data == false) {
+					
+					alert("이미 장바구니에 존재하는 상품입니다.");
+					
+				}
+				
+			},
+			
+			error: function(data) {
+
+				alert(data);
+				
+			}				
+		});
+	}	
 
 </script>
 </head>
@@ -181,7 +216,7 @@ $(function() {
 <body>
 
 	<div class="content2">
-		<form name="myForm" method="post" action="">
+		<form id="myForm" name="myForm" method="post" action="">
 			<br/><br/><br/><br/>
 			
 			<table width="1000" align="center">
@@ -280,8 +315,7 @@ $(function() {
 									<br/>
 									
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
-									<input type="button" value="장바구니에 담기" onclick="insertCart();" class="btn" />
-									<input type="hidden" name="${g_dto.getG_NUM()}" value="${g_dto.getG_NUM()}"  id="select2">
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" />
 								</td>
 							</tr>
 						</table>

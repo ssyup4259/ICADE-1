@@ -9,6 +9,11 @@
 	select nvl(max(C_NUM), 0) from Cart
 </select>
 
+<!-- 장바구니 추가 전 동일품목 여부 조회 -->
+<select id="insertCartCheck" parameterType="map" resultType="int">
+	select nvl(count(*), 0) from cart where C_ID = #{c_id} and C_CODE = #{c_code}
+</select>
+
 <!-- 장바구니 추가 -->
 <insert id="insertCartItem" parameterType="com.project.dto.CartDTO">
 	insert into Cart (C_NUM, C_CODE, C_ID, C_NAME, C_COUNT) values(#{C_NUM}, #{C_CODE}, #{C_ID}, #{C_NAME}, #{C_COUNT})

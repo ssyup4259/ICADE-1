@@ -6,6 +6,9 @@ import com.project.dto.CartDTO;
 
 public interface CartDAO {
 	
+	//장바구니 추가 전 동일품목여부 조회 (완성)
+	public boolean insertCartCheck(String c_id, String c_code) throws Exception;
+	
 	//장바구니 추가 (완성)
 	public void insertCartItem(CartDTO c_dto) throws Exception;
 	
