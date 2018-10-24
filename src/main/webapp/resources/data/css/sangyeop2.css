@@ -1,0 +1,277 @@
+/* 전체 골격 */
+html {
+	font-family: 'Jua', sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: 'Jua', sans-serif;
+}
+
+body {
+	margin: 0;
+	font-family: 'Jua', sans-serif;
+}
+
+/* Style the footer */
+.footer {
+	background-color: #f1f1f1;
+	padding: 10px;
+}
+
+/* 상단 nav드롭다운*/
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: white;
+}
+
+.topfixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+li {
+	float: left;
+}
+
+li a, .dropbtn {
+	font-size: 23px;
+	display: inline-block;
+	color: #8F9493;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+	background-color: white;
+	color: #A3C838;
+}
+
+li.dropdown {
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	font-size: 20px; color : #8F9493;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	color: #8F9493;
+}
+
+.dropdown-content a:hover {
+	background-color: white;
+	color: #A3C838;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* 로그인 등등 버튼들 */
+.btn {
+	background-color: white;
+	color: #A3C838;
+	padding: 5px 13px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	height: 40px;
+}
+
+/*input*/
+.inputBox{
+	border-color: #A3C838;
+	color: #8F9493;
+	text-align: center;
+	font-size: 16px;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	height: 40px;
+}
+
+.btn:hover {
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+	background-color: #A3C838;
+	color: white;
+}
+
+/* select 박스들 */
+.sel {
+	width: 400px;
+	height: 40px;
+	font-size: 16px;
+	color: #8F9493;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	text-align-last: center;
+}
+
+.file_input_textbox {
+	folate: left;
+}
+
+
+/* carousel slide */
+.carousel{
+    position:relative;
+    overflow:hidden;
+    height: 500px;
+    
+}
+.carousel > li{
+    position:absolute;
+    left:0;
+    top:0;
+    opacity:1;
+    animation: slide 16s ease infinite forwards;
+}
+.carousel > li:nth-child(1){
+    opacity:1;
+    z-index: 3;
+}
+.carousel > li:nth-child(2){
+    z-index:2;
+    animation-delay: 4s;
+}
+.carousel > li:nth-child(3){
+    z-index:1;
+    animation-delay: 8s;
+}
+
+@keyframes slide{
+    0%{opacity:1; left:0;}
+    33.33%{opacity:0.5; left:-120%;}
+    34%{opacity:0;}
+    66.66%{left:0; opacity:0;}
+    100%{opacity:1;}
+}
+
+.thumbnail a>img, .thumbnail>img {
+	display: block;
+	max-width: 100%;
+	height: auto
+}
+
+.img-rounded {
+	border-radius: 6px
+}
+
+.img-thumbnail {
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+	padding: 4px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out
+}
+
+.img-circle {
+	border-radius: 50%
+}
+
+hr {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 0;
+	border-top: 1px solid #eee
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+
+.thumbnail {
+	display: block;
+	padding: 4px;
+	margin-bottom: 20px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-transition: border .2s ease-in-out;
+	-o-transition: border .2s ease-in-out;
+	transition: border .2s ease-in-out
+}
+
+.thumbnail a>img, .thumbnail>img {
+	margin-right: auto;
+	margin-left: auto
+}
+
+a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
+	border-color: #337ab7
+}
+
+.thumbnail .caption {
+	padding: 9px;
+	color: #333
+}
+
+.img-thumbnail {
+	max-width: none
+}
+
+.thumbnail img:hover {
+	webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.panel-body img:hover {
+	background-size: 120% 120%;
+}
+
+/* 고정 */
+.sticky {
+	position: sticky;
+	top: 0px;
+}
+
+.sticky2 {
+	position: sticky;
+	top: 3px;
+}
+

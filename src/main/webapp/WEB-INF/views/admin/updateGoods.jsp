@@ -48,7 +48,6 @@ function sendIt() {
 	        
 	f.action = "<%=cp%>/admin/updateGoods.action";
 	f.submit();
-	
 }
 
 </script>
