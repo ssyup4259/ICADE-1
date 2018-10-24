@@ -11,7 +11,7 @@
 <title>ICADE</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -27,11 +27,11 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>/goods/goodsList.action";
+		f.action = "<%=cp%>
+	/goods/goodsList.action";
 		f.submit();
-	
+
 	}
-	
 </script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -55,44 +55,12 @@
 	});
 </script>
 <style type="text/css">
-.back_to_top {
-	position: fixed;
-	bottom: 10px;
-	left: 90%;
-	text-decoration: none;
-	padding: auto;
-	display: none;
-	z-index: 998;
-}
-
-a:link {
-	color: #8F9493;
-	text-decoration: none;
-}
-
-a:visited {
-	color: #8F9493;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #A3C838;
-}
-
-a:active {
-	color: #A3C838;
-}
-
-a.footer {
-	color: black;
-}
-
-#opacity {
-	opacity: 0.8;
-}
-
-#opacity:hover {
-	opacity: 1.0;
+#goodsImage {
+	width: 85%;
+	height: 40%;
+	margin-top: 15px;;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
 }
 </style>
 </head>
@@ -163,7 +131,11 @@ a.footer {
 									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 100%" alt="Image">
 									</a>
 								</div>
-								<div class="panel-footer" style="text-align: right;">가격 : <fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</div>
+								<div class="panel-footer" style="text-align: right;">
+									가격 :
+									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+									원
+								</div>
 							</div>
 						</div>
 
@@ -191,13 +163,16 @@ a.footer {
 						</c:if>
 
 						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="width: 85%; height: 40%; margin-top: 15px;; border-top-left-radius: 30px; border-top-right-radius: 30px;" alt="Image">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
 								<div style="padding-left: 10%">
 									<p>${g_dto.getG_NAME()}</p>
 								</div>
 								<div class="row">
 									<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
-									<div class="col-sm-6" style="text-align: right; padding-right: 10%;"><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</div>
+									<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
+										<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+										원
+									</div>
 								</div>
 							</a>
 						</div>
