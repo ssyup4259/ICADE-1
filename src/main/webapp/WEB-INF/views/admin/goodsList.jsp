@@ -53,9 +53,9 @@ tr:hover {
 <script type="text/javascript">
 function sendIt() {
 	
-	var f = document.myForm;
+	var f = document.searchForm;
 	        
-	f.action = "<%=cp%>/admin/updateGoodsDetailCount.action";
+	f.action = "<%=cp%>/admin/goodsList.action";
 	f.submit();
 
 }
