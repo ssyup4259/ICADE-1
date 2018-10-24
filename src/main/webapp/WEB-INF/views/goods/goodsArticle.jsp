@@ -337,10 +337,6 @@ $(function() {
 							<tr align="center">
 								<td align="center" colspan="2">
 									<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
-									<select></select>
-									
-									<br/>
-									
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
 									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" />
 								</td>
