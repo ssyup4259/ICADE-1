@@ -24,13 +24,13 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	MyUtil myUtil;
 	
-	//장바구니 추가
+	//장바구니 추가 (완성)
 	@Override
 	public void insertCartItem(String c_id, GoodsDTO g_dto, GoodsDetailDTO gd_dto) throws Exception {
 		
 		CartDTO c_dto = new CartDTO();
 		
-		String c_code = gd_dto.getGD_CODE();
+		String c_code = g_dto.getG_NUM() + "-" + gd_dto.getGD_KIND_NUM() + "-" + gd_dto.getGD_DEVICE() + "-" + gd_dto.getGD_COLOR();
 		String c_name = g_dto.getG_NAME();
 		int c_count = gd_dto.getGD_COUNT();
 		
@@ -43,7 +43,7 @@ public class CartServiceImpl implements CartService {
 		
 	}
 
-	//장바구니 리스트
+	//장바구니 리스트 (완성)
 	@Override
 	public HttpServletRequest cartList(HttpServletRequest req, String c_id) throws Exception {
 		
@@ -100,20 +100,20 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	
-	//장바구니 개별 비우기
+	//장바구니 개별 비우기 (완성)
 	@Override
 	public String deleteCartItem(int c_num, String pageNum) throws Exception {
 		c_dao.deleteCartItem(c_num, pageNum);
 		return pageNum;
 	}
 
-	//장바구니 모두 비우기
+	//장바구니 모두 비우기 (완성)
 	@Override
 	public void deleteCartAll(String c_id) throws Exception {
 		c_dao.deleteCartAll(c_id);
 	}
 
-	//장바구니 수량 수정
+	//장바구니 수량 수정 (완성)
 	@Override
 	public void updateCartItem(String c_code, int c_count) throws Exception {
 		
@@ -121,7 +121,7 @@ public class CartServiceImpl implements CartService {
 		
 	}
 
-
+	//장바구니 1개의 데이터 (완성)
 	@Override
 	public CartDTO getCartItem(String c_num) throws Exception {
 		return c_dao.getCartItem(c_num);

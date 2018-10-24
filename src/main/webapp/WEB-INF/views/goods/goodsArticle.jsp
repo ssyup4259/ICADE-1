@@ -51,7 +51,7 @@
 
 
 <!-- 탭 메뉴 적용 -->
-<script>
+<script type="text/javascript">
 		$(function () {	
 			tab('#tab',0);	
 		});
@@ -84,11 +84,11 @@
 
 
 <!-- 콤보박스 연결 -->
-<script >
+<script type="text/javascript">
 $(function() {
 
 	var select = "<option>:: 선택 ::</option>"; 
-	$("#product").change(function() {			
+	$("#product").change(function() {
 		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
 			$("#sub").find("option").remove().end().append(select);
 		} else {
@@ -165,6 +165,15 @@ $(function() {
 		document.getElementById("GD_COUNT").value = count;
 		
 	}
+	
+	function insertCart() {
+		
+		var f = document.myForm;
+		
+		f.action = "<%=cp%>/cart/insertCart.action";
+		f.submit();
+		
+	}
 
 </script>
 </head>
@@ -222,6 +231,7 @@ $(function() {
 								<td>기종</td>
 								<td align="left">
 									<c:if test="${!empty gd_list}">
+										<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}"/>
 										<select name="GD_DEVICE" id="product" >
 											<option value="">::기종을 선택하세요::</option>
 											<c:forEach var="gd_dto" items="${d_list}">
@@ -265,9 +275,7 @@ $(function() {
 							<tr align="center">
 								<td align="center" colspan="2">
 									<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
-									
-									 <select></select>
-									 
+									<select></select>
 									
 									<br/>
 									
@@ -297,17 +305,14 @@ $(function() {
 						<c:if test="${empty pageNum}">
 							<br>
 							<div id="btn">
-					<%-- 			<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
-									<h2>상품목록으로 돌아가기</h2> --%>
-								</a>
+								<%-- <a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
+										<h2>상품목록으로 돌아가기</h2></a> --%>
 							</div>
 							<br>
 						</c:if>
 					</td>
 				</tr>
 			</table>
-			
-			
 			
 			<div>
 				<div class="tab">
@@ -317,18 +322,16 @@ $(function() {
 					    <li>상품사용후기</li>	
 					    <li>관련후기</li>	
 					</ul>
-						<div class="tab_con" id="tab_con">
-						    <div>상품상세정보</a></div>	
-						    <div>상품구매안내</a></div>
-						    <div>상품사용후기</a></div>
-						</div>
+					<div class="tab_con" id="tab_con">
+					    <div>상품상세정보</div>	
+					    <div>상품구매안내</div>
+					    <div>상품사용후기</div>
+					</div>
 				</div>
 			</div>		
-				
 			
 		</form>
-		</div>
-
+	</div>
 
 </body>
 </html>

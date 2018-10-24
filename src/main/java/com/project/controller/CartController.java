@@ -39,7 +39,7 @@ public class CartController {
 	@Autowired
 	CartDAO c_dao;
 	
-	//장바구니 리스트
+	//장바구니 리스트 (완성)
 	@RequestMapping(value="/cartList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String cartList(HttpServletRequest req) throws Exception {
 		
@@ -54,7 +54,7 @@ public class CartController {
 		
 	}
 	
-	//장바구니 추가 아직 미완성~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//장바구니 추가 (완성)
 	@RequestMapping(value="/insertCart.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String insertCartItem(HttpServletRequest req, GoodsDTO g_dto, GoodsDetailDTO gd_dto) throws Exception {
 		
@@ -65,11 +65,11 @@ public class CartController {
 		
 		c_service.insertCartItem(c_id, g_dto, gd_dto);
 		
-		return "redirect:goods/goodsArticle.action";
+		return "redirect:/goods/goodsArticle.action?G_NUM=" + g_dto.getG_NUM();
 		
 	}
 	
-	//장바구니 개별 비우기
+	//장바구니 개별 비우기 (완성)
 	@RequestMapping(value="/deleteCartItem.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String deleteCartItem(HttpServletRequest req) throws Exception {
 		
@@ -82,7 +82,7 @@ public class CartController {
 		
 	}
 	
-	//장바구니 모두 비우기
+	//장바구니 모두 비우기 (완성)
 	@RequestMapping(value="/deleteCartAll.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String deleteCartAll(HttpServletRequest req) throws Exception {
 		
@@ -97,7 +97,7 @@ public class CartController {
 		
 	}
 	
-	//장바구니 수량 수정
+	//장바구니 수량 수정 (완성)
 	@RequestMapping(value="/updateCartItem.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateCartItem(HttpServletRequest req) throws Exception {
 		
@@ -111,25 +111,25 @@ public class CartController {
 		
 	}
 	
-	//장바구니 재고 확인
-		@RequestMapping(value="/updateCheck.action", method= {RequestMethod.GET, RequestMethod.POST})
-		@ResponseBody
-		public String updateCheck(HttpServletRequest req) throws Exception {
+	//장바구니 재고 확인 (완성)
+	@RequestMapping(value="/updateCheck.action", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String updateCheck(HttpServletRequest req) throws Exception {
+		
+		String c_code = req.getParameter("c_code");
+		int c_count = Integer.parseInt(req.getParameter("c_count"));
+		String pageNum = req.getParameter("pageNum");
+		
+		int count = c_dao.countGoods(c_code);
+		
+		if (count >= c_count) {
 			
-			String c_code = req.getParameter("c_code");
-			int c_count = Integer.parseInt(req.getParameter("c_count"));
-			String pageNum = req.getParameter("pageNum");
-			
-			int count = c_dao.countGoods(c_code);
-			
-			if (count >= c_count) {
-				
-				return "true";
-			}
-			
-			return "false";
-			
+			return "true";
 		}
+		
+		return "false";
+		
+	}
 	
 	//체크한 상품만 구매 하기 위함
 	@RequestMapping(value="/cartTest.action", method= {RequestMethod.GET, RequestMethod.POST})
