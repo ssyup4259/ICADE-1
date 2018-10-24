@@ -154,6 +154,14 @@
 		});
 	});
 	
+	$(document).ready(function (){
+		$("#order_search_btn").click(function(){
+			alert("a");
+			$("#OrderHistoryForm").attr("action","orderHistory_ok.action").submit();
+		});
+	});
+	
+	
 	
 	
 	

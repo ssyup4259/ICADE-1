@@ -29,7 +29,7 @@
 <form action="" method="post" name="myForm">
 
 <input type="hidden" id="mode" name="mode" value="${mode}">
-<input type="hidden" id="msg" name="msg" value="${msg}">
+<input type="text" id="msg" name="msg" value="${msg}">
 
 <table border="1" style="margin-left: auto; margin-right: auto;">
 	<tr >
@@ -73,7 +73,7 @@ $("#pw").keyup(function(event){
 				//alert("false : " + data);
 				$("#msg").val("비밀번호가 틀립니다.");
 			}else if(data==true){
-				$("#msg").empty();
+				$("#msg").val("");
 			}
 		}
 	});

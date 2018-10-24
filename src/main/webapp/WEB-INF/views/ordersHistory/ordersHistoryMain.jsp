@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
@@ -21,14 +20,17 @@
     <h2>주문조회</h2>
 </div>
 
-<div class="xans-element- xans-myshop xans-myshop-orderhistorytab ec-base-tab "><ul class="menu">
-<li class="selected"><a href="/myshop/order/list.html?history_start_date=2018-07-21&amp;history_end_date=2018-10-19">주문내역조회 (0)</a></li>
+<div class="xans-element- xans-myshop xans-myshop-orderhistorytab ec-base-tab ">
+	<ul class="menu">
+		<li class="selected"><a href="/myshop/order/list.html?history_start_date=2018-07-21&amp;history_end_date=2018-10-19">주문내역조회 (0)</a></li>
         <li class=""><a href="/myshop/order/list.html?mode=cs&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19">취소/반품/교환 내역 (0)</a></li>
         <li class=" displaynone"><a href="/myshop/order/list_old.html?mode=old&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19">이전 주문내역 (0)</a></li>
     </ul>
 </div>
 
-<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm"><div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
+<form method="post" id="OrderHistoryForm" name="OrderHistoryForm">
+
+<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
 
 <fieldset class="ec-base-box">
 	<legend>검색기간설정</legend>
@@ -54,32 +56,29 @@
 	            <a href="#none" class="btnNormal" days="180"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" id="sixMonth" alt="6개월"></a>
 	        </span>
 	        <!-- 기간 지정부분 -->
-	        <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text">
-	        	<!-- 달력 버튼 -->
-	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>
-	         ~ 
+	        <!-- <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text">
+	        	달력 버튼
+	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button> -->
+	        	
+	        <input type="text" id="sdate" name="startDay"> ~ <input type="text" id="edate" name="endDay"> 
+	        
+	        <!-- 
 	        <input id="history_end_date" name="history_end_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-10-19" type="text">
-	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button>        
+	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button> -->        
 	        <!-- 조회 버튼 -->
 	        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">
-	        
-	        <br/>
-	        <input type="text" id="history_start_date_button" class="" readonly="readonly" size="10" value="" name="searchStartDay">
-	         ~ 
-	        <input type="text" id="history_end_date_button" class="" readonly="readonly" size="10" value="" name="searchLastDay">
-	        
-	        <br/>
-	        <input type="text" id="sdate"> ~ <input type="text" id="edate">
 </fieldset>
 
 <ul>
-<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
-        <li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
-    </ul>
+	<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
+	<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+</ul>
+
 </div>
-<input id="mode" name="mode" value="" type="hidden">
-<input id="term" name="term" value="now" type="hidden">
+
 </form>
+
+
 <div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem ec-base-table typeList"><!--
         $login_url = /member/login.html
     -->

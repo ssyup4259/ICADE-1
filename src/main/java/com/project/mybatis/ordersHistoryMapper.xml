@@ -5,8 +5,8 @@
 <mapper namespace="com.project.mybatis.ordersHistoryMapper">
 
 	<!-- 아이디로 주문내역 조회 -->
-	<select id="selectOrderNum" parameterType="String" resultType="list">
-		select O_NUM from orders where O_ID = #{O_ID};
+	<select id="selectOrderNum" parameterType="String" resultType="integer">
+		select O_NUM from orders where O_ID = #{O_ID}
 	</select>
 
 	<!-- 주문내역 메인페이지에 뿌려줄 정보 -->
@@ -40,8 +40,8 @@
 		select O_NUM,O_ID,O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from Orders
 		where ${serchKey} = #{O_STATUS}
 	<![CDATA[
-	    and O_DATE >=to_date(#{start_date}, 'YYYY-MM-DD' )
-	    and O_DATE < to_date(#{end_date}, 'YYYY-MM-DD')
+	    and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
+	    and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
 	]]>
 	</select> 	
 

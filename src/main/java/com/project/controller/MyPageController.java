@@ -69,6 +69,8 @@ public class MyPageController {
 	public String cancelCheckStep1(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		//탈퇴버튼 클릭후 나오는 본인확인을 위한 인증 컨트롤러
 		
+		System.out.println("infoCheckPage_ok.action 들어옴---------------------------------------");
+		
 		HttpSession session = request.getSession();
 		
 		String mode = request.getParameter("mode");
@@ -295,8 +297,6 @@ public class MyPageController {
 		
 		System.out.println(userPw);
 		System.out.println(inputPw);
-		
-		
 		
 		if(userPw!=inputPw&&!userPw.equals(inputPw)) {
 			return false;
