@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/sangyeop.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -21,15 +21,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <style type="text/css">
-.sticky {
-	position: sticky;
-	top: 0px;
-}
-
-.sticky2 {
-	position: sticky;
-	top: 3px;
-}
 </style>
 <script type="text/javascript">
 
@@ -37,32 +28,32 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>/goods/goodsList.action";
+		f.action = "<%=cp%>
+	/goods/goodsList.action";
 		f.submit();
-		
-	}
 
+	}
 </script>
 
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false"/>
+	<jsp:include page="../include/header.jsp" flush="false" />
 
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
 				<form class="form-inline" action="" name="searchForm" method="post">
-					<input type="hidden" name="GK_KIND_NUM" value="${gdKindNum}" />
-					
-					<select name="GK_KIND_NUM" class="sel1" style="width: 100px;">
+					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
+
+					<select name="GK_KIND_NUM" class="sel" style="width: 100px; cursor: pointer;">
 						<option value="">전체</option>
 						<c:forEach var="gk_dto" items="${gk_lists}">
 							<option value="${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</option>
 						</c:forEach>
 					</select>
-					
-					<select name="searchKey" class="sel1" style="width: 100px;">
+
+					<select name="searchKey" class="sel" style="width: 100px; cursor: pointer;">
 						<option value="G_NAME">상품명</option>
 						<option value="G_CONTENT">내용</option>
 					</select>
@@ -73,7 +64,7 @@
 		</div>
 	</div>
 
-	<div class="container-fluid" style="background-color: #F2F1F0;">
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px;">
 		<div class="container-fluid col-sm-8">
 			<div class="row">
 				<div class="container-fluid" style="width: 120%;">
@@ -94,40 +85,47 @@
 							<div class="row">
 						</c:if>
 
-						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">
-							<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="width: 100%; height: 380px; border-top-left-radius: 30px; border-top-right-radius: 30px;" alt="Image">
-								<div class="caption">
+						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
+								<div style="padding-left: 10%">
 									<p>${g_dto.getG_NAME()}</p>
-									남은 수량 : ${g_dto.getG_COUNT()}
+								</div>
+								<div class="row">
+									<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
+									<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
+										<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+										원
+									</div>
 								</div>
 							</a>
 						</div>
-						
+
 						<br>
 
 						<c:if test="${i % 4 == 3 || g_lists.size() == i+1}">
-							</div>
-						</c:if>
-		
-						<c:set var="i" value="${i+1}" />
+				</div>
+				<br>
+				<br>
+				</c:if>
 
-					</c:forEach>
-					<div style="text-align: center;">
-						<c:if test="${dataCount!=0 }">
+				<c:set var="i" value="${i+1}" />
+
+				</c:forEach>
+				<div style="text-align: center;">
+					<c:if test="${dataCount!=0 }">
 							${pageIndexList }
 						</c:if>
-						
-						<c:if test="${dataCount==0 }">
+
+					<c:if test="${dataCount==0 }">
 							등록된 상품이 없습니다.
 						</c:if>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<br><br><br><br>
-
+	<br>
+	<br>
+	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

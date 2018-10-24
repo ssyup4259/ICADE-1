@@ -23,7 +23,36 @@ public class CartDAOImpl implements CartDAO {
 	
 	public static String cartMapper = "com.project.mybatis.cartMapper";
 
-	//장바구니 추가
+	//장바구니 추가 전 동일품목여부 조회 (완성)
+	@Override
+	public String insertCartCheck(String c_id, String c_code, int gd_count) throws Exception {
+		
+		Map<String, String> hMap = new HashMap<String, String>();
+		
+		hMap.put("c_id", c_id);
+		hMap.put("c_code", c_code);
+		
+		CartDTO c_dto = sessionTemplate.selectOne(cartMapper + ".insertCartCheck", hMap);
+		
+		int reduplication = c_dto.getReduplication();//동일품목 중복여부
+		int stockCount = c_dto.getGd_count();//재고 수량
+		
+		System.out.println(reduplication);
+		System.out.println(stockCount);
+		
+		if (reduplication > 0) {
+			return "reduplication";
+		}
+		
+		if (stockCount < gd_count) {
+			return "lack";
+		}
+		
+		return "success";
+		
+	}
+	
+	//장바구니 추가 (완성)
 	@Override
 	public void insertCartItem(CartDTO c_dto) throws Exception {
 		
@@ -35,7 +64,7 @@ public class CartDAOImpl implements CartDAO {
 		
 	}
 
-	//장바구니 리스트
+	//장바구니 리스트 (완성)
 	@Override
 	public List<CartDTO> getCartLists(int start, int end, String c_id) throws Exception {
 		
@@ -49,28 +78,27 @@ public class CartDAOImpl implements CartDAO {
 		
 		return c_lists;
 	}
-
 	
-	//장바구니에 담은 상품 개수 구하기
+	//장바구니에 담은 상품 개수 구하기 (완성)
 	@Override
 	public int getCartCount(String c_id) throws Exception {
 		return sessionTemplate.selectOne(cartMapper + ".getCartCount", c_id);
 	}
 
-
+	//장바구니 개별 비우기 (완성)
 	@Override
 	public String deleteCartItem(int c_num, String pageNum) throws Exception {
 		sessionTemplate.delete(cartMapper + ".deleteCartItem", c_num);
 		return pageNum;
 	}
 
-
+	//장바구니 전체 비우기 (완성)
 	@Override
 	public void deleteCartAll(String c_id) throws Exception {
 		sessionTemplate.delete(cartMapper + ".deleteCartAll", c_id);
 	}
 
-
+	//장바구니 수량 수정 (완성)
 	@Override
 	public void updateCartItem(String c_code, int c_count) throws Exception {
 		
@@ -83,13 +111,13 @@ public class CartDAOImpl implements CartDAO {
 		
 	}
 
-
+	//상품코드별 재고수량 (완성)
 	@Override
 	public int countGoods(String c_code) throws Exception {
 		return sessionTemplate.selectOne(cartMapper + ".countGoods", c_code);
 	}
 
-
+	//장바구니 1개의 데이터 (완성)
 	@Override
 	public CartDTO getCartItem(String c_num) throws Exception {
 		return sessionTemplate.selectOne("com.project.mybatis.cartMapper.getCartItem", c_num);

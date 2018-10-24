@@ -1,18 +1,19 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>ICADE</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/sangyeop.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -26,32 +27,50 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>/goods/goodsList.action";
+		f.action = "<%=cp%>
+	/goods/goodsList.action";
 		f.submit();
-		
+
 	}
-
 </script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		var offset = 220;
+		var duration = 500;
+		jQuery(window).scroll(function() {
+			if (jQuery(this).scrollTop() > offset) {
+				jQuery('.back_to_top').fadeIn(duration);
+			} else {
+				jQuery('.back_to_top').fadeOut(duration);
+			}
+		});
 
+		jQuery('.back_to_top').click(function(event) {
+			event.preventDefault();
+			jQuery('html, body').animate({
+				scrollTop : 0
+			}, duration);
+			return false;
+		})
+	});
+</script>
 <style type="text/css">
-.sticky {
-	position: sticky;
-	top: 0px;
-}
-
-.sticky2 {
-	position: sticky;
-	top: 3px;
+#goodsImage {
+	width: 85%;
+	height: 40%;
+	margin-top: 15px;;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
 }
 </style>
 </head>
 <body>
 	<div class="container-fluid text-center event" style="background-color: #DDDADB; font-size: 26px; vertical-align: middle;">
 		GRAND OPEN!! 회원가입 시 2000포인트 증정!
-		<img src="/icade/resources/data/img/close.png" onclick="$('.event').slideUp(400);" style="cursor: pointer; vertical-align: middle;">
+		<img src="/icade/resources/data/img/close.png" onclick="$('.event').slideUp(400);" style="cursor: pointer; vertical-align: top; size: 26px;">
 	</div>
 
-	<jsp:include page="./include/header.jsp" flush="false"/>
+	<jsp:include page="./include/header.jsp" flush="false" />
 
 	<ul class="carousel">
 		<li>
@@ -70,15 +89,15 @@
 			<div align="center" style="margin-top: 25px;">
 				<form class="form-inline" action="" name="searchForm" method="post">
 					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
-					
-					<select name="GK_KIND_NUM" class="sel1" style="width: 100px;">
+
+					<select name="GK_KIND_NUM" class="sel" style="width: 100px; cursor: pointer;">
 						<option value="">전체</option>
 						<c:forEach var="gk_dto" items="${gk_lists}">
 							<option value="${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</option>
 						</c:forEach>
 					</select>
-					
-					<select name="searchKey" class="sel1" style="width: 100px;">
+
+					<select name="searchKey" class="sel" style="width: 100px; cursor: pointer;">
 						<option value="G_NAME">상품명</option>
 						<option value="G_CONTENT">내용</option>
 					</select>
@@ -90,7 +109,7 @@
 	</div>
 
 	<!-- 중단 sidebar, container -->
-	<div class="container-fluid" style="background-color: #F2F1F0;">
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px;">
 		<div class="container-fluid col-sm-8">
 			<div class="row">
 				<div class="container-fluid" style="width: 120%;">
@@ -109,11 +128,14 @@
 							<div class="panel panel-primary">
 								<div class="panel-heading">${g_dto.getG_NAME()}</div>
 								<div class="panel-body">
-									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">
-										<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 100%" alt="Image">
+									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 100%" alt="Image">
 									</a>
 								</div>
-								<div class="panel-footer">${g_dto.getG_CONTENT()}</div>
+								<div class="panel-footer" style="text-align: right;">
+									가격 :
+									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+									원
+								</div>
 							</div>
 						</div>
 
@@ -140,19 +162,25 @@
 							<div class="row">
 						</c:if>
 
-						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">
-							<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="width: 100%; height: 380px; border-top-left-radius: 30px; border-top-right-radius: 30px;" alt="Image">
-								<div class="caption">
+						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
+								<div style="padding-left: 10%">
 									<p>${g_dto.getG_NAME()}</p>
+								</div>
+								<div class="row">
+									<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
+									<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
+										<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+										원
+									</div>
 								</div>
 							</a>
 						</div>
-						<br>
-
 
 						<c:if test="${i % 4 == 3 || newList.size() == i+1}">
 				</div>
+				<br>
+				<br>
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
@@ -162,21 +190,9 @@
 		</div>
 	</div>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
 
 	</div>
+	<jsp:include page="./include/footer.jsp" flush="false" />
 
-
-	<div class="container-fluid " style="width: 100%; height: 300px; background-color: white;">
-		<div class="row">
-			<div class="col-sm-3">전화번호</div>
-			<div class="col-sm-3">INFO</div>
-			<div class="col-sm-3">아무거나</div>
-			<div class="col-sm-3">귀찮네</div>
-		</div>
-	</div>
 </body>
 </html>

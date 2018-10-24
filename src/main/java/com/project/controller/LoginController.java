@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.dao.AdminDAO;
-import com.project.dao.LoginDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.LoginService;
@@ -30,7 +28,6 @@ public class LoginController {
 	
 	@RequestMapping(value="/login.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login(HttpServletRequest req, HttpServletResponse resp)throws Exception{
-		System.out.println("login.action");
 		return "login/login";
 	}
 	
@@ -40,17 +37,10 @@ public class LoginController {
 		String M_ID = req.getParameter("M_ID");
 		String M_PW = req.getParameter("M_PW");
 		
-		//System.out.println(M_ID);
-		//System.out.println(M_PW);
-		
 		HttpSession session = req.getSession();
-		//System.out.println("service전");
 		MemberDTO dto = service.checkInfo(M_ID);
 		
-		//System.out.println(dto.getM_ID());
-		
 		if(dto==null || dto.equals(null)) {
-			System.out.println("dto가 널일시 뜬다.");
 			
 			String msg = "아이디가 없습니다";
 			
@@ -58,23 +48,19 @@ public class LoginController {
 			
 			return "login/login";
 		
-		}else if(dto.getM_PW()!=M_PW && !dto.getM_PW().equals(M_PW)){
+		} else if(dto.getM_PW()!=M_PW && !dto.getM_PW().equals(M_PW)){
+			
 			String msg = "비밀번호가 틀립니다.";
 			
 			req.setAttribute("msg", msg);
 			
 			return "login/login";
 			
-		}else{
+		} else {
 			
-			//System.out.println("아이디 비번 true 반환시 보인다.");
-
 			dto.setM_DATE(dto.getM_DATE().substring(0, 10));
 			
 			session.setAttribute("userInfo", dto);
-			
-			//MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
-			//System.out.println("보낼때" + vo.getM_ID());
 			
 			return "loginTest";
 		}
@@ -85,13 +71,8 @@ public class LoginController {
 	@RequestMapping(value="/loginTest.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String loginTest(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		//System.out.println("여기왔따.");
-		
 		//HttpSession session = req.getSession();
-		
 		//String userId = (String) session.getAttribute("userId");
-		
-		//System.out.println("세션 : " + userId);
 		
 		//session.setAttribute("userId", userId);
 		
@@ -107,6 +88,20 @@ public class LoginController {
 		session.invalidate();
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/search/idSearch.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String idSearch(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		
+		return "login/idSearch";
+		
+	}
+	
+	@RequestMapping(value="/search/pwdSearch.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String pwdSearch(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		
+		return "login/pwdSearch";
+		
 	}
 	
 	@ModelAttribute

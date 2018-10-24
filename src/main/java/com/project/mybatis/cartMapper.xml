@@ -9,6 +9,15 @@
 	select nvl(max(C_NUM), 0) from Cart
 </select>
 
+<!-- 장바구니 추가 전 동일품목 여부 조회 -->
+<select id="insertCartCheck" parameterType="map" resultType="com.project.dto.CartDTO">
+	select b.gd_code, a.count as reduplication, b.gd_count as gd_count from 
+	(select ROWNUM AS rn, count from (select nvl(count(*), 0) as count from cart where c_id = #{c_id} and c_code = #{c_code})) a
+	full join
+	(select ROWNUM AS rn, gd_count, gd_code from GOODS_DETAIL where GD_CODE = #{c_code}) b
+	ON a.rn = b.rn
+</select>
+
 <!-- 장바구니 추가 -->
 <insert id="insertCartItem" parameterType="com.project.dto.CartDTO">
 	insert into Cart (C_NUM, C_CODE, C_ID, C_NAME, C_COUNT) values(#{C_NUM}, #{C_CODE}, #{C_ID}, #{C_NAME}, #{C_COUNT})
