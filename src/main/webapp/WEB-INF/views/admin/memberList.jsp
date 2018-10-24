@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/sangyeop.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -45,7 +45,9 @@
 		
 		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
 			
-			f.action = "<%=cp%>/admin/authorityChange.action?m_id=" + m_id + "&new_rank=" + new_rank;
+			f.action = "<%=cp%>
+	/admin/authorityChange.action?m_id=" + m_id
+					+ "&new_rank=" + new_rank;
 			f.submit();
 
 		} else {
@@ -55,21 +57,11 @@
 	}
 </script>
 <style type="text/css">
-.sticky {
-	position: sticky;
-	top: 0px;
-}
-
-.sticky2 {
-	position: sticky;
-	top: 3px;
-}
-
 table {
 	border-collapse: collapse;
 	width: 100%;
 	border: 3px solid #A3C838;
-	border-top-left-radius : 12px;
+	border-top-left-radius: 12px;
 	text-align: center;
 }
 
@@ -81,16 +73,12 @@ th, td {
 tr:hover {
 	background-color: white;
 }
-
-label.radio {
-	color: white;
-}
 </style>
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; margin-bottom: 200px; border-bottom: 200px;">
-		<div class="container-fluid text-center" style="padding-top: 40px; padding-bottom: 40px;">
+		<div class="container-fluid text-center" style="padding-top: 50px; padding-bottom: 50px;">
 			<h2>회원 리스트</h2>
 			<form action="" name="searchForm" method="post">
 
@@ -173,6 +161,7 @@ label.radio {
 			</form>
 		</div>
 	</div>
+	<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>
