@@ -1,6 +1,7 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -26,11 +27,11 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>
-	/goods/goodsList.action";
+		f.action = "<%=cp%>/goods/goodsList.action";
 		f.submit();
-
+	
 	}
+	
 </script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -162,7 +163,7 @@ a.footer {
 									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 100%" alt="Image">
 									</a>
 								</div>
-								<div class="panel-footer" style="text-align: right;">가격 : ${g_dto.getG_PRICE()}원</div>
+								<div class="panel-footer" style="text-align: right;">가격 : <fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</div>
 							</div>
 						</div>
 
@@ -196,7 +197,7 @@ a.footer {
 								</div>
 								<div class="row">
 									<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
-									<div class="col-sm-6" style="text-align: right; padding-right: 10%;">${g_dto.getG_PRICE()}원</div>
+									<div class="col-sm-6" style="text-align: right; padding-right: 10%;"><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</div>
 								</div>
 							</a>
 						</div>
