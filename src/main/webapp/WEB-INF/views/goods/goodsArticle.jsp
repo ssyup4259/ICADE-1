@@ -235,7 +235,6 @@ $(function() {
 				
 				if (data == "success") {
 					insertCart();
-					alert("성공");
 				} else if (data == "reduplication") {
 					alert("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
@@ -249,7 +248,6 @@ $(function() {
 			error: function(data) {
 
 				console.log(data);
-				alert(data);
 				
 			}				
 		});
@@ -357,10 +355,6 @@ $(function() {
 							<tr align="center">
 								<td align="center" colspan="2">
 									<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
-									<select></select>
-									
-									<br/>
-									
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
 									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" />
 								</td>

@@ -12,9 +12,21 @@ public class CartDTO {
 	private String C_SAVEFILENAME;
 	private int C_PRICE;
 	private int C_COUNT;
+	private int reduplication;//동일품목 중복 여부
+	private int gd_count;
 	
-	
-	
+	public int getReduplication() {
+		return reduplication;
+	}
+	public void setReduplication(int reduplication) {
+		this.reduplication = reduplication;
+	}
+	public int getGd_count() {
+		return gd_count;
+	}
+	public void setGd_count(int gd_count) {
+		this.gd_count = gd_count;
+	}
 	public int getC_PRICE() {
 		return C_PRICE;
 	}

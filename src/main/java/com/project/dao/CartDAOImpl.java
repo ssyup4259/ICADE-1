@@ -32,14 +32,15 @@ public class CartDAOImpl implements CartDAO {
 		hMap.put("c_id", c_id);
 		hMap.put("c_code", c_code);
 		
-		Map<String, String> resultMap = new HashMap<String, String>();
+		CartDTO c_dto = sessionTemplate.selectOne(cartMapper + ".insertCartCheck", hMap);
 		
-		resultMap = sessionTemplate.selectOne(cartMapper + ".insertCartCheck", hMap);
+		int reduplication = c_dto.getReduplication();//동일품목 중복여부
+		int stockCount = c_dto.getGd_count();//재고 수량
 		
-		int count = Integer.parseInt(resultMap.get("a.count"));//동일품목 중복여부
-		int stockCount = Integer.parseInt(resultMap.get("b.gd_count"));//재고 수량
+		System.out.println(reduplication);
+		System.out.println(stockCount);
 		
-		if (count > 0) {
+		if (reduplication > 0) {
 			return "reduplication";
 		}
 		
