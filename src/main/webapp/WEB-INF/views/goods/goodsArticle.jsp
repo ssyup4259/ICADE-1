@@ -202,6 +202,23 @@ $(function() {
 		f.submit();
 		
 	}
+
+	function change () {
+		
+		var f = documnet.myForm;
+		
+	 	var hm = f.GD_COUNT.value;
+	 	var sell_price = ${g_dto.getG_PRICE()};
+	 	alert(sell_price);
+		var sum = f.sum.value;
+
+			if (hm < 0) {
+				hm = 0;
+			}
+		sum = parseInt(hm) * sell_price;
+	}  
+
+	
 	
 	//장바구니에 추가 전 동일품목여부 조회
 	function insertCheck() {
@@ -319,16 +336,17 @@ $(function() {
 							<tr align="center">
 								<td>수량</td>
 								<td align="left">
-									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();"/>
 									<input type="button" id="up" class="up" onclick="countUp();"/>
 									<input type="button" id="down" class="down" onclick="countDown();"/>개
 								</td>
 							</tr>
-					
 							
 							<tr align="center">
 								<td>총 상품금액</td>
-								<td align="left"></td>
+								<td align="left">
+									<input type="text" id="sum" name="sum" value="" />
+								</td>
 							</tr>
 							
 							
