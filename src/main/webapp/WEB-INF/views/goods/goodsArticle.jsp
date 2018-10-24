@@ -21,7 +21,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-  <style>
+<style type="text/css">
+
   body {
       position: relative; 
 	  }
@@ -43,7 +44,8 @@
   #section1 {padding-top:50px;height:500px; width:33% color: #000000; }
   #section2 {padding-top:50px;height:500px;color: #000000; }
   #section3 {padding-top:50px;height:500px;color: #000000; }
-  </style>
+  
+</style>
   
 <style type="text/css">
 		
@@ -54,205 +56,25 @@
 	.menu_ul li.on { background-color:#eee; color:#f00; }
 </style>
 
+<style type="text/css">
 
-</head>
+	input.up {
+        background: url("<%=cp%>/resources/images/btn_quantity_up.gif") no-repeat;
+        border: none;
+        width: 22px;
+        height: 13px;
+        cursor: pointer;
+	}
+	
+	input.down {
+	        background: url("<%=cp%>/resources/images/btn_quantity_down.gif") no-repeat;
+	        border: none;
+	        width: 22px;
+	        height: 13px;
+	        cursor: pointer;
+	}
 
-
-
-
-<body>
-
-	<div class="content2">
-		<form id="myForm" name="myForm" method="post" action="">
-			<br/><br/><br/><br/>
-			
-			<table width="1000" align="center">
-				<tr>
-					<td colspan="2" align="center">
-						<h1>${g_dto.getG_NAME()}</h1>
-					</td>
-				</tr>
-				<tr>
-					<td width="340">
-						 <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="340" height="300"> 
-					</td>
-					<td>
-						<table width="100%" height="300">
-							<tr align="center">
-								<td>상품명</td>
-								<td align="left">
-									${g_dto.getG_NAME()}
-									<input type="hidden" name="G_NAME" value="${g_dto.getG_NAME()}"/>
-								</td>
-							</tr>
-							<tr align="center">
-								<td>소비자가</td>
-								<td align="left">
-									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
-								</td>
-							</tr>
-							
-							<tr align="center" onclick="discount();">
-								<td>판매가</td>
-								<td align="left">
-									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
-									<input type="hidden" name="G_PRICE" value="${g_dto.getG_PRICE()}"/>
-								</td>
-							</tr>
-							<tr align="center">
-								<td>적립금</td>
-								<td align="left">
-									<img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg"/>
-									<fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>원	
-								</td>
-							</tr>
-							
-							
-							<!--  기종 선택 -->
-							<tr align="center">
-								<td>기종</td>
-								<td align="left">
-									<c:if test="${!empty gd_list}">
-										<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}"/>
-										<select name="GD_DEVICE" id="product" >
-											<option value="">::기종을 선택하세요::</option>
-											<c:forEach var="gd_dto" items="${d_list}">
-												<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
-											</c:forEach>
-										</select>
-									</c:if>
-								</td>
-							</tr>
-							
-							<!--  색상 선택 -->
-							<tr align="center">
-								<td>색상</td>
-								<td align="left">
-								<select name="GD_COLOR" id="sub">
-										<option>:: 색상을 선택해주세요 ::</option>
-								</select>
-								</td>
-							</tr>
-							
-							<tr align="center">
-								<td>수량</td>
-								<td align="left">
-									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();"/>
-									<input type="button" id="up" class="up" onclick="countUp();"/>
-									<input type="button" id="down" class="down" onclick="countDown();"/>개
-								</td>
-							</tr>
-					
-							
-							<tr align="center">
-									<td>총 상품금액</td>
-									<td align="left">
-									<input border="0" type="text" name="sum" value="${g_dto.getG_PRICE()}" size="11" readonly>원
-									</td>
-							</tr>
-							
-							
-							<tr>
-								<td colspan="2" height="2" bgcolor="#b3cccc"></td>
-							</tr>
-							
-							<tr align="center">
-								<td align="center" colspan="2">
-									<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
-									<select></select>
-									
-									<br/>
-									
-									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
-									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" />
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" height="2" bgcolor="#b3cccc"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<c:if test="${!empty pageNum}">
-							<br>
-							<div id="btn">
-								<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
-									<h2>상품목록으로 돌아가기</h2>
-								</a>
-							</div>
-							<br>
-						</c:if>
-						<!-- 최근본 상품목록에서 클릭했을 경우 -->
-						<c:if test="${empty pageNum}">
-							<br>
-							<div id="btn">
-								<%-- <a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
-										<h2>상품목록으로 돌아가기</h2></a> --%>
-							</div>
-							<br>
-						</c:if>
-					</td>
-				</tr>
-			</table>
-			
-			<!-- divison 이동 -->
-		    <div>
-		      <div class="collapse navbar-collapse" id="menu">
-		        <ul class="nav navbar-nav" id="menu_ul">
-		          <li><a href="#section1">Section 1</a></li>
-		          <li><a href="#section2">Section 2</a></li>
-		          <li><a href="#section3">Section 3</a></li>
-		        </ul>
-		      </div>
-		    </div>
-			<div id="section1" class="container-fluid">
-			  <h1>Section 1</h1>
-			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			</div>
-			
-			
-				<!-- divison 이동 -->
-		    <div>
-		      <div class="collapse navbar-collapse" id="menu">
-		        <ul class="nav navbar-nav" id="menu_ul">
-		          <li class="selected"><a href="#section1">Section 1</a></li>
-		          <li><a href="#section2">Section 2</a></li>
-		          <li><a href="#section3">Section 3</a></li>
-		        </ul>
-		      </div>
-		    </div>
-			<div id="section2" class="container-fluid">
-			  <h1>Section 2</h1>
-			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			</div>
-			
-				<!-- divison 이동 -->
-		    <div>
-		      <div class="collapse navbar-collapse" id="menu">
-		        <ul class="nav navbar-nav" id="menu_ul">
-		          <li><a href="#section1">Section 1</a></li>
-		          <li><a href="#section2">Section 2</a></li>
-		          <li class="selected" ><a href="#section3">Section 3</a></li>
-		        </ul>
-		      </div>
-		    </div>
-			<div id="section3" class="container-fluid">
-			  <h1>Section 3</h1>
-			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			</div>
-		</form>
-	</div>
-
-</body>
-
-
-
-
+</style>
 
 <!-- 탭 메뉴 적용 -->
 <script type="text/javascript">
@@ -394,40 +216,218 @@ $(function() {
 			data: allData,
 			success: function(data) {
 				
-				if (data == true) {
-					
+				if (data == "success") {
 					insertCart();
-					
-				} else if (data == false) {
-					
+					alert("성공");
+				} else if (data == "reduplication") {
 					alert("이미 장바구니에 존재하는 상품입니다.");
-					
+				} else if (data == "lack") {
+					alert("담고자하는 수량이 재고 수량보다 많습니다.");
 				}
+				
+				console.log(data);
 				
 			},
 			
 			error: function(data) {
 
+				console.log(data);
 				alert(data);
 				
 			}				
 		});
 	}	
 
-	//금액 자동 계산
-	function change () {
-		
-	var	hm = document.myForm.GD_COUNT;
-	var	sum = document.myForm.sum;
-	var	sell_price =${g_dto.getG_PRICE()};
-		
-			if (hm.value < 0) {
-				hm.value = 0;
-			}
-		sum.value = parseInt(hm.value) * sell_price;
-}  
-	
 </script>
 
+</head>
+
+<body>
+
+	<div class="content2">
+		<form id="myForm" name="myForm" method="post" action="">
+			<br/><br/><br/><br/>
+			
+			<table width="1000" align="center">
+				<tr>
+					<td colspan="2" align="center">
+						<h1>${g_dto.getG_NAME()}</h1>
+					</td>
+				</tr>
+				<tr>
+					<td width="340">
+						 <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="340" height="300"> 
+					</td>
+					<td>
+						<table width="100%" height="300">
+							<tr align="center">
+								<td>상품명</td>
+								<td align="left">
+									${g_dto.getG_NAME()}
+									<input type="hidden" name="G_NAME" value="${g_dto.getG_NAME()}"/>
+								</td>
+							</tr>
+							<tr align="center">
+								<td>소비자가</td>
+								<td align="left">
+									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
+								</td>
+							</tr>
+							
+							<tr align="center" onclick="discount();">
+								<td>판매가</td>
+								<td align="left">
+									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
+									<input type="hidden" name="G_PRICE" value="${g_dto.getG_PRICE()}"/>
+								</td>
+							</tr>
+							<tr align="center">
+								<td>적립금</td>
+								<td align="left">
+									<img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg"/>
+									<fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>원	
+								</td>
+							</tr>
+							
+							
+							<!--  기종 선택 -->
+							<tr align="center">
+								<td>기종</td>
+								<td align="left">
+									<c:if test="${!empty gd_list}">
+										<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}"/>
+										<select name="GD_DEVICE" id="product" >
+											<option value="">::기종을 선택하세요::</option>
+											<c:forEach var="gd_dto" items="${d_list}">
+												<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
+											</c:forEach>
+										</select>
+									</c:if>
+								</td>
+							</tr>
+							
+							<!--  색상 선택 -->
+							<tr align="center">
+								<td>색상</td>
+								<td align="left">
+								<select name="GD_COLOR" id="sub">
+										<option>:: 색상을 선택해주세요 ::</option>
+								</select>
+								</td>
+							</tr>
+							
+							<tr align="center">
+								<td>수량</td>
+								<td align="left">
+									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+									<input type="button" id="up" class="up" onclick="countUp();"/>
+									<input type="button" id="down" class="down" onclick="countDown();"/>개
+								</td>
+							</tr>
+					
+							
+							<tr align="center">
+								<td>총 상품금액</td>
+								<td align="left"></td>
+							</tr>
+							
+							
+							<tr>
+								<td colspan="2" height="2" bgcolor="#b3cccc"></td>
+							</tr>
+							
+							<tr align="center">
+								<td align="center" colspan="2">
+									<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
+									<select></select>
+									
+									<br/>
+									
+									<input type="button" value="구매하기" onclick="orderIt();" class="btn" />
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="2" bgcolor="#b3cccc"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<c:if test="${!empty pageNum}">
+							<br>
+							<div id="btn">
+								<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
+									<h2>상품목록으로 돌아가기</h2>
+								</a>
+							</div>
+							<br>
+						</c:if>
+						<!-- 최근본 상품목록에서 클릭했을 경우 -->
+						<c:if test="${empty pageNum}">
+							<br>
+							<div id="btn">
+								<%-- <a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
+										<h2>상품목록으로 돌아가기</h2></a> --%>
+							</div>
+							<br>
+						</c:if>
+					</td>
+				</tr>
+			</table>
+			
+			<!-- divison 이동 -->
+		    <div>
+		      <div class="collapse navbar-collapse" id="menu">
+		        <ul class="nav navbar-nav" id="menu_ul">
+		          <li><a href="#section1">Section 1</a></li>
+		          <li><a href="#section2">Section 2</a></li>
+		          <li><a href="#section3">Section 3</a></li>
+		        </ul>
+		      </div>
+		    </div>
+			<div id="section1" class="container-fluid">
+			  <h1>Section 1</h1>
+			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			</div>
+			
+			
+				<!-- divison 이동 -->
+		    <div>
+		      <div class="collapse navbar-collapse" id="menu">
+		        <ul class="nav navbar-nav" id="menu_ul">
+		          <li class="selected"><a href="#section1">Section 1</a></li>
+		          <li><a href="#section2">Section 2</a></li>
+		          <li><a href="#section3">Section 3</a></li>
+		        </ul>
+		      </div>
+		    </div>
+			<div id="section2" class="container-fluid">
+			  <h1>Section 2</h1>
+			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			</div>
+			
+				<!-- divison 이동 -->
+		    <div>
+		      <div class="collapse navbar-collapse" id="menu">
+		        <ul class="nav navbar-nav" id="menu_ul">
+		          <li><a href="#section1">Section 1</a></li>
+		          <li><a href="#section2">Section 2</a></li>
+		          <li class="selected" ><a href="#section3">Section 3</a></li>
+		        </ul>
+		      </div>
+		    </div>
+			<div id="section3" class="container-fluid">
+			  <h1>Section 3</h1>
+			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			</div>
+		</form>
+	</div>
+
+</body>
 
 </html>

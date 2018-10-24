@@ -25,20 +25,29 @@ public class CartDAOImpl implements CartDAO {
 
 	//장바구니 추가 전 동일품목여부 조회 (완성)
 	@Override
-	public boolean insertCartCheck(String c_id, String c_code) throws Exception {
+	public String insertCartCheck(String c_id, String c_code, int gd_count) throws Exception {
 		
 		Map<String, String> hMap = new HashMap<String, String>();
 		
 		hMap.put("c_id", c_id);
 		hMap.put("c_code", c_code);
 		
-		int flag = sessionTemplate.selectOne(cartMapper + ".insertCartCheck", hMap);
+		Map<String, String> resultMap = new HashMap<String, String>();
 		
-		if (flag > 0) {
-			return false;
+		resultMap = sessionTemplate.selectOne(cartMapper + ".insertCartCheck", hMap);
+		
+		int count = Integer.parseInt(resultMap.get("a.count"));//동일품목 중복여부
+		int stockCount = Integer.parseInt(resultMap.get("b.gd_count"));//재고 수량
+		
+		if (count > 0) {
+			return "reduplication";
 		}
 		
-		return true;
+		if (stockCount < gd_count) {
+			return "lack";
+		}
+		
+		return "success";
 		
 	}
 	
