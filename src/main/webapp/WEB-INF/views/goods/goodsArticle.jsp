@@ -21,7 +21,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-  <style>
+<style type="text/css">
+
   body {
       position: relative; 
 	  }
@@ -43,7 +44,8 @@
   #section1 {padding-top:50px;height:500px; width:33% color: #000000; }
   #section2 {padding-top:50px;height:500px;color: #000000; }
   #section3 {padding-top:50px;height:500px;color: #000000; }
-  </style>
+  
+</style>
   
 <style type="text/css">
 		
@@ -54,11 +56,191 @@
 	.menu_ul li.on { background-color:#eee; color:#f00; }
 </style>
 
+<style type="text/css">
+
+	input.up {
+        background: url("<%=cp%>/resources/images/btn_quantity_up.gif") no-repeat;
+        border: none;
+        width: 22px;
+        height: 13px;
+        cursor: pointer;
+	}
+	
+	input.down {
+	        background: url("<%=cp%>/resources/images/btn_quantity_down.gif") no-repeat;
+	        border: none;
+	        width: 22px;
+	        height: 13px;
+	        cursor: pointer;
+	}
+
+</style>
+
+<!-- 탭 메뉴 적용 -->
+<script type="text/javascript">
+		$(function () {	
+			tab('#tab',0);	
+		});
+		
+		function tab(e, num){
+		    var num = num || 0;
+		    var menu = $(e).children();
+		    var con = $(e+'_con').children();
+		    var select = $(menu).eq(num);
+		    var i = num;
+		
+		    select.addClass('on');
+		    con.eq(num).show();
+		
+		    menu.click(function(){
+		        if(select!==null){
+		            select.removeClass("on");
+		            con.eq(i).hide();
+		        }
+		
+		        select = $(this);	
+		        i = $(this).index();
+		
+		        select.addClass('on');
+		        con.eq(i).show();
+		    });
+		}
+
+</script>
+
+
+<!-- 콤보박스 연결 -->
+<script type="text/javascript">
+$(function() {
+
+	var select = "<option>:: 선택 ::</option>"; 
+	$("#product").change(function() {
+		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
+			$("#sub").find("option").remove().end().append(select);
+		} else {
+			comboChange($(this).val());
+		}
+	});
+
+	function comboChange(deviceCode) {
+		
+		var G_NUM = ${g_dto.getG_NUM()};
+		
+		var allData = {"GD_DEVICE":deviceCode, "G_NUM":G_NUM};
+		
+		$.ajax({
+			type:"post",
+			url:"<%=cp%>/goods/colorCheck.action",
+			datatype:  'json',
+			data: allData,
+			success: function(data)
+			{
+				
+				var dc_list = [];
+				
+				dc_list = data;
+				
+				if(dc_list.length > 0) {
+					
+					$("#sub").find("option").remove().end().append(select);
+					
+					$.each(dc_list, function(key, value) {
+						$("#sub").append("<option value='" + value.gd_COLOR + "'>" + value.gc_COLOR + "</option>");
+						console.log(value);
+					});
+					
+				} else {
+					$("#sub").find("option").remove().end().append("<option>-- No sub --</option>");
+					return;
+				}
+			},
+			
+			error: function() {
+
+				alert("안된다");
+				
+			}				
+		});
+	}	
+});
+
+</script>
+
+
+<script type="text/javascript">
+
+	function countUp() {
+		
+		var count = Number(document.getElementById("GD_COUNT").value);
+		
+		count = count + 1;
+		
+		document.getElementById("GD_COUNT").value = count;
+		
+	}
+	
+	function countDown() {
+		
+		var count = Number(document.getElementById("GD_COUNT").value);
+		
+		if (count <= 1) {
+			return;
+		}
+		
+		count = count - 1;
+		
+		document.getElementById("GD_COUNT").value = count;
+		
+	}
+	
+	//장바구니에 추가
+	function insertCart() {
+		
+		var f = document.myForm;
+		
+		f.action = "<%=cp%>/cart/insertCart.action";
+		f.submit();
+		
+	}
+	
+	//장바구니에 추가 전 동일품목여부 조회
+	function insertCheck() {
+		
+		var allData = $("#myForm").serialize();
+		
+		$.ajax({
+			
+			type:"post",
+			url:"<%=cp%>/cart/insertCheck.action",
+			datatype:  'json',
+			data: allData,
+			success: function(data) {
+				
+				if (data == "success") {
+					insertCart();
+					alert("성공");
+				} else if (data == "reduplication") {
+					alert("이미 장바구니에 존재하는 상품입니다.");
+				} else if (data == "lack") {
+					alert("담고자하는 수량이 재고 수량보다 많습니다.");
+				}
+				
+				console.log(data);
+				
+			},
+			
+			error: function(data) {
+
+				console.log(data);
+				alert(data);
+				
+			}				
+		});
+	}	
+
+</script>
 
 </head>
-
-
-
 
 <body>
 
@@ -247,172 +429,5 @@
 	</div>
 
 </body>
-
-
-
-
-
-<!-- 탭 메뉴 적용 -->
-<script type="text/javascript">
-		$(function () {	
-			tab('#tab',0);	
-		});
-		
-		function tab(e, num){
-		    var num = num || 0;
-		    var menu = $(e).children();
-		    var con = $(e+'_con').children();
-		    var select = $(menu).eq(num);
-		    var i = num;
-		
-		    select.addClass('on');
-		    con.eq(num).show();
-		
-		    menu.click(function(){
-		        if(select!==null){
-		            select.removeClass("on");
-		            con.eq(i).hide();
-		        }
-		
-		        select = $(this);	
-		        i = $(this).index();
-		
-		        select.addClass('on');
-		        con.eq(i).show();
-		    });
-		}
-
-</script>
-
-
-<!-- 콤보박스 연결 -->
-<script type="text/javascript">
-$(function() {
-
-	var select = "<option>:: 선택 ::</option>"; 
-	$("#product").change(function() {
-		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
-			$("#sub").find("option").remove().end().append(select);
-		} else {
-			comboChange($(this).val());
-		}
-	});
-
-	function comboChange(deviceCode) {
-		
-		var G_NUM = ${g_dto.getG_NUM()};
-		
-		var allData = {"GD_DEVICE":deviceCode, "G_NUM":G_NUM};
-		
-		$.ajax({
-			type:"post",
-			url:"<%=cp%>/goods/colorCheck.action",
-			datatype:  'json',
-			data: allData,
-			success: function(data)
-			{
-				
-				var dc_list = [];
-				
-				dc_list = data;
-				
-				if(dc_list.length > 0) {
-					
-					$("#sub").find("option").remove().end().append(select);
-					
-					$.each(dc_list, function(key, value) {
-						$("#sub").append("<option value='" + value.gd_COLOR + "'>" + value.gc_COLOR + "</option>");
-						console.log(value);
-					});
-					
-				} else {
-					$("#sub").find("option").remove().end().append("<option>-- No sub --</option>");
-					return;
-				}
-			},
-			
-			error: function() {
-
-				alert("안된다");
-				
-			}				
-		});
-	}	
-});
-
-</script>
-
-
-<script type="text/javascript">
-
-	function countUp() {
-		
-		var count = Number(document.getElementById("GD_COUNT").value);
-		
-		count = count + 1;
-		
-		document.getElementById("GD_COUNT").value = count;
-		
-	}
-	
-	function countDown() {
-		
-		var count = Number(document.getElementById("GD_COUNT").value);
-		
-		if (count <= 1) {
-			return;
-		}
-		
-		count = count - 1;
-		
-		document.getElementById("GD_COUNT").value = count;
-		
-	}
-	
-	//장바구니에 추가
-	function insertCart() {
-		
-		var f = document.myForm;
-		
-		f.action = "<%=cp%>/cart/insertCart.action";
-		f.submit();
-		
-	}
-	
-	//장바구니에 추가 전 동일품목여부 조회
-	function insertCheck() {
-		
-		var allData = $("#myForm").serialize();
-		
-		$.ajax({
-			
-			type:"post",
-			url:"<%=cp%>/cart/insertCheck.action",
-			datatype:  'json',
-			data: allData,
-			success: function(data) {
-				
-				if (data == true) {
-					
-					insertCart();
-					
-				} else if (data == false) {
-					
-					alert("이미 장바구니에 존재하는 상품입니다.");
-					
-				}
-				
-			},
-			
-			error: function(data) {
-
-				alert(data);
-				
-			}				
-		});
-	}	
-
-</script>
-
 
 </html>
