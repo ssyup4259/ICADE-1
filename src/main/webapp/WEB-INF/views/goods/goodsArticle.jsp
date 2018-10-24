@@ -20,15 +20,31 @@
 
 <style type="text/css">
 
-		 { margin:0; padding:0; }
-		ul,li { list-style:none; }
-		a { text-decoration:none; color:#000; }
-		.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
-		.tab li { float:left; width:25%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
-		.tab li { display:inline-block; padding:20px; cursor:pointer; }
-		.tab li.on { background-color:#eee; color:#f00; }
-		.tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
-		.tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
+	{ margin:0; padding:0; }
+	ul,li { list-style:none; }
+	a { text-decoration:none; color:#000; }
+	.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
+	.tab li { float:left; width:25%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+	.tab li { display:inline-block; padding:20px; cursor:pointer; }
+	.tab li.on { background-color:#eee; color:#f00; }
+	.tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
+	.tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
+
+	input.up {
+	        background: url("<%=cp%>/resources/images/btn_quantity_up.gif") no-repeat;
+	        border: none;
+	        width: 22px;
+	        height: 13px;
+	        cursor: pointer;
+	}
+	
+	input.down {
+	        background: url("<%=cp%>/resources/images/btn_quantity_down.gif") no-repeat;
+	        border: none;
+	        width: 22px;
+	        height: 13px;
+	        cursor: pointer;
+	}
 
 </style>
 </head>
@@ -123,19 +139,41 @@ $(function() {
 });
 </script>
 
+
+<script type="text/javascript">
+
+	function countUp() {
+		
+		var count = Number(document.getElementById("GD_COUNT").value);
+		
+		count = count + 1;
+		
+		document.getElementById("GD_COUNT").value = count;
+		
+	}
+	
+	function countDown() {
+		
+		var count = Number(document.getElementById("GD_COUNT").value);
+		
+		if (count <= 1) {
+			return;
+		}
+		
+		count = count - 1;
+		
+		document.getElementById("GD_COUNT").value = count;
+		
+	}
+
+</script>
 </head>
-
-
 
 <body>
 
-
 	<div class="content2">
 		<form name="myForm" method="post" action="">
-			<Br> <br> <br> <br>
-			
-			
-			
+			<br/><br/><br/><br/>
 			
 			<table width="1000" align="center">
 				<tr>
@@ -151,25 +189,30 @@ $(function() {
 						<table width="100%" height="300">
 							<tr align="center">
 								<td>상품명</td>
-								<td align="left">${g_dto.getG_NAME()}</td>
+								<td align="left">
+									${g_dto.getG_NAME()}
+									<input type="hidden" name="G_NAME" value="${g_dto.getG_NAME()}"/>
+								</td>
 							</tr>
 							<tr align="center">
 								<td>소비자가</td>
-								<td align="left">${g_dto.getG_CONTENT()}</td>
+								<td align="left">
+									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
+								</td>
 							</tr>
 							
 							<tr align="center" onclick="discount();">
 								<td>판매가</td>
 								<td align="left">
-									
 									<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원
-									
+									<input type="hidden" name="G_PRICE" value="${g_dto.getG_PRICE()}"/>
 								</td>
 							</tr>
 							<tr align="center">
 								<td>적립금</td>
 								<td align="left">
-									<img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg"/><fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>원	
+									<img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg"/>
+									<fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>원	
 								</td>
 							</tr>
 							
@@ -179,7 +222,7 @@ $(function() {
 								<td>기종</td>
 								<td align="left">
 									<c:if test="${!empty gd_list}">
-										<select name="deviceKind" id="product" >
+										<select name="GD_DEVICE" id="product" >
 											<option value="">::기종을 선택하세요::</option>
 											<c:forEach var="gd_dto" items="${d_list}">
 												<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
@@ -193,9 +236,18 @@ $(function() {
 							<tr align="center">
 								<td>색상</td>
 								<td align="left">
-								<select name="sub" id="sub">
+								<select name="GD_COLOR" id="sub">
 										<option>:: 색상을 선택해주세요 ::</option>
 								</select>
+								</td>
+							</tr>
+							
+							<tr align="center">
+								<td>수량</td>
+								<td align="left">
+									<input type="text" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+									<input type="button" id="up" class="up" onclick="countUp();"/>
+									<input type="button" id="down" class="down" onclick="countDown();"/>개
 								</td>
 							</tr>
 					
@@ -212,7 +264,7 @@ $(function() {
 							
 							<tr align="center">
 								<td align="center" colspan="2">
-									<input type="hidden" name="productId" value="${g_dto.getG_NUM()}">
+									<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
 									
 									 <select></select>
 									 

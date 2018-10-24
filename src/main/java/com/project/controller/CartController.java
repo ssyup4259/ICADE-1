@@ -1,10 +1,7 @@
 package com.project.controller;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -134,7 +131,7 @@ public class CartController {
 			
 		}
 	
-	//체크박스 내용 확인
+	//체크한 상품만 구매 하기 위함
 	@RequestMapping(value="/cartTest.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String cartTest(HttpServletRequest req) throws Exception {
 		

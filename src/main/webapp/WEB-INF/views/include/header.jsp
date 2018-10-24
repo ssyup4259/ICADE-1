@@ -51,6 +51,9 @@
 			<li style="float: right">
 				<a href="<%=cp%>/logout.action">로그아웃</a>
 			</li>
+			<li style="float: right">
+				<a href="<%=cp%>/cart/cartList.action">장바구니</a>
+			</li>
 		</c:if>
 		
 		
