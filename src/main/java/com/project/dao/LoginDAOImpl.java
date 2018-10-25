@@ -1,5 +1,7 @@
 package com.project.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,13 @@ public class LoginDAOImpl implements LoginDAO {
 		
 		return dto;
 
+	}
+	
+	
+	//ID찾기
+	@Override
+	public String idFind(Map<String, String> map) throws Exception {
+		return sessionTemplate.selectOne(loginMapper + ".idFind", map);
 	}
 	
 	

@@ -52,6 +52,44 @@
 
 </script>
 
+<script type="text/javascript">
+
+function idFind() {
+	
+	var allData = $("#findIdForm").serialize();
+	
+	$.ajax({
+		
+		type:"post",
+		url:"<%=cp%>/find/idFind.action",
+		datatype:  'json',
+		data: allData,
+		success: function(data) {
+			
+			if (data == null || data == "") {
+				
+				alert("ID가 존재하지 않습니다.");
+				
+			} else {
+				
+				alert("찾으시는 ID는 '" + data + "' 입니다.");
+				
+			}
+			
+		},
+		
+		error: function(data) {
+	
+			alert("error");
+			alert(data);
+			console.log(data);
+			
+		}				
+	});
+}
+
+</script>
+
 </head>
 
 <body>
@@ -101,7 +139,7 @@
 				</div>
 				<br/>
 				<div style="width: 90px; margin: 0 auto;">
-					<input type="button" value="확인" class="btn" onclick="" style="width: 150px;"/>
+					<input type="button" value="확인" class="btn" onclick="idFind();" style="width: 150px;"/>
 				</div>
 				<br/>
 			</div>
