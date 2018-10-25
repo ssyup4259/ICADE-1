@@ -64,9 +64,9 @@
 	</ul>
 
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
-		<div class="collapse navbar-collapse" id="myNavbar">
+		<div class="" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
-				<form class="form-inline" action="" name="searchForm" method="post">
+				<form class="" action="" name="searchForm" method="post">
 					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
 
 					<select name="GK_KIND_NUM" class="sel" style="width: 100px; cursor: pointer;">
