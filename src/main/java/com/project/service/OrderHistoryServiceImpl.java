@@ -28,12 +28,6 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		return oh_dao.selectOrders(O_ID);
 	}
 
-	//주문번호를 들어가서 뿌려줄 데이터 조회
-	@Override
-	public OrderDetailDTO selectOrder(int OD_NUM) throws Exception {
-		return oh_dao.selectOrder(OD_NUM);
-	}
-
 	//상품코드를 통한 글번호(상품번호) 조회
 	@Override
 	public int selectGoodsPage(int GD_CODE) throws Exception {

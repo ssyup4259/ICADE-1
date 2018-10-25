@@ -34,16 +34,11 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	@Override
 	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
 		
-		List<OrdersDTO> lists = new ArrayList<OrdersDTO>(); 
+		List<OrdersDTO> lists = new ArrayList<OrdersDTO>();
 				
-		lists.add((OrdersDTO) sessionTemplate.selectOne(ordersHistory + ".selectOrders", O_ID));
+		lists = sessionTemplate.selectList(ordersHistory + ".selectOrders", O_ID);
 		
 		return lists;
-	}
-
-	@Override
-	public OrderDetailDTO selectOrder(int OD_NUM) throws Exception {
-		return sessionTemplate.selectOne(ordersHistory + ".selectOrderDetail", OD_NUM);
 	}
 
 	@Override
@@ -66,7 +61,7 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 
 		List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
 		
-		lists.add((OrderDetailDTO)sessionTemplate.selectOne(ordersHistory + ".selectOrderDetail",O_Num));
+		lists = sessionTemplate.selectList(ordersHistory + ".selectOrderDetail",O_Num);
 		
 		return lists;
 	}

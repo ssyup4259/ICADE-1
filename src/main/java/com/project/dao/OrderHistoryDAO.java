@@ -14,9 +14,6 @@ public interface OrderHistoryDAO {
 	//주문내역 메인에 뿌려줄 값 조회
 	public List<OrdersDTO> selectOrders(String O_ID) throws Exception;
 	
-	//주문번호를 들어가서 뿌려줄 데이터 조회
-	public OrderDetailDTO selectOrder(int OD_NUM) throws Exception;
-	
 	//상품코드를 통한 글번호(상품번호) 조회
 	public int selectGoodsPage(int GD_CODE) throws Exception;
 	

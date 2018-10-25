@@ -48,9 +48,13 @@ public class OrdersHistoryController {
 		
 		System.out.println("for문돌린다====================================================");
 		
-		for(int i = 0;i<=integerList.size();i++) {
+		for(int i = 0;i<integerList.size();i++) {
 			
 			System.out.println(integerList);
+			
+			Integer itt = integerList.get(i);
+			
+			System.out.println(itt);
 			
 		}
 		
