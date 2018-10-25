@@ -43,9 +43,8 @@ public class LoginDAOImpl implements LoginDAO {
 
 	//비밀번호 찾기
 	@Override
-	public String findFind(Map<String, String> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String pwdFind(Map<String, String> map) throws Exception {
+		return sessionTemplate.selectOne(loginMapper + ".pwdFind", map);
 	}
 	
 	

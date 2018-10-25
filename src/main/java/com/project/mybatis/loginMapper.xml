@@ -16,4 +16,11 @@
 	 or (M_NAME = #{name} and (M_CELLPHONE1 = #{phone1} and M_CELLPHONE2 = #{phone2} and M_CELLPHONE3 = #{phone3}))
 </select>
 
+<!-- 패스워드 찾기 -->
+<select id="pwdFind" parameterType="map" resultType="String">
+	select m_pw from member
+	where (M_ID = #{id} and (M_NAME = #{name} and (M_EMAIL_ID = #{email} and M_EMAIL_DOMAIN = #{domain})))
+	or (M_ID = #{id} and (M_NAME = #{name} and (M_CELLPHONE1 = #{phone1} and M_CELLPHONE2 = #{phone2} and M_CELLPHONE3 = #{phone3})))
+</select>
+
 </mapper>
