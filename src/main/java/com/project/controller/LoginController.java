@@ -63,7 +63,7 @@ public class LoginController {
 			
 			session.setAttribute("userInfo", dto);
 			
-			return "loginTest";
+			return "redirect:/";
 		}
 		
 		
