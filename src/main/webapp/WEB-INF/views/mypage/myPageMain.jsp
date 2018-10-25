@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+	function sendIt(mode) {
+		window.location.href="infoCheckPage.action?mode=" + mode;
+	}
+
+</script>
 </head>
 <body>
 
@@ -14,16 +21,16 @@
 
 <div class=""><ul>
 <li class=" ">
-            <strong class="title">가용적립금</strong>
-            <strong class="data use">&nbsp;<span id="xans_myshop_bankbook_avail_mileage">2,700원</span></strong>
+            <strong class="title">가용포인트</strong>
+            <strong class="data use">&nbsp;<span id="xans_myshop_bankbook_avail_mileage">${point} Point</span></strong>
             <a href="/myshop/mileage/historyList.html" class="button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_result.gif" alt="조회"></a>
         </li>
         <li class="">
-            <strong class="title">총적립금</strong>
+            <strong class="title">총포인트</strong>
             <strong class="data"><span id="xans_myshop_bankbook_total_mileage">2,700원</span></strong>
         </li>
         <li class="">
-            <strong class="title">사용적립금</strong>
+            <strong class="title">사용포인트</strong>
             <strong class="data"><span id="xans_myshop_bankbook_used_mileage">0원</span></strong>
         </li>
         <li class="displaynone">
@@ -34,11 +41,6 @@
         <li>
             <strong class="title">총주문</strong>
             <strong class="data"><span id="xans_myshop_bankbook_order_price">0원</span>(<span id="xans_myshop_bankbook_order_count">0</span>회)</strong>
-        </li>
-        <li class="">
-            <strong class="title">쿠폰</strong>
-            <strong class="data"><span id="xans_myshop_bankbook_coupon_cnt"></span><span>개</span></strong>
-            <a href="/myshop/coupon/coupon.html" class="button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_result.gif" alt="조회"></a>
         </li>
     </ul>
 </div>
@@ -53,8 +55,8 @@
 포 인 트 : ${point} <br/>
 가 입 일 : ${sessionScope.userInfo.getM_DATE()} <br/>
 <br/>
-<a href="changeInfo.action"><input type="button" value="정보수정"></a>&nbsp;<a href="cancelMembership.action"><input type="button" value="회원탈퇴"></a>
-<a href="orderHistory.action"><input type="button" value="주문내역조회"></a>&nbsp;<a href="cancelMembership.action"><input type="button" value="주소록"></a>
+<a href="#"><input type="button" value="정보수정" onclick="sendIt('change')"></a>&nbsp;<a href="#"><input type="button" value="회원탈퇴" onclick="sendIt('cancel')"></a>
+<a href="orderHistory.action"><input type="button" value="주문내역조회"></a>&nbsp;<a href="myPage.action"><input type="button" value="주소록"></a>
 
 
 

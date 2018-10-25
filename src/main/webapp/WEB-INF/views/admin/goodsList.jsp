@@ -37,7 +37,7 @@ function sendIt() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 
-		<div class="container-fluid text-center">
+		<div class="container-fluid text-center table1">
 			<h1>상품 목록</h1>
 			<form action="" name="searchForm" method="post">
 				<select name="GD_KIND_NUM" class="sel">

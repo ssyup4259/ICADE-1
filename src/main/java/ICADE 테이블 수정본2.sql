@@ -210,6 +210,9 @@ ALTER TABLE Board_Comment
     ADD CONSTRAINT FK_Board_Comment_BC_NUM_Goods_ FOREIGN KEY (BC_NUM)
         REFERENCES Goods (G_NUM) ON DELETE CASCADE;
 
+ALTER TABLE Board_Comment add(BC_IMAGE VARCHAR(20));
+ALTER TABLE Board_Comment add(BC_SAVEFILENAME VARCHAR(20));
+
 
 -- Leave Table Create SQL
 CREATE TABLE Leave

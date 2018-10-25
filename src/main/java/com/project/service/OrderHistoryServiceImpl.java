@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 
 	//주문내역 메인에 뿌려줄 값 조회
 	@Override
-	public OrdersDTO selectOrders(String O_ID) throws Exception {
+	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
 		return oh_dao.selectOrders(O_ID);
 	}
 
@@ -43,6 +44,17 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 	@Override
 	public String selectSaveFile(int G_NUM) throws Exception {
 		return oh_dao.selectSaveFile(G_NUM);
+	}
+
+	//기간 지정 주문 내역 검사용 
+	@Override
+	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception {
+		return oh_dao.selectOrdersCondition(hmap);
+	}
+
+	@Override
+	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception {
+		return oh_dao.selectOrderDetail(O_Num);
 	}
 
 }
