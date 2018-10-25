@@ -19,13 +19,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="<%=cp%>/resources/data/js/loginScript.js"></script>
 
 </head>
 <body>
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
-<form action="login_ok.action" method="post">
+<form action="login_ok.action" method="post" id="loginForm">
 	
 	<div style="text-align: center;">
 	
@@ -40,17 +41,17 @@
 		<table border="1" style="margin-left: auto; margin-right: auto;">
 			<tr>
 				<td >
-					아이디 : <input type="text" name="M_ID">
-					비밀번호 : <input type="password" name="M_PW">
+					아이디 : <input type="text" name="M_ID" id="userId">
+					비밀번호 : <input type="password" name="M_PW" id="userPw">
 				</td>
 				<td rowspan="2">
-					<input type="submit" value="로그인">
+					 <input type="button" value="로그인" onClick="loginProcess()">
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
-					<input type="checkbox" name="idSaveCheck">아이디 저장
+					<input type="checkbox" id="saveId" name="idSaveCheck">아이디 저장
 				</td>
 			</tr>
 		

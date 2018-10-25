@@ -21,7 +21,7 @@
 
 	<!-- orders의 주문번호를 받아서 주문내역의 상세내용 select -->
 	<select id="selectOrderDetail" parameterType="int" resultType="com.project.dto.OrderDetailDTO">
-		select OD_CODE, OD_NAME,OD_COUNT,OD_PRICE,OD_DISCOU from Order_Detail where OD_NUM = #{OD_NUM}
+		select OD_CODE, OD_NAME,OD_COLOR,OD_DEVICE,OD_COUNT,OD_PRICE,OD_DISCOUNT from Order_Detail where OD_NUM = #{O_NUM}
 	</select>
 
 	<!-- 상품코드(OD_CODE)로 상품번호(글번호) 찾기 -->
@@ -42,7 +42,7 @@
 	<!-- 주문날짜와 주문상태에 따른 Orders테이블 값 가져오기 -->
 	<select id="selectOrdersCondition" parameterType="map" resultType="com.project.dto.OrdersDTO">
 		select O_NUM,O_ID,O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from Orders
-		where ${serchKey} = #{O_STATUS}
+		where O_ID = #{O_ID}
 	<![CDATA[
 	    and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
 	    and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')

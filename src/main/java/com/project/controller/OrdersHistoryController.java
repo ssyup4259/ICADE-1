@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
+import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrdersDTO;
 import com.project.service.OrderHistoryService;
 
@@ -41,6 +43,20 @@ public class OrdersHistoryController {
 		String m_Id = dto.getM_ID();
 		
 		List<OrdersDTO> lists = (List<OrdersDTO>) service.selectOrders(m_Id);
+		
+		List<Integer> integerList = service.selectOrderNum(m_Id);
+		
+		System.out.println("for문돌린다====================================================");
+		
+		for(int i = 0;i<=integerList.size();i++) {
+			
+			System.out.println(integerList);
+			
+		}
+		
+		System.out.println("====================================================for문끝났다");
+		
+		//List<OrderDetailDTO> lists2 = (List<OrderDetailDTO>) service.selectOrderDetail(O_Num);
 		
 		request.setAttribute("lists", lists);
 		
@@ -78,10 +94,8 @@ public class OrdersHistoryController {
 		hMap.put("startDay", startDay);
 		hMap.put("endDay", endDay);
 		
-		//System.out.println(startDay);
-		//System.out.println(endDay);
-		
-		System.out.println("1");
+		System.out.println(startDay);
+		System.out.println(endDay);
 		
 		List<OrdersDTO> lists = service.selectOrdersCondition(hMap);
 		

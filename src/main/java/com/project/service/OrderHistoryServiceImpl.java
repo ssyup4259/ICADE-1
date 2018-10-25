@@ -52,4 +52,9 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		return oh_dao.selectOrdersCondition(hmap);
 	}
 
+	@Override
+	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception {
+		return oh_dao.selectOrderDetail(O_Num);
+	}
+
 }

@@ -26,4 +26,7 @@ public interface OrderHistoryService {
 	//기간 지정 주문 내역 검사용 
 	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception;
 	
+	//주문제품의 상세설명
+	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception;
+	
 }

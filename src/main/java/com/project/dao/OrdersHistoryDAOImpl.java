@@ -33,7 +33,6 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 
 	@Override
 	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
-		System.out.println("DAOImple 전");
 		
 		List<OrdersDTO> lists = new ArrayList<OrdersDTO>(); 
 				
@@ -60,6 +59,16 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	@Override
 	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception {
 		return sessionTemplate.selectList(ordersHistory + "selectOrdersCondition");
+	}
+
+	@Override
+	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception {
+
+		List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
+		
+		lists.add((OrderDetailDTO)sessionTemplate.selectOne(ordersHistory + ".selectOrderDetail",O_Num));
+		
+		return lists;
 	}
 
 }

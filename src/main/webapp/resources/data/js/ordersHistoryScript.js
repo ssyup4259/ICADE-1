@@ -4,6 +4,28 @@
 	var date = dt.getDate();
 	var maxDate = $("#history_end_date_button").val();
 
+	//변경될 달력부분의 인풋박스에 기본값 넣어두기(3달전)
+	var defaultValue = year + "-" + (month-3) + "-" + date; 
+	var inputVal1 = $("#history_start_date_button").val();
+	
+	$(function() {
+		if(!inputVal1){
+			//$( "#history_start_date_button" ).val(defaultValue);
+			$( "#sdate" ).val(defaultValue);
+		}
+	});
+	
+	//오늘의 날짜 기준의 기본값 넣어주기(today)
+	var today = year + "-" + month + "-" + date; 
+	var inputVal2 = $("#history_end_date_button").val();
+	
+	$(function() {
+		if(!inputVal2){
+			//$( "#history_end_date_button" ).val(today);	
+			$( "#edate" ).val(today);	
+		}
+	}); 
+	
 	$(document).ready(function () {
 	    $.datepicker.regional['ko'] = { // regional는 언어
 	        closeText: '닫기',//닫기 버튼의 문자열
@@ -79,27 +101,7 @@
 		});
 	});
 	*/
-	//변경될 달력부분의 인풋박스에 기본값 넣어두기(3달전)
-	var defaultValue = year + "-" + (month-3) + "-" + date; 
-	var inputVal1 = $("#history_start_date_button").val();
 	
-	$(function() {
-		if(!inputVal1){
-			//$( "#history_start_date_button" ).val(defaultValue);
-			$( "#sdate" ).val(defaultValue);
-		}
-	});
-	
-	//오늘의 날짜 기준의 기본값 넣어주기(today)
-	var today = year + "-" + month + "-" + date; 
-	var inputVal2 = $("#history_end_date_button").val();
-	
-	$(function() {
-		if(!inputVal2){
-			//$( "#history_end_date_button" ).val(today);	
-			$( "#edate" ).val(today);	
-		}
-	}); 
 	
 	//오늘
 	var today = year + "-" + month + "-" + date;
@@ -156,16 +158,11 @@
 	
 	$(document).ready(function (){
 		$("#order_search_btn").click(function(){
-			alert("a");
 			$("#OrderHistoryForm").attr("action","orderHistory_ok.action").submit();
 		});
 	});
 	
-	
-	
-	
-	
-	
+
 	
 	
 	
