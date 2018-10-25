@@ -27,8 +27,7 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>
-	/goods/goodsList.action";
+		f.action = "<%=cp%>/goods/goodsList.action";
 		f.submit();
 
 	}
