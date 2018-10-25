@@ -12,7 +12,7 @@ public interface LoginDAO {
 	public String idFind(Map<String, String> map) throws Exception;
 	
 	//비밀번호 찾기
-	public String findFind(Map<String, String> map) throws Exception;
+	public String pwdFind(Map<String, String> map) throws Exception;
 	
 	
 }

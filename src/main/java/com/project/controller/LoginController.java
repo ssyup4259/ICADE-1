@@ -63,7 +63,7 @@ public class LoginController {
 			
 			session.setAttribute("userInfo", dto);
 			
-			return "loginTest";
+			return "redirect:/";
 		}
 		
 		
@@ -116,11 +116,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/find/pwdFind.action", method= {RequestMethod.POST})
+	@ResponseBody
 	public String pwdFind(MemberDTO m_dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
 		String result = l_service.pwdFind(m_dto);
 		
-		return "login/pwdFind";
+		return result;
 		
 	}
 	

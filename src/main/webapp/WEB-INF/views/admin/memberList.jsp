@@ -45,9 +45,7 @@
 		
 		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
 			
-			f.action = "<%=cp%>
-	/admin/authorityChange.action?m_id=" + m_id
-					+ "&new_rank=" + new_rank;
+			f.action = "<%=cp%>/admin/authorityChange.action?m_id=" + m_id + "&new_rank=" + new_rank;
 			f.submit();
 
 		} else {
@@ -56,24 +54,6 @@
 
 	}
 </script>
-<style type="text/css">
-table {
-	border-collapse: collapse;
-	width: 100%;
-	border: 3px solid #A3C838;
-	border-top-left-radius: 12px;
-	text-align: center;
-}
-
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #A3C838;
-}
-
-tr:hover {
-	background-color: white;
-}
-</style>
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />

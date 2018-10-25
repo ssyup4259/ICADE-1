@@ -70,13 +70,13 @@ function idFind() {
 			
 			if (data == null || data == "") {
 				
-				var tag = "ID가 존재하지 않습니다.<br/><br/>";
+				var tag = "정보가 일치하지 않습니다.<br/><br/>";
 				
 				$("#result").append(tag);
 				
 			} else {
 				
-				var tag = "찾으시는 ID는 '" + data + "' 입니다.<br/><br/>";
+				var tag = "찾으시는 ID의 비밀번호는 '" + data + "' 입니다.<br/><br/>";
 				
 				$("#result").append(tag);
 				
