@@ -21,7 +21,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<script type="text/javascript">
+
+	function change(kind) {
+		
+		if (kind == "email") {
+			
+			document.getElementById("email_view").style.display = "block";
+			document.getElementById("phone_view").style.display = "none";
+			
+			document.getElementById("M_CELLPHONE1").value = "";
+			document.getElementById("M_CELLPHONE2").value = "";
+			document.getElementById("M_CELLPHONE3").value = "";
+			
+			document.getElementById("M_NAME").focus();
+			
+		} else if (kind == "phone") {
+			
+			document.getElementById("email_view").style.display = "none";
+			document.getElementById("phone_view").style.display = "block";
+			
+			document.getElementById("M_EMAIL_ID").value = "";
+			document.getElementById("M_EMAIL_DOMAIN").value = "";
+			
+			document.getElementById("M_NAME").focus();
+			
+		}
+		
+	}
+
+</script>
+
 </head>
+
 <body>
 
 <jsp:include page="../include/header.jsp" flush="false" />
@@ -40,37 +72,36 @@
 			<div style="width: 30%; margin: 0 auto;">
 				<br/>
 				<div style="padding: 10px 0px 10px 0px; width: 170px; margin: 0 auto;">
-					<input id="check_method1" name="check_method" value="2" type="radio" checked="checked">
-					<label for="check_method1">이메일</label>
-					<input id="check_method2" name="check_method" value="3" type="radio">
-					<label for="check_method2">
-						<span id="search_type_mobile_lable" style="display: inline;">휴대폰번호</span>
+					<input id="check_email" name="check" value="2" type="radio" checked="checked" onclick="change('email')">
+					<label for="check_email">이메일</label>
+					<input id="check_phone" name="check" value="3" type="radio" onclick="change('phone')">
+					<label for="check_phone">
+						<span style="display: inline;">휴대폰번호</span>
 					</label>
 				</div>
 				
-				<div id="name_view" style="margin: 10px 0px 10px 0px;">
-					<strong id="name_lable" style="margin-right: 23%;">이름</strong>
-					<input id="name" name="name" value="" type="text" class="inputBox" style="width: 200px;">
+				<div style="margin: 10px 0px 10px 0px;">
+					<strong style="margin-right: 23%;">이름</strong>
+					<input type="text" id="M_NAME" name="M_NAME" class="inputBox" style="width: 257px;" autofocus>
 				</div>
 				
 				<div id="email_view" style="margin: 10px 0px 10px 0px;">
 					<strong style="margin-right: 8%;">이메일로 찾기</strong>
-					<input id="email" name="email" style="width: 200px;" class="inputBox" fw-filter="isEmail" value="" type="text">
+					<input id="M_EMAIL_ID" name="M_EMAIL_ID" style="width: 115px;" class="inputBox" fw-filter="isEmail" value="" type="text"> @ 
+					<input id="M_EMAIL_DOMAIN" name="M_EMAIL_DOMAIN" style="width: 115px;" class="inputBox" fw-filter="isEmail" value="" type="text">
 				</div>
 				
-				<div style="margin: 10px 0px 10px 0px; display: none;">
+				<div id="phone_view" style="margin: 10px 0px 10px 0px; display: none;">
 					<strong>휴대폰 번호로 찾기</strong>
-					<input id="mobile1" name="mobile1" style="width: 54px;" class="inputBox" maxlength="3" value="" type="text">
+					<input id="M_CELLPHONE1" name="M_CELLPHONE1" style="width: 73px;" class="inputBox" maxlength="3" value="" type="text">
 					 - 
-					<input id="mobile2" name="mobile2" style="width: 54px;" class="inputBox" maxlength="4" value="" type="text">
+					<input id="M_CELLPHONE2" name="M_CELLPHONE2" style="width: 73px;" class="inputBox" maxlength="4" value="" type="text">
 					 - 
-					<input id="mobile3" name="mobile3" style="width: 54px;" class="inputBox" maxlength="4" value="" type="text">
+					<input id="M_CELLPHONE3" name="M_CELLPHONE3" style="width: 73px;" class="inputBox" maxlength="4" value="" type="text">
 				</div>
 				<br/>
 				<div style="width: 90px; margin: 0 auto;">
-					<a href="#" onclick="">
-						<img src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_submit.gif" alt="확인">
-					</a>
+					<input type="button" value="확인" class="btn" onclick="" style="width: 150px;"/>
 				</div>
 				<br/>
 			</div>
