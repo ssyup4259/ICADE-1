@@ -70,17 +70,15 @@ function idFind() {
 			
 			if (data == null || data == "") {
 				
-				var tag = "ID가 존재하지 않습니다.<br/>";
+				var tag = "ID가 존재하지 않습니다.<br/><br/>";
 				
-				$("#result").prepend(tag);
-				$("#result").append("<br/>");
+				$("#result").append(tag);
 				
 			} else {
 				
-				var tag = "찾으시는 ID는 '" + data + "' 입니다.<br/>";
+				var tag = "찾으시는 ID는 '" + data + "' 입니다.<br/><br/>";
 				
-				$("#result").prepend(tag);
-				$("#result").append("<br/>");
+				$("#result").append(tag);
 				
 			}
 			
