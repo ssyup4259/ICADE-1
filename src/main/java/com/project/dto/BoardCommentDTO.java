@@ -23,7 +23,8 @@ public class BoardCommentDTO {
 	private MultipartFile bcFile;
 	//파일 저장명
 	private String BC_SAVEFILENAME;
-	
+	// 댓글- 답변글 깊이
+    private int commentLevel;
 	
 	
 	public int getBC_NUM() {
@@ -80,6 +81,12 @@ public class BoardCommentDTO {
 	}
 	public void setBC_SAVEFILENAME(String bC_SAVEFILENAME) {
 		BC_SAVEFILENAME = bC_SAVEFILENAME;
+	}
+	public int getCommentLevel() {
+		return commentLevel;
+	}
+	public void setCommentLevel(int commentLevel) {
+		this.commentLevel = commentLevel;
 	}
 
 	
