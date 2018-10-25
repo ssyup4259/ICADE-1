@@ -66,4 +66,11 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 		return lists;
 	}
 
+	@Override
+	public int countSearch(int OD_NUM) throws Exception {
+		return sessionTemplate.selectOne(ordersHistory + ".countSearch",OD_NUM);
+	}
+
+
+
 }

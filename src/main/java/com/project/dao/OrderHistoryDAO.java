@@ -26,4 +26,6 @@ public interface OrderHistoryDAO {
 	//주문제품의 상세설명
 	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception;
 
+	//상품코드 안에 있는 상품의 종류
+	public int countSearch(int OD_NUM) throws Exception;
 }

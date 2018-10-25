@@ -51,4 +51,9 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		return oh_dao.selectOrderDetail(O_Num);
 	}
 
+	@Override
+	public int countSearch(int OD_NUM) throws Exception {
+		return oh_dao.countSearch(OD_NUM);
+	}
+
 }

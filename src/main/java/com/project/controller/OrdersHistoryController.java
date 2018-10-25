@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -36,9 +37,9 @@ public class OrdersHistoryController {
 		
 		HttpSession session = request.getSession();
 		
-		HashMap<String, Object> hMap = new HashMap<String, Object>();
-		
+		List<OrderDetailDTO> orderList = new ArrayList<OrderDetailDTO>(); 
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		HashMap<Integer, Object> hMap = new HashMap<Integer, Object>();
 		
 		String m_Id = dto.getM_ID();
 		
@@ -46,22 +47,30 @@ public class OrdersHistoryController {
 		
 		List<Integer> integerList = service.selectOrderNum(m_Id);
 		
+		
+		
 		System.out.println("for문돌린다====================================================");
 		
 		for(int i = 0;i<integerList.size();i++) {
 			
 			System.out.println(integerList);
 			
-			Integer itt = integerList.get(i);
+			Integer O_Num = integerList.get(i);
 			
-			System.out.println(itt);
+			int countOrder = service.countSearch(O_Num);
+			
+			orderList = (List<OrderDetailDTO>) service.selectOrderDetail(O_Num);
+		
+			hMap.put(O_Num, countOrder);
 			
 		}
 		
 		System.out.println("====================================================for문끝났다");
 		
-		//List<OrderDetailDTO> lists2 = (List<OrderDetailDTO>) service.selectOrderDetail(O_Num);
 		
+		
+		request.setAttribute("orderList", orderList);
+		request.setAttribute("hMap", hMap);
 		request.setAttribute("lists", lists);
 		
 		return "ordersHistory/ordersHistoryMain";

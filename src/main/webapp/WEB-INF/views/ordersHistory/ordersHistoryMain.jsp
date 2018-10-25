@@ -49,7 +49,7 @@
 			</div> -->
 			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
 	        <span class="period">
-	            <a href="#none" class="btnNormal" 	="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
+	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
 	            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" id="oneWeek" alt="1주일"></a>
 	            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" id="oneMonth" alt="1개월"></a>
 	            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" id="threeMonth" alt="3개월"></a>
@@ -115,6 +115,8 @@
 
 <c:forEach items="${lists }" var="dto">
 
+<input type="hidden" id="temp" value="${dto.getO_NUM()}">
+
 <tbody class="center displaynone">
 <tr class="">
 	<td class="number displaynone">
@@ -131,14 +133,15 @@
 		<a href="/product/detail.html"><strong></strong></a>
 		<div class="option displaynone"></div>
 		<ul class="xans-element- xans-myshop xans-myshop-optionset option">
-		<li class=""><strong><%-- ${dto.getOD_NAME } --%></strong> (개)</li><!-- 하나의 제품 보여주고 외 몇개 또는 모든 재품 보여주기 고민 -->
-</ul>
+			<li class=""><strong><%-- ${dto.getOD_NAME } --%></strong> (개)</li><!-- 하나의 제품 보여주고 외 몇개 또는 모든 재품 보여주기 고민 -->
+		</ul>
 <!-- <p class="gBlank5 displaynone">무이자할부 상품</p> -->
                 </td>
                 <td></td>
                 <td class="right">
-<strong></strong><div class="displaynone"></div>
-</td>
+					<strong>${dto.getO_TOT()}</strong>
+					<div class="displaynone"></div>
+				</td>
                 <td class="state">
                     <p class="txtEm"></p>
                     <p class="displaynone"><a href="" target=""></a></p>
@@ -149,7 +152,8 @@
                     <a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract3.gif" alt="반품철회"></a>
                 </td>
                 <td>
-                    <p class="displaynone"><a href="#none" class="line" onclick="">[상세정보]</a></p>
+                    <p class="displaynone">
+                    	<a href="#none" class="line" onclick="">[상세정보]</a></p>
                     <p class="displaynone">-</p>
                 </td>
             </tr>
