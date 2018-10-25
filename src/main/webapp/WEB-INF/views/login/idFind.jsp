@@ -58,6 +58,8 @@ function idFind() {
 	
 	var allData = $("#findIdForm").serialize();
 	
+	$("#result").empty();
+	
 	$.ajax({
 		
 		type:"post",
@@ -68,11 +70,17 @@ function idFind() {
 			
 			if (data == null || data == "") {
 				
-				alert("ID가 존재하지 않습니다.");
+				var tag = "ID가 존재하지 않습니다.<br/>";
+				
+				$("#result").prepend(tag);
+				$("#result").append("<br/>");
 				
 			} else {
 				
-				alert("찾으시는 ID는 '" + data + "' 입니다.");
+				var tag = "찾으시는 ID는 '" + data + "' 입니다.<br/>";
+				
+				$("#result").prepend(tag);
+				$("#result").append("<br/>");
 				
 			}
 			
@@ -138,7 +146,10 @@ function idFind() {
 					<input id="M_CELLPHONE3" name="M_CELLPHONE3" style="width: 73px;" class="inputBox" maxlength="4" value="" type="text">
 				</div>
 				<br/>
-				<div style="width: 90px; margin: 0 auto;">
+				
+				<div id="result" style="width: 100%; text-align: center;"></div>
+				
+				<div style="width: 100%; text-align: center;">
 					<input type="button" value="확인" class="btn" onclick="idFind();" style="width: 150px;"/>
 				</div>
 				<br/>
