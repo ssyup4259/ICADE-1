@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
