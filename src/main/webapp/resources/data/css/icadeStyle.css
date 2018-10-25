@@ -410,10 +410,21 @@ a:active {
 	color: #A3C838;
 }
 
+/* 우측 위로가기랑 최근 본상품 */
 .back_to_top {
 	position: fixed;
 	bottom: 10px;
-	left: 90%;
+	right: 5%;
+	text-decoration: none;
+	padding: auto;
+	display: none;
+	z-index: 998;
+}
+
+.latestGoods {
+	position: fixed;
+	bottom: 150px;
+	right: 5%;
 	text-decoration: none;
 	padding: auto;
 	display: none;
@@ -454,3 +465,9 @@ a:active {
 	background-color: white;
 }
  */
+ 
+ .lg img{
+ 	width : 170px;
+ 	height : 170px;
+ 	border-radius: 12px;
+ }
