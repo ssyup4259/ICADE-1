@@ -28,8 +28,7 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>
-	/goods/goodsList.action";
+		f.action = "<%=cp%>/goods/goodsList.action";
 		f.submit();
 
 	}
@@ -86,7 +85,8 @@
 						</c:if>
 
 						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">
+							<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
 								<div style="padding-left: 10%">
 									<p>${g_dto.getG_NAME()}</p>
 								</div>

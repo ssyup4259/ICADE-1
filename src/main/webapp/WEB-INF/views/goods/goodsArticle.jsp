@@ -315,24 +315,11 @@ $(function() {
 							</div>
 						</div>
 					</div>
-					<c:if test="${!empty pageNum}">
-						<br>
 						<div id="btn">
-							<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
+							<a href="javascript:history.back();">
 								<h2>상품목록으로 돌아가기</h2>
 							</a>
 						</div>
-						<br>
-					</c:if>
-					<!-- 최근본 상품목록에서 클릭했을 경우 -->
-					<c:if test="${empty pageNum}">
-						<br>
-						<div id="btn">
-							<%-- <a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
-										<h2>상품목록으로 돌아가기</h2></a> --%>
-						</div>
-						<br>
-					</c:if>
 				</div>
 
 				<!-- divison 이동 -->
