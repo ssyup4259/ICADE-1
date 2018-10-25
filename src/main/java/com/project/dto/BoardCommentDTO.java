@@ -4,17 +4,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BoardCommentDTO {
 	
+	//글번호
 	private int BC_NUM;
+	//글 게시판
 	private int BC_BOARD;
+	//작성날짜
 	private int BC_DATE;
+	//작성 게시판
 	private int BC_PARENT;
 	
-	
+	//작성 아이디
 	private String BC_ID;
+	//작성 내용
 	private String BC_CONTENT;
+	//사진
 	private String BC_IMAGE;
+	//파일
+	private MultipartFile bcFile;
+	//파일 저장명
+	private String BC_SAVEFILENAME;
 	
-	private MultipartFile gFile;
 	
 	
 	public int getBC_NUM() {
@@ -59,13 +68,20 @@ public class BoardCommentDTO {
 	public void setBC_IMAGE(String bC_IMAGE) {
 		BC_IMAGE = bC_IMAGE;
 	}
-	public MultipartFile getgFile() {
-		return gFile;
+	public MultipartFile getBcFile() {
+		return bcFile;
 	}
-	public void setgFile(MultipartFile gFile) {
-		this.gFile = gFile;
+	public void setBcFile(MultipartFile bcFile) {
+		this.bcFile = bcFile;
 	}
-	
+
+	public String getBC_SAVEFILENAME() {
+		return BC_SAVEFILENAME;
+	}
+	public void setBC_SAVEFILENAME(String bC_SAVEFILENAME) {
+		BC_SAVEFILENAME = bC_SAVEFILENAME;
+	}
+
 	
 	
 	
