@@ -39,11 +39,14 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		return bc_dto.getBC_NUM();
 		
 	}
-	
+	//댓글 개수 구하기
+	@Override
+	public int countReply(int bc_board) throws Exception {
+		return sessionTemplate.selectOne(replyMapper+".countReply"); 
+	}
 	//댓글리스트
 	@Override
-	public List<BoardCommentDTO> replyList(String BC_ID) throws Exception {
-		
+	public List<BoardCommentDTO> replyList(int start,int end) throws Exception {
 		return sessionTemplate.selectList(replyMapper + ".listData");
 	}
 	
@@ -76,6 +79,7 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		}
 		sessionTemplate.delete(replyMapper + ".deleteGoods", BC_NUM);
 	}
+
 
 
 

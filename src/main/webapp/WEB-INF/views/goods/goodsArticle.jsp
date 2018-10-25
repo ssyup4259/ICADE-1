@@ -282,8 +282,7 @@ $(function() {
 		$.ajax({
 			
 			type:"post",
-			url:"<%=cp%>
-	/cart/insertCheck.action",
+			url:"<%=cp%>/cart/insertCheck.action",
 			datatype : 'json',
 			data : allData,
 			success : function(data) {
@@ -315,7 +314,7 @@ $(function() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<form id="myForm" name="myForm" method="post" action="">
+			<form id="myForm" name="myForm" method="post" action="" enctype="multipart/form-data">
 				<table width="100%" align="center" style="border: none;">
 					<tr>
 						<td colspan="2" align="center">
@@ -462,7 +461,7 @@ $(function() {
 						<div class="cont">
 							<h3>배송정보</h3>
 
-							<ul class="delivery">
+							<ul class="delivery" >
 								<li>배송 방법 : 택배</li>
 								<li>배송 지역 : 전국지역</li>
 								<li>배송 비용 : 3,000원</li>
@@ -499,7 +498,7 @@ $(function() {
 					</div>
 				</div>
 
-				<!-- divison 이동 -->
+				<!-- //divison 이동 -->
 				<div>
 					<div>
 						<b><br></b>
@@ -523,16 +522,166 @@ $(function() {
 						<b><br></b>
 					</div>
 				</div>
+				 
+				 
+				<!-- 댓글부분 -->
 				<div id="section3" class="container-fluid">
 					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-					<p></p>
-					<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-					<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+					<div id="comment" class="container-fluid">
+						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
+					
+								<!-- 댓글 목록 -->
+								<c:if test="${!empty bc_list}">
+									<c:forEach var="bc_dto" items="${bc_list}">
+										<tr height="60px;" class="even">
+											<!-- 아이디, 작성날짜 -->
+											
+											<td width="15%" valign="top">
+												<div style="width: 120px; height: 40px;">
+												<div style="margin-top: 15%"></div>
+													<%-- <c:if test="${bc_dto.commentLevel > 1}">
+														&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
+														<img src="${pageContext.request.contextPath}/img/arrow.png" width="10" height="10">
+													</c:if> --%>
+													${bc_dto.BC_ID}<br> <font color="b3cccc" size="2">${bc_dto.BC_CONTENT}</font>
+												</div>
+											</td>
+										
+										
+										<!-- 본문내용 -->
+										<td width="70%">
+											<div  class="text_wrapper">&nbsp;&nbsp;&nbsp;&nbsp;${bc_dto.BC_CONTENT}</div>
+										</td>
+										<!-- 버튼 -->
+										<td width="15%">
+											<div id="btn" style="text-align: center;">
+												<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+												<c:if test="${bc_dto.BC_ID eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
+													<c:if test="${bc_dto.commentLevel eq 1}">
+														<a href="#" onclick="cmReplyOpen(${bc_dto.BC_NUM});">[답변]</a>
+														<br>
+													</c:if>
+												</c:if>
+			
+												<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
+												<c:if test="${bc_dto.BC_ID == sessionScope.userInfo.getM_ID()}">
+													<a href="#" onclick="cmUpdateOpen(${bc_dto.BC_NUM},'${bc_dto.BC_CONTENT}');">[수정]</a>
+													<br>
+													<a href="#" onclick="cmDeleteOpen(${bc_dto.BC_NUM});">[삭제]</a>
+													<Br>
+												</c:if>
+											</div>
+										</td>
+									</tr>
+			
+								</c:forEach>
+							</c:if>
+			
+							<!-- 로그인 했을 경우만 댓글 작성가능 -->
+							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+								<tr bgcolor="lightgray" height="60px;">
+									<form name="writeCommentForm" action="" method="post" enctype="multipart/form-data">
+										<input type="hidden" name="comment_id" value="${sessionScope.userInfo.getM_ID()}">
+										<!-- 아이디-->
+										<td width="15%">
+											<div>${sessionScope.userInfo.getM_ID()}</div>
+										</td>
+										<!-- 본문 작성-->
+										<td width="75%">
+											<div>
+												<textarea id="inputbox" name="comment_content" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
+												<input type="file" id="upload">
+											</div>
+										</td>
+										<!-- 댓글 등록 버튼 -->
+										<td width="15%">
+											<div id="btn2" style="text-align: center;">
+												<p>
+													<input type="button" id="replySubmit" onclick="" value="[댓글등록]" class="btn" height="20px;">
+												</p>
+											</div>
+											<div id="result"></div>
+										</td>
+									</form>
+								</tr>
+							</c:if>
+							
+							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+								<tr bgcolor="lightgray" height="60px;">
+									<!-- 아이디-->
+									<td width="15%">
+										<div>${sessionScope.customInfo.mId}</div>
+									</td>
+									<!-- 본문 작성-->
+									<td width="75%">
+									
+										<div>
+										   
+											<textarea id="inputbox" name="comment_content" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
+											disabled="disabled">로그인 후 등록 가능합니다.</textarea>
+										 
+										</div>
+									
+									</td>
+									<!-- 댓글 등록 버튼 -->
+									<td width="15%">
+										<div id="btn" style="text-align: center;">
+											<p>
+												<input id="process" type="button" disabled="disabled" value="[댓글등록]" class="btn" height="20px;">
+											</p>
+										</div>
+									</td>
+								</tr>
+							</c:if>
+							<tr>
+								<br/>
+								<td colspan="3" align="center">
+									<h2>${pageIndexList_c}</h2>
+								</td>
+								<br/>
+							</tr>
+						</table>
+				   </div>
 				</div>
 			</form>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
+
+
+
+
+<script>
+$(document).ready(function() {
+	$("#replySubmit").click(function() {
+		
+		var replyText = $("#inputbox").val();
+		var BC_BOARD =${g_dto.getG_NUM()};
+		var upload = $('#upload').val();
+		var param = "{'replyText': replyText, 'BC_BOARD':BC_BOARD, 'upload':upload}";
+		
+		$.ajax({
+			type : "post",
+			url :"<%=cp%>/goods/replyInsert.action",
+			data : param,
+			enctype: "multipart/form-data",
+			success:function(){
+				alert("댓글이 등록되었습니다.");
+			
+			},
+			error: function() {
+
+				alert("안된다");
+			}
+		});
+		$("#replySubmit").submit();
+	});	
+});
+
+
+
+</script>
+
 
 </html>
