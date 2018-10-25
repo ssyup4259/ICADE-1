@@ -4,6 +4,12 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<script type="text/javascript">
+function msg(){ 
+ alert('지금은 채용 기간이 아닙니다.');
+ } 
+
+</script>
 
 <div class="navbar container-fluid sticky" style="z-index: 90;">
 	<ul>
@@ -62,6 +68,9 @@
 				<li style="float: right">
 					<a href="<%=cp%>/cart/cartList.action">장바구니</a>
 				</li>
+				<li style="float: right">
+					<a href="<%=cp%>/myPage.action">마이페이지</a>
+				</li>
 			</c:if>
 			<li style="float: right">
 				<a href="<%=cp%>/logout.action">로그아웃</a>
@@ -75,7 +84,7 @@
 </div>
 
 <div class="container-fluid text-center" style="color: #8F9493; margin-bottom: 10px;">
-	<a href="">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>
+	<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>
 	<img src="/icade/resources/data/logo/logo1.png">
 	<a href="">고객센터</a>&nbsp;&nbsp;<a href="">공지사항</a>
 </div>

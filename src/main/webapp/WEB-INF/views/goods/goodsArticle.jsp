@@ -32,10 +32,6 @@ body {
 	z-index: 9999 !important;
 }
 
-.navbar {
-	margin-bottom: 0p x;
-}
-
 .affix ~ .container-fluid {
 	position: relative;
 	top: 50px;
@@ -43,67 +39,16 @@ body {
 
 #section1 {
 	padding-top: 50px;
-	height: 500px;
-	width: 33% color: #000000;
 }
 
 #section2 {
 	padding-top: 50px;
-	height: 500px;
-	color: #000000;
 }
 
 #section3 {
 	padding-top: 50px;
-	height: 500px;
-	color: #000000;
-}
-</style>
-
-<style type="text/css">
-a {
-	text-decoration: none;
-	color: #000;
 }
 
-.menu_ul {
-	border: 1px solid #ddd;
-	border-left: none;
-	background: #fff;
-	overflow: hidden;
-}
-
-.menu_ul li {
-	float: left;
-	width: 33.3%;
-	border-left: 1px solid #ddd;
-	text-align: center;
-	box-sizing: border-box;
-}
-
-.menu_ul li {
-	display: inline-block;
-	padding: 20px;
-	cursor: pointer;
-}
-
-.menu_ul li.on {
-	background-color: #eee;
-	color: #f00;
-}
-
-table {
-	border-collapse: collapse;
-	width: 100%;
-	text-align: center;
-}
-
-th, td {
-	padding: 8px;
-}
-</style>
-
-<style type="text/css">
 input.up {
 	background: url("<%=cp%>/resources/images/btn_quantity_up.gif")
 		no-repeat;
@@ -121,49 +66,7 @@ input.down {
 	height: 13px;
 	cursor: pointer;
 }
-
-table {
-	border-collapse: collapse;
-	width: 100%;
-	text-align: center;
-}
-
-th, td {
-	padding: 8px;
-}
 </style>
-
-<!-- 탭 메뉴 적용 -->
-<script type="text/javascript">
-		$(function () {	
-			tab('#tab',0);	
-		});
-		
-		function tab(e, num){
-		    var num = num || 0;
-		    var menu = $(e).children();
-		    var con = $(e+'_con').children();
-		    var select = $(menu).eq(num);
-		    var i = num;
-		
-		    select.addClass('on');
-		    con.eq(num).show();
-		
-		    menu.click(function(){
-		        if(select!==null){
-		            select.removeClass("on");
-		            con.eq(i).hide();
-		        }
-		
-		        select = $(this);	
-		        i = $(this).index();
-		
-		        select.addClass('on');
-		        con.eq(i).show();
-		    });
-		}
-
-</script>
 
 
 <!-- 콤보박스 연결 -->
@@ -314,172 +217,171 @@ $(function() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<form id="myForm" name="myForm" method="post" action="" enctype="multipart/form-data">
-				<table width="100%" align="center" style="border: none;">
-					<tr>
-						<td colspan="2" align="center">
-							<h1>${g_dto.getG_NAME()}</h1>
-						</td>
-					</tr>
-					<tr>
-						<td width="350px;" height="500px;"><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="border-radius: 15px; height: 90%; width: 90%;"></td>
-
-
-						<td>
-							<table width="100%" height="300" style="border: none;">
-								<tr align="center">
-									<td>상품명</td>
-									<td align="left">${g_dto.getG_NAME()}<input type="hidden" name="G_NAME" value="${g_dto.getG_NAME()}" />
-									</td>
-								</tr>
-								<tr align="center">
-									<td>소비자가</td>
-									<td align="left"><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</td>
-								</tr>
-
-								<tr align="center" onclick="discount();">
-									<td>판매가</td>
-									<td align="left"><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원 <input type="hidden" name="G_PRICE" value="${g_dto.getG_PRICE()}" /></td>
-								</tr>
-								<tr align="center">
-									<td>적립금</td>
-									<td align="left"><img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg" /> <fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>원</td>
-								</tr>
-
-
-								<!--  기종 선택 -->
-								<tr align="center">
-									<td>기종</td>
-									<td align="left"><c:if test="${!empty gd_list}">
-											<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
-											<select name="GD_DEVICE" id="product" class="sel" style="width: 40%;">
-												<option value="">::기종을 선택하세요::</option>
-												<c:forEach var="gd_dto" items="${d_list}">
-													<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
-												</c:forEach>
-											</select>
-										</c:if></td>
-								</tr>
-
-								<!--  색상 선택 -->
-								<tr align="center">
-									<td>색상</td>
-									<td align="left"><select name="GD_COLOR" id="sub" class="sel" style="width: 40%;">
-											<option>:: 색상을 선택해주세요 ::</option>
-										</select></td>
-								</tr>
-
-								<tr align="center">
-									<td>수량</td>
-									<td align="left"><input type="text" class="inputBox" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" /> <input type="button" id="up" class="up" onclick="countUp();" /> <input type="button" id="down" class="down" onclick="countDown();" />개</td>
-								</tr>
-
-								<tr align="center">
-									<td>총 상품금액</td>
-									<td align="left"><input type="text" id="sum" class="inputBox" name="sum" value="" readonly="readonly" /></td>
-								</tr>
-
-								<tr>
-									<td colspan="2" height="1" bgcolor="black"></td>
-								</tr>
-
-								<tr align="center">
-									<td align=""><c:choose>
-											<c:when test="">
-												<a href='javascript:like_func();'>
-													<img src="<%=cp%>/resources/images/dislike.png" id="heart.png">
-												</a>
-											</c:when>
-											<c:otherwise>
-												<a href='javascript: login_need();'>
-													<img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
-												</a>
-											</c:otherwise>
-										</c:choose> <a href="댓글목록">
-											<img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
-										</a></td>
-									<td align="left" colspan="2"><input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}"> <input type="button" value="구매하기" onclick="orderIt();" class="btn" /> <input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" /></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr height="1">
-						<td colspan="2" height="1" bgcolor="black"></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center"><c:if test="${!empty pageNum}">
-								<br>
-								<div id="btn">
-									<a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
-										<h2>상품목록으로 돌아가기</h2>
-									</a>
+			<form id="myForm" name="myForm" method="post" action="">
+				<div align="left" style="font-size: 30px; margin-bottom: 10px; padding-left: 80px;">${g_dto.getG_NAME()}</div>
+				<div class="row">
+					<div class="col-sm-5">
+						<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="border-radius: 15px; height: 90%; width: 70%;">
+					</div>
+					<div class="col-sm-7" style="font-size: 20px;">
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">상품명</div>
+							<div class="col-sm-9" style="text-align: left">${g_dto.getG_NAME()}<input type="hidden" name="G_NAME" value="${g_dto.getG_NAME()}" />
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">소비자가</div>
+							<div class="col-sm-9" style="text-align: left">
+								<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+								원
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">판매가</div>
+							<div class="col-sm-9" style="text-align: left">
+								<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+								원
+								<input type="hidden" name="G_PRICE" value="${g_dto.getG_PRICE()}" />
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">적립금</div>
+							<div class="col-sm-9" style="text-align: left">
+								<img src="<%=cp%>/resources/images/credit/icon_201612281355512700.jpg" />
+								<fmt:formatNumber>${g_dto.getG_PRICE()*0.1}</fmt:formatNumber>
+								원
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">기종</div>
+							<div class="col-sm-9" style="text-align: left">
+								<c:if test="${!empty gd_list}">
+									<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
+									<select name="GD_DEVICE" id="product" class="sel" style="width: 100%;">
+										<option value="">::기종을 선택하세요::</option>
+										<c:forEach var="gd_dto" items="${d_list}">
+											<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
+										</c:forEach>
+									</select>
+								</c:if>
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">색상</div>
+							<div class="col-sm-9" style="text-align: left">
+								<select name="GD_COLOR" id="sub" class="sel" style="width: 100%;">
+									<option>:: 색상을 선택해주세요 ::</option>
+								</select>
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">수량</div>
+							<div class="col-sm-9" style="text-align: left">
+								<input type="button" id="down" class="down" onclick="countDown();" />								
+								<input type="text" class="inputBox" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" style="width: 50px;" />
+								개
+								<input type="button" id="up" class="up" onclick="countUp();" />
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: left;">총 상품금액</div>
+							<div class="col-sm-9" style="text-align: left">
+								<input type="text" id="sum" class="inputBox" name="sum" value="" readonly="readonly" style="width: 100%;" />
+							</div>
+						</div>
+						<div class="row" style="height: 60px;">
+							<div class="col-sm-3" style="text-align: right;">
+								<c:choose>
+									<c:when test="">
+										<a href='javascript:like_func();'> <img src="<%=cp%>/resources/images/dislike.png" id="heart.png">
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href='javascript: login_need();'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
+										</a>
+									</c:otherwise>
+								</c:choose>
+								<a href="댓글목록"> <img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
+								</a>
+							</div>
+							<div class="row col-sm-9" style="text-align: left">
+								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
+								<div class="col-sm-6">
+									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
 								</div>
-								<br>
-							</c:if> <!-- 최근본 상품목록에서 클릭했을 경우 --> <c:if test="${empty pageNum}">
-								<br>
-								<div id="btn">
-									<%-- <a href="<%=cp%>/list.action?pageNum=${pageNum}&G_NUM=${g_dto.getG_NUM()}">
-										<h2>상품목록으로 돌아가기</h2></a> --%>
+								<div class="col-sm-6">
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;"  />
 								</div>
-								<br>
-							</c:if></td>
-					</tr>
-				</table>
+							</div>
+						</div>
+					</div>
+						<div id="btn">
+							<a href="javascript:history.back();">
+								<h2>상품목록으로 돌아가기</h2>
+							</a>
+						</div>
+				</div>
 
 				<!-- divison 이동 -->
-				<div class="conatiner-fluid sticky text-center" id="menu" style="z-index: 999; background-color: transparent; padding-top: 8px;" >
-					<a href="#section1">
-						<input type="button" class="btn" value="상품상세정보" style="width: 200px;">
-					</a>
-					&nbsp;&nbsp;&nbsp;
-					<a href="#section2">
-						<input type="button" class="btn" value="상품구매안내" style="width: 200px;">
-					</a>
-					&nbsp;&nbsp;&nbsp;
-					<a href="#section3">
-						<input type="button" class="btn" value="상품사용후기" style="width: 200px;">
+				<div class="conatiner-fluid sticky text-center" id="menu" style="z-index: 999; background-color: transparent; padding-top: 8px;">
+					<a href="#section1"> <input type="button" class="btn" value="상품상세정보" style="width: 200px;">
+					</a> &nbsp;&nbsp;&nbsp; <a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
+					</a> &nbsp;&nbsp;&nbsp; <a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
 					</a>
 				</div>
 
-				<div id="section1" class="container-fluid" style="margin: auto">
-					<h1>상품상세정보</h1>
-					<p></p>
+				<div id="section1" class="container-fluid">
+					<div align="left">
+						<h1>상품상세정보</h1>
+					</div>
+					<div>
+						<p></p>
+					</div>
 				</div>
-
+				<hr>
 				<!-- 상품구매안내 -->
 				<div id="section2" class="container-fluid">
-					<h1>상품구매안내</h1>
-
+					<div align="left">
+						<h1>상품구매안내</h1>
+					</div>
 					<div id="prdInfo" class="ec-base-tab grid5">
 						<div class="cont">
 							<h3>상품결제정보</h3>
 
-							<div>무통장 입금은 인터넷뱅킹, 텔레뱅킹, 스마트폰뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다. &nbsp;</div>
-							<div>주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 3일 이내 로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.</div>
+							<div align="left">
+								무통장 입금은 인터넷뱅킹, 텔레뱅킹, 스마트폰뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.
+								<br>
+								주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 3일 이내 로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.
+							</div>
 						</div>
-
+						<br>
+						<br>
 						<div class="cont">
 							<h3>배송정보</h3>
-
-							<ul class="delivery" >
-								<li>배송 방법 : 택배</li>
-								<li>배송 지역 : 전국지역</li>
-								<li>배송 비용 : 3,000원</li>
-								<li>배송 기간 : 1일 ~ 3일</li>
+							<div align="left">
+								배송 방법 : 택배
 								<br>
-								<li>
-									배송 안내 :
-									<div>
-										<span style="font-size: 9pt;">고객님께서 주문하신 상품은 입금 확인 후, 제작하여 발송처리합니다.</span>
+								배송 지역 : 전국지역
+								<br>
+								배송 비용 : 3000원
+								<br>
+								배송 기간 : 1일~3일
+								<br>
+								<div class="row" style="margin-left: 0;">
+									<div>배송 안내 :</div>
+									<div style="margin-left: 5px;">
+										고객님께서 주문하신 상품은 입금 확인 후, 제작하여 발송처리합니다.
+										<br>
+										배송기간은 1일~3일입니다. 우체국택배를 이용하여 일요일,공휴일은 쉽니다.
 									</div>
-									<div>배송기간은 1일~3일입니다. 우체국택배를 이용하여 일요일,공휴일은 쉽니다.</div>
-								</li>
-							</ul>
+								</div>
+							</div>
 						</div>
-
+						<br>
+						<br>
 						<div class="cont">
 							<h3>교환 및 반품정보</h3>
-							<div>
+							<div align="left">
 								<div>
 									<b style="font-size: 9pt;">현재 저희는 상품수령 즉시 불량이나 문제가 있을 경우 교환,환불처리가 가능하지만, 사용하시다가 생긴 고장은 A/S처리가 불가능합니다 더나은 서비스를 드리지못해 죄송합니다!</b>
 								</div>
@@ -490,13 +392,16 @@ $(function() {
 								<div>&nbsp; (색상 교환, 사이즈 교환 등 포함)(5,000원)</div>
 							</div>
 						</div>
+						<br>
+						<br>
 
 						<div class="cont">
 							<h3>서비스문의</h3>
-							서비스 문의 안내는 고객센터 문의쪽에 남겨주시거나 카카오톡,페이스북 페이지로 글남겨주시면 바로답변드리겠습니다!!
+							<div align="left">서비스 문의 안내는 고객센터 문의쪽에 남겨주시거나 카카오톡,페이스북 페이지로 글남겨주시면 바로답변드리겠습니다!!</div>
 						</div>
 					</div>
 				</div>
+				<hr>
 
 				<!-- //divison 이동 -->
 				<div>
@@ -517,13 +422,11 @@ $(function() {
 					</div>
 					<div>
 						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
+				<div id="section3" class="container-fluid">
+					<div align="left">
+						<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 					</div>
 				</div>
-				 
-				 
 				<!-- 댓글부분 -->
 				<div id="section3" class="container-fluid">
 					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
@@ -648,8 +551,6 @@ $(function() {
 	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
-
-
 
 
 <script>
