@@ -58,8 +58,8 @@
 		</table>
 		
 		<br/>
-		<a href="<%=cp%>/search/idSearch.action">아이디 찾기</a>&nbsp;/&nbsp;
-		<a href="<%=cp%>/search/pwdSearch.action">비밀번호 찾기</a>&nbsp;/&nbsp;
+		<a href="<%=cp%>/find/idFind.action">아이디 찾기</a>&nbsp;/&nbsp;
+		<a href="<%=cp%>/find/pwdFind.action">비밀번호 찾기</a>&nbsp;/&nbsp;
 		<a href="<%=cp%>/join.action">회원가입</a>
 	
 	</div>
