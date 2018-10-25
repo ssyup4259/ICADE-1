@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,7 @@
 
 <fieldset class="ec-base-box">
 	<legend>검색기간설정</legend>
-	        <div class="stateSelect ">
+	        <!-- <div class="stateSelect ">
 	            <select id="order_status" name="order_status" class="">
 					<option value="all">전체 주문처리상태</option>
 					<option value="shipped_before">입금전</option>
@@ -46,7 +46,7 @@
 					<option value="order_return">반품</option>
 				</select>       
 	
-			</div>
+			</div> -->
 			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
 	        <span class="period">
 	            <a href="#none" class="btnNormal" 	="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
@@ -78,37 +78,47 @@
 
 </form>
 
-
 <div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem ec-base-table typeList"><!--
         $login_url = /member/login.html
     -->
+
 <div class="title">
         <h3>주문 상품 정보</h3>
-    </div>
+</div>
+    
+    
+
+
 <table border="1" summary="">
 <caption>주문 상품 정보</caption>
-        <colgroup>
-<col style="width:135px;">
-<col style="width:93px;">
-<col style="width:auto;">
-<col style="width:61px;">
-<col style="width:111px;">
-<col style="width:111px;">
-<col style="width:111px;">
+<colgroup>
+	<col style="width:135px;">
+	<col style="width:93px;">
+	<col style="width:auto;">
+	<col style="width:61px;">
+	<col style="width:111px;">
+	<col style="width:111px;">
+	<col style="width:111px;">
 </colgroup>
-<thead><tr>
-<th scope="col">주문일자<br>[주문번호]</th>
-                <th scope="col">이미지</th>
-                <th scope="col">상품정보</th>
-                <th scope="col">수량</th>
-                <th scope="col">상품구매금액</th>
-                <th scope="col">주문처리상태</th>
-                <th scope="col">취소/교환/반품</th>
-            </tr></thead>
+
+<thead>
+	<tr>
+		<th scope="col">주문일자<br>[주문번호]</th>
+		<th scope="col">이미지</th>
+		<th scope="col">상품정보</th>
+		<th scope="col">수량</th>
+		<th scope="col">상품구매금액</th>
+		<th scope="col">주문처리상태</th>
+		<th scope="col">취소/교환/반품</th>
+	</tr>
+</thead>
+
+<c:forEach items="${lists }" var="dto">
+
 <tbody class="center displaynone">
 <tr class="">
 	<td class="number displaynone">
-		<p><a href="detail.html" class="line">[]</a></p>
+		<p><a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" style="text-decoration:none" class="line">${dto.getO_DATE()}<br/>[${dto.getO_NUM()}]</a></p>
 			<a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
 			<a href="cancel.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
 			<a href="exchange.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
@@ -120,10 +130,10 @@
 	<td class="product left top">
 		<a href="/product/detail.html"><strong></strong></a>
 		<div class="option displaynone"></div>
-		<ul class="xans-element- xans-myshop xans-myshop-optionset option"><li class="">
-<strong></strong> (개)</li>
+		<ul class="xans-element- xans-myshop xans-myshop-optionset option">
+		<li class=""><strong><%-- ${dto.getOD_NAME } --%></strong> (개)</li><!-- 하나의 제품 보여주고 외 몇개 또는 모든 재품 보여주기 고민 -->
 </ul>
-<p class="gBlank5 displaynone">무이자할부 상품</p>
+<!-- <p class="gBlank5 displaynone">무이자할부 상품</p> -->
                 </td>
                 <td></td>
                 <td class="right">
@@ -144,7 +154,11 @@
                 </td>
             </tr>
 </tbody>
+</c:forEach>
 </table>
+
+
+
 <p class="message ">주문 내역이 없습니다.</p>
 </div>
 

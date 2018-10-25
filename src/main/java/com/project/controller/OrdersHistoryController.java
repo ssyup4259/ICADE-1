@@ -34,11 +34,13 @@ public class OrdersHistoryController {
 		
 		HttpSession session = request.getSession();
 		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
 		
 		String m_Id = dto.getM_ID();
 		
-		List<OrdersDTO> lists = service.selectOrders(m_Id);
+		List<OrdersDTO> lists = (List<OrdersDTO>) service.selectOrders(m_Id);
 		
 		request.setAttribute("lists", lists);
 		
@@ -79,12 +81,32 @@ public class OrdersHistoryController {
 		//System.out.println(startDay);
 		//System.out.println(endDay);
 		
+		System.out.println("1");
+		
 		List<OrdersDTO> lists = service.selectOrdersCondition(hMap);
+		
+		System.out.println("2");
 		
 		mav.addObject("lists", lists);
 		
 		mav.addObject("");
 		mav.setViewName("/ordersHistory/ordersHistoryMain");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/ordersHistoryDetail.action",method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String o_num = request.getParameter("o_num");
+		
+		mav.addObject("o_num", o_num);
+		
+		
+		
+		mav.setViewName("/ordersHistory/orderHistoryDetail");
 		
 		return mav;
 	}

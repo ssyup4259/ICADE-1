@@ -1,6 +1,8 @@
 package com.project.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,7 +33,13 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 
 	@Override
 	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
-		return sessionTemplate.selectOne(ordersHistory + ".selectOrders", O_ID);
+		System.out.println("DAOImple 전");
+		
+		List<OrdersDTO> lists = new ArrayList<OrdersDTO>(); 
+				
+		lists.add((OrdersDTO) sessionTemplate.selectOne(ordersHistory + ".selectOrders", O_ID));
+		
+		return lists;
 	}
 
 	@Override

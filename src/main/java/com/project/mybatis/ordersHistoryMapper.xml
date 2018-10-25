@@ -8,10 +8,15 @@
 	<select id="selectOrderNum" parameterType="String" resultType="integer">
 		select O_NUM from orders where O_ID = #{O_ID}
 	</select>
+	
+	<!-- 메인페이지의 외 몇개의 상품인지 체크할 카운트 쿼리 -->
+	<select id="countSearch" parameterType="int" resultType="int">
+		select count(OD_NUM) from Order_Detail where OD_NUM = #{OD_NUM}
+	</select>
 
 	<!-- 주문내역 메인페이지에 뿌려줄 정보 -->
 	<select id="selectOrders" parameterType="String" resultType="com.project.dto.OrdersDTO">
-		select O_NUM,O_ID,O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from orders where O_ID = #{O_ID}
+		select O_NUM,O_ID,to_char(trunc(O_DATE),'YYYY-MM-DD') O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from orders where O_ID = #{O_ID}
 	</select>
 
 	<!-- orders의 주문번호를 받아서 주문내역의 상세내용 select -->
@@ -29,10 +34,9 @@
 		select G_saveFile from Goods where G_NUM = #{G_NUM}
 	</select>
 	
-	
-	<!-- 주문내역 조회 메인에서 상품코드 하나에 몇개의 제품이 있는지 찾기 -->
-	<select id="selectCountOdNum" parameterType="int" resultType="int">
-		select count(OD_NUM) from Order_Detail where OD_NUM = #{OD_NUM} 
+	<!-- 메인에서 뿌려줄 주문내역에 포함된 상품 정보 -->
+	<select id="selectMainDetail" parameterType="int" resultType="com.project.dto.OrderDetailDTO">
+		select OD_NUM,OD_NAME,OD_DEVICEOD_COLOR,OD_COUNT from Order_Detail where OD_NUM = #{OD_NUM}
 	</select>
 
 	<!-- 주문날짜와 주문상태에 따른 Orders테이블 값 가져오기 -->
@@ -45,5 +49,14 @@
 	]]>
 	</select> 	
 
+	<!-- 기종 코드로 기종 가져오기 -->
+	<select id="deviceSearch" parameterType="int" resultType="String">
+		select DK_NAME from Device_Kind where DK_CODE = #{DK_CODE}
+	</select>
+
+	<!-- 색상 코드로 색상 가져오기 -->
+	<select id="colorSearch" parameterType="int" resultType="String">
+		select GC_COLOR from Goods_Color where GC_CODE = #{GC_CODE}
+	</select>
 
 </mapper>
