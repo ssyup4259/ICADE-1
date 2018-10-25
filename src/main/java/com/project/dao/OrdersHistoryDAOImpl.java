@@ -1,6 +1,9 @@
 package com.project.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,8 +32,13 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	}
 
 	@Override
-	public OrdersDTO selectOrders(String O_ID) throws Exception {
-		return sessionTemplate.selectOne(ordersHistory + ".selectOrders", O_ID);
+	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
+		
+		List<OrdersDTO> lists = new ArrayList<OrdersDTO>(); 
+				
+		lists.add((OrdersDTO) sessionTemplate.selectOne(ordersHistory + ".selectOrders", O_ID));
+		
+		return lists;
 	}
 
 	@Override
@@ -46,6 +54,21 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	@Override
 	public String selectSaveFile(int G_NUM) throws Exception {
 		return sessionTemplate.selectOne(ordersHistory + ".selectSaveFile", G_NUM);
+	}
+
+	@Override
+	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception {
+		return sessionTemplate.selectList(ordersHistory + "selectOrdersCondition");
+	}
+
+	@Override
+	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception {
+
+		List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
+		
+		lists.add((OrderDetailDTO)sessionTemplate.selectOne(ordersHistory + ".selectOrderDetail",O_Num));
+		
+		return lists;
 	}
 
 }

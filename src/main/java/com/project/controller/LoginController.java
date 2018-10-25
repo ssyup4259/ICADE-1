@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
@@ -21,7 +22,7 @@ import com.project.service.LoginService;
 public class LoginController {
 	
 	@Autowired
-	private LoginService service;
+	private LoginService l_service;
 	
 	@Autowired
 	AdminDAO a_dao;
@@ -38,7 +39,7 @@ public class LoginController {
 		String M_PW = req.getParameter("M_PW");
 		
 		HttpSession session = req.getSession();
-		MemberDTO dto = service.checkInfo(M_ID);
+		MemberDTO dto = l_service.checkInfo(M_ID);
 		
 		if(dto==null || dto.equals(null)) {
 			
@@ -90,17 +91,34 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/search/idSearch.action", method= {RequestMethod.GET,RequestMethod.POST})
-	public String idSearch(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+	@RequestMapping(value="/find/idFind.action", method= {RequestMethod.GET})
+	public String idFindForm(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		return "login/idSearch";
+		return "login/idFind";
 		
 	}
 	
-	@RequestMapping(value="/search/pwdSearch.action", method= {RequestMethod.GET,RequestMethod.POST})
-	public String pwdSearch(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+	@RequestMapping(value="/find/idFind.action", method= {RequestMethod.POST})
+	@ResponseBody
+	public String idFind(MemberDTO m_dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		return "login/pwdSearch";
+		String result = l_service.idFind(m_dto);
+		
+		return result;
+		
+	}
+	
+	@RequestMapping(value="/find/pwdFind.action", method= {RequestMethod.GET})
+	public String pwdFindForm(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		
+		return "login/pwdFind";
+		
+	}
+	
+	@RequestMapping(value="/find/pwdFind.action", method= {RequestMethod.POST})
+	public String pwdFind(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		
+		return "login/pwdFind";
 		
 	}
 	

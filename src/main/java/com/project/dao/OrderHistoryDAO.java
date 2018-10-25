@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.project.dto.OrderDetailDTO;
@@ -11,7 +12,7 @@ public interface OrderHistoryDAO {
 	public List<Integer> selectOrderNum(String O_ID) throws Exception;
 	
 	//주문내역 메인에 뿌려줄 값 조회
-	public OrdersDTO selectOrders(String O_ID) throws Exception;
+	public List<OrdersDTO> selectOrders(String O_ID) throws Exception;
 	
 	//주문번호를 들어가서 뿌려줄 데이터 조회
 	public OrderDetailDTO selectOrder(int OD_NUM) throws Exception;
@@ -21,5 +22,11 @@ public interface OrderHistoryDAO {
 	
 	//상품 번호로 저장된 이미지의 saveFileName 받기
 	public String selectSaveFile(int G_NUM) throws Exception;
+
+	//기간 지정 주문 내역 검사용 
+	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception;
+	
+	//주문제품의 상세설명
+	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception;
 
 }

@@ -52,6 +52,52 @@
 
 </script>
 
+<script type="text/javascript">
+
+function idFind() {
+	
+	var allData = $("#findIdForm").serialize();
+	
+	$("#result").empty();
+	
+	$.ajax({
+		
+		type:"post",
+		url:"<%=cp%>/find/idFind.action",
+		datatype:  'json',
+		data: allData,
+		success: function(data) {
+			
+			if (data == null || data == "") {
+				
+				var tag = "ID가 존재하지 않습니다.<br/>";
+				
+				$("#result").prepend(tag);
+				$("#result").append("<br/>");
+				
+			} else {
+				
+				var tag = "찾으시는 ID는 '" + data + "' 입니다.<br/>";
+				
+				$("#result").prepend(tag);
+				$("#result").append("<br/>");
+				
+			}
+			
+		},
+		
+		error: function(data) {
+	
+			alert("error");
+			alert(data);
+			console.log(data);
+			
+		}				
+	});
+}
+
+</script>
+
 </head>
 
 <body>
@@ -100,8 +146,11 @@
 					<input id="M_CELLPHONE3" name="M_CELLPHONE3" style="width: 73px;" class="inputBox" maxlength="4" value="" type="text">
 				</div>
 				<br/>
-				<div style="width: 90px; margin: 0 auto;">
-					<input type="button" value="확인" class="btn" onclick="" style="width: 150px;"/>
+				
+				<div id="result" style="width: 100%; text-align: center;"></div>
+				
+				<div style="width: 100%; text-align: center;">
+					<input type="button" value="확인" class="btn" onclick="idFind();" style="width: 150px;"/>
 				</div>
 				<br/>
 			</div>
