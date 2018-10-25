@@ -31,17 +31,22 @@ public class BoardCommentController {
 	AdminDAO a_dao;
 	
 	//댓글 입력
-	@RequestMapping("/replyInsert.action")
-	public String insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, @RequestParam("upload") MultipartFile f1)throws Exception{
-		System.out.println("메롱" + req.getParameter("BC_BOARD"));
-	 	bc_service.insertData(bc_dto, req, f1);
+	@RequestMapping("replyInsert.action")
+	@ResponseBody
+	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req)throws Exception{
+		
+		
+	 	bc_service.insertData(bc_dto, req);
 	 	
-	 	return "redirect:/goods/goodsArticle.action";
+	 	
 	}
 	//댓글 리스트
 	@RequestMapping("/replyList.action")
-	public HttpServletRequest listData(HttpServletRequest req)throws Exception{
-		return bc_service.replyList(req);
+	public String listData(HttpServletRequest req)throws Exception{
+		
+		
+		 bc_service.replyList(req);
+		 return "/goods/replyList";
 	}
 	
 	//댓글 수정

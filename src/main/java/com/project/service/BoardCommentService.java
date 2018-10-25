@@ -11,7 +11,7 @@ import com.project.dto.BoardCommentDTO;
 public interface BoardCommentService {
 	
 	//댓글등록
-	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, @RequestParam("upload") MultipartFile f1) throws Exception;
+	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req) throws Exception;
 	//댓글 리스트
 	public HttpServletRequest replyList(HttpServletRequest req) throws Exception;
 	//상품 한개의 정보

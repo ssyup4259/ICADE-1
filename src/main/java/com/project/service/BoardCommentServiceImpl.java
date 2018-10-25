@@ -3,17 +3,16 @@ package com.project.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.DocFlavor.STRING;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -32,12 +31,16 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	MyUtil myUtil;
 
 	@Override
-	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, @RequestParam("upload") MultipartFile f1) throws Exception {
+	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req) throws Exception {
 
 		int bc_num;
 		String saveFileName;
-		f1 = req.getFile("bcFile");
+		
+		MultipartFile file = req.getFile("bcFile");
 		String path =req.getSession().getServletContext().getRealPath("/resources/goods");
+		
+		System.out.println(file);
+		System.out.println(bc_dto);
 		
 		File f  = new File(path);
 		
@@ -45,8 +48,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			f.mkdirs();
 		}
 		
-		
-		bc_dto.setBC_IMAGE(f1.getOriginalFilename());
+		bc_dto.setBC_IMAGE(file.getOriginalFilename());
 		
 		String fileExt = bc_dto.getBC_IMAGE().substring(bc_dto.getBC_IMAGE().lastIndexOf("."));
 		
@@ -55,12 +57,12 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		saveFileName += fileExt;
 		bc_dto.setBC_SAVEFILENAME(saveFileName);
 		
-		if (f1.getSize() >0 || f1 != null) {
+		if (file.getSize() >0 || file != null) {
 			
 			try {
 				
 				FileOutputStream fos = new FileOutputStream(path +"/" + saveFileName);
-				InputStream is = f1.getInputStream();
+				InputStream is = file.getInputStream();
 				
 				byte[] buffer = new byte[512];
 				
@@ -90,7 +92,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		String cp = req.getContextPath();
 		
-		int bc_board = Integer.parseInt(req.getParameter("bc_board"));
+		int bc_board = Integer.parseInt(req.getParameter("G_NUM"));
 		
 		String pageNum = req.getParameter("pageNum");
 		int currentPage = 1;

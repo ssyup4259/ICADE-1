@@ -9,7 +9,7 @@ public interface BoardCommentDAO {
 	//댓글입력
 	public int insertData(BoardCommentDTO bc_dto) throws Exception;
 	//댓글 개수 구하기
-	public int countReply(int bc_board)throws Exception;
+	public int countReply(int BC_NUM)throws Exception;
 	//댓글 리스트
 	public List<BoardCommentDTO> replyList(int start,int end) throws Exception; 
 	//댓글 하나의 데이터 읽어오기

@@ -212,6 +212,7 @@ ALTER TABLE Board_Comment
 
 ALTER TABLE Board_Comment add(BC_IMAGE VARCHAR(20));
 ALTER TABLE Board_Comment add(BC_SAVEFILENAME VARCHAR(20));
+ALTER TABLE Board_Comment modify(BC_SAVEFILENAME VARCHAR(200));
 
 
 -- Leave Table Create SQL

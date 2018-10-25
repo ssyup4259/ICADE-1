@@ -34,6 +34,17 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		
 		bc_dto.setBC_NUM(maxNum + 1);
 		
+		
+		System.out.println();
+		System.out.println(bc_dto.getBC_BOARD());
+		System.out.println(bc_dto.getBC_NUM());
+		System.out.println(bc_dto.getBC_CONTENT());
+		System.out.println(bc_dto.getBC_ID());
+		System.out.println(bc_dto.getBC_IMAGE());
+		System.out.println(bc_dto.getBC_PARENT());
+		System.out.println(bc_dto.getBC_SAVEFILENAME());
+		System.out.println();
+		
 		sessionTemplate.insert(replyMapper + ".insertData", bc_dto);
 		
 		return bc_dto.getBC_NUM();
@@ -41,7 +52,7 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	}
 	//댓글 개수 구하기
 	@Override
-	public int countReply(int bc_board) throws Exception {
+	public int countReply(int BC_NUM) throws Exception {
 		return sessionTemplate.selectOne(replyMapper+".countReply"); 
 	}
 	//댓글리스트
