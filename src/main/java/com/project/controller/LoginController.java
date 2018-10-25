@@ -116,9 +116,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/find/pwdFind.action", method= {RequestMethod.POST})
-	public String pwdFind(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
+	@ResponseBody
+	public String pwdFind(MemberDTO m_dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		return "login/pwdFind";
+		String result = l_service.pwdFind(m_dto);
+		
+		return result;
 		
 	}
 	

@@ -55,6 +55,10 @@ public class GoodsServiceImpl implements GoodsService {
 		String pageNum = req.getParameter("pageNum");
 		int currentPage = 1;
 		
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
 		if (pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
@@ -136,6 +140,11 @@ public class GoodsServiceImpl implements GoodsService {
 		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
 		
 		String pageNum = req.getParameter("pageNum");
+		
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
 		
