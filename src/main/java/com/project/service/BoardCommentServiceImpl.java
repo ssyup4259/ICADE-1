@@ -92,17 +92,20 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		String cp = req.getContextPath();
 		
-		int bc_board = Integer.parseInt(req.getParameter("G_NUM"));
-		
+		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
+		System.out.println(BC_BOARD);
 		String pageNum = req.getParameter("pageNum");
 		int currentPage = 1;
 		
 		if (pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
+		if(pageNum == null)
+			pageNum ="1";
+		
 			
 		//전체데이터갯수
-		int dataCount = bc_dao.countReply(bc_board);
+		int dataCount = bc_dao.countReply(BC_BOARD);
 		
 		//전체페이지수
 		int numPerPage = 7;
@@ -114,13 +117,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
-		List<BoardCommentDTO>bc_list = bc_dao.replyList(start, end);
-		
-		Map<String, Integer> map =  new HashMap<String, Integer>();
-		
-		map.put("BC_BOARD", bc_board);
-		map.put("start", start);
-		map.put("end", end);
+		List<BoardCommentDTO>bc_list = bc_dao.replyList(start, end ,BC_BOARD);
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, pageNum);
 		
