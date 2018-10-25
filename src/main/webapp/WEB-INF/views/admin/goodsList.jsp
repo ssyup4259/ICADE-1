@@ -21,35 +21,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<style type="text/css">
-.sticky {
-	position: sticky;
-	top: 0px;
-}
-
-.sticky2 {
-	position: sticky;
-	top: 3px;
-}
-
-table {
-	border-collapse: collapse;
-	width: 100%;
-	border: 3px solid #A3C838;
-	border-top-left-radius: 12px;
-	text-align: center;
-}
-
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #A3C838;
-}
-
-tr:hover {
-	background-color: white;
-}
-</style>
-
 <script type="text/javascript">
 function sendIt() {
 	
@@ -66,7 +37,7 @@ function sendIt() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 
-		<div class="container-fluid text-center">
+		<div class="container-fluid text-center table1">
 			<h1>상품 목록</h1>
 			<form action="" name="searchForm" method="post">
 				<select name="GD_KIND_NUM" class="sel">
