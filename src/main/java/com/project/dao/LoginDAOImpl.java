@@ -40,6 +40,13 @@ public class LoginDAOImpl implements LoginDAO {
 	public String idFind(Map<String, String> map) throws Exception {
 		return sessionTemplate.selectOne(loginMapper + ".idFind", map);
 	}
+
+	//비밀번호 찾기
+	@Override
+	public String findFind(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

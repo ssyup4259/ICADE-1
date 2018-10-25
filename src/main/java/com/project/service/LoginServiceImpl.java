@@ -44,4 +44,11 @@ public class LoginServiceImpl implements LoginService {
 		return result;
 	}
 
+	//비밀번호 찾기
+	@Override
+	public String pwdFind(MemberDTO m_dto) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
