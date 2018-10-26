@@ -447,8 +447,8 @@ a:active {
 	border-top-right-radius: 30px;
 }
 
-/* table */
-/* .table1 table {
+table
+.table1 table {
 	border-collapse: collapse;
 	width: 100%;
 	border: 3px solid #A3C838;
@@ -464,7 +464,7 @@ a:active {
 .table1 tr:hover {
 	background-color: white;
 }
- */
+
  
  .lg img{
  	width : 60px;
