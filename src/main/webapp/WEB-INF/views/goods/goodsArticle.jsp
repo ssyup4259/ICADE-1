@@ -433,7 +433,6 @@ $(function() {
 									</tr>
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-
 								<form id="commentForm" method="post" enctype="multipart/form-data">
 									<tr bgcolor="lightgray" height="60px;">
 										<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
