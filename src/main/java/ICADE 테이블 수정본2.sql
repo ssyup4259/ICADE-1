@@ -189,6 +189,10 @@ CREATE TABLE Order_Detail
 ALTER TABLE Order_Detail MODIFY(OD_DEVICE VARCHAR2(40));
 ALTER TABLE Order_Detail MODIFY(OD_COLOR VARCHAR2(20));
 
+ALTER TABLE Order_Detail
+    ADD CONSTRAINT FK_Order_Detail_OD_CODE FOREIGN KEY (OD_CODE)
+        REFERENCES Goods_Detail (GD_CODE);
+
 -- Board_Comment Table Create SQL
 CREATE TABLE Board_Comment
 (
@@ -212,7 +216,6 @@ ALTER TABLE Board_Comment
 
 ALTER TABLE Board_Comment add(BC_IMAGE VARCHAR(20));
 ALTER TABLE Board_Comment add(BC_SAVEFILENAME VARCHAR(20));
-ALTER TABLE Board_Comment modify(BC_SAVEFILENAME VARCHAR(200));
 
 
 -- Leave Table Create SQL
