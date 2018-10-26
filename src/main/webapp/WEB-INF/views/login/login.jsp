@@ -41,7 +41,7 @@
 		<table border="1" style="margin-left: auto; margin-right: auto;">
 			<tr>
 				<td >
-					아이디 : <input type="text" name="M_ID" id="userId">
+					아이디 : <input type="text" name="M_ID" id="userId" autofocus>
 					비밀번호 : <input type="password" name="M_PW" id="userPw">
 				</td>
 				<td rowspan="2">
