@@ -37,7 +37,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String saveFileName;
 		
 		MultipartFile file = req.getFile("bcFile");
-		String path =req.getSession().getServletContext().getRealPath("/resources/goods");
+		String path =req.getSession().getServletContext().getRealPath("/resources/reply");
 		
 		System.out.println(file);
 		System.out.println(bc_dto);
@@ -93,22 +93,22 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String cp = req.getContextPath();
 		
 		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
-		System.out.println(BC_BOARD);
 		String pageNum = req.getParameter("pageNum");
+		String replyPageNum = req.getParameter("replyPageNum");
 		int currentPage = 1;
 		
-		if (pageNum != null)
-			currentPage = Integer.parseInt(pageNum);
+		if (replyPageNum != null)
+			currentPage = Integer.parseInt(replyPageNum);
 		
-		if(pageNum == null)
-			pageNum ="1";
+		if (replyPageNum == null || replyPageNum.equals("")) {
+			replyPageNum="1";
+		}
 		
-			
 		//전체데이터갯수
 		int dataCount = bc_dao.countReply(BC_BOARD);
 		
 		//전체페이지수
-		int numPerPage = 7;
+		int numPerPage = 3;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if (currentPage > totalPage)
@@ -119,10 +119,25 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		List<BoardCommentDTO>bc_list = bc_dao.replyList(start, end ,BC_BOARD);
 		
-		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, pageNum);
 		
-		req.setAttribute("pageIndexList", pageIndexList);
+		
+		String param = "";
+		param += "G_NUM=" + BC_BOARD;
+		
+		//글보기 주소 정리
+		String replyUrl = cp + "/goods/goodsArticle.action";
+		
+		if (!param.equals("")) {
+			replyUrl = replyUrl+ "?" + param ;
+		}
+		
+		
+		String pageIndexList_r = myUtil.pageIndexList_r(currentPage, totalPage, replyUrl);
+		
+		req.setAttribute("pageIndexList", pageIndexList_r);
+		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("bc_lists", bc_list);
+		req.setAttribute("replyPageNum", replyPageNum);
 		
 		return req;
 	}

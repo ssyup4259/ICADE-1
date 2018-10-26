@@ -10,7 +10,7 @@ public class BoardCommentDTO {
 	//글 게시판
 	private int BC_BOARD;
 	//작성날짜
-	private DATE BC_DATE;
+	private String BC_DATE;
 	//작성 게시판
 	private int BC_PARENT;
 	
@@ -18,7 +18,7 @@ public class BoardCommentDTO {
 	private String BC_ID;
 	//작성 내용
 	private String BC_CONTENT;
-	//사진
+	//사진 파일 명
 	private String BC_IMAGE;
 	//파일
 	private MultipartFile bcFile;
@@ -40,10 +40,10 @@ public class BoardCommentDTO {
 	public void setBC_BOARD(int bC_BOARD) {
 		BC_BOARD = bC_BOARD;
 	}
-	public DATE getBC_DATE() {
+	public String getBC_DATE() {
 		return BC_DATE;
 	}
-	public void setBC_DATE(DATE bC_DATE) {
+	public void setBC_DATE(String bC_DATE) {
 		BC_DATE = bC_DATE;
 	}
 	public int getBC_PARENT() {

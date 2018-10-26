@@ -430,27 +430,26 @@ $(function() {
 	<div id="section3" class="container-fluid">
 					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 					<div id="comment" class="container-fluid">
-					<div id="replyList"></div>
+					
 						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
 								<!-- 댓글 목록 -->
 									<tr>
-									
 										<!-- 버튼 -->
 										<td width="15%">
 											<div id="btn" style="text-align: center;">
 												<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
-												<c:if test="${bc_dto.BC_ID eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
-													<c:if test="${bc_dto.commentLevel eq 1}">
-														<a href="#" onclick="cmReplyOpen(${bc_dto.BC_NUM});">[답변]</a>
+												<c:if test="${bc_dto.getBC_ID() eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
+													<c:if test="${bc_dto.getLevel() eq 1}">
+														<a href="#" onclick="cmReplyOpen(${bc_dto.getBC_NUM()});">[답변]</a>
 														<br>
 													</c:if>
 												</c:if>
 			
 												<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 												<c:if test="${bc_dto.BC_ID == sessionScope.userInfo.getM_ID()}">
-													<a href="#" onclick="cmUpdateOpen(${bc_dto.BC_NUM},'${bc_dto.BC_CONTENT}');">[수정]</a>
+													<a href="#" onclick="cmUpdateOpen(${bc_dto.getBC_NUM()},'${bc_dto.getBC_CONTENT()}');">[수정]</a>
 													<br>
-													<a href="#" onclick="cmDeleteOpen(${bc_dto.BC_NUM});">[삭제]</a>
+													<a href="#" onclick="cmDeleteOpen(${bc_dto.getBC_NUM()});">[삭제]</a>
 													<Br>
 												</c:if>
 											</div>
@@ -460,7 +459,6 @@ $(function() {
 			
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-							
 								<form id="commentForm" method="post" enctype="multipart/form-data">
 								<tr bgcolor="lightgray" height="60px;">
 										<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
@@ -495,12 +493,12 @@ $(function() {
 								<tr bgcolor="lightgray" height="60px;">
 									<!-- 아이디-->
 									<td width="15%">
-										<div>${sessionScope.customInfo.mId}</div>
+										<div>${sessionScope.userInfo.getM_ID()}</div>
 									</td>
 									<!-- 본문 작성-->
 									<td width="75%">
 										<div>
-											<textarea id="" name="comment_content" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
+											<textarea id="" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
 											disabled="disabled">로그인 후 등록 가능합니다.</textarea>
 										</div>
 									</td>
@@ -524,20 +522,43 @@ $(function() {
 								<br/>
 							</tr>
 						</table>
+						<div id="replyList"></div>
 				   </div>
 				</div>
 	
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
-
+<!-- 댓글에 띄울 리스트 작성 -->
+<script>
+function listReply(){
+	 $.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyList").html(result);
+		}
+	 });
+}
+/* window.onload = function listReply() {
+} */
+</script>
 
 <script>
 $(document).ready(function() {
+	$.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyList").html(result);
+		}
+	 });
+	
 	$("#replySubmit").click(function() {
 		
 		 var formData = new FormData($("#commentForm")[0]);
 
-		
 		/* var replyText = $("#inputbox").val();
 		var BC_BOARD =${g_dto.getG_NUM()};
 		var upload = $('#upload').val();
@@ -551,7 +572,14 @@ $(document).ready(function() {
             contentType : false,
 			success:function(){
 				alert("댓글이 등록되었습니다.");
-				listReply();
+				$.ajax({
+					 type:"get",
+					 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+					 success : function(result) {
+						 //responseText가 result에 저장됨.
+						 $("#replyList").html(result);
+					}
+				 });
 			},
 			error: function(result) {
 				alert("안된다");
@@ -559,30 +587,17 @@ $(document).ready(function() {
 				
 			}
 		});
-		$("#replySubmit").submit();
 	});	
 });
 </script>
-
-<!-- 댓글에 띄울 리스트 작성 -->
-
 <script>
- function listReply() {
-	 $.ajax({
-		
-		 type:"get",
-		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
-		 success : function(result) {
-			 //responseText가 result에 저장됨.
-			 $("#replyList").html(result);
-		}
-	 });
-}
+
+
+
 
 
 
 </script>
-
 
 
 </html>

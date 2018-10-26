@@ -35,17 +35,6 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		
 		bc_dto.setBC_NUM(maxNum + 1);
 		
-		
-		System.out.println();
-		System.out.println(bc_dto.getBC_BOARD());
-		System.out.println(bc_dto.getBC_NUM());
-		System.out.println(bc_dto.getBC_CONTENT());
-		System.out.println(bc_dto.getBC_ID());
-		System.out.println(bc_dto.getBC_IMAGE());
-		System.out.println(bc_dto.getBC_PARENT());
-		System.out.println(bc_dto.getBC_SAVEFILENAME());
-		System.out.println();
-		
 		sessionTemplate.insert(replyMapper + ".insertData", bc_dto);
 		
 		return bc_dto.getBC_NUM();
@@ -59,6 +48,7 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	//댓글리스트
 	@Override
 	public List<BoardCommentDTO> replyList(int start,int end, int BC_BOARD) throws Exception {
+		
 		
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();

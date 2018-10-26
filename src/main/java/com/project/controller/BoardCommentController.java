@@ -46,6 +46,7 @@ public class BoardCommentController {
 		
 		
 		 bc_service.replyList(req);
+		 
 		 return "/goods/replyList";
 	}
 	

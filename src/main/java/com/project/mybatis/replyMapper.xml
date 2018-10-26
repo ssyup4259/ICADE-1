@@ -4,7 +4,7 @@
 
 <mapper namespace="com.project.mybatis.replyMapper">
 
-<!-- GoodsNum의 최댓값 -->
+<!-- bc_num의 최댓값 -->
 <select id="replyMaxNum" resultType="int">
 	select nvl(max(BC_NUM), 0) from board_comment
 </select>
@@ -17,9 +17,9 @@ values(#{BC_NUM},#{BC_BOARD},#{BC_ID},sysdate,#{BC_PARENT},#{BC_CONTENT},#{BC_IM
 <!-- 댓글 리스트 -->
 <select id="listData" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO" >
 	SELECT * FROM (SELECT  ROWNUM AS rnum, data.* FROM 
-	(SELECT LEVEL, BC_NUM,BC_BOARD,BC_ID,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME FROM BOARD_COMMENT
+	(SELECT LEVEL,BC_NUM,BC_BOARD,BC_ID,BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME FROM BOARD_COMMENT
 	WHERE BC_BOARD = #{BC_BOARD} START WITH BC_PARENT =0
-	CONNECT BY PRIOR BC_NUM = BC_PARENT ORDER SIBLINGS BY BC_NUM DESC) data)
+	CONNECT BY NOCYCLE PRIOR BC_NUM = BC_PARENT ORDER SIBLINGS BY BC_NUM DESC) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
