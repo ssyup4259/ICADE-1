@@ -196,6 +196,8 @@ $(function() {
 					alert("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
 					alert("담고자하는 수량이 재고 수량보다 많습니다.");
+				} else {
+					alert("로그인 후 사용 가능합니다.");
 				}
 
 				console.log(data);
@@ -203,7 +205,8 @@ $(function() {
 			},
 
 			error : function(data) {
-
+	
+				alert("error");
 				console.log(data);
 
 			}
@@ -217,7 +220,7 @@ $(function() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<form id="myForm" name="myForm" method="post" action="">
+			<form id="myForm" name="myForm" method="post" action="" enctype="multipart/form-data">
 				<div align="left" style="font-size: 30px; margin-bottom: 10px; padding-left: 80px;">${g_dto.getG_NAME()}</div>
 				<div class="row">
 					<div class="col-sm-5">
@@ -403,20 +406,186 @@ $(function() {
 				</div>
 				<hr>
 
-				<div id="section3" class="container-fluid">
-					<div align="left">
-						<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+				<!-- //divison 이동 -->
+				<div>
+					<div>
+						<b><br></b>
 					</div>
 					<div>
-						<p></p>
-						<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-						<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+						<b><br></b>
 					</div>
-				</div>
+					<div>
+						<b><br></b>
+					</div>
+					<div>
+						<b><br></b>
+					</div>
+					<div>
+						<b><br></b>
+					</div>
+					<div>
+						<b><br></b>
+				
 			</form>
 		</div>
 	</div>
+				<!-- 댓글부분 -->
+	<div id="section3" class="container-fluid">
+					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+					<div id="comment" class="container-fluid">
+					<div id="replyList"></div>
+						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
+								<!-- 댓글 목록 -->
+									<tr>
+									
+										<!-- 버튼 -->
+										<td width="15%">
+											<div id="btn" style="text-align: center;">
+												<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+												<c:if test="${bc_dto.BC_ID eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
+													<c:if test="${bc_dto.commentLevel eq 1}">
+														<a href="#" onclick="cmReplyOpen(${bc_dto.BC_NUM});">[답변]</a>
+														<br>
+													</c:if>
+												</c:if>
+			
+												<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
+												<c:if test="${bc_dto.BC_ID == sessionScope.userInfo.getM_ID()}">
+													<a href="#" onclick="cmUpdateOpen(${bc_dto.BC_NUM},'${bc_dto.BC_CONTENT}');">[수정]</a>
+													<br>
+													<a href="#" onclick="cmDeleteOpen(${bc_dto.BC_NUM});">[삭제]</a>
+													<Br>
+												</c:if>
+											</div>
+										</td>
+									</tr>
+			
+			
+							<!-- 로그인 했을 경우만 댓글 작성가능 -->
+							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+							
+								<form id="commentForm" method="post" enctype="multipart/form-data">
+								<tr bgcolor="lightgray" height="60px;">
+										<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
+										<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
+										<!-- 아이디-->
+										<td width="15%">
+											<div>${sessionScope.userInfo.getM_ID()}</div>
+										</td>
+										<!-- 본문 작성-->
+										<td width="75%">
+											<div>
+												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
+												<input type="file" id="upload" name="bcFile">
+											</div>
+										</td>
+										<!-- 댓글 등록 버튼 -->
+										<td width="15%">
+											<div id="btn2" style="text-align: center;">
+												<p>
+													<input type="button" id="replySubmit" onclick="" value="[댓글등록]" class="btn" height="20px;">
+												</p>
+											</div>
+											<div id="result"></div>
+										</td>
+								</tr>
+								</form>
+							</c:if>
+
+							
+							<!-- 로그인 하지 않았을때만 보이는 화면 -->
+							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+								<tr bgcolor="lightgray" height="60px;">
+									<!-- 아이디-->
+									<td width="15%">
+										<div>${sessionScope.customInfo.mId}</div>
+									</td>
+									<!-- 본문 작성-->
+									<td width="75%">
+										<div>
+											<textarea id="" name="comment_content" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
+											disabled="disabled">로그인 후 등록 가능합니다.</textarea>
+										</div>
+									</td>
+									
+									
+									<!-- 댓글 등록 버튼 -->
+									<td width="15%">
+										<div id="btn" style="text-align: center;">
+											<p>
+												<input id="process" type="button" disabled="disabled" value="[댓글등록]" class="btn" height="20px;">
+											</p>
+										</div>
+									</td>
+								</tr>
+							</c:if>
+							<tr>
+								<br/>
+								<td colspan="3" align="center">
+									<h2>${pageIndexList_c}</h2>
+								</td>
+								<br/>
+							</tr>
+						</table>
+				   </div>
+				</div>
+	
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
+
+
+<script>
+$(document).ready(function() {
+	$("#replySubmit").click(function() {
+		
+		 var formData = new FormData($("#commentForm")[0]);
+
+		
+		/* var replyText = $("#inputbox").val();
+		var BC_BOARD =${g_dto.getG_NUM()};
+		var upload = $('#upload').val();
+		var param = "{'replyText': replyText, 'BC_BOARD':BC_BOARD, 'upload':upload}"; */
+		
+		$.ajax({
+			type : "post",
+			url :"<%=cp%>/goods/replyInsert.action",
+			data : formData,
+			processData : false,
+            contentType : false,
+			success:function(){
+				alert("댓글이 등록되었습니다.");
+				listReply();
+			},
+			error: function(result) {
+				alert("안된다");
+				alert(result);
+				
+			}
+		});
+		$("#replySubmit").submit();
+	});	
+});
+</script>
+
+<!-- 댓글에 띄울 리스트 작성 -->
+
+<script>
+ function listReply() {
+	 $.ajax({
+		
+		 type:"get",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyList").html(result);
+		}
+	 });
+}
+
+
+
+</script>
+
+
 
 </html>

@@ -1,6 +1,7 @@
 package com.project.dto;
 
 import org.springframework.web.multipart.MultipartFile;
+import oracle.sql.DATE;
 
 public class BoardCommentDTO {
 	
@@ -9,7 +10,7 @@ public class BoardCommentDTO {
 	//글 게시판
 	private int BC_BOARD;
 	//작성날짜
-	private int BC_DATE;
+	private DATE BC_DATE;
 	//작성 게시판
 	private int BC_PARENT;
 	
@@ -23,7 +24,8 @@ public class BoardCommentDTO {
 	private MultipartFile bcFile;
 	//파일 저장명
 	private String BC_SAVEFILENAME;
-	
+	// 댓글- 답변글 깊이
+    private int Level;
 	
 	
 	public int getBC_NUM() {
@@ -38,10 +40,10 @@ public class BoardCommentDTO {
 	public void setBC_BOARD(int bC_BOARD) {
 		BC_BOARD = bC_BOARD;
 	}
-	public int getBC_DATE() {
+	public DATE getBC_DATE() {
 		return BC_DATE;
 	}
-	public void setBC_DATE(int bC_DATE) {
+	public void setBC_DATE(DATE bC_DATE) {
 		BC_DATE = bC_DATE;
 	}
 	public int getBC_PARENT() {
@@ -81,7 +83,13 @@ public class BoardCommentDTO {
 	public void setBC_SAVEFILENAME(String bC_SAVEFILENAME) {
 		BC_SAVEFILENAME = bC_SAVEFILENAME;
 	}
-
+	public int getLevel() {
+		return Level;
+	}
+	public void setLevel(int level) {
+		Level = level;
+	}
+	
 	
 	
 	

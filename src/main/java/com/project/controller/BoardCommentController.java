@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.AdminDAO;
@@ -28,24 +30,35 @@ public class BoardCommentController {
 	@Autowired
 	AdminDAO a_dao;
 	
-	
 	//댓글 입력
-	@RequestMapping("/replyInsert.action")
+	@RequestMapping("replyInsert.action")
 	@ResponseBody
-	public String insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req)throws Exception{
+	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req)throws Exception{
 		
-		bc_service.insertData(bc_dto, req);
-		return "/goods/goodsArticle";
+		
+	 	bc_service.insertData(bc_dto, req);
+	 	
+	 	
+	}
+	//댓글 리스트
+	@RequestMapping("/replyList.action")
+	public String listData(HttpServletRequest req)throws Exception{
+		
+		
+		 bc_service.replyList(req);
+		 return "/goods/replyList";
 	}
 	
 	//댓글 수정
 	@RequestMapping("/replyUpdate.action")
-	@ResponseBody
 	public String updateData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req)throws Exception{
 		
 		bc_service.updateData(bc_dto, req);
 		return "/goods/goodsArticle";
 	}
+	
+	
+	
 
 	//댓글 삭제
 	@RequestMapping("/replyDelete.action")

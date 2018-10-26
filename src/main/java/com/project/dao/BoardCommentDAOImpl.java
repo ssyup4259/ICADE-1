@@ -2,6 +2,7 @@ package com.project.dao;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -34,17 +35,39 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		
 		bc_dto.setBC_NUM(maxNum + 1);
 		
+		
+		System.out.println();
+		System.out.println(bc_dto.getBC_BOARD());
+		System.out.println(bc_dto.getBC_NUM());
+		System.out.println(bc_dto.getBC_CONTENT());
+		System.out.println(bc_dto.getBC_ID());
+		System.out.println(bc_dto.getBC_IMAGE());
+		System.out.println(bc_dto.getBC_PARENT());
+		System.out.println(bc_dto.getBC_SAVEFILENAME());
+		System.out.println();
+		
 		sessionTemplate.insert(replyMapper + ".insertData", bc_dto);
 		
 		return bc_dto.getBC_NUM();
 		
 	}
-	
+	//댓글 개수 구하기
+	@Override
+	public int countReply(int BC_BOARD) throws Exception {
+		return sessionTemplate.selectOne(replyMapper+".countReply",BC_BOARD); 
+	}
 	//댓글리스트
 	@Override
-	public List<BoardCommentDTO> replyList(String BC_ID) throws Exception {
+	public List<BoardCommentDTO> replyList(int start,int end, int BC_BOARD) throws Exception {
 		
-		return sessionTemplate.selectList(replyMapper + ".listData");
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("BC_BOARD" ,BC_BOARD);
+		params.put("start", start);
+		params.put("end", end);
+		
+		return sessionTemplate.selectList(replyMapper + ".listData", params);
 	}
 	
 	//하나의 댓글 읽어오기
@@ -76,6 +99,7 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		}
 		sessionTemplate.delete(replyMapper + ".deleteGoods", BC_NUM);
 	}
+
 
 
 

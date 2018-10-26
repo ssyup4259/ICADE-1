@@ -8,8 +8,10 @@ public interface BoardCommentDAO {
 	
 	//댓글입력
 	public int insertData(BoardCommentDTO bc_dto) throws Exception;
+	//댓글 개수 구하기
+	public int countReply(int BC_BOARD)throws Exception;
 	//댓글 리스트
-	public List<BoardCommentDTO> replyList(String BC_ID) throws Exception; 
+	public List<BoardCommentDTO> replyList(int start,int end, int BC_BOARD ) throws Exception; 
 	//댓글 하나의 데이터 읽어오기
 	public BoardCommentDTO getReadData(int bc_num)throws Exception;
 	//댓글 수정

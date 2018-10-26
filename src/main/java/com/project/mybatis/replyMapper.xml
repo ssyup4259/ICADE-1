@@ -16,14 +16,13 @@ values(#{BC_NUM},#{BC_BOARD},#{BC_ID},sysdate,#{BC_PARENT},#{BC_CONTENT},#{BC_IM
 
 <!-- 댓글 리스트 -->
 <select id="listData" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO" >
-	select * from (
-	select rownum rnum, data.* from (
-	select BC_NUM,BC_BOARD,BC_ID,BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME
-	from board_comment where BC_ID =#{BC_ID} order by BC_DATE asc) data)
+	SELECT * FROM (SELECT  ROWNUM AS rnum, data.* FROM 
+	(SELECT LEVEL, BC_NUM,BC_BOARD,BC_ID,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME FROM BOARD_COMMENT
+	WHERE BC_BOARD = #{BC_BOARD} START WITH BC_PARENT =0
+	CONNECT BY PRIOR BC_NUM = BC_PARENT ORDER SIBLINGS BY BC_NUM DESC) data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
-
 </select>
 
 <!-- 하나의 데이터 읽어오기 -->
@@ -31,12 +30,18 @@ values(#{BC_NUM},#{BC_BOARD},#{BC_ID},sysdate,#{BC_PARENT},#{BC_CONTENT},#{BC_IM
 select BC_NUM,BC_BOARD,BC_ID,BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME from board_comment where BC_NUM = #{BC_NUM}
 </select>
 
-<update id="updateData" parameterType="String">
+<!-- 댓글 업데이트 -->
+<update id="updateData" parameterType="int">
 update board_comment set BC_DATE = sysdate,BC_CONTENT =#{BC_CONTENT},BC_IMAGE =#{BC_IMAGE},BC_SAVEFILENAME=#{BC_SAVEFILENAME} where BC_ID =#{BC_ID}
 </update>
 
-<delete id="deleteData" parameterType="String">
+<!--  댓글 삭제 -->
+<delete id="deleteData" parameterType="int">
 delete board_comment where BC_NUM =#{BC_NUM}
 </delete>
 
+<!-- 댓글 개수 구하기 -->
+<select id="countReply" parameterType="int" resultType="int">
+select count(*) from board_comment where BC_BOARD = #{BC_BOARD}
+</select>
 </mapper>
