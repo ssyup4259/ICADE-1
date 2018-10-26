@@ -95,7 +95,6 @@ $(function() {
 			data: allData,
 			success: function(data)
 			{
-				
 				var dc_list = [];
 				
 				dc_list = data;
@@ -305,7 +304,7 @@ $(function() {
 										</a>
 									</c:otherwise>
 								</c:choose>
-								<a href="댓글목록"> <img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
+								<a href="#section3"> <img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
 								</a>
 							</div>
 							<div class="row col-sm-9" style="text-align: left">
@@ -452,7 +451,7 @@ $(function() {
 										<td width="15%">
 											<div id="btn2" style="text-align: center;">
 												<p>
-													<input type="button" id="replySubmit" onclick="" value="[댓글등록]" class="btn" height="20px;">
+													<input type="button" id="replySubmit" value="[댓글등록]" class="btn" height="20px;">
 												</p>
 											</div>
 											<div id="result"></div>
@@ -482,7 +481,7 @@ $(function() {
 									<td width="15%">
 										<div id="btn" style="text-align: center;">
 											<p>
-												<input id="process" type="button" disabled="disabled" value="[댓글등록]" class="btn" height="20px;">
+												<input id="process" type="button" value="[댓글등록]" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px;">
 											</p>
 										</div>
 									</td>
@@ -536,11 +535,6 @@ $(document).ready(function() {
 		
 		 var formData = new FormData($("#commentForm")[0]);
 
-		/* var replyText = $("#inputbox").val();
-		var BC_BOARD =${g_dto.getG_NUM()};
-		var upload = $('#upload').val();
-		var param = "{'replyText': replyText, 'BC_BOARD':BC_BOARD, 'upload':upload}"; */
-		
 		$.ajax({
 			type : "post",
 			url :"<%=cp%>/goods/replyInsert.action",
@@ -564,17 +558,9 @@ $(document).ready(function() {
 				
 			}
 		});
+		$("#replySubmit").submit();
 	});	
 });
 </script>
-<script>
 
-
-
-
-
-
-</script>
-
-
-</html>
+</html>                                                                   

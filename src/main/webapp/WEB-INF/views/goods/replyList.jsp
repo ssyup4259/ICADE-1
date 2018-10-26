@@ -20,6 +20,13 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
+<script>
+
+
+
+</script>
+
+
 <body>
 	<table style="width: 1000">
 		<c:if test="${!empty bc_lists}">
