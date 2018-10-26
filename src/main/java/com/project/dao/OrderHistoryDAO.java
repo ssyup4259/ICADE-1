@@ -28,4 +28,6 @@ public interface OrderHistoryDAO {
 
 	//상품코드 안에 있는 상품의 종류
 	public int countSearch(int OD_NUM) throws Exception;
+	
+	public List<Object> selectOdSaveFileName(int OD_Num) throws Exception;
 }

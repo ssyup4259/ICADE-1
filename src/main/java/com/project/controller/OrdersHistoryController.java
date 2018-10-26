@@ -31,7 +31,7 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	AdminDAO a_dao;
-	
+
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -47,7 +47,7 @@ public class OrdersHistoryController {
 		
 		List<Integer> integerList = service.selectOrderNum(m_Id);
 		
-		
+		List<Object> detailList = new ArrayList<Object>();
 		
 		System.out.println("for문돌린다====================================================");
 		
@@ -57,20 +57,19 @@ public class OrdersHistoryController {
 			
 			Integer O_Num = integerList.get(i);
 			
-			int countOrder = service.countSearch(O_Num);
-			
 			orderList = (List<OrderDetailDTO>) service.selectOrderDetail(O_Num);
 		
-			hMap.put(O_Num, countOrder);
+			detailList = service.selectOdSaveFileName(O_Num);
+			
+			
 			
 		}
 		
 		System.out.println("====================================================for문끝났다");
 		
 		
-		
+		request.setAttribute("detailList", detailList);
 		request.setAttribute("orderList", orderList);
-		request.setAttribute("hMap", hMap);
 		request.setAttribute("lists", lists);
 		
 		return "ordersHistory/ordersHistoryMain";
@@ -127,11 +126,14 @@ public class OrdersHistoryController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String o_num = request.getParameter("o_num");
+		int O_Num = Integer.parseInt(request.getParameter("o_num"));
 		
-		mav.addObject("o_num", o_num);
+		List<OrderDetailDTO> detailLists = service.selectOrderDetail(O_Num);
 		
+		mav.addObject("O_Num", O_Num);
+		//mav.addObject(detailLists);
 		
+		request.setAttribute("detailLists", detailLists);
 		
 		mav.setViewName("/ordersHistory/orderHistoryDetail");
 		

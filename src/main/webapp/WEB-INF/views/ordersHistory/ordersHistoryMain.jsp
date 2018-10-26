@@ -119,7 +119,7 @@
 
 <tbody class="center displaynone">
 <tr class="">
-	<td class="number displaynone">
+	<td class="number displaynone" rowspan="${list.size }">
 		<p><a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" style="text-decoration:none" class="line">${dto.getO_DATE()}<br/>[${dto.getO_NUM()}]</a></p>
 			<a href="#none" class="displaynone" onclick=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
 			<a href="cancel.html" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
@@ -137,7 +137,7 @@
 		</ul>
 <!-- <p class="gBlank5 displaynone">무이자할부 상품</p> -->
                 </td>
-                <td></td>
+                <td>${dto.getO_COUNT()} </td>
                 <td class="right">
 					<strong>${dto.getO_TOT()}</strong>
 					<div class="displaynone"></div>

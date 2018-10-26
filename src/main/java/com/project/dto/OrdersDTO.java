@@ -26,7 +26,8 @@ public class OrdersDTO {
 	private int O_TOT;
 	//운송장 번호
 	private int O_TNUM;
-	
+	//주문번호에 포함된 상품의 갯수
+	private int O_COUNT;
 	
 	public int getO_NUM() {
 		return O_NUM;
@@ -100,8 +101,14 @@ public class OrdersDTO {
 	public void setO_TNUM(int o_TNUM) {
 		O_TNUM = o_TNUM;
 	}
+	public int getO_COUNT() {
+		return O_COUNT;
+	}
+	public void setO_COUNT(int o_COUNT) {
+		O_COUNT = o_COUNT;
+	}
 	
-
+	
 	
 	
 }

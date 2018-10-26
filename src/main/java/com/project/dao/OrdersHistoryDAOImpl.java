@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrdersDTO;
 
+import oracle.net.aso.h;
+
 @Repository
 public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	
@@ -69,6 +71,16 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	@Override
 	public int countSearch(int OD_NUM) throws Exception {
 		return sessionTemplate.selectOne(ordersHistory + ".countSearch",OD_NUM);
+	}
+
+	@Override
+	public List<Object> selectOdSaveFileName(int OD_Num) throws Exception {
+
+		 List<Object> lists = new ArrayList<Object>();
+		 
+		 lists = sessionTemplate.selectList(ordersHistory + ".selectOdSaveFileName", OD_Num); 
+		
+		return lists;
 	}
 
 

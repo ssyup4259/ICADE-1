@@ -22,7 +22,7 @@ document.domain = "wemakeprice.com";
 <h3 class="tit_mypage tit_buylist_view">구매상세내역</h3>
 <div class="box_buylist_info">
 	<div class="noti_area">
-	<span class="srno"><strong>결제번호</strong> : 648361552</span>
+	<span class="srno"><strong>결제번호</strong> : ${O_Num}</span>
 	<span><strong>주문일</strong> : 2018-10-08</span>
 	</div>
 
@@ -57,30 +57,34 @@ document.domain = "wemakeprice.com";
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="fst">
-			<td class="cont ta_left fst">
-				<div class="box_thumb">
-					<a href="/deal/adeal/2362808"><img src="http://img.wemep.co.kr/deal/8/280/2362808/a976a6de5fcc994fb41320662fdf2ecc2cf97a72.jpg" width="50" height="50" alt=""><strong class="tit">[무료배송] 소문난 누룽지 3kg</strong></a>
-				</div>
-				<ul class="list_dot">
-        		<li>02_소문난 누룽지 3kg×1개</li>
-				</ul>
-			</td>
-		
-			<td>1(수량)</td>
-			<!--1 노출갯수-->
-			<td>16,900원</td>
-			<td rowspan="1">
-				<div class="buy_dl_info">0원(배송비)</div>
-			</td>
+		<c:forEach items="${detailLists}" var="dto">
+			<tr class="fst">
+				<td class="cont ta_left fst">
+					<div class="box_thumb">
+						<a href="/deal/adeal/${dto.getOD_CODE() }"><img src="http://img.wemep.co.kr/deal/8/280/2362808/a976a6de5fcc994fb41320662fdf2ecc2cf97a72.jpg" width="50" height="50" alt=""><strong class="tit">${dto.getOD_NAME()}</strong></a>
+					</div>
+					<ul class="list_dot">
+	        		<li>${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}×${dto.getOD_COUNT()}개</li>
+					</ul>
+				</td>
 			
-			<td class="cont2" rowspan="1">
-				배송완료 <br>
-				<a class="btn_flexible btn_flexible02" onclick="window.open('/mypage/delivery_popup/801797022/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;">
-					<span class="inner">배송조회</span>
-				</a>
-			</td>
-		</tr>
+				<td>${dto.getOD_COUNT()}</td>
+				<!--1 노출갯수-->
+				<td>16,900원</td>
+				<td rowspan="1">
+					<div class="buy_dl_info">0원(배송비)</div>
+				</td>
+				
+				<td class="cont2" rowspan="1">
+					배송완료 <br>
+					<a class="btn_flexible btn_flexible02" onclick="window.open('/mypage/delivery_popup/801797022/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;">
+						<span class="inner">배송조회</span>
+					</a>
+				</td>
+			</tr>
+		</c:forEach>	
+		
+		<!-- 
 		
 		<tr>
 			<td class="cont ta_left fst">
@@ -92,7 +96,7 @@ document.domain = "wemakeprice.com";
 				</ul>
 			</td>
 			<td>1</td>
-			<!--1 노출갯수-->
+			1 노출갯수
 			<td>9,300원</td>
 			<td rowspan="1">
 				<div class="buy_dl_info">0원</div>
@@ -115,7 +119,7 @@ document.domain = "wemakeprice.com";
 				</ul>
 			</td>
 			<td>1</td>
-			<!--1 노출갯수-->
+			1 노출갯수
 			<td>6,500원</td>
 			<td rowspan="1">
 				<div class="buy_dl_info">2,500원</div>
@@ -126,7 +130,9 @@ document.domain = "wemakeprice.com";
 					<span class="inner">배송조회</span>
 				</a>
 			</td>
-		</tr>
+		</tr> 
+		
+		-->
 	</tbody>
 </table>
 

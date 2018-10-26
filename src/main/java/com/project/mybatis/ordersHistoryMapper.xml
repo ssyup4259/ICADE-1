@@ -16,7 +16,16 @@
 
 	<!-- 주문내역 메인페이지에 뿌려줄 정보 -->
 	<select id="selectOrders" parameterType="String" resultType="com.project.dto.OrdersDTO">
-		select O_NUM,O_ID,to_char(trunc(O_DATE),'YYYY-MM-DD') O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from orders where O_ID = #{O_ID}
+		select O_NUM,O_ID,to_char(trunc(O_DATE),'YYYY-MM-DD') O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM, 
+			(select count(OD_NUM) from ORDER_DETAIL where O_NUM=OD_NUM) as O_COUNT from orders where O_ID = #{O_ID}
+	</select>
+	
+	<!-- 글번호+세이브파일네임 -->
+	<select id="selectOdSaveFileName" parameterType="int" resultType="map">
+		select * from(
+		(select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME from ORDER_DETAIL,
+		(select GD_NUM,GD_CODE from GOODS_DETAIL),(select G_NUM,G_SAVEFILENAME from goods)
+		where OD_CODE = GD_CODE and GD_NUM = G_NUM)data) where OD_NUM = #{OD_NUM}
 	</select>
 
 	<!-- orders의 주문번호를 받아서 주문내역의 상세내용 select -->

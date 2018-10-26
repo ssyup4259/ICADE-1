@@ -56,4 +56,10 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		return oh_dao.countSearch(OD_NUM);
 	}
 
+	@Override
+	public List<Object> selectOdSaveFileName(int OD_Num) throws Exception {
+
+		return oh_dao.selectOdSaveFileName(OD_Num);
+	}
+
 }
