@@ -472,7 +472,7 @@ $(function() {
 									<td width="75%">
 										<div>
 											<textarea id="" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
-											disabled="disabled">로그인 후 등록 가능합니다.</textarea>
+											disabled="disabled">로그인 후  등록 가능합니다.</textarea>
 										</div>
 									</td>
 
