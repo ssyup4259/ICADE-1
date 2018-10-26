@@ -40,7 +40,14 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String path =req.getSession().getServletContext().getRealPath("/resources/reply");
 		
 		System.out.println(file);
-		System.out.println(bc_dto);
+		System.out.println(bc_dto.getBC_BOARD());
+		System.out.println(bc_dto.getBC_CONTENT());
+		System.out.println(bc_dto.getBC_DATE());
+		System.out.println(bc_dto.getBC_ID());
+		System.out.println(bc_dto.getBC_IMAGE());
+		System.out.println(bc_dto.getBC_NUM());
+		System.out.println(bc_dto.getBC_PARENT());
+		System.out.println(bc_dto.getBC_SAVEFILENAME());
 		
 		File f  = new File(path);
 		
@@ -128,7 +135,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String replyUrl = cp + "/goods/goodsArticle.action";
 		
 		if (!param.equals("")) {
-			replyUrl = replyUrl+ "?" + param ;
+			replyUrl = replyUrl+ "?" + param;
 		}
 		
 		
