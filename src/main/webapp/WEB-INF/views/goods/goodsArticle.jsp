@@ -196,6 +196,8 @@ $(function() {
 					alert("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
 					alert("담고자하는 수량이 재고 수량보다 많습니다.");
+				} else {
+					alert("로그인 후 사용 가능합니다.");
 				}
 
 				console.log(data);
@@ -203,7 +205,8 @@ $(function() {
 			},
 
 			error : function(data) {
-
+	
+				alert("error");
 				console.log(data);
 
 			}
@@ -277,7 +280,7 @@ $(function() {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: left;">수량</div>
 							<div class="col-sm-9" style="text-align: left">
-								<input type="button" id="down" class="down" onclick="countDown();" />								
+								<input type="button" id="down" class="down" onclick="countDown();" />
 								<input type="text" class="inputBox" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" style="width: 50px;" />
 								개
 								<input type="button" id="up" class="up" onclick="countUp();" />
@@ -289,6 +292,7 @@ $(function() {
 								<input type="text" id="sum" class="inputBox" name="sum" value="" readonly="readonly" style="width: 100%;" />
 							</div>
 						</div>
+						<hr style="border-top: 2px solid black">
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
@@ -310,24 +314,19 @@ $(function() {
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
 								</div>
 								<div class="col-sm-6">
-									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;"  />
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;" />
 								</div>
 							</div>
 						</div>
 					</div>
-						<div id="btn">
-							<a href="javascript:history.back();">
-								<h2>상품목록으로 돌아가기</h2>
-							</a>
-						</div>
 				</div>
-
+				<hr style="border-top: 2px solid black">
 				<!-- divison 이동 -->
 				<div class="conatiner-fluid sticky text-center" id="menu" style="z-index: 999; background-color: transparent; padding-top: 8px;">
 					<a href="#section1"> <input type="button" class="btn" value="상품상세정보" style="width: 200px;">
-					</a> &nbsp;&nbsp;&nbsp; <a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
-					</a> &nbsp;&nbsp;&nbsp; <a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
-					</a>
+					</a>&nbsp;<a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
+					</a>&nbsp;<a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
+					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btn" value="상품목록으로 돌아가기" style="width: 200px;"></a>
 				</div>
 
 				<div id="section1" class="container-fluid">
@@ -402,32 +401,9 @@ $(function() {
 					</div>
 				</div>
 				<hr>
-
-				<!-- //divison 이동 -->
-				<div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
 				
-			</form>
-		</div>
-	</div>
 				<!-- 댓글부분 -->
-	<div id="section3" class="container-fluid">
+				<div id="section3" class="container-fluid">
 					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 					<div id="comment" class="container-fluid">
 					
@@ -446,21 +422,20 @@ $(function() {
 												</c:if>
 			
 												<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
-												<c:if test="${bc_dto.BC_ID == sessionScope.userInfo.getM_ID()}">
+												<c:if test="${bc_dto.BC_ID() == sessionScope.userInfo.getM_ID()}">
 													<a href="#" onclick="cmUpdateOpen(${bc_dto.getBC_NUM()},'${bc_dto.getBC_CONTENT()}');">[수정]</a>
 													<br>
 													<a href="#" onclick="cmDeleteOpen(${bc_dto.getBC_NUM()});">[삭제]</a>
-													<Br>
+													<br>
 												</c:if>
 											</div>
 										</td>
 									</tr>
-			
-			
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+
 								<form id="commentForm" method="post" enctype="multipart/form-data">
-								<tr bgcolor="lightgray" height="60px;">
+									<tr bgcolor="lightgray" height="60px;">
 										<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
 										<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
 										<!-- 아이디-->
@@ -483,11 +458,11 @@ $(function() {
 											</div>
 											<div id="result"></div>
 										</td>
-								</tr>
+									</tr>
 								</form>
 							</c:if>
 
-							
+
 							<!-- 로그인 하지 않았을때만 보이는 화면 -->
 							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 								<tr bgcolor="lightgray" height="60px;">
@@ -502,8 +477,8 @@ $(function() {
 											disabled="disabled">로그인 후 등록 가능합니다.</textarea>
 										</div>
 									</td>
-									
-									
+
+
 									<!-- 댓글 등록 버튼 -->
 									<td width="15%">
 										<div id="btn" style="text-align: center;">
@@ -515,17 +490,20 @@ $(function() {
 								</tr>
 							</c:if>
 							<tr>
-								<br/>
+								<br />
 								<td colspan="3" align="center">
 									<h2>${pageIndexList_c}</h2>
 								</td>
-								<br/>
+								<br />
 							</tr>
 						</table>
 						<div id="replyList"></div>
 				   </div>
 				</div>
-	
+			</form>
+		</div>
+	</div>
+
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 <!-- 댓글에 띄울 리스트 작성 -->
