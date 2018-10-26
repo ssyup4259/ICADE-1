@@ -5,6 +5,14 @@
 	String cp = request.getContextPath();
 %>
 
+<style type="text/css">
+.lg img {
+	width: 60px;
+	height: 60px;
+	border-radius: 12px;
+}
+</style>
+
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		var offset = 220;
@@ -12,10 +20,16 @@
 		jQuery(window).scroll(function() {
 			if (jQuery(this).scrollTop() > offset) {
 				jQuery('.back_to_top').fadeIn(duration);
+				jQuery('.latestGoods').fadeIn(duration);
 			} else {
 				jQuery('.back_to_top').fadeOut(duration);
+				jQuery('.latestGoods').fadeOut(duration);
 			}
 		});
+		
+		jQuery('#mm').hover(function(){
+			jQuery('.latestGoods').fadeOut(duration);
+		})
 
 		jQuery('.back_to_top').click(function(event) {
 			event.preventDefault();
@@ -24,11 +38,29 @@
 			}, duration);
 			return false;
 		})
+
 	});
 </script>
 
-<input type="button" class="btn back_to_top" value="맨위로 슈슈슝">
 
+<input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
+
+<div class="latestGoods">
+	<div class="lg text-center" style="width: 70px; height: 750px; border: 2px solid #A3C838; border-radius: 12px;">
+		<h3>최근 본</h3>
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+		<h3>찜한</h3>
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+	</div>
+</div>
 <div class="container-fluid footer" style="width: 100%; height: 300px; background-color: white;">
 	<div class="row text-center">
 		<div class="col-sm-3 " style="text-align: right;">

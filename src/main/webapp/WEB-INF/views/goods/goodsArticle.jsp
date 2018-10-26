@@ -95,7 +95,6 @@ $(function() {
 			data: allData,
 			success: function(data)
 			{
-				
 				var dc_list = [];
 				
 				dc_list = data;
@@ -196,6 +195,8 @@ $(function() {
 					alert("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
 					alert("담고자하는 수량이 재고 수량보다 많습니다.");
+				} else {
+					alert("로그인 후 사용 가능합니다.");
 				}
 
 				console.log(data);
@@ -203,7 +204,8 @@ $(function() {
 			},
 
 			error : function(data) {
-
+	
+				alert("error");
 				console.log(data);
 
 			}
@@ -217,7 +219,7 @@ $(function() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<form id="myForm" name="myForm" method="post" action="">
+			<form id="myForm" name="myForm" method="post" action="" enctype="multipart/form-data">
 				<div align="left" style="font-size: 30px; margin-bottom: 10px; padding-left: 80px;">${g_dto.getG_NAME()}</div>
 				<div class="row">
 					<div class="col-sm-5">
@@ -277,7 +279,7 @@ $(function() {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: left;">수량</div>
 							<div class="col-sm-9" style="text-align: left">
-								<input type="button" id="down" class="down" onclick="countDown();" />								
+								<input type="button" id="down" class="down" onclick="countDown();" />
 								<input type="text" class="inputBox" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" style="width: 50px;" />
 								개
 								<input type="button" id="up" class="up" onclick="countUp();" />
@@ -289,6 +291,7 @@ $(function() {
 								<input type="text" id="sum" class="inputBox" name="sum" value="" readonly="readonly" style="width: 100%;" />
 							</div>
 						</div>
+						<hr style="border-top: 2px solid black">
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
@@ -301,7 +304,7 @@ $(function() {
 										</a>
 									</c:otherwise>
 								</c:choose>
-								<a href="댓글목록"> <img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
+								<a href="#section3"> <img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
 								</a>
 							</div>
 							<div class="row col-sm-9" style="text-align: left">
@@ -310,24 +313,19 @@ $(function() {
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
 								</div>
 								<div class="col-sm-6">
-									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;"  />
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;" />
 								</div>
 							</div>
 						</div>
 					</div>
-						<div id="btn">
-							<a href="javascript:history.back();">
-								<h2>상품목록으로 돌아가기</h2>
-							</a>
-						</div>
 				</div>
-
+				<hr style="border-top: 2px solid black">
 				<!-- divison 이동 -->
 				<div class="conatiner-fluid sticky text-center" id="menu" style="z-index: 999; background-color: transparent; padding-top: 8px;">
 					<a href="#section1"> <input type="button" class="btn" value="상품상세정보" style="width: 200px;">
-					</a> &nbsp;&nbsp;&nbsp; <a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
-					</a> &nbsp;&nbsp;&nbsp; <a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
-					</a>
+					</a>&nbsp;<a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
+					</a>&nbsp;<a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
+					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btn" value="상품목록으로 돌아가기" style="width: 200px;"></a>
 				</div>
 
 				<div id="section1" class="container-fluid">
@@ -402,89 +400,42 @@ $(function() {
 					</div>
 				</div>
 				<hr>
-
-				<!-- //divison 이동 -->
-				<div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-					</div>
-					<div>
-						<b><br></b>
-				<div id="section3" class="container-fluid">
-					<div align="left">
-						<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-					</div>
-				</div>
+				
 				<!-- 댓글부분 -->
 				<div id="section3" class="container-fluid">
 					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 					<div id="comment" class="container-fluid">
-						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
 					
+						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
 								<!-- 댓글 목록 -->
-								<c:if test="${!empty bc_list}">
-									<c:forEach var="bc_dto" items="${bc_list}">
-										<tr height="60px;" class="even">
-											<!-- 아이디, 작성날짜 -->
-											
-											<td width="15%" valign="top">
-												<div style="width: 120px; height: 40px;">
-												<div style="margin-top: 15%"></div>
-													<%-- <c:if test="${bc_dto.commentLevel > 1}">
-														&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
-														<img src="${pageContext.request.contextPath}/img/arrow.png" width="10" height="10">
-													</c:if> --%>
-													${bc_dto.BC_ID}<br> <font color="b3cccc" size="2">${bc_dto.BC_CONTENT}</font>
-												</div>
-											</td>
-										
-										
-										<!-- 본문내용 -->
-										<td width="70%">
-											<div  class="text_wrapper">&nbsp;&nbsp;&nbsp;&nbsp;${bc_dto.BC_CONTENT}</div>
-										</td>
+									<tr>
 										<!-- 버튼 -->
 										<td width="15%">
 											<div id="btn" style="text-align: center;">
 												<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
-												<c:if test="${bc_dto.BC_ID eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
-													<c:if test="${bc_dto.commentLevel eq 1}">
-														<a href="#" onclick="cmReplyOpen(${bc_dto.BC_NUM});">[답변]</a>
+												<c:if test="${bc_dto.getBC_ID() eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
+													<c:if test="${bc_dto.getLevel() eq 1}">
+														<a href="#" onclick="cmReplyOpen(${bc_dto.getBC_NUM()});">[답변]</a>
 														<br>
 													</c:if>
 												</c:if>
 			
 												<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
-												<c:if test="${bc_dto.BC_ID == sessionScope.userInfo.getM_ID()}">
-													<a href="#" onclick="cmUpdateOpen(${bc_dto.BC_NUM},'${bc_dto.BC_CONTENT}');">[수정]</a>
+												<c:if test="${bc_dto.BC_ID() == sessionScope.userInfo.getM_ID()}">
+													<a href="#" onclick="cmUpdateOpen(${bc_dto.getBC_NUM()},'${bc_dto.getBC_CONTENT()}');">[수정]</a>
 													<br>
-													<a href="#" onclick="cmDeleteOpen(${bc_dto.BC_NUM});">[삭제]</a>
-													<Br>
+													<a href="#" onclick="cmDeleteOpen(${bc_dto.getBC_NUM()});">[삭제]</a>
+													<br>
 												</c:if>
 											</div>
 										</td>
 									</tr>
-			
-								</c:forEach>
-							</c:if>
-			
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-								<tr bgcolor="lightgray" height="60px;">
-									<form name="writeCommentForm" action="" method="post" enctype="multipart/form-data">
-										<input type="hidden" name="comment_id" value="${sessionScope.userInfo.getM_ID()}">
+								<form id="commentForm" method="post" enctype="multipart/form-data">
+									<tr bgcolor="lightgray" height="60px;">
+										<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
+										<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
 										<!-- 아이디-->
 										<td width="15%">
 											<div>${sessionScope.userInfo.getM_ID()}</div>
@@ -492,97 +443,124 @@ $(function() {
 										<!-- 본문 작성-->
 										<td width="75%">
 											<div>
-												<textarea id="inputbox" name="comment_content" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
-												<input type="file" id="upload">
+												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
+												<input type="file" id="upload" name="bcFile">
 											</div>
 										</td>
 										<!-- 댓글 등록 버튼 -->
 										<td width="15%">
 											<div id="btn2" style="text-align: center;">
 												<p>
-													<input type="button" id="replySubmit" onclick="" value="[댓글등록]" class="btn" height="20px;">
+													<input type="button" id="replySubmit" value="[댓글등록]" class="btn" height="20px;">
 												</p>
 											</div>
 											<div id="result"></div>
 										</td>
-									</form>
-								</tr>
+									</tr>
+								</form>
 							</c:if>
-							
+
+
+							<!-- 로그인 하지 않았을때만 보이는 화면 -->
 							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 								<tr bgcolor="lightgray" height="60px;">
 									<!-- 아이디-->
 									<td width="15%">
-										<div>${sessionScope.customInfo.mId}</div>
+										<div>${sessionScope.userInfo.getM_ID()}</div>
 									</td>
 									<!-- 본문 작성-->
 									<td width="75%">
-									
 										<div>
-										   
-											<textarea id="inputbox" name="comment_content" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
-											disabled="disabled">로그인 후 등록 가능합니다.</textarea>
-										 
+											<textarea id="" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
+											disabled="disabled">로그인 후  등록 가능합니다.</textarea>
 										</div>
-									
 									</td>
+
+
 									<!-- 댓글 등록 버튼 -->
 									<td width="15%">
 										<div id="btn" style="text-align: center;">
 											<p>
-												<input id="process" type="button" disabled="disabled" value="[댓글등록]" class="btn" height="20px;">
+												<input id="process" type="button" value="[댓글등록]" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px;">
 											</p>
 										</div>
 									</td>
 								</tr>
 							</c:if>
 							<tr>
-								<br/>
+								<br />
 								<td colspan="3" align="center">
 									<h2>${pageIndexList_c}</h2>
 								</td>
-								<br/>
+								<br />
 							</tr>
 						</table>
+						<div id="replyList"></div>
 				   </div>
 				</div>
 			</form>
 		</div>
 	</div>
+
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
-
+<!-- 댓글에 띄울 리스트 작성 -->
+<script>
+function listReply(){
+	 $.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyList").html(result);
+		}
+	 });
+}
+/* window.onload = function listReply() {
+} */
+</script>
 
 <script>
 $(document).ready(function() {
+	$.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyList").html(result);
+		}
+	 });
+	
 	$("#replySubmit").click(function() {
 		
-		var replyText = $("#inputbox").val();
-		var BC_BOARD =${g_dto.getG_NUM()};
-		var upload = $('#upload').val();
-		var param = "{'replyText': replyText, 'BC_BOARD':BC_BOARD, 'upload':upload}";
-		
+		 var formData = new FormData($("#commentForm")[0]);
+
 		$.ajax({
 			type : "post",
 			url :"<%=cp%>/goods/replyInsert.action",
-			data : param,
-			enctype: "multipart/form-data",
+			data : formData,
+			processData : false,
+            contentType : false,
 			success:function(){
 				alert("댓글이 등록되었습니다.");
-			
+				$.ajax({
+					 type:"get",
+					 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+					 success : function(result) {
+						 //responseText가 result에 저장됨.
+						 $("#replyList").html(result);
+					}
+				 });
 			},
-			error: function() {
-
+			error: function(result) {
 				alert("안된다");
+				alert(result);
+				
 			}
 		});
 		$("#replySubmit").submit();
 	});	
 });
-
-
-
 </script>
 
-
-</html>
+</html>                                                                   

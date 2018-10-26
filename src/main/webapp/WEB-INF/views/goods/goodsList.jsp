@@ -79,7 +79,6 @@
 					<br>
 					<c:set var="i" value="0" />
 					<c:forEach var="g_dto" items="${g_lists}">
-
 						<c:if test="${i % 4 == 0}">
 							<div class="row">
 						</c:if>

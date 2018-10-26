@@ -3,17 +3,16 @@ package com.project.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.DocFlavor.STRING;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -32,12 +31,23 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	MyUtil myUtil;
 
 	@Override
-	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, @RequestParam("upload") MultipartFile f1) throws Exception {
+	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req) throws Exception {
 
 		int bc_num;
 		String saveFileName;
-		f1 = req.getFile("bcFile");
-		String path =req.getSession().getServletContext().getRealPath("/resources/goods");
+		
+		MultipartFile file = req.getFile("bcFile");
+		String path =req.getSession().getServletContext().getRealPath("/resources/reply");
+		
+		System.out.println(file);
+		System.out.println(bc_dto.getBC_BOARD());
+		System.out.println(bc_dto.getBC_CONTENT());
+		System.out.println(bc_dto.getBC_DATE());
+		System.out.println(bc_dto.getBC_ID());
+		System.out.println(bc_dto.getBC_IMAGE());
+		System.out.println(bc_dto.getBC_NUM());
+		System.out.println(bc_dto.getBC_PARENT());
+		System.out.println(bc_dto.getBC_SAVEFILENAME());
 		
 		File f  = new File(path);
 		
@@ -45,8 +55,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			f.mkdirs();
 		}
 		
-		
-		bc_dto.setBC_IMAGE(f1.getOriginalFilename());
+		bc_dto.setBC_IMAGE(file.getOriginalFilename());
 		
 		String fileExt = bc_dto.getBC_IMAGE().substring(bc_dto.getBC_IMAGE().lastIndexOf("."));
 		
@@ -55,12 +64,12 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		saveFileName += fileExt;
 		bc_dto.setBC_SAVEFILENAME(saveFileName);
 		
-		if (f1.getSize() >0 || f1 != null) {
+		if (file.getSize() >0 || file != null) {
 			
 			try {
 				
 				FileOutputStream fos = new FileOutputStream(path +"/" + saveFileName);
-				InputStream is = f1.getInputStream();
+				InputStream is = file.getInputStream();
 				
 				byte[] buffer = new byte[512];
 				
@@ -90,20 +99,23 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		String cp = req.getContextPath();
 		
-		int bc_board = Integer.parseInt(req.getParameter("bc_board"));
-		
+		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
 		String pageNum = req.getParameter("pageNum");
+		String replyPageNum = req.getParameter("replyPageNum");
 		int currentPage = 1;
 		
-		if (pageNum != null)
-			currentPage = Integer.parseInt(pageNum);
+		if (replyPageNum != null)
+			currentPage = Integer.parseInt(replyPageNum);
 		
-			
+		if (replyPageNum == null || replyPageNum.equals("")) {
+			replyPageNum="1";
+		}
+		
 		//전체데이터갯수
-		int dataCount = bc_dao.countReply(bc_board);
+		int dataCount = bc_dao.countReply(BC_BOARD);
 		
 		//전체페이지수
-		int numPerPage = 7;
+		int numPerPage = 3;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if (currentPage > totalPage)
@@ -112,18 +124,27 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
-		List<BoardCommentDTO>bc_list = bc_dao.replyList(start, end);
+		List<BoardCommentDTO>bc_list = bc_dao.replyList(start, end ,BC_BOARD);
 		
-		Map<String, Integer> map =  new HashMap<String, Integer>();
 		
-		map.put("BC_BOARD", bc_board);
-		map.put("start", start);
-		map.put("end", end);
 		
-		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, pageNum);
+		String param = "";
+		param += "G_NUM=" + BC_BOARD;
 		
-		req.setAttribute("pageIndexList", pageIndexList);
+		//글보기 주소 정리
+		String replyUrl = cp + "/goods/goodsArticle.action";
+		
+		if (!param.equals("")) {
+			replyUrl = replyUrl+ "?" + param;
+		}
+		
+		
+		String pageIndexList_r = myUtil.pageIndexList_r(currentPage, totalPage, replyUrl);
+		
+		req.setAttribute("pageIndexList", pageIndexList_r);
+		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("bc_lists", bc_list);
+		req.setAttribute("replyPageNum", replyPageNum);
 		
 		return req;
 	}

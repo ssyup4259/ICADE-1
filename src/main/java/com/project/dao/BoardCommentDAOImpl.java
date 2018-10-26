@@ -2,6 +2,7 @@ package com.project.dao;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -41,13 +42,22 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	}
 	//댓글 개수 구하기
 	@Override
-	public int countReply(int bc_board) throws Exception {
-		return sessionTemplate.selectOne(replyMapper+".countReply"); 
+	public int countReply(int BC_BOARD) throws Exception {
+		return sessionTemplate.selectOne(replyMapper+".countReply",BC_BOARD); 
 	}
 	//댓글리스트
 	@Override
-	public List<BoardCommentDTO> replyList(int start,int end) throws Exception {
-		return sessionTemplate.selectList(replyMapper + ".listData");
+	public List<BoardCommentDTO> replyList(int start,int end, int BC_BOARD) throws Exception {
+		
+		
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("BC_BOARD" ,BC_BOARD);
+		params.put("start", start);
+		params.put("end", end);
+		
+		return sessionTemplate.selectList(replyMapper + ".listData", params);
 	}
 	
 	//하나의 댓글 읽어오기

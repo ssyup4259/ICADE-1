@@ -23,7 +23,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//System.out.println("preHandle1 : " + reqUrl);
 		
 		//if문으로 예외처리하여 true를 리턴해서 요청url로 그냥 통과시켜준다.
-		if(reqUrl=="http://"+localhost+":8080/icade/login.action" || reqUrl.equals("http://"+localhost+":8080/icade/login.action")) {
+		/*if(reqUrl=="http://"+localhost+":8080/icade/login.action" || reqUrl.equals("http://"+localhost+":8080/icade/login.action")) {
 			return true;
 		}
 		if(reqUrl=="http://"+localhost+":8080/icade/login_ok.action" || reqUrl.equals("http://"+localhost+":8080/icade/login_ok.action")) {
@@ -52,8 +52,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		if(reqUrl=="http://"+localhost+":8080/icade/sendMail_ok.action" || reqUrl.equals("http://"+localhost+":8080/icade/sendMail_ok.action")) {
 			return true;
-		}
-		
+		}*/
 		
 		
 		session.setAttribute("reqUrl", reqUrl);

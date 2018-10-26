@@ -37,7 +37,7 @@ function sendIt() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 
-		<div class="container-fluid text-center table1">
+		<div class="container-fluid text-center">
 			<h1>상품 목록</h1>
 			<form action="" name="searchForm" method="post">
 				<select name="GD_KIND_NUM" class="sel">
@@ -79,7 +79,6 @@ function sendIt() {
 					</tr>
 				</thead>
 				<tbody style="border: none;">
-
 					<c:forEach var="g_dto" items="${g_lists}">
 						<tr>
 							<td>${g_dto.getGK_KIND()}</td>
@@ -94,7 +93,6 @@ function sendIt() {
 							<!-- <a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a> -->
 						</tr>
 					</c:forEach>
-
 					<tr>
 						<td colspan="9"><c:if test="${dataCount!=0 }">
 				${pageIndexList }
