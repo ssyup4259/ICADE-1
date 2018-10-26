@@ -4,21 +4,12 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+
 <style type="text/css">
-.rolling_panel {
-	position: relative;
-	overflow: hidden;
-}
-
-.rolling_panel ul {
-	position: absolute;
-	list-style: none;
-}
-
-.rolling_panel ul li {
-	background-color : transparent;
-	width: 200px;
-	height: 200px;
+.lg img {
+	width: 60px;
+	height: 60px;
+	border-radius: 12px;
 }
 </style>
 
@@ -46,102 +37,25 @@
 	});
 </script>
 
-<script type="text/javascript">
-	$(document).ready(
-			function() {
 
-				var $panel = $(".rolling_panel").find("ul");
+<input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
 
-				var itemWidth = $panel.children().outerWidth(); // 아이템 가로 길이
-				var itemLength = $panel.children().length; // 아이템 수
-
-				// Auto 롤링 아이디
-				var rollingId;
-
-				auto();
-
-				function auto() {
-
-					// 2초마다 start 호출
-					rollingId = setInterval(function() {
-						start();
-					}, 2000);
-				}
-
-				function start() {
-					$panel.css("width", itemWidth * itemLength);
-					$panel.animate({
-						"top" : -itemWidth + "px"
-					}, function() {
-
-						// 첫번째 아이템을 마지막에 추가하기
-						$(this).append(
-								"<li>" + $(this).find("li:first").html()
-										+ "</li>");
-
-						// 첫번째 아이템을 삭제하기
-						$(this).find("li:first").remove();
-
-						// 좌측 패널 수치 초기화
-						$(this).css("top", "30px");
-					});
-				}
-
-				// 이전 이벤트 실행
-				function prev(e) {
-					$panel.css("top", -itemWidth);
-					$panel.prepend("<li>" + $panel.find("li:last").html()
-							+ "</li>");
-					$panel.animate({
-						"top" : "30px"
-					}, function() {
-						$(this).find("li:last").remove();
-					});
-				}
-
-				// 다음 이벤트 실행
-				function next(e) {
-					$panel.animate({
-						"top" : -itemWidth + "px"
-					}, function() {
-						$(this).append(
-								"<li>" + $(this).find("li:first").html()
-										+ "</li>");
-						$(this).find("li:first").remove();
-						$(this).css("top", "30px");
-					});
-				}
-			});
-</script>
-
-
-
-<input type="button" class="btn back_to_top" value="맨위로 슈슈슝" style="width: 200px;">
-
-<div class="latestGoods rolling_wrapper">
-	<div class="lg text-center rolling_panel" style="width: 800px; height: 600px; border: 2px solid #A3C838; border-radius: 12px;">
-		<h3>최근 본 상품</h3>
-		<ul>
-			<li>
-				<img src="/icade/resources/data/img/sample.jpg">
-			</li>
-			<li>
-				<img src="/icade/resources/data/img/sample1.jpg">
-			</li>
-			<li>
-				<img src="/icade/resources/data/img/sample.jpg">
-			</li>
-			<li>
-				<img src="/icade/resources/data/img/sample1.jpg">
-			</li>
-			<li>
-				<img src="/icade/resources/data/img/sample.jpg">
-			</li>
-
-		</ul>
+<div class="latestGoods">
+	<div class="lg text-center" style="width: 70px; height: 750px; border: 2px solid #A3C838; border-radius: 12px;">
+		<h3>최근 본</h3>
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+		<h3>찜한</h3>
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
+		<img src="/icade/resources/data/img/sample1.jpg">
+		<img src="/icade/resources/data/img/sample.jpg">
 	</div>
 </div>
-
 <div class="container-fluid footer" style="width: 100%; height: 300px; background-color: white;">
 	<div class="row text-center">
 		<div class="col-sm-3 " style="text-align: right;">
