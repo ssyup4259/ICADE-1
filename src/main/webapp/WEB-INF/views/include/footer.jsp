@@ -42,17 +42,37 @@
 	});
 </script>
 
+<script type="text/javascript">
+
+	function sendIt(g_num) {
+		
+		
+		
+		var f = document.searchForm;
+		
+		f.action = "<%=cp%>/goods/cookieDelete.action?g_num=" + g_num;
+		f.submit()
+		
+	} 
+
+</script>
+
+
 
 <input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
 
 <div class="latestGoods">
 	<div class="lg text-center" style="width: 70px; height: 750px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
+		<input type="button" value=" 전체 삭제 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/cookieDelete_ok.action';"/>
+		<form action="" name="searchForm" method="post">
+		<c:forEach var="ck" items="${ck_lists}" varStatus="status">
+		<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"><br/><br/>
+		<input type="button" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
+		<br/><br/>
+		</c:forEach>
+
+		</form>
 		<h3>찜한</h3>
 		<img src="/icade/resources/data/img/sample.jpg">
 		<img src="/icade/resources/data/img/sample1.jpg">
