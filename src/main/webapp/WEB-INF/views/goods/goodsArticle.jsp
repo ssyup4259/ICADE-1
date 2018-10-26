@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아이폰 케이스는 ICADE</title>
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle2.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">

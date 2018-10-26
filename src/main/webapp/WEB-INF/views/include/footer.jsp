@@ -23,8 +23,13 @@
 				jQuery('.latestGoods').fadeIn(duration);
 			} else {
 				jQuery('.back_to_top').fadeOut(duration);
+				jQuery('.latestGoods').fadeOut(duration);
 			}
 		});
+		
+		jQuery('#mm').hover(function(){
+			jQuery('.latestGoods').fadeOut(duration);
+		})
 
 		jQuery('.back_to_top').click(function(event) {
 			event.preventDefault();

@@ -5,10 +5,9 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-function msg(){ 
- alert('지금은 채용 기간이 아닙니다.');
- } 
-
+	function msg() {
+		alert('지금은 채용 기간이 아닙니다.');
+	}
 </script>
 
 <div class="navbar container-fluid sticky" style="z-index: 90;">
@@ -55,26 +54,27 @@ function msg(){
 
 		<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
 			<li class="dropdown" style="float: right;">
-				<a href="javascript:void(0)" class="dropbtn">관리자 메뉴</a>
+				<a href="javascript:void(0)" class="dropbtn" id="mm">관리자 메뉴</a>
 
 				<div class="dropdown-content">
-					<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a> <a href="<%=cp%>/admin/memberList.action">회원 목록</a>
+					<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a> <a href="<%=cp%>/admin/memberList.action">회원 목록</a><a href="<%=cp%>/logout.action">로그아웃</a>
 				</div>
 			</li>
 		</c:if>
 
 		<c:if test="${!empty sessionScope.userInfo}">
 			<c:if test="${sessionScope.userInfo.getM_RANK() != 'admin'}">
-				<li style="float: right">
-					<a href="<%=cp%>/cart/cartList.action">장바구니</a>
+
+				<li class="dropdown" style="float: right;">
+					<a href="javascript:void(0)" class="dropbtn" id="mm">회원 메뉴</a>
+
+					<div class="dropdown-content">
+						<a href="<%=cp%>/cart/cartList.action">장바구니</a> <a href="<%=cp%>/myPage.action">마이페이지</a><a href="<%=cp%>/logout.action">로그아웃</a>
+					</div>
 				</li>
-				<li style="float: right">
-					<a href="<%=cp%>/myPage.action">마이페이지</a>
-				</li>
+
 			</c:if>
-			<li style="float: right">
-				<a href="<%=cp%>/logout.action">로그아웃</a>
-			</li>
+
 			<li style="float: right;">
 				<a>${sessionScope.userInfo.getM_ID()}님 환영합니다.</a>
 			</li>
