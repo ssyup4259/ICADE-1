@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mybatis.noticeMapper">
+
+	<!-- GoodsNum의 최댓값 -->
+	<select id="noticeMaxNum" resultType="int">
+		select nvl(max(BN_NUM), 0) from Board_Notice
+	</select>
+
+	<!-- 상품 전체 데이터 갯수 -->
+	<select id="getNoticeCount" parameterType="hashMap" resultType="int">
+		select nvl(count(*), 0) from Board_Notice where ${searchKey} like '%' || #{searchValue} || '%'
+	</select>
+
+	<!-- 상품 리스트 출력 -->
+	<select id="getNoticeLists" parameterType="hashMap" resultType="com.project.dto.NoticeDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select DISTINCT BN_NUM, BN_SUBJECT, BN_CONTENT, to_char(BN_DATE, 'YYYY-MM-DD') BN_DATE
+		from Board_Notice
+		where ${searchKey} like '%' || #{searchValue} || '%' order by BN_NUM desc) data)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+</mapper>
