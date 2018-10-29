@@ -18,6 +18,10 @@ public class OrderDetailDTO {
 	private int OD_PRICE;
 	//상품 할인률
 	private int OD_DISCOUNT;
+	//상품의 글번호
+	private int GD_NUM;
+	//상품의 저장된 이미지 이름
+	private String G_SAVEFILENAME;
 	
 	public int getOD_NUM() {
 		return OD_NUM;
@@ -66,6 +70,18 @@ public class OrderDetailDTO {
 	}
 	public void setOD_DISCOUNT(int oD_DISCOUNT) {
 		OD_DISCOUNT = oD_DISCOUNT;
+	}
+	public int getGD_NUM() {
+		return GD_NUM;
+	}
+	public void setGD_NUM(int gD_NUM) {
+		GD_NUM = gD_NUM;
+	}
+	public String getG_SAVEFILENAME() {
+		return G_SAVEFILENAME;
+	}
+	public void setG_SAVEFILENAME(String g_SAVEFILENAME) {
+		G_SAVEFILENAME = g_SAVEFILENAME;
 	}
 
 	

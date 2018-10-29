@@ -61,80 +61,30 @@ document.domain = "wemakeprice.com";
 			<tr class="fst">
 				<td class="cont ta_left fst">
 					<div class="box_thumb">
-						<a href="/deal/adeal/${dto.getOD_CODE() }"><img src="http://img.wemep.co.kr/deal/8/280/2362808/a976a6de5fcc994fb41320662fdf2ecc2cf97a72.jpg" width="50" height="50" alt=""><strong class="tit">${dto.getOD_NAME()}</strong></a>
+						<a href="/<%=cp%>/goods/${dto.getOD_CODE()}"><img src="/icade/resources/data/logo/logo1.jpg" width="50" height="50" alt="<%=cp%>"><strong class="tit"> ${dto.getOD_NAME()}</strong></a>
 					</div>
 					<ul class="list_dot">
-	        		<li>${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}×${dto.getOD_COUNT()}개</li>
+						<li>${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}×${dto.getOD_COUNT()}개</li>
 					</ul>
 				</td>
 			
 				<td>${dto.getOD_COUNT()}</td>
 				<!--1 노출갯수-->
-				<td>16,900원</td>
+				<td>${dto.getOD_PRICE()}원</td>
 				<td rowspan="1">
 					<div class="buy_dl_info">0원(배송비)</div>
 				</td>
 				
-				<td class="cont2" rowspan="1">
-					배송완료 <br>
+				<td class="cont2" rowspan="1">배송완료 <br>
 					<a class="btn_flexible btn_flexible02" onclick="window.open('/mypage/delivery_popup/801797022/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;">
 						<span class="inner">배송조회</span>
 					</a>
 				</td>
 			</tr>
-		</c:forEach>	
-		
-		<!-- 
-		
-		<tr>
-			<td class="cont ta_left fst">
-				<div class="box_thumb">
-					<a href="/deal/adeal/3274700"><img src="http://img.wemep.co.kr/deal/0/470/3274700/c10d1f5c6d7c57c6b5d30f994643e175c491e17f.jpg" width="50" height="50" alt=""><strong class="tit">[무료배송] 샌디스크 USB 메모리</strong></a>
-				</div>
-				<ul class="list_dot">
-					<li>01_샌디스크 크루저 블레이드 CZ50 | 용량 선택 : 03_1. 32GB</li>
-				</ul>
-			</td>
-			<td>1</td>
-			1 노출갯수
-			<td>9,300원</td>
-			<td rowspan="1">
-				<div class="buy_dl_info">0원</div>
-			</td>
-			<td class="cont2" rowspan="1">
-				배송완료 <br>
-				<a class="btn_flexible btn_flexible02" onclick="window.open('/mypage/delivery_popup/801797024/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;">
-					<span class="inner">배송조회</span>
-				</a>
-			</td>
-		</tr>
-	
-		<tr>
-			<td class="cont ta_left fst">
-				<div class="box_thumb">
-					<a href="/deal/adeal/1722608"><img src="http://img.wemep.co.kr/deal/8/260/1722608/2772350fad13eeef5d05696ac55c35146b91001b.jpg" width="50" height="50" alt=""><strong class="tit">Coms HDMI to VGA 컨버터 케이블</strong></a>
-				</div>
-				<ul class="list_dot">
-					<li>01_ HDMI to VGA 컨버터   FW934</li>
-				</ul>
-			</td>
-			<td>1</td>
-			1 노출갯수
-			<td>6,500원</td>
-			<td rowspan="1">
-				<div class="buy_dl_info">2,500원</div>
-			</td>
-			<td class="cont2" rowspan="1">
-				배송완료 <br>
-				<a class="btn_flexible btn_flexible02" onclick="window.open('/mypage/delivery_popup/801797027/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;">
-					<span class="inner">배송조회</span>
-				</a>
-			</td>
-		</tr> 
-		
-		-->
+		</c:forEach>
 	</tbody>
 </table>
+
 
 
 <div class="box_tit_mypage">

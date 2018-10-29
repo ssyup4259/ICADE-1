@@ -74,11 +74,11 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	}
 
 	@Override
-	public List<Object> selectOdSaveFileName(int OD_Num) throws Exception {
+	public List<OrderDetailDTO> selectOdSaveFileName(String M_ID) throws Exception {
 
-		 List<Object> lists = new ArrayList<Object>();
+		 List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
 		 
-		 lists = sessionTemplate.selectList(ordersHistory + ".selectOdSaveFileName", OD_Num); 
+		 lists = sessionTemplate.selectList(ordersHistory + ".selectOdSaveFileName", M_ID); 
 		
 		return lists;
 	}

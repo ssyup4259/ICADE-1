@@ -57,9 +57,9 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 	}
 
 	@Override
-	public List<Object> selectOdSaveFileName(int OD_Num) throws Exception {
+	public List<OrderDetailDTO> selectOdSaveFileName(String M_ID) throws Exception {
 
-		return oh_dao.selectOdSaveFileName(OD_Num);
+		return oh_dao.selectOdSaveFileName(M_ID);
 	}
 
 }

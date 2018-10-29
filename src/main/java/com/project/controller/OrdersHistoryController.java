@@ -1,8 +1,6 @@
 package com.project.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +32,10 @@ public class OrdersHistoryController {
 
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
+		System.out.println("입장");
 		HttpSession session = request.getSession();
 		
-		List<OrderDetailDTO> orderList = new ArrayList<OrderDetailDTO>(); 
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
-		HashMap<Integer, Object> hMap = new HashMap<Integer, Object>();
 		
 		String m_Id = dto.getM_ID();
 		
@@ -47,8 +43,8 @@ public class OrdersHistoryController {
 		
 		List<Integer> integerList = service.selectOrderNum(m_Id);
 		
-		List<Object> detailList = new ArrayList<Object>();
-		
+		List<OrderDetailDTO> detailList = service.selectOdSaveFileName(m_Id);
+		/*
 		System.out.println("for문돌린다====================================================");
 		
 		for(int i = 0;i<integerList.size();i++) {
@@ -57,20 +53,21 @@ public class OrdersHistoryController {
 			
 			Integer O_Num = integerList.get(i);
 			
-			orderList = (List<OrderDetailDTO>) service.selectOrderDetail(O_Num);
-		
-			detailList = service.selectOdSaveFileName(O_Num);
+			detailList.addAll(service.selectOdSaveFileName(O_Num)); 
 			
-			
+			//List<Map<String, Object>> listsMap = detailList;
+			request.setAttribute("detailList", detailList);
 			
 		}
 		
 		System.out.println("====================================================for문끝났다");
-		
+		*/
 		
 		request.setAttribute("detailList", detailList);
-		request.setAttribute("orderList", orderList);
 		request.setAttribute("lists", lists);
+		request.setAttribute("integerList", integerList);
+		
+		System.out.println("올리고 리턴");
 		
 		return "ordersHistory/ordersHistoryMain";
 	}
@@ -125,13 +122,18 @@ public class OrdersHistoryController {
 	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
+		String m_Id = dto.getM_ID();
 		
 		int O_Num = Integer.parseInt(request.getParameter("o_num"));
 		
-		List<OrderDetailDTO> detailLists = service.selectOrderDetail(O_Num);
+		List<OrderDetailDTO> detailLists = service.selectOdSaveFileName(m_Id);
 		
 		mav.addObject("O_Num", O_Num);
-		//mav.addObject(detailLists);
+		//mav.addObject("detailLists",detailLists);
 		
 		request.setAttribute("detailLists", detailLists);
 		
@@ -140,6 +142,13 @@ public class OrdersHistoryController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/test.action",method= {RequestMethod.POST,RequestMethod.GET})
+	public String test(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		//실험용 추후 삭제
+		return "ordersHistory/test";
+	}
+	
+		
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
