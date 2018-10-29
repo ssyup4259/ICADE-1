@@ -128,8 +128,8 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>주문하시는 분</td>
 						<td align="left">
-							ㅇㅇㅇ
-							<input type="hidden" name="name" value="ㅇㅇㅇ"/>
+							${m_dto.getM_NAME()}
+							<input type="hidden" name="name" value="${m_dto.getM_NAME()}"/>
 						</td>
 					</tr>
 					
@@ -145,22 +145,22 @@ function sample6_execDaumPostcode() {
 							
 								<tr>
 									<td align="left">
-										00000
-										<input type="hidden" name="zipcode" value="00000"/>
+										${m_dto.getM_ZIPCODE()}
+										<input type="hidden" name="zipcode" value="${m_dto.getM_ZIPCODE()}"/>
 									</td>
 									<td>우편번호</td>
 								</tr>
 								<tr>
 									<td align="left">
-										서울시 ~~~ !!! @@@@
-										<input type="hidden" name="address1" value="서울시 ~~~ !!! @@@@"/>
+										${m_dto.getM_ADDRESS1()}
+										<input type="hidden" name="address1" value="${m_dto.getM_ADDRESS1()}"/>
 									</td>
 									<td>기본주소</td>
 								</tr>
 								<tr>
 									<td align="left">
-										1234번지 1234호
-										<input type="hidden" name="address2" value="1234번지 1234호"/>
+										${m_dto.getM_ADDRESS2()}
+										<input type="hidden" name="address2" value="${m_dto.getM_ADDRESS2()}"/>
 									</td>
 									<td>나머지주소</td>
 								</tr>
@@ -171,10 +171,10 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>휴대전화</td>
 						<td align="left">
-							010-1234-5678
-							<input type="hidden" name="phone1" value="010"/>
-							<input type="hidden" name="phone2" value="1234"/>
-							<input type="hidden" name="phone3" value="5678"/>
+							${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}
+							<input type="hidden" name="phone1" value="${m_dto.getM_CELLPHONE1()}"/>
+							<input type="hidden" name="phone2" value="${m_dto.getM_CELLPHONE2()}"/>
+							<input type="hidden" name="phone3" value="${m_dto.getM_CELLPHONE3()}"/>
 						</td>
 					</tr>
 					
@@ -202,7 +202,7 @@ function sample6_execDaumPostcode() {
 					
 					<tr>
 						<td>받으시는 분</td>
-						<td align="left"><input type="text" class="inputBox" id="O_NAME" name="O_NAME"/></td>
+						<td align="left"><input type="text" class="inputBox" id="O_NAME" name="O_NAME" value="${m_dto.getM_NAME()}"/></td>
 					</tr>
 					
 					<tr>
@@ -217,19 +217,19 @@ function sample6_execDaumPostcode() {
 								
 								<tr>
 									<td colspan="2" align="left">
-									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBox" readonly="readonly"/>
+									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBox" readonly="readonly" value="${m_dto.getM_ZIPCODE()}"/>
 									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
 									</td>
 								</tr>
 								<tr>
 									<td align="left">
-									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px"/>
+									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS1()}"/>
 									</td>
 									<td>기본주소</td>
 								</tr>
 								<tr>
 									<td align="left">
-									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBox" style="text-align: left; padding-left: 10px"/>
+									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBox" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS2()}"/>
 									</td>
 									<td>나머지주소</td>
 								</tr>
@@ -240,9 +240,9 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>휴대전화</td>
 						<td align="left">
-							<input type="text" name="O_PH1" class="inputBox" size="6" maxlength="3"/> -
-							<input type="text" name="O_PH2" class="inputBox" size="6" maxlength="4"/> -
-							<input type="text" name="O_PH3" class="inputBox" size="6" maxlength="4"/>  
+							<input type="text" name="O_PH1" class="inputBox" size="6" maxlength="3" value="${m_dto.getM_CELLPHONE1()}"/> -
+							<input type="text" name="O_PH2" class="inputBox" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE2()}"/> -
+							<input type="text" name="O_PH3" class="inputBox" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE3()}"/>  
 						</td>
 					</tr>
 					
@@ -268,22 +268,23 @@ function sample6_execDaumPostcode() {
 						<td>합계</td>
 					</tr>
 					
-					<tr>
-						<td><img src="<%=cp%>/resources/goodsImage/201810161038304392625303709.jpg" width="80px" height="80px"/></td>
-						<td align="left">
-							아이몰 아이폰 우레탄 불사신 케이스<br/>
-							[옵션: 아이폰 6 6S(케이스+ 필름)]<br/>
-							<fmt:formatNumber>15900</fmt:formatNumber> / 2
-						</td>
-						<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
-					</tr>
-					
+					<c:forEach var="b_dto" items="${b_lists}">
+						<tr>
+							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
+							<td align="left">
+								${b_dto.getName()}<br/>
+								[옵션: ${b_dto.getKind()} / ${b_dto.getColor()}]<br/>
+								<fmt:formatNumber>${b_dto.getPrice()}</fmt:formatNumber>원 / ${b_dto.getCount()}
+							</td>
+							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
+						</tr>
+					</c:forEach>
 				</table>
 				<br/>
 				<table border="1" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>총 주문 금액</td>
-						<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
+						<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
 					</tr>
 					<tr>
 						<td>총 할인 금액</td>
@@ -296,7 +297,7 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>최종 결제 금액</td>
 						<td>
-							<fmt:formatNumber>31800</fmt:formatNumber>원
+							<fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원
 							<input type="hidden" name="O_TOT" value=""/>
 						</td>
 					</tr>
