@@ -17,6 +17,7 @@
 	jQuery(document).ready(function() {
 		var offset = 220;
 		var duration = 500;
+		var fduration = 100;
 		jQuery(window).scroll(function() {
 			if (jQuery(this).scrollTop() > offset) {
 				jQuery('.back_to_top').fadeIn(duration);
@@ -28,7 +29,7 @@
 		});
 		
 		jQuery('#mm').hover(function(){
-			jQuery('.latestGoods').fadeOut(duration);
+			jQuery('.latestGoods').fadeOut(fduration);
 		})
 
 		jQuery('.back_to_top').click(function(event) {

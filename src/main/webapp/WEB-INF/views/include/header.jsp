@@ -86,5 +86,5 @@
 <div class="container-fluid text-center" style="color: #8F9493; margin-bottom: 10px;">
 	<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>
 	<img src="/icade/resources/data/logo/logo1.png">
-	<a href="">고객센터</a>&nbsp;&nbsp;<a href="">공지사항</a>
+	<a href="">고객센터</a>&nbsp;&nbsp;<a href="<%=cp%>/notice/noticeList.action">공지사항</a>
 </div>
