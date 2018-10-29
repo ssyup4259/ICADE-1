@@ -74,92 +74,124 @@ function sample6_execDaumPostcode() {
 </head>
 <body>
 
-<table border="1" cellpadding="0" cellspacing="0" width="70%">
-	
-	<tr>
-		<td>주문자 정보</td>
-	</tr>
-	
-	<tr>
-		<td>주문하시는 분</td>
-		<td>ㅇㅇㅇ</td>
-	</tr>
-	
-	<tr>
-		<td>주소</td>
-		<td>
-			<table border="1" cellpadding="0" cellspacing="0" width="80%">
-				<tr>
-					<td><input type="text" size="5"/></td>
-					<td>우편번호</td>
-				</tr>
-				<tr>
-					<td>서울시 ~~~ !!! @@@@</td>
-					<td>기본주소</td>
-				</tr>
-				<tr>
-					<td>1234번지 1234호</td>
-					<td>나머지주소</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>휴대전화</td>
-		<td>010-1234-5678</td>
-	</tr>
-	
-</table>
-<br/><br/><br/>
-<table border="1" cellpadding="0" cellspacing="0" width="70%">
-	
-	<tr>
-		<td>배송지 정보</td>
-	</tr>
-	
-	<tr>
-		<td>배송지 선택</td>
-		<td>
-			<input type="radio" id="test1" name="test"/>
-			<label for="test1">주문자 정보와 동일</label> 
-			<input type="radio" id="test2" name="test"/>
-			<label for="test2">새로운배송지</label> 
-		</td>
-	</tr>
-	
-	<tr>
-		<td>받으시는 분</td>
-		<td>ㅇㅇㅇ</td>
-	</tr>
-	
-	<tr>
-		<td>주소</td>
-		<td>
-			<table border="1" cellpadding="0" cellspacing="0" width="80%">
-				<tr>
-					<td colspan="2"><input type="text" size="5" id="sample6_postcode"/>
-					<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
-					</td>
-				</tr>
-				<tr>
-					<td><input type="text" size="20" id="sample6_address"/></td>
-					<td>기본주소</td>
-				</tr>
-				<tr>
-					<td><input type="text" size="20" id="sample6_address2"/></td>
-					<td>나머지주소</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>휴대전화</td>
-		<td>010-1234-5678</td>
-	</tr>
-	
-</table>
+<jsp:include page="../include/header.jsp" flush="false" />
+
+<div style="margin: 3%">
+
+	<table border="1" cellpadding="0" cellspacing="0" width="38%">
+		<colgroup>
+			<col width="15%"/>
+			<col width="80%"/>
+		</colgroup>
+		
+		<tr>
+			<td colspan="2">주문자 정보</td>
+		</tr>
+		
+		<tr>
+			<td>주문하시는 분</td>
+			<td>ㅇㅇㅇ</td>
+		</tr>
+		
+		<tr>
+			<td>주소</td>
+			<td>
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+				
+					<colgroup>
+						<col width="82%"/>
+						<col width="18%"/>
+					</colgroup>
+				
+					<tr>
+						<td>00000</td>
+						<td>우편번호</td>
+					</tr>
+					<tr>
+						<td>서울시 ~~~ !!! @@@@</td>
+						<td>기본주소</td>
+					</tr>
+					<tr>
+						<td>1234번지 1234호</td>
+						<td>나머지주소</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>휴대전화</td>
+			<td>010-1234-5678</td>
+		</tr>
+		
+	</table>
+	<br/>
+	<table border="1" cellpadding="0" cellspacing="0" width="38%">
+		<colgroup>
+			<col width="15%"/>
+			<col width="80%"/>
+		</colgroup>
+		
+		<tr>
+			<td colspan="2">배송지 정보</td>
+		</tr>
+		
+		<tr>
+			<td>배송지 선택</td>
+			<td>
+				<input type="radio" id="test1" name="test" checked="checked"/>
+				<label for="test1">주문자 정보와 동일</label> 
+				<input type="radio" id="test2" name="test"/>
+				<label for="test2">새로운배송지</label> 
+			</td>
+		</tr>
+		
+		<tr>
+			<td>받으시는 분</td>
+			<td><input type="text" class="inputBox"/></td>
+		</tr>
+		
+		<tr>
+			<td>주소</td>
+			<td>
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					
+					<colgroup>
+						<col width="70%"/>
+						<col width="30%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="2"><input type="text" size="7" id="sample6_postcode" class="inputBox" readonly="readonly"/>
+						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
+						</td>
+					</tr>
+					<tr>
+						<td><input type="text" size="50" id="sample6_address" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px"/></td>
+						<td>기본주소</td>
+					</tr>
+					<tr>
+						<td><input type="text" size="50" id="sample6_address2" class="inputBox" style="text-align: left; padding-left: 10px"/></td>
+						<td>나머지주소</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>휴대전화</td>
+			<td>
+				<input type="text" class="inputBox" size="6" maxlength="3"/> -
+				<input type="text" class="inputBox" size="6" maxlength="4"/> -
+				<input type="text" class="inputBox" size="6" maxlength="4"/>  
+			</td>
+		</tr>
+		
+	</table>
+
+</div>
+
+<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>
