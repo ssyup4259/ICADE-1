@@ -23,8 +23,9 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
 
-<title>Insert title here</title>
+<title>구매 화면</title>
 
+<!-- 우편번호 api -->
 <script type="text/javascript">
 function sample6_execDaumPostcode() {
 	new daum.Postcode(
@@ -72,191 +73,243 @@ function sample6_execDaumPostcode() {
 }
 </script>
 
+<!-- 배송지 관련 -->
+<script type="text/javascript">
+
+	function deliveryAddr() {
+		
+		var f = document.myForm;
+		
+		f.O_NAME.value = f.name.value;
+		f.O_ZIPCODE.value = f.zipcode.value;
+		f.O_ADDRESS1.value = f.address1.value;
+		f.O_ADDRESS2.value = f.address2.value;
+		f.O_PH1.value = f.phone1.value;
+		f.O_PH2.value = f.phone2.value;
+		f.O_PH3.value = f.phone3.value;
+		
+	}
+	
+	function newAddr() {
+		
+		var f = document.myForm;
+		
+		f.O_NAME.value = "";
+		f.O_ZIPCODE.value = "";
+		f.O_ADDRESS1.value = "";
+		f.O_ADDRESS2.value = "";
+		f.O_PH1.value = "";
+		f.O_PH2.value = "";
+		f.O_PH3.value = "";
+		
+	}
+
+
+</script>
 </head>
 <body>
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
-<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">
-	<div class="row">
-		<div class="col-sm-7">
-		
-			<table border="1" cellpadding="0" cellspacing="0" width="100%">
-				<colgroup>
-					<col width="15%"/>
-					<col width="80%"/>
-				</colgroup>
-				
-				<tr>
-					<td colspan="2">주문자 정보</td>
-				</tr>
-				
-				<tr>
-					<td>주문하시는 분</td>
-					<td align="left">ㅇㅇㅇ</td>
-				</tr>
-				
-				<tr>
-					<td>주소</td>
-					<td>
-						<table border="1" cellpadding="0" cellspacing="0" width="100%">
-						
-							<colgroup>
-								<col width="82%"/>
-								<col width="18%"/>
-							</colgroup>
-						
-							<tr>
-								<td align="left">00000</td>
-								<td>우편번호</td>
-							</tr>
-							<tr>
-								<td align="left">서울시 ~~~ !!! @@@@</td>
-								<td>기본주소</td>
-							</tr>
-							<tr>
-								<td align="left">1234번지 1234호</td>
-								<td>나머지주소</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>휴대전화</td>
-					<td align="left">010-1234-5678</td>
-				</tr>
-				
-			</table>
-			<br/>
-			<table border="1" cellpadding="0" cellspacing="0" width="100%">
-				<colgroup>
-					<col width="15%"/>
-					<col width="80%"/>
-				</colgroup>
-				
-				<tr>
-					<td colspan="2">배송지 정보</td>
-				</tr>
-				
-				<tr>
-					<td>배송지 선택</td>
-					<td align="left">
-						<input type="radio" id="test1" name="test" checked="checked"/>
-						<label for="test1">주문자 정보와 동일</label> 
-						<input type="radio" id="test2" name="test"/>
-						<label for="test2">새로운배송지</label> 
-					</td>
-				</tr>
-				
-				<tr>
-					<td>받으시는 분</td>
-					<td align="left"><input type="text" class="inputBox"/></td>
-				</tr>
-				
-				<tr>
-					<td>주소</td>
-					<td>
-						<table border="1" cellpadding="0" cellspacing="0" width="100%">
+<form action="" method="post" name="myForm">
+	<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">
+		<div class="row">
+			<div class="col-sm-7">
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					<colgroup>
+						<col width="15%"/>
+						<col width="80%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="2">주문자 정보</td>
+					</tr>
+					
+					<tr>
+						<td>주문하시는 분</td>
+						<td align="left">
+							ㅇㅇㅇ
+							<input type="hidden" name="name" value="ㅇㅇㅇ"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>주소</td>
+						<td>
+							<table border="1" cellpadding="0" cellspacing="0" width="100%">
 							
-							<colgroup>
-								<col width="70%"/>
-								<col width="30%"/>
-							</colgroup>
+								<colgroup>
+									<col width="82%"/>
+									<col width="18%"/>
+								</colgroup>
 							
-							<tr>
-								<td colspan="2" align="left">
-								<input type="text" size="7" id="sample6_postcode" class="inputBox" readonly="readonly"/>
-								<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
-								</td>
-							</tr>
-							<tr>
-								<td align="left">
-								<input type="text" size="50" id="sample6_address" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px"/>
-								</td>
-								<td>기본주소</td>
-							</tr>
-							<tr>
-								<td align="left">
-								<input type="text" size="50" id="sample6_address2" class="inputBox" style="text-align: left; padding-left: 10px"/>
-								</td>
-								<td>나머지주소</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>휴대전화</td>
-					<td align="left">
-						<input type="text" class="inputBox" size="6" maxlength="3"/> -
-						<input type="text" class="inputBox" size="6" maxlength="4"/> -
-						<input type="text" class="inputBox" size="6" maxlength="4"/>  
-					</td>
-				</tr>
-				
-			</table>
-		</div>
-	
-		<div class="col-sm-5">
+								<tr>
+									<td align="left">
+										00000
+										<input type="hidden" name="zipcode" value="00000"/>
+									</td>
+									<td>우편번호</td>
+								</tr>
+								<tr>
+									<td align="left">
+										서울시 ~~~ !!! @@@@
+										<input type="hidden" name="address1" value="서울시 ~~~ !!! @@@@"/>
+									</td>
+									<td>기본주소</td>
+								</tr>
+								<tr>
+									<td align="left">
+										1234번지 1234호
+										<input type="hidden" name="address2" value="1234번지 1234호"/>
+									</td>
+									<td>나머지주소</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>휴대전화</td>
+						<td align="left">
+							010-1234-5678
+							<input type="hidden" name="phone1" value="010"/>
+							<input type="hidden" name="phone2" value="1234"/>
+							<input type="hidden" name="phone3" value="5678"/>
+						</td>
+					</tr>
+					
+				</table>
+				<br/>
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					<colgroup>
+						<col width="15%"/>
+						<col width="80%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="2">배송지 정보</td>
+					</tr>
+					
+					<tr>
+						<td>배송지 선택</td>
+						<td align="left">
+							<input type="radio" id="test1" name="test" checked="checked" onclick="deliveryAddr();"/>
+							<label for="test1">주문자 정보와 동일</label> 
+							<input type="radio" id="test2" name="test" onclick="newAddr();"/>
+							<label for="test2">새로운배송지</label> 
+						</td>
+					</tr>
+					
+					<tr>
+						<td>받으시는 분</td>
+						<td align="left"><input type="text" class="inputBox" id="O_NAME" name="O_NAME"/></td>
+					</tr>
+					
+					<tr>
+						<td>주소</td>
+						<td>
+							<table border="1" cellpadding="0" cellspacing="0" width="100%">
+								
+								<colgroup>
+									<col width="70%"/>
+									<col width="30%"/>
+								</colgroup>
+								
+								<tr>
+									<td colspan="2" align="left">
+									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBox" readonly="readonly"/>
+									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
+									</td>
+								</tr>
+								<tr>
+									<td align="left">
+									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px"/>
+									</td>
+									<td>기본주소</td>
+								</tr>
+								<tr>
+									<td align="left">
+									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBox" style="text-align: left; padding-left: 10px"/>
+									</td>
+									<td>나머지주소</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>휴대전화</td>
+						<td align="left">
+							<input type="text" name="O_PH1" class="inputBox" size="6" maxlength="3"/> -
+							<input type="text" name="O_PH2" class="inputBox" size="6" maxlength="4"/> -
+							<input type="text" name="O_PH3" class="inputBox" size="6" maxlength="4"/>  
+						</td>
+					</tr>
+					
+				</table>
+			</div>
 		
-			<table border="1" cellpadding="0" cellspacing="0" width="100%">
-				<colgroup>
-					<col width="15%"/>
-					<col width="70%"/>
-					<col width="15%"/>
-				</colgroup>
-				
-				<tr>
-					<td colspan="3">주문 상품</td>
-				</tr>
-				
-				<tr>
-					<td>이미지</td>
-					<td>상품정보</td>
-					<td>합계</td>
-				</tr>
-				
-				<tr>
-					<td><img src="<%=cp%>/resources/goodsImage/201810161038304392625303709.jpg" width="80px" height="80px"/></td>
-					<td align="left">
-						아이몰 아이폰 우레탄 불사신 케이스<br/>
-						[옵션: 아이폰 6 6S(케이스+ 필름)]<br/>
-						<fmt:formatNumber>15900</fmt:formatNumber> / 2
-					</td>
-					<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
-				</tr>
-				
-			</table>
-			<br/>
-			<table border="1" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>총 주문 금액</td>
-					<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
-				</tr>
-				<tr>
-					<td>총 할인 금액</td>
-					<td><fmt:formatNumber>0</fmt:formatNumber>원</td>
-				</tr>
-				<tr>
-					<td>포인트</td>
-					<td><input type="text"/>원 (총 사용가능 적립금 : 1,500원)</td>
-				</tr>
-				<tr>
-					<td>최종 결제 금액</td>
-					<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
-				</tr>
-				<tr>
-					<td align="center" colspan="2">
-						<input type="button" class="btn2" value="결제하기"/>
-					</td>
-				</tr>
-			</table>
+			<div class="col-sm-5">
 			
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					<colgroup>
+						<col width="15%"/>
+						<col width="70%"/>
+						<col width="15%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="3">주문 상품</td>
+					</tr>
+					
+					<tr>
+						<td>이미지</td>
+						<td>상품정보</td>
+						<td>합계</td>
+					</tr>
+					
+					<tr>
+						<td><img src="<%=cp%>/resources/goodsImage/201810161038304392625303709.jpg" width="80px" height="80px"/></td>
+						<td align="left">
+							아이몰 아이폰 우레탄 불사신 케이스<br/>
+							[옵션: 아이폰 6 6S(케이스+ 필름)]<br/>
+							<fmt:formatNumber>15900</fmt:formatNumber> / 2
+						</td>
+						<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
+					</tr>
+					
+				</table>
+				<br/>
+				<table border="1" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>총 주문 금액</td>
+						<td><fmt:formatNumber>31800</fmt:formatNumber>원</td>
+					</tr>
+					<tr>
+						<td>총 할인 금액</td>
+						<td><fmt:formatNumber>0</fmt:formatNumber>원</td>
+					</tr>
+					<tr>
+						<td>포인트</td>
+						<td><input type="text" class="btn2" size="6"/>원 (총 사용가능 적립금 : 1,500원)</td>
+					</tr>
+					<tr>
+						<td>최종 결제 금액</td>
+						<td>
+							<fmt:formatNumber>31800</fmt:formatNumber>원
+							<input type="hidden" name="O_TOT" value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" colspan="2">
+							<input type="button" class="btn2" value="결제하기"/>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		
 	</div>
-</div>
+</form>
 
 <jsp:include page="../include/footer.jsp" flush="false" />
 
