@@ -268,6 +268,7 @@ function sample6_execDaumPostcode() {
 						<td>합계</td>
 					</tr>
 					
+					<c:set var="total" value="0"/>
 					<c:forEach var="b_dto" items="${b_lists}">
 						<tr>
 							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
@@ -278,13 +279,14 @@ function sample6_execDaumPostcode() {
 							</td>
 							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
 						</tr>
+						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
 					</c:forEach>
 				</table>
 				<br/>
 				<table border="1" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>총 주문 금액</td>
-						<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
+						<td><fmt:formatNumber>${total}</fmt:formatNumber>원</td>
 					</tr>
 					<tr>
 						<td>총 할인 금액</td>
@@ -297,7 +299,7 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>최종 결제 금액</td>
 						<td>
-							<fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원
+							<fmt:formatNumber>${total}</fmt:formatNumber>원
 							<input type="hidden" name="O_TOT" value=""/>
 						</td>
 					</tr>
