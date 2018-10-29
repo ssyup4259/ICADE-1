@@ -102,7 +102,7 @@ function buyIt() {
 	
 	var f = document.myForm;
 	
-	f.action = "<%=cp%>/cart/cartTest.action";
+	f.action = "<%=cp%>/buy/buyForm.action";
 	f.submit();
 	
 	

@@ -213,6 +213,21 @@ $(function() {
 	}
 </script>
 
+<!-- 구매하기 -->
+<script type="text/javascript">
+
+	function orderIt() {
+		
+		var f = document.myForm;
+		
+		f.action = "<%=cp%>/buy/buyForm.action";
+		f.submit();
+		
+		
+	}
+
+</script>
+
 </head>
 
 <body>
@@ -309,6 +324,7 @@ $(function() {
 							</div>
 							<div class="row col-sm-9" style="text-align: left">
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
+								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
 								</div>
