@@ -1,13 +1,16 @@
 package com.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.dao.AdminDAO;
 import com.project.dao.BuyDAO;
@@ -17,6 +20,7 @@ import com.project.dto.CartDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.MemberDTO;
+import com.project.dto.OrdersDTO;
 
 @Service
 public class BuyServiceImpl implements BuyService {
@@ -102,6 +106,67 @@ public class BuyServiceImpl implements BuyService {
 		req.setAttribute("b_lists", b_lists);
 		
 		return req;
+	}
+
+	
+	//결제 로직
+	@Override
+	@Transactional
+	public String payIt(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
+		
+		String[] code = req.getParameterValues("code");
+		String[] count = req.getParameterValues("count");
+		
+		//해야할 작업
+		
+		//Start----------------해당 상품의 재고에서 수량 감소------------------
+		
+		for (int i = 0; i < count.length; i++) {
+
+			Map<String, String> map = new HashMap<String, String>();
+			
+			map.put("code", code[i]);
+			map.put("count", count[i]);
+			
+			b_dao.goodsDetailCountDown(map);
+			
+		}
+		
+		//End----------------해당 상품의 재고에서 수량 감소------------------
+		
+		//Order, Order_Detail 테이블에 내용 추가
+		
+		//Start--------------------Orders 테이블에 추가 ------------------------
+		HttpSession session = req.getSession();
+		MemberDTO m_dto = (MemberDTO)session.getAttribute("userInfo");
+		String m_id = m_dto.getM_ID();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		String ph = req.getParameter("O_PH1") + "-" + req.getParameter("O_PH2") + "-" + req.getParameter("O_PH3");
+		
+		map.put("O_NUM", Integer.toString(b_dao.ordersMaxNum() + 1));
+		map.put("O_ID", m_id);
+		map.put("O_NAME", o_dto.getO_NAME());
+		map.put("O_PH", ph);
+		map.put("O_ZIPCODE", o_dto.getO_ZIPCODE());
+		map.put("O_ADDRESS1", o_dto.getO_ADDRESS1());
+		map.put("O_ADDRESS2", o_dto.getO_ADDRESS2());
+		map.put("O_TOT", Integer.toString(o_dto.getO_TOT()));
+		
+		b_dao.insertOrders(map);
+		
+		//End--------------------Orders 테이블에 추가 ------------------------
+		
+		//Start--------------------Orders_Detail 테이블에 추가 ------------------------
+		
+		
+		
+		
+		
+		//End--------------------Orders_Detail 테이블에 추가 ------------------------
+		
+		return null;
 	}
 	
 	

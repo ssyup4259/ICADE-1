@@ -2,6 +2,7 @@ package com.project.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,26 @@ public class BuyDAOImpl implements BuyDAO {
 	public GoodsDetailDTO getReadGoodsDetail(String gd_code) throws Exception {
 		return sessionTemplate.selectOne(buyMapper + ".getReadGoodsDetail", gd_code);
 	}
+
+	@Override
+	public void goodsDetailCountDown(Map<String, String> map) throws Exception {
+		sessionTemplate.update(buyMapper + ".goodsDetailCountDown", map);
+	}
+
+	@Override
+	public void goodsDetailCountUp(Map<String, String> map) throws Exception {
+		sessionTemplate.update(buyMapper + ".goodsDetailCountUp", map);
+	}
 	
-	
+	@Override
+	public int ordersMaxNum() throws Exception {
+		return sessionTemplate.selectOne(buyMapper + ".ordersMaxNum");
+	}
+
+	@Override
+	public void insertOrders(Map<String, String> map) throws Exception {
+		sessionTemplate.insert(buyMapper + ".insertOrders", map);
+		
+	}
 
 }

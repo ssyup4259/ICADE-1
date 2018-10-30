@@ -12,6 +12,25 @@
 	order by GD_DEVICE, GD_COLOR
 </select>
 
+<!-- 결제 후 상세 상품 재고 감소 -->
+<update id="goodsDetailCountDown" parameterType="map">
+	update GOODS_DETAIL set GD_COUNT = GD_COUNT - #{count} where GD_CODE = #{code}
+</update>
+
+<!-- 환불 후 상세 상품 재고 증가 -->
+<update id="goodsDetailCountUp" parameterType="map">
+	update GOODS_DETAIL set GD_COUNT = GD_COUNT + #{count} where GD_CODE = #{code}
+</update>
+
+<select id="ordersMaxNum" resultType="int">
+	select nvl(max(O_NUM), 0) from Orders
+</select>
+
+<!-- Order테이블에 추가 -->
+<insert id="insertOrders" parameterType="map">
+	insert into Orders O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM
+	values (#{O_NUM}, #{O_ID}, sysdate, #{O_NAME}, #{O_PH}, #{O_ZIPCODE}, #{O_ADDRESS1}, #{O_ADDRESS2}, '배송준비중', '카드결제', #{O_TOT}, null)
+</insert>
 
 
 

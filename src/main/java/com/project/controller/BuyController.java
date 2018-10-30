@@ -20,6 +20,7 @@ import com.project.dao.AdminDAO;
 import com.project.dto.BuyDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
+import com.project.dto.OrdersDTO;
 import com.project.service.BuyService;
 
 @Controller
@@ -51,16 +52,11 @@ public class BuyController {
 	//결제 완료 후 주문정보 DB에 insert
 	@RequestMapping(value="/payIt.action", method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String payIt(HttpServletRequest req) throws Exception {
+	public String payIt(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
 		
 		List<BuyDTO> b_lists = new ArrayList<BuyDTO>();
 		
-		String[] code = req.getParameterValues("code");
-		String[] count = req.getParameterValues("count");
-		
-		for (int i = 0; i < count.length; i++) {
-			System.out.println("code : " + code[i] + ", count : " + count[i]);
-		}
+		b_service.payIt(req, o_dto);
 		
 		return "success";
 		
