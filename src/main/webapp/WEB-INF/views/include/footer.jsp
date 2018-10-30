@@ -13,6 +13,7 @@
 }
 </style>
 
+
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		var offset = 220;
@@ -56,7 +57,22 @@
 	} 
 
 </script>
+<script type="text/javascript">
+        $(document).ready(function(){
 
+            //Check if the current URL contains '#' 
+            if(document.URL.indexOf("#")==-1)
+            {
+                // Set the URL to whatever it was plus "#".
+                url = document.URL+"#";
+                location = "#";
+
+                //Reload the page
+                location.reload(true);
+
+            }
+        });
+    </script> 
 
 
 <input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
@@ -66,7 +82,7 @@
 		<h3>최근 본</h3>
 		<input type="button" value=" 전체 삭제 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/cookieDelete_ok.action';"/>
 		<form action="" name="searchForm" method="post">
-		<c:forEach var="ck" items="${ck_lists}" varStatus="status">
+		<c:forEach var="ck" items="${ck_lists}">
 		<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"><br/><br/>
 		<input type="button" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
 		<br/><br/>
