@@ -219,11 +219,16 @@ $(function() {
 	function orderIt() {
 		
 		var f = document.myForm;
+		var login = "${sessionScope.userInfo.getM_ID()}";
 		
 		f.action = "<%=cp%>/buy/buyForm.action";
-		f.submit();
 		
-		
+		if (login != "") {
+			f.submit();	
+		} else {
+			alert("로그인 후 사용 가능합니다.");
+		}
+
 	}
 
 </script>
