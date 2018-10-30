@@ -135,7 +135,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			
 			try {
 				
-				FileOutputStream fos = new FileOutputStream(path +"/" + saveFileName);
+				FileOutputStream fos = new FileOutputStream(path +"/" + save1);
 				InputStream is = file1.getInputStream();
 				
 				byte[] buffer = new byte[512];
@@ -162,7 +162,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			
 			try {
 				
-				FileOutputStream fos = new FileOutputStream(path +"/" + saveFileName);
+				FileOutputStream fos = new FileOutputStream(path +"/" + save2);
 				InputStream is = file2.getInputStream();
 				
 				byte[] buffer = new byte[512];
@@ -189,7 +189,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		try {
 			
-			FileOutputStream fos = new FileOutputStream(path +"/" + saveFileName);
+			FileOutputStream fos = new FileOutputStream(path +"/" + save3);
 			InputStream is = file3.getInputStream();
 			
 			byte[] buffer = new byte[512];

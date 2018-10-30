@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,14 +70,17 @@ public class BoardCommentController {
 	@ResponseBody
 	public String deleteData(HttpServletRequest req)throws Exception{
 		
+		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
 		
 		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 		
-		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
+		System.out.println(BC_NUM);
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 		
 		bc_service.deleteData(BC_NUM, path);
 		
-		return "rediret:goods/goodsArticle.action";
+		return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
 	}
 	
 	

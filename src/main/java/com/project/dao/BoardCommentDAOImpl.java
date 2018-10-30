@@ -81,6 +81,11 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		BoardCommentDTO bc_dto = sessionTemplate.selectOne(replyMapper + ".readData", BC_NUM);
 		
 		String filePath = path + File.separator+bc_dto.getBC_IMAGE();
+		String filePath1 = path + File.separator+bc_dto.getBC_CONTENTFILE1();
+		String filePath2 = path + File.separator+bc_dto.getBC_CONTENTFILE2();
+		String filePath3 = path + File.separator+bc_dto.getBC_CONTENTFILE3();
+		
+		
 		
 		//물리적 파일 삭제
 		File f = new File(filePath);
@@ -88,6 +93,25 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		if (f.exists()) {
 			f.delete(); //물리적 파일 삭제
 		}
+		//물리적 파일 삭제
+		File f1 = new File(filePath1);
+	
+		if (f1.exists()) {
+			f1.delete(); //물리적 파일 삭제
+		}
+		//물리적 파일 삭제
+		File f2 = new File(filePath2);
+	
+		if (f2.exists()) {
+			f2.delete(); //물리적 파일 삭제
+		}
+		//물리적 파일 삭제
+		File f3 = new File(filePath3);
+	
+		if (f3.exists()) {
+			f3.delete(); //물리적 파일 삭제
+		}
+		
 		sessionTemplate.delete(replyMapper + ".deleteGoods", BC_NUM);
 	}
 
