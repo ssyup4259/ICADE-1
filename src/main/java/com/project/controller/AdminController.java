@@ -184,17 +184,17 @@ public class AdminController {
 		json.addProperty("imp_key", imp_key);
 		json.addProperty("imp_secret", imp_secret);
 		
-		String _token = api.getToken(req, resp, json);
+		String token = api.getToken(req, resp, json);
 		
 		String imp_uid = "imp_493354362170";
 		
-		Map<String,String> map = api.getInfo(req, resp, _token, imp_uid);
+		Map<String,String> map = api.getInfo(req, resp, token, imp_uid);
 		
 		log.info(map.get("imp_uid"));
 		log.info(map.get("status"));
 		log.info(map.get("amount"));
 		
-		req.setAttribute("token", _token);
+		req.setAttribute("token", token);
 		
 		return "admin/payments";
 		
