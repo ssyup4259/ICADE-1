@@ -198,18 +198,18 @@
 <br/><br/>
 
 <table align="center">
-				<tr>
-					<td>
-						<c:if test="${dataCount!=0 }">
-					${pageIndexList}
-				</c:if>
-						<c:if test="${dataCount==0}">
-					데이터가 없습니다
-  				</c:if>
+	<tr>
+		<td>
+			<c:if test="${dataCount!=0 }">
+		${pageIndexList}
+	</c:if>
+			<c:if test="${dataCount==0}">
+		주문 내역이 없습니다.
+			</c:if>
 
-					</td>
-				</tr>
-			</table>
+		</td>
+	</tr>
+</table>
 <!-- 
 <div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate"><a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19" class="first"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_first.gif" alt="첫 페이지"></a>
 <a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_prev.gif" alt="이전 페이지"></a>
