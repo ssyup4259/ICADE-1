@@ -213,6 +213,26 @@ $(function() {
 	}
 </script>
 
+<!-- 구매하기 -->
+<script type="text/javascript">
+
+	function orderIt() {
+		
+		var f = document.myForm;
+		var login = "${sessionScope.userInfo.getM_ID()}";
+		
+		f.action = "<%=cp%>/buy/buyForm.action";
+		
+		if (login != "") {
+			f.submit();	
+		} else {
+			alert("로그인 후 사용 가능합니다.");
+		}
+
+	}
+
+</script>
+
 </head>
 
 <body>
@@ -309,6 +329,7 @@ $(function() {
 							</div>
 							<div class="row col-sm-9" style="text-align: left">
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
+								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
 									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
 								</div>

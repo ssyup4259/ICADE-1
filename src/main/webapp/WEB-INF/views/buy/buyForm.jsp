@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -22,8 +23,9 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
 
-<title>Insert title here</title>
+<title>구매 화면</title>
 
+<!-- 우편번호 api -->
 <script type="text/javascript">
 function sample6_execDaumPostcode() {
 	new daum.Postcode(
@@ -71,95 +73,320 @@ function sample6_execDaumPostcode() {
 }
 </script>
 
+<!-- 배송지 관련 -->
+<script type="text/javascript">
+
+	function deliveryAddr() {
+		
+		var f = document.myForm;
+		
+		f.O_NAME.value = f.name.value;
+		f.O_ZIPCODE.value = f.zipcode.value;
+		f.O_ADDRESS1.value = f.address1.value;
+		f.O_ADDRESS2.value = f.address2.value;
+		f.O_PH1.value = f.phone1.value;
+		f.O_PH2.value = f.phone2.value;
+		f.O_PH3.value = f.phone3.value;
+		
+	}
+	
+	function newAddr() {
+		
+		var f = document.myForm;
+		
+		f.O_NAME.value = "";
+		f.O_ZIPCODE.value = "";
+		f.O_ADDRESS1.value = "";
+		f.O_ADDRESS2.value = "";
+		f.O_PH1.value = "";
+		f.O_PH2.value = "";
+		f.O_PH3.value = "";
+		
+	}
+
+</script>
+
+<!-- 결제 관련 -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+<script type="text/javascript">
+
+	function payIt() {
+		
+		var total = $("#O_TOT").val();
+		var name = "${m_dto.getM_NAME()}";
+		var email = "${m_dto.getM_EMAIL_ID()}@${m_dto.getM_EMAIL_DOMAIN()}";
+		var tel = "${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}";
+		var addr = "${m_dto.getM_ADDRESS1()} ${m_dto.getM_ADDRESS2()}";
+		var zipcode = "${m_dto.getM_ZIPCODE()}";
+		
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp79506821');  // 가맹점 식별 코드
+	
+		IMP.request_pay({
+			pg : 'inicis', // version 1.1.0부터 지원.
+			pay_method : 'card',
+			merchant_uid : 'merchant_' + new Date().getTime(),
+			name : '상품명 어떻게 하지',
+			amount : 10,
+			buyer_email : email,
+			buyer_name : name,
+			buyer_tel : tel,
+			buyer_addr : addr,
+			buyer_postcode : zipcode
+			
+		}, function(rsp) {
+			
+			if ( rsp.success ) {
+				
+				var allData = $("#myForm").serialize();
+				
+				allData = allData + "&imp_uid=" + rsp.imp_uid;
+				
+				$.ajax({
+					
+		    		url: "<%=cp%>/buy/payIt.action",
+		    		type: 'POST',
+		    		dataType: 'text',
+		    		data: allData,
+		    		success: function(data) {
+		    			
+		    			location.href = "<%=cp%>/buy/buyOK.action";
+		    			
+		    		},
+		    		
+		    		error : function(data) {
+		    			
+		    			alert("Ajax Error");
+		    			console.log(data);
+		    			
+		    		}
+		    		
+		    	});
+				
+		    } else {
+		    	
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+
+		        alert(msg);
+		        
+		    }
+		});
+	}
+
+</script>
+
 </head>
 <body>
 
-<table border="1" cellpadding="0" cellspacing="0" width="70%">
-	
-	<tr>
-		<td>주문자 정보</td>
-	</tr>
-	
-	<tr>
-		<td>주문하시는 분</td>
-		<td>ㅇㅇㅇ</td>
-	</tr>
-	
-	<tr>
-		<td>주소</td>
-		<td>
-			<table border="1" cellpadding="0" cellspacing="0" width="80%">
-				<tr>
-					<td><input type="text" size="5"/></td>
-					<td>우편번호</td>
-				</tr>
-				<tr>
-					<td>서울시 ~~~ !!! @@@@</td>
-					<td>기본주소</td>
-				</tr>
-				<tr>
-					<td>1234번지 1234호</td>
-					<td>나머지주소</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>휴대전화</td>
-		<td>010-1234-5678</td>
-	</tr>
-	
-</table>
-<br/><br/><br/>
-<table border="1" cellpadding="0" cellspacing="0" width="70%">
-	
-	<tr>
-		<td>배송지 정보</td>
-	</tr>
-	
-	<tr>
-		<td>배송지 선택</td>
-		<td>
-			<input type="radio" id="test1" name="test"/>
-			<label for="test1">주문자 정보와 동일</label> 
-			<input type="radio" id="test2" name="test"/>
-			<label for="test2">새로운배송지</label> 
-		</td>
-	</tr>
-	
-	<tr>
-		<td>받으시는 분</td>
-		<td>ㅇㅇㅇ</td>
-	</tr>
-	
-	<tr>
-		<td>주소</td>
-		<td>
-			<table border="1" cellpadding="0" cellspacing="0" width="80%">
-				<tr>
-					<td colspan="2"><input type="text" size="5" id="sample6_postcode"/>
-					<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
-					</td>
-				</tr>
-				<tr>
-					<td><input type="text" size="20" id="sample6_address"/></td>
-					<td>기본주소</td>
-				</tr>
-				<tr>
-					<td><input type="text" size="20" id="sample6_address2"/></td>
-					<td>나머지주소</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>휴대전화</td>
-		<td>010-1234-5678</td>
-	</tr>
-	
-</table>
+<jsp:include page="../include/header.jsp" flush="false" />
+
+<form action="" method="post" id="myForm" name="myForm">
+	<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">
+		<div class="row">
+			<div class="col-sm-7">
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					<colgroup>
+						<col width="15%"/>
+						<col width="80%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="2">주문자 정보</td>
+					</tr>
+					
+					<tr>
+						<td>주문하시는 분</td>
+						<td align="left">
+							${m_dto.getM_NAME()}
+							<input type="hidden" name="name" value="${m_dto.getM_NAME()}"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>주소</td>
+						<td>
+							<table border="1" cellpadding="0" cellspacing="0" width="100%">
+							
+								<colgroup>
+									<col width="82%"/>
+									<col width="18%"/>
+								</colgroup>
+							
+								<tr>
+									<td align="left">
+										${m_dto.getM_ZIPCODE()}
+										<input type="hidden" name="zipcode" value="${m_dto.getM_ZIPCODE()}"/>
+									</td>
+									<td>우편번호</td>
+								</tr>
+								<tr>
+									<td align="left">
+										${m_dto.getM_ADDRESS1()}
+										<input type="hidden" name="address1" value="${m_dto.getM_ADDRESS1()}"/>
+									</td>
+									<td>기본주소</td>
+								</tr>
+								<tr>
+									<td align="left">
+										${m_dto.getM_ADDRESS2()}
+										<input type="hidden" name="address2" value="${m_dto.getM_ADDRESS2()}"/>
+									</td>
+									<td>나머지주소</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>휴대전화</td>
+						<td align="left">
+							${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}
+							<input type="hidden" name="phone1" value="${m_dto.getM_CELLPHONE1()}"/>
+							<input type="hidden" name="phone2" value="${m_dto.getM_CELLPHONE2()}"/>
+							<input type="hidden" name="phone3" value="${m_dto.getM_CELLPHONE3()}"/>
+						</td>
+					</tr>
+					
+				</table>
+				<br/>
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					<colgroup>
+						<col width="15%"/>
+						<col width="80%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="2">배송지 정보</td>
+					</tr>
+					
+					<tr>
+						<td>배송지 선택</td>
+						<td align="left">
+							<input type="radio" id="test1" name="test" checked="checked" onclick="deliveryAddr();"/>
+							<label for="test1">주문자 정보와 동일</label> 
+							<input type="radio" id="test2" name="test" onclick="newAddr();"/>
+							<label for="test2">새로운배송지</label> 
+						</td>
+					</tr>
+					
+					<tr>
+						<td>받으시는 분</td>
+						<td align="left"><input type="text" class="inputBox" id="O_NAME" name="O_NAME" value="${m_dto.getM_NAME()}"/></td>
+					</tr>
+					
+					<tr>
+						<td>주소</td>
+						<td>
+							<table border="1" cellpadding="0" cellspacing="0" width="100%">
+								
+								<colgroup>
+									<col width="70%"/>
+									<col width="30%"/>
+								</colgroup>
+								
+								<tr>
+									<td colspan="2" align="left">
+									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBox" readonly="readonly" value="${m_dto.getM_ZIPCODE()}"/>
+									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
+									</td>
+								</tr>
+								<tr>
+									<td align="left">
+									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS1()}"/>
+									</td>
+									<td>기본주소</td>
+								</tr>
+								<tr>
+									<td align="left">
+									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBox" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS2()}"/>
+									</td>
+									<td>나머지주소</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>휴대전화</td>
+						<td align="left">
+							<input type="text" name="O_PH1" class="inputBox" size="6" maxlength="3" value="${m_dto.getM_CELLPHONE1()}"/> -
+							<input type="text" name="O_PH2" class="inputBox" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE2()}"/> -
+							<input type="text" name="O_PH3" class="inputBox" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE3()}"/>  
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+		
+			<div class="col-sm-5">
+			
+				<table border="1" cellpadding="0" cellspacing="0" width="100%">
+					<colgroup>
+						<col width="15%"/>
+						<col width="70%"/>
+						<col width="15%"/>
+					</colgroup>
+					
+					<tr>
+						<td colspan="3">주문 상품</td>
+					</tr>
+					
+					<tr>
+						<td>이미지</td>
+						<td>상품정보</td>
+						<td>합계</td>
+					</tr>
+					
+					<c:set var="total" value="0"/>
+					<c:forEach var="b_dto" items="${b_lists}">
+						<tr>
+							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
+							<td align="left">
+								${b_dto.getName()}<br/>
+								<input type="hidden" name="code" value="${b_dto.getCode()}"/>
+								<input type="hidden" name="count" value="${b_dto.getCount()}"/>
+								[옵션: ${b_dto.getKind()} / ${b_dto.getColor()}]<br/>
+								<fmt:formatNumber>${b_dto.getPrice()}</fmt:formatNumber>원 / ${b_dto.getCount()}개
+							</td>
+							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
+						</tr>
+						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
+					</c:forEach>
+				</table>
+				<br/>
+				<table border="1" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>총 주문 금액</td>
+						<td><fmt:formatNumber>${total}</fmt:formatNumber>원</td>
+					</tr>
+					<tr>
+						<td>총 할인 금액</td>
+						<td><fmt:formatNumber>0</fmt:formatNumber>원</td>
+					</tr>
+					<tr>
+						<td>포인트</td>
+						<td><input type="text" class="btn2" size="6"/>원 (총 사용가능 적립금 : 1,500원)</td>
+					</tr>
+					<tr>
+						<td>최종 결제 금액</td>
+						<td>
+							<fmt:formatNumber>${total}</fmt:formatNumber>원
+							<input type="hidden" id="O_TOT" name="O_TOT" value="${total}"/>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" colspan="2">
+							<input type="button" class="btn2" value="결제하기" onclick="payIt();"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</form>
+
+<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>

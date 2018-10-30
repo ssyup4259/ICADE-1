@@ -28,6 +28,39 @@ public class GoodsDetailDTO {
     
     // 상품 색상
     private String GC_COLOR;
+    
+    // 상품 이름
+    private String G_NAME;
+    
+    // 상품 가격
+    private String G_PRICE;
+    
+    // 상품 할인율
+    private int G_DISCOUNT;
+
+	public String getG_NAME() {
+		return G_NAME;
+	}
+
+	public void setG_NAME(String g_NAME) {
+		G_NAME = g_NAME;
+	}
+
+	public String getG_PRICE() {
+		return G_PRICE;
+	}
+
+	public void setG_PRICE(String g_PRICE) {
+		G_PRICE = g_PRICE;
+	}
+
+	public int getG_DISCOUNT() {
+		return G_DISCOUNT;
+	}
+
+	public void setG_DISCOUNT(int g_DISCOUNT) {
+		G_DISCOUNT = g_DISCOUNT;
+	}
 
 	public int getGD_NUM() {
 		return GD_NUM;

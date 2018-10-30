@@ -26,8 +26,15 @@ public class OrdersDTO {
 	private int O_TOT;
 	//운송장 번호
 	private int O_TNUM;
+	//imp_uid
+	private String O_IMP;
 	
-	
+	public String getO_IMP() {
+		return O_IMP;
+	}
+	public void setO_IMP(String o_IMP) {
+		O_IMP = o_IMP;
+	}
 	public int getO_NUM() {
 		return O_NUM;
 	}
@@ -100,8 +107,6 @@ public class OrdersDTO {
 	public void setO_TNUM(int o_TNUM) {
 		O_TNUM = o_TNUM;
 	}
-	
-
 	
 	
 }

@@ -1,7 +1,7 @@
 package com.project.controller;
 
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +19,12 @@ import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrderDetailDTO;
+import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
 import com.project.service.OrderHistoryService;
+import com.project.util.MyUtil;
+
+import oracle.sql.DATE;
 
 @Controller
 public class OrdersHistoryController {
@@ -30,35 +34,97 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	AdminDAO a_dao;
-	
+
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
+
 		HttpSession session = request.getSession();
+		MyUtil myUtil = new MyUtil();
+		Date date = new Date();
 		
-		HashMap<String, Object> hMap = new HashMap<String, Object>();
-		
+		//로그인시 있는 유저의 세션정보를 받아온다.
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
+		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
+		String startDate = (String) request.getParameter("startDay");
+		String endDate = (String) request.getParameter("endDay");
+		String pageNum = request.getParameter("pageNum");
+		
+		if(startDate==null || startDate.equals(null)){
+			startDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate()); 
+		}
+		if(endDate==null || endDate.equals(null)) {
+			endDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		}
+		
+		//System.out.println(startDate + "-" + endDate);
 		
 		String m_Id = dto.getM_ID();
 		
+		HashMap<Integer, List<OrderHistoryDTO>> hashMap = new HashMap<Integer, List<OrderHistoryDTO>>();
+		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("O_ID", m_Id);
+		hMap.put("start_date",startDate);
+		hMap.put("end_date",endDate);	
+		
+		//현재 페이지
+        int currentPage = 1;
+		
+		// 페이지number처리
+		if (pageNum != null) {
+			currentPage = Integer.parseInt(pageNum);
+		}
+		
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int numPerPage = 5;
+		
+		int dataCount = service.maxOrders(hMap);
+		
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		
+		if (currentPage > totalPage) {
+			currentPage = totalPage;
+		}
+		
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+		
+		String listUrl = "orderHistory.action";
+		
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
 		List<OrdersDTO> lists = (List<OrdersDTO>) service.selectOrders(m_Id);
 		
-		List<Integer> integerList = service.selectOrderNum(m_Id);
+		List<Integer> integerList = service.selectOrderNum(hMap);
 		
 		System.out.println("for문돌린다====================================================");
 		
-		for(int i = 0;i<=integerList.size();i++) {
+		for(int i = 0;i<integerList.size();i++) {
 			
 			System.out.println(integerList);
+			
+			Integer O_Num = integerList.get(i);
+			
+			hMap.put("OD_NUM",O_Num);
+			
+			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
+			
+			hashMap.put(O_Num, mapList);
 			
 		}
 		
 		System.out.println("====================================================for문끝났다");
 		
-		//List<OrderDetailDTO> lists2 = (List<OrderDetailDTO>) service.selectOrderDetail(O_Num);
-		
+		request.setAttribute("dataCount", dataCount);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("hashMap", hashMap);
 		request.setAttribute("lists", lists);
+		request.setAttribute("integerList", integerList);
 		
 		return "ordersHistory/ordersHistoryMain";
 	}
@@ -113,18 +179,38 @@ public class OrdersHistoryController {
 	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
 		
-		String o_num = request.getParameter("o_num");
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
 		
-		mav.addObject("o_num", o_num);
+		String m_Id = dto.getM_ID();
 		
+		int O_Num = Integer.parseInt(request.getParameter("o_num"));
 		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("O_ID", m_Id);
+		hMap.put("O_NUM", O_Num);
+		
+		List<OrderDetailDTO> detailLists = service.selectOdSaveFileName(hMap);
+		
+		mav.addObject("O_Num", O_Num);
+		//mav.addObject("detailLists",detailLists);
+		
+		request.setAttribute("detailLists", detailLists);
 		
 		mav.setViewName("/ordersHistory/orderHistoryDetail");
 		
 		return mav;
 	}
 	
+	@RequestMapping(value="/test.action",method= {RequestMethod.POST,RequestMethod.GET})
+	public String test(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		//실험용 추후 삭제
+		return "ordersHistory/test";
+	}
+	
+		
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		

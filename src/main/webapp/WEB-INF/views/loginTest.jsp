@@ -26,6 +26,8 @@
 
 <br/>
 기본값으로 보이는곳
+<a href="test.action"><input type="button" value="가라"></a>
+
 
 
 

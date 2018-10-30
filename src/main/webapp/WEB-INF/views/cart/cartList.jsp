@@ -9,6 +9,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle2.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+
 <title>장바구니</title>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -64,16 +70,6 @@ function updateCheck(c_code, count) {
 	});
 }	
 
-function getMessage() {
-	
-	var message = "${message}";
-	
-	if (message != "") {
-		alert(message);
-	}
-	
-}
-
 function countUp(g_code) {
 	
 	var count = Number(document.getElementById(g_code).value);
@@ -102,8 +98,15 @@ function buyIt() {
 	
 	var f = document.myForm;
 	
-	f.action = "<%=cp%>/cart/cartTest.action";
-	f.submit();
+	f.action = "<%=cp%>/buy/buyForm.action";
+	
+	if ($("input:checkbox[id='chk']").is(":checked") == true) {
+		f.submit();
+	} else {
+		alert("상품을 선택 해 주세요.");
+	}
+	
+	
 	
 	
 }
@@ -139,22 +142,27 @@ input[type=checkbox] {
 </style>
 
 </head>
-<body onload="getMessage();">
+<body>
+
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <h3>장바구니 리스트</h3>
 <form action="" method="post" name="myForm">
 <input type="hidden" name="pageNum" value="${pageNum}"/>
 <c:forEach var="c_dto" items="${c_lists}">
-	<input type="checkbox" name="chk" value="${c_dto.getC_NUM()}"/>
-	<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>&nbsp;
-	${c_dto.getC_NAME()}&nbsp;
-	[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
+	<label>
+		<input type="checkbox" id="chk" name="chk" value="${c_dto.getC_NUM()}"/>
+		<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>&nbsp;
+	</label>
+	<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${c_dto.getC_GNUM()}">
+		${c_dto.getC_NAME()}&nbsp;
+		[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
+	</a>
 	<fmt:formatNumber>${c_dto.getC_PRICE()}</fmt:formatNumber>원&nbsp;&nbsp;&nbsp;
-	<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
-	<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
 	<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
-	개&nbsp;
-	<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})"/>	
+	<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
+	<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
+	<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})" class="btn"/>	
 	<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원&nbsp;&nbsp;
 	<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
 	<br/>
@@ -164,8 +172,8 @@ input[type=checkbox] {
 
 <c:if test="${dataCount!=0 }">
 	<br/>
-	<input type="button" value="모두 비우기" onclick="javascript:location.href='<%=cp%>/cart/deleteCartAll.action';"/>
-	<input type="button" value="구매하기" onclick="buyIt();"/>
+	<input type="button" value="모두 비우기" onclick="javascript:location.href='<%=cp%>/cart/deleteCartAll.action';" class="btn"/>
+	<input type="button" value="구매하기" onclick="buyIt();" class="btn"/>
 	<br/><br/>
 </c:if>
 <c:if test="${dataCount!=0 }">
@@ -175,6 +183,7 @@ input[type=checkbox] {
 	등록된 상품이 없습니다.
 </c:if>
 
+<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>
