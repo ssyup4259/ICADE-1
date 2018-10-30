@@ -23,42 +23,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <script>
-$("#deleteData").click(function() {
 
-	
-/* 	var num = new Array();
-	
-	<c:forEach var="bc_dto" items="${bc_lists}">
-		num.push("${bc_dto.BC_NUM}");
-	</c:forEach>
+	function replyDelete(BC_NUM,BC_BOARD) {
 
-	 */
+	alert(BC_NUM);
 	
-	 var num =$("#deleteData").val();
-	 alert(num);
-	 
+	var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
+		
 	if(confirm("삭제하시겠습니까?")) {
 	$.ajax({
-
-		type :"get",
-		url : "<%=cp%>/goods/replyDelete.action?BC_NUM=num",
+		type :"post",
+		data : data,
+		url : "<%=cp%>/goods/replyDelete.action",
 		success:function(result){
-			
-			if (result=="success") {
 				alert("삭제되었습니다");
-				
-			}
-		}
-		
-		});
-	}
-});
+		},
+		error: function(result) {
+			alert("안된다");
+ 	    }
+     });
+   }
+  }
 
 
 </script>
 
 
 <body>
+	<form id="replyForm" method="post" enctype="multipart/form-data">
 	<table style="width: 1000">
 		<c:if test="${!empty bc_lists}">
 					<c:forEach var="bc_dto" items="${bc_lists}">
@@ -67,6 +59,7 @@ $("#deleteData").click(function() {
 							<td width="15%" valign="top">
 								<div style="width: 120px; height: 40px;">
 								<div style="margin-top: 15%"></div>
+
 									<%-- <c:if test="${bc_dto.getLevel() > 1}">
 										&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
 									</c:if> --%>
@@ -87,7 +80,7 @@ $("#deleteData").click(function() {
 									<c:if test="${bc_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
 										<a href="#" id="updateData" onclick="cmUpdateOpen(${bc_dto.getBC_NUM()},${bc_dto.getBC_CONTENT()}">[수정]</a>
 										<br>
-										<button id="deleteData" value="${bc_dto.getBC_NUM()}" class="btn">삭제</button>
+										<button onclick="replyDelete(${bc_dto.getBC_NUM()},${bc_dto.getBC_BOARD()});" class="btn">삭제</button>
 										<br>
 									</c:if>
 								</div>
@@ -107,16 +100,7 @@ $("#deleteData").click(function() {
 						</tr>
 					</c:forEach>
 				</c:if>
-			<%-- 		<tr>
-							<div style="text-align: center;">
-								<c:if test="${dataCount!=0 }">
-										${pageIndexList}
-								</c:if>
-								<c:if test="${dataCount==0 }">
-										등록된 댓글이 없습니다.
-								</c:if>
-							</div>
-						</tr> --%>
 	</table>
+	</form>
 </body>
 </html>

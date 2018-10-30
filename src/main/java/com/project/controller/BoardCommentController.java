@@ -61,20 +61,14 @@ public class BoardCommentController {
 		bc_service.updateData(bc_dto, req);
 		return "/goods/goodsArticle";
 	}
-	
-	
-	
-
 	//댓글 삭제
-	@RequestMapping("/replyDelete.action")
-	@ResponseBody
+	@RequestMapping(value="/replyDelete.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String deleteData(HttpServletRequest req)throws Exception{
 		
-		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
-		
+		int BC_BOARD = Integer.parseInt(req.getParameter("BC_BOARD"));
 		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 		
-		System.out.println(BC_NUM);
+		System.out.println(BC_NUM + "SDNAKSNDKASNDLASND");
 		
 		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 		
