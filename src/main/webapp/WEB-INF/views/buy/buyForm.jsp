@@ -120,38 +120,56 @@ function sample6_execDaumPostcode() {
 		var zipcode = "${m_dto.getM_ZIPCODE()}";
 		
 		var IMP = window.IMP; // 생략가능
-		IMP.init('imp85066946');  // 가맹점 식별 코드
+		IMP.init('imp79506821');  // 가맹점 식별 코드
 	
 		IMP.request_pay({
 			pg : 'inicis', // version 1.1.0부터 지원.
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
-			name : '주문명:결제테스트',
-			amount : total,
+			name : '상품명 어떻게 하지',
+			amount : 10,
 			buyer_email : email,
 			buyer_name : name,
 			buyer_tel : tel,
 			buyer_addr : addr,
-			buyer_postcode : zipcode,
-			m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			buyer_postcode : zipcode
 			
 		}, function(rsp) {
 			
 			if ( rsp.success ) {
-				var msg = '결제가 완료되었습니다.';
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점 거래ID : ' + rsp.merchant_uid;
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
-			} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
-			}
-		
-			alert(msg);
-		
+				
+				var allData = $("#myForm").serialize(); 
+				
+				$.ajax({
+					
+		    		url: "<%=cp%>/buy/payIt.action",
+		    		type: 'POST',
+		    		dataType: 'json',
+		    		data: allData,
+		    		success: function(data) {
+		    			
+		    			alert("결제가 완료되었습니다.");
+		    			
+		    		},
+		    		
+		    		error : function(data) {
+		    			
+		    			alert("Ajax Error");
+		    			console.log(data);
+		    			
+		    		}
+		    		
+		    	});
+				
+		    } else {
+		    	
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+
+		        alert(msg);
+		        
+		    }
 		});
-		
 	}
 
 </script>
@@ -161,7 +179,7 @@ function sample6_execDaumPostcode() {
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
-<form action="" method="post" name="myForm">
+<form action="" method="post" id="myForm" name="myForm">
 	<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">
 		<div class="row">
 			<div class="col-sm-7">
@@ -324,6 +342,8 @@ function sample6_execDaumPostcode() {
 							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
 							<td align="left">
 								${b_dto.getName()}<br/>
+								<input type="hidden" name="code" value="${b_dto.getCode()}"/>
+								<input type="hidden" name="count" value="${b_dto.getCount()}"/>
 								[옵션: ${b_dto.getKind()} / ${b_dto.getColor()}]<br/>
 								<fmt:formatNumber>${b_dto.getPrice()}</fmt:formatNumber>원 / ${b_dto.getCount()}개
 							</td>
