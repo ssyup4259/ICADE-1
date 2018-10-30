@@ -1,9 +1,21 @@
 package com.project.dto;
 
-public class OrderDetailDTO {
+public class OrderHistoryDTO {
 	
-	//주문 번호
-	private int OD_NUM;
+	//주문번호
+	private int O_NUM;
+	//주문 날짜
+	private String O_DATE;
+	//배송상태
+	private String O_STATUS;
+	//결제수단
+	private String O_WAY;
+	//결제 총 금액
+	private int O_TOT;
+	//운송장 번호
+	private int O_TNUM;
+	//주문번호에 포함된 상품의 갯수
+	private int O_COUNT;
 	//상품코드
 	private String OD_CODE;
 	//주문 상품명
@@ -23,11 +35,47 @@ public class OrderDetailDTO {
 	//상품의 저장된 이미지 이름
 	private String G_SAVEFILENAME;
 	
-	public int getOD_NUM() {
-		return OD_NUM;
+	public int getOH_NUM() {
+		return O_NUM;
 	}
-	public void setOD_NUM(int oD_NUM) {
-		OD_NUM = oD_NUM;
+	public void setOH_NUM(int oH_NUM) {
+		O_NUM = oH_NUM;
+	}
+	public String getO_DATE() {
+		return O_DATE;
+	}
+	public void setO_DATE(String o_DATE) {
+		O_DATE = o_DATE;
+	}
+	public String getO_STATUS() {
+		return O_STATUS;
+	}
+	public void setO_STATUS(String o_STATUS) {
+		O_STATUS = o_STATUS;
+	}
+	public String getO_WAY() {
+		return O_WAY;
+	}
+	public void setO_WAY(String o_WAY) {
+		O_WAY = o_WAY;
+	}
+	public int getO_TOT() {
+		return O_TOT;
+	}
+	public void setO_TOT(int o_TOT) {
+		O_TOT = o_TOT;
+	}
+	public int getO_TNUM() {
+		return O_TNUM;
+	}
+	public void setO_TNUM(int o_TNUM) {
+		O_TNUM = o_TNUM;
+	}
+	public int getO_COUNT() {
+		return O_COUNT;
+	}
+	public void setO_COUNT(int o_COUNT) {
+		O_COUNT = o_COUNT;
 	}
 	public String getOD_CODE() {
 		return OD_CODE;
@@ -84,6 +132,5 @@ public class OrderDetailDTO {
 		G_SAVEFILENAME = g_SAVEFILENAME;
 	}
 
-	
 	
 }

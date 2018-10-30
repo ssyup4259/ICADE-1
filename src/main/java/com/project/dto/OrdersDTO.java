@@ -29,7 +29,6 @@ public class OrdersDTO {
 	//imp_uid
 	private String O_IMP;
 	
-	
 	public String getO_IMP() {
 		return O_IMP;
 	}
@@ -108,8 +107,14 @@ public class OrdersDTO {
 	public void setO_TNUM(int o_TNUM) {
 		O_TNUM = o_TNUM;
 	}
+	public int getO_COUNT() {
+		return O_COUNT;
+	}
+	public void setO_COUNT(int o_COUNT) {
+		O_COUNT = o_COUNT;
+	}
 	
-
+	
 	
 	
 }
