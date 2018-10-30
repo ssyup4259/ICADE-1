@@ -49,4 +49,15 @@ public class BuyDAOImpl implements BuyDAO {
 		
 	}
 
+	@Override
+	public void insertOrderDetail(Map<String, String> map) throws Exception {
+		sessionTemplate.insert(buyMapper + ".insertOrderDetail", map);
+	}
+	
+	//상품 코드로 상품 정보 읽어오기(오버로딩)
+	@Override
+	public GoodsDetailDTO getReadGoodsDetail(Map<String, String> map) throws Exception {
+		return sessionTemplate.selectOne(buyMapper + ".getReadGoodsDetailMap", map);
+	}
+
 }

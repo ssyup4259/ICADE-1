@@ -54,8 +54,6 @@ public class BuyController {
 	@ResponseBody
 	public String payIt(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
 		
-		List<BuyDTO> b_lists = new ArrayList<BuyDTO>();
-		
 		b_service.payIt(req, o_dto);
 		
 		return "success";

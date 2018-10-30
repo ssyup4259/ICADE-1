@@ -12,24 +12,39 @@
 	order by GD_DEVICE, GD_COLOR
 </select>
 
-<!-- 결제 후 상세 상품 재고 감소 -->
+<!-- 결제 후 상세 상품 재고 감소, 판매수량 증가 -->
 <update id="goodsDetailCountDown" parameterType="map">
-	update GOODS_DETAIL set GD_COUNT = GD_COUNT - #{count} where GD_CODE = #{code}
+	update GOODS_DETAIL set GD_COUNT = GD_COUNT - #{count}, GD_SELLCOUNT = GD_SELLCOUNT + #{count} where GD_CODE = #{code}
 </update>
 
-<!-- 환불 후 상세 상품 재고 증가 -->
+<!-- 환불 후 상세 상품 재고 증가, 판매수량 감소 -->
 <update id="goodsDetailCountUp" parameterType="map">
-	update GOODS_DETAIL set GD_COUNT = GD_COUNT + #{count} where GD_CODE = #{code}
+	update GOODS_DETAIL set GD_COUNT = GD_COUNT + #{count}, GD_SELLCOUNT = GD_SELLCOUNT - #{count} where GD_CODE = #{code}
 </update>
 
 <select id="ordersMaxNum" resultType="int">
 	select nvl(max(O_NUM), 0) from Orders
 </select>
 
-<!-- Order테이블에 추가 -->
+<!-- Orders 테이블에 추가 -->
 <insert id="insertOrders" parameterType="map">
-	insert into Orders O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM
+	insert into Orders (O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM)
 	values (#{O_NUM}, #{O_ID}, sysdate, #{O_NAME}, #{O_PH}, #{O_ZIPCODE}, #{O_ADDRESS1}, #{O_ADDRESS2}, '배송준비중', '카드결제', #{O_TOT}, null)
+</insert>
+
+<!-- 상세 상품 한개의 데이터 -->
+<select id="getReadGoodsDetailMap" parameterType="map" resultType="com.project.dto.GoodsDetailDTO">
+	select GD_NUM, GD_CODE, G_NAME, G_PRICE, GD_KIND_NUM, GD_DEVICE, DK_NAME, GD_COLOR, GC_COLOR, GD_COUNT, GD_SELLCOUNT, G_DISCOUNT
+	from Goods_Detail, (select DK_CODE, DK_NAME from DEVICE_KIND), (select GC_CODE, GC_COLOR from GOODS_COLOR),
+	(select G_NAME, G_PRICE, G_DISCOUNT from Goods where G_NUM=#{g_num})
+	where GD_CODE = #{gd_code} and GD_DEVICE = DK_CODE and GD_COLOR = GC_CODE
+	order by GD_DEVICE, GD_COLOR
+</select>
+
+<!-- Order_Detail 테이블에 추가 -->
+<insert id="insertOrderDetail" parameterType="map">
+	insert into Order_Detail (OD_NUM, OD_CODE, OD_NAME, OD_DEVICE, OD_COLOR, OD_COUNT, OD_PRICE, OD_DISCOUNT)
+	values (#{OD_NUM}, #{OD_CODE}, #{OD_NAME}, #{OD_DEVICE}, #{OD_COLOR}, #{OD_COUNT}, #{OD_PRICE}, #{OD_DISCOUNT})
 </insert>
 
 

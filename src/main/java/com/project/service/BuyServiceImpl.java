@@ -114,12 +114,12 @@ public class BuyServiceImpl implements BuyService {
 	@Transactional
 	public String payIt(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
 		
-		String[] code = req.getParameterValues("code");
-		String[] count = req.getParameterValues("count");
-		
 		//해야할 작업
 		
-		//Start----------------해당 상품의 재고에서 수량 감소------------------
+		//Start----------------해당 상품의 재고에서 수량 감소, 판매수량 증가------------------
+		
+		String[] code = req.getParameterValues("code");
+		String[] count = req.getParameterValues("count");
 		
 		for (int i = 0; i < count.length; i++) {
 
@@ -146,6 +146,7 @@ public class BuyServiceImpl implements BuyService {
 		String ph = req.getParameter("O_PH1") + "-" + req.getParameter("O_PH2") + "-" + req.getParameter("O_PH3");
 		
 		map.put("O_NUM", Integer.toString(b_dao.ordersMaxNum() + 1));
+		String OD_NUM = Integer.toString(b_dao.ordersMaxNum() + 1);//Order_detail의 OD_NUM
 		map.put("O_ID", m_id);
 		map.put("O_NAME", o_dto.getO_NAME());
 		map.put("O_PH", ph);
@@ -158,13 +159,33 @@ public class BuyServiceImpl implements BuyService {
 		
 		//End--------------------Orders 테이블에 추가 ------------------------
 		
-		//Start--------------------Orders_Detail 테이블에 추가 ------------------------
+		//Start--------------------Order_Detail 테이블에 추가 ------------------------
 		
+		for (int i = 0; i < count.length; i++) {
+
+			map = new HashMap<String, String>();
+			
+			map.put("gd_code", code[i]);
+			map.put("g_num", code[i].substring(0, code[i].indexOf('-')));
+			
+			GoodsDetailDTO gd_dto = b_dao.getReadGoodsDetail(map);
+			
+			map = new HashMap<String, String>();
+			
+			map.put("OD_NUM", OD_NUM);
+			map.put("OD_CODE", code[i]);
+			map.put("OD_NAME", gd_dto.getG_NAME());
+			map.put("OD_DEVICE", gd_dto.getDK_NAME());
+			map.put("OD_COLOR", gd_dto.getGC_COLOR());
+			map.put("OD_COUNT", count[i]);
+			map.put("OD_PRICE", gd_dto.getG_PRICE());
+			map.put("OD_DISCOUNT", Integer.toString(gd_dto.getG_DISCOUNT()));
+			
+			b_dao.insertOrderDetail(map);
+			
+		}
 		
-		
-		
-		
-		//End--------------------Orders_Detail 테이블에 추가 ------------------------
+		//End--------------------Order_Detail 테이블에 추가 ------------------------
 		
 		return null;
 	}

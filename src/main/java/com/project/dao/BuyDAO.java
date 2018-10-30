@@ -20,4 +20,10 @@ public interface BuyDAO {
 	//Orders 테이블에 추가
 	public void insertOrders(Map<String, String> map) throws Exception;
 	
+	//상품의 정보 조회
+	public GoodsDetailDTO getReadGoodsDetail(Map<String, String> map) throws Exception;
+	
+	//Order_Detail 테이블에 추가
+	public void insertOrderDetail(Map<String, String> map) throws Exception;
+	
 }
