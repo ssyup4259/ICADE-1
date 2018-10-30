@@ -48,9 +48,12 @@
 									<td width="70%">
 										${bc_dto.getBC_CONTENT()}
 									</td>
-									<td align="right">
-									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px" id="replyImage">
+									<td>
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px" id=""><br>
 									</td>
+									<td><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: 300px; height: 400px" id=""></td>
+									<td><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: 300px; height: 400px" id=""></td>
+									<td><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: 300px; height: 400px" id=""></td>
 							<!-- 버튼 -->
 							<td width="15%">
 								<div id="btn" style="text-align: center;">
@@ -74,7 +77,7 @@
 						</tr>
 					</c:forEach>
 				</c:if>
-						<tr>
+			<%-- 		<tr>
 							<div style="text-align: center;">
 								<c:if test="${dataCount!=0 }">
 										${pageIndexList}
@@ -83,7 +86,7 @@
 										등록된 댓글이 없습니다.
 								</c:if>
 							</div>
+						</tr> --%>
 	</table>
-						</tr>
 </body>
 </html>

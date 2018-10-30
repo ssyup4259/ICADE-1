@@ -21,6 +21,7 @@ import com.project.service.MemberService;
 import com.project.util.CommandMap;
 
 @Controller
+@RequestMapping("/member/*")
 public class MemberController {
 	
 	@Autowired
