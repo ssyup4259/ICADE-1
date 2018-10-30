@@ -60,6 +60,14 @@ public class BuyController {
 		
 	}
 	
+	//결제 완료 후 주문정보 DB에 insert
+	@RequestMapping(value="/buyOK.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String buyOK(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
+		
+		return "buy/buyOK";
+		
+	}
+	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		

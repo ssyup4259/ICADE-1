@@ -144,11 +144,11 @@ function sample6_execDaumPostcode() {
 					
 		    		url: "<%=cp%>/buy/payIt.action",
 		    		type: 'POST',
-		    		dataType: 'json',
+		    		dataType: 'text',
 		    		data: allData,
 		    		success: function(data) {
 		    			
-		    			alert("결제가 완료되었습니다.");
+		    			location.href = "<%=cp%>/buy/buyOK.action";
 		    			
 		    		},
 		    		
