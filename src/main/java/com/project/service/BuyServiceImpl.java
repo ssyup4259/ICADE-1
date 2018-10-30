@@ -51,7 +51,7 @@ public class BuyServiceImpl implements BuyService {
 		b_dto.setCode(dto.getGD_CODE());
 		b_dto.setColor(dto.getGC_COLOR());
 		b_dto.setCount(gd_dto.getGD_COUNT());
-		b_dto.setDiscount(g_dto.getG_PRICE());
+		b_dto.setDiscount(0);//수정 요함
 		b_dto.setKind(dto.getDK_NAME());
 		b_dto.setName(g_dto.getG_NAME());
 		b_dto.setNum(gd_dto.getGD_NUM());
