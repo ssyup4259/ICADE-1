@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.OrderHistoryDAO;
 import com.project.dto.OrderDetailDTO;
+import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
 
 @Service
@@ -18,8 +19,8 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 	
 	//주문내역조회
 	@Override
-	public List<Integer> selectOrderNum(String O_ID) throws Exception {
-		return oh_dao.selectOrderNum(O_ID);
+	public List<Integer> selectOrderNum(HashMap<String, Object> hMap) throws Exception {
+		return oh_dao.selectOrderNum(hMap);
 	}
 
 	//주문내역 메인에 뿌려줄 값 조회
@@ -51,15 +52,22 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		return oh_dao.selectOrderDetail(O_Num);
 	}
 
-	@Override
-	public int countSearch(int OD_NUM) throws Exception {
-		return oh_dao.countSearch(OD_NUM);
+		@Override
+	public List<OrderDetailDTO> selectOdSaveFileName(HashMap<String, Object> hMap) throws Exception {
+
+		return oh_dao.selectOdSaveFileName(hMap);
 	}
 
 	@Override
-	public List<OrderDetailDTO> selectOdSaveFileName(String M_ID) throws Exception {
+	public List<OrderHistoryDTO> OrderHistoryMain(HashMap<String, Object> hMap) throws Exception {
 
-		return oh_dao.selectOdSaveFileName(M_ID);
+		return oh_dao.OrderHistoryMain(hMap);
+	}
+
+	@Override
+	public int maxOrders(HashMap<String, Object> hMap) throws Exception {
+
+		return oh_dao.maxOrders(hMap);
 	}
 
 }

@@ -1,6 +1,6 @@
 	var dt = new Date();
 	var year = dt.getFullYear();
-	var month = dt.getMonth()+1;
+	var month = ("0" + (dt.getMonth() + 1)).slice(-2);
 	var date = dt.getDate();
 	var maxDate = $("#history_end_date_button").val();
 
@@ -161,6 +161,31 @@
 			$("#OrderHistoryForm").attr("action","orderHistory_ok.action").submit();
 		});
 	});
+	
+	$(document).ready(function() {
+		var status = $(".txtEm").val();
+		
+		if(status==""){
+			
+		}
+		
+	});
+	
+	
+	$(window).load(function () {
+	    $(".gubun").each(function () {
+	        var rows = $(".gubun:contains('" + $(this).text() + "')");
+	        if (rows.length > 1) {
+	          rows.eq(0).attr("rowspan", rows.length);
+	          rows.not(":eq(0)").remove();
+	        }
+	    });
+	});
+	
+	
+	
+	
+	
 	
 	
 	

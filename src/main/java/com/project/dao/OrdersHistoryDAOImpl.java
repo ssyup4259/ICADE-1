@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.OrderDetailDTO;
+import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
 
 import oracle.net.aso.h;
@@ -29,8 +30,8 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 
 	
 	@Override
-	public List<Integer> selectOrderNum(String O_ID) throws Exception {
-		return sessionTemplate.selectList(ordersHistory + ".selectOrderNum",O_ID);
+	public List<Integer> selectOrderNum(HashMap<String, Object> hMap) throws Exception {
+		return sessionTemplate.selectList(ordersHistory + ".selectOrderNum",hMap);
 	}
 
 	@Override
@@ -69,16 +70,24 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	}
 
 	@Override
-	public int countSearch(int OD_NUM) throws Exception {
-		return sessionTemplate.selectOne(ordersHistory + ".countSearch",OD_NUM);
+	public int maxOrders(HashMap<String, Object> hMap) throws Exception {
+		return sessionTemplate.selectOne(ordersHistory + ".maxOrders",hMap);
 	}
 
 	@Override
-	public List<OrderDetailDTO> selectOdSaveFileName(String M_ID) throws Exception {
+	public List<OrderDetailDTO> selectOdSaveFileName(HashMap<String, Object> hMap) throws Exception {
 
 		 List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
 		 
-		 lists = sessionTemplate.selectList(ordersHistory + ".selectOdSaveFileName", M_ID); 
+		 lists = sessionTemplate.selectList(ordersHistory + ".selectOdSaveFileName", hMap); 
+		
+		return lists;
+	}
+
+	@Override
+	public List<OrderHistoryDTO> OrderHistoryMain(HashMap<String, Object> hMap) throws Exception {
+
+		List<OrderHistoryDTO> lists = sessionTemplate.selectList(ordersHistory + ".OrderHistoryMain",hMap);
 		
 		return lists;
 	}
