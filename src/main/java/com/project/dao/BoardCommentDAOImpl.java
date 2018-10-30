@@ -63,8 +63,8 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	
 	//하나의 댓글 읽어오기
 	@Override
-	public BoardCommentDTO getReadData(int bc_num) throws Exception {
-		return sessionTemplate.selectOne(replyMapper +".readData");
+	public BoardCommentDTO getReadData(int BC_NUM) throws Exception {
+		return sessionTemplate.selectOne(replyMapper +".readData",BC_NUM);
 	}
 
 	

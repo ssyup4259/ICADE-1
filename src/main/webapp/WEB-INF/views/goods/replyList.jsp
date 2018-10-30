@@ -26,8 +26,6 @@
 
 	function replyDelete(BC_NUM,BC_BOARD) {
 
-	alert(BC_NUM);
-	
 	var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
 		
 	if(confirm("삭제하시겠습니까?")) {
@@ -44,10 +42,16 @@
      });
    }
   }
-
+</script>
+<script type="text/javascript">
+ function replyUpdate(BC_NUM){
+	 var num =BC_NUM;
+	 f = document.replyForm;
+	 f.action = "<%=cp%>/goods/replyUpdate.action?BC_NUM=num";
+	 f.submit();
+}
 
 </script>
-
 
 <body>
 	<form id="replyForm" method="post" enctype="multipart/form-data">
@@ -78,10 +82,10 @@
 									
 									<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 									<c:if test="${bc_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-										<a href="#" id="updateData" onclick="cmUpdateOpen(${bc_dto.getBC_NUM()},${bc_dto.getBC_CONTENT()}">[수정]</a>
+										<input type="button" value="수정" onclick="javascript:location.href='<%=cp%>/goods/replyUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}';" class="btn" height="20px">
 										<br>
 										<button onclick="replyDelete(${bc_dto.getBC_NUM()},${bc_dto.getBC_BOARD()});" class="btn">삭제</button>
-										<br>
+										<br> 
 									</c:if>
 								</div>
 								</div>
@@ -90,12 +94,12 @@
 									<td width="70%">
 										${bc_dto.getBC_CONTENT()}
 									</td>
-									<td>
-									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px" id=""><br>
-									</td>
 									<td><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: 300px; height: 400px" id=""></td>
 									<td><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: 300px; height: 400px" id=""></td>
 									<td><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: 300px; height: 400px" id=""></td>
+									<td>
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px" id=""><br>
+									</td>
 							<!-- 버튼 -->
 						</tr>
 					</c:forEach>
