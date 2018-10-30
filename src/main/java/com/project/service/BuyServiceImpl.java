@@ -154,6 +154,7 @@ public class BuyServiceImpl implements BuyService {
 		map.put("O_ADDRESS1", o_dto.getO_ADDRESS1());
 		map.put("O_ADDRESS2", o_dto.getO_ADDRESS2());
 		map.put("O_TOT", Integer.toString(o_dto.getO_TOT()));
+		map.put("O_IMP", req.getParameter("imp_uid"));
 		
 		b_dao.insertOrders(map);
 		

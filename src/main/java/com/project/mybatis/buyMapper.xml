@@ -28,8 +28,8 @@
 
 <!-- Orders 테이블에 추가 -->
 <insert id="insertOrders" parameterType="map">
-	insert into Orders (O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM)
-	values (#{O_NUM}, #{O_ID}, sysdate, #{O_NAME}, #{O_PH}, #{O_ZIPCODE}, #{O_ADDRESS1}, #{O_ADDRESS2}, '배송준비중', '카드결제', #{O_TOT}, null)
+	insert into Orders (O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM, O_IMP)
+	values (#{O_NUM}, #{O_ID}, sysdate, #{O_NAME}, #{O_PH}, #{O_ZIPCODE}, #{O_ADDRESS1}, #{O_ADDRESS2}, '배송준비중', '카드결제', #{O_TOT}, null, #{O_IMP})
 </insert>
 
 <!-- 상세 상품 한개의 데이터 -->

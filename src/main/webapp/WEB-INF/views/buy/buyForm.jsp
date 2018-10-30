@@ -138,7 +138,9 @@ function sample6_execDaumPostcode() {
 			
 			if ( rsp.success ) {
 				
-				var allData = $("#myForm").serialize(); 
+				var allData = $("#myForm").serialize();
+				
+				allData = allData + "&imp_uid=" + rsp.imp_uid;
 				
 				$.ajax({
 					
