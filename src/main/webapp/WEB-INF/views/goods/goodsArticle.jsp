@@ -422,41 +422,25 @@ $(function() {
 				</div>
 				<hr>
 				
-				<!-- 댓글부분 -->
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	<!-- 댓글부분 -->
 				<div id="section3" class="container-fluid">
 					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 					<div id="comment" class="container-fluid">
+						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
+						<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
 					
+					<form id="commentForm" method="post" enctype="multipart/form-data">
 						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
-								<!-- 댓글 목록 -->
-									<tr>
-										<!-- 버튼 -->
-										<td width="15%">
-											<div id="btn" style="text-align: center;">
-												<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
-												<c:if test="${bc_dto.getBC_ID() eq sessionScope.userInfo.getM_ID() || sessionScope.userInfo.getM_ID() eq 'admin'}">
-													<c:if test="${bc_dto.getLevel() eq 1}">
-														<a href="#" onclick="cmReplyOpen(${bc_dto.getBC_NUM()});">[답변]</a>
-														<br>
-													</c:if>
-												</c:if>
-			
-												<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
-												<c:if test="${bc_dto.BC_ID() == sessionScope.userInfo.getM_ID()}">
-													<a href="#" onclick="cmUpdateOpen(${bc_dto.getBC_NUM()},'${bc_dto.getBC_CONTENT()}');">[수정]</a>
-													<br>
-													<a href="#" onclick="cmDeleteOpen(${bc_dto.getBC_NUM()});">[삭제]</a>
-													<br>
-												</c:if>
-											</div>
-										</td>
-									</tr>
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-								<form id="commentForm" method="post" enctype="multipart/form-data">
-									<tr bgcolor="lightgray" height="60px;">
-										<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
-										<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
+							<tr>
+									<%-- <tr bgcolor="lightgray" height="60px;">
 										<!-- 아이디-->
 										<td width="15%">
 											<div>${sessionScope.userInfo.getM_ID()}</div>
@@ -464,21 +448,19 @@ $(function() {
 										<!-- 본문 작성-->
 										<td width="75%">
 											<div>
-												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
+												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color:transparent;"></textarea>
 												<input type="file" id="upload" name="bcFile">
 											</div>
-										</td>
+										</td> --%>
 										<!-- 댓글 등록 버튼 -->
 										<td width="15%">
 											<div id="btn2" style="text-align: center;">
 												<p>
-													<input type="button" id="replySubmit" value="[댓글등록]" class="btn" height="20px;">
+													<input type="button" id="" value="포토후기 작성하기"  onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
 												</p>
 											</div>
-											<div id="result"></div>
 										</td>
 									</tr>
-								</form>
 							</c:if>
 
 
@@ -502,7 +484,7 @@ $(function() {
 									<td width="15%">
 										<div id="btn" style="text-align: center;">
 											<p>
-												<input id="process" type="button" value="[댓글등록]" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px;">
+												<input id="process" type="button" value="로그인하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px;">
 											</p>
 										</div>
 									</td>
@@ -517,12 +499,10 @@ $(function() {
 							</tr>
 						</table>
 						<div id="replyList"></div>
+						</form>
+						
 				   </div>
 				</div>
-			</form>
-		</div>
-	</div>
-
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 <!-- 댓글에 띄울 리스트 작성 -->

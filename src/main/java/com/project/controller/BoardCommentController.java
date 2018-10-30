@@ -6,12 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.AdminDAO;
@@ -31,22 +30,28 @@ public class BoardCommentController {
 	AdminDAO a_dao;
 	
 	//댓글 입력
-	@RequestMapping("replyInsert.action")
-	@ResponseBody
-	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req)throws Exception{
+	@RequestMapping(value="/replyinsert.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String replyinsertData(HttpServletRequest req)throws Exception{
 		
+		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
 		
-	 	bc_service.insertData(bc_dto, req);
+		req.setAttribute("G_NUM", G_NUM);
+		
+	 	return "goods/replyCreate";
+	}
+	@RequestMapping(value="/replyinsert_ok.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String replyInsert_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
+		
+		int BC_BOARD = Integer.parseInt(request.getParameter("G_NUM"));
+	 	bc_service.insertData(bc_dto, req, request);
 	 	
-	 	
+	 	return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
 	}
 	//댓글 리스트
 	@RequestMapping("/replyList.action")
 	public String listData(HttpServletRequest req)throws Exception{
 		
-		
 		 bc_service.replyList(req);
-		 
 		 return "/goods/replyList";
 	}
 	

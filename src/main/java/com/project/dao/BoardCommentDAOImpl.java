@@ -45,11 +45,12 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	public int countReply(int BC_BOARD) throws Exception {
 		return sessionTemplate.selectOne(replyMapper+".countReply",BC_BOARD); 
 	}
+	
+	
+	
 	//댓글리스트
 	@Override
 	public List<BoardCommentDTO> replyList(int start,int end, int BC_BOARD) throws Exception {
-		
-		
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		

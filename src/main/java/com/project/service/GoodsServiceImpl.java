@@ -171,6 +171,7 @@ public class GoodsServiceImpl implements GoodsService {
 		req.setAttribute("g_dto", g_dto);
 		req.setAttribute("gd_list", gd_list);
 		req.setAttribute("d_list", d_list);
+		req.setAttribute("G_NUM", G_NUM);
 		
 		return req;
 	}
