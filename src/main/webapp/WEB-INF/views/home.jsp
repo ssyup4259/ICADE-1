@@ -81,7 +81,7 @@
 						<option value="G_CONTENT">내용</option>
 					</select>
 					<input type="text" class="inputBox" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;">
-					<button type="button" class="btn" style="width: 100px;" onclick="sendIt();">검색</button>
+					<button type="button" class="btnGray" style="width: 100px;" onclick="sendIt();">검색</button>
 				</form>
 			</div>
 		</div>
