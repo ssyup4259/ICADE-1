@@ -39,14 +39,14 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		bc_dto.setBC_BOARD(BC_BOARD);
 		int bc_num;
 		String saveFileName;
-		String save1 = null;
-		String save2 = null;
-		String save3 = null;
+		String save1;
+		String save2;
+		String save3;
 
-		MultipartFile file = req.getFile("bcFile");
-		MultipartFile file1 = req.getFile("bcFile1");
-		MultipartFile file2 = req.getFile("bcFile2");
-		MultipartFile file3 = req.getFile("bcFile3");
+		MultipartFile file = req.getFile("bcfile");
+		MultipartFile file1 = req.getFile("bcfile1");
+		MultipartFile file2 = req.getFile("bcfile2");
+		MultipartFile file3 = req.getFile("bcfile3");
 
 		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 
@@ -60,7 +60,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		System.out.println(bc_dto.getBC_IMAGE());
 		System.out.println(bc_dto.getBC_NUM());
 		System.out.println(bc_dto.getBC_PARENT());
-
+		
+		
 		File f = new File(path);
 
 		if (!f.exists()) {
@@ -71,51 +72,26 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String fileExt1;
 		String fileExt2;
 		String fileExt3;
-
+		
+		//파일 이름을 세팅함
 		bc_dto.setBC_IMAGE(file.getOriginalFilename());
+		bc_dto.setBC_CONTENTFILE1(file1.getOriginalFilename());
+		bc_dto.setBC_CONTENTFILE2(file2.getOriginalFilename());
+		bc_dto.setBC_CONTENTFILE3(file3.getOriginalFilename());
+		
+		System.out.println(bc_dto.getBC_IMAGE());
+		System.out.println(bc_dto.getBC_CONTENTFILE1().length());
+		System.out.println(bc_dto.getBC_CONTENTFILE2().length());
+		System.out.println(bc_dto.getBC_CONTENTFILE3());
+		
+		//메인 사진은 무조건 등록해야함
 		fileExt = bc_dto.getBC_IMAGE().substring(bc_dto.getBC_IMAGE().lastIndexOf("."));
-		System.out.println(fileExt);
 		saveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
 		saveFileName += System.nanoTime();
 		saveFileName += fileExt;
 		bc_dto.setBC_SAVEFILENAME(saveFileName);
-
-		if (bc_dto.getBC_CONTENTFILE1() != null) {
-			bc_dto.setBC_CONTENTFILE1(file1.getOriginalFilename());
-			fileExt1 = bc_dto.getBC_CONTENTFILE1().substring(bc_dto.getBC_CONTENTFILE1().lastIndexOf("."));
-			save1 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
-			save1 += System.nanoTime();
-			save1 += fileExt1;
-			bc_dto.setBC_SAVE1(save1);
-
-		} else if (bc_dto.getBC_CONTENTFILE1() == null) {
-			fileExt1 = null;
-			save1 = null;
-			bc_dto.setBC_SAVE1(save1);
-		}
-
-		if (bc_dto.getBC_CONTENTFILE2() != null) {
-			fileExt2 = bc_dto.getBC_CONTENTFILE2().substring(bc_dto.getBC_CONTENTFILE2().lastIndexOf("."));
-			save2 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
-			save2 += System.nanoTime();
-			save2 += fileExt2;
-			bc_dto.setBC_SAVE2(save2);
-		} else if (bc_dto.getBC_CONTENTFILE2() == null) {
-			save2 = null;
-			bc_dto.setBC_SAVE1(save2);
-		}
-
-		if (bc_dto.getBC_CONTENTFILE3() != null) {
-			fileExt3 = bc_dto.getBC_CONTENTFILE3().substring(bc_dto.getBC_CONTENTFILE3().lastIndexOf("."));
-			save3 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
-			save3 += System.nanoTime();
-			save3 += fileExt3;
-			bc_dto.setBC_SAVE3(save3);
-		} else if (bc_dto.getBC_CONTENTFILE3() == null) {
-			save3 = null;
-			bc_dto.setBC_SAVE1(save3);
-		}
-
+		System.out.println("얍얍3");
+		
 		// 댓글 메인사진
 		if (file.getSize() > 0 || file != null) {
 
@@ -143,88 +119,135 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			}
 
 		}
+		
+		
+		//파일 저장 이름 세팅
+		if (bc_dto.getBC_CONTENTFILE1().length() !=0) {
+			fileExt1 = bc_dto.getBC_CONTENTFILE1().substring(bc_dto.getBC_CONTENTFILE1().lastIndexOf("."));
+			save1 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+			save1 += System.nanoTime();
+			save1 += fileExt1;
+			bc_dto.setBC_SAVE1(save1);
+			
+			// 댓글 컨텐츠 사진
+			if (file1.getSize() > 0 || file1 != null) {
 
-		// 댓글 컨텐츠 사진
-		if (file1.getSize() > 0 || file1 != null) {
+				try {
 
-			try {
+					FileOutputStream fos = new FileOutputStream(path + "/" + save1);
+					InputStream is = file1.getInputStream();
 
-				FileOutputStream fos = new FileOutputStream(path + "/" + save1);
-				InputStream is = file1.getInputStream();
+					byte[] buffer = new byte[512];
 
-				byte[] buffer = new byte[512];
+					while (true) {
 
-				while (true) {
+						int data = is.read(buffer, 0, buffer.length);
 
-					int data = is.read(buffer, 0, buffer.length);
-
-					if (data == -1) {
-						break;
+						if (data == -1) {
+							break;
+						}
+						fos.write(buffer, 0, data);
 					}
-					fos.write(buffer, 0, data);
+
+					is.close();
+					fos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
-				is.close();
-				fos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-
+		} else if (bc_dto.getBC_CONTENTFILE1().length() == 0) {
+			save1 = null;
+			bc_dto.setBC_SAVE1(save1);
+			System.out.println("얍얍1");
 		}
-		// 댓글 컨텐츠 사진
-		if (file2.getSize() > 0 || file2 != null) {
+		
+		//파일 저장 이름 세팅해주자.
+		if (bc_dto.getBC_CONTENTFILE2().length() != 0) {
+			fileExt2 = bc_dto.getBC_CONTENTFILE2().substring(bc_dto.getBC_CONTENTFILE2().lastIndexOf("."));
+			save2 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+			save2 += System.nanoTime();
+			save2 += fileExt2;
+			bc_dto.setBC_SAVE2(save2);
+			
+			// 댓글 컨텐츠 사진
+			if (file2.getSize() > 0 || file2 != null) {
 
-			try {
+				try {
 
-				FileOutputStream fos = new FileOutputStream(path + "/" + save2);
-				InputStream is = file2.getInputStream();
+					FileOutputStream fos = new FileOutputStream(path + "/" + save2);
+					InputStream is = file2.getInputStream();
 
-				byte[] buffer = new byte[512];
+					byte[] buffer = new byte[512];
 
-				while (true) {
+					while (true) {
 
-					int data = is.read(buffer, 0, buffer.length);
+						int data = is.read(buffer, 0, buffer.length);
 
-					if (data == -1) {
-						break;
+						if (data == -1) {
+							break;
+						}
+						fos.write(buffer, 0, data);
 					}
-					fos.write(buffer, 0, data);
+
+					is.close();
+					fos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
-				is.close();
-				fos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-
+			
+			
+			
+		} else if (bc_dto.getBC_CONTENTFILE2().length() == 0) {
+			save2 = null;
+			bc_dto.setBC_SAVE2(save2);
 		}
-		// 댓글 컨텐츠 사진
-		if (file3.getSize() > 0 || file3 != null) {
 
-			try {
+		
+		//파일 저장 이름 세팅해주자.
+		if (bc_dto.getBC_CONTENTFILE3().length() != 0) {
+			fileExt3 = bc_dto.getBC_CONTENTFILE3().substring(bc_dto.getBC_CONTENTFILE3().lastIndexOf("."));
+			save3 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+			save3 += System.nanoTime();
+			save3 += fileExt3;
+			bc_dto.setBC_SAVE3(save3);
+			
+			// 댓글 컨텐츠 사진
+			if (file3.getSize() > 0 || file3 != null) {
 
-				FileOutputStream fos = new FileOutputStream(path + "/" + save3);
-				InputStream is = file3.getInputStream();
+				try {
 
-				byte[] buffer = new byte[512];
+					FileOutputStream fos = new FileOutputStream(path + "/" + save3);
+					InputStream is = file3.getInputStream();
 
-				while (true) {
+					byte[] buffer = new byte[512];
 
-					int data = is.read(buffer, 0, buffer.length);
+					while (true) {
 
-					if (data == -1) {
-						break;
+						int data = is.read(buffer, 0, buffer.length);
+
+						if (data == -1) {
+							break;
+						}
+						fos.write(buffer, 0, data);
 					}
-					fos.write(buffer, 0, data);
+
+					is.close();
+					fos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
-				is.close();
-				fos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-
+			
+			
+		} else if (bc_dto.getBC_CONTENTFILE3().length() == 0) {
+			save3 = null;
+			bc_dto.setBC_SAVE3(save3);
 		}
+
 		bc_num = bc_dao.insertData(bc_dto);
 	}
 
@@ -291,32 +314,56 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 	// 댓글 업데이트
 	@Override
-	public void updateData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request) throws Exception {
+	public void updateData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)
+			throws Exception {
 
-		int BC_NUM = Integer.parseInt(request.getParameter("BC_NUM"));
-		bc_dto.setBC_NUM(BC_NUM);
-		bc_dto.setBcfile(req.getFile("bcfile"));
-		bc_dto.setBcfile1(req.getFile("bcfile1"));
-		bc_dto.setBcfile2(req.getFile("bcfile2"));
-		bc_dto.setBcfile3(req.getFile("bcfile3"));
 		
+		String saveFileName1 = null;
+		String saveFileName2 = null;
+		String saveFileName3 = null;
+		String saveFileName4 = null;
+		
+		String newSaveFileName1 = null;
+		String newSaveFileName2 = null;
+		String newSaveFileName3 = null;
+		String newSaveFileName4 = null;
+		
+		String save1 = null;
+		String save2 = null;
+		String save3 = null;
+		String save4 = null;
+		
+		String image1 =null;
+		String image2 =null;
+		String image3 =null;
+		String image4 =null;
+		
+		
+		
+		
+		int BC_NUM = Integer.parseInt(request.getParameter("BC_NUM"));
+
 		System.out.println(bc_dto.getBC_BOARD());
 		System.out.println(bc_dto.getBC_CONTENT());
 		System.out.println(bc_dto.getBC_ID());
-		System.out.println(bc_dto.getBC_IMAGE());
+		System.out.println(bc_dto.getBC_SAVEFILENAME());
 		System.out.println(bc_dto.getBC_NUM());
 		System.out.println(bc_dto.getBC_PARENT());
 		System.out.println(bc_dto.getBcfile());
 		System.out.println(bc_dto.getBcfile1());
 		System.out.println(bc_dto.getBcfile2());
 		System.out.println(bc_dto.getBcfile3());
+
 		
-		
+
+		// 상품 메인사진
 		if (!bc_dto.getBcfile().isEmpty()) {
 
-			bc_dto = bc_dao.getReadData(bc_dto.getBC_NUM());
-			String saveFileName = bc_dto.getBC_SAVEFILENAME();
-			String path = req.getSession().getServletContext().getRealPath("/resources/goods");
+			BoardCommentDTO bc_dto1 = new BoardCommentDTO();
+			
+			bc_dto1 = bc_dao.getReadData(bc_dto.getBC_NUM());
+			String saveFileName = bc_dto1.getBC_SAVEFILENAME();
+			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 
 			File f = new File(path);
 
@@ -324,11 +371,14 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 				f.delete();
 
-				MultipartFile file = req.getFile("bcFile");
+				MultipartFile file = req.getFile("bcfile");
 
-				bc_dto.setBC_IMAGE(file.getOriginalFilename());
+				bc_dto1.setBC_IMAGE(file.getOriginalFilename());
 
-				String fileExt = bc_dto.getBC_IMAGE().substring(bc_dto.getBC_IMAGE().lastIndexOf("."));
+				//저장되는 이미지 (화면xx)
+				saveFileName1 = bc_dto1.getBC_IMAGE();
+				
+				String fileExt = bc_dto1.getBC_IMAGE().substring(bc_dto1.getBC_IMAGE().lastIndexOf("."));
 				if (fileExt == null || fileExt.equals("")) {
 					return;
 				}
@@ -337,9 +387,10 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 				newSaveFileName += System.nanoTime();
 				newSaveFileName += fileExt;
 
-				// 저장될 파일명 세팅
-
-				bc_dto.setBC_SAVEFILENAME(newSaveFileName);
+				bc_dto1.setBC_SAVEFILENAME(newSaveFileName);
+				
+				// 저장될 파일명 세팅//보여지는 사진
+				newSaveFileName1 =bc_dto1.getBC_SAVEFILENAME();
 
 				if (file.getSize() > 0 || file != null) {
 
@@ -373,15 +424,335 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 				}
 
 			}
-	} else if(bc_dto.getBcfile()==null){
+		} else if (bc_dto.getBcfile().isEmpty()) {
 
-		bc_dto = bc_dao.getReadData(bc_dto.getBC_NUM());
+			BoardCommentDTO bc_dto2 = new BoardCommentDTO();
+			
+			bc_dto2 = bc_dao.getReadData(bc_dto.getBC_NUM());
+			
+			 image1 = bc_dto2.getBC_IMAGE();
+			 save1 = bc_dto2.getBC_SAVEFILENAME();
 
-		bc_dto.setBC_IMAGE(bc_dto.getBC_IMAGE());
-		bc_dto.setBC_SAVEFILENAME(bc_dto.getBC_SAVEFILENAME());
-	}
+			/*bc_dto.setBC_IMAGE(bc_dto.getBC_IMAGE());
+			bc_dto.setBC_SAVEFILENAME(bc_dto.getBC_SAVEFILENAME());*/
+		}
+
+		
+		
+		if (!bc_dto.getBcfile1().isEmpty()) {
+
+
+			BoardCommentDTO bc_dto3 = new BoardCommentDTO();
+			
+			bc_dto3 = bc_dao.getReadData(bc_dto.getBC_NUM());
+			String saveFileName = bc_dto3.getBC_SAVE1();
+			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
+
+			File f = new File(path);
+
+			if (f.exists()) {
+
+				f.delete();
+
+				MultipartFile file1 = req.getFile("bcfile1");
+
+				bc_dto3.setBC_CONTENTFILE1(file1.getOriginalFilename());
+				saveFileName2 = bc_dto3.getBC_CONTENTFILE1();
+
+				String fileExt = bc_dto3.getBC_CONTENTFILE1().substring(bc_dto3.getBC_CONTENTFILE1().lastIndexOf("."));
+				if (fileExt == null || fileExt.equals("")) {
+					return;
+				}
+
+				String newSaveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+				newSaveFileName += System.nanoTime();
+				newSaveFileName += fileExt;
+
+				// 저장될 파일명 세팅
+
+				bc_dto3.setBC_SAVE1(newSaveFileName);
+				newSaveFileName2 = bc_dto3.getBC_SAVE1();
+
+				if (file1.getSize() > 0 || file1 != null) {
+
+					try {
+
+						FileOutputStream fos = new FileOutputStream(path + "/" + newSaveFileName);
+
+						InputStream is = file1.getInputStream();
+
+						byte[] buffer = new byte[512];
+
+						while (true) {
+
+							int data = is.read(buffer, 0, buffer.length);
+
+							if (data == -1) {
+								break;
+							}
+
+							fos.write(buffer, 0, data);
+
+						}
+
+						is.close();
+						fos.close();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+		} else if (bc_dto.getBcfile1().isEmpty()) {
+
+			BoardCommentDTO bc_dto4 = new BoardCommentDTO();
+
+			bc_dto4 = bc_dao.getReadData(bc_dto.getBC_NUM());
+			
+			image2 = bc_dto4.getBC_CONTENTFILE1();
+			 save2 = bc_dto4.getBC_SAVE1();
+		}
+
+		// 컨텐츠 사진
+		if (!bc_dto.getBcfile2().isEmpty()) {
+
+			BoardCommentDTO bc_dto5 = new BoardCommentDTO();
+			
+			bc_dto5 = bc_dao.getReadData(bc_dto.getBC_NUM());
+			String saveFileName = bc_dto5.getBC_SAVE2();
+			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
+
+			File f = new File(path);
+
+			if (f.exists()) {
+
+				f.delete();
+
+				MultipartFile file = req.getFile("bcfile2");
+
+				bc_dto5.setBC_CONTENTFILE2(file.getOriginalFilename());
+				
+				saveFileName3 = bc_dto5.getBC_CONTENTFILE2();
+
+				String fileExt = bc_dto5.getBC_CONTENTFILE2().substring(bc_dto5.getBC_CONTENTFILE2().lastIndexOf("."));
+				if (fileExt == null || fileExt.equals("")) {
+					return;
+				}
+
+				String newSaveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+				newSaveFileName += System.nanoTime();
+				newSaveFileName += fileExt;
+
+				// 저장될 파일명 세팅
+
+				bc_dto5.setBC_SAVE2(newSaveFileName);
+				
+				newSaveFileName3 = bc_dto5.getBC_SAVE2();
+
+				if (file.getSize() > 0 || file != null) {
+
+					try {
+
+						FileOutputStream fos = new FileOutputStream(path + "/" + newSaveFileName);
+
+						InputStream is = file.getInputStream();
+
+						byte[] buffer = new byte[512];
+
+						while (true) {
+
+							int data = is.read(buffer, 0, buffer.length);
+
+							if (data == -1) {
+								break;
+							}
+
+							fos.write(buffer, 0, data);
+
+						}
+
+						is.close();
+						fos.close();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+		} else if (bc_dto.getBcfile2().isEmpty()) {
+
+			BoardCommentDTO bc_dto6 = new BoardCommentDTO();
+			
+			
+			bc_dto6 = bc_dao.getReadData(bc_dto.getBC_NUM());
+
+			image3 = bc_dto6.getBC_CONTENTFILE2();
+			save3 = bc_dto6.getBC_SAVE2();
+			
+		}
+
+		// 컨텐츠 사진
+		if (!bc_dto.getBcfile3().isEmpty()) {
+
+			BoardCommentDTO bc_dto7 = new BoardCommentDTO();
+			
+			bc_dto7 = bc_dao.getReadData(bc_dto.getBC_NUM());
+			String saveFileName = bc_dto7.getBC_SAVE3();
+			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
+
+			File f = new File(path);
+
+			if (f.exists()) {
+
+				f.delete();
+
+				MultipartFile file = req.getFile("bcfile3");
+
+				bc_dto7.setBC_CONTENTFILE3(file.getOriginalFilename());
+				
+				saveFileName4 = bc_dto7.getBC_CONTENTFILE3();
+
+				String fileExt = bc_dto7.getBC_CONTENTFILE3().substring(bc_dto7.getBC_CONTENTFILE3().lastIndexOf("."));
+				if (fileExt == null || fileExt.equals("")) {
+					return;
+				}
+
+				String newSaveFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+				newSaveFileName += System.nanoTime();
+				newSaveFileName += fileExt;
+
+				// 저장될 파일명 세팅
+
+				bc_dto7.setBC_SAVE3(newSaveFileName);
+
+				newSaveFileName4 = bc_dto7.getBC_SAVE3();
+				
+				if (file.getSize() > 0 || file != null) {
+
+					try {
+
+						FileOutputStream fos = new FileOutputStream(path + "/" + newSaveFileName);
+
+						InputStream is = file.getInputStream();
+
+						byte[] buffer = new byte[512];
+
+						while (true) {
+
+							int data = is.read(buffer, 0, buffer.length);
+
+							if (data == -1) {
+								break;
+							}
+
+							fos.write(buffer, 0, data);
+
+						}
+
+						is.close();
+						fos.close();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+		} else if (bc_dto.getBcfile3().isEmpty()) {
+
+			BoardCommentDTO bc_dto8 = new BoardCommentDTO();
+			
+			bc_dto8 = bc_dao.getReadData(bc_dto.getBC_NUM());
+
+			image4 = bc_dto8.getBC_CONTENTFILE3();
+			save4 = bc_dto8.getBC_SAVE3();
+			
+		}
+
+		//컨텐츠 파일 이미지 저장(xx)
+	/*	String saveFileName1 = null;
+		String saveFileName2 = null;
+		String saveFileName3 = null;
+		String saveFileName4 = null;
+		
+		
+		// 저장될 파일명 세팅 -뿌려주는 
+		String newSaveFileName1 = null;
+		String newSaveFileName2 = null;
+		String newSaveFileName3 = null;
+		String newSaveFileName4 = null;
+		
+		save가 보여지는 것
+		
+		// 저장될 파일명 세팅
+		String image1 =null;
+		String image2 =null;
+		String image3 =null;
+		String image4 =null;
+				
+		//컨텐츠 파일 이미지 저장- 뿌려주는
+		String save1 = null;
+		String save2 = null;
+		String save3 = null;
+		String save4 = null;*/
+		
+		if (saveFileName1 == null) {
+			bc_dto.setBC_IMAGE(image1);
+		}else {
+			bc_dto.setBC_IMAGE(saveFileName1);
+		}
+		if (saveFileName2 == null) {
+			bc_dto.setBC_CONTENTFILE1(image2);
+		}else {
+			bc_dto.setBC_CONTENTFILE1(saveFileName2);
+		}
+		if (saveFileName3 == null) {
+			bc_dto.setBC_CONTENTFILE2(image3);
+		}else {
+			bc_dto.setBC_CONTENTFILE2(saveFileName3);
+		}
+		if (saveFileName4 == null) {
+			bc_dto.setBC_CONTENTFILE3(image4);
+		}else {
+			bc_dto.setBC_CONTENTFILE3(saveFileName4);
+		}
+		
+		if(newSaveFileName1 == null) {
+			bc_dto.setBC_SAVEFILENAME(save1);
+		}else {
+			bc_dto.setBC_SAVEFILENAME(newSaveFileName1);
+		}
+		if(newSaveFileName2 == null) {
+			bc_dto.setBC_SAVE1(save2);
+		}else {
+			bc_dto.setBC_SAVE1(newSaveFileName2);
+		}
+		if(newSaveFileName2 == null) {
+			bc_dto.setBC_SAVE2(save3);
+		}else {
+			bc_dto.setBC_SAVE2(newSaveFileName3);
+		}
+		if(newSaveFileName3 == null) {
+			bc_dto.setBC_SAVE3(save4);
+		}else {
+			bc_dto.setBC_SAVE3(newSaveFileName4);
+		}
+		
+		bc_dto.setBC_NUM(BC_NUM);
+		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT());
+		bc_dto.setBC_ID(bc_dto.getBC_ID());
+		bc_dto.setBC_BOARD(bc_dto.getBC_BOARD());
+		bc_dto.setBC_PARENT(bc_dto.getBC_PARENT());
+		
+		
 		bc_dao.updateData(bc_dto);
 	}
+
 	@Override
 	public void deleteData(int BC_NUM, String path) throws Exception {
 

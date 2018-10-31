@@ -64,9 +64,9 @@
 </head>
 <body>
 
-<div id="bbs">
-	
 	<form action="" name="myForm" method="post" enctype="multipart/form-data">
+	
+	<div id="bbs">
 	
 	<input type="hidden" name="BC_BOARD" value="${bc_dto.getBC_BOARD()}">
 	<input type="hidden" name="BC_NUM" value="${bc_dto.getBC_NUM()}">
@@ -103,19 +103,19 @@
 			<dl>
 				<dt>사&nbsp;&nbsp;&nbsp;&nbsp;진</dt>
 					<dd>
-						<input type="file"  name="bcFile"><br>
+						<input type="file"  name="bcfile"><br>
 						${bc_dto.getBC_IMAGE()}
 					</dd>
 					<dd>							
-						<input type="file"  name="bcFile1"><br>
+						<input type="file"  name="bcfile1"><br>
 						${bc_dto.getBC_CONTENTFILE1()}
 					</dd>
 					<dd>
-						<input type="file"  name="bcFile2"><br>
+						<input type="file"  name="bcfile2"><br>
 						${bc_dto.getBC_CONTENTFILE2()}
 					</dd>
 					<dd>
-						<input type="file"  name="bcFile3"><br>
+						<input type="file"  name="bcfile3"><br>
 						${bc_dto.getBC_CONTENTFILE3()}
 					</dd>
 			</dl>		
@@ -129,9 +129,8 @@
 	<input type="button" value=" 작성취소 " class="btn2"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
 	</div>
 	
+	</div>
 	</form>
-	
-</div>
 
 </body>
 </html>

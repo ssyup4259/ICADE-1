@@ -98,10 +98,10 @@
 				</dd>							
 			</dl>		
 		</div>
-		<input type="file" id="upload" name="bcFile"><br>
-		<input type="file" id="upload1" name="bcFile1"><br>
-		<input type="file" id="upload2" name="bcFile2"><br>
-		<input type="file" id="upload3" name="bcFile3"><br>
+		<input type="file" id="upload" name="bcfile"><br>
+		<input type="file" id="upload1" name="bcfile1"><br>
+		<input type="file" id="upload2" name="bcfile2"><br>
+		<input type="file" id="upload3" name="bcfile3"><br>
 	</div>	
 	
 	<div id="bbsCreated_footer">
