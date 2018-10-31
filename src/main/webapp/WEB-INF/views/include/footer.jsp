@@ -87,12 +87,24 @@
 
 </script>
 
-<script>
-	$(document).ready(function(){
-		
-	});
+ <script type="text/javascript">
+        $(document).ready(function(){
 
-</script>
+            //Check if the current URL contains '#' 
+            if(document.URL.indexOf("#")==-1)
+            {
+                // Set the URL to whatever it was plus "#".
+                url = document.URL+"#";
+                location = "#";
+
+                //Reload the page
+                location.reload(true);
+
+            }
+        });
+ </script> 
+
+
 
 <input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
 
