@@ -50,6 +50,14 @@ public class OrdersHistoryController {
 		String endDate = (String) request.getParameter("endDay");
 		String pageNum = request.getParameter("pageNum");
 		
+		String pageStart = request.getParameter("endPage");
+		
+		if(pageStart==null||pageStart.equals(null)) {
+			pageStart = "1";
+		}
+		int pageEnd = Integer.parseInt(request.getParameter("endPage")); 
+		
+		
 		if(startDate==null || startDate.equals(null)){
 			startDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate()); 
 		}
@@ -68,6 +76,8 @@ public class OrdersHistoryController {
 		hMap.put("O_ID", m_Id);
 		hMap.put("start_date",startDate);
 		hMap.put("end_date",endDate);	
+
+		
 		
 		//현재 페이지
         int currentPage = 1;
