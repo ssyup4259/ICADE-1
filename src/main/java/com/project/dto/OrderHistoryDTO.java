@@ -14,16 +14,16 @@ public class OrderHistoryDTO {
 	private int O_TOT;
 	//운송장 번호
 	private int O_TNUM;
-	//주문번호에 포함된 상품의 갯수
-	private int O_COUNT;
+	//환불코드?
+	private String O_IMP;
 	//상품코드
 	private String OD_CODE;
 	//주문 상품명
 	private String OD_NAME;
 	//지원 기종
-	private int OD_DEVICE;
+	private String OD_DEVICE;
 	//색상
-	private int OD_COLOR;
+	private String OD_COLOR;
 	//주문 수량
 	private int OD_COUNT;
 	//상품 가격
@@ -35,12 +35,6 @@ public class OrderHistoryDTO {
 	//상품의 저장된 이미지 이름
 	private String G_SAVEFILENAME;
 	
-	public int getOH_NUM() {
-		return O_NUM;
-	}
-	public void setOH_NUM(int oH_NUM) {
-		O_NUM = oH_NUM;
-	}
 	public String getO_DATE() {
 		return O_DATE;
 	}
@@ -71,11 +65,17 @@ public class OrderHistoryDTO {
 	public void setO_TNUM(int o_TNUM) {
 		O_TNUM = o_TNUM;
 	}
-	public int getO_COUNT() {
-		return O_COUNT;
+	public int getO_NUM() {
+		return O_NUM;
 	}
-	public void setO_COUNT(int o_COUNT) {
-		O_COUNT = o_COUNT;
+	public void setO_NUM(int o_NUM) {
+		O_NUM = o_NUM;
+	}
+	public String getO_IMP() {
+		return O_IMP;
+	}
+	public void setO_IMP(String o_IMP) {
+		O_IMP = o_IMP;
 	}
 	public String getOD_CODE() {
 		return OD_CODE;
@@ -89,16 +89,16 @@ public class OrderHistoryDTO {
 	public void setOD_NAME(String oD_NAME) {
 		OD_NAME = oD_NAME;
 	}
-	public int getOD_DEVICE() {
+	public String getOD_DEVICE() {
 		return OD_DEVICE;
 	}
-	public void setOD_DEVICE(int oD_DEVICE) {
+	public void setOD_DEVICE(String oD_DEVICE) {
 		OD_DEVICE = oD_DEVICE;
 	}
-	public int getOD_COLOR() {
+	public String getOD_COLOR() {
 		return OD_COLOR;
 	}
-	public void setOD_COLOR(int oD_COLOR) {
+	public void setOD_COLOR(String oD_COLOR) {
 		OD_COLOR = oD_COLOR;
 	}
 	public int getOD_COUNT() {

@@ -43,6 +43,8 @@
    }
   }
 </script>
+
+
 <script type="text/javascript">
  function replyUpdate(BC_NUM){
 	 var num =BC_NUM;

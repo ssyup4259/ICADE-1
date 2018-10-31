@@ -1,51 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <title>주문 내역 조회</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
+
+<script type="text/javascript">
+
+	function cancelIt(imp_uid) {
+		
+		$.ajax({			
+			type : "post",
+			url :"<%=cp%>/payment/cancel.action",
+			data : {"imp_uid":imp_uid},
+			datatype : "text",
+			success:function(data){
+				alert(data);
+				console.log(data);
+			},
+			error: function(data) {
+				alert("error");
+				alert(data);
+			}
+		});
+	
+	}
+
+</script>
+
 </head>
 <body>
-<%-- 
-<c:forEach var="ttt" items="${integerList}" varStatus="i">
-	${ttt }
-</c:forEach>
 
-<br/>
-
-<c:forEach var="map" items="${hashMap}">
-	${dto.key }
-	<c:forEach var="dto" items="${map.value }">
-		${dto.getOH_NUM() }
-	</c:forEach> }
-</c:forEach> 
---%>
-<!-- 
-<table border="1">
-	<tr>
-		<td class="gubun">1</td>
-		<td>2</td>
-		<td>3</td>
-	</tr>
-	<tr>
-		<td class="gubun">1</td>
-		<td>2</td>
-		<td>3</td>
-	</tr>
-	<tr>
-		<td class="gubun">1</td>
-		<td>2</td>
-		<td>3</td>
-	</tr>
-</table>
- -->
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <div id="container">
         <div id="contents">
@@ -118,12 +116,12 @@
         <h3>주문 상품 정보</h3>
 </div>
 
-<table border="1" summary="">
+<table border="1" style="width: 70%;">
 <caption>주문 상품 정보</caption>
 <colgroup>
 	<col style="width:135px;">
 	<col style="width:93px;">
-	<col style="width:auto;">
+	<col style="width:150px;">
 	<col style="width:61px;">
 	<col style="width:111px;">
 	<col style="width:111px;">
@@ -147,40 +145,40 @@
 <c:forEach var="map" items="${hashMap}">
 	<c:forEach var="dto" items="${map.value }">
 			<tr class="xans-record-">
-				<td rowspan="<%-- ${fn:length(lists)} --%>" class="gubun">
+				<td class="gubun">
 					<p>${dto.getO_DATE()}<br/>
-						<a href="ordersHistoryDetail.action?o_num=${dto.getOH_NUM()}" class="line">[${dto.getOH_NUM()}]</a>
+						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
-			        <a href="#none" class="displaynone" onclick="OrderHistory.orderCancel('20181029-0004189')"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
-			        <a href="cancel.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
-			        <a href="exchange.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
-			        <a href="return.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif" alt="반품신청"></a>
+					<form action="" method="post" name="myForm">
+						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
+					</form>
+			        
 				</td>
-				
-				<td class="thumb"><a href="/icade/good/${dto.getGD_NUM()}"><img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';" alt=""></a></td>
+				<td class="thumb">
+					<a href="/icade/good/${dto.getGD_NUM()}">
+						<img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" width="80" height="80">
+					</a>
+				</td>
 			       <td class="product left top">
-					<a href="/product/detail.html?product_no=850&amp;cate_no=70"><strong>${dto.getOD_NAME()}</strong></a>
+					<a href="/product/detail.html?product_no=850&amp;cate_no=70">
+						<strong>${dto.getOD_NAME()}</strong>
+					</a>
 						<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div>
 				</td>
 				
 				<td>${dto.getOD_COUNT()}</td>
 				
 				<td class="right">
-					<strong>₩${dto.getOD_PRICE()}</strong>
-					<div class="displaynone"></div>
+					<strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong>
 				</td>
 				
 				<td class="state">
 					<p class="txtEm">${dto.getO_STATUS()}</p>
-					<p class="displaynone"><a href="#" target="_self"></a></p>
-					<p class="displaynone"><a href="#none" class="line" onclick=""></a></p>
-					
-					<a href="/board/product/write.html?board_no=4&amp;product_no=850&amp;order_id=20181029-0004189" class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_comment.gif" alt="구매후기"></a>
 				</td>
 				
 				<td>
-					<p class="displaynone"><a href="#none" class="line" onclick="OrderHistory.getDetailInfo('?product_no=850&amp;cate_no=70&amp;order_id=20181029-0004189&amp;ord_item_code=20181029-0004189-01');">[상세정보]</a></p>
-					<p class="">-</p>
+					<a href="#none" class="line" onclick="OrderHistory.getDetailInfo('?product_no=850&amp;cate_no=70&amp;order_id=20181029-0004189&amp;ord_item_code=20181029-0004189-01');">[상세정보]</a>
+					<p class="">${dto.getO_IMP()}</p>
 				</td>
 				
 			</tr>
@@ -224,6 +222,6 @@
 
     </div>
  -->
-
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
