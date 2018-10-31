@@ -25,4 +25,6 @@ public interface BoardCommentDAO {
 	public int countAllReply()throws Exception;
 	//하나의 댓글에 담긴 상품 정보
 	public BoardCommentDTO getReadOne(int bc_num)throws Exception;
+	//이전글 다음글 설정하기
+	public BoardCommentDTO readSubject(int bc_num)throws Exception;
 }

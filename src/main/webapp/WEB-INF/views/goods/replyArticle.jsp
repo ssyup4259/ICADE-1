@@ -50,7 +50,7 @@
 				<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
 				 <div>
 					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
-					<br>				
+					<br>
 					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
 					<br>
 					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: auto; height: auto" id="">
@@ -63,12 +63,19 @@
 			</tr>
 			</table>
 		</div>
-		<!-- <div class="bbsArticle_bottomLine">
-			이전글 : 작업중
+		
+		<div class="bbsArticle_bottomLine">
+				<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
+					이전글 : <a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
+				</c:if>	
 		</div>
+		
 		<div class="bbsArticle_noLine">
-			다음글 : 작업중
-		</div> -->
+				<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
+					다음글 : <a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
+				</c:if>
+		</div>
+		
 	</div>
 	<div id="bbsArticle_footer">
 		<div id="leftFooter">
@@ -81,7 +88,7 @@
 				</c:if>
 					
 				<li style="float: right">
-					<input type="text" value="${replyPageNum}"/>
+					<input type="hidden" value="${replyPageNum}"/>
                	    <input type="button" value=" 리스트 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${replyPageNum}';"/>
 				</li>
 			</ul>

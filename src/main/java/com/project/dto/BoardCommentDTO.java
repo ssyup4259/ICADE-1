@@ -28,6 +28,12 @@ public class BoardCommentDTO {
 	private String G_NAME;
 	//부모글 번호
 	private int G_NUM;
+	
+	//이전글, 다음글
+	private int NEXT_BC_NUM;
+	private int PREV_BC_NUM;
+	private String NEXT_BC_SUBJECT;
+	private String PREV_BC_SUBJECT;
 
 //------------컨텐츠 사진들---------------------
 	private String BC_CONTENTFILE1;
@@ -223,6 +229,39 @@ public class BoardCommentDTO {
 	public void setG_NUM(int g_NUM) {
 		G_NUM = g_NUM;
 	}
+
+	public int getNEXT_BC_NUM() {
+		return NEXT_BC_NUM;
+	}
+
+	public void setNEXT_BC_NUM(int nEXT_BC_NUM) {
+		NEXT_BC_NUM = nEXT_BC_NUM;
+	}
+
+	public int getPREV_BC_NUM() {
+		return PREV_BC_NUM;
+	}
+
+	public void setPREV_BC_NUM(int pREV_BC_NUM) {
+		PREV_BC_NUM = pREV_BC_NUM;
+	}
+
+	public String getNEXT_BC_SUBJECT() {
+		return NEXT_BC_SUBJECT;
+	}
+
+	public void setNEXT_BC_SUBJECT(String nEXT_BC_SUBJECT) {
+		NEXT_BC_SUBJECT = nEXT_BC_SUBJECT;
+	}
+
+	public String getPREV_BC_SUBJECT() {
+		return PREV_BC_SUBJECT;
+	}
+
+	public void setPREV_BC_SUBJECT(String pREV_BC_SUBJECT) {
+		PREV_BC_SUBJECT = pREV_BC_SUBJECT;
+	}
+	
 	
 	
 }

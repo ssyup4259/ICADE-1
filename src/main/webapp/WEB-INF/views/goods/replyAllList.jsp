@@ -50,7 +50,7 @@
 	  </c:if>
       	<td colspan="1" >
       	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">${bc_dto.getG_NAME()}</a><br>
-     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}"><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" style="width: 300px; height: 400px" id=""><br>
+     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}"><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" style="width: 300px; height: 400px" id=""><br>
     	 ${bc_dto.getBC_SUBJECT()}</a>
     	</td>
   	<c:if test="${i%j == j-1}">

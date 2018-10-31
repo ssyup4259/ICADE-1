@@ -467,24 +467,11 @@ $(function() {
 							<!-- 로그인 하지 않았을때만 보이는 화면 -->
 							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 								<tr bgcolor="lightgray" height="60px;">
-									<!-- 아이디-->
-									<td width="15%">
-										<div>${sessionScope.userInfo.getM_ID()}</div>
-									</td>
 									<!-- 본문 작성-->
-									<td width="75%">
+									<td width="100%">
 										<div>
-											<textarea id="" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"
-											disabled="disabled">로그인 후  등록 가능합니다.</textarea>
-										</div>
-									</td>
-
-
-									<!-- 댓글 등록 버튼 -->
-									<td width="15%">
-										<div id="btn" style="text-align: center;">
 											<p>
-												<input id="process" type="button" value="로그인하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px;">
+												<input type="button" value="포토후기 작성하기"  onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px">
 											</p>
 										</div>
 									</td>

@@ -120,7 +120,6 @@ public class BoardCommentController {
 	@RequestMapping("/articleUpdate_ok.action")
 	public String articleUpdate_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
 		
-		int BC_BOARD = Integer.parseInt(request.getParameter("BC_BOARD"));
 		int BC_NUM = Integer.parseInt(request.getParameter("BC_NUM"));
 		bc_service.updateData(bc_dto, req, request);
 		
@@ -130,7 +129,6 @@ public class BoardCommentController {
 	public String articleDelete(HttpServletRequest req)throws Exception{
 		
 		int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
-		int BC_BOARD = Integer.parseInt(req.getParameter("BC_BOARD"));
 		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 		
 		String path = req.getSession().getServletContext().getRealPath("/resources/reply");

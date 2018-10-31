@@ -771,6 +771,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String cp = req.getContextPath();
 		
 		String replyPageNum = req.getParameter("replyPageNum");
+		
 		int currentPage = 1;
 
 		if (replyPageNum != null)
@@ -820,23 +821,24 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	//하나의 댓글 상세페이지
 	@Override
 	public HttpServletRequest replyArticle(HttpServletRequest req) throws Exception {
-	//갖고온 데이터 받기
 		
+				//갖고온 데이터 받기
 				int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 				
-				String replyPageNum = req.getParameter("pageNum");
+				String replyPageNum = req.getParameter("replyPageNum");
 				
 				if (replyPageNum == null || replyPageNum.equals("")) {
 					replyPageNum = "1";
 				}
 				
 				BoardCommentDTO bc_dto =  bc_dao.getReadOne(BC_NUM);
-							
-				String param = "replyPageNum=" + replyPageNum;
+				
+				BoardCommentDTO sub_dto = bc_dao.readSubject(BC_NUM);
+				
 			
-				req.setAttribute("params", param);
 				req.setAttribute("replyPageNum", replyPageNum);
 				req.setAttribute("bc_dto", bc_dto);
+				req.setAttribute("sub_dto", sub_dto);
 				
 				return req;
 	}

@@ -135,4 +135,9 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	public BoardCommentDTO getReadOne(int bc_num) throws Exception {
 		return sessionTemplate.selectOne(replyMapper+".readOne",bc_num );
 	}
+	
+	@Override
+	public BoardCommentDTO readSubject(int bc_num) throws Exception {
+		return sessionTemplate.selectOne(replyMapper+".readSubject", bc_num);
+	}
 }
