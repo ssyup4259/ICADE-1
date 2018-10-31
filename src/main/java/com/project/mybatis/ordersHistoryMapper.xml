@@ -17,8 +17,8 @@
 	<select id="maxOrders" parameterType="map" resultType="int">
 		select nvl(count(O_NUM),0) from ORDERS where O_ID = #{O_ID}
 	<![CDATA[
-		and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
-		and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
+	   and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
+	   and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
 	]]>
 	</select>
 
@@ -39,18 +39,24 @@
 
 	<select id="OrderHistoryMain" parameterType="map" resultType="com.project.dto.OrderHistoryDTO">
 		select O_NUM,to_char(trunc(O_DATE),'YYYY-MM-DD') O_DATE,O_STATUS,O_WAY,O_TOT,O_TNUM,O_IMP,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME from(
-			select rownum rnum, data.* from(
-				(select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME,O_NUM,O_ID,O_DATE,O_STATUS,O_WAY,O_TOT,O_TNUM,O_IMP from ORDER_DETAIL,
-				(select GD_NUM,GD_CODE from GOODS_DETAIL),(select G_NUM,G_SAVEFILENAME from goods),(select O_ID,O_NUM,O_DATE,O_STATUS,O_WAY,O_TOT,O_TNUM,O_IMP from ORDERS)
-			where O_NUM=OD_NUM AND OD_CODE = GD_CODE and GD_NUM = G_NUM and OD_NUM = #{OD_NUM} and O_ID = #{O_ID}
+			(select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME,O_NUM,O_ID,O_DATE,O_STATUS,O_WAY,O_TOT,O_TNUM,O_IMP from ORDER_DETAIL,
+			(select GD_NUM,GD_CODE from GOODS_DETAIL),(select G_NUM,G_SAVEFILENAME from goods),(select O_ID,O_NUM,O_DATE,O_STATUS,O_WAY,O_TOT,O_TNUM,O_IMP from ORDERS)
+			where O_NUM=OD_NUM AND OD_CODE = GD_CODE and GD_NUM = G_NUM) data) 
+		where OD_NUM = #{OD_NUM} and O_ID = #{O_ID}
 	<![CDATA[
-				and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date},'YYYY-MM-DD' ) 
-				and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
-				ORDER by O_date desc)
-			data))
-			where rnum>=#{start} and rnum <= #{end}
+	    and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
+	    and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
+	    ORDER by OD_NUM
 	]]>
+	
 	</select>
+
+	<!-- orders의 주문번호를 받아서 주문내역의 상세내용 select -->
+<!-- 
+	<select id="selectOrderDetail" parameterType="int" resultType="com.project.dto.OrderDetailDTO">
+		select OD_CODE, OD_NAME,OD_COLOR,OD_DEVICE,OD_COUNT,OD_PRICE,OD_DISCOUNT from Order_Detail where OD_NUM = #{O_NUM}
+	</select> 
+-->
 
 	<!-- 상품코드(OD_CODE)로 상품번호(글번호) 찾기 -->
 	<select id="selectGoodsPage" parameterType="int" resultType="int">

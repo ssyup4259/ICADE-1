@@ -55,7 +55,7 @@ public class OrdersHistoryController {
 		if(pageStart==null||pageStart.equals(null)) {
 			pageStart = "1";
 		}
-		int pageEnd = Integer.parseInt(request.getParameter("endPage")); 
+		//int pageEnd = Integer.parseInt(request.getParameter("endPage")); 
 		
 		
 		if(startDate==null || startDate.equals(null)){
@@ -121,7 +121,7 @@ public class OrdersHistoryController {
 			Integer O_Num = integerList.get(i);
 			
 			hMap.put("OD_NUM",O_Num);
-			
+			System.out.println("aa");
 			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
 			
 			hashMap.put(O_Num, mapList);
