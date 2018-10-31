@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -80,12 +80,12 @@
 					<label><input type="radio" name="M_RANK" value="seller" checked="checked" />seller</label>
 				</c:if>
 
-				<select name="searchKey" class="sel">
+				<select name="searchKey" class="selGreen" style="width: 150px;">
 					<option value="M_ID">아이디</option>
 					<option value="M_NAME">이름</option>
 				</select>
-				<input type="text" name="searchValue" class="inputBox">
-				<input type="button" value=" 검색 " class="btn" onclick="sendIt();" />
+				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
+				<input type="button" value=" 검색 " class="btnGreen" onclick="sendIt();" style="width: 150px;" />
 			</form>
 
 

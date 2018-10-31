@@ -10,7 +10,7 @@
 <title>상품목록</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -40,7 +40,7 @@ function sendIt() {
 		<div class="container-fluid text-center">
 			<h1>상품 목록</h1>
 			<form action="" name="searchForm" method="post">
-				<select name="GD_KIND_NUM" class="sel">
+				<select name="GD_KIND_NUM" class="selGreen" style="width: 150px;">
 					<option value="">전체</option>
 					<c:forEach var="gk_dto" items="${gk_lists}">
 						<c:if test="${gdKindNum eq gk_dto.GK_NUM}">
@@ -52,15 +52,15 @@ function sendIt() {
 					</c:forEach>
 				</select>
 
-				<select name="searchKey" class="sel" style="width: 150px;">
+				<select name="searchKey" class="selGreen" style="width: 150px;">
 					<option value="G_NAME">상품명</option>
 					<option value="G_CONTENT">내용</option>
 				</select>
 
-				<input type="text" name="searchValue" class="inputBox">
-				<input type="button" value=" 검색 " class="btn" onclick="sendIt();" style="width: 150px;" />
+				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
+				<input type="button" value=" 검색 " class="btnGreen" onclick="sendIt();" style="width: 150px;" />
 
-				<input type="button" value=" 상품 등록 " class="btn" onclick="javascript:location.href='<%=cp%>/admin/insertGoods.action';" style="width: 150px;" />
+				<input type="button" value=" 상품 등록 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/admin/insertGoods.action';" style="width: 150px;" />
 
 			</form>
 

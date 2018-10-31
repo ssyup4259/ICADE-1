@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -40,24 +40,24 @@
 	<jsp:include page="../include/header.jsp" flush="false" />
 
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
-		<div class="collapse navbar-collapse" id="myNavbar">
+		<div class="" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
-				<form class="form-inline" action="" name="searchForm" method="post">
+				<form class="" action="" name="searchForm" method="post">
 					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
 
-					<select name="GK_KIND_NUM" class="sel" style="width: 100px; cursor: pointer;">
+					<select name="GK_KIND_NUM" class="selGreen" style="width: 100px; cursor: pointer;">
 						<option value="">전체</option>
 						<c:forEach var="gk_dto" items="${gk_lists}">
 							<option value="${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</option>
 						</c:forEach>
 					</select>
 
-					<select name="searchKey" class="sel" style="width: 100px; cursor: pointer;">
+					<select name="searchKey" class="selGreen" style="width: 100px; cursor: pointer;">
 						<option value="G_NAME">상품명</option>
 						<option value="G_CONTENT">내용</option>
 					</select>
-					<input type="text" class="inputBox" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;">
-					<button type="button" class="btn" style="width: 100px;" onclick="sendIt();">검색</button>
+					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;">
+					<button type="button" class="btnGreen" style="width: 100px;" onclick="sendIt();">검색</button>
 				</form>
 			</div>
 		</div>
