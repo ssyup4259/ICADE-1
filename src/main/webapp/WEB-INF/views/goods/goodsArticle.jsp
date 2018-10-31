@@ -308,7 +308,7 @@ $(function() {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: left;">총 상품금액</div>
 							<div class="col-sm-9" style="text-align: left">
-								<input type="text" id="sum" class="inputBox" name="sum" value="" readonly="readonly" style="width: 100%;" />
+								<input type="text" id="sum" class="inputBox" name="sum" value="${g_dto.getG_PRICE()}" readonly="readonly" style="width: 100%;" />
 							</div>
 						</div>
 						<hr style="border-top: 2px solid black">
