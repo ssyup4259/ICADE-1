@@ -23,7 +23,7 @@ public class GoodsDTO {
     private String G_CONTENT;
 
     // 할인율 상품에 대한 할인율
-    private String G_DISCOUNT;
+    private int G_DISCOUNT;
 
     // 파일
     private MultipartFile gFile;
@@ -137,11 +137,11 @@ public class GoodsDTO {
 		G_CONTENT = g_CONTENT;
 	}
 
-	public String getG_DISCOUNT() {
+	public int getG_DISCOUNT() {
 		return G_DISCOUNT;
 	}
 
-	public void setG_DISCOUNT(String g_DISCOUNT) {
+	public void setG_DISCOUNT(int g_DISCOUNT) {
 		G_DISCOUNT = g_DISCOUNT;
 	}
 
