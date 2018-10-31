@@ -46,7 +46,7 @@ public class GoodsController {
 		
 		g_service.goodsMain(req);
 		
-		c_service.cookieList(req);
+		
 		
 		return "goods/goodsMain";
 		
@@ -86,6 +86,7 @@ public class GoodsController {
 			if (num == g_num || num.equals(g_num)) {
 				Cookie setCookie = new Cookie(g_num, null);
 				setCookie.setMaxAge(0);
+				setCookie.setPath("/");
 				resp.addCookie(setCookie);
 				break;
 			}
@@ -94,7 +95,9 @@ public class GoodsController {
 		
 		Cookie setCookie = new Cookie(g_num, g_num);
 		setCookie.setMaxAge(60*60*24);
+		setCookie.setPath("/");
 		resp.addCookie(setCookie);
+		
 	
 		
 		
@@ -117,10 +120,9 @@ public class GoodsController {
 	
 	
 	@ModelAttribute
-	HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
 		Cookie[] cookies = req.getCookies();
-		
 		List<String> c_lists = new ArrayList<String>();
 	
 		if(cookies != null){

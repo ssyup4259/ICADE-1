@@ -37,9 +37,10 @@ public class CookieServiceImpl implements CookieService{
 	}
 
 	@Override
-	public void cookieList(HttpServletRequest req) throws Exception {
+	public HttpServletRequest cookieList(HttpServletRequest req) throws Exception {
 		
 		List<String> c_lists = new ArrayList<String>();		
+		
 		c_lists = (List<String>) req.getAttribute("c_lists");
 		
 		List<GoodsDTO> ck_lists = new ArrayList<GoodsDTO>();
@@ -65,9 +66,10 @@ public class CookieServiceImpl implements CookieService{
 		}
 		
 		req.setAttribute("ck_lists", ck_lists);
+		
+		return req;
+		
 	}
 
-
-	
 
 }

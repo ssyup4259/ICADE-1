@@ -11,6 +11,6 @@ public interface CookieService {
 	public GoodsDTO cookieInsert(HttpServletRequest req)throws Exception;
 	
 	
-	public void cookieList(HttpServletRequest req)throws Exception;
+	public HttpServletRequest cookieList(HttpServletRequest req)throws Exception;
 	
 }
