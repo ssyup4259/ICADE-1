@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.AdminDAO;
@@ -52,33 +50,46 @@ public class BoardCommentController {
 	public String listData(HttpServletRequest req)throws Exception{
 		
 		 bc_service.replyList(req);
+		 
 		 return "/goods/replyList";
 	}
 	
 	//댓글 수정
-	@RequestMapping("/replyUpdate.action")
-	public String updateData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req)throws Exception{
-		
-		bc_service.updateData(bc_dto, req);
-		return "/goods/goodsArticle";
-	}
-	
-	
-	
-
-	//댓글 삭제
-	@RequestMapping("/replyDelete.action")
-	@ResponseBody
-	public String deleteData(HttpServletRequest req)throws Exception{
-		
+	@RequestMapping(value="/replyUpdate.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String replyupdateData(HttpServletRequest req)throws Exception{
 		
 		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
+		System.out.println(BC_NUM);
+		BoardCommentDTO bc_dto = bc_service.getReadReply(BC_NUM);
 		
-		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
+		req.setAttribute("bc_dto", bc_dto);
+		
+	 	return "goods/replyUpdate";
+	}
+	
+	@RequestMapping("/replyUpdate_ok.action")
+	public String replyUpdate_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
+		
+		int BC_BOARD = Integer.parseInt(request.getParameter("BC_BOARD"));
+		
+		bc_service.updateData(bc_dto, req, request);
+		
+		return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
+	}
+	//댓글 삭제
+	@RequestMapping(value="/replyDelete.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteData(HttpServletRequest req)throws Exception{
+		
+		int BC_BOARD = Integer.parseInt(req.getParameter("BC_BOARD"));
+		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
+		
+		System.out.println(BC_NUM + "SDNAKSNDKASNDLASND");
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 		
 		bc_service.deleteData(BC_NUM, path);
 		
-		return "rediret:goods/goodsArticle.action";
+		return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
 	}
 	
 	
