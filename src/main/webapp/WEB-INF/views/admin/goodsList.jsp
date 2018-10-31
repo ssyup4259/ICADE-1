@@ -31,6 +31,15 @@ function sendIt() {
 
 }
 </script>
+<style type="text/css">
+.paging a{
+	color: black;
+}
+
+.paging a:active{
+	color:#A3C838;
+}
+</style>
 
 </head>
 <body>
@@ -94,11 +103,16 @@ function sendIt() {
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="9"><c:if test="${dataCount!=0 }">
+						<td colspan="9">
+						<div class="paging">
+						<c:if test="${dataCount!=0 }">
 				${pageIndexList }
 					</c:if> <c:if test="${dataCount==0 }">
 				등록된 상품이 없습니다.
-					</c:if></td>
+					</c:if>
+						</div>
+					
+					</td>
 					</tr>
 				</tbody>
 			</table>

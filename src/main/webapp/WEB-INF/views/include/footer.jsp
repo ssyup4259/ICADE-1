@@ -44,7 +44,7 @@
 </script>
 
 
-<input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
+<input type="button" class="btnGray back_to_top" value="맨위로" style="width: 70px;">
 
 <div class="latestGoods">
 	<div class="lg text-center" style="width: 70px; height: 750px; border: 2px solid #A3C838; border-radius: 12px;">
