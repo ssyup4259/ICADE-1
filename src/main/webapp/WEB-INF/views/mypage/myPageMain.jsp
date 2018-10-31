@@ -120,7 +120,7 @@
 
 			<input type="button" value="정보수정" onclick="sendIt('change')" class="btnGreen" style="width: 250px;">
 			<input type="button" value="회원탈퇴" onclick="sendIt('cancel')" class="btnGreen" style="width: 250px;">
-			<input type="button" value="주문내역조회" class="btnGreen" style="width: 250px;">
+			<input type="button" value="주문내역조회" id="orderHistory" class="btnGreen" style="width: 250px;">
 			<input type="button" value="주소록" class="btnGreen" style="width: 250px;">
 		</div>
 	</div>
@@ -128,5 +128,10 @@
 
 	<jsp:include page="../include/footer.jsp" flush="false" />
 	</div>
+<script type="text/javascript">
+	$("#orderHistory").click(function(){
+		document.location.href = "orderHistory.action";
+	});
+</script>
 </body>
 </html>
