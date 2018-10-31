@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <title>주문 내역 조회</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -13,6 +18,8 @@
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
 </head>
 <body>
+
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <div id="container">
         <div id="contents">
@@ -85,12 +92,12 @@
         <h3>주문 상품 정보</h3>
 </div>
 
-<table border="1" summary="">
+<table border="1" style="width: 70%;">
 <caption>주문 상품 정보</caption>
 <colgroup>
 	<col style="width:135px;">
 	<col style="width:93px;">
-	<col style="width:auto;">
+	<col style="width:150px;">
 	<col style="width:61px;">
 	<col style="width:111px;">
 	<col style="width:111px;">
@@ -118,14 +125,22 @@
 					<p>${dto.getO_DATE()}<br/>
 						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
-			        <a href="#none" class="displaynone" onclick="OrderHistory.orderCancel('20181029-0004189')"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
-			        <a href="cancel.html?o_imp=${dto.getO_IMP()}" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="환불신청"></a>
-			        <a href="exchange.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
-			        <a href="return.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif" alt="반품신청"></a>
+					<form action="https://api.iamport.kr/payments/cancel" method="post" name="myForm">
+						<input type="hidden" name="imp_uid" value="${dto.getO_IMP()}"/>
+						<input type="submit" value="환불 하기"/>
+					</form>
+			        <img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="환불신청">
+			        
 				</td>
-				<td class="thumb"><a href="/icade/good/${dto.getGD_NUM()}"><img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';" alt=""></a></td>
+				<td class="thumb">
+					<a href="/icade/good/${dto.getGD_NUM()}">
+						<img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" width="80" height="80">
+					</a>
+				</td>
 			       <td class="product left top">
-					<a href="/product/detail.html?product_no=850&amp;cate_no=70"><strong>${dto.getOD_NAME()}</strong></a>
+					<a href="/product/detail.html?product_no=850&amp;cate_no=70">
+						<strong>${dto.getOD_NAME()}</strong>
+					</a>
 						<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div>
 				</td>
 				
@@ -145,8 +160,10 @@
 				</td>
 				
 				<td>
-					<p class="displaynone"><a href="#none" class="line" onclick="OrderHistory.getDetailInfo('?product_no=850&amp;cate_no=70&amp;order_id=20181029-0004189&amp;ord_item_code=20181029-0004189-01');">[상세정보]</a></p>
-					<p class="">-</p>
+					<p class="displaynone">
+					<a href="#none" class="line" onclick="OrderHistory.getDetailInfo('?product_no=850&amp;cate_no=70&amp;order_id=20181029-0004189&amp;ord_item_code=20181029-0004189-01');">[상세정보]</a>
+					</p>
+					<p class="">${dto.getO_IMP()}</p>
 				</td>
 				
 			</tr>
@@ -190,6 +207,6 @@
 
     </div>
  -->
-
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
