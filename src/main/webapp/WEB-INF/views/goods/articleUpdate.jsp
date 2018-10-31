@@ -54,7 +54,7 @@
 		}
 		f.BC_CONTENT.value = str;
 
-		f.action = "<%=cp%>/goods/replyUpdate_ok.action";
+		f.action = "<%=cp%>/goods/articleUpdate_ok.action";
 		f.submit();
 		
 	}
@@ -124,9 +124,9 @@
 	</div>	
 	
 	<div id="bbsCreated_footer">
-	<input type="button" value="수정하기" class="btn2" onclick="sendIt();"/>
-	<input type="reset" value="다시입력" class="btn2" onclick="document.myForm.subject.focus();"/>
-	<input type="button" value="작성취소" class="btn2"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
+	<input type="button" value="수정하기 " class="btn2" onclick="sendIt();"/>
+	<input type="reset" value=" 다시입력 " class="btn2" onclick="document.myForm.subject.focus();"/>
+	<input type="button" value=" 작성취소 " class="btn2"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
 	</div>
 	
 	</div>

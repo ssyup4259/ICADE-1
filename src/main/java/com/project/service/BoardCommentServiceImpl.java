@@ -3,6 +3,8 @@ package com.project.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.BoardCommentDAO;
 import com.project.dto.BoardCommentDTO;
+import com.project.dto.GoodsDTO;
+import com.project.dto.GoodsDetailDTO;
 import com.project.util.MyUtil;
 
 @Service
@@ -362,7 +366,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			BoardCommentDTO bc_dto1 = new BoardCommentDTO();
 			
 			bc_dto1 = bc_dao.getReadData(bc_dto.getBC_NUM());
-			String saveFileName = bc_dto1.getBC_SAVEFILENAME();
 			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 
 			File f = new File(path);
@@ -445,7 +448,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			BoardCommentDTO bc_dto3 = new BoardCommentDTO();
 			
 			bc_dto3 = bc_dao.getReadData(bc_dto.getBC_NUM());
-			String saveFileName = bc_dto3.getBC_SAVE1();
 			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 
 			File f = new File(path);
@@ -521,7 +523,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			BoardCommentDTO bc_dto5 = new BoardCommentDTO();
 			
 			bc_dto5 = bc_dao.getReadData(bc_dto.getBC_NUM());
-			String saveFileName = bc_dto5.getBC_SAVE2();
 			String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 
 			File f = new File(path);
@@ -681,20 +682,20 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String saveFileName4 = null;
 		
 		
-		// 저장될 파일명 세팅 -뿌려주는 
-		String newSaveFileName1 = null;
-		String newSaveFileName2 = null;
-		String newSaveFileName3 = null;
-		String newSaveFileName4 = null;
-		
-		save가 보여지는 것
-		
 		// 저장될 파일명 세팅
 		String image1 =null;
 		String image2 =null;
 		String image3 =null;
 		String image4 =null;
 				
+		
+		// 저장될 파일명 세팅 -뿌려주는 
+		String newSaveFileName1 = null;
+		String newSaveFileName2 = null;
+		String newSaveFileName3 = null;
+		String newSaveFileName4 = null;
+		
+	
 		//컨텐츠 파일 이미지 저장- 뿌려주는
 		String save1 = null;
 		String save2 = null;
@@ -732,16 +733,19 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		}else {
 			bc_dto.setBC_SAVE1(newSaveFileName2);
 		}
-		if(newSaveFileName2 == null) {
+		if(newSaveFileName3 == null) {
 			bc_dto.setBC_SAVE2(save3);
 		}else {
 			bc_dto.setBC_SAVE2(newSaveFileName3);
 		}
-		if(newSaveFileName3 == null) {
+		if(newSaveFileName4 == null) {
 			bc_dto.setBC_SAVE3(save4);
 		}else {
 			bc_dto.setBC_SAVE3(newSaveFileName4);
 		}
+		
+		
+		
 		
 		bc_dto.setBC_NUM(BC_NUM);
 		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT());
@@ -752,12 +756,89 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		bc_dao.updateData(bc_dto);
 	}
-
+	//댓글삭제
 	@Override
 	public void deleteData(int BC_NUM, String path) throws Exception {
 
 		bc_dao.deleteData(BC_NUM, path);
 
+	}
+	//댓글 전체 리스트
+	@Override
+	public HttpServletRequest replyAllList(HttpServletRequest req) throws Exception {
+		
+		
+		String cp = req.getContextPath();
+		
+		String replyPageNum = req.getParameter("replyPageNum");
+		int currentPage = 1;
+
+		if (replyPageNum != null)
+			currentPage = Integer.parseInt(replyPageNum);
+
+		if (replyPageNum == null || replyPageNum.equals("")) {
+			replyPageNum = "1";
+		}
+
+		// 전체데이터갯수
+		int dataCount = bc_dao.countAllReply();
+
+		// 전체페이지수
+		int numPerPage = 3;
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+
+		if (currentPage > totalPage)
+			currentPage = totalPage;
+
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+
+		List<BoardCommentDTO> bc_Alllist = bc_dao.replyAllList(start, end);
+
+	/*	String param = "";
+		param += "G_NUM=" + BC_BOARD;*/
+
+		// 글보기 주소 정리
+		String replyUrl = cp + "/goods/replyAllList.action";
+
+		/*if (!param.equals("")) {
+			replyUrl = replyUrl + "?" + param;
+		}*/
+
+		String pageIndexList_r = myUtil.pageIndexList_r(currentPage, totalPage, replyUrl);
+		
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("pageIndexList", pageIndexList_r);
+		req.setAttribute("dataCount", dataCount);
+		req.setAttribute("bc_Alllist", bc_Alllist);
+		req.setAttribute("replyPageNum", replyPageNum);
+
+		return req;
+		
+	}
+
+	//하나의 댓글 상세페이지
+	@Override
+	public HttpServletRequest replyArticle(HttpServletRequest req) throws Exception {
+	//갖고온 데이터 받기
+		
+				int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
+				
+				String replyPageNum = req.getParameter("pageNum");
+				
+				if (replyPageNum == null || replyPageNum.equals("")) {
+					replyPageNum = "1";
+				}
+				
+				BoardCommentDTO bc_dto =  bc_dao.getReadOne(BC_NUM);
+							
+				String param = "replyPageNum=" + replyPageNum;
+			
+				req.setAttribute("params", param);
+				req.setAttribute("replyPageNum", replyPageNum);
+				req.setAttribute("bc_dto", bc_dto);
+				
+				return req;
 	}
 
 }

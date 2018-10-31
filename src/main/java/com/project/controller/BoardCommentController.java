@@ -83,8 +83,6 @@ public class BoardCommentController {
 		int BC_BOARD = Integer.parseInt(req.getParameter("BC_BOARD"));
 		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 		
-		System.out.println(BC_NUM + "SDNAKSNDKASNDLASND");
-		
 		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 		
 		bc_service.deleteData(BC_NUM, path);
@@ -92,7 +90,56 @@ public class BoardCommentController {
 		return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
 	}
 	
+	//댓글 전체 리스트
+	@RequestMapping(value="/replyAllList.action", method= {RequestMethod.GET,RequestMethod.POST})
+	public String listAll(HttpServletRequest req)throws Exception{
+		
+		bc_service.replyAllList(req);
+		
+		 return "goods/replyAllList";
+	}
+	@RequestMapping(value="/replyArticle.action" ,method= {RequestMethod.GET,RequestMethod.POST})
+	public String replyArticle(HttpServletRequest req)throws Exception{
+		
+		bc_service.replyArticle(req);
+		
+		return "goods/replyArticle";
+	}
+	@RequestMapping(value="/articleUpdate.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String articleUpdate(HttpServletRequest req)throws Exception{
+		
+		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
+		System.out.println(BC_NUM);
+		BoardCommentDTO bc_dto = bc_service.getReadReply(BC_NUM);
+		
+		req.setAttribute("bc_dto", bc_dto);
+		
+	 	return "goods/articleUpdate";
+	}
 	
+	@RequestMapping("/articleUpdate_ok.action")
+	public String articleUpdate_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
+		
+		int BC_BOARD = Integer.parseInt(request.getParameter("BC_BOARD"));
+		int BC_NUM = Integer.parseInt(request.getParameter("BC_NUM"));
+		bc_service.updateData(bc_dto, req, request);
+		
+		return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM;
+	}
+	@RequestMapping(value="/articleDelete.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String articleDelete(HttpServletRequest req)throws Exception{
+		
+		int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
+		int BC_BOARD = Integer.parseInt(req.getParameter("BC_BOARD"));
+		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
+		
+		bc_service.deleteData(BC_NUM, path);
+		
+		return "redirect:/goods/replyAllList.action?replyPageNum="+replyPageNum;
+	}
+		
 	@ModelAttribute
 	HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		

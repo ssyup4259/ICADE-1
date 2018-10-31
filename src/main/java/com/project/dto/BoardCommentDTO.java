@@ -24,6 +24,10 @@ public class BoardCommentDTO {
 	private String BC_SAVEFILENAME;
 	// 파일
 	private MultipartFile bcfile;
+	//부모상품명
+	private String G_NAME;
+	//부모글 번호
+	private int G_NUM;
 
 //------------컨텐츠 사진들---------------------
 	private String BC_CONTENTFILE1;
@@ -203,4 +207,22 @@ public class BoardCommentDTO {
 	public void setBcfile3(MultipartFile bcfile3) {
 		this.bcfile3 = bcfile3;
 	}
+
+	public String getG_NAME() {
+		return G_NAME;
+	}
+
+	public void setG_NAME(String g_NAME) {
+		G_NAME = g_NAME;
+	}
+
+	public int getG_NUM() {
+		return G_NUM;
+	}
+
+	public void setG_NUM(int g_NUM) {
+		G_NUM = g_NUM;
+	}
+	
+	
 }

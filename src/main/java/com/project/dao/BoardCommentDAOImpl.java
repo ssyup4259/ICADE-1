@@ -82,12 +82,10 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		
 		System.out.println(BC_NUM +"adsasdasfafasdasdsd");
 		
-		String filePath = path + File.separator+bc_dto.getBC_IMAGE();
-		String filePath1 = path + File.separator+bc_dto.getBC_CONTENTFILE1();
-		String filePath2 = path + File.separator+bc_dto.getBC_CONTENTFILE2();
-		String filePath3 = path + File.separator+bc_dto.getBC_CONTENTFILE3();
-		
-		
+		String filePath = path + File.separator+bc_dto.getBC_SAVEFILENAME();
+		String filePath1 = path + File.separator+bc_dto.getBC_SAVE1();
+		String filePath2 = path + File.separator+bc_dto.getBC_SAVE2();
+		String filePath3 = path + File.separator+bc_dto.getBC_SAVE3();
 		
 		//물리적 파일 삭제
 		File f = new File(filePath);
@@ -116,9 +114,25 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		
 		sessionTemplate.delete(replyMapper + ".deleteData", BC_NUM);
 	}
-
-
-
-
-
+	//댓글 전체 리스트
+	@Override
+	public List<BoardCommentDTO> replyAllList(int start, int end) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+				
+		params.put("start", start);
+		params.put("end", end);
+		
+		return sessionTemplate.selectList(replyMapper + ".replyAllList", params);
+	}
+	@Override
+	public int countAllReply() throws Exception {
+		
+	return sessionTemplate.selectOne(replyMapper+".countAllReply");
+		
+	}
+	@Override
+	public BoardCommentDTO getReadOne(int bc_num) throws Exception {
+		return sessionTemplate.selectOne(replyMapper+".readOne",bc_num );
+	}
 }
