@@ -95,6 +95,7 @@
 
 <ul>
 	<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
+		<br/><!-- 태그 안먹어서 임시로 띄어쓰기 -->
 	<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
 </ul>
 
@@ -169,7 +170,7 @@
 				</td>
 				
 				<td>
-					<a href="#none" class="line" onclick="OrderHistory.getDetailInfo('?product_no=850&amp;cate_no=70&amp;order_id=20181029-0004189&amp;ord_item_code=20181029-0004189-01');">[상세정보]</a>
+					<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
 					<p class="">${dto.getO_IMP()}</p>
 				</td>
 				

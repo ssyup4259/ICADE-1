@@ -131,8 +131,10 @@ public class OrdersHistoryController {
 			
 			Integer O_Num = integerList.get(i);
 			
+			System.out.println(O_Num);
+			
 			hMap.put("OD_NUM",O_Num);
-			System.out.println("aa");
+			
 			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
 			
 			hashMap.put(O_Num, mapList);
