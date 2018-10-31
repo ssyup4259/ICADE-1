@@ -52,14 +52,6 @@
     <h2>주문조회</h2>
 </div>
 
-<div class="xans-element- xans-myshop xans-myshop-orderhistorytab ec-base-tab ">
-	<ul class="menu">
-		<li class="selected"><a href="/myshop/order/list.html?history_start_date=2018-07-21&amp;history_end_date=2018-10-19">주문내역조회 (0)</a></li>
-        <li class=""><a href="/myshop/order/list.html?mode=cs&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19">취소/반품/교환 내역 (0)</a></li>
-        <li class=" displaynone"><a href="/myshop/order/list_old.html?mode=old&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19">이전 주문내역 (0)</a></li>
-    </ul>
-</div>
-
 <form method="post" id="OrderHistoryForm" name="OrderHistoryForm">
 
 <div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
@@ -155,12 +147,12 @@
 			        
 				</td>
 				<td class="thumb">
-					<a href="/icade/good/${dto.getGD_NUM()}">
+					<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}">
 						<img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" width="80" height="80">
 					</a>
 				</td>
 			       <td class="product left top">
-					<a href="/product/detail.html?product_no=850&amp;cate_no=70">
+					<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}">
 						<strong>${dto.getOD_NAME()}</strong>
 					</a>
 						<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div>
@@ -194,6 +186,8 @@
 </div>
 
 <br/><br/>
+
+<input type="hidden" name="nextIndex" value="">
 
 <table align="center">
 	<tr>
