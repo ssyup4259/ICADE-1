@@ -1,8 +1,12 @@
 package com.project.controller;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
@@ -23,8 +28,7 @@ import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
 import com.project.service.OrderHistoryService;
 import com.project.util.MyUtil;
-
-import oracle.sql.DATE;
+import com.project.util.RestAPI;
 
 @Controller
 public class OrdersHistoryController {
@@ -34,6 +38,9 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	
+	@Autowired
+	RestAPI api;
 
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -136,6 +143,25 @@ public class OrdersHistoryController {
 		request.setAttribute("lists", lists);
 		request.setAttribute("integerList", integerList);
 		
+		//-----------------------------------------------------------------------------------------
+		String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
+		String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
+		JsonObject json = new JsonObject();
+
+		json.addProperty("imp_key", imp_key);
+		json.addProperty("imp_secret", imp_secret);
+		
+		String token = api.getToken(request, response, json);
+		String header = "Bearer " + token;
+		
+		String apiUrl = "https://api.iamport.kr/payments/cancel";
+		
+		URL url = new URL(apiUrl);
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Authorization", header);
+		
+		//-----------------------------------------------------------------------------------------
 		return "ordersHistory/ordersHistoryMain";
 	}
 	
@@ -217,6 +243,26 @@ public class OrdersHistoryController {
 	@RequestMapping(value="/test.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String test(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		//실험용 추후 삭제
+		
+		//---------------------------------------------------------------------------------------
+		
+		String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
+		String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
+		JsonObject json = new JsonObject();
+
+		json.addProperty("imp_key", imp_key);
+		json.addProperty("imp_secret", imp_secret);
+		
+		String token = api.getToken(request, response, json);
+		
+		String imp_uid = "imp_493354362170";
+		
+		Map<String,String> map = api.getInfo(request, response, token, imp_uid);
+		
+		request.setAttribute("token", token);
+		
+		//---------------------------------------------------------------------------------------
+		
 		return "ordersHistory/test";
 	}
 	

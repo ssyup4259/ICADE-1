@@ -21,9 +21,9 @@ public class OrderHistoryDTO {
 	//주문 상품명
 	private String OD_NAME;
 	//지원 기종
-	private int OD_DEVICE;
+	private String OD_DEVICE;
 	//색상
-	private int OD_COLOR;
+	private String OD_COLOR;
 	//주문 수량
 	private int OD_COUNT;
 	//상품 가격
@@ -89,16 +89,16 @@ public class OrderHistoryDTO {
 	public void setOD_NAME(String oD_NAME) {
 		OD_NAME = oD_NAME;
 	}
-	public int getOD_DEVICE() {
+	public String getOD_DEVICE() {
 		return OD_DEVICE;
 	}
-	public void setOD_DEVICE(int oD_DEVICE) {
+	public void setOD_DEVICE(String oD_DEVICE) {
 		OD_DEVICE = oD_DEVICE;
 	}
-	public int getOD_COLOR() {
+	public String getOD_COLOR() {
 		return OD_COLOR;
 	}
-	public void setOD_COLOR(int oD_COLOR) {
+	public void setOD_COLOR(String oD_COLOR) {
 		OD_COLOR = oD_COLOR;
 	}
 	public int getOD_COUNT() {
