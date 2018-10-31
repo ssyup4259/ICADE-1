@@ -13,6 +13,7 @@
 }
 </style>
 
+
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		var offset = 220;
@@ -43,17 +44,81 @@
 	});
 </script>
 
+<script type="text/javascript">
 
-<input type="button" class="btn back_to_top" value="맨위로" style="width: 70px;">
+	function sendIt(g_num) {
+		
+		$.ajax({
+			url:'<%=cp%>/cookies/cookieDelete.action',
+			type:'POST',
+			data:{"G_NUM":g_num},
+			datatype:  'text'
+			}).done(function() {
+				$('#ckList').load(document.URL +  ' #ckList');
+				
+			}).fail(function(){
+				alert("error");
+			});
+		
+		<%-- var f = document.searchForm;
+		
+		f.action = "<%=cp%>/cookies/cookieDelete.action?g_num=" + g_num;
+		f.submit() --%>
+		
+	} 
 
-<div class="latestGoods">
+</script>
+<script>
+	$(document).ready(function(){
+		
+		$("#btn2").click(function(){
+			$.ajax({
+			url:'<%=cp%>/cookies/cookieDelete_ok.action',
+			type:'POST',
+			datatype:  'text',
+			}).done(function() {
+				$('#ckList').load(document.URL +  ' #ckList');
+			}).fail(function(){
+			
+			});
+		});
+		
+	});
+
+</script>
+
+ <script type="text/javascript">
+        $(document).ready(function(){
+
+            //Check if the current URL contains '#' 
+            if(document.URL.indexOf("#")==-1)
+            {
+                // Set the URL to whatever it was plus "#".
+                url = document.URL+"#";
+                location = "#";
+
+                //Reload the page
+                location.reload(true);
+
+            }
+        });
+ </script> 
+
+
+
+<input type="button" class="btnGray back_to_top" value="맨위로" style="width: 70px;">
+
+<div class="latestGoods" id="ckList">
 	<div class="lg text-center" style="width: 70px; height: 750px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
+		<form action="" name="searchForm" method="post">
+		<input type="button" id="btn2" value=" 전체 삭제 " class="btn2"/>
+		<c:forEach var="ck" items="${ck_lists}">
+		<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"><br/><br/>
+		<input type="button" id="btn1" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
+		<br/><br/>
+		</c:forEach>
+		</form>
 		<h3>찜한</h3>
 		<img src="/icade/resources/data/img/sample.jpg">
 		<img src="/icade/resources/data/img/sample1.jpg">

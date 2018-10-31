@@ -154,7 +154,7 @@ public class MyUtil {
 			
 			if (page == currentPage) {
 				
-				sb.append("<font color=\"Fuchsia\">" + page + "</font>&nbsp;");
+				sb.append("<font color=\"black\" size=\"16px\">" + page + "</font>&nbsp;");
 				
 			} else {
 				sb.append("<a href=\"" + replyUrl + "replyPageNum=" + page + "\">" + page  + "</a>&nbsp;");

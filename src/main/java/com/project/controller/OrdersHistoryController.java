@@ -1,5 +1,12 @@
 package com.project.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
@@ -23,8 +32,7 @@ import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
 import com.project.service.OrderHistoryService;
 import com.project.util.MyUtil;
-
-import oracle.sql.DATE;
+import com.project.util.RestAPI;
 
 @Controller
 public class OrdersHistoryController {
@@ -34,6 +42,9 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	
+	@Autowired
+	RestAPI api;
 
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -214,10 +225,61 @@ public class OrdersHistoryController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/test.action",method= {RequestMethod.POST,RequestMethod.GET})
-	public String test(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/payment/cancel.action",method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String test(HttpServletRequest req,HttpServletResponse resp) throws Exception {
 		//실험용 추후 삭제
-		return "ordersHistory/test";
+		
+		//-----------------------------------------------------------------------------------------
+				String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
+				String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
+				JsonObject json = new JsonObject();
+
+				json.addProperty("imp_key", imp_key);
+				json.addProperty("imp_secret", imp_secret);
+				
+				String token = api.getToken(req, resp, json);
+				String header = "Bearer " + token;
+				
+				String imp_uid = req.getParameter("imp_uid");
+				
+				String apiUrl = "https://api.iamport.kr/payments/cancel";
+				
+				URL url = new URL(apiUrl);
+		        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		        con.setDoInput(true);
+		        con.setDoOutput(true);
+		        con.setUseCaches(false);
+		        con.setRequestMethod("POST");
+		        con.setRequestProperty("Authorization", header);
+		        con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		        
+		        //매개변수 전달
+		        OutputStream os = con.getOutputStream();
+		        OutputStreamWriter writer = new OutputStreamWriter(os);
+		        writer.write("imp_uid="+imp_uid);
+		        writer.close();
+
+		        os.close();
+		        
+		        int responseCode = con.getResponseCode();
+		        BufferedReader br;
+		        if(responseCode==200) { // 정상 호출
+		            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		            return "success";
+		        } else {  // 에러 발생
+		            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		        }
+		        String inputLine;
+		        StringBuffer sb = new StringBuffer();
+		        while ((inputLine = br.readLine()) != null) {
+		            sb.append(inputLine);
+		        }
+		        br.close();
+				
+				//-----------------------------------------------------------------------------------------
+		
+		return "fail";
 	}
 	
 		

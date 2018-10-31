@@ -77,6 +77,7 @@
 			<mapping path="/admin/goodsList.action"/>
 			<mapping path="/admin/memberList.action"/>
 			<mapping path="/myPage.action"/>
+			<mapping path="/orderHistory.action"/>
 			<beans:bean id="loginInterceptor" class="com.project.interceptor.LoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>

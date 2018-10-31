@@ -45,7 +45,9 @@
 		
 		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
 			
-			f.action = "<%=cp%>/admin/authorityChange.action?m_id=" + m_id + "&new_rank=" + new_rank;
+			f.action = "<%=cp%>
+	/admin/authorityChange.action?m_id=" + m_id
+					+ "&new_rank=" + new_rank;
 			f.submit();
 
 		} else {
@@ -54,31 +56,54 @@
 
 	}
 </script>
+<style type="text/css">
+input[type='radio'] {
+	width: 100%;
+    height: 100%;
+	opacity: 0;
+	  left: 0;
+    top: 0;
+}
+
+.btn-group input[type='radio']:checked+label {
+    border: 1px solid #1993d1;
+    line-height: 28px;
+    color: #1993d1;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
+
+	<div class="" data-toggle="buttons" style="display: flex; justify-content: center;">
+		<label class="btnGray"> <input type="radio" name="memGender" value="여" autocomplete="off" checked>여
+		</label> <label class="btnGray"> <input type="radio" name="memGender" value="남" autocomplete="off">남
+		</label>
+	</div>
+
 	<div class="container-fluid" style="background-color: #F2F1F0; margin-bottom: 200px; border-bottom: 200px;">
 		<div class="container-fluid text-center" style="padding-top: 50px; padding-bottom: 50px;">
 			<h2>회원 리스트</h2>
 			<form action="" name="searchForm" method="post">
+				<div class="btn-group" data-toggle="buttons">
+					<c:if test="${empty M_RANK}">
+						<label class="btnGray">전체<input type="radio" name="M_RANK" value="" checked="checked" /></label>
+						<label class="btnGray">customer<input type="radio" name="M_RANK" value="customer" /></label>
+						<label class="btnGray">seller<input type="radio" name="M_RANK" value="seller" /></label>
+					</c:if>
 
-				<c:if test="${empty M_RANK}">
-					<label><input type="radio" name="M_RANK" value="" checked="checked" />전체</label>
-					<label><input type="radio" name="M_RANK" value="customer" />customer</label>
-					<label><input type="radio" name="M_RANK" value="seller" />seller</label>
-				</c:if>
+					<c:if test="${M_RANK == 'customer'}">
+						<label class="btnGray"><input type="radio" name="M_RANK" value="" />전체</label>
+						<label class="btnGray"><input type="radio" name="M_RANK" value="customer" checked="checked" />customer</label>
+						<label class="btnGray"><input type="radio" name="M_RANK" value="seller" />seller</label>
+					</c:if>
 
-				<c:if test="${M_RANK == 'customer'}">
-					<label><input type="radio" name="M_RANK" value="" />전체</label>
-					<label><input type="radio" name="M_RANK" value="customer" checked="checked" />customer</label>
-					<label><input type="radio" name="M_RANK" value="seller" />seller</label>
-				</c:if>
-
-				<c:if test="${M_RANK == 'seller'}">
-					<label><input type="radio" name="M_RANK" value="" />전체</label>
-					<label><input type="radio" name="M_RANK" value="customer" />customer</label>
-					<label><input type="radio" name="M_RANK" value="seller" checked="checked" />seller</label>
-				</c:if>
+					<c:if test="${M_RANK == 'seller'}">
+						<label class="btnGray"><input type="radio" name="M_RANK" value="" />전체</label>
+						<label class="btnGray"><input type="radio" name="M_RANK" value="customer" />customer</label>
+						<label class="btnGray"><input type="radio" name="M_RANK" value="seller" checked="checked" />seller</label>
+					</c:if>
+				</div>
 
 				<select name="searchKey" class="selGreen" style="width: 150px;">
 					<option value="M_ID">아이디</option>
