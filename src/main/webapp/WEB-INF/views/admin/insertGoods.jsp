@@ -151,7 +151,7 @@ function enableTextBox(name) {
 <br/>
 상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>
 상품 설명 사진 : <input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
-할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>% <br/>
+할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="0"/>% <br/>
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 

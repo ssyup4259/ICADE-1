@@ -13,39 +13,6 @@
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
 </head>
 <body>
-<%-- 
-<c:forEach var="ttt" items="${integerList}" varStatus="i">
-	${ttt }
-</c:forEach>
-
-<br/>
-
-<c:forEach var="map" items="${hashMap}">
-	${dto.key }
-	<c:forEach var="dto" items="${map.value }">
-		${dto.getOH_NUM() }
-	</c:forEach> }
-</c:forEach> 
---%>
-<!-- 
-<table border="1">
-	<tr>
-		<td class="gubun">1</td>
-		<td>2</td>
-		<td>3</td>
-	</tr>
-	<tr>
-		<td class="gubun">1</td>
-		<td>2</td>
-		<td>3</td>
-	</tr>
-	<tr>
-		<td class="gubun">1</td>
-		<td>2</td>
-		<td>3</td>
-	</tr>
-</table>
- -->
 
 <div id="container">
         <div id="contents">
@@ -149,14 +116,13 @@
 			<tr class="xans-record-">
 				<td rowspan="<%-- ${fn:length(lists)} --%>" class="gubun">
 					<p>${dto.getO_DATE()}<br/>
-						<a href="ordersHistoryDetail.action?o_num=${dto.getOH_NUM()}" class="line">[${dto.getOH_NUM()}]</a>
+						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
 			        <a href="#none" class="displaynone" onclick="OrderHistory.orderCancel('20181029-0004189')"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"></a>
-			        <a href="cancel.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="취소신청"></a>
+			        <a href="cancel.html?o_imp=${dto.getO_IMP()}" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif" alt="환불신청"></a>
 			        <a href="exchange.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif" alt="교환신청"></a>
 			        <a href="return.html?order_id=20181029-0004189" class="displaynone button"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif" alt="반품신청"></a>
 				</td>
-				
 				<td class="thumb"><a href="/icade/good/${dto.getGD_NUM()}"><img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';" alt=""></a></td>
 			       <td class="product left top">
 					<a href="/product/detail.html?product_no=850&amp;cate_no=70"><strong>${dto.getOD_NAME()}</strong></a>

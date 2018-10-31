@@ -29,7 +29,7 @@
 <form action="" method="post" name="myForm">
 
 <input type="hidden" id="mode" name="mode" value="${mode}">
-<input type="text" id="msg" name="msg" value="${msg}">
+<input type="hidden" id="msg" name="msg" value="${msg}">
 
 <table border="1" style="margin-left: auto; margin-right: auto;">
 	<tr >
