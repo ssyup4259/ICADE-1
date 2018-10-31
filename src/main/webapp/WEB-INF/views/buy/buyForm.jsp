@@ -113,7 +113,12 @@ function sample6_execDaumPostcode() {
 	function payIt() {
 		
 		var total = $("#O_TOT").val();
-		var name = "${m_dto.getM_NAME()}";
+		var name = "${b_lists[0].getName()}";
+		var count = ${b_lists.size()};
+		
+		if (count > 1) {
+			name = name + " 외 " + (count-1) + "개";
+		}
 		var email = "${m_dto.getM_EMAIL_ID()}@${m_dto.getM_EMAIL_DOMAIN()}";
 		var tel = "${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}";
 		var addr = "${m_dto.getM_ADDRESS1()} ${m_dto.getM_ADDRESS2()}";
@@ -126,7 +131,7 @@ function sample6_execDaumPostcode() {
 			pg : 'inicis', // version 1.1.0부터 지원.
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
-			name : '상품명 어떻게 하지',
+			name : name,
 			amount : 10,
 			buyer_email : email,
 			buyer_name : name,
