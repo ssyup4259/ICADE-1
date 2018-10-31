@@ -130,8 +130,7 @@ public class GoodsController {
 			for(int i=0; i<cookies.length; i++){
 				
 				Cookie ck = cookies[i];
-				
-				if (ck.getName().equals("JSESSIONID")) {
+				if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
 					
 				} else {
 					
