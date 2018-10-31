@@ -16,6 +16,30 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
+
+<script type="text/javascript">
+
+	function cancelIt(imp_uid) {
+		
+		$.ajax({			
+			type : "post",
+			url :"<%=cp%>/payment/cancel.action",
+			data : {"imp_uid":imp_uid},
+			datatype : "text",
+			success:function(data){
+				alert(data);
+				console.log(data);
+			},
+			error: function(data) {
+				alert("error");
+				alert(data);
+			}
+		});
+	
+	}
+
+</script>
+
 </head>
 <body>
 
@@ -125,9 +149,8 @@
 					<p>${dto.getO_DATE()}<br/>
 						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
-					<form action="https://api.iamport.kr/payments/cancel" method="post" name="myForm">
-						<input type="hidden" name="imp_uid" value="${dto.getO_IMP()}"/>
-						<input type="submit" value="환불 하기"/>
+					<form action="" method="post" name="myForm">
+						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
 					</form>
 			        <img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="환불신청">
 			        
