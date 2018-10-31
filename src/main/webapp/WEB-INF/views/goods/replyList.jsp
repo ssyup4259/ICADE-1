@@ -35,6 +35,7 @@ $("#deleteData").click(function() {
 	 */
 	
 	 var num =$("#deleteData").val();
+	 
 	 alert(num);
 	 
 	if(confirm("삭제하시겠습니까?")) {
