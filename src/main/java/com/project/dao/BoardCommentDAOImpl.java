@@ -63,8 +63,8 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	
 	//하나의 댓글 읽어오기
 	@Override
-	public BoardCommentDTO getReadData(int bc_num) throws Exception {
-		return sessionTemplate.selectOne(replyMapper +".readData");
+	public BoardCommentDTO getReadData(int BC_NUM) throws Exception {
+		return sessionTemplate.selectOne(replyMapper +".readData",BC_NUM);
 	}
 
 	
@@ -79,6 +79,8 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	public void deleteData(int BC_NUM,String path) throws Exception {
 		
 		BoardCommentDTO bc_dto = sessionTemplate.selectOne(replyMapper + ".readData", BC_NUM);
+		
+		System.out.println(BC_NUM +"adsasdasfafasdasdsd");
 		
 		String filePath = path + File.separator+bc_dto.getBC_IMAGE();
 		String filePath1 = path + File.separator+bc_dto.getBC_CONTENTFILE1();
@@ -112,7 +114,7 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 			f3.delete(); //물리적 파일 삭제
 		}
 		
-		sessionTemplate.delete(replyMapper + ".deleteGoods", BC_NUM);
+		sessionTemplate.delete(replyMapper + ".deleteData", BC_NUM);
 	}
 
 
