@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
@@ -145,14 +145,13 @@
 <c:forEach var="map" items="${hashMap}">
 	<c:forEach var="dto" items="${map.value }">
 			<tr class="xans-record-">
-				<td rowspan="<%-- ${fn:length(lists)} --%>" class="gubun">
+				<td class="gubun">
 					<p>${dto.getO_DATE()}<br/>
 						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
 					<form action="" method="post" name="myForm">
 						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
 					</form>
-			        <img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="환불신청">
 			        
 				</td>
 				<td class="thumb">
@@ -170,22 +169,15 @@
 				<td>${dto.getOD_COUNT()}</td>
 				
 				<td class="right">
-					<strong>₩${dto.getOD_PRICE()}</strong>
-					<div class="displaynone"></div>
+					<strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong>
 				</td>
 				
 				<td class="state">
 					<p class="txtEm">${dto.getO_STATUS()}</p>
-					<p class="displaynone"><a href="#" target="_self"></a></p>
-					<p class="displaynone"><a href="#none" class="line" onclick=""></a></p>
-					
-					<a href="/board/product/write.html?board_no=4&amp;product_no=850&amp;order_id=20181029-0004189" class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_comment.gif" alt="구매후기"></a>
 				</td>
 				
 				<td>
-					<p class="displaynone">
 					<a href="#none" class="line" onclick="OrderHistory.getDetailInfo('?product_no=850&amp;cate_no=70&amp;order_id=20181029-0004189&amp;ord_item_code=20181029-0004189-01');">[상세정보]</a>
-					</p>
 					<p class="">${dto.getO_IMP()}</p>
 				</td>
 				
