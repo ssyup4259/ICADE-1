@@ -56,7 +56,7 @@ public class BuyController {
 		
 	}
 	
-	//결제 완료 후 주문정보 DB에 insert
+	//구매 완료 후 이동 페이지
 	@RequestMapping(value="/buyOK.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String buyOK(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
 		

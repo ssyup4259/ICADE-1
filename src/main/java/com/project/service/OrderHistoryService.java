@@ -40,4 +40,7 @@ public interface OrderHistoryService {
 	
 	//개인 주문내역 주문 환불
 	public String cancel(HttpServletRequest req, HttpServletResponse resp) throws Exception;
+	
+	//주문 환불 후 DB정보들 변경
+	public String cancelOK(HttpServletRequest req, HttpServletResponse resp) throws Exception;
 }

@@ -232,6 +232,15 @@ public class OrdersHistoryController {
 		return service.cancel(req, resp);
 	}
 	
+	//환불 후 DB정보 변경
+	@RequestMapping(value="/payment/cancelOK.action",method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String cancelOK(HttpServletRequest req,HttpServletResponse resp) throws Exception {
+		
+		return service.cancelOK(req, resp);
+		
+	}
+	
 		
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {

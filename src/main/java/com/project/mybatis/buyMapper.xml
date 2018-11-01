@@ -38,8 +38,8 @@
 
 <!-- Orders 테이블에 추가 -->
 <insert id="insertOrders" parameterType="map">
-	insert into Orders (O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM, O_IMP)
-	values (#{O_NUM}, #{O_ID}, sysdate, #{O_NAME}, #{O_PH}, #{O_ZIPCODE}, #{O_ADDRESS1}, #{O_ADDRESS2}, '배송준비중', '카드결제', #{O_TOT}, null, #{O_IMP})
+	insert into Orders (O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM, O_IMP, O_POINT)
+	values (#{O_NUM}, #{O_ID}, sysdate, #{O_NAME}, #{O_PH}, #{O_ZIPCODE}, #{O_ADDRESS1}, #{O_ADDRESS2}, '배송준비중', '카드결제', #{O_TOT}, null, #{O_IMP}, #{O_POINT})
 </insert>
 
 <!-- 상세 상품 한개의 데이터 -->
@@ -56,6 +56,25 @@
 	insert into Order_Detail (OD_NUM, OD_CODE, OD_NAME, OD_DEVICE, OD_COLOR, OD_COUNT, OD_PRICE, OD_DISCOUNT)
 	values (#{OD_NUM}, #{OD_CODE}, #{OD_NAME}, #{OD_DEVICE}, #{OD_COLOR}, #{OD_COUNT}, #{OD_PRICE}, #{OD_DISCOUNT})
 </insert>
+
+<!-- 주문내역 조회 -->
+<select id="getReadOrders" parameterType="String" resultType="com.project.dto.OrdersDTO">
+	select O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM, O_IMP, O_POINT
+	from Orders
+	where O_NUM = #{o_num}
+</select>
+
+<!-- 배송상태 변경 -->
+<update id="updateStatus" parameterType="String">
+	update Orders set O_STATUS = '환불 완료' where O_NUM = #{o_num}
+</update>
+
+<!-- 주문 상세 내역 데이터 -->
+<select id="getReadOrderDetail" parameterType="String" resultType="com.project.dto.OrderDetailDTO">
+	select OD_NUM, OD_CODE, OD_NAME, OD_DEVICE, OD_COLOR, OD_COUNT, OD_PRICE, OD_DISCOUNT
+	from ORDER_DETAIL
+	where OD_NUM = #{o_num}
+</select>
 
 
 

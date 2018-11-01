@@ -19,16 +19,16 @@
 
 <script type="text/javascript">
 
-	function cancelIt(imp_uid) {
+	function cancelIt(imp_uid, o_num) {
 		
 		$.ajax({			
 			type : "post",
 			url :"<%=cp%>/payment/cancel.action",
-			data : {"imp_uid":imp_uid},
+			data : {"imp_uid":imp_uid, "o_num":o_num},
 			datatype : "text",
 			success:function(data){
 				alert(data);
-				console.log(data);
+				cancelOK(data);
 			},
 			error: function(data) {
 				alert("error");
@@ -36,6 +36,29 @@
 			}
 		});
 	
+	}
+	
+	function cancelOK(o_num) {
+		
+		$.ajax({			
+			type : "post",
+			url :"<%=cp%>/payment/cancelOK.action",
+			data : {"o_num":o_num},
+			datatype : "text",
+			success:function(data){
+				alert("Yeah");
+				
+				if (data == "success") {
+					alert("LOL");
+				}
+				console.log(data);
+			},
+			error: function(data) {
+				alert("error");
+				alert(data);
+			}
+		});
+		
 	}
 
 </script>
@@ -155,7 +178,7 @@
 				
 				<td class="gubun">
 					<form action="" method="post" name="myForm">
-						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
+						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}',${dto.getO_NUM()});"/>
 					</form>
 					<p class="">${dto.getO_IMP()}</p>
 				</td>

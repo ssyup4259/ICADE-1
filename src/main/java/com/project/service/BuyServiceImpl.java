@@ -124,7 +124,7 @@ public class BuyServiceImpl implements BuyService {
 		
 		for (int i = 0; i < count.length; i++) {
 
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("code", code[i]);
 			map.put("count", count[i]);
@@ -142,7 +142,7 @@ public class BuyServiceImpl implements BuyService {
 		MemberDTO m_dto = (MemberDTO)session.getAttribute("userInfo");
 		String m_id = m_dto.getM_ID();
 		
-		Map<String,String> map = new HashMap<String, String>();
+		Map<String,Object> map = new HashMap<String, Object>();
 		
 		String ph = req.getParameter("O_PH1") + "-" + req.getParameter("O_PH2") + "-" + req.getParameter("O_PH3");
 		
@@ -156,6 +156,7 @@ public class BuyServiceImpl implements BuyService {
 		map.put("O_ADDRESS2", o_dto.getO_ADDRESS2());
 		map.put("O_TOT", Integer.toString(o_dto.getO_TOT()));
 		map.put("O_IMP", req.getParameter("imp_uid"));
+		map.put("O_POINT", o_dto.getO_POINT());
 		
 		b_dao.insertOrders(map);
 		
@@ -165,14 +166,14 @@ public class BuyServiceImpl implements BuyService {
 		
 		for (int i = 0; i < count.length; i++) {
 
-			map = new HashMap<String, String>();
+			map = new HashMap<String, Object>();
 			
 			map.put("gd_code", code[i]);
 			map.put("g_num", code[i].substring(0, code[i].indexOf('-')));
 			
 			GoodsDetailDTO gd_dto = b_dao.getReadGoodsDetail(map);
 			
-			map = new HashMap<String, String>();
+			map = new HashMap<String, Object>();
 			
 			map.put("OD_NUM", OD_NUM);
 			map.put("OD_CODE", code[i]);
@@ -191,7 +192,7 @@ public class BuyServiceImpl implements BuyService {
 		
 		//Start--------------------Member 테이블 Point 감소 ------------------------
 		
-		int m_point = Integer.parseInt(req.getParameter("point"));
+		int m_point = Integer.parseInt(req.getParameter("O_POINT"));
 		
 		Map<String,Object> hMap = new HashMap<String, Object>();
 		
