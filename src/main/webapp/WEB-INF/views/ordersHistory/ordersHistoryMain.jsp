@@ -92,7 +92,7 @@
 		<div class="titleArea">
 			<h2>주문조회</h2>
 		</div>
-
+<input type="button" id="test" value="Test">
 <form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
@@ -153,7 +153,7 @@
 					<c:forEach var="map" items="${hashMap}">
 						<c:forEach var="dto" items="${map.value }">
 							<tr>
-								<td>
+								<td class="gubun">
 									<p>${dto.getO_DATE()}<br />
 										<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 									</p> 
@@ -215,6 +215,26 @@
 	        }
 	    });
 	});
+	
+	$(document).ready(function() {
+		$("#test").click(function(){
+			alert("a");
+			var status = $("#edate").val();
+			alert(status);
+			var testArray = status.split("-");
+			var testYear = testArray.splice(0,1);
+			var testMonth = testArray.splice(0,1);
+			var testDate = testArray.splice(0,1);
+		
+			alert(testYear);
+			alert(testMonth);
+			alert(testDate);
+			
+		
+		});
+	});
+	
+	
 </script>
 </body>
 </html>

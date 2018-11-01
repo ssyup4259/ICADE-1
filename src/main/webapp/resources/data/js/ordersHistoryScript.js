@@ -172,15 +172,6 @@
 		});
 	});
 	
-	$(document).ready(function() {
-		var status = $("#edate").val();
-		var testYear = status.splice(1,1);
-		
-		if(status==""){
-			
-		}
-		
-	});
 	
 	
 	
