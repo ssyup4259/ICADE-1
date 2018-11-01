@@ -28,7 +28,15 @@ public class OrdersDTO {
 	private int O_TNUM;
 	//imp_uid
 	private String O_IMP;
+	//사용 포인트
+	private int O_POINT;
 	
+	public int getO_POINT() {
+		return O_POINT;
+	}
+	public void setO_POINT(int o_POINT) {
+		O_POINT = o_POINT;
+	}
 	public String getO_IMP() {
 		return O_IMP;
 	}

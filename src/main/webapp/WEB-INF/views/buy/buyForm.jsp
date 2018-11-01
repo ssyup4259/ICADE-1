@@ -124,8 +124,8 @@ function sample6_execDaumPostcode() {
 		} else if (pf.O_PH1.value == "" || pf.O_PH2.value == "" || pf.O_PH2.value == "") {
 			alert("휴대전화 번호를 작성 해 주세요.");
 			return;
-		} else if (pf.point.value == "") {
-			pf.point.value = "0";
+		} else if (pf.O_POINT.value == "") {
+			pf.O_POINT.value = "0";
 		}
 		
 		var total = parseInt($("#O_TOT").val());
@@ -207,10 +207,10 @@ function sample6_execDaumPostcode() {
 		
 		var mPoint = ${m_dto.getM_POINT()};
 		
-		if (pf.point.value > mPoint) {
+		if (pf.O_POINT.value > mPoint) {
 			alert("보유하신 적립금 보다 초과해서 사용 하실 수 없습니다.");
-			pf.point.value = "";
-			pf.point.focus();
+			pf.O_POINT.value = "";
+			pf.O_POINT.focus();
 			$("#o_tot").html(parseInt(totalPay) + "원");
 			$("#O_TOT").val(totalPay);
 			return;
@@ -218,7 +218,7 @@ function sample6_execDaumPostcode() {
 		
 		var tot = $("#O_TOT").val();
 		tot = parseInt(totalPay);
-		tot = totalPay - pf.point.value;
+		tot = totalPay - pf.O_POINT.value;
 		
 		$("#o_tot").html(tot + "원");
 		$("#O_TOT").val(tot);
@@ -420,7 +420,7 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>포인트</td>
 						<td>
-							<input type="text" name="point" style="text-align: right;" size="6" value="0"/>원
+							<input type="text" name="O_POINT" style="text-align: right;" size="6" value="0"/>원
 							 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) 
 							 <input type="button" value="적용" class="btn2" onclick="pointUse();"/>
 						</td>

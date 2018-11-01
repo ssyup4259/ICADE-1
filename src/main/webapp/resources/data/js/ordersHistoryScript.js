@@ -45,11 +45,13 @@
 	        yearSuffix: '', //년도 뒤에 붙는 단위
 	        showOn: 'both',
 	        buttonText: "달력",
+	        buttonradius: "12px",
 	        changeMonth: true,
 	        changeYear: true,
 	        showButtonPanel: true,
 	        yearRange: 'c-99:c+99',
 	    };
+	    
 	    $.datepicker.setDefaults($.datepicker.regional['ko']);
 	 
 
