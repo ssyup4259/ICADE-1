@@ -29,7 +29,6 @@
 			data : {"imp_uid":imp_uid, "o_num":o_num},
 			datatype : "text",
 			success : function(data) {
-				alert(data);
 				cancelOK(data);
 			},
 			error : function(data) {
@@ -48,7 +47,6 @@
 			data : {"o_num":o_num},
 			datatype : "text",
 			success:function(data){
-				alert("Yeah");
 				
 				if (data == "success") {
 					alert("LOL");
