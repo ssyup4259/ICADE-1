@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.GoodsDetailDTO;
+import com.project.dto.OrderDetailDTO;
+import com.project.dto.OrdersDTO;
 
 @Repository
 public class BuyDAOImpl implements BuyDAO {
@@ -28,13 +30,15 @@ public class BuyDAOImpl implements BuyDAO {
 		return sessionTemplate.selectOne(buyMapper + ".getReadGoodsDetail", gd_code);
 	}
 
+	//결제 후 상세상품 재고 감소
 	@Override
-	public void goodsDetailCountDown(Map<String, String> map) throws Exception {
+	public void goodsDetailCountDown(Map<String, Object> map) throws Exception {
 		sessionTemplate.update(buyMapper + ".goodsDetailCountDown", map);
 	}
 
+	//결제 후 상세상품 재고 증가 
 	@Override
-	public void goodsDetailCountUp(Map<String, String> map) throws Exception {
+	public void goodsDetailCountUp(Map<String, Object> map) throws Exception {
 		sessionTemplate.update(buyMapper + ".goodsDetailCountUp", map);
 	}
 	
@@ -44,20 +48,50 @@ public class BuyDAOImpl implements BuyDAO {
 	}
 
 	@Override
-	public void insertOrders(Map<String, String> map) throws Exception {
+	public void insertOrders(Map<String, Object> map) throws Exception {
 		sessionTemplate.insert(buyMapper + ".insertOrders", map);
 		
 	}
 
 	@Override
-	public void insertOrderDetail(Map<String, String> map) throws Exception {
+	public void insertOrderDetail(Map<String, Object> map) throws Exception {
 		sessionTemplate.insert(buyMapper + ".insertOrderDetail", map);
 	}
 	
 	//상품 코드로 상품 정보 읽어오기(오버로딩)
 	@Override
-	public GoodsDetailDTO getReadGoodsDetail(Map<String, String> map) throws Exception {
+	public GoodsDetailDTO getReadGoodsDetail(Map<String, Object> map) throws Exception {
 		return sessionTemplate.selectOne(buyMapper + ".getReadGoodsDetailMap", map);
+	}
+
+	//포인트 감소
+	@Override
+	public void pointMinus(Map<String, Object> map) throws Exception {
+		sessionTemplate.update(buyMapper + ".pointMinus", map);
+	}
+
+	//포인트 증가
+	@Override
+	public void pointAdd(Map<String, Object> map) throws Exception {
+		sessionTemplate.update(buyMapper + ".pointAdd", map);
+	}
+
+	//환불 후 배송상태 변경
+	@Override
+	public void updateStatus(String o_num) throws Exception {
+		sessionTemplate.update(buyMapper + ".updateStatus", o_num);
+	}
+
+	//주문 상세 내역 조회
+	@Override
+	public List<OrderDetailDTO> getReadOrderDetail(String o_num) throws Exception {
+		return sessionTemplate.selectList(buyMapper + ".getReadOrderDetail", o_num);
+	}
+
+	//주문 내역 조회
+	@Override
+	public OrdersDTO getReadOrders(String o_num) throws Exception {
+		return sessionTemplate.selectOne(buyMapper + ".getReadOrders", o_num);
 	}
 
 }

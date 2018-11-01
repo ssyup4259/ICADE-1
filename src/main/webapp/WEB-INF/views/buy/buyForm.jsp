@@ -78,7 +78,7 @@ function sample6_execDaumPostcode() {
 
 	function deliveryAddr() {
 		
-		var f = document.myForm;
+		var f = document.payForm;
 		
 		f.O_NAME.value = f.name.value;
 		f.O_ZIPCODE.value = f.zipcode.value;
@@ -92,7 +92,7 @@ function sample6_execDaumPostcode() {
 	
 	function newAddr() {
 		
-		var f = document.myForm;
+		var f = document.payForm;
 		
 		f.O_NAME.value = "";
 		f.O_ZIPCODE.value = "";
@@ -112,7 +112,26 @@ function sample6_execDaumPostcode() {
 
 	function payIt() {
 		
-		var total = $("#O_TOT").val();
+		var pf = document.payForm;
+		
+		if (pf.O_NAME.value == "") {
+			alert("받으시는 분 이름을 작성 해 주세요.");
+			pf.O_NAME.focus();
+			return;
+		} else if (pf.O_ZIPCODE.value == "" || pf.O_ADDRESS1.value == "" || pf.O_ADDRESS2.value == "") {
+			alert("주소를 작성 해 주세요.");
+			return;
+		} else if (pf.O_PH1.value == "" || pf.O_PH2.value == "" || pf.O_PH2.value == "") {
+			alert("휴대전화 번호를 작성 해 주세요.");
+			return;
+		} else if (pf.O_POINT.value == "") {
+			pf.O_POINT.value = "0";
+		} else if (pf.pFlag.value != "true") {
+			alert("포인트를 적용 해 주세요.");
+			return;
+		}
+		
+		var total = parseInt($("#O_TOT").val());
 		var name = "${b_lists[0].getName()}";
 		var count = ${b_lists.size()};
 		
@@ -132,7 +151,7 @@ function sample6_execDaumPostcode() {
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : name,
-			amount : 10,
+			amount : 500,
 			buyer_email : email,
 			buyer_name : name,
 			buyer_tel : tel,
@@ -143,7 +162,7 @@ function sample6_execDaumPostcode() {
 			
 			if ( rsp.success ) {
 				
-				var allData = $("#myForm").serialize();
+				var allData = $("#payForm").serialize();
 				
 				allData = allData + "&imp_uid=" + rsp.imp_uid;
 				
@@ -181,12 +200,53 @@ function sample6_execDaumPostcode() {
 
 </script>
 
+<script type="text/javascript">
+
+	function pointUse() {
+		
+		var totalPay = $("#totalPay").val();
+		
+		var pf = document.payForm;
+		
+		var mPoint = ${m_dto.getM_POINT()};
+		
+		if (pf.O_POINT.value > mPoint) {
+			alert("보유하신 적립금 보다 초과해서 사용 하실 수 없습니다.");
+			pf.O_POINT.value = "";
+			pf.O_POINT.focus();
+			$("#o_tot").html(parseInt(totalPay) + "원");
+			$("#O_TOT").val(totalPay);
+			pf.pFlag.value = "false";
+			return;
+		}
+		
+		var tot = $("#O_TOT").val();
+		tot = parseInt(totalPay);
+		tot = totalPay - pf.O_POINT.value;
+		
+		$("#o_tot").html(tot + "원");
+		$("#O_TOT").val(tot);
+		
+		pf.pFlag.value = "true";
+		
+	}
+	
+	function pFlagChange() {
+		
+		var pf = document.payForm;
+		
+		pf.pFlag.value = "false";
+		
+	}
+
+</script>
+
 </head>
 <body>
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
-<form action="" method="post" id="myForm" name="myForm">
+<form action="" method="post" id="payForm" name="payForm">
 	<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">
 		<div class="row">
 			<div class="col-sm-7">
@@ -344,6 +404,7 @@ function sample6_execDaumPostcode() {
 					</tr>
 					
 					<c:set var="total" value="0"/>
+					<c:set var="discount" value="0"/>
 					<c:forEach var="b_dto" items="${b_lists}">
 						<tr>
 							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
@@ -356,6 +417,7 @@ function sample6_execDaumPostcode() {
 							</td>
 							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
 						</tr>
+						<c:set var="discount" value="${discount + b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount()}"/>
 						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
 					</c:forEach>
 				</table>
@@ -367,17 +429,25 @@ function sample6_execDaumPostcode() {
 					</tr>
 					<tr>
 						<td>총 할인 금액</td>
-						<td><fmt:formatNumber>0</fmt:formatNumber>원</td>
+						<td><fmt:formatNumber>${discount}</fmt:formatNumber>원</td>
 					</tr>
 					<tr>
 						<td>포인트</td>
-						<td><input type="text" class="btn2" size="6"/>원 (총 사용가능 적립금 : 1,500원)</td>
+						<td>
+							<input type="text" name="O_POINT" style="text-align: right;" size="6" value="0" onchange="pFlagChange();"/>원
+							 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) 
+							 <input type="button" value="적용" class="btn2" onclick="pointUse();"/>
+						</td>
 					</tr>
 					<tr>
 						<td>최종 결제 금액</td>
 						<td>
-							<fmt:formatNumber>${total}</fmt:formatNumber>원
-							<input type="hidden" id="O_TOT" name="O_TOT" value="${total}"/>
+							<div id="o_tot">
+								<fmt:formatNumber>${total - discount}</fmt:formatNumber>원
+							</div>							
+							<input type="hidden" id="O_TOT" name="O_TOT" value="${total - discount}"/>
+							<input type="hidden" id="totalPay" value="${total - discount}"/>
+							<input type="hidden" name="pFlag" value="false"/>
 						</td>
 					</tr>
 					<tr>

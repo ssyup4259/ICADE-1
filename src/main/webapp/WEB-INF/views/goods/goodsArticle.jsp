@@ -316,7 +316,7 @@ $(function() {
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
 									<c:when test="">
-										<a href='javascript:like_func();'> <img src="<%=cp%>/resources/images/dislike.png" id="heart.png">
+										<a href='javascript:like_func();'> <img src="<%=cp%>/resources/images/dislike.png" >
 										</a>
 									</c:when>
 									<c:otherwise>

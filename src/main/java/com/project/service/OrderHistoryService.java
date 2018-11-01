@@ -3,6 +3,9 @@ package com.project.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
@@ -34,4 +37,10 @@ public interface OrderHistoryService {
 	
 	//주문내여조회 메인 화면 뿌리기
 	public List<OrderHistoryDTO> OrderHistoryMain(HashMap<String, Object> hMap) throws Exception;
+	
+	//개인 주문내역 주문 환불
+	public String cancel(HttpServletRequest req, HttpServletResponse resp) throws Exception;
+	
+	//주문 환불 후 DB정보들 변경
+	public String cancelOK(HttpServletRequest req, HttpServletResponse resp) throws Exception;
 }

@@ -84,10 +84,8 @@
 </div>
 
 <div class="container-fluid text-center" style="color: #8F9493; margin-bottom: 10px;">
-	<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>
-	<a  href="<%=cp%>/goods/replyAllList.action" >포토후기</a>
+	<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>&nbsp;&nbsp; <a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
 	<img src="/icade/resources/data/logo/logo1.png">
-	<a href="" >FAQ</a>
-	<a href="">고객센터</a>&nbsp;&nbsp;<a href="<%=cp%>/notice/noticeList.action">공지사항</a>
-	
+	&nbsp;<a href=""> FAQ</a>&nbsp;&nbsp;<a href="">고객센터</a>&nbsp;&nbsp;<a href="<%=cp%>/notice/noticeList.action">공지사항</a>
+
 </div>

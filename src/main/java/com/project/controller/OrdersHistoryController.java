@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,9 +44,6 @@ public class OrdersHistoryController {
 	@Autowired
 	AdminDAO a_dao;
 	
-	@Autowired
-	RestAPI api;
-
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
@@ -59,13 +57,18 @@ public class OrdersHistoryController {
 		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
 		String startDate = (String) request.getParameter("startDay");
 		String endDate = (String) request.getParameter("endDay");
-		String pageNum = request.getParameter("pageNum");
 		
+		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
+		String pageNum = request.getParameter("pageNum");
 		String pageStart = request.getParameter("endPage");
+		String pageEnd = request.getParameter("endPage");
+		
+		System.out.println("마지막 페이지 : " + pageStart);
 		
 		if(pageStart==null||pageStart.equals(null)) {
 			pageStart = "1";
 		}
+		
 		//int pageEnd = Integer.parseInt(request.getParameter("endPage")); 
 		
 		
@@ -80,15 +83,13 @@ public class OrdersHistoryController {
 		
 		String m_Id = dto.getM_ID();
 		
-		HashMap<Integer, List<OrderHistoryDTO>> hashMap = new HashMap<Integer, List<OrderHistoryDTO>>();
+		LinkedHashMap<Integer, List<OrderHistoryDTO>> hashMap = new LinkedHashMap<Integer, List<OrderHistoryDTO>>();
 		
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		
 		hMap.put("O_ID", m_Id);
 		hMap.put("start_date",startDate);
 		hMap.put("end_date",endDate);	
-
-		
 		
 		//현재 페이지
         int currentPage = 1;
@@ -115,6 +116,9 @@ public class OrdersHistoryController {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
+		hMap.put("start",start);
+		hMap.put("end",end);
+		
 		String listUrl = "orderHistory.action";
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
@@ -123,24 +127,23 @@ public class OrdersHistoryController {
 		
 		List<Integer> integerList = service.selectOrderNum(hMap);
 		
-		System.out.println("for문돌린다====================================================");
+		//System.out.println("for문돌린다====================================================");
 		
 		for(int i = 0;i<integerList.size();i++) {
-			
-			System.out.println(integerList);
 			
 			Integer O_Num = integerList.get(i);
 			
 			hMap.put("OD_NUM",O_Num);
-			System.out.println("aa");
+			
 			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
 			
 			hashMap.put(O_Num, mapList);
 			
 		}
 		
-		System.out.println("====================================================for문끝났다");
+		//System.out.println("====================================================for문끝났다");
 		
+		request.setAttribute("endPgae", pageEnd);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
@@ -225,61 +228,21 @@ public class OrdersHistoryController {
 		return mav;
 	}
 	
+	//개인 주문내역 주문 환불
 	@RequestMapping(value="/payment/cancel.action",method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public String test(HttpServletRequest req,HttpServletResponse resp) throws Exception {
-		//실험용 추후 삭제
+	public String cancel(HttpServletRequest req,HttpServletResponse resp) throws Exception {
 		
-		//-----------------------------------------------------------------------------------------
-				String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
-				String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
-				JsonObject json = new JsonObject();
-
-				json.addProperty("imp_key", imp_key);
-				json.addProperty("imp_secret", imp_secret);
-				
-				String token = api.getToken(req, resp, json);
-				String header = "Bearer " + token;
-				
-				String imp_uid = req.getParameter("imp_uid");
-				
-				String apiUrl = "https://api.iamport.kr/payments/cancel";
-				
-				URL url = new URL(apiUrl);
-		        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-		        con.setDoInput(true);
-		        con.setDoOutput(true);
-		        con.setUseCaches(false);
-		        con.setRequestMethod("POST");
-		        con.setRequestProperty("Authorization", header);
-		        con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		        
-		        //매개변수 전달
-		        OutputStream os = con.getOutputStream();
-		        OutputStreamWriter writer = new OutputStreamWriter(os);
-		        writer.write("imp_uid="+imp_uid);
-		        writer.close();
-
-		        os.close();
-		        
-		        int responseCode = con.getResponseCode();
-		        BufferedReader br;
-		        if(responseCode==200) { // 정상 호출
-		            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		            return "success";
-		        } else {  // 에러 발생
-		            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-		        }
-		        String inputLine;
-		        StringBuffer sb = new StringBuffer();
-		        while ((inputLine = br.readLine()) != null) {
-		            sb.append(inputLine);
-		        }
-		        br.close();
-				
-				//-----------------------------------------------------------------------------------------
+		return service.cancel(req, resp);
+	}
+	
+	//환불 후 DB정보 변경
+	@RequestMapping(value="/payment/cancelOK.action",method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String cancelOK(HttpServletRequest req,HttpServletResponse resp) throws Exception {
 		
-		return "fail";
+		return service.cancelOK(req, resp);
+		
 	}
 	
 		
