@@ -173,7 +173,8 @@
 	});
 	
 	$(document).ready(function() {
-		var status = $(".txtEm").val();
+		var status = $("#edate").val();
+		var testYear = status.splice(1,1);
 		
 		if(status==""){
 			
@@ -182,15 +183,6 @@
 	});
 	
 	
-	$(window).load(function () {
-	    $(".gubun").each(function () {
-	        var rows = $(".gubun:contains('" + $(this).text() + "')");
-	        if (rows.length > 1) {
-	          rows.eq(0).attr("rowspan", rows.length);
-	          rows.not(":eq(0)").remove();
-	        }
-	    });
-	});
 	
 	
 	
