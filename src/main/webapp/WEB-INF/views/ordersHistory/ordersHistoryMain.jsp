@@ -58,19 +58,6 @@
 
 <fieldset class="ec-base-box">
 	<legend>검색기간설정</legend>
-	        <!-- <div class="stateSelect ">
-	            <select id="order_status" name="order_status" class="">
-					<option value="all">전체 주문처리상태</option>
-					<option value="shipped_before">입금전</option>
-					<option value="shipped_standby">배송준비중</option>
-					<option value="shipped_begin">배송중</option>
-					<option value="shipped_complate">배송완료</option>
-					<option value="order_cancel">취소</option>
-					<option value="order_exchange">교환</option>
-					<option value="order_return">반품</option>
-				</select>       
-	
-			</div> -->
 			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
 	        <span class="period">
 	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
@@ -142,10 +129,7 @@
 					<p>${dto.getO_DATE()}<br/>
 						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
-					<form action="" method="post" name="myForm">
-						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
-					</form>
-			        
+					<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
 				</td>
 				<td class="thumb">
 					<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}">
@@ -169,8 +153,10 @@
 					<p class="txtEm">${dto.getO_STATUS()}</p>
 				</td>
 				
-				<td>
-					<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
+				<td class="gubun">
+					<form action="" method="post" name="myForm">
+						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
+					</form>
 					<p class="">${dto.getO_IMP()}</p>
 				</td>
 				
@@ -205,22 +191,6 @@
 		</td>
 	</tr>
 </table>
-
-</form>
-<!-- 
-<div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate"><a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19" class="first"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_first.gif" alt="첫 페이지"></a>
-<a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_prev.gif" alt="이전 페이지"></a>
-<ol>
-<li class="xans-record-"><a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19" class="this">1</a></li>
-            </ol>
-<a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_next.gif" alt="다음 페이지"></a>
-<a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19" class="last"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_last.gif" alt="마지막 페이지"></a>
-</div>
-        </div>
-        <hr class="layout"><div id="background"></div>
-
-    </div>
- -->
 <jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

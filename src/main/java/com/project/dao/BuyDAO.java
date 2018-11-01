@@ -26,4 +26,10 @@ public interface BuyDAO {
 	//Order_Detail 테이블에 추가
 	public void insertOrderDetail(Map<String, String> map) throws Exception;
 	
+	//Point 감소
+	public void pointMinus(Map<String, Object> map) throws Exception;
+	
+	//Point 증가
+	public void pointAdd(Map<String, Object> map) throws Exception;
+	
 }
