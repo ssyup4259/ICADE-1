@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% String cp = request.getContextPath(); %>
+<%
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -26,16 +28,16 @@
 			url :"<%=cp%>/payment/cancel.action",
 			data : {"imp_uid":imp_uid, "o_num":o_num},
 			datatype : "text",
-			success:function(data){
+			success : function(data) {
 				alert(data);
 				cancelOK(data);
 			},
-			error: function(data) {
+			error : function(data) {
 				alert("error");
 				alert(data);
 			}
 		});
-	
+
 	}
 	
 	function cancelOK(o_num) {
@@ -60,159 +62,158 @@
 		});
 		
 	}
-
 </script>
+
+<script type="text/javascript">
+	$('.btnGray').on('click', function() {
+		$(this).toggleClass('active');
+	});
+</script>
+<style type="text/css">
+.btnGray {
+	border-radius: 6px;
+	width: 50px;
+	height: 30px;
+}
+
+.btnGray.active {
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+	background-color: #8F9493;
+	color: white;
+}
+</style>
 
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header.jsp" flush="false" />
 
-<div id="container">
-        <div id="contents">
-            
-<div class="titleArea">
-    <h2>주문조회</h2>
-</div>
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+		<div class="container">
 
-<form method="post" id="OrderHistoryForm" name="OrderHistoryForm">
+			<div class="titleArea">
+				<h2>주문조회</h2>
+			</div>
 
-<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
+			<form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
+				<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
+					<h2>검색기간설정</h2>
+					<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
+					<div class="row">
+						<div class="col-sm-4">
+							<input type="button" class="btnGray" value="오늘" id="today">
+							<input type="button" class="btnGray" value="1주일" id="oneWeek">
+							<input type="button" class="btnGray" value="1개월" id="oneMonth">
+							<input type="button" class="btnGray" value="3개월" id="threeMonth">
+							<input type="button" class="btnGray" value="6개월" id="sixMonth">
+						</div>
+						<!-- 기간 지정부분 -->
 
-<fieldset class="ec-base-box">
-	<legend>검색기간설정</legend>
-			<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
-	        <span class="period">
-	            <a href="#none" class="btnNormal" days="00"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1_on.gif" id="today" alt="오늘"></a>
-	            <a href="#none" class="btnNormal" days="07"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" id="oneWeek" alt="1주일"></a>
-	            <a href="#none" class="btnNormal" days="30"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" id="oneMonth" alt="1개월"></a>
-	            <a href="#none" class="btnNormal" days="90"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" id="threeMonth" alt="3개월"></a>
-	            <a href="#none" class="btnNormal" days="180"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" id="sixMonth" alt="6개월"></a>
-	        </span>
-	        <!-- 기간 지정부분 -->
-	        <!-- <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-07-21" type="text">
-	        	달력 버튼
-	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button> -->
-	        	
-	        <input type="text" id="sdate" name="startDay"> ~ <input type="text" id="edate" name="endDay"> 
-	        
-	        <!-- 
-	        <input id="history_end_date" name="history_end_date" class="fText hasDatepicker" readonly="readonly" size="10" value="2018-10-19" type="text">
-	        	<button type="button" class="ui-datepicker-trigger" ><img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..."></button> -->        
-	        <!-- 조회 버튼 -->
-	        <input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif">
-</fieldset>
+						<div class="col-sm-6" style="text-align: left;">
+							<input type="text" id="sdate" class="inputBoxGray" name="startDay" style="width: 200px; height: 30px;">
+							~
+							<input type="text" id="edate" class="inputBoxGray" name="endDay" style="width: 200px; height: 30px;">
+						</div>
 
-<ul>
-	<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
-		<br/><!-- 태그 안먹어서 임시로 띄어쓰기 -->
-	<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
-</ul>
-
-</div>
-
-</form>
-
-<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem ec-base-table typeList">
-
-<div class="title">
-        <h3>주문 상품 정보</h3>
-</div>
-
-<table border="1" style="width: 70%;">
-<caption>주문 상품 정보</caption>
-<colgroup>
-	<col style="width:135px;">
-	<col style="width:93px;">
-	<col style="width:150px;">
-	<col style="width:61px;">
-	<col style="width:111px;">
-	<col style="width:111px;">
-	<col style="width:111px;">
-</colgroup>
-
-<thead>
-	<tr>
-		<th scope="col">주문일자<br>[주문번호]</th>
-		<th scope="col">이미지</th>
-		<th scope="col">상품정보</th>
-		<th scope="col">수량</th>
-		<th scope="col">상품구매금액</th>
-		<th scope="col">주문처리상태</th>
-		<th scope="col">취소/교환/반품</th>
-	</tr>
-</thead>
+						<!-- 조회 버튼 -->
+						<div class="col-sm-2">
+							<input type="button" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
+						</div>
+					</div>
 
 
-		<tbody class="center ">
-<c:forEach var="map" items="${hashMap}">
-	<c:forEach var="dto" items="${map.value }">
-			<tr class="xans-record-">
-				<td class="gubun">
-					<p>${dto.getO_DATE()}<br/>
-						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
-					</p>
-					<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
-				</td>
-				<td class="thumb">
-					<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}">
-						<img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" width="80" height="80">
-					</a>
-				</td>
-			       <td class="product left top">
-					<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}">
-						<strong>${dto.getOD_NAME()}</strong>
-					</a>
-						<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div>
-				</td>
-				
-				<td>${dto.getOD_COUNT()}</td>
-				
-				<td class="right">
-					<strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong>
-				</td>
-				
-				<td class="state">
-					<p class="txtEm">${dto.getO_STATUS()}</p>
-				</td>
-				
-				<td class="gubun">
-					<form action="" method="post" name="myForm">
-						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}',${dto.getO_NUM()});"/>
-					</form>
-					<p class="">${dto.getO_IMP()}</p>
-				</td>
-				
-			</tr>
-	</c:forEach> 
-</c:forEach>			
-		</tbody>
+					<div>
+						기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.
+						<br />
+						<!-- 태그 안먹어서 임시로 띄어쓰기 -->
+						주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.
+					</div>
+				</div>
+			</form>
 
-</table>
+			<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
+				<h2>주문 상품 정보</h2>
 
-<c:if test="${empty lists}">
-<p class="message ">주문 내역이 없습니다.</p>
-</c:if>
-</div>
 
-<br/><br/>
+				<table border="1" style="width: 100%;">
+					<colgroup>
+						<col style="width: 14.5%;">
+						<col style="width: 10.5%;">
+						<col style="width: 16.5%;">
+						<col style="width: 8.5%;">
+						<col style="width: 12.5%;">
+						<col style="width: 12.5%;">
+						<col style="width: 12.5%;">
+					</colgroup>
 
-<input type="hidden" name="nextIndex" value="">
+					<thead>
+						<tr>
+							<th scope="col">주문일자<br>[주문번호]
+							</th>
+							<th scope="col">이미지</th>
+							<th scope="col">상품정보</th>
+							<th scope="col">수량</th>
+							<th scope="col">상품구매금액</th>
+							<th scope="col">주문처리상태</th>
+							<th scope="col">취소/교환/반품</th>
+						</tr>
+					</thead>
 
-<table align="center">
-	<tr>
-		<td>
-			<c:if test="${dataCount!=0 }">
+					<tbody>
+						<c:forEach var="map" items="${hashMap}">
+							<c:forEach var="dto" items="${map.value }">
+								<tr>
+									<td>
+										<p>${dto.getO_DATE()}<br />
+											<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
+										</p> <a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
+									</td>
+									<td><a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" width="80" height="80">
+									</a></td>
+									<td><a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <strong>${dto.getOD_NAME()}</strong>
+									</a>
+										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
+
+									<td>${dto.getOD_COUNT()}</td>
+
+									<td><strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong></td>
+
+									<td>
+										<p>${dto.getO_STATUS()}</p>
+									</td>
+
+									<td>
+										<form action="" method="post" name="myForm">
+											<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
+										</form>
+										<p class="">${dto.getO_IMP()}</p>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:forEach>
+						<tr>
+							<td colspan="7"><c:if test="${empty lists}">
+									<p class="message ">주문 내역이 없습니다.</p>
+								</c:if> <c:if test="${dataCount!=0 }">
 		${pageIndexList}
-	</c:if>
-			<c:if test="${dataCount==0}">
-		주문 내역이 없습니다.
-			</c:if>
+	</c:if></td>
+						</tr>
+					</tbody>
 
-		</td>
-	</tr>
-</table>
+				</table>
+			</div>
 
-<jsp:include page="../include/footer.jsp" flush="false" />
+			<br />
+			<br />
+
+			<form method="get">
+				<input type="hidden" name="endPage" value="${endPgae}">
+
+			</form>
+		</div>
+	</div>
+
+	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

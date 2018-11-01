@@ -45,27 +45,32 @@
 	        yearSuffix: '', //년도 뒤에 붙는 단위
 	        showOn: 'both',
 	        buttonText: "달력",
+	        buttonradius: "12px",
 	        changeMonth: true,
 	        changeYear: true,
 	        showButtonPanel: true,
 	        yearRange: 'c-99:c+99',
 	    };
+	    
 	    $.datepicker.setDefaults($.datepicker.regional['ko']);
 	 
-	  //변경될 달력의 값
-	    $('#sdate').datepicker();
-	    $('#sdate').datepicker("option", "maxDate", $("#edate").val());
-	    $('#sdate').datepicker("option", "onClose", function ( selectedDate ) {
-	        $("#edate").datepicker( "option", "minDate", selectedDate );
-	    });
+
 	    
-	  //오늘의 날짜 기준의 달력값
+	    //오늘의 날짜 기준의 달력값
 	    $('#edate').datepicker();
 	    $('#edate').datepicker("option", "minDate", $("#sdate").val());
 	    $('#edate').datepicker("option", "maxDate", dt);
 	    $('#edate').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#sdate").datepicker( "option", "maxDate", selectedDate );
 	    });
+	    
+	    //변경될 달력의 값
+	    $('#sdate').datepicker();
+	    $('#sdate').datepicker("option", "maxDate", $("#edate").val());
+	    $('#sdate').datepicker("option", "onClose", function ( selectedDate ) {
+	        $("#edate").datepicker( "option", "minDate", selectedDate );
+	    });
+	    
 	});
 	
 	/*
@@ -116,10 +121,15 @@
 	//일주일전
 	var oneWeek = year + "-" + month + "-" + (date-7);
 	
+	var cal = Calendar.getInstance();
+	
+	cal.add(Calendar.DATE , -7);
+	var beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
+	
 	$(document).ready(function (){
-		$("#oneWeek").click(function(event){
+		$("#oneWeek").click(function(){
 		event.preventDefault();
-		$("#sdate" ).val(oneWeek);
+		$("#sdate" ).val(beforeWeek);
 		});
 	});
 	
@@ -158,7 +168,7 @@
 	
 	$(document).ready(function (){
 		$("#order_search_btn").click(function(){
-			$("#OrderHistoryForm").attr("action","orderHistory_ok.action").submit();
+			$("#OrderHistoryFormId").submit();
 		});
 	});
 	

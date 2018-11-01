@@ -72,11 +72,6 @@ public class LoginController {
 	@RequestMapping(value="/loginTest.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String loginTest(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
-		//HttpSession session = req.getSession();
-		//String userId = (String) session.getAttribute("userId");
-		
-		//session.setAttribute("userId", userId);
-		
 		return "loginTest";
 	}
 	
