@@ -1,6 +1,6 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="true" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -16,18 +16,13 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
-<title>Insert title here</title>
+<title>마이 쇼핑</title>
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
-	function sendIt(mode) {
-		window.location.href = "infoCheckPage.action?mode=" + mode;
-	}
-</script>
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
@@ -118,8 +113,8 @@
 				<div class="col-sm-8" style="text-align: left;">${sessionScope.userInfo.getM_DATE()}</div>
 			</div>
 
-			<input type="button" value="정보수정" onclick="sendIt('change')" class="btnGreen" style="width: 250px;">
-			<input type="button" value="회원탈퇴" onclick="sendIt('cancel')" class="btnGreen" style="width: 250px;">
+			<input type="button" value="정보수정" onclick="sendIt('change');" class="btnGreen" style="width: 250px;">
+			<input type="button" value="회원탈퇴" onclick="sendIt('cancel');" class="btnGreen" style="width: 250px;">
 			<input type="button" value="주문내역조회" id="orderHistory" class="btnGreen" style="width: 250px;">
 			<input type="button" value="주소록" class="btnGreen" style="width: 250px;">
 		</div>
@@ -129,9 +124,14 @@
 	<jsp:include page="../include/footer.jsp" flush="false" />
 	</div>
 <script type="text/javascript">
+
 	$("#orderHistory").click(function(){
 		document.location.href = "orderHistory.action";
 	});
+	
+	function sendIt(mode) {
+		window.location.href = "infoCheckPage.action?mode=" + mode;
+	}
 </script>
 </body>
 </html>
