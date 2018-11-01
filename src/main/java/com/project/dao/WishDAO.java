@@ -29,5 +29,5 @@ public interface WishDAO {
 	
 	public void deleteWish(int g_num,String m_id)throws Exception;
 	
-	
+	public List<WishDTO> selectWish(String M_ID)throws Exception;
 }

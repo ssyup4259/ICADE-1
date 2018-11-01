@@ -20,8 +20,8 @@ update WISH set W_CHECK = 0 where W_MNO =#{G_NUM}
 	select rownum rnum, data.* from (
 	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK, G_SAVEFILENAME as W_SAVEFILENAME
 	FROM WISH, GOODS
-	WHERE W_GNUM = G_NUM AND W_ID = #{m_id} AND W_CHECK = 0
-	order by ROWNUM desc)DATA) 
+	WHERE W_GNUM = G_NUM AND W_ID = #{m_id} AND W_CHECK = 1
+	order by W_NUM desc ) DATA) 
 	<![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
@@ -33,7 +33,7 @@ update WISH set W_CHECK = 0 where W_MNO =#{G_NUM}
 <!--찜리스트 등록-->
 <insert id="insertWish" parameterType="com.project.dto.WishDTO">
 insert into WISH (W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK) 
-values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},0)
+values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},1)
 </insert>
 <!-- 전체 데이터수 -->
 <select id="dataCount" resultType="int">
@@ -70,6 +70,8 @@ select W_CHECK from WISH WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 <select id="checkList" parameterType="map" resultType="com.project.dto.WishDTO">
 	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK from WISH
 </select>
-
+<select id="selectWish" parameterType="String" resultType="com.project.dto.WishDTO">
+	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK from WISH where W_ID = #{M_ID}
+</select>
 
 </mapper>

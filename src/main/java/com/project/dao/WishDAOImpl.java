@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class WishDAOImpl implements WishDAO{
 	@Override
 	public void wishInsert(WishDTO w_dto) throws Exception {
 		
+		 System.out.println(w_dto.getW_ID());
 		 int maxNum = 0;
 		 maxNum = sessionTemplete.selectOne(wishMapper+".wishMaxNum");
 		 w_dto.setW_NUM(maxNum+1);
@@ -120,6 +122,19 @@ public class WishDAOImpl implements WishDAO{
 		map.put("g_num", g_num);
 		map.put("m_id", m_id);
 		sessionTemplete.delete(wishMapper + ".deleteWish",map);
+		
+	}
+	@Override
+	public List<WishDTO> selectWish(String M_ID) throws Exception {
+		
+		
+		System.out.println("---------------------------dao 탔다");
+		List<WishDTO> lists =new ArrayList<WishDTO>();
+				
+		lists = sessionTemplete.selectList(wishMapper +".selectWish",M_ID);
+		
+		
+		return lists;
 		
 	}
 

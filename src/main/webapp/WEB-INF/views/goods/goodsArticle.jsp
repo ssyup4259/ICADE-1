@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아이폰 케이스는 ICADE</title>
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -233,6 +233,70 @@ $(function() {
 
 </script>
 
+<script type="text/javascript">
+function like_func(g_num) {
+	
+	
+	$.ajax({
+		url:"<%=cp%>/wish/wishInsert.action",
+		type:"post",
+		chache:false,
+		async:false,
+		data :{'g_num':g_num},
+		success : function(map) {
+			var msg = '';
+			var like_img = '';
+			var num =map.g_num;
+			var like_check = map.like_check;
+		if(like_check!=1){
+			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
+			 if(document.URL.indexOf("##")==-1)
+	            {
+	                // Set the URL to whatever it was plus "#".
+	                url = document.URL+"##";
+	                location = "##";
+
+	                //Reload the page
+	                location.reload(true);
+
+	            }
+			
+		}else if(like_check==1){
+			
+			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
+			 if(document.URL.indexOf("##")==-1)
+	            {
+	                // Set the URL to whatever it was plus "#".
+	                url = document.URL+"##";
+	                location = "##";
+
+	                //Reload the page
+	                location.reload(true);
+
+	            }
+		}
+		
+	},
+	error: function(){
+		
+		alert("실패");
+		}
+		
+	});
+	
+	
+}
+</script>
+<script type="text/javascript">
+function login_need() {
+	
+	alert("로그인 후 찜목록을 눌러주세요!");
+	
+	
+}
+
+</script>
+
 </head>
 
 <body>
@@ -306,7 +370,7 @@ $(function() {
 							</div>
 						</div>
 						<div class="row" style="height: 60px;">
-							<div class="col-sm-3" style="text-align: left;">총 상품금액</div>
+							<div class="col-sm-3" style="text-align: left;">총 상품금액 ${w_Check}</div>
 							<div class="col-sm-9" style="text-align: left">
 								<input type="text" id="sum" class="inputBox" name="sum" value="${g_dto.getG_PRICE()}" readonly="readonly" style="width: 100%;" />
 							</div>
@@ -315,9 +379,19 @@ $(function() {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
-									<c:when test="">
-										<a href='javascript:like_func();'> <img src="<%=cp%>/resources/images/dislike.png" id="heart.png">
+									<c:when test="${!empty sessionScope.userInfo}">
+										<c:choose>
+											<c:when test="${w_Check ==1}">
+										<a href='#'>
+										<img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 										</a>
+										</c:when>
+										<c:otherwise>
+										<a href='#'>
+										<img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+										</a>
+										</c:otherwise>
+										</c:choose>
 									</c:when>
 									<c:otherwise>
 										<a href='javascript: login_need();'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
@@ -331,10 +405,10 @@ $(function() {
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
 								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
-									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
+									<input type="button" value="구매하기" onclick="orderIt();" class="btnGray" style="width: 100%" />
 								</div>
 								<div class="col-sm-6">
-									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;" />
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btnGray" style="width: 100%;" />
 								</div>
 							</div>
 						</div>
@@ -343,10 +417,10 @@ $(function() {
 				<hr style="border-top: 2px solid black">
 				<!-- divison 이동 -->
 				<div class="conatiner-fluid sticky text-center" id="menu" style="z-index: 999; background-color: transparent; padding-top: 8px;">
-					<a href="#section1"> <input type="button" class="btn" value="상품상세정보" style="width: 200px;">
-					</a>&nbsp;<a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
-					</a>&nbsp;<a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
-					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btn" value="상품목록으로 돌아가기" style="width: 200px;"></a>
+					<a href="#section1"> <input type="button" class="btnGreen" value="상품상세정보" style="width: 200px;">
+					</a>&nbsp;<a href="#section2"> <input type="button" class="btnGreen" value="상품구매안내" style="width: 200px;">
+					</a>&nbsp;<a href="#section3"> <input type="button" class="btnGreen" value="상품사용후기" style="width: 200px;">
+					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btnGreen" value="상품목록으로 돌아가기" style="width: 200px;"></a>
 				</div>
 
 				<div id="section1" class="container-fluid">

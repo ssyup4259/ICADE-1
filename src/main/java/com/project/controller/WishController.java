@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.MemberDTO;
+import com.project.dto.WishDTO;
 import com.project.service.WishService;
 
 @Controller
@@ -21,19 +23,7 @@ public class WishController {
 	
 	@Autowired
 	WishService w_service;
-	
-	@RequestMapping(value="/wishList.action",method= {RequestMethod.GET})
-	public String wishList(HttpServletRequest req) throws Exception{
-		
-		System.out.println("===================wishList.action 부분 들어왔나 체크용================================");
-		
-		w_service.wishList(req);
-		
-		
-		
-		return "wish/wish";
-		
-	}
+
 	
 	@RequestMapping(value="/wishInsert.action",method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
@@ -43,17 +33,18 @@ public class WishController {
 		
 		
 		
-		/*HttpSession info = req.getSession();
+		HttpSession info = req.getSession();
 		
 		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
 		String m_id = m_dto.getM_ID();
-		*/
+		System.out.println("------------id체크");
+		System.out.println(m_id);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 	
-		int count = w_service.checkWish(g_num, "aaa");//데이터가 있는지 없는지 확인
-		
-		
+		int count = w_service.checkWish(g_num, m_id);//데이터가 있는지 없는지 확인
+		System.out.println("------------------------------------------카운트");
+		System.out.println(count);
 		
 		
 		if(count==0) {//찜목록에 있으면
@@ -62,28 +53,23 @@ public class WishController {
 			
 		}else if(count!=0) {
 			
-			int like_check = w_service.wCheck(g_num, "aaa");//체크값 확인
+			int like_check = w_service.wCheck(g_num, m_id);//체크값 확인
 			System.out.println("------------------------------------------------------------------");	
 			System.out.println(like_check);
 			
-			if(like_check !=0) {
-				w_service.likeCheckCancel(g_num, "aaa");
-				map.put("msg", "찜목록에 추가되었습니다.");
-				map.put("like_check", like_check);
-				map.put("g_num", g_num);
 				
-			}else if(like_check ==0){
-				
-				w_service.likeCheck(g_num, "aaa");
+				w_service.deleteWish(g_num, m_id);
 				map.put("msg", "찜목록이 삭제되었습니다.");
-				map.put("like_check", like_check);
+				map.put("like_check", 0);
 				map.put("g_num", g_num);
 			
-		}
+		
 			
 			
 	}
-
+		List<WishDTO> lists = new ArrayList<WishDTO>();
+		lists = w_service.selectWish(m_id);
+		info.setAttribute("wishInfo",lists);
 		return map;
 		
 	}

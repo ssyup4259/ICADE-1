@@ -114,17 +114,23 @@
 		<form action="" name="searchForm" method="post">
 		<input type="button" id="btn2" value=" 전체 삭제 " class="btn2"/>
 		<c:forEach var="ck" items="${ck_lists}">
-		<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"><br/><br/>
+		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
+		<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"></a><br/><br/>
 		<input type="button" id="btn1" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});"/>
 		<br/><br/>
 		</c:forEach>
 		</form>
 		<h3>찜한</h3>
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
+		<c:forEach var="w_dto" items="${wishList}">
+		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/><br/><br/>
+		</a>
+		</c:forEach>
+		
+			<c:if test="${dataCount==0 }">
+				등록된 상품이 없습니다.
+			</c:if>
+		
 	</div>
 </div>
 <div class="container-fluid footer" style="width: 100%; height: 300px; background-color: white;">

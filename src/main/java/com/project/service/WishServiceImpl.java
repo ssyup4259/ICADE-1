@@ -1,9 +1,11 @@
 package com.project.service;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +32,19 @@ public class WishServiceImpl implements WishService {
 	@Override
 	public HttpServletRequest wishList(HttpServletRequest req) throws Exception {
 		
+
+		HttpSession session = req.getSession();
+		
+		
+		MemberDTO mDto = (MemberDTO) session.getAttribute("userInfo");
+		
+		
+		String m_id;
+		
+		
+		m_id= mDto.getM_ID();
+		
+	
 		String cp = req.getContextPath();
 		
 		String pageNum = req.getParameter("pageNum");
@@ -45,7 +60,7 @@ public class WishServiceImpl implements WishService {
 		//전체데이터갯수
 		int dataCount = w_dao.dataCount();
 		//전체페이지수
-				int numPerPage = 3;
+				int numPerPage = 2;
 				int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 				
 				if (currentPage > totalPage)
@@ -56,18 +71,16 @@ public class WishServiceImpl implements WishService {
 		
 		System.out.println("wishList ServiceImpl 까지 들어왔고");
 		
-		String m_id = req.getParameter("m_id");
 		
-		
-		List<WishDTO> wishList = w_dao.wishList(start,end,"aaa");
-		String listUrl = cp + "/wish/wishList.action";
+		List<WishDTO> wishList = w_dao.wishList(start,end,m_id);
+		String uri =req.getRequestURI();
+		String listUrl = uri;
 	
 		String pageIndexList =myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
 		req.setAttribute("dataCount",dataCount);
 		req.setAttribute("wishList",wishList);
 		req.setAttribute("pageIndexList",pageIndexList);
-		
 		return req;
 		
 		
@@ -76,13 +89,12 @@ public class WishServiceImpl implements WishService {
 
 	@Override
 	public void wishInsert(int g_num,HttpServletRequest req) throws Exception {
-		/*HttpSession info = req.getSession();
-		MemberDTO m_dto = (MemberDTO) info.getAttribute("UserInfo");
+		
+		HttpSession info = req.getSession();
+		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
 		
 		String m_id = m_dto.getM_ID();
-		*/
 		
-	
 		
 		GoodsDTO g_dto = new GoodsDTO();
 		
@@ -93,7 +105,7 @@ public class WishServiceImpl implements WishService {
 		w_dto.setW_NAME(g_dto.getG_NAME());
 		w_dto.setW_GNUM(g_num);
 		w_dto.setW_SAVEFILENAME(g_dto.getG_SAVEFILENAME());
-		w_dto.setW_ID("aaa");
+		w_dto.setW_ID(m_id);
 		
 		w_dao.wishInsert(w_dto);
 		
@@ -140,6 +152,14 @@ public class WishServiceImpl implements WishService {
 	public void deleteWish(int g_num, String m_id) throws Exception {
 		
 		w_dao.deleteWish(g_num, m_id);
+	}
+
+	@Override
+	public List<WishDTO> selectWish(String M_ID) throws Exception {
+		System.out.println("----------------------서비스 탓다");
+		List<WishDTO> lists =new ArrayList<WishDTO>();
+		lists =w_dao.selectWish(M_ID);
+		 return lists;
 	}
 
 
