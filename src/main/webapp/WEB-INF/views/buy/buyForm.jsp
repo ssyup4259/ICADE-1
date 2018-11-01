@@ -126,6 +126,9 @@ function sample6_execDaumPostcode() {
 			return;
 		} else if (pf.O_POINT.value == "") {
 			pf.O_POINT.value = "0";
+		} else if (pf.pFlag.value != "true") {
+			alert("포인트를 적용 해 주세요.");
+			return;
 		}
 		
 		var total = parseInt($("#O_TOT").val());
@@ -213,6 +216,7 @@ function sample6_execDaumPostcode() {
 			pf.O_POINT.focus();
 			$("#o_tot").html(parseInt(totalPay) + "원");
 			$("#O_TOT").val(totalPay);
+			pf.pFlag.value = "false";
 			return;
 		}
 		
@@ -222,6 +226,16 @@ function sample6_execDaumPostcode() {
 		
 		$("#o_tot").html(tot + "원");
 		$("#O_TOT").val(tot);
+		
+		pf.pFlag.value = "true";
+		
+	}
+	
+	function pFlagChange() {
+		
+		var pf = document.payForm;
+		
+		pf.pFlag.value = "false";
 		
 	}
 
@@ -403,7 +417,7 @@ function sample6_execDaumPostcode() {
 							</td>
 							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
 						</tr>
-						<c:set var="discount" value="${discount + (b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount())}"/>
+						<c:set var="discount" value="${discount + b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount()}"/>
 						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
 					</c:forEach>
 				</table>
@@ -420,7 +434,7 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>포인트</td>
 						<td>
-							<input type="text" name="O_POINT" style="text-align: right;" size="6" value="0"/>원
+							<input type="text" name="O_POINT" style="text-align: right;" size="6" value="0" onchange="pFlagChange();"/>원
 							 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) 
 							 <input type="button" value="적용" class="btn2" onclick="pointUse();"/>
 						</td>
@@ -433,6 +447,7 @@ function sample6_execDaumPostcode() {
 							</div>							
 							<input type="hidden" id="O_TOT" name="O_TOT" value="${total - discount}"/>
 							<input type="hidden" id="totalPay" value="${total - discount}"/>
+							<input type="hidden" name="pFlag" value="false"/>
 						</td>
 					</tr>
 					<tr>
