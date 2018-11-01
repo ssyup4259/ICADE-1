@@ -7,6 +7,7 @@
 
 <style type="text/css">
 .lg img {
+margin: 0 auto;
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
@@ -112,14 +113,10 @@
 	<div class="lg text-center" style="width: 70px; height: 830px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
 		<form action="" name="searchForm" method="post">
-			<input type="button" id="btn2" value=" 전체 삭제 " class="btn2" />
+			<input type="button" id="btn2" value="전체삭제" class="btnGray" style="font-size: 13px; width: 100%;"/>
 			<c:forEach var="ck" items="${ck_lists}">
-				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100">
-				<br />
-				<br />
-				<input type="button" id="btn1" value=" 삭제 " class="btn2" onclick="sendIt(${ck.getG_NUM()});" />
-				<br />
-				<br />
+				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}">
+				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 			</c:forEach>
 		</form>
 		<h3>찜한</h3>
