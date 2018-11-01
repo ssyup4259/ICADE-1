@@ -52,7 +52,7 @@
     <h2>주문조회</h2>
 </div>
 
-<form method="post" id="OrderHistoryForm" name="OrderHistoryForm">
+<form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
 
 <div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
 
@@ -188,7 +188,9 @@
 
 <br/><br/>
 
-<input type="hidden" name="nextIndex" value="">
+<form method="get">
+<input type="hidden" name="endPage" value="${endPgae}">
+
 
 <table align="center">
 	<tr>
@@ -203,6 +205,8 @@
 		</td>
 	</tr>
 </table>
+
+</form>
 <!-- 
 <div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate"><a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19" class="first"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_first.gif" alt="첫 페이지"></a>
 <a href="?page=1&amp;history_start_date=2018-07-21&amp;history_end_date=2018-10-19"><img src="//img.echosting.cafe24.com/skin/base/common/btn_page_prev.gif" alt="이전 페이지"></a>

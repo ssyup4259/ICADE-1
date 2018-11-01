@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,13 +57,18 @@ public class OrdersHistoryController {
 		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
 		String startDate = (String) request.getParameter("startDay");
 		String endDate = (String) request.getParameter("endDay");
-		String pageNum = request.getParameter("pageNum");
 		
+		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
+		String pageNum = request.getParameter("pageNum");
 		String pageStart = request.getParameter("endPage");
+		String pageEnd = request.getParameter("endPage");
+		
+		System.out.println("마지막 페이지 : " + pageStart);
 		
 		if(pageStart==null||pageStart.equals(null)) {
 			pageStart = "1";
 		}
+		
 		//int pageEnd = Integer.parseInt(request.getParameter("endPage")); 
 		
 		
@@ -77,15 +83,13 @@ public class OrdersHistoryController {
 		
 		String m_Id = dto.getM_ID();
 		
-		HashMap<Integer, List<OrderHistoryDTO>> hashMap = new HashMap<Integer, List<OrderHistoryDTO>>();
+		LinkedHashMap<Integer, List<OrderHistoryDTO>> hashMap = new LinkedHashMap<Integer, List<OrderHistoryDTO>>();
 		
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		
 		hMap.put("O_ID", m_Id);
 		hMap.put("start_date",startDate);
 		hMap.put("end_date",endDate);	
-
-		
 		
 		//현재 페이지
         int currentPage = 1;
@@ -112,6 +116,9 @@ public class OrdersHistoryController {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
+		hMap.put("start",start);
+		hMap.put("end",end);
+		
 		String listUrl = "orderHistory.action";
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
@@ -120,15 +127,15 @@ public class OrdersHistoryController {
 		
 		List<Integer> integerList = service.selectOrderNum(hMap);
 		
-		System.out.println("for문돌린다====================================================");
+		//System.out.println("for문돌린다====================================================");
 		
 		for(int i = 0;i<integerList.size();i++) {
 			
-			System.out.println(integerList);
+			//System.out.println(integerList);
 			
 			Integer O_Num = integerList.get(i);
 			
-			System.out.println(O_Num);
+			//System.out.println(O_Num);
 			
 			hMap.put("OD_NUM",O_Num);
 			
@@ -138,8 +145,9 @@ public class OrdersHistoryController {
 			
 		}
 		
-		System.out.println("====================================================for문끝났다");
+		//System.out.println("====================================================for문끝났다");
 		
+		request.setAttribute("endPgae", pageEnd);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
