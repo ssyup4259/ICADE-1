@@ -191,6 +191,20 @@
 		</td>
 	</tr>
 </table>
+</form>
 <jsp:include page="../include/footer.jsp" flush="false" />
+<script type="text/javascript">
+
+	$(window).load(function () {
+	    $(".gubun").each(function () {
+	        var rows = $(".gubun:contains('" + $(this).text() + "')");
+	        if (rows.length > 1) {
+	          rows.eq(0).attr("rowspan", rows.length);
+	          rows.not(":eq(0)").remove();
+	        }
+	    });
+	});
+
+</script>
 </body>
 </html>

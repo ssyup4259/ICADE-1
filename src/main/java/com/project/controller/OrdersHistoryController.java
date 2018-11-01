@@ -131,11 +131,7 @@ public class OrdersHistoryController {
 		
 		for(int i = 0;i<integerList.size();i++) {
 			
-			//System.out.println(integerList);
-			
 			Integer O_Num = integerList.get(i);
-			
-			//System.out.println(O_Num);
 			
 			hMap.put("OD_NUM",O_Num);
 			
