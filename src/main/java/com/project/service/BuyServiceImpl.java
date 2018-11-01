@@ -189,6 +189,19 @@ public class BuyServiceImpl implements BuyService {
 		
 		//End--------------------Order_Detail 테이블에 추가 ------------------------
 		
+		//Start--------------------Member 테이블 Point 감소 ------------------------
+		
+		int m_point = Integer.parseInt(req.getParameter("point"));
+		
+		Map<String,Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("m_point", m_point);
+		hMap.put("m_id", m_id);
+		
+		b_dao.pointMinus(hMap);
+		
+		//End--------------------Member 테이블 Point 감소 ------------------------
+		
 		return null;
 	}
 	
