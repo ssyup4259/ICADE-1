@@ -1,12 +1,5 @@
 package com.project.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -24,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
@@ -33,7 +25,6 @@ import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
 import com.project.service.OrderHistoryService;
 import com.project.util.MyUtil;
-import com.project.util.RestAPI;
 
 @Controller
 public class OrdersHistoryController {
@@ -58,19 +49,10 @@ public class OrdersHistoryController {
 		String startDate = (String) request.getParameter("startDay");
 		String endDate = (String) request.getParameter("endDay");
 		
+		System.out.println("startDate : " + startDate);
+		
 		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
 		String pageNum = request.getParameter("pageNum");
-		String pageStart = request.getParameter("endPage");
-		String pageEnd = request.getParameter("endPage");
-		
-		System.out.println("마지막 페이지 : " + pageStart);
-		
-		if(pageStart==null||pageStart.equals(null)) {
-			pageStart = "1";
-		}
-		
-		//int pageEnd = Integer.parseInt(request.getParameter("endPage")); 
-		
 		
 		if(startDate==null || startDate.equals(null)){
 			startDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate()); 
@@ -143,7 +125,6 @@ public class OrdersHistoryController {
 		
 		//System.out.println("====================================================for문끝났다");
 		
-		request.setAttribute("endPgae", pageEnd);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
