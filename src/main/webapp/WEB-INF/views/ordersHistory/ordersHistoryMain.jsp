@@ -142,10 +142,7 @@
 					<p>${dto.getO_DATE()}<br/>
 						<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 					</p>
-					<form action="" method="post" name="myForm">
-						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
-					</form>
-			        
+					<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
 				</td>
 				<td class="thumb">
 					<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}">
@@ -169,8 +166,10 @@
 					<p class="txtEm">${dto.getO_STATUS()}</p>
 				</td>
 				
-				<td>
-					<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
+				<td class="gubun">
+					<form action="" method="post" name="myForm">
+						<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}');"/>
+					</form>
 					<p class="">${dto.getO_IMP()}</p>
 				</td>
 				

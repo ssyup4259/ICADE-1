@@ -344,6 +344,7 @@ function sample6_execDaumPostcode() {
 					</tr>
 					
 					<c:set var="total" value="0"/>
+					<c:set var="discount" value="0"/>
 					<c:forEach var="b_dto" items="${b_lists}">
 						<tr>
 							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
@@ -356,6 +357,7 @@ function sample6_execDaumPostcode() {
 							</td>
 							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
 						</tr>
+						<c:set var="discount" value="${discount + (b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount())}"/>
 						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
 					</c:forEach>
 				</table>
@@ -367,17 +369,20 @@ function sample6_execDaumPostcode() {
 					</tr>
 					<tr>
 						<td>총 할인 금액</td>
-						<td><fmt:formatNumber>0</fmt:formatNumber>원</td>
+						<td><fmt:formatNumber>${discount}</fmt:formatNumber>원</td>
 					</tr>
 					<tr>
 						<td>포인트</td>
-						<td><input type="text" class="btn2" size="6"/>원 (총 사용가능 적립금 : 1,500원)</td>
+						<td>
+							<input type="text" class="btn2" style="text-align: right;" size="6" value="0"/>원
+							 (총 사용가능 적립금 : <span id="point"><fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber></span>원)
+						</td>
 					</tr>
 					<tr>
 						<td>최종 결제 금액</td>
 						<td>
-							<fmt:formatNumber>${total}</fmt:formatNumber>원
-							<input type="hidden" id="O_TOT" name="O_TOT" value="${total}"/>
+							<fmt:formatNumber>${total - discount}</fmt:formatNumber>원
+							<input type="hidden" id="O_TOT" name="O_TOT" value="${total - discount}"/>
 						</td>
 					</tr>
 					<tr>
