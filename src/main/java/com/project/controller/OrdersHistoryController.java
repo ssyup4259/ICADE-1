@@ -38,6 +38,8 @@ public class OrdersHistoryController {
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
+		System.out.println("==================orderHistory.action 두번타는지 테스트용================================================");
+		
 		HttpSession session = request.getSession();
 		MyUtil myUtil = new MyUtil();
 		Date date = new Date();

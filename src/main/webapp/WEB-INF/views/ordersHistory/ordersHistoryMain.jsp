@@ -230,11 +230,22 @@
 		});
 	});
 	
+	$(document).ready(function (){
+		var startDate = <%=request.getParameter("startDate")%>
+		
+		if(!startDate){
+			alert("없다");
+		}else{
+			alert("있다?");
+		}
+		
+	});
+	
 	//변경될 달력부분의 인풋박스에 기본값 넣어두기(3달전)
 	<%-- var defaultValue = year + "-" + (month-3) + "-" + date;
 	
 	$(function() {
-		var startDate = <%=request.getParameter("startDate")%>
+		
 		
 		if(!startDate){
 			$( "#sdate" ).val(defaultValue);
