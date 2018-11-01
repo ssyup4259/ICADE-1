@@ -29,27 +29,6 @@
 
 
 </head>
-<script>
-
-	function replyDelete(BC_NUM,BC_BOARD) {
-
-	var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
-		
-	if(confirm("삭제하시겠습니까?")) {
-	$.ajax({
-		type :"post",
-		data : data,
-		url : "<%=cp%>/goods/replyDelete.action",
-		success:function(result){
-				alert("삭제되었습니다");
-		},
-		error: function(result) {
-			alert("안된다");
- 	    }
-     });
-   }
-  }
-</script>
 
 
 <script type="text/javascript">
@@ -82,7 +61,7 @@
      	 }
 		
 </script>
-<!-- 댓글 등록하기 -->
+<!-- 대댓글 등록하기 -->
 <script>
 	function writeCmt(BC_BOARD,BC_NUM,BC_CONTENT) {
 		
@@ -110,12 +89,33 @@
 		});
 	}
 </script>
+<script>
+
+	function replyDelete(BC_NUM,BC_BOARD) {
+
+	var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
+		
+	if(confirm("삭제하시겠습니까?")) {
+	$.ajax({
+		type :"post",
+		data : data,
+		url : "<%=cp%>/goods/replyDelete.action",
+		success:function(result){
+				alert("삭제되었습니다");
+		},
+		error: function(result) {
+			alert("안된다");
+ 	    }
+     });
+   }
+  }
+</script>
 
 <body>
 	<form id="replyForm" method="post" enctype="multipart/form-data">
 		 <div id="bbs">
-		 <c:forEach var="bc_dto" items="${bc_lists}">
 				<div id="bbsArticle">
+				 <c:forEach var="bc_dto" items="${bc_lists}">
 					<div id="replyHeader" style="padding-left: 35px; font-size: 20px">
 						<ul>
 							<li>
@@ -129,9 +129,9 @@
 								#${bc_dto.getBC_ID()}&nbsp;&nbsp;&nbsp;&nbsp;등록일 :${bc_dto.getBC_DATE()}
 							</li>
 						</ul>
-				</div>
+					</div>
 				
-				<div class="${bc_dto.getBC_NUM()}" style="display:none">
+					<div class="${bc_dto.getBC_NUM()}" style="display:none">
 						<table width="600" border="0">
 						<tr>
 							<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
@@ -162,11 +162,51 @@
 								</div>
 							</div>
 							</td>
-					</table>
-					<div id="replyComment"></div>
+						</table>
+					</c:forEach>
+			<c:forEach var="rp_dto" items="${rp_list}">
+			<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
+				<!-- 댓글 목록 -->
+						<tr height="60px;" class="even">
+							<!-- 아이디, 작성날짜 -->
+							<td width="15%" valign="top">
+								<div style="width: 120px; height: 40px;">
+								<div style="margin-top: 15%"></div>
+									<%-- <c:if test="${rp_dto.getLevel() > 1}">
+									&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
+									</c:if> --%>
+									${rp_dto.getBC_ID()}<br> <font color="b3cccc" size="2">${rp_dto.getBC_DATE()}</font>
+								</div>
+							</td>
+							<!-- 본문내용 -->
+							<td width="70%">
+								${rp_dto.getBC_CONTENT()}
+							</td>
+							<!-- 버튼 -->
+							<td width="15%">
+								<div id="btn" style="text-align: center;">
+									<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+									<c:if test="${rp_dto.BC_ID() eq sessionScope.userInfo.getM_ID()}">
+										<c:if test="${bc_dto.commentLevel eq 1}">
+									<a href="#" onclick="cmReplyOpen(${rp_dto.BC_NUM});">[답변]</a>
+											<br>
+										</c:if>
+									</c:if>
+
+									<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
+									<c:if test="${rp_dto.BC_ID() == sessionScope.userInfo.getM_ID()}">
+										<a href="#" onclick="cmUpdateOpen(${rp_dto.BC_NUM},${rp_dto.getBC_CONTENT()}">[수정]</a>
+								<br>
+								<a href="#" onclick="cmDeleteOpen(${rp_dto.BC_NUM});">[삭제]</a>
+										<Br>
+									</c:if>
+								</div>
+							</td>
+						</tr>
+						</table>
+					</c:forEach>
 				 </div>
-				</div>
-			</c:forEach>
+			</div>
 		</div>
 	</form>
 </body>

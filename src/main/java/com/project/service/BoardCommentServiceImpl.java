@@ -262,7 +262,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String cp = req.getContextPath();
 
 		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
-		String pageNum = req.getParameter("pageNum");
+		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 		String replyPageNum = req.getParameter("replyPageNum");
 		int currentPage = 1;
 
@@ -287,7 +287,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int end = currentPage * numPerPage;
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
-
+		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM);
 		String param = "";
 		param += "G_NUM=" + BC_BOARD;
 
@@ -303,6 +303,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		req.setAttribute("pageIndexList", pageIndexList_r);
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("bc_lists", bc_list);
+		req.setAttribute("rp_list", rp_list);
 		req.setAttribute("replyPageNum", replyPageNum);
 
 		return req;
@@ -842,7 +843,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 				
 				return req;
 	}
-
+	//대댓글 등록
 	@Override
 	public HttpServletRequest replyComment(BoardCommentDTO bc_dto, HttpServletRequest req) throws Exception {
 		
@@ -851,7 +852,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String BC_ID =  req.getParameter("BC_ID");
 		String BC_CONTENT =req.getParameter("BC_CONTENT");
 		
-		int BC_PARENT = BC_BOARD;
+		int BC_PARENT = BC_NUM;
 		
 		System.out.println(BC_BOARD);
 		System.out.println(BC_ID);
@@ -863,9 +864,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		bc_dto.setBC_CONTENT(BC_CONTENT);
 		bc_dto.setBC_PARENT(BC_PARENT);
 		
-		int bc_num;
 		
-		bc_num = bc_dao.insertData(bc_dto);
+		bc_dao.insertData(bc_dto);
 		
 		return null;
 	}

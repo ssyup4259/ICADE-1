@@ -148,7 +148,6 @@ public class BoardCommentController {
 		
 	}
 	
-	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		

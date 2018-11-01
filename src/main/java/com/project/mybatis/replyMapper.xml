@@ -74,7 +74,7 @@ select count(*) from board_comment
 ]]>
 </select>
 
-<!-- 하나의 댓글(조인)정보 읽어오기 -->
+<!-- 하나의 댓글정보 읽어오기 -->
 <select id="readOne" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
 select BC_NUM,BC_BOARD,BC_ID,BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME,BC_CONTENTFILE1,
 BC_CONTENTFILE2,BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT ,G_NUM,G_NAME
@@ -101,8 +101,11 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 	    order by BC_DATE desc
 	)
 	where BC_NUM = #{BC_NUM}
+</select>
 
-
+<!-- 대댓글 리스트 가져오기 -->
+<select id="readReply" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
+ 	select BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID from board_comment where BC_PARENT =#{BC_PARENT}
 </select>
 
 </mapper>

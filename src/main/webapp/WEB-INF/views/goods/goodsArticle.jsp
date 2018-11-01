@@ -492,21 +492,6 @@ $(function() {
 </body>
 <!-- 댓글에 띄울 리스트 작성 -->
 <script>
-function listReply(){
-	 $.ajax({
-		 type:"get",
-		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
-		 success : function(result) {
-			 //responseText가 result에 저장됨.
-			 $("#replyList").html(result);
-		}
-	 });
-}
-/* window.onload = function listReply() {
-} */
-</script>
-
-<script>
 $(document).ready(function() {
 	$.ajax({
 		 type:"get",
@@ -516,36 +501,6 @@ $(document).ready(function() {
 			 $("#replyList").html(result);
 		}
 	 });
-	
-	$("#replySubmit").click(function() {
-		
-		 var formData = new FormData($("#commentForm")[0]);
-
-		$.ajax({
-			type : "post",
-			url :"<%=cp%>/goods/replyInsert.action",
-			data : formData,
-			processData : false,
-            contentType : false,
-			success:function(){
-				alert("댓글이 등록되었습니다.");
-				$.ajax({
-					 type:"get",
-					 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
-					 success : function(result) {
-						 //responseText가 result에 저장됨.
-						 $("#replyList").html(result);
-					}
-				 });
-			},
-			error: function(result) {
-				alert("안된다");
-				alert(result);
-				
-			}
-		});
-		$("#replySubmit").submit();
-	});	
 });
 </script>
 
