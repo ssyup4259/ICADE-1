@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아이폰 케이스는 ICADE</title>
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -346,7 +346,7 @@ $(function() {
 					<a href="#section1"> <input type="button" class="btn" value="상품상세정보" style="width: 200px;">
 					</a>&nbsp;<a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
 					</a>&nbsp;<a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
-					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btn" value="상품목록으로 돌아가기" style="width: 200px;"></a>
+					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btnGreen" value="상품목록으로 돌아가기" style="width: 200px;"></a>
 				</div>
 
 				<div id="section1" class="container-fluid">
@@ -430,7 +430,18 @@ $(function() {
 	
 	<!-- 댓글부분 -->
 				<div id="section3" class="container-fluid">
-					<h1>REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+						<ul>
+							<li style="float: left; padding-left: 15px">
+								<p style="font-size: 20px ">REVIEW | 포토리뷰 작성하고 적립금 받자!</p>
+							</li>
+						
+							<li style="float: right; padding-top: 6px; padding-right: 15px">
+			               	    <input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';"/>
+							</li>
+							<li style="float: right; padding-top: 6px; padding-right: 11px">
+								<input type="button" value="포토후기 작성하기"  class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
+							</li>
+						</ul>
 					<div id="comment" class="container-fluid">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
 						<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
@@ -439,8 +450,8 @@ $(function() {
 						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-							<tr>
-									<%-- <tr bgcolor="lightgray" height="60px;">
+						<%-- 	<tr>
+									<tr bgcolor="lightgray" height="60px;">
 										<!-- 아이디-->
 										<td width="15%">
 											<div>${sessionScope.userInfo.getM_ID()}</div>
@@ -451,16 +462,10 @@ $(function() {
 												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color:transparent;"></textarea>
 												<input type="file" id="upload" name="bcFile">
 											</div>
-										</td> --%>
-										<!-- 댓글 등록 버튼 -->
-										<td width="15%">
-											<div id="btn2" style="text-align: center;">
-												<p>
-													<input type="button" value="포토후기 작성하기"  onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
-												</p>
-											</div>
 										</td>
-									</tr>
+										<!-- 댓글 등록 버튼 -->
+										
+									</tr> --%>
 							</c:if>
 
 
@@ -477,13 +482,6 @@ $(function() {
 									</td>
 								</tr>
 							</c:if>
-							<tr>
-								<br />
-								<td colspan="3" align="center">
-									<h2>${pageIndexList_c}</h2>
-								</td>
-								<br />
-							</tr>
 						</table>
 						<div id="replyList"></div>
 						</form>

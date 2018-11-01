@@ -785,7 +785,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int dataCount = bc_dao.countAllReply();
 
 		// 전체페이지수
-		int numPerPage = 3;
+		int numPerPage = 12;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
 		if (currentPage > totalPage)
@@ -841,6 +841,33 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 				req.setAttribute("sub_dto", sub_dto);
 				
 				return req;
+	}
+
+	@Override
+	public HttpServletRequest replyComment(BoardCommentDTO bc_dto, HttpServletRequest req) throws Exception {
+		
+		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
+		int BC_BOARD = Integer.parseInt(req.getParameter("BC_BOARD"));
+		String BC_ID =  req.getParameter("BC_ID");
+		String BC_CONTENT =req.getParameter("BC_CONTENT");
+		
+		int BC_PARENT = BC_BOARD;
+		
+		System.out.println(BC_BOARD);
+		System.out.println(BC_ID);
+		System.out.println(BC_CONTENT);
+		System.out.println(BC_PARENT);
+		
+		bc_dto.setBC_BOARD(BC_BOARD);
+		bc_dto.setBC_ID(BC_ID);
+		bc_dto.setBC_CONTENT(BC_CONTENT);
+		bc_dto.setBC_PARENT(BC_PARENT);
+		
+		int bc_num;
+		
+		bc_num = bc_dao.insertData(bc_dto);
+		
+		return null;
 	}
 
 }

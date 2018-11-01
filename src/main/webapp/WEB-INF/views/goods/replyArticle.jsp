@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>포토후기</title>
 
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -25,39 +25,51 @@
 <jsp:include page="../include/header.jsp" flush="false" />
 
 <div id="bbs">
-	<div id="bbs_title" align="">
+	<div id="bbs_title" style="font-size:25px; padding-left: 35px">
 	 #${bc_dto.getG_NAME()}
 	 <br>
-	 <font size="3" ><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">상품상세보기</a></font>
+	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"><font size="5" >상품상세보기</font></a>
 	</div>
 	<div id="bbsArticle">
-		<div id="bbsArticle_header">
-			<h3>${bc_dto.getBC_SUBJECT()}</h3>
+		<div id="bbsArticle_header" style="padding-left: 35px; font-size: 20px">
+			<ul>
+				<li>
+					<p style="font-size: 20px; float: left">
+				 		${bc_dto.getBC_SUBJECT()}
+				 	</p>
+				</li>
+				
+				<li style="float: right; padding-top: 17px; padding-right: 35px">
+					#${bc_dto.getBC_ID()}&nbsp;&nbsp;&nbsp;&nbsp;등록일 : ${bc_dto.getBC_DATE()}
+				</li>
+				
+			</ul>
 		</div>
-		<div class="bbsArticle_bottomLine">
-			<dl>
-				<dt>${bc_dto.getBC_ID()}</dt>
-			</dl>
-		</div>
-		<div class="bbsArticle_bottomLine">
-			<dl>
-				<dt>등록일 : ${bc_dto.getBC_DATE()}</dt>
-			</dl>
-		</div>
-		<div id="bbsArticle_content">
+		
+		<div id="reply_content">
 			<table width="600" border="0">
 			<tr>
 				<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
 				 <div>
-					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
+					 <c:if test="${!empty bc_dto.getBC_SAVEFILENAME()}">
+						<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
+					 </c:if>
 					<br>
+					
+					<c:if test="${!empty bc_dto.getBC_SAVE1()}">
 					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
+					</c:if>
 					<br>
+					<c:if test="${!empty bc_dto.getBC_SAVE2()}">
 					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: auto; height: auto" id="">
+					</c:if>
 					<br>
+					<c:if test="${!empty bc_dto.getBC_SAVE3()}">
 					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: auto; height: auto" id="">
+					</c:if>
 					<br>
 					${bc_dto.getBC_CONTENT()}
+					<!-- 댓글 부분 -->
 				</div>
 				</td>
 			</tr>
@@ -82,14 +94,14 @@
 			<ul>
 				<c:if test="${bc_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
 				<li>
-	               <input type="button" value=" 수정 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/articleUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}';" />
-	               <input type="button" value=" 삭제 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/articleDelete.action?BC_NUM=${bc_dto.getBC_NUM()}&BC_BOARD=${bc_dto.getBC_BOARD()}&replyPageNum=${replyPageNum}';" />
+	               <input type="button" value=" 수정 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}';" />
+	               <input type="button" value=" 삭제 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleDelete.action?BC_NUM=${bc_dto.getBC_NUM()}&BC_BOARD=${bc_dto.getBC_BOARD()}&replyPageNum=${replyPageNum}';" />
 				</li>
 				</c:if>
 					
 				<li style="float: right">
 					<input type="hidden" value="${replyPageNum}"/>
-               	    <input type="button" value=" 리스트 " class="btn2" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${replyPageNum}';"/>
+               	    <input type="button" value=" 목록으로 돌아가기 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${replyPageNum}';"/>
 				</li>
 			</ul>
 		

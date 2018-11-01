@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dao.AdminDAO;
@@ -137,9 +138,19 @@ public class BoardCommentController {
 		
 		return "redirect:/goods/replyAllList.action?replyPageNum="+replyPageNum;
 	}
+	
+	//대댓글 등록
+	@RequestMapping(value="/replyComment.action")
+	@ResponseBody
+	public void replyComment(BoardCommentDTO bc_dto, HttpServletRequest req)throws Exception{
 		
+		bc_service.replyComment(bc_dto, req);
+		
+	}
+	
+	
 	@ModelAttribute
-	HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
+	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		req.setAttribute("gk_lists", gk_lists);

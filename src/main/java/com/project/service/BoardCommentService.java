@@ -24,5 +24,8 @@ public interface BoardCommentService {
 	public HttpServletRequest replyAllList(HttpServletRequest req)throws Exception;
 	//댓글 상세페이지
 	public HttpServletRequest replyArticle(HttpServletRequest req)throws Exception;
+	//대댓글 등록
+	public HttpServletRequest replyComment(BoardCommentDTO bc_dto,HttpServletRequest req)throws Exception;
+	
 	
 }

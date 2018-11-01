@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>아이폰 케이스는 ICADE</title>
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -22,36 +22,62 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
+<script type="text/javascript">
+	function login() {
+		
+		var f = document.replyForm;
+		alert("로그인 후 작성 가능합니다.");
+		
+		f.action = "<%=cp%>/login.action";
+		f.submit();
+	}
+</script>
+
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
-	<table width="700" cellpadding="0" cellspacing="3" align="center" bgcolor="e4e4e4">
-		<tr height="50">
-			<td bgcolor="#ffffff" style="padding-left: 10px;">
-			<b>이미지 게시판</b>
-			</td>
-		</tr>
-	</table>
- 
-  <form action="" method="post" name="myForm">
+  <form action="" method="post" name="replyForm">
   
   <c:set var = "i" value="0" />
-  <c:set var = "j" value="3" />
+  <c:set var = "j" value="5" />
+  
+	 <div id="" style="text-align: center;">
+	 
+	 	 <!-- 로그인 안하면 작성 불가능 -->
+		 <c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+			<p>
+				<input type="button" value="포토후기 작성하기" style="width: 80%"  
+				onclick="javascript:location.href='<%=cp%>/goods/articleCreate.action';" class="btnGreen" height="20px">
+			</p>
+		 </c:if>
+		  <!-- 로그인 안하면 작성 불가능 -->
+		 <c:if test="${empty sessionScope.userInfo.getM_ID()}">
+			<p>
+				<input type="button" value="포토후기 작성하기" style="width: 80%"   
+				onclick="login();" class="btnGreen" height="20px">
+			</p>
+		 </c:if>
+	 </div>
+
   
   <table  align="center">
 	 <tr>
-		 <td width="33%">
-		 <td width="33%">
-		 <td width="33%">
+		 <td width="20%">
+		 <td width="20%">
+		 <td width="20%">
+		 <td width="20%">
+		 <td width="20%">
 	 </tr>
 	 
   <c:forEach var="bc_dto" items="${bc_Alllist }">
 	  <c:if test="${i%j == 0} ">
 	 <tr align="center">
 	  </c:if>
-      	<td colspan="1" >
+      	<td colspan="1" style=" margin: 0; padding:0">
       	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">${bc_dto.getG_NAME()}</a><br>
-     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}"><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" style="width: 300px; height: 400px" id=""><br>
-    	 ${bc_dto.getBC_SUBJECT()}</a>
+     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}">
+     	 <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px; margin: 0px; " id=""><br>
+    	 ${bc_dto.getBC_SUBJECT()}
+    	 </a>
     	</td>
   	<c:if test="${i%j == j-1}">
     </tr>
