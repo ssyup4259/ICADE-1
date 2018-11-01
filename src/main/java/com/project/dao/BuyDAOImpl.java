@@ -60,4 +60,16 @@ public class BuyDAOImpl implements BuyDAO {
 		return sessionTemplate.selectOne(buyMapper + ".getReadGoodsDetailMap", map);
 	}
 
+	//포인트 감소
+	@Override
+	public void pointMinus(Map<String, Object> map) throws Exception {
+		sessionTemplate.update(buyMapper + ".pointMinus", map);
+	}
+
+	//포인트 증가
+	@Override
+	public void pointAdd(Map<String, Object> map) throws Exception {
+		sessionTemplate.update(buyMapper + ".pointAdd", map);
+	}
+
 }

@@ -22,6 +22,16 @@
 	update GOODS_DETAIL set GD_COUNT = GD_COUNT + #{count}, GD_SELLCOUNT = GD_SELLCOUNT - #{count} where GD_CODE = #{code}
 </update>
 
+<!-- 포인트 감소 -->
+<update id="pointMinus" parameterType="map">
+	update member set m_point = m_point - #{m_point} where m_id = #{m_id}
+</update>
+
+<!-- 포인트 증가 -->
+<update id="pointAdd" parameterType="map">
+	update member set m_point = m_point + #{m_point} where m_id = #{m_id}
+</update>
+
 <select id="ordersMaxNum" resultType="int">
 	select nvl(max(O_NUM), 0) from Orders
 </select>

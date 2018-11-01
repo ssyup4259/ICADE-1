@@ -55,7 +55,7 @@ public class BuyServiceImpl implements BuyService {
 		b_dto.setCode(dto.getGD_CODE());
 		b_dto.setColor(dto.getGC_COLOR());
 		b_dto.setCount(gd_dto.getGD_COUNT());
-		b_dto.setDiscount(0);//수정 요함
+		b_dto.setDiscount(g_dto.getG_DISCOUNT());//수정 요함
 		b_dto.setKind(dto.getDK_NAME());
 		b_dto.setName(g_dto.getG_NAME());
 		b_dto.setNum(gd_dto.getGD_NUM());
@@ -89,11 +89,12 @@ public class BuyServiceImpl implements BuyService {
 			c_dto = c_dao.getCartItem(c_num[i]);
 			
 			BuyDTO b_dto = new BuyDTO();
+			GoodsDTO g_dto = a_dao.getReadGoods(c_dto.getC_GNUM());
 			
 			b_dto.setCode(c_dto.getC_CODE());
 			b_dto.setColor(c_dto.getC_COLOR());
 			b_dto.setCount(c_dto.getC_COUNT());
-			b_dto.setDiscount(0);//수정 요함
+			b_dto.setDiscount(g_dto.getG_DISCOUNT());//수정 요함
 			b_dto.setKind(c_dto.getC_DEVICE());
 			b_dto.setName(c_dto.getC_NAME());
 			b_dto.setNum(c_dto.getC_GNUM());
@@ -187,6 +188,19 @@ public class BuyServiceImpl implements BuyService {
 		}
 		
 		//End--------------------Order_Detail 테이블에 추가 ------------------------
+		
+		//Start--------------------Member 테이블 Point 감소 ------------------------
+		
+		int m_point = Integer.parseInt(req.getParameter("point"));
+		
+		Map<String,Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("m_point", m_point);
+		hMap.put("m_id", m_id);
+		
+		b_dao.pointMinus(hMap);
+		
+		//End--------------------Member 테이블 Point 감소 ------------------------
 		
 		return null;
 	}

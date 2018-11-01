@@ -23,9 +23,9 @@
 
 <script type="text/javascript">
 
-	function sendIt(){
+	function searchIt(){
 		
-		var f = document.searchForm;
+		var f = document.goodsSearchForm;
 		
 		f.action = "<%=cp%>
 	/goods/goodsList.action";
@@ -67,7 +67,7 @@
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
 		<div class="" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
-				<form class="" action="" name="searchForm" method="post">
+				<form class="" action="" name="goodsSearchForm" method="post">
 					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
 
 					<select name="GK_KIND_NUM" class="selGreen" style="width: 100px; cursor: pointer;">
@@ -82,7 +82,7 @@
 						<option value="G_CONTENT">내용</option>
 					</select>
 					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;">
-					<button type="button" class="btnGreen" style="width: 100px;" onclick="sendIt();">검색</button>
+					<button type="button" class="btnGreen" style="width: 100px;" onclick="searchIt();">검색</button>
 				</form>
 			</div>
 		</div>
