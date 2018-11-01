@@ -27,7 +27,8 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>/goods/goodsList.action";
+		f.action = "<%=cp%>
+	/goods/goodsList.action";
 		f.submit();
 
 	}
@@ -88,7 +89,7 @@
 	</div>
 
 	<!-- 중단 sidebar, container -->
-	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px;">
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container-fluid col-sm-8">
 			<div class="row">
 				<div class="container-fluid" style="width: 120%;">
@@ -158,8 +159,6 @@
 
 						<c:if test="${i % 4 == 3 || newList.size() == i+1}">
 				</div>
-				<br>
-				<br>
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
