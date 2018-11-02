@@ -73,7 +73,7 @@ input.down {
 <script type="text/javascript">
 $(function() {
 
-	var select = "<option>:: 선택 ::</option>"; 
+	var select = "<option value='none'>:: 선택 ::</option>"; 
 	$("#product").change(function() {
 		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
 			$("#sub").find("option").remove().end().append(select);
@@ -221,6 +221,18 @@ $(function() {
 		var f = document.myForm;
 		var login = "${sessionScope.userInfo.getM_ID()}";
 		
+		if (f.GD_DEVICE.value == "none") {
+			alert("기종을 선택 해 주세요.");
+			f.GD_DEVICE.focus();
+			return;
+		}
+		
+		if (f.GD_COLOR.value == "none") {
+			alert("색상을 선택 해 주세요.");
+			f.GD_COLOR.focus();
+			return;
+		}
+		
 		f.action = "<%=cp%>/buy/buyForm.action";
 		
 		if (login != "") {
@@ -344,7 +356,7 @@ function login_need() {
 								<c:if test="${!empty gd_list}">
 									<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
 									<select name="GD_DEVICE" id="product" class="sel" style="width: 100%;">
-										<option value="">::기종을 선택하세요::</option>
+										<option value="none">::기종을 선택하세요::</option>
 										<c:forEach var="gd_dto" items="${d_list}">
 											<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
 										</c:forEach>
@@ -356,7 +368,7 @@ function login_need() {
 							<div class="col-sm-3" style="text-align: left;">색상</div>
 							<div class="col-sm-9" style="text-align: left">
 								<select name="GD_COLOR" id="sub" class="sel" style="width: 100%;">
-									<option>:: 색상을 선택해주세요 ::</option>
+									<option value="none">:: 색상을 선택해주세요 ::</option>
 								</select>
 							</div>
 						</div>
