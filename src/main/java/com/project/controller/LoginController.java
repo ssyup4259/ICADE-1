@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
+import com.project.dto.WishDTO;
 import com.project.service.LoginService;
+import com.project.service.WishService;
 
 @Controller
 public class LoginController {
@@ -26,6 +29,9 @@ public class LoginController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	
+	@Autowired
+	WishService w_service;
 	
 	@RequestMapping(value="/login.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login(HttpServletRequest req, HttpServletResponse resp)throws Exception{
@@ -58,10 +64,15 @@ public class LoginController {
 			return "login/login";
 			
 		} else {
+			List<WishDTO> lists =new ArrayList<WishDTO>();
 			
+			lists =  w_service.selectWish(M_ID);
 			dto.setM_DATE(dto.getM_DATE().substring(0, 10));
 			
 			session.setAttribute("userInfo", dto);
+			session.setAttribute("wishInfo", lists);
+			System.out.println("---------------------------");
+			
 			
 			return "redirect:/";
 		}

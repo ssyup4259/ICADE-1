@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mybatis.wishMapper">
+
+<!--찜목록 추가  -->
+<update id="updateWish" parameterType="int">
+update WISH set W_CHECK = W_CHECK+1 where W_MNO =#{G_NUM}
+</update>
+	
+<!--찜목록 삭제  -->
+<update id="updateWishCancel" parameterType="int">
+update WISH set W_CHECK = 0 where W_MNO =#{G_NUM}
+</update>
+
+<!--찜리스트  -->
+<select id="wishList" parameterType="map" resultType="com.project.dto.WishDTO">
+	select *from (
+	select rownum rnum, data.* from (
+	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK, G_SAVEFILENAME as W_SAVEFILENAME
+	FROM WISH, GOODS
+	WHERE W_GNUM = G_NUM AND W_ID = #{m_id} AND W_CHECK = 1
+	order by W_NUM desc ) DATA) 
+	<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+<!-- wishNum의 최댓값 -->
+<select id="wishMaxNum" resultType="int">
+	select nvl(max(w_num),0) from WISH
+</select>
+<!--찜리스트 등록-->
+<insert id="insertWish" parameterType="com.project.dto.WishDTO">
+insert into WISH (W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK) 
+values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},1)
+</insert>
+<!-- 전체 데이터수 -->
+<select id="dataCount" resultType="int">
+select nvl(count(*), 0) from WISH
+</select>
+<!--데이터 중복  -->
+<select id="checkWish" parameterType="map" resultType="int">
+	select nvl(count(*), 0) from WISH where W_ID = #{m_id} and W_GNUM = #{g_num}
+</select>
+<!--찜 리스트 체크  -->
+<update id="like_check" parameterType="map">
+	update WISH
+	set W_CHECK = 1
+ 	WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
+</update>
+<!--찜 리스트 체크  -->
+<update id="like_check_cancel" parameterType="map">
+	update WISH
+	set W_CHECK = 0
+ 	WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
+</update>
+<!--찜 w_check 값  -->
+<select id="wCheck" parameterType="map" resultType="int">
+select W_CHECK from WISH WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
+</select>
+
+<!-- 찜 삭제 -->
+<delete id="deleteWish" parameterType="map">
+	delete wish WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
+</delete>
+<!-- 찜 리스트(check용) -->
+<select id="checkList" parameterType="map" resultType="com.project.dto.WishDTO">
+	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK from WISH
+</select>
+<select id="selectWish" parameterType="String" resultType="com.project.dto.WishDTO">
+	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK from WISH where W_ID = #{M_ID}
+</select>
+<!--찜 목록 리스트 -->
+
+<select parameterType="map" id="wishListList" resultType="com.project.dto.WishDTO">
+select *from 
+( select rownum rnum, data.* from (
+ select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK, G_SAVEFILENAME as W_SAVEFILENAME 
+ FROM WISH, GOODS 
+ WHERE W_GNUM = G_NUM AND W_ID = #{m_id} AND W_CHECK = 1
+ order by ROWNUM desc)DATA) 
+<![CDATA[ where rnum >= #{start} and rnum <= #{end} ]]>
+
+</select>
+</mapper>

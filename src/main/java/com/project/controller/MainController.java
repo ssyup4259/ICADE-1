@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
+import com.project.dto.MemberDTO;
 import com.project.service.CookieService;
 import com.project.service.GoodsService;
+import com.project.service.WishService;
 
 
 @Controller
@@ -27,6 +30,8 @@ public class MainController {
 	GoodsService g_service;
 	@Autowired
 	CookieService c_service;
+	@Autowired
+	WishService w_service;
 	@Autowired
 	AdminDAO a_dao;
 	
@@ -39,6 +44,12 @@ public class MainController {
 		System.out.println(lists);
 		g_service.goodsMain(req);
 		c_service.cookieList(req);
+		
+		HttpSession session = req.getSession();
+		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
+		if(mdto != null) {
+		w_service.wishList(req);
+		}
 		
 		return "home";
 	}
