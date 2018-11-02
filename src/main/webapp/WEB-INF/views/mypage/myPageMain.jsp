@@ -25,13 +25,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('.hide').click(function() {
+		$('.hideWish').click(function() {
 			$('.toggle').hide();
 			setDisplayValue();
-			$('#ch').toggleClass('hide');
-			$('#ch').toggleClass('show');
+			$('#ch').toggleClass('hideWish');
+			$('#ch').toggleClass('showWish');
 		});
-		$('.show').click(function() {
+		$('.showWish').click(function() {
 			$('.toggle').show();
 			setDisplayValue();
 		});
@@ -43,6 +43,37 @@
 	}
 </script>
 
+
+<style type="text/css">
+
+.hideWish {
+	background-color: white;
+	color: #A3C838;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	height: 40px;
+}
+
+.showWish {
+	background-color: white;
+	color: #A3C838;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	height: 40px;
+}
+
+</style>
+
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
@@ -53,8 +84,8 @@
 
 					<font style="font-size: 30px;"><b>마이 쇼핑</b></font>
 					<p>
-						<button id="ch" class="hide" value="찜리스트 펼치기">찜리스트 숨기기</button>
-						<button class="show" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						<button id="ch" class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
+						<button class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
 
 					</p>
 					<hr style="border: 3px solid #DDDADB;">
@@ -183,7 +214,7 @@
 					<br>
 
 				</div>
-				<div class="col-sm-4 toggle">
+				<div class="col-sm-4 toggle" style="display: none;">
 
 
 					<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
