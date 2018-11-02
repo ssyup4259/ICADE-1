@@ -50,11 +50,15 @@ margin: 0 auto;
 	function wishsList(){
 			var f = document.wishForm;
 			var m_id= "${sessionScope.userInfo.getM_ID()}";
-	
-			alert(m_id);
-	
+			
+			if(m_id==""){
+				alert(m_id);
+				
+			
+			}else{
 			location.href = "<%=cp%>/wish/wishList.action?m_id=" + m_id;
 			
+			}
 		
 	}
 
@@ -131,8 +135,8 @@ margin: 0 auto;
 		<input type="button" id="btn5" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
 		<form action="" name="searchForm" method="post">
 			<c:forEach var="ck" items="${ck_lists}">
-				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}"></a>
-				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}">
+				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
+				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}"></a>
 				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 			</c:forEach>
 		</form>
