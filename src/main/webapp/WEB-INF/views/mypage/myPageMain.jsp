@@ -190,6 +190,7 @@ function setDisplayValue() {
 	
 	<div class="toggle">
 	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
+	 	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteWish();" style="width: 200px;"/>
 	 	<c:forEach var="w_dto" items="${wishList}">
 	<tr>
 		<td>
@@ -197,6 +198,7 @@ function setDisplayValue() {
 		<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/>
 		</a>
 		상품명:${w_dto.getW_NAME()}
+		<input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGreen" style="width: 200px;" value="찜 삭제">
 		</td>
 	</tr>
 		</c:forEach>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -47,14 +48,27 @@ public class WishController {
 		return mav;
 		
 	}
+	@RequestMapping(value="/deleteWish.action",method= {RequestMethod.POST})
+	public String deleteWish()throws Exception{
+		
+		return "redirect:/myPage.action" ;
+		
+	}
+	@RequestMapping(value="/deleteAllWish.action",method= {RequestMethod.POST})
+	public String deleteAllWish(int g_num ,HttpServletRequest req)throws Exception{
+	
+		
+		
+		
+		
+		return "redirect:/myPage.action" ;
+		
+	}
+	
 	
 	@RequestMapping(value="/wishInsert.action",method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public HashMap<String, Object> wishInsert(HttpServletRequest req,int g_num) throws Exception{
-		
-		
-		
-		
 		
 		HttpSession info = req.getSession();
 		

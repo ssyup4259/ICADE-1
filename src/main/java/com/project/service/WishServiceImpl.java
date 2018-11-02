@@ -206,6 +206,13 @@ public class WishServiceImpl implements WishService {
 		
 	}
 
+	@Override
+	public void deleteAllWish(String m_id) throws Exception {
+		
+		w_dao.deleteAllWish(m_id);
+		
+	}
+
 
 	
 }

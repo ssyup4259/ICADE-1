@@ -59,7 +59,10 @@ select nvl(count(*), 0) from WISH
 <select id="wCheck" parameterType="map" resultType="int">
 select W_CHECK from WISH WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 </select>
-
+<!-- 찜 전체 삭제 -->
+<delete id="deleteAllWish" parameterType="map">
+	delete wish WHERE AND W_ID = #{m_id}
+</delete>
 <!-- 찜 삭제 -->
 <delete id="deleteWish" parameterType="map">
 	delete wish WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}

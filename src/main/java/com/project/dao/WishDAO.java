@@ -29,6 +29,8 @@ public interface WishDAO {
 	
 	public void deleteWish(int g_num,String m_id)throws Exception;
 	
+	public void deleteAllWish(String m_id)throws Exception;
+	
 	public List<WishDTO> selectWish(String M_ID)throws Exception;
 	//찜목록 리스트 출력
 	public List<WishDTO> wishListList(int start, int end,String m_id)throws Exception;

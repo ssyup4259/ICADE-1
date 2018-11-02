@@ -150,6 +150,15 @@ public class WishDAOImpl implements WishDAO{
 		
 	}
 
+	@Override
+	public void deleteAllWish(String m_id) throws Exception {
+		HashMap<String, Object> map =new HashMap<String, Object>();
+		
+		map.put("m_id", m_id);
+		sessionTemplete.delete(wishMapper + ".deleteAllWish",map);
+		
+	}
+
 
 
 }
