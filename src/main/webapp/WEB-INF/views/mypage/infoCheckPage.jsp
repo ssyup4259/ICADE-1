@@ -71,7 +71,7 @@
 							<td colspan="2" style="text-align: left">비밀번호 : <input type="password" name="M_PW" id="pw" class="inputBoxGray" style="width: 400px; background: transparent;"></td>
 						</tr>
 						<tr>
-							<td style="border-right: 1;"><input type="button" value="본인인증" onclick="sendIt();" class="btnGreen" style="width: 100px;"></td>
+							<td style="border-right: 1;"><input type="button" value="본인인증" onclick="infoCheckPage_sendIt();" class="btnGreen" style="width: 100px;"></td>
 							<td><input type="button" value="취소" onclick="location.href='myPage.action';" class="btnGreen" style="width: 100px;"></td>
 						</tr>
 					</table>
