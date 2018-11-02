@@ -117,7 +117,7 @@
 			</div>
 		<!-- 조회 버튼 -->
 			<div class="col-sm-2">
-				<input type="button" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
+				<input type="submit" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;" onsubmit="false">
 			</div>
 		</div>
 		<div>
