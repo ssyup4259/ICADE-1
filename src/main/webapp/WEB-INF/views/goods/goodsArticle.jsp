@@ -454,7 +454,7 @@ function login_need() {
 					<a href="#section1"> <input type="button" class="btnGreen" value="상품상세정보" style="width: 200px;">
 					</a>&nbsp;<a href="#section2"> <input type="button" class="btnGreen" value="상품구매안내" style="width: 200px;">
 					</a>&nbsp;<a href="#section3"> <input type="button" class="btnGreen" value="상품사용후기" style="width: 200px;">
-					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btnGreen" value="상품목록으로 돌아가기" style="width: 200px;"></a>
+					</a>&nbsp;<a href="<%=cp%>/goods/goodsList.action?${params}"><input type="button" class="btnGreen" value="상품목록으로 돌아가기" style="width: 200px;"></a>
 				</div>
 
 				<div id="section1" class="container-fluid">

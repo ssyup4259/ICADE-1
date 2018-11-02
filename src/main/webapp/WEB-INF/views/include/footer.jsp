@@ -52,7 +52,8 @@
 			var m_id= "${sessionScope.userInfo.getM_ID()}";
 			
 			if(m_id==""){
-				alert(m_id);
+				alert("로그인을 하셔야 됩니다");
+				
 				
 			
 			}else{
