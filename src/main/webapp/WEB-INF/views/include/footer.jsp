@@ -46,6 +46,21 @@ margin: 0 auto;
 </script>
 
 <script type="text/javascript">
+	
+	function wishsList(){
+			var f = document.wishForm;
+			var m_id= "${sessionScope.userInfo.getM_ID()}";
+	
+			alert(m_id);
+	
+			location.href = "<%=cp%>/wish/wishList.action?m_id=" + m_id;
+			
+		
+	}
+
+</script>
+
+<script>
 
 	function sendIt(g_num) {
 		
@@ -71,8 +86,8 @@ margin: 0 auto;
 </script>
 <script>
 	$(document).ready(function(){
+		$('#btn5').on('click',function() {
 		
-		$("#btn2").click(function(){
 			$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete_ok.action',
 			type:'POST',
@@ -107,24 +122,36 @@ margin: 0 auto;
 
 
 
+
 <input type="button" class="btnGray back_to_top" value="맨위로" style="width: 70px;">
 
 <div class="latestGoods" id="ckList">
 	<div class="lg text-center" style="width: 70px; height: 830px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
+		<input type="button" id="btn5" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
 		<form action="" name="searchForm" method="post">
-			<input type="button" id="btn2" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
 			<c:forEach var="ck" items="${ck_lists}">
+				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}"></a>
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}">
 				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 			</c:forEach>
 		</form>
 		<h3>찜한</h3>
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
+		<c:forEach var="w_dto" items="${wishList}">
+		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/><br/><br/>
+		</a>
+		</c:forEach>
+		
+			<c:if test="${dataCount==0 }">
+				등록된 상품이 없습니다.
+			</c:if>
+		<form action="" name="wishForm">
+		<div>		
+		<input type="button" value="찜리스트" onclick="wishsList();"/>
+		</div>
+		</form>
+		
 	</div>
 </div>
 <div class="container-fluid footer" style="width: 100%; height: 300px; background-color: white;">
