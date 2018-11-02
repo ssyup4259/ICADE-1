@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -82,7 +82,7 @@
 							<input type="hidden" id="checkId" name="checkId" value="">
 						</div>
 						<div class="col-sm-2" style="padding-top: 0;">
-							<input type="button" value="중복확인" style="width: 120px;" class="btn2" id="user_id_checkBtn" />
+							<input type="button" value="중복확인" style="width: 120px;" class="btnGray" id="user_id_checkBtn" />
 						</div>
 					</div>
 
@@ -144,7 +144,7 @@
 							<input type="hidden" id="checkNick" name="checkNick" value="">
 						</div>
 						<div class="col-sm-2">
-							<input type="button" class="btn2" style="width: 120px;" value="중복확인" id="user_nickName_checkBtn" />
+							<input type="button" class="btnGray" style="width: 120px;" value="중복확인" id="user_nickName_checkBtn" />
 						</div>
 					</div>
 
@@ -184,11 +184,16 @@
                 </select> -->
 						</div>
 						<div class="col-sm-2">
-							<input type="button" style="width: 120px;" value="중복확인" class="btn2" id="user_Email_checkBtn" />
+							<input type="button" style="width: 120px;" value="중복확인" class="btnGray" id="user_Email_checkBtn" />
 						</div>
 					</div>
-					<div class="container text-center">
-						<input type="button" class="btn2" style="width: 60%;" value="이메일 인증하기" id="" onclick="sendMail();" />
+
+					<div class="row">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-8" style="text-align: left;">
+							<input type="button" class="btnGray" style="width: 100%;" value="이메일 인증하기" id="" onclick="sendMail();" />
+						</div>
+						<div class="col-sm-2"></div>
 					</div>
 					<hr style="border: 1px solid black;">
 
@@ -219,7 +224,7 @@
 							<input type="text" class="memberInputBox" name="M_ADDRESS1" placeholder="주소" id="sample6_address">
 						</div>
 						<div class="col-sm-2">
-							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
+							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGray" value="우편번호 찾기">
 						</div>
 					</div>
 
@@ -234,8 +239,8 @@
 				<div class="col-sm-4"></div>
 				<hr style="border: 1px solid black;">
 				<div style="text-align: center; padding-bottom: 15px;">
-					<input type="button" class="btn2" id="singUpBtn" value="회원가입" style="width: 200px; height: 40px;" onclick="" />
-					<input type="button" class="btn2" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
+					<input type="button" class="btnGreen" id="singUpBtn" value="회원가입" style="width: 200px; height: 40px;" onclick="" />
+					<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 				</div>
 			</div>
 		</div>
@@ -802,7 +807,7 @@ function signUp() {
 		
 
 		f.action= "<%=cp%>/join_ok.action";
-				f.submit();
+		f.submit();
 
 			}
 		}

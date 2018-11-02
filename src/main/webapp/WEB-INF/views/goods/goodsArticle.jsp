@@ -382,15 +382,13 @@ function login_need() {
 									<c:when test="${!empty sessionScope.userInfo}">
 										<c:choose>
 											<c:when test="${w_Check ==1}">
-										<a href='#'>
-										<img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
-										</a>
-										</c:when>
-										<c:otherwise>
-										<a href='#'>
-										<img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
-										</a>
-										</c:otherwise>
+												<a href='#'> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href='#'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												</a>
+											</c:otherwise>
 										</c:choose>
 									</c:when>
 									<c:otherwise>
@@ -428,7 +426,7 @@ function login_need() {
 						<h1>상품상세정보</h1>
 					</div>
 					<div>
-						<p></p>
+						<img alt="" src="<%=cp%>/resources/goodsContentImage/${g_dto.getG_CONTENT_SAVE_FILE()}" />
 					</div>
 				</div>
 				<hr>
@@ -495,36 +493,37 @@ function login_need() {
 					</div>
 				</div>
 				<hr>
-				
+
 			</form>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<!-- 댓글부분 -->
-				<div id="section3" class="container-fluid">
-						<ul>
-							<li style="float: left; padding-left: 15px">
-								<p style="font-size: 20px ">REVIEW | 포토리뷰 작성하고 적립금 받자!</p>
-							</li>
-						
-							<li style="float: right; padding-top: 6px; padding-right: 15px">
-			               	    <input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';"/>
-							</li>
-							<li style="float: right; padding-top: 6px; padding-right: 11px">
-								<input type="button" value="포토후기 작성하기"  class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
-							</li>
-						</ul>
-					<div id="comment" class="container-fluid">
-						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
-						<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
-					
-					<form id="commentForm" method="post" enctype="multipart/form-data">
-						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
-							<!-- 로그인 했을 경우만 댓글 작성가능 -->
-							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-						<%-- 	<tr>
+	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-bottom: 50px;">
+		<div id="section3" class="container-fluid" style="width: 80%;">
+			<ul style="background: transparent">
+				<li style="float: left; padding-left: 15px">
+					<p style="font-size: 30px">REVIEW | 포토리뷰 작성하고 적립금 받자!</p>
+				</li>
+
+				<li style="float: right; padding-top: 6px; padding-right: 15px">
+					<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" />
+				</li>
+				<li style="float: right; padding-top: 6px; padding-right: 11px">
+					<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
+				</li>
+			</ul>
+			<div id="comment" class="container-fluid">
+				<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
+				<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
+
+				<form id="commentForm" method="post" enctype="multipart/form-data">
+					<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
+						<!-- 로그인 했을 경우만 댓글 작성가능 -->
+						<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+							<%-- 	<tr>
 									<tr bgcolor="lightgray" height="60px;">
 										<!-- 아이디-->
 										<td width="15%">
@@ -540,28 +539,29 @@ function login_need() {
 										<!-- 댓글 등록 버튼 -->
 										
 									</tr> --%>
-							</c:if>
+						</c:if>
 
 
-							<!-- 로그인 하지 않았을때만 보이는 화면 -->
-							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-								<tr bgcolor="lightgray" height="60px;">
-									<!-- 본문 작성-->
-									<td width="100%">
-										<div>
-											<p>
-												<input type="button" value="포토후기 작성하기"  onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px">
-											</p>
-										</div>
-									</td>
-								</tr>
-							</c:if>
-						</table>
-						<div id="replyList"></div>
-						</form>
-						
-				   </div>
-				</div>
+						<!-- 로그인 하지 않았을때만 보이는 화면 -->
+						<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+							<tr bgcolor="lightgray" height="60px;">
+								<!-- 본문 작성-->
+								<td width="100%">
+									<div>
+										<p>
+											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px">
+										</p>
+									</div>
+								</td>
+							</tr>
+						</c:if>
+					</table>
+					<div id="replyList"></div>
+				</form>
+
+			</div>
+		</div>
+	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 <!-- 댓글에 띄울 리스트 작성 -->
@@ -578,4 +578,4 @@ $(document).ready(function() {
 });
 </script>
 
-</html>                                                                   
+</html>
