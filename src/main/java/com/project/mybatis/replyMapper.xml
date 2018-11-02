@@ -27,10 +27,6 @@ values(#{BC_NUM},#{BC_BOARD},#{BC_ID},sysdate,#{BC_PARENT},#{BC_CONTENT},#{BC_IM
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
 </select>
-<!-- 일반 댓글 리스트 -->
-<select id="">
-	SELECT * FROM BOARD_COMMENT WHERE BC_
-</select>
 
 <!-- 하나의 데이터 읽어오기 -->
 <select id="readData" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
@@ -65,10 +61,10 @@ select count(*) from board_comment
 <select id="replyAllList" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO">
 	select * from(
 	select rownum rnum,data.* from(
-	select BC_NUM,BC_BOARD,BC_ID,to_char(BC_DATE,'YYYY-MM-DD') BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,
+	select BC_NUM,BC_BOARD,BC_ID,TO_CHAR(BC_DATE,'YYYY-MM-DD') BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,
 	BC_SAVEFILENAME,BC_CONTENTFILE1,BC_CONTENTFILE2,
 	BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT,G_NUM,G_NAME
-	FROM BOARD_COMMENT,(select g_name,g_num from goods) WHERE BC_BOARD = G_NUM AND BC_SUBJECT !=0)data)
+	FROM BOARD_COMMENT,(select g_name,g_num from goods) WHERE BC_BOARD = G_NUM AND BC_PARENT =0)data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
@@ -104,9 +100,10 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 </select>
 
 <!-- 대댓글 리스트 가져오기 -->
-<select id="readReply" resultType="com.project.dto.BoardCommentDTO">
-	select BC_BOARD,BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods)
-    where BC_BOARD =G_NUM AND BC_PARENT=(SELECT BC_NUM FROM BOARD_COMMENT,(SELECT G_NUM FROM GOODS) WHERE BC_BOARD=G_NUM AND BC_PARENT = 0)
+<select id="readReply" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
+			select BC_BOARD,BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods)
+		    where BC_BOARD =G_NUM AND  BC_PARENT =#{BC_NUM}
+         	
 </select>
 
 </mapper>

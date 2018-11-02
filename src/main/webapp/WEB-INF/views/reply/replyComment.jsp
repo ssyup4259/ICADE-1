@@ -17,8 +17,6 @@
 	
 	
 <script type="text/javascript">	
-	
-	
 	function cmDelete(BC_NUM,BC_BOARD) {
 
 		var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
@@ -39,6 +37,21 @@
 	   }
 	  }
 </script>
+<script type="text/javascript">
+	function cmUpdateOpen(BC_NUM,BC_CONTENT) {
+		$.ajax({
+			type :"get",
+			url : "<%=cp%>/goods/goodsReplyComment.action?BC_NUM="+BC_NUM+"&BC_CONTENT="+BC_CONTENT,
+			success:function(result){
+					("#goodsReplyModify").html(result);
+			},
+			error: function(result) {
+				alert("안된다");
+	 	    }
+	     });
+	}
+</script>
+
 </head>
 <body>
 	 <c:forEach var="rp_dto" items="${rp_list}">
@@ -65,15 +78,13 @@
 							<div id="btn" style="text-align: center;">
 								<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 								<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-									<a href="#" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()},${rp_dto.getBC_CONTENT()}">[수정]</a>
-								<br>
-							<a href="#" onclick="cmDelete(${rp_dto.getBC_NUM()},${rp_dto.getBC_BOARD()});">[삭제]</a>
-									<br>
+									<a href="#" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()},${rp_dto.getBC_CONTENT()})">[수정]</a>
 								</c:if>
 							</div> 
 						</td>
 					</tr>
 				</table>
+				<div id="goodsReplyModify"></div>
 		</c:forEach> 	
 </body>
 </html>

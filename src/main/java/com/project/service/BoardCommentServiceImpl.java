@@ -286,7 +286,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int end = currentPage * numPerPage;
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
-		List<BoardCommentDTO> rp_list = bc_dao.readReply();
+	
 		String param = "";
 		param += "G_NUM=" + BC_BOARD;
 
@@ -303,7 +303,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("bc_lists", bc_list);
 		req.setAttribute("replyPageNum", replyPageNum);
-		req.setAttribute("rp_list", rp_list);
 
 		return req;
 
@@ -866,7 +865,31 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		bc_dao.insertData(bc_dto);
 		
-		return null;
+		return req;
 	}
+	//대댓글 리스트
+	@Override
+	public HttpServletRequest replyCommentList(HttpServletRequest req) throws Exception {
+		
+		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
+		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM);
+		
+		req.setAttribute("rp_list", rp_list);
+		return req;
+	}
+
+	//대댓글 수정
+	@Override
+	public void updateReply(BoardCommentDTO bc_dto, HttpServletRequest req) throws Exception {
+		
+		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
+		
+		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT());
+		
+		bc_dao.updateData(bc_dto);
+		
+	}
+	
+	
 
 }
