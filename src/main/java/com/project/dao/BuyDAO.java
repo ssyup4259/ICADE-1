@@ -44,4 +44,7 @@ public interface BuyDAO {
 	//주문 상세 내역 조회
 	public List<OrderDetailDTO> getReadOrderDetail(String o_num) throws Exception;
 	
+	//구매 후 장바구니 비우기
+	public void deleteCartItems(String cnum) throws Exception;
+	
 }

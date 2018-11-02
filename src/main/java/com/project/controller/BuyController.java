@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dao.AdminDAO;
+import com.project.dao.BuyDAO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.OrdersDTO;
@@ -29,8 +31,11 @@ public class BuyController {
 	AdminDAO a_dao;
 	
 	@Autowired
+	BuyDAO b_dao;
+	
+	@Autowired
 	BuyService b_service;
-
+	
 	//구매 화면
 	@RequestMapping(value="/buyForm.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String buyForm(HttpServletRequest req, GoodsDetailDTO gd_dto) throws Exception {
@@ -58,9 +63,18 @@ public class BuyController {
 	
 	//구매 완료 후 이동 페이지
 	@RequestMapping(value="/buyOK.action", method= {RequestMethod.GET, RequestMethod.POST})
-	public String buyOK(HttpServletRequest req, OrdersDTO o_dto) throws Exception {
+	@ResponseBody
+	public String buyOK(HttpServletRequest req, HttpServletResponse resp, OrdersDTO o_dto) throws Exception {
 		
-		return "buy/buyOK";
+		String cnums[] = req.getParameterValues("cnum");
+		
+		for (int i = 0; i < cnums.length; i++) {
+			
+			b_dao.deleteCartItems(cnums[i]);
+			
+		}
+		
+		return "success";
 		
 	}
 	

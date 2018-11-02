@@ -20,7 +20,15 @@ public class BuyDTO {
 	private int count;
 	//할인율
 	private int discount;
+	//장바구니 번호
+	private int cnum;
 	
+	public int getCnum() {
+		return cnum;
+	}
+	public void setCnum(int cnum) {
+		this.cnum = cnum;
+	}
 	public String getSaveFileName() {
 		return saveFileName;
 	}
