@@ -148,7 +148,7 @@
 			</c:if>
 		<form action="" name="wishForm">
 		<div>		
-		<input type="button" value="찜리스트" onclick="wishsList();"/>
+		<input type="button" value="찜리스트" onclick="wishsList();" class="btnGreen"/>
 		</div>
 		</form>
 		

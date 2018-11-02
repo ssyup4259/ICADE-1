@@ -157,9 +157,11 @@
 								</div>
 							</a>
 						</div>
+					
 
 						<c:if test="${i % 4 == 3 || newList.size() == i+1}">
 				</div>
+					<br><br>
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
