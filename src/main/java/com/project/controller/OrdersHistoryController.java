@@ -126,6 +126,7 @@ public class OrdersHistoryController {
 		
 		//System.out.println("====================================================for문끝났다");
 		
+		request.setAttribute("startDate", startDate);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
