@@ -105,6 +105,7 @@ $(function() {
 					
 					$.each(dc_list, function(key, value) {
 						$("#sub").append("<option value='" + value.gd_COLOR + "'>" + value.gc_COLOR + "</option>");
+						$("#sub").append("<input id='code" + value.gd_COLOR + "' type='hidden' value='" + value.gd_COUNT + "'/>");
 						console.log(value);
 					});
 					
@@ -179,6 +180,20 @@ $(function() {
 	//장바구니에 추가 전 동일품목여부 조회
 	function insertCheck() {
 		
+		var f = document.myForm;
+		
+		if (f.GD_DEVICE.value == "none") {
+			alert("기종을 선택 해 주세요.");
+			f.GD_DEVICE.focus();
+			return;
+		}
+		
+		if (f.GD_COLOR.value == "none") {
+			alert("색상을 선택 해 주세요.");
+			f.GD_COLOR.focus();
+			return;
+		}
+		
 		var allData = $("#myForm").serialize();
 		
 		$.ajax({
@@ -220,6 +235,7 @@ $(function() {
 		
 		var f = document.myForm;
 		var login = "${sessionScope.userInfo.getM_ID()}";
+		var code = $("#sub").val();
 		
 		if (f.GD_DEVICE.value == "none") {
 			alert("기종을 선택 해 주세요.");
@@ -230,6 +246,13 @@ $(function() {
 		if (f.GD_COLOR.value == "none") {
 			alert("색상을 선택 해 주세요.");
 			f.GD_COLOR.focus();
+			return;
+		}
+		
+		if (f.GD_COUNT.value > $("#code"+code).val()) {
+			alert("구매하고자 하는 수량이 재고 수량보다 많습니다.");
+			f.GD_COUNT.value = "";
+			f.GD_COUNT.focus();
 			return;
 		}
 		
@@ -382,7 +405,7 @@ function login_need() {
 							</div>
 						</div>
 						<div class="row" style="height: 60px;">
-							<div class="col-sm-3" style="text-align: left;">총 상품금액 ${w_Check}</div>
+							<div class="col-sm-3" style="text-align: left;">총 상품금액</div>
 							<div class="col-sm-9" style="text-align: left">
 								<input type="text" id="sum" class="inputBox" name="sum" value="${g_dto.getG_PRICE()}" readonly="readonly" style="width: 100%;" />
 							</div>
@@ -415,7 +438,7 @@ function login_need() {
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
 								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
-									<input type="button" value="구매하기" onclick="orderIt();" class="btnGray" style="width: 100%" />
+									<input type="button" value="구매하기" onclick="orderIt('code');" class="btnGray" style="width: 100%" />
 								</div>
 								<div class="col-sm-6">
 									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btnGray" style="width: 100%;" />
