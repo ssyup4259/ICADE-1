@@ -21,6 +21,24 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
+<script>
+ $(document).ready(function() {
+	var BC_BOARD =$("#articleBC_board").val();
+	$.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyCommentList.action?G_NUM="+BC_BOARD,
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyComment").html(result);
+		},error : function (result) {
+			alert("로딩실패");
+		}
+	 });
+});
+
+</script>
+
+
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
 
@@ -69,12 +87,14 @@
 					</c:if>
 					<br>
 					${bc_dto.getBC_CONTENT()}
-					<!-- 댓글 부분 -->
+					<!-- 포토후기 부분 -->
 				</div>
 				</td>
 			</tr>
 			</table>
 		</div>
+			<div id="replyComment"></div>
+		
 		
 		<div class="bbsArticle_bottomLine">
 				<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
@@ -100,6 +120,7 @@
 				</c:if>
 					
 				<li style="float: right">
+					<input type="hidden" id="articleBC_board" value="${bc_dto.getBC_BOARD()}">
 					<input type="hidden" value="${replyPageNum}"/>
                	    <input type="button" value=" 목록으로 돌아가기 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${replyPageNum}';"/>
 				</li>

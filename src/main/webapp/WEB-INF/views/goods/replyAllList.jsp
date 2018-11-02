@@ -69,19 +69,19 @@
 	 </tr>
 	 
   <c:forEach var="bc_dto" items="${bc_Alllist }">
-	  <c:if test="${i%j == 0} ">
-	 <tr align="center">
-	  </c:if>
-      	<td colspan="1" style=" margin: 0; padding:0">
-      	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">${bc_dto.getG_NAME()}</a><br>
-     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}">
-     	 <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px; margin: 0px; " id=""><br>
-    	 ${bc_dto.getBC_SUBJECT()}
-    	 </a>
-    	</td>
-  	<c:if test="${i%j == j-1}">
-    </tr>
-  	</c:if>
+		  <c:if test="${i%j == 0} ">
+		 <tr align="center">
+		  </c:if>
+	      	<td colspan="1" style=" margin: 0; padding:0">
+	      	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">${bc_dto.getG_NAME()}</a><br>
+	     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}">
+	     	 <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px; margin: 0px; " id=""><br>
+	    	 ${bc_dto.getBC_SUBJECT()}
+	    	 </a>
+	    	</td>
+	  	<c:if test="${i%j == j-1}">
+	    </tr>
+	  	</c:if>
   	<c:set var ="i" value="${i+1}" />
   </c:forEach>
    

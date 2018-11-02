@@ -91,7 +91,7 @@ public class BoardCommentController {
 		return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
 	}
 	
-	//댓글 전체 리스트
+	//포토후기 전체 리스트
 	@RequestMapping(value="/replyAllList.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String listAll(HttpServletRequest req)throws Exception{
 		
@@ -99,6 +99,7 @@ public class BoardCommentController {
 		
 		 return "goods/replyAllList";
 	}
+	//포토후기 상세 페이지
 	@RequestMapping(value="/replyArticle.action" ,method= {RequestMethod.GET,RequestMethod.POST})
 	public String replyArticle(HttpServletRequest req)throws Exception{
 		
@@ -106,6 +107,7 @@ public class BoardCommentController {
 		
 		return "goods/replyArticle";
 	}
+	//포토후기 수정
 	@RequestMapping(value="/articleUpdate.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String articleUpdate(HttpServletRequest req)throws Exception{
 		
@@ -126,6 +128,7 @@ public class BoardCommentController {
 		
 		return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM;
 	}
+	//포토후기 삭제
 	@RequestMapping(value="/articleDelete.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String articleDelete(HttpServletRequest req)throws Exception{
 		
@@ -146,6 +149,15 @@ public class BoardCommentController {
 		
 		bc_service.replyComment(bc_dto, req);
 		
+		
+	}
+	//대댓글 리스트
+	@RequestMapping("/replyCommentList.action")
+	public String replyCommentList(HttpServletRequest req)throws Exception{
+		
+		 bc_service.replyList(req);
+		 
+		 return "goods/replyComment";
 	}
 	
 	@ModelAttribute
