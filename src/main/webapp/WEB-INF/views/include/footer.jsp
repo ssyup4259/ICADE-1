@@ -7,7 +7,7 @@
 
 <style type="text/css">
 .lg img {
-margin: 0 auto;
+	margin: 0 auto;
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
@@ -113,10 +113,10 @@ margin: 0 auto;
 	<div class="lg text-center" style="width: 70px; height: 830px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
 		<form action="" name="searchForm" method="post">
-			<input type="button" id="btn2" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
+			<input type="button" id="btn2" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;" />
 			<c:forEach var="ck" items="${ck_lists}">
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}">
-				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
+				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;" />
 			</c:forEach>
 		</form>
 		<h3>찜한</h3>
@@ -164,7 +164,7 @@ margin: 0 auto;
 	<div class="text-center" style="font-size: 13px;">
 		사업자 등록번호 안내 : 523-81-00706 [사업자정보확인]통신판매업 신고 2017-강남-0606 전화 : 02-1234-5678 주소 : 서울특별시 강남구 테헤란로 123 여삼빌딩 15층
 		<br>
-		개인정보보호책임자 : 서영욱(admin@i-m-all.com)Hosting by 심플렉스인터넷(주)Copyright © 2018 아이케이드. All rights reserved. 반품 : 서울특별시 강남구 테헤란로 123 여삼빌딩 15층
+		개인정보보호책임자 : 박명성(admin@icade.com)Hosting by 아이케이드인터넷(주)Copyright © 2018 아이케이드. All rights reserved. 반품 : 서울특별시 강남구 테헤란로 123 여삼빌딩 15층
 		<br>
 		안전한 상거래를 위해 KB에스크로 이체 구매 안전 서비스를 이용하실 수 있습니다.[KB에스크로 이체 판매자 정보확인]
 		<br>
