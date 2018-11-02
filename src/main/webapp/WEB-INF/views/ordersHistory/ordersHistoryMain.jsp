@@ -40,9 +40,7 @@
 					alert(data);
 				}
 			});
-		  
 		}
-
 	}
 	
 	function cancelOK(o_num) {
@@ -64,8 +62,8 @@
 				alert(data);
 			}
 		});
-		
 	}
+	
 </script>
 
 <script type="text/javascript">
@@ -98,7 +96,7 @@
 		<div class="titleArea">
 			<h2>주문조회</h2>
 		</div>
-<input type="button" id="test" value="Test">
+
 <form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
@@ -129,7 +127,6 @@
 		</div>
 	</div>
 </form>
-
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>주문 상품 정보</h2>
 			<table border="1" style="width: 100%;">
@@ -202,11 +199,10 @@
 		</table>
 	</div>
 
-<br /><br />
+<br/><br/>
 
 <form method="get">
 	<input type="hidden" name="endPage" value="${endPgae}">
-
 </form>
 
 	</div>
@@ -224,26 +220,18 @@
 	        }
 	    });
 	});
-	
-	$(document).ready(function() {
-		$("#test").click(function(){
-			alert("a");
-			var status = $("#edate").val();
-			alert(status);
-			var testArray = status.split("-");
-			var testYear = testArray.splice(0,1);
-			var testMonth = testArray.splice(0,1);
-			var testDate = testArray.splice(0,1);
+
+<%-- 	
+	$(document).ready(function (){
+		var startDate = <%=request.getParameter("startDate")%>
 		
-			alert(testYear);
-			alert(testMonth);
-			alert(testDate);
-			
-		
-		});
+		if(!startDate){
+			alert("없다");
+		}else{
+			alert("있다?");
+		}
 	});
-	
-	
+ --%>	
 </script>
 </body>
 </html>

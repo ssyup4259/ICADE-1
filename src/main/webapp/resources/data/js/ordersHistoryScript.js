@@ -1,9 +1,10 @@
 	var dt = new Date();
 	var year = dt.getFullYear();
-	var month = ("0" + (dt.getMonth() + 1)).slice(-2);
-	var date = dt.getDate();
+	var month = ("0" + (dt.getMonth()+1)).slice(-2);
+	var date = ("0" + dt.getDate()).slice(-2);
 	var maxDate = $("#history_end_date_button").val();
 
+	
 	//변경될 달력부분의 인풋박스에 기본값 넣어두기(3달전)
 	var defaultValue = year + "-" + (month-3) + "-" + date; 
 	var inputVal1 = $("#history_start_date_button").val();
@@ -73,96 +74,92 @@
 	    
 	});
 	
-	/*
-	//변경될 달력의 값
-	$(function() {
-		$( "#history_start_date_button" ).datepicker({
-			dateFormat:'yy/mm/dd',
-			showOn: "both", 
-			buttonImage: "//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif", 
-	        buttonImageOnly: true,
-	        maxDate: new Date(),
-	        nextText:'다음 달',
-	        prevText:'이전 달',
-	        dayNamesMin:['일','월','화','수','목','금','토'],
-	        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12']
-		});
-	});
-	
-	//오늘의 날짜 기준의 달력값
-	$(function() {
-		$( "#history_end_date_button" ).datepicker({
-			dateFormat:'yy/mm/dd',
-			showOn: "both", 
-			buttonImage: "//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif", 
-	        buttonImageOnly: true,
-	        maxDate: new Date(),
-	        nextText:'다음 달',
-	        prevText:'이전 달',
-	        dayNamesMin:['일','월','화','수','목','금','토'],
-	        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12']
-		});
-	});
-	*/
-	
-	
 	//오늘
 	var today = year + "-" + month + "-" + date;
 	
 	$(document).ready(function (){
 		$("#today").click(function(event){
-		event.preventDefault();
-		$("#sdate" ).val(today);
+			event.preventDefault();
+			$("#sdate" ).val(today);
 		});
 	});
 	
+	//바뀐 endDate 가져오기
+	/*$(document).ready(function() {
+		$("#edate").change(function(){
+			var endDate = $("#edate").val();
+			var eDayArray = endDate.split("-");
+			var changeYear = eDayArray.splice(0,1);
+			var changeMonth = eDayArray.splice(0,1);
+			var changeDate = eDayArray.splice(0,1);
+			
+			//var sDate = testYear + "-" + testMonth + "-" + testDate
+
+		});
+	});*/
+	
 	//일주일전
-	var oneWeek = year + "-" + month + "-" + (date-7);
-	
-	var cal = Calendar.getInstance();
-	
-	cal.add(Calendar.DATE , -7);
-	var beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
-	
 	$(document).ready(function (){
 		$("#oneWeek").click(function(){
-		event.preventDefault();
-		$("#sdate" ).val(beforeWeek);
+			var edate = $("#edate").val();
+			var date = new Date(edate);
+			date.setDate(date.getDate()-7);
+			var year = date.getFullYear();
+			var month = ("0" + (date.getMonth()+1)).slice(-2);
+			var date = ("0" + date.getDate()).slice(-2);
+			var oneWeek = year + "-" + month + "-" + date;
+			
+			event.preventDefault();
+			$("#sdate").val(oneWeek);
 		});
 	});
 	
 	//한달전
-	var monthAgo = month-1;
-	var oneMonth = year + "-" + monthAgo + "-" + date;
-	
 	$(document).ready(function (){
 		$("#oneMonth").click(function(event){
-		event.preventDefault();
-		$("#sdate" ).val(oneMonth);
+			var edate = $("#edate").val();
+			var date = new Date(edate);
+			date.setMonth(date.getMonth()-1);
+			var year = date.getFullYear();
+			var month = ("0" + (date.getMonth()+1)).slice(-2);
+			var date = ("0" + date.getDate()).slice(-2);
+			var oneMonth = year + "-" + month + "-" + date;
+			
+			event.preventDefault();
+			$("#sdate" ).val(oneMonth);
+			
 		});
 	});
 	
 	//3개월전
-	var threeMonthAgo = month-3;
-	var threeMonth = year + "-" + threeMonthAgo + "-" + date;
-	
 	$(document).ready(function (){
 		$("#threeMonth").click(function(event){
-		event.preventDefault();
-		$("#sdate" ).val(threeMonth);
+			var edate = $("#edate").val();
+			var date = new Date(edate);
+			date.setMonth(date.getMonth()-3);
+			var year = date.getFullYear();
+			var month = ("0" + (date.getMonth()+1)).slice(-2);
+			var date = ("0" + date.getDate()).slice(-2);
+			var threeMonth = year + "-" + month + "-" + date;
+			
+			event.preventDefault();
+			$("#sdate" ).val(threeMonth);
 		});
 	});
 	
 	//6개월전
-	var sixMonthAgo = month-6;
-	var sixMonth = year + "-" + sixMonthAgo + "-" + date;
-	
 	$(document).ready(function (){
 		$("#sixMonth").click(function(event){
-		event.preventDefault();
-		$("#sdate" ).val(sixMonth);
+			var edate = $("#edate").val();
+			var date = new Date(edate);
+			date.setMonth(date.getMonth()-6);
+			var year = date.getFullYear();
+			var month = ("0" + (date.getMonth()+1)).slice(-2);
+			var date = ("0" + date.getDate()).slice(-2);
+			var sixMonth = year + "-" + month + "-" + date;
+			
+			event.preventDefault();
+			$("#sdate" ).val(sixMonth);
 		});
 	});
 	

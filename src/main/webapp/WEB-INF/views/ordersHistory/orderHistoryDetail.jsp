@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <title>Insert title here</title>
 </head>
 <body>
-
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <div id="content_area" height="100%"><script type="text/javascript">
 document.domain = "wemakeprice.com";
@@ -154,6 +155,7 @@ document.domain = "wemakeprice.com";
 </table>
 <a style="cursor:pointer;" onclick="history.back();return false;" class="btn_mypage btn_listview">목록보기</a>
 
+<jsp:include page="../include/footer.jsp" flush="false" />
 <script type="text/javascript">
 
 $(document).ready(function(){
