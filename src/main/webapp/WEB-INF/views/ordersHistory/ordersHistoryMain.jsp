@@ -23,19 +23,25 @@
 
 	function cancelIt(imp_uid, o_num) {
 		
-		$.ajax({			
-			type : "post",
-			url :"<%=cp%>/payment/cancel.action",
-			data : {"imp_uid":imp_uid, "o_num":o_num},
-			datatype : "text",
-			success : function(data) {
-				cancelOK(data);
-			},
-			error : function(data) {
-				alert("error");
-				alert(data);
-			}
-		});
+		var refund = confirm("환불 하시겠습니까?");
+		
+		if(refund == true){
+			
+		  $.ajax({			
+				type : "post",
+				url :"<%=cp%>/payment/cancel.action",
+				data : {"imp_uid":imp_uid, "o_num":o_num},
+				datatype : "text",
+				success : function(data) {
+					cancelOK(data);
+				},
+				error : function(data) {
+					alert("error");
+					alert(data);
+				}
+			});
+		  
+		}
 
 	}
 	
@@ -172,9 +178,10 @@
 								</td>
 								<td>
 									<form action="" method="post" name="myForm">
-										<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
+										<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
+											<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
+										</c:if>
 									</form>
-										<p class="">${dto.getO_IMP()}</p>
 								</td>
 							</tr>
 						</c:forEach>
