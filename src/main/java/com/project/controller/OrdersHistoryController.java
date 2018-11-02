@@ -22,7 +22,6 @@ import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrderHistoryDTO;
-import com.project.dto.OrdersDTO;
 import com.project.service.OrderHistoryService;
 import com.project.util.MyUtil;
 
@@ -56,11 +55,17 @@ public class OrdersHistoryController {
 		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
 		String pageNum = request.getParameter("pageNum");
 		
+		System.out.println("pageNum : " + pageNum);
+		
+		String basicStartDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate());
+		
+		String basicEndDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		
 		if(startDate==null || startDate.equals(null)){
-			startDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate()); 
+			startDate = basicStartDate; 
 		}
 		if(endDate==null || endDate.equals(null)) {
-			endDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
+			endDate = basicEndDate;
 		}
 		
 		String m_Id = dto.getM_ID();
@@ -101,15 +106,27 @@ public class OrdersHistoryController {
 		hMap.put("start",start);
 		hMap.put("end",end);
 		
+		// 페이징 처리
+
+		String param = "";
+		
+		// 검색하고 기존의 창으로 돌아가기 위한 코딩
+		if (!startDate.equals(basicStartDate)) {
+			param = "startDay=" + startDate;
+			param += "&endDay=" + endDate;
+		}
+
 		String listUrl = "orderHistory.action";
+
+		if (!param.equals("")) {
+			listUrl = listUrl + "?" + param;
+		}
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
-		List<OrdersDTO> lists = (List<OrdersDTO>) service.selectOrders(m_Id);
-		
 		List<Integer> integerList = service.selectOrderNum(hMap);
 		
-		//System.out.println("for문돌린다====================================================");
+		System.out.println("for문돌린다====================================================");
 		
 		for(int i = 0;i<integerList.size();i++) {
 			
@@ -127,15 +144,14 @@ public class OrdersHistoryController {
 		//System.out.println("====================================================for문끝났다");
 		
 		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
-		request.setAttribute("lists", lists);
-		request.setAttribute("integerList", integerList);
 		
 		return "ordersHistory/ordersHistoryMain";
 	}
-	
+/*	
 	@RequestMapping(value="/orderHistory_ok.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -149,7 +165,7 @@ public class OrdersHistoryController {
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
 		
 		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
-		String startDate = (String) request.getParameter("startDay");
+		String startDate = (String) request.getParameter("startDate");
 		String endDate = (String) request.getParameter("endDay");
 		
 		System.out.println("startDate : " + startDate);
@@ -206,11 +222,9 @@ public class OrdersHistoryController {
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
-		List<OrdersDTO> lists = (List<OrdersDTO>) service.selectOrders(m_Id);
-		
 		List<Integer> integerList = service.selectOrderNum(hMap);
 		
-		//System.out.println("for문돌린다====================================================");
+		System.out.println("for문돌린다====================================================");
 		
 		for(int i = 0;i<integerList.size();i++) {
 			
@@ -225,19 +239,20 @@ public class OrdersHistoryController {
 			hashMap.put(O_Num, mapList);
 		}
 		
-		//System.out.println("====================================================for문끝났다");
+		System.out.println("====================================================for문끝났다");
 		
+		System.out.println(" for문 끝났다 " + startDate);
+		
+		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
-		request.setAttribute("lists", lists);
-		request.setAttribute("integerList", integerList);
 		
 		//return "ordersHistory/ordersHistoryMain";
 		return "redirect:orderHistory.action";
 	}
-
+*/
 	
 	@RequestMapping(value="/ordersHistoryDetail.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
