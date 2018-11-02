@@ -160,6 +160,7 @@ public class BoardCommentController {
 		 return "goods/replyComment";
 	}
 	
+	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		

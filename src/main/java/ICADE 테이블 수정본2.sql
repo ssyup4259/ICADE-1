@@ -238,6 +238,10 @@ ALTER TABLE Board_Comment add(BC_SAVE1 VARCHAR(200));
 ALTER TABLE Board_Comment add(BC_SAVE2 VARCHAR(200));
 ALTER TABLE Board_Comment add(BC_SAVE3 VARCHAR(200));
 
+ALTER TABLE Board_Comment DROP COLUMN BC_KIND;
+
+
+
 -- Leave Table Create SQL
 CREATE TABLE Leave
 (

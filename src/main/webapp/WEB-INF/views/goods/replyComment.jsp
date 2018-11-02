@@ -74,7 +74,7 @@
 						},error : function (result) {
 							alert("로딩실패");
 						}
-					 });
+					 });-
 			},
 			error: function(result) {
 				alert("안된다");
