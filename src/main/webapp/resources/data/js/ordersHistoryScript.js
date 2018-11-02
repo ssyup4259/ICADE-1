@@ -75,10 +75,15 @@
 	});
 	
 	//오늘
-	var today = year + "-" + month + "-" + date;
-	
 	$(document).ready(function (){
 		$("#today").click(function(event){
+			var edate = $("#edate").val();
+			var date = new Date(edate);
+			var year = date.getFullYear();
+			var month = ("0" + (date.getMonth()+1)).slice(-2);
+			var date = ("0" + date.getDate()).slice(-2);
+			var today = year + "-" + month + "-" + date;
+			
 			event.preventDefault();
 			$("#sdate" ).val(today);
 		});
