@@ -15,9 +15,9 @@
 <!-- 상품등록하기 버튼 submit -->
 <script type="text/javascript">
 
-function sendIt() {
+function insertIt() {
 	
-	var f = document.myForm;
+	var f = document.gInsertForm;
     
     str = f.G_NAME.value;
     str = str.trim();
@@ -108,7 +108,7 @@ function enableTextBox(name) {
 
 <h3>상품등록 테스트</h3>
 
-<form action="" name="myForm" method="POST" enctype="multipart/form-data">
+<form action="" name="gInsertForm" method="POST" enctype="multipart/form-data">
 
 상품 종류 : 
 
@@ -155,8 +155,8 @@ function enableTextBox(name) {
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 
-<input type="button" onclick="sendIt()" value="상품등록">
-<input type="reset" value=" 다시입력 " onclick="document.myForm.G_NAME.focus();"/>
+<input type="button" onclick="insertIt()" value="상품등록">
+<input type="reset" value=" 다시입력 " onclick="document.gInsertForm.G_NAME.focus();"/>
 <input type="button" onclick="javascript:location.href='<%=cp%>';" value="취 소"/>
 
 </form>
