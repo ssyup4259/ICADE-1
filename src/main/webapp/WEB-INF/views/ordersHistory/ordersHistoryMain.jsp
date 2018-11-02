@@ -173,11 +173,13 @@
 										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
 								<td>${dto.getOD_COUNT()}</td>
 								<td><strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong></td>
-								<td>
+								<td class="gubun">
+									<p style="display: none;">${dto.getO_IMP()}</p>
 									<p>${dto.getO_STATUS()}</p>
 								</td>
-								<td>
-									<form action="" method="post" name="myForm">
+								<td class="gubun">
+									<p style="display: none;">${dto.getO_IMP()}</p>
+									<form action="" method="post" name="myForm">										
 										<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
 											<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
 										</c:if>
