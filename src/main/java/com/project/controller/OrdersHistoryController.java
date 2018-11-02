@@ -37,7 +37,7 @@ public class OrdersHistoryController {
 	
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
-
+		
 		System.out.println("==================orderHistory.action 두번타는지 테스트용================================================");
 		
 		HttpSession session = request.getSession();
@@ -62,8 +62,6 @@ public class OrdersHistoryController {
 		if(endDate==null || endDate.equals(null)) {
 			endDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		}
-		
-		//System.out.println(startDate + "-" + endDate);
 		
 		String m_Id = dto.getM_ID();
 		
@@ -115,6 +113,8 @@ public class OrdersHistoryController {
 		
 		for(int i = 0;i<integerList.size();i++) {
 			
+			System.out.println(integerList);
+			
 			Integer O_Num = integerList.get(i);
 			
 			hMap.put("OD_NUM",O_Num);
@@ -122,7 +122,6 @@ public class OrdersHistoryController {
 			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
 			
 			hashMap.put(O_Num, mapList);
-			
 		}
 		
 		//System.out.println("====================================================for문끝났다");
@@ -135,7 +134,7 @@ public class OrdersHistoryController {
 		
 		return "ordersHistory/ordersHistoryMain";
 	}
-	
+	/*
 	@RequestMapping(value="/orderHistory_ok.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ordersHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -151,7 +150,7 @@ public class OrdersHistoryController {
 		String startDay = (String) request.getParameter("startDay");
 		String endDay = (String) request.getParameter("endDay");
 		
-		/*
+		
 		<option value="all">전체 주문처리상태</option>
 		<option value="shipped_before">입금전</option>
 		<option value="shipped_standby">배송준비중</option>
@@ -160,7 +159,7 @@ public class OrdersHistoryController {
 		<option value="order_cancel">취소</option>
 		<option value="order_exchange">교환</option>
 		<option value="order_return">반품</option>
-		*/
+		
 		
 		//where O_STATUS = O_STATUS 조건 주면 상관없이 모두다 나오는듯
 		
@@ -181,7 +180,7 @@ public class OrdersHistoryController {
 		
 		return mav;
 	}
-	
+	*/
 	@RequestMapping(value="/ordersHistoryDetail.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
