@@ -428,7 +428,7 @@ function login_need() {
 						<h1>상품상세정보</h1>
 					</div>
 					<div>
-						<p></p>
+						<img alt="" src="<%=cp%>/resources/goodsContentImage/${g_dto.getG_CONTENT_SAVE_FILE()}"/>
 					</div>
 				</div>
 				<hr>
