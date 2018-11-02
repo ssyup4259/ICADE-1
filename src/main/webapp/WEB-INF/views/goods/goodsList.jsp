@@ -41,8 +41,8 @@
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
 		<div class="" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
-				<form class="" action="" name="goodsSearchForm" method="post">
-					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
+				<form action="" name="goodsSearchForm" method="post">
+					<input type="hidden" name="GK_KIND_NUM" value="${gdKindNum}" />
 
 					<select name="GK_KIND_NUM" class="selGreen" style="width: 100px; cursor: pointer;">
 						<option value="">전체</option>

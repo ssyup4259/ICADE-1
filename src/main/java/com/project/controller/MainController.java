@@ -30,7 +30,7 @@ public class MainController {
 	@Autowired
 	AdminDAO a_dao;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(HttpServletRequest req) throws Exception {
 		System.out.println("------------------------------req 확인");
 		System.out.println(req);

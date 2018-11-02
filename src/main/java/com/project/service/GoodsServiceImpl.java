@@ -100,7 +100,7 @@ public class GoodsServiceImpl implements GoodsService {
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
-			param = "gdKindNum=" + gdKindNum;
+			param = "GK_KIND_NUM=" + gdKindNum;
 			param = "&searchKey=" + searchKey;
 			param+= "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
