@@ -223,7 +223,7 @@
 
 
 	$(document).ready(function (){
-		var startDate = <%=request.getParameter("startDate")%>
+		var startDate = <%=request.getParameter("startDate")%>;
 		
 		if(!startDate){
 			alert("없다");
