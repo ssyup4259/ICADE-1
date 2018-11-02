@@ -66,6 +66,7 @@ public class MyUtil {
 			sb.append("<a href=\"" + listUrl + "pageNum=" 
 					+ currentPageSetup + "\">◀이전</a>&nbsp;");
 			
+			
 		}
 		
 		//바로가기 페이지

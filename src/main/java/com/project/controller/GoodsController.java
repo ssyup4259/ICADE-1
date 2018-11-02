@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,12 @@ import com.project.dao.AdminDAO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
+import com.project.dto.MemberDTO;
+import com.project.dto.WishDTO;
 import com.project.service.AdminService;
 import com.project.service.CookieService;
 import com.project.service.GoodsService;
+import com.project.service.WishService;
 
 @Controller
 @RequestMapping("/goods/*")
@@ -31,7 +35,8 @@ public class GoodsController {
 	
 	@Autowired
 	GoodsService g_service;
-	
+	@Autowired
+	WishService w_service;
 	@Autowired
 	AdminDAO a_dao;
 	@Autowired
@@ -59,7 +64,11 @@ public class GoodsController {
 		g_service.goodsList(req);
 		
 		c_service.cookieList(req);
-		
+		HttpSession session = req.getSession();
+		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
+		if(mdto != null) {
+		w_service.wishList(req);
+		}
 
 		return "goods/goodsList";
 		
@@ -70,13 +79,29 @@ public class GoodsController {
 	public String goodsArticle(HttpServletRequest req, HttpServletResponse resp) throws Exception{
 		
 		GoodsDTO g_dto = c_service.cookieInsert(req);
-		
+		HttpSession session = req.getSession();
 		String g_num = Integer.toString(g_dto.getG_NUM());
-		
+		int w_Check=0;
 		//List<String> lists = (List<String>) addAttributes(req);
+		
+		List<WishDTO> w_lists = new ArrayList<WishDTO>();
+		w_lists = (List<WishDTO>) session.getAttribute("wishInfo");
+		if(w_lists != null) {
+		Iterator<WishDTO> wit = w_lists.iterator();
+		
+		while (wit.hasNext()) {
+			
+			WishDTO wdto = wit.next();
+			if(wdto.getW_GNUM() ==Integer.parseInt(g_num)) {
+				
+				w_Check=wdto.getW_CHECK();
+			}
+		}
+		System.out.println(w_Check);
+		}
+		
 		List<String> lists = (List<String>) req.getAttribute("c_lists");
-		System.out.println("-------------------------------------lists 체크");
-		System.out.println(lists);
+		
 		Iterator<String> it = lists.iterator();
 		
 		
@@ -97,9 +122,13 @@ public class GoodsController {
 		setCookie.setMaxAge(60*60*24);
 		setCookie.setPath("/");
 		resp.addCookie(setCookie);
+		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
+		if(mdto != null) {
+		w_service.wishList(req);
+		}
 		
+		req.setAttribute("w_Check", w_Check);
 	
-		
 		
 		g_service.goodsArticle(req);
 		
