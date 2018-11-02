@@ -40,7 +40,7 @@
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
-		<div class="container text-center" style="width: 30%;">
+		<div class="container text-center" style="width: 500px;">
 			<h1>회원정보 수정</h1>
 			<div style="text-align: left">
 				<b>회원정보를 수정하기 위해서는 비밀번호를 입력하셔야 합니다.</b>
@@ -67,7 +67,7 @@
 							<td colspan="2" style="text-align: left">아 이 디 : ${sessionScope.userInfo.getM_ID()}</td>
 						</tr>
 						<tr>
-							<td colspan="2" style="text-align: left">비밀번호 : <input type="password" name="M_PW" id="pw" class="inputBoxGray" style="width: 400px; background: transparent;"></td>
+							<td colspan="2" style="text-align: left">비밀번호 : <input type="password" name="M_PW" id="pw" class="inputBoxGray" style="width: 450px; background: transparent;"></td>
 						</tr>
 						<tr>
 							<td style="border-right: 1;"><input type="button" value="본인인증" onclick="sendIt();" class="btnGreen" style="width: 100px;"></td>
