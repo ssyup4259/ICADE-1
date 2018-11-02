@@ -98,7 +98,7 @@
 		<div class="titleArea">
 			<h2>주문조회</h2>
 		</div>
-<input type="button" id="test" value="Test">
+
 <form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
@@ -227,22 +227,43 @@
 	
 	$(document).ready(function() {
 		$("#test").click(function(){
-			alert("a");
 			var status = $("#edate").val();
-			alert(status);
 			var testArray = status.split("-");
 			var testYear = testArray.splice(0,1);
 			var testMonth = testArray.splice(0,1);
 			var testDate = testArray.splice(0,1);
-		
-			alert(testYear);
-			alert(testMonth);
-			alert(testDate);
+			var sDate = testYear + "-" + testMonth + "-" + testDate
 			
+			alert(sDate);
 		
 		});
 	});
 	
+	$(document).ready(function (){
+		var startDate = <%=request.getParameter("startDate")%>
+		
+		if(!startDate){
+			alert("없다");
+		}else{
+			alert("있다?");
+		}
+		
+	});
+	
+	//변경될 달력부분의 인풋박스에 기본값 넣어두기(3달전)
+	<%-- var defaultValue = year + "-" + (month-3) + "-" + date;
+	
+	$(function() {
+		
+		
+		if(!startDate){
+			$( "#sdate" ).val(defaultValue);
+		}else{
+			$( "#sdate" ).val(startDate);
+		}
+	});
+	
+	 --%>
 	
 </script>
 </body>
