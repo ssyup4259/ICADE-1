@@ -221,7 +221,7 @@
 	    });
 	});
 
-<%-- 	
+
 	$(document).ready(function (){
 		var startDate = <%=request.getParameter("startDate")%>
 		
@@ -231,7 +231,7 @@
 			alert("있다?");
 		}
 	});
- --%>	
+	
 </script>
 </body>
 </html>
