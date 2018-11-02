@@ -71,7 +71,6 @@
 	    $('#sdate').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#edate").datepicker( "option", "minDate", selectedDate );
 	    });
-	    
 	});
 	
 	//오늘
@@ -88,20 +87,6 @@
 			$("#sdate" ).val(today);
 		});
 	});
-	
-	//바뀐 endDate 가져오기
-	/*$(document).ready(function() {
-		$("#edate").change(function(){
-			var endDate = $("#edate").val();
-			var eDayArray = endDate.split("-");
-			var changeYear = eDayArray.splice(0,1);
-			var changeMonth = eDayArray.splice(0,1);
-			var changeDate = eDayArray.splice(0,1);
-			
-			//var sDate = testYear + "-" + testMonth + "-" + testDate
-
-		});
-	});*/
 	
 	//일주일전
 	$(document).ready(function (){
