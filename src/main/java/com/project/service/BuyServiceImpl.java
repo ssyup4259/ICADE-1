@@ -100,6 +100,7 @@ public class BuyServiceImpl implements BuyService {
 			b_dto.setNum(c_dto.getC_GNUM());
 			b_dto.setPrice(c_dto.getC_PRICE());
 			b_dto.setSaveFileName(c_dto.getC_SAVEFILENAME());
+			b_dto.setCnum(c_dto.getC_NUM());
 			
 			b_lists.add(b_dto);
 		}
