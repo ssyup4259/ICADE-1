@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
-	function sendIt() {
+	function changInfoAuthorization_sendIt() {
 		
 		var f = document.myForm;
 		alert("a");
@@ -46,7 +46,7 @@ ${mode}
 			비밀번호 : <input type="password" name="M_PW">
 		</td>
 		<td rowspan="2">
-			<input type="button" value="본인인증" onclick="sendIt();">
+			<input type="button" value="본인인증" onclick="changInfoAuthorization_sendIt();">
 		</td>
 	</tr>
 	<tr>

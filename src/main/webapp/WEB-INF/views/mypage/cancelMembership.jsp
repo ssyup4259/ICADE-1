@@ -13,7 +13,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <body>
 
-<form action="cancelMembership_ok.action" method="post" id="cancelMembership" name="cancelMembership" onsubmit="return sendIt">
+<form action="cancelMembership_ok.action" method="post" id="cancelMembership" name="cancelMembership" onsubmit="return changInfoAuthorization_sendIt">
 
 <div class="mytmall_title">
 	<h3 class="t_dropOut1"><span>Icade 서비스 이용 중 불편사항을 선택해주세요.</span></h3>
@@ -95,7 +95,7 @@
 
 	var doubleSubmitFlag = false;
 
-	function sendIt() {
+	function changInfoAuthorization_sendIt() {
 		
 		if(doubleSubmitFlag){
 	        alert('처리 중입니다.');
