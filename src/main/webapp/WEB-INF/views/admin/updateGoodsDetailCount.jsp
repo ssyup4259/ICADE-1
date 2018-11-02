@@ -13,7 +13,7 @@
 <!-- 재고 수정하기 버튼 submit -->
 <script type="text/javascript">
 
-function sendIt() {
+function countUpdateIt() {
 	
 	var f = document.myForm;
 	        
@@ -50,7 +50,7 @@ function sendIt() {
 		
 	</c:forEach>
 	<br/><br/>
-	<input type="button" onclick="sendIt()" value="재고 수정"/>
+	<input type="button" onclick="countUpdateIt()" value="재고 수정"/>
 	<input type="button" onclick="javascript:history.back();" value="취 소"/>
 
 </form>

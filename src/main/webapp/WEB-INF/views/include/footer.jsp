@@ -62,7 +62,7 @@
 
 <script>
 
-	function sendIt(g_num) {
+	function footer_sendIt(g_num) {
 		
 		$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete.action',
@@ -133,7 +133,7 @@
 			<c:forEach var="ck" items="${ck_lists}">
 				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}"></a>
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}">
-				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;" />
+				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="footer_sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;" />
 			</c:forEach>
 		</form>
 		<h3>찜한</h3>
