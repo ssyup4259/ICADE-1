@@ -40,9 +40,7 @@
 					alert(data);
 				}
 			});
-		  
 		}
-
 	}
 	
 	function cancelOK(o_num) {
@@ -64,8 +62,8 @@
 				alert(data);
 			}
 		});
-		
 	}
+	
 </script>
 
 <script type="text/javascript">
@@ -129,7 +127,6 @@
 		</div>
 	</div>
 </form>
-
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>주문 상품 정보</h2>
 			<table border="1" style="width: 100%;">
@@ -202,11 +199,10 @@
 		</table>
 	</div>
 
-<br /><br />
+<br/><br/>
 
 <form method="get">
 	<input type="hidden" name="endPage" value="${endPgae}">
-
 </form>
 
 	</div>
@@ -224,21 +220,8 @@
 	        }
 	    });
 	});
-	
-	$(document).ready(function() {
-		$("#test").click(function(){
-			var status = $("#edate").val();
-			var testArray = status.split("-");
-			var testYear = testArray.splice(0,1);
-			var testMonth = testArray.splice(0,1);
-			var testDate = testArray.splice(0,1);
-			var sDate = testYear + "-" + testMonth + "-" + testDate
-			
-			alert(sDate);
-		
-		});
-	});
-	
+
+<%-- 	
 	$(document).ready(function (){
 		var startDate = <%=request.getParameter("startDate")%>
 		
@@ -247,24 +230,8 @@
 		}else{
 			alert("있다?");
 		}
-		
 	});
-	
-	//변경될 달력부분의 인풋박스에 기본값 넣어두기(3달전)
-	<%-- var defaultValue = year + "-" + (month-3) + "-" + date;
-	
-	$(function() {
-		
-		
-		if(!startDate){
-			$( "#sdate" ).val(defaultValue);
-		}else{
-			$( "#sdate" ).val(startDate);
-		}
-	});
-	
-	 --%>
-	
+ --%>	
 </script>
 </body>
 </html>
