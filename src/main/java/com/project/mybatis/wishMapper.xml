@@ -43,8 +43,6 @@ select nvl(count(*), 0) from WISH
 <select id="checkWish" parameterType="map" resultType="int">
 	select nvl(count(*), 0) from WISH where W_ID = #{m_id} and W_GNUM = #{g_num}
 </select>
-
-
 <!--찜 리스트 체크  -->
 <update id="like_check" parameterType="map">
 	update WISH
@@ -73,5 +71,16 @@ select W_CHECK from WISH WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 <select id="selectWish" parameterType="String" resultType="com.project.dto.WishDTO">
 	select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK from WISH where W_ID = #{M_ID}
 </select>
+<!--찜 목록 리스트 -->
 
+<select parameterType="map" id="wishListList" resultType="com.project.dto.WishDTO">
+select *from 
+( select rownum rnum, data.* from (
+ select W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK, G_SAVEFILENAME as W_SAVEFILENAME 
+ FROM WISH, GOODS 
+ WHERE W_GNUM = G_NUM AND W_ID = #{m_id} AND W_CHECK = 1
+ order by ROWNUM desc)DATA) 
+<![CDATA[ where rnum >= #{start} and rnum <= #{end} ]]>
+
+</select>
 </mapper>

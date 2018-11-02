@@ -18,9 +18,11 @@
 	
 	<c:forEach var="w_dto" items="${wishList}">
 		<tr>
-			
-			<td><img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/></td>
-			
+		<td>
+			<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/>
+			</a>
+		</td>
 		</tr>
 	</c:forEach>
 	<tr>

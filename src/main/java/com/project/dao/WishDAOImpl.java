@@ -137,6 +137,19 @@ public class WishDAOImpl implements WishDAO{
 		return lists;
 		
 	}
+	
+	@Override
+	public List<WishDTO> wishListList(int start, int end,String m_id) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("start", start);
+		params.put("end",end);
+		params.put("m_id",m_id);
+		return sessionTemplete.selectList(wishMapper + ".wishListList", params);
+		
+	}
+
 
 
 }

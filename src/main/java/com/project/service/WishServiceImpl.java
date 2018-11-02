@@ -162,6 +162,50 @@ public class WishServiceImpl implements WishService {
 		 return lists;
 	}
 
+	@Override
+	public HttpServletRequest wishListList(HttpServletRequest req) throws Exception {
+		String cp = req.getContextPath();
+		
+		String pageNum = req.getParameter("pageNum");
+		
+		int currentPage = 1;
+		
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
+		if (pageNum != null)
+			currentPage = Integer.parseInt(pageNum);
+		//전체데이터갯수
+		int dataCount = w_dao.dataCount();
+		//전체페이지수
+				int numPerPage = 4;
+				int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+				
+				if (currentPage > totalPage)
+					currentPage = totalPage;
+				
+				int start = (currentPage - 1) * numPerPage + 1;
+				int end = currentPage * numPerPage;
+		
+		
+		String m_id = req.getParameter("m_id");
+		
+		
+		List<WishDTO> wishList = w_dao.wishList(start,end,m_id);
+		String listUrl = cp + "/wish/wishList.action?m_id="+m_id;
+	
+		String pageIndexList =myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
+		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("wishList",wishList);
+		req.setAttribute("pageIndexList",pageIndexList);
+		
+		
+		return req;
+		
+	}
+
 
 	
 }

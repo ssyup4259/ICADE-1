@@ -23,5 +23,7 @@ public interface WishService {
 	public void deleteWish(int g_num,String m_id)throws Exception;
 	
 	public List<WishDTO> selectWish(String m_id)throws Exception;
+	
+	public HttpServletRequest wishListList(HttpServletRequest req)throws Exception;
 
 }

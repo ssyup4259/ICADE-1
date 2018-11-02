@@ -45,6 +45,21 @@
 </script>
 
 <script type="text/javascript">
+	
+	function wishsList(){
+			var f = document.wishForm;
+			var m_id= "${sessionScope.userInfo.getM_ID()}";
+	
+			alert(m_id);
+	
+			location.href = "<%=cp%>/wish/wishList.action?m_id=" + m_id;
+			
+		
+	}
+
+</script>
+
+<script>
 
 	function sendIt(g_num) {
 		
@@ -70,8 +85,8 @@
 </script>
 <script>
 	$(document).ready(function(){
+		$('#btn5').on('click',function() {
 		
-		$("#btn2").click(function(){
 			$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete_ok.action',
 			type:'POST',
@@ -106,13 +121,15 @@
 
 
 
+
 <input type="button" class="btnGray back_to_top" value="맨위로" style="width: 70px;">
 
 <div class="latestGoods" id="ckList">
 	<div class="lg text-center" style="width: 70px; height: 750px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
+		<input type="button" id="btn5" value="전체 삭제"/>
 		<form action="" name="searchForm" method="post">
-		<input type="button" id="btn2" value=" 전체 삭제 " class="btn2"/>
+		
 		<c:forEach var="ck" items="${ck_lists}">
 		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
 		<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}" width="100" height="100"></a><br/><br/>
@@ -130,6 +147,11 @@
 			<c:if test="${dataCount==0 }">
 				등록된 상품이 없습니다.
 			</c:if>
+		<form action="" name="wishForm">
+		<div>		
+		<input type="button" value="찜리스트" onclick="wishsList();"/>
+		</div>
+		</form>
 		
 	</div>
 </div>

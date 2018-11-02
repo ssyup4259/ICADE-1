@@ -23,7 +23,19 @@ public class WishController {
 	
 	@Autowired
 	WishService w_service;
-
+	
+	
+	@RequestMapping(value="/wishList.action",method= {RequestMethod.GET,RequestMethod.POST})
+	public String wishList(HttpServletRequest req) throws Exception{
+		
+		System.out.println("===================wishList.action 부분 들어왔나 체크용================================");
+		
+		w_service.wishListList(req);
+		
+		
+		return "wish/wish";
+		
+	}
 	
 	@RequestMapping(value="/wishInsert.action",method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
