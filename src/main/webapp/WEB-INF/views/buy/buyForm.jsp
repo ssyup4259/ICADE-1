@@ -232,7 +232,17 @@ function sample6_execDaumPostcode() {
 			pf.O_POINT.value = "";
 			pf.O_POINT.focus();
 			$("#o_tot").html(parseInt(totalPay) + "원");
-			$("#O_TOT").val(totalPay);
+			$("#O_TOT").val(parseInt(totalPay));
+			pf.pFlag.value = "false";
+			return;
+		}
+		
+		if (pf.O_POINT.value > parseInt(totalPay)) {
+			alert("최종 결제 금액보다 초과해서 사용 하실 수 없습니다.");
+			pf.O_POINT.value = "";
+			pf.O_POINT.focus();
+			$("#o_tot").html(parseInt(totalPay) + "원");
+			$("#O_TOT").val(parseInt(totalPay));
 			pf.pFlag.value = "false";
 			return;
 		}
