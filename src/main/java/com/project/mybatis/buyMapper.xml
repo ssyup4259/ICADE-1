@@ -76,6 +76,10 @@
 	where OD_NUM = #{o_num}
 </select>
 
+<!-- 구매후 장바구니 개별 비우기 -->
+<delete id="deleteCartItems" parameterType="String">
+	delete Cart where C_NUM = #{cnum}
+</delete>
 
 
 </mapper>

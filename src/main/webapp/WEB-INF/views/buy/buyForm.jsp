@@ -174,7 +174,24 @@ function sample6_execDaumPostcode() {
 		    		data: allData,
 		    		success: function(data) {
 		    			
-		    			location.href = "<%=cp%>/buy/buyOK.action";
+		    			$.ajax({
+							
+				    		url: "<%=cp%>/buy/buyOK.action",
+				    		type: 'POST',
+				    		dataType: 'text',
+				    		data: allData ,
+				    		success: function(data) {
+				    			location.href="<%=cp%>/orderHistory.action";
+				    		},
+				    		
+				    		error : function(data) {
+				    			
+				    			alert("Ajax Error");
+				    			console.log(data);
+				    			
+				    		}
+				    		
+		    			});
 		    			
 		    		},
 		    		
@@ -215,7 +232,17 @@ function sample6_execDaumPostcode() {
 			pf.O_POINT.value = "";
 			pf.O_POINT.focus();
 			$("#o_tot").html(parseInt(totalPay) + "원");
-			$("#O_TOT").val(totalPay);
+			$("#O_TOT").val(parseInt(totalPay));
+			pf.pFlag.value = "false";
+			return;
+		}
+		
+		if (pf.O_POINT.value > parseInt(totalPay)) {
+			alert("최종 결제 금액보다 초과해서 사용 하실 수 없습니다.");
+			pf.O_POINT.value = "";
+			pf.O_POINT.focus();
+			$("#o_tot").html(parseInt(totalPay) + "원");
+			$("#O_TOT").val(parseInt(totalPay));
 			pf.pFlag.value = "false";
 			return;
 		}
@@ -415,7 +442,10 @@ function sample6_execDaumPostcode() {
 								[옵션: ${b_dto.getKind()} / ${b_dto.getColor()}]<br/>
 								<fmt:formatNumber>${b_dto.getPrice()}</fmt:formatNumber>원 / ${b_dto.getCount()}개
 							</td>
-							<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원</td>
+							<td>
+								<fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원
+								<input name="cnum" type="hidden" value="${b_dto.getCnum()}"/>
+							</td>
 						</tr>
 						<c:set var="discount" value="${discount + b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount()}"/>
 						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
