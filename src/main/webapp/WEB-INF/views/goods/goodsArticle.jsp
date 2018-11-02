@@ -249,7 +249,7 @@ $(function() {
 			return;
 		}
 		
-		if (f.GD_COUNT.value > $("#code"+code).val()) {
+		if (f.GD_COUNT.value > parseInt($("#code"+code).val())) {
 			alert("구매하고자 하는 수량이 재고 수량보다 많습니다.");
 			f.GD_COUNT.value = "";
 			f.GD_COUNT.focus();
