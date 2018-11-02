@@ -29,7 +29,7 @@
 		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
 		 success : function(result) {
 			 //responseText가 result에 저장됨.
-			 $("#replyComment").html(result);
+			 $("#photoReply").html(result);
 		},error : function (result) {
 			alert("로딩실패");
 		}
@@ -67,7 +67,7 @@ function writeReply(BC_BOARD,BC_NUM,BC_CONTENT) {
 				 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
 				 success : function(result) {
 					 //responseText가 result에 저장됨.
-					 $("#replyComment").html(result);
+					 $("#photoReply").html(result);
 				}
 			 });
 		},
@@ -133,7 +133,7 @@ function writeReply(BC_BOARD,BC_NUM,BC_CONTENT) {
 				</td>
 			</tr>
 			</table>
-		</div>
+	</div>
 				<div align="center">
 					<textarea id="BC_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
 					<input type="button" onclick="writeReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px;">
@@ -142,7 +142,7 @@ function writeReply(BC_BOARD,BC_NUM,BC_CONTENT) {
 					
 				</div>
 			<!-- 댓글 목록부분 -->
-			<div id="replyComment"></div>
+			<div id="photoReply"></div>
 		
 		
 		<div class="bbsArticle_bottomLine">

@@ -29,5 +29,7 @@ public interface BoardCommentDAO {
 	public BoardCommentDTO readSubject(int bc_num)throws Exception;
 	//대댓글 리스트
 	public List<BoardCommentDTO> readReply(int BC_NUM)throws Exception;
+	//파일없는 댓글 삭제
+	public void deleteReply(int BC_NUM)throws Exception;
 	
 }

@@ -878,15 +878,20 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		return req;
 	}
 
-	//대댓글 수정SSSSSSS
+	//대댓글 수정
 	@Override
 	public void updateReply(BoardCommentDTO bc_dto, HttpServletRequest req) throws Exception {
 		
-		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
-		
 		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT());
+		bc_dto.setBC_NUM(bc_dto.getBC_NUM());
 		
 		bc_dao.updateData(bc_dto);
+		
+	}
+
+	@Override
+	public void deleteReply(int BC_NUM) throws Exception {
+		bc_dao.deleteReply(BC_NUM);
 		
 	}
 	

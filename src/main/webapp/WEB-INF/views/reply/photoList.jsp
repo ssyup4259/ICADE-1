@@ -83,7 +83,7 @@
 		
 		$.ajax({
 			type : "post",
-			url :"<%=cp%>/goods/replyComment.action",
+			url :"<%=cp%>/goods/commentInsert.action",
 			data : formData,
 			success:function(result){
 				
