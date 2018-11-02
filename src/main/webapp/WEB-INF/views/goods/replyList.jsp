@@ -31,18 +31,24 @@
 </head>
 
 
-<script type="text/javascript">
- function replyUpdate(BC_NUM){
-	 var num =BC_NUM;
-	 f = document.replyForm;
-	 f.action = "<%=cp%>/goods/replyUpdate.action?BC_NUM=num";
-	 f.submit();
-}
+<script>
+ $(document).ready(function() {
+	var BC_BOARD =$("#BC_BOARD").val();
+	$.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyCommentList.action?G_NUM="+BC_BOARD,
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyComment").html(result);
+		},error : function (result) {
+			alert("로딩실패");
+		}
+	 });
+});
 
 </script>
 
 <script>
-
 	function show(BC_NUM) {
 		
 		
@@ -75,12 +81,27 @@
 		alert(BC_BOARD);
 		
 		var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
+		
 		$.ajax({
 			type : "post",
 			url :"<%=cp%>/goods/replyComment.action",
 			data : formData,
-			success:function(){
+			success:function(result){
+				
+				console.log(result);
+				
+				var BC_BOARD =$("#BC_BOARD").val()
+				
 				alert("댓글이 등록되었습니다.");
+				$.ajax({
+					 type:"get",
+					 url :"<%=cp%>/goods/replyCommentList.action?G_NUM="+BC_BOARD,
+					 success : function(result) {
+						 //responseText가 result에 저장됨.
+						 $("#replyComment").html(result);
+					alert(BC_BOARD);
+					}
+				 });
 			},
 			error: function(result) {
 				alert("안된다");
@@ -89,8 +110,8 @@
 		});
 	}
 </script>
+<!-- 대댓글 삭제 -->
 <script>
-
 	function replyDelete(BC_NUM,BC_BOARD) {
 
 	var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
@@ -102,6 +123,16 @@
 		url : "<%=cp%>/goods/replyDelete.action",
 		success:function(result){
 				alert("삭제되었습니다");
+				$.ajax({
+					 type:"get",
+					 url :"<%=cp%>/goods/replyCommentList.action?G_NUM="+BC_BOARD,
+					 success : function(result) {
+						 //responseText가 result에 저장됨.
+						 $("#replyComment").html(result);
+					},error : function (result) {
+						alert("로딩실패");
+					}
+				 });
 		},
 		error: function(result) {
 			alert("안된다");
@@ -123,6 +154,7 @@
 								<p style="font-size: 20px; float:left">
 							 		<a id="replySubject" onclick="show(${bc_dto.getBC_NUM()});">${bc_dto.getBC_SUBJECT()}</a>
 							 		<%-- <input type="button"   onclick="show(${bc_dto.getBC_NUM()});"> --%>
+							 		
 							 	</p>
 							</li>
 							
@@ -160,50 +192,13 @@
 									<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px;">
 									<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 									value="${sessionScope.userInfo.getM_ID()}"/>
+									
 								</div>
+									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
 							</c:if>
 							</c:forEach>
 							
-							
-							<c:forEach var="rp_dto" items="${rp_list}">
-							<!-- 대댓글 목록 -->
-								<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
-									<!-- 댓글 목록 -->
-										<tr height="60px;" class="even">
-											<!-- 아이디, 작성날짜 -->
-											<td width="15%" valign="top">
-												<div style="width: 120px; height: 40px;">
-												<div style="margin-top: 15%"></div>
-													<%-- <c:if test="${rp_dto.getLevel() > 1}">
-													&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
-													</c:if> --%>
-													${rp_dto.getBC_ID()}<br> <font color="b3cccc" size="2">${rp_dto.getBC_DATE()}</font>
-												</div>
-											</td>
-											<!-- 본문내용 -->
-											<td width="70%">
-												${rp_dto.getBC_CONTENT()}
-											</td>
-											<!-- 버튼 -->
-											<td width="15%">
-												<div id="btn" style="text-align: center;">
-													<!-- 이부분은 확인 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
-													<c:if test="${rp_dto.getBC_ID() eq sessionScope.userInfo.getM_ID()}">
-													<a href="#" onclick="cmReplyOpen(${rp_dto.getBC_NUM()});">[답변]</a>
-														<br>
-													</c:if>
-													<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
-													<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-														<a href="#" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()},${bc_dto.getBC_CONTENT()}">[수정]</a>
-												<br>
-												<a href="#" onclick="cmDeleteOpen(${rp_dto.getBC_NUM()});">[삭제]</a>
-														<Br>
-													</c:if>
-												</div>
-											</td>
-										</tr>
-									</table>
-								</c:forEach>
+						<div id="replyComment"></div>
 							</div>
 							</td>
 						</table>

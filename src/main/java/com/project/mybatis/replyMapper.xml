@@ -68,7 +68,7 @@ select count(*) from board_comment
 	select BC_NUM,BC_BOARD,BC_ID,to_char(BC_DATE,'YYYY-MM-DD') BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,
 	BC_SAVEFILENAME,BC_CONTENTFILE1,BC_CONTENTFILE2,
 	BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT,G_NUM,G_NAME
-	FROM BOARD_COMMENT,(select g_name,g_num from goods) WHERE BC_BOARD = G_NUM)data)
+	FROM BOARD_COMMENT,(select g_name,g_num from goods) WHERE BC_BOARD = G_NUM AND BC_SUBJECT !=0)data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>

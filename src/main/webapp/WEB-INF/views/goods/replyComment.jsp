@@ -13,7 +13,7 @@
 <link href="${pageContext.request.contextPath}/css/sangyeop.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 
-	<title>댓글</title>
+	<title>답글</title>
 	
 	<style type="text/css">
 		#wrap {
@@ -53,29 +53,73 @@
 		f.submit();
 					
 	}
+	
+	function cmDeleteOpen(BC_NUM,BC_BOARD) {
+
+		var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
+			
+		if(confirm("삭제하시겠습니까?")) {
+		$.ajax({
+			type :"post",
+			data : data,
+			url : "<%=cp%>/goods/replyDelete.action",
+			success:function(result){
+					alert("삭제되었습니다");
+					$.ajax({
+						 type:"get",
+						 url :"<%=cp%>/goods/replyCommentList.action?G_NUM="+BC_BOARD,
+						 success : function(result) {
+							 //responseText가 result에 저장됨.
+							 $("#replyComment").html(result);
+						},error : function (result) {
+							alert("로딩실패");
+						}
+					 });
+			},
+			error: function(result) {
+				alert("안된다");
+	 	    }
+	     });
+	   }
+	  }
 		
 </script>
 	
 </head>
 <body>
-	<div id="wrap">
-		<br>
-		<b><font size="5" color="#5c8a8a">댓글</font></b>
-		<hr size="1" width="550" color="#b3cccc">
-		<br>
-		<div id="commentReplyForm">
-			<form name="replyComplete" action="" method="post">
-			
-				<input type="text" id="replyNum" name="BC_NUM" value="${bc_dto.getBC_NUM()}"> 		
-				<input type="text" id="replyBoard" name="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
-						
-				<textarea rows="7" cols="50" name="BC_CONTENT" style="border-radius : 20px; border-color: #b3cccc; padding-left: 20px; font-size: 18px;"></textarea>
-				<br><br>
-				<input type="button" value="등록" onclick="checkValue()" class="btn" style="width: 200px; height: 40px; font-size: 18px;">
-				<input type="button" value="창닫기" onclick="window.close()" class="btn" style="width: 200px; height: 40px; font-size: 18px;">
-				
-			</form>
-		</div>
-	</div>	
+			 <c:forEach var="rp_dto" items="${rp_list}">
+							<!-- 대댓글 목록 -->
+								<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
+									<!-- 댓글 목록 -->
+										<tr height="60px;" class="even">
+											<!-- 아이디, 작성날짜 -->
+											<td width="15%" valign="top">
+												<div style="width: 120px; height: 40px;">
+												<div style="margin-top: 15%"></div>
+													<c:if test="${rp_dto.getLevel() > 1}">
+													&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
+													</c:if>
+													${rp_dto.getBC_ID()}<br> <font color="b3cccc" size="2">${rp_dto.getBC_DATE()}</font>
+												</div>
+											</td>
+											<!-- 본문내용 -->
+											<td width="70%">
+												${rp_dto.getBC_CONTENT()}
+											</td>
+											<!-- 버튼 -->
+											<td width="15%">
+												<div id="btn" style="text-align: center;">
+													<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
+													<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
+														<a href="#" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()},${bc_dto.getBC_CONTENT()}">[수정]</a>
+												<br>
+												<a href="#" onclick="cmDeleteOpen(${rp_dto.getBC_NUM()},${rp_dto.getBC_BOARD()});">[삭제]</a>
+														<Br>
+													</c:if>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</c:forEach> 	
 </body>
 </html>
