@@ -104,8 +104,9 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 </select>
 
 <!-- 대댓글 리스트 가져오기 -->
-<select id="readReply" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
-	select BC_BOARD,BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods) where BC_BOARD =G_NUM AND BC_BOARD =#{BC_BOARD}
+<select id="readReply" resultType="com.project.dto.BoardCommentDTO">
+	select BC_BOARD,BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods)
+    where BC_BOARD =G_NUM AND BC_PARENT=(SELECT BC_NUM FROM BOARD_COMMENT,(SELECT G_NUM FROM GOODS) WHERE BC_BOARD=G_NUM AND BC_PARENT = 0)
 </select>
 
 </mapper>

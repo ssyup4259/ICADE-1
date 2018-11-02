@@ -286,7 +286,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int end = currentPage * numPerPage;
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
-		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_BOARD);
+		List<BoardCommentDTO> rp_list = bc_dao.readReply();
 		String param = "";
 		param += "G_NUM=" + BC_BOARD;
 
