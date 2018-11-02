@@ -1,6 +1,6 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="true" contentType="text/html; charset=UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -41,8 +41,8 @@
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
 		<div class="" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
-				<form class="" action="" name="goodsSearchForm" method="post">
-					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
+				<form action="" name="goodsSearchForm" method="post">
+					<input type="hidden" name="GK_KIND_NUM" value="${gdKindNum}" />
 
 					<select name="GK_KIND_NUM" class="selGreen" style="width: 100px; cursor: pointer;">
 						<option value="">전체</option>
@@ -83,7 +83,7 @@
 						</c:if>
 
 						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}&GK_KIND_NUM=${gdKindNum}">
 							<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
 								<div style="padding-left: 10%">
 									<p>${g_dto.getG_NAME()}</p>
@@ -110,11 +110,11 @@
 
 				</c:forEach>
 				<div style="text-align: center;">
-					<c:if test="${dataCount!=0 }">
-							${pageIndexList }
+					<c:if test="${dataCount != 0 }">
+							${pageIndexList}
 						</c:if>
 
-					<c:if test="${dataCount==0 }">
+					<c:if test="${dataCount == 0 }">
 							등록된 상품이 없습니다.
 						</c:if>
 				</div>

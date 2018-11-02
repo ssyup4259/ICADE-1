@@ -23,20 +23,24 @@
 
 	function cancelIt(imp_uid, o_num) {
 		
-		$.ajax({			
-			type : "post",
-			url :"<%=cp%>/payment/cancel.action",
-			data : {"imp_uid":imp_uid, "o_num":o_num},
-			datatype : "text",
-			success : function(data) {
-				cancelOK(data);
-			},
-			error : function(data) {
-				alert("error");
-				alert(data);
-			}
-		});
-
+		var refund = confirm("환불 하시겠습니까?");
+		
+		if(refund == true){
+			
+		  $.ajax({			
+				type : "post",
+				url :"<%=cp%>/payment/cancel.action",
+				data : {"imp_uid":imp_uid, "o_num":o_num},
+				datatype : "text",
+				success : function(data) {
+					cancelOK(data);
+				},
+				error : function(data) {
+					alert("error");
+					alert(data);
+				}
+			});
+		}
 	}
 	
 	function cancelOK(o_num) {
@@ -49,7 +53,7 @@
 			success:function(data){
 				
 				if (data == "success") {
-					alert("LOL");
+					location.href="<%=cp%>/orderHistory.action";
 				}
 				console.log(data);
 			},
@@ -58,8 +62,8 @@
 				alert(data);
 			}
 		});
-		
 	}
+	
 </script>
 
 <script type="text/javascript">
@@ -92,8 +96,8 @@
 		<div class="titleArea">
 			<h2>주문조회</h2>
 		</div>
-<input type="button" id="test" value="Test">
-<form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
+
+<form method="get" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action?pageNum=${pageNum}&startDay=${startDate}">
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
 		<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
@@ -107,13 +111,13 @@
 			</div>
 		<!-- 기간 지정부분 -->
 			<div class="col-sm-6" style="text-align: left;">
-				<input type="text" id="sdate" class="inputBoxGray" name="startDay" style="width: 200px; height: 30px;">
+				<input type="text" id="sdate" class="inputBoxGray" name="startDay" style="width: 200px; height: 30px;" value="${startDate}">
 				~
-				<input type="text" id="edate" class="inputBoxGray" name="endDay" style="width: 200px; height: 30px;">
+				<input type="text" id="edate" class="inputBoxGray" name="endDay" style="width: 200px; height: 30px;" value="${endDate}">
 			</div>
 		<!-- 조회 버튼 -->
 			<div class="col-sm-2">
-				<input type="button" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
+				<input type="submit" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
 			</div>
 		</div>
 		<div>
@@ -123,7 +127,6 @@
 		</div>
 	</div>
 </form>
-
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>주문 상품 정보</h2>
 			<table border="1" style="width: 100%;">
@@ -167,14 +170,17 @@
 										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
 								<td>${dto.getOD_COUNT()}</td>
 								<td><strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong></td>
-								<td>
+								<td class="gubun">
+									<p style="display: none;">${dto.getO_IMP()}</p>
 									<p>${dto.getO_STATUS()}</p>
 								</td>
-								<td>
-									<form action="" method="post" name="myForm">
-										<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
+								<td class="gubun">
+									<p style="display: none;">${dto.getO_IMP()}</p>
+									<form action="" method="post" name="myForm">										
+										<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
+											<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
+										</c:if>
 									</form>
-										<p class="">${dto.getO_IMP()}</p>
 								</td>
 							</tr>
 						</c:forEach>
@@ -193,12 +199,7 @@
 		</table>
 	</div>
 
-<br /><br />
-
-<form method="get">
-	<input type="hidden" name="endPage" value="${endPgae}">
-
-</form>
+<br/><br/>
 
 	</div>
 </div>
@@ -215,26 +216,6 @@
 	        }
 	    });
 	});
-	
-	$(document).ready(function() {
-		$("#test").click(function(){
-			alert("a");
-			var status = $("#edate").val();
-			alert(status);
-			var testArray = status.split("-");
-			var testYear = testArray.splice(0,1);
-			var testMonth = testArray.splice(0,1);
-			var testDate = testArray.splice(0,1);
-		
-			alert(testYear);
-			alert(testMonth);
-			alert(testDate);
-			
-		
-		});
-	});
-	
-	
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="true" contentType="text/html; charset=UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -21,9 +21,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 
-	function sendIt() {
+	function memberList() {
 		
-		var f = document.searchForm;
+		var f = document.mSearchForm;
 		
 		f.action = "<%=cp%>/admin/memberList.action";
 		f.submit();
@@ -45,9 +45,7 @@
 		
 		if (confirm("권한을 " + m_rank + "에서 " + new_rank + "로 변경 하시겠습니까?") == true) {
 			
-			f.action = "<%=cp%>
-	/admin/authorityChange.action?m_id=" + m_id
-					+ "&new_rank=" + new_rank;
+			f.action = "<%=cp%>/admin/authorityChange.action?m_id=" + m_id + "&new_rank=" + new_rank;
 			f.submit();
 
 		} else {
@@ -75,16 +73,11 @@ input[type='radio'] {
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
 
-	<div class="" data-toggle="buttons" style="display: flex; justify-content: center;">
-		<label class="btnGray"> <input type="radio" name="memGender" value="여" autocomplete="off" checked>여
-		</label> <label class="btnGray"> <input type="radio" name="memGender" value="남" autocomplete="off">남
-		</label>
-	</div>
 
 	<div class="container-fluid" style="background-color: #F2F1F0; margin-bottom: 200px; border-bottom: 200px;">
 		<div class="container-fluid text-center" style="padding-top: 50px; padding-bottom: 50px;">
 			<h2>회원 리스트</h2>
-			<form action="" name="searchForm" method="post">
+			<form action="" name="mSearchForm" method="post">
 				<div class="btn-group" data-toggle="buttons">
 					<c:if test="${empty M_RANK}">
 						<label class="btnGray">전체<input type="radio" name="M_RANK" value="" checked="checked" /></label>
@@ -110,7 +103,7 @@ input[type='radio'] {
 					<option value="M_NAME">이름</option>
 				</select>
 				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
-				<input type="button" value=" 검색 " class="btnGreen" onclick="sendIt();" style="width: 150px;" />
+				<input type="button" value=" 검색 " class="btnGreen" onclick="memberList();" style="width: 150px;" />
 			</form>
 
 

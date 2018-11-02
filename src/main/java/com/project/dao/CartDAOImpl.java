@@ -37,9 +37,6 @@ public class CartDAOImpl implements CartDAO {
 		int reduplication = c_dto.getReduplication();//동일품목 중복여부
 		int stockCount = c_dto.getGd_count();//재고 수량
 		
-		System.out.println(reduplication);
-		System.out.println(stockCount);
-		
 		if (reduplication > 0) {
 			return "reduplication";
 		}

@@ -69,7 +69,7 @@
 					<a href="javascript:void(0)" class="dropbtn" id="mm">회원 메뉴</a>
 
 					<div class="dropdown-content">
-						<a href="<%=cp%>/cart/cartList.action">장바구니</a> <a href="<%=cp%>/myPage.action">마이페이지</a><a href="<%=cp%>/logout.action">로그아웃</a>
+						<a href="<%=cp%>/cart/cartList.action">장바구니</a> <a href="<%=cp%>/myPage.action?m_id=${sessionScope.userInfo.getM_ID()}">마이페이지</a><a href="<%=cp%>/logout.action">로그아웃</a>
 					</div>
 				</li>
 
@@ -85,7 +85,7 @@
 
 <div class="container-fluid text-center" style="color: #8F9493; margin-bottom: 10px;">
 	<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>&nbsp;&nbsp; <a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
-	<img src="/icade/resources/data/logo/logo1.png">
+	<img src="/icade/resources/data/logo/logo1.png" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
 	&nbsp;<a href=""> FAQ</a>&nbsp;&nbsp;<a href="">고객센터</a>&nbsp;&nbsp;<a href="<%=cp%>/notice/noticeList.action">공지사항</a>
 
 </div>

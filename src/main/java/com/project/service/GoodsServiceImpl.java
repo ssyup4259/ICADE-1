@@ -65,7 +65,7 @@ public class GoodsServiceImpl implements GoodsService {
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
 		
-		if (searchKey == null) {
+		if (searchKey == null || searchKey.equals("")) {
 			
 			searchKey = "G_NAME";
 			searchValue = "";
@@ -100,7 +100,7 @@ public class GoodsServiceImpl implements GoodsService {
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
-			param = "gdKindNum=" + gdKindNum;
+			param = "GK_KIND_NUM=" + gdKindNum;
 			param = "&searchKey=" + searchKey;
 			param+= "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
@@ -139,6 +139,12 @@ public class GoodsServiceImpl implements GoodsService {
 		//갖고온 데이터 받기
 		int G_NUM = Integer.parseInt(req.getParameter("G_NUM"));
 		
+		String gkKindNum = req.getParameter("GK_KIND_NUM");
+		
+		if (gkKindNum == null || gkKindNum.equals("")) {
+			gkKindNum = "";
+		}
+		
 		String pageNum = req.getParameter("pageNum");
 		
 		if (pageNum == null || pageNum.equals("")) {
@@ -147,6 +153,16 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
+		
+		if (searchKey == null || searchKey.equals("")) {
+			searchKey = "G_NAME";
+			searchValue = "";
+		} else {
+			
+			if (req.getMethod().equalsIgnoreCase("GET"))
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			
+		}
 		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
@@ -160,7 +176,8 @@ public class GoodsServiceImpl implements GoodsService {
 
 		
 		String param = "pageNum=" + pageNum;
-		if(searchKey!=null){
+		param += "&GK_KIND_NUM=" + gkKindNum;
+		if(searchKey != null && !searchKey.equals("")){
 			param += "&searchKey=" + searchKey;
 			param += "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");

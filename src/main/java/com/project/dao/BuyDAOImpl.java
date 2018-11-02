@@ -94,4 +94,10 @@ public class BuyDAOImpl implements BuyDAO {
 		return sessionTemplate.selectOne(buyMapper + ".getReadOrders", o_num);
 	}
 
+	//구매 후 장바구니 비우기
+	@Override
+	public void deleteCartItems(String cnum) throws Exception {
+		sessionTemplate.delete(buyMapper + ".deleteCartItems", cnum);
+	}
+
 }

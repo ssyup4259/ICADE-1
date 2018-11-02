@@ -1,6 +1,6 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="true" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -31,6 +31,7 @@
 		f.submit();
 
 	}
+	
 </script>
 
 <style type="text/css">
@@ -66,8 +67,8 @@
 	<div class="container-fluid sticky2" style="width: 700px; z-index: 999;">
 		<div class="" id="myNavbar">
 			<div align="center" style="margin-top: 25px;">
-				<form class="" action="" name="goodsSearchForm" method="post">
-					<input type="hidden" name="GK_KIND_NUM" value="${gkKindNum}" />
+				<form action="" name="goodsSearchForm" method="post">
+					<input type="hidden" name="GK_KIND_NUM" value="${gdKindNum}" />
 
 					<select name="GK_KIND_NUM" class="selGreen" style="width: 100px; cursor: pointer;">
 						<option value="">전체</option>
@@ -80,7 +81,8 @@
 						<option value="G_NAME">상품명</option>
 						<option value="G_CONTENT">내용</option>
 					</select>
-					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;">
+					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;" onkeypress="if(event.keyCode==13) searchIt();">
+					<div style="display: none;"><input type="text" value=""/></div>
 					<button type="button" class="btnGreen" style="width: 100px;" onclick="searchIt();">검색</button>
 				</form>
 			</div>
@@ -155,9 +157,11 @@
 								</div>
 							</a>
 						</div>
+					
 
 						<c:if test="${i % 4 == 3 || newList.size() == i+1}">
 				</div>
+					<br><br>
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />

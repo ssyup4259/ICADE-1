@@ -73,7 +73,7 @@ input.down {
 <script type="text/javascript">
 $(function() {
 
-	var select = "<option>:: 선택 ::</option>"; 
+	var select = "<option value='none'>:: 선택 ::</option>"; 
 	$("#product").change(function() {
 		if($("#product").val() == "") { // select의 value가 ""이면, "선택" 메뉴만 보여줌.
 			$("#sub").find("option").remove().end().append(select);
@@ -105,6 +105,7 @@ $(function() {
 					
 					$.each(dc_list, function(key, value) {
 						$("#sub").append("<option value='" + value.gd_COLOR + "'>" + value.gc_COLOR + "</option>");
+						$("#sub").append("<input id='code" + value.gd_COLOR + "' type='hidden' value='" + value.gd_COUNT + "'/>");
 						console.log(value);
 					});
 					
@@ -179,6 +180,20 @@ $(function() {
 	//장바구니에 추가 전 동일품목여부 조회
 	function insertCheck() {
 		
+		var f = document.myForm;
+		
+		if (f.GD_DEVICE.value == "none") {
+			alert("기종을 선택 해 주세요.");
+			f.GD_DEVICE.focus();
+			return;
+		}
+		
+		if (f.GD_COLOR.value == "none") {
+			alert("색상을 선택 해 주세요.");
+			f.GD_COLOR.focus();
+			return;
+		}
+		
 		var allData = $("#myForm").serialize();
 		
 		$.ajax({
@@ -220,6 +235,26 @@ $(function() {
 		
 		var f = document.myForm;
 		var login = "${sessionScope.userInfo.getM_ID()}";
+		var code = $("#sub").val();
+		
+		if (f.GD_DEVICE.value == "none") {
+			alert("기종을 선택 해 주세요.");
+			f.GD_DEVICE.focus();
+			return;
+		}
+		
+		if (f.GD_COLOR.value == "none") {
+			alert("색상을 선택 해 주세요.");
+			f.GD_COLOR.focus();
+			return;
+		}
+		
+		if (f.GD_COUNT.value > parseInt($("#code"+code).val())) {
+			alert("구매하고자 하는 수량이 재고 수량보다 많습니다.");
+			f.GD_COUNT.value = "";
+			f.GD_COUNT.focus();
+			return;
+		}
 		
 		f.action = "<%=cp%>/buy/buyForm.action";
 		
@@ -230,6 +265,71 @@ $(function() {
 		}
 
 	}
+
+</script>
+
+<script type="text/javascript">
+function like_func(g_num) {
+	
+	
+	$.ajax({
+		url:"<%=cp%>/wish/wishInsert.action",
+		type:"post",
+		chache:false,
+		async:false,
+		data :{'g_num':g_num},
+		success : function(map) {
+			var msg = '';
+			var like_img = '';
+			var num =map.g_num;
+			var like_check = map.like_check;
+		
+		if(like_check!=1){
+			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
+			 if(document.URL.indexOf("##")==-1)
+	            {
+	                // Set the URL to whatever it was plus "#".
+	                url = document.URL+"##";
+	                location = "##";
+
+	                //Reload the page
+	                location.reload(true);
+
+	            }
+			
+		}else if(like_check==1){
+			
+			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
+			 if(document.URL.indexOf("##")==-1)
+	            {
+	                // Set the URL to whatever it was plus "#".
+	                url = document.URL+"##";
+	                location = "##";
+
+	                //Reload the page
+	                location.reload(true);
+
+	            }
+		}
+		
+	},
+	error: function(){
+		
+		alert("실패");
+		}
+		
+	});
+	
+	
+}
+</script>
+<script type="text/javascript">
+function login_need() {
+	
+	alert("로그인 후 찜목록을 눌러주세요!");
+	
+	
+}
 
 </script>
 
@@ -280,7 +380,7 @@ $(function() {
 								<c:if test="${!empty gd_list}">
 									<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
 									<select name="GD_DEVICE" id="product" class="sel" style="width: 100%;">
-										<option value="">::기종을 선택하세요::</option>
+										<option value="none">::기종을 선택하세요::</option>
 										<c:forEach var="gd_dto" items="${d_list}">
 											<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
 										</c:forEach>
@@ -292,7 +392,7 @@ $(function() {
 							<div class="col-sm-3" style="text-align: left;">색상</div>
 							<div class="col-sm-9" style="text-align: left">
 								<select name="GD_COLOR" id="sub" class="sel" style="width: 100%;">
-									<option>:: 색상을 선택해주세요 ::</option>
+									<option value="none">:: 색상을 선택해주세요 ::</option>
 								</select>
 							</div>
 						</div>
@@ -315,9 +415,17 @@ $(function() {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
-									<c:when test="">
-										<a href='javascript:like_func();'> <img src="<%=cp%>/resources/images/dislike.png" >
-										</a>
+									<c:when test="${!empty sessionScope.userInfo}">
+										<c:choose>
+											<c:when test="${w_Check ==1}">
+												<a href='#'> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href='#'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												</a>
+											</c:otherwise>
+										</c:choose>
 									</c:when>
 									<c:otherwise>
 										<a href='javascript: login_need();'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
@@ -331,10 +439,10 @@ $(function() {
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
 								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
-									<input type="button" value="구매하기" onclick="orderIt();" class="btn" style="width: 100%" />
+									<input type="button" value="구매하기" onclick="orderIt('code');" class="btnGray" style="width: 100%" />
 								</div>
 								<div class="col-sm-6">
-									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btn" style="width: 100%;" />
+									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btnGray" style="width: 100%;" />
 								</div>
 							</div>
 						</div>
@@ -343,10 +451,10 @@ $(function() {
 				<hr style="border-top: 2px solid black">
 				<!-- divison 이동 -->
 				<div class="conatiner-fluid sticky text-center" id="menu" style="z-index: 999; background-color: transparent; padding-top: 8px;">
-					<a href="#section1"> <input type="button" class="btn" value="상품상세정보" style="width: 200px;">
-					</a>&nbsp;<a href="#section2"> <input type="button" class="btn" value="상품구매안내" style="width: 200px;">
-					</a>&nbsp;<a href="#section3"> <input type="button" class="btn" value="상품사용후기" style="width: 200px;">
-					</a>&nbsp;<a href="javascript:history.back();"><input type="button" class="btnGreen" value="상품목록으로 돌아가기" style="width: 200px;"></a>
+					<a href="#section1"> <input type="button" class="btnGreen" value="상품상세정보" style="width: 200px;">
+					</a>&nbsp;<a href="#section2"> <input type="button" class="btnGreen" value="상품구매안내" style="width: 200px;">
+					</a>&nbsp;<a href="#section3"> <input type="button" class="btnGreen" value="상품사용후기" style="width: 200px;">
+					</a>&nbsp;<a href="<%=cp%>/goods/goodsList.action?${params}"><input type="button" class="btnGreen" value="상품목록으로 돌아가기" style="width: 200px;"></a>
 				</div>
 
 				<div id="section1" class="container-fluid">
@@ -354,7 +462,7 @@ $(function() {
 						<h1>상품상세정보</h1>
 					</div>
 					<div>
-						<p></p>
+						<img alt="" src="<%=cp%>/resources/goodsContentImage/${g_dto.getG_CONTENT_SAVE_FILE()}" />
 					</div>
 				</div>
 				<hr>
@@ -421,73 +529,60 @@ $(function() {
 					</div>
 				</div>
 				<hr>
-				
+
 			</form>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<!-- 댓글부분 -->
-				<div id="section3" class="container-fluid">
-						<ul>
-							<li style="float: left; padding-left: 15px">
-								<p style="font-size: 20px ">REVIEW | 포토리뷰 작성하고 적립금 받자!</p>
-							</li>
+	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-bottom: 50px;">
+		<div id="section3" class="container-fluid" style="width: 80%;">
+			<ul style="background: transparent">
+				<li style="float: left; padding-left: 15px">
+					<p style="font-size: 30px">REVIEW | 포토리뷰 작성하고 적립금 받자!</p>
+				</li>
+
+				<li style="float: right; padding-top: 6px; padding-right: 15px">
+					<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" />
+				</li>
+				<li style="float: right; padding-top: 6px; padding-right: 11px">
+					<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
+				</li>
+			</ul>
+			<div id="comment" class="container-fluid">
+				<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
+				<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
+
+				<form id="commentForm" method="post" enctype="multipart/form-data">
+					<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
+						<!-- 로그인 했을 경우만 댓글 작성가능 -->
+						<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 						
-							<li style="float: right; padding-top: 6px; padding-right: 15px">
-			               	    <input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';"/>
-							</li>
-							<li style="float: right; padding-top: 6px; padding-right: 11px">
-								<input type="button" value="포토후기 작성하기"  class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
-							</li>
-						</ul>
-					<div id="comment" class="container-fluid">
-						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
-						<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
-					
-					<form id="commentForm" method="post" enctype="multipart/form-data">
-						<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
-							<!-- 로그인 했을 경우만 댓글 작성가능 -->
-							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-						<%-- 	<tr>
-									<tr bgcolor="lightgray" height="60px;">
-										<!-- 아이디-->
-										<td width="15%">
-											<div>${sessionScope.userInfo.getM_ID()}</div>
-										</td>
-										<!-- 본문 작성-->
-										<td width="75%">
-											<div>
-												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color:transparent;"></textarea>
-												<input type="file" id="upload" name="bcFile">
-											</div>
-										</td>
-										<!-- 댓글 등록 버튼 -->
-										
-									</tr> --%>
-							</c:if>
+						</c:if>
 
 
-							<!-- 로그인 하지 않았을때만 보이는 화면 -->
-							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-								<tr bgcolor="lightgray" height="60px;">
-									<!-- 본문 작성-->
-									<td width="100%">
-										<div>
-											<p>
-												<input type="button" value="포토후기 작성하기"  onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px">
-											</p>
-										</div>
-									</td>
-								</tr>
-							</c:if>
-						</table>
-						<div id="replyList"></div>
-						</form>
-						
-				   </div>
-				</div>
+						<!-- 로그인 하지 않았을때만 보이는 화면 -->
+						<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+							<tr bgcolor="lightgray" height="60px;">
+								<!-- 본문 작성-->
+								<td width="100%">
+									<div>
+										<p>
+											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+										</p>
+									</div>
+								</td>
+							</tr>
+						</c:if>
+					</table>
+					<div id="replyList"></div>
+				</form>
+
+			</div>
+		</div>
+	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 <!-- 댓글에 띄울 리스트 작성 -->
@@ -504,4 +599,4 @@ $(document).ready(function() {
 });
 </script>
 
-</html>                                                                   
+</html>

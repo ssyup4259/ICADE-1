@@ -5,10 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+
+<script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <div id="content_area" height="100%"><script type="text/javascript">
 document.domain = "wemakeprice.com";
@@ -61,7 +71,9 @@ document.domain = "wemakeprice.com";
 			<tr class="fst">
 				<td class="cont ta_left fst">
 					<div class="box_thumb">
-						<a href="/<%=cp%>/goods/${dto.getOD_CODE()}"><img src="/icade/resources/data/logo/logo1.jpg" width="50" height="50" alt="<%=cp%>"><strong class="tit"> ${dto.getOD_NAME()}</strong></a>
+						<a href="<%=cp%>/goods/${dto.getOD_CODE()}"><img src="<%=cp%>/resources/data/logo/logo1.jpg" width="50" height="50">
+							<strong class="tit"> ${dto.getOD_NAME()}</strong>
+						</a>
 					</div>
 					<ul class="list_dot">
 						<li>${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}×${dto.getOD_COUNT()}개</li>
@@ -154,6 +166,7 @@ document.domain = "wemakeprice.com";
 </table>
 <a style="cursor:pointer;" onclick="history.back();return false;" class="btn_mypage btn_listview">목록보기</a>
 
+<jsp:include page="../include/footer.jsp" flush="false" />
 <script type="text/javascript">
 
 $(document).ready(function(){

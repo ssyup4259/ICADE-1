@@ -1,6 +1,6 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="true" contentType="text/html; charset=UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -22,9 +22,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-function sendIt() {
+function goodsSearchIt() {
 	
-	var f = document.searchForm;
+	var f = document.gSearchForm;
 	        
 	f.action = "<%=cp%>/admin/goodsList.action";
 	f.submit();
@@ -48,7 +48,7 @@ function sendIt() {
 
 		<div class="container-fluid text-center">
 			<h1>상품 목록</h1>
-			<form action="" name="searchForm" method="post">
+			<form action="" name="gSearchForm" method="post">
 				<select name="GD_KIND_NUM" class="selGreen" style="width: 150px;">
 					<option value="">전체</option>
 					<c:forEach var="gk_dto" items="${gk_lists}">
@@ -67,7 +67,7 @@ function sendIt() {
 				</select>
 
 				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
-				<input type="button" value=" 검색 " class="btnGreen" onclick="sendIt();" style="width: 150px;" />
+				<input type="button" value=" 검색 " class="btnGreen" onclick="goodsSearchIt();" style="width: 150px;" />
 
 				<input type="button" value=" 상품 등록 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/admin/insertGoods.action';" style="width: 150px;" />
 

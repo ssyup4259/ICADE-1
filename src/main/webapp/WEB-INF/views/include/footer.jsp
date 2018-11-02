@@ -7,7 +7,7 @@
 
 <style type="text/css">
 .lg img {
-margin: 0 auto;
+	margin: 0 auto;
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
@@ -46,8 +46,28 @@ margin: 0 auto;
 </script>
 
 <script type="text/javascript">
+	
+	function wishsList(){
+			var f = document.wishForm;
+			var m_id= "${sessionScope.userInfo.getM_ID()}";
+			
+			if(m_id==""){
+				alert("로그인을 하셔야 됩니다");
+				
+				
+			
+			}else{
+			location.href = "<%=cp%>/wish/wishList.action?m_id=" + m_id;
+			
+			}
+		
+	}
 
-	function sendIt(g_num) {
+</script>
+
+<script>
+
+	function footer_sendIt(g_num) {
 		
 		$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete.action',
@@ -71,8 +91,8 @@ margin: 0 auto;
 </script>
 <script>
 	$(document).ready(function(){
+		$('#btn5').on('click',function() {
 		
-		$("#btn2").click(function(){
 			$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete_ok.action',
 			type:'POST',
@@ -107,24 +127,36 @@ margin: 0 auto;
 
 
 
+
 <input type="button" class="btnGray back_to_top" value="맨위로" style="width: 70px;">
 
 <div class="latestGoods" id="ckList">
 	<div class="lg text-center" style="width: 70px; height: 830px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
+		<input type="button" id="btn5" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
 		<form action="" name="searchForm" method="post">
-			<input type="button" id="btn2" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
 			<c:forEach var="ck" items="${ck_lists}">
-				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}">
+				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
+				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}"></a>
 				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 			</c:forEach>
 		</form>
 		<h3>찜한</h3>
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
-		<img src="/icade/resources/data/img/sample1.jpg">
-		<img src="/icade/resources/data/img/sample.jpg">
+		<c:forEach var="w_dto" items="${wishList}">
+		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/><br/><br/>
+		</a>
+		</c:forEach>
+		
+			<c:if test="${dataCount==0 }">
+				등록된 상품이 없습니다.
+			</c:if>
+		<form action="" name="wishForm">
+		<div>		
+		<input type="button" value="찜리스트" onclick="wishsList();" class="btnGreen"/>
+		</div>
+		</form>
+		
 	</div>
 </div>
 <div class="container-fluid footer" style="width: 100%; height: 300px; background-color: white;">
@@ -164,7 +196,7 @@ margin: 0 auto;
 	<div class="text-center" style="font-size: 13px;">
 		사업자 등록번호 안내 : 523-81-00706 [사업자정보확인]통신판매업 신고 2017-강남-0606 전화 : 02-1234-5678 주소 : 서울특별시 강남구 테헤란로 123 여삼빌딩 15층
 		<br>
-		개인정보보호책임자 : 서영욱(admin@i-m-all.com)Hosting by 심플렉스인터넷(주)Copyright © 2018 아이케이드. All rights reserved. 반품 : 서울특별시 강남구 테헤란로 123 여삼빌딩 15층
+		개인정보보호책임자 : 박명성(admin@icade.com)Hosting by 아이케이드인터넷(주)Copyright © 2018 아이케이드. All rights reserved. 반품 : 서울특별시 강남구 테헤란로 123 여삼빌딩 15층
 		<br>
 		안전한 상거래를 위해 KB에스크로 이체 구매 안전 서비스를 이용하실 수 있습니다.[KB에스크로 이체 판매자 정보확인]
 		<br>

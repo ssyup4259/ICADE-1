@@ -68,47 +68,4 @@
 	]]>
 	
 	</select>
-
-	<!-- orders의 주문번호를 받아서 주문내역의 상세내용 select -->
-<!-- 
-	<select id="selectOrderDetail" parameterType="int" resultType="com.project.dto.OrderDetailDTO">
-		select OD_CODE, OD_NAME,OD_COLOR,OD_DEVICE,OD_COUNT,OD_PRICE,OD_DISCOUNT from Order_Detail where OD_NUM = #{O_NUM}
-	</select> 
--->
-
-	<!-- 상품코드(OD_CODE)로 상품번호(글번호) 찾기 -->
-	<select id="selectGoodsPage" parameterType="int" resultType="int">
-		select GD_NUM from Goods_Detail where GD_CODE=#{GD_CODE} 
-	</select>
-	
-	<!-- 찾은 상품번호(GD_NUM)로 saveFile 찾기 -->
-	<select id="selectSaveFile" parameterType="int" resultType="String">
-		select G_saveFile from Goods where G_NUM = #{G_NUM}
-	</select>
-	
-	<!-- 메인에서 뿌려줄 주문내역에 포함된 상품 정보 -->
-	<select id="selectMainDetail" parameterType="int" resultType="com.project.dto.OrderDetailDTO">
-		select OD_NUM,OD_NAME,OD_DEVICEOD_COLOR,OD_COUNT from Order_Detail where OD_NUM = #{OD_NUM}
-	</select>
-
-	<!-- 주문날짜와 주문상태에 따른 Orders테이블 값 가져오기 -->
-	<select id="selectOrdersCondition" parameterType="map" resultType="com.project.dto.OrdersDTO">
-		select O_NUM,O_ID,O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM from Orders
-		where O_ID = #{O_ID}
-	<![CDATA[
-	    and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
-	    and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
-	]]>
-	</select> 	
-
-	<!-- 기종 코드로 기종 가져오기 -->
-	<select id="deviceSearch" parameterType="int" resultType="String">
-		select DK_NAME from Device_Kind where DK_CODE = #{DK_CODE}
-	</select>
-
-	<!-- 색상 코드로 색상 가져오기 -->
-	<select id="colorSearch" parameterType="int" resultType="String">
-		select GC_COLOR from Goods_Color where GC_CODE = #{GC_CODE}
-	</select>
-
 </mapper>

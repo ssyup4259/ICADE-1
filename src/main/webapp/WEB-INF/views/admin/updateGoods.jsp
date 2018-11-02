@@ -15,7 +15,7 @@
 <!-- 상품수정하기 버튼 submit -->
 <script type="text/javascript">
 
-function sendIt() {
+function goodsUpdateIt() {
 	
 	var f = document.myForm;
     
@@ -70,7 +70,7 @@ function sendIt() {
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 
-<input type="button" onclick="sendIt()" value="상품수정">
+<input type="button" onclick="goodsUpdateIt()" value="상품수정">
 <input type="button" onclick="javascript:history.back();" value="취 소"/>
 
 </form>
