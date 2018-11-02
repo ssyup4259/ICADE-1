@@ -135,53 +135,110 @@ public class OrdersHistoryController {
 		
 		return "ordersHistory/ordersHistoryMain";
 	}
-	/*
+	
 	@RequestMapping(value="/orderHistory_ok.action",method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView ordersHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String ordersHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
-		ModelAndView mav = new ModelAndView();
+		System.out.println("_ok 들어온거 확인===============================================");
+		
 		HttpSession session = request.getSession();
+		MyUtil myUtil = new MyUtil();
+		Date date = new Date();
 		
+		//로그인시 있는 유저의 세션정보를 받아온다.
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
 		
+		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
+		String startDate = (String) request.getParameter("startDay");
+		String endDate = (String) request.getParameter("endDay");
+		
+		System.out.println("startDate : " + startDate);
+		
+		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
+		String pageNum = request.getParameter("pageNum");
+		
+		if(startDate==null || startDate.equals(null)){
+			startDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate()); 
+		}
+		if(endDate==null || endDate.equals(null)) {
+			endDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		}
+		
 		String m_Id = dto.getM_ID();
-
+		
+		LinkedHashMap<Integer, List<OrderHistoryDTO>> hashMap = new LinkedHashMap<Integer, List<OrderHistoryDTO>>();
+		
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		
-		String startDay = (String) request.getParameter("startDay");
-		String endDay = (String) request.getParameter("endDay");
+		hMap.put("O_ID", m_Id);
+		hMap.put("start_date",startDate);
+		hMap.put("end_date",endDate);	
 		
+		//현재 페이지
+        int currentPage = 1;
 		
-		<option value="all">전체 주문처리상태</option>
-		<option value="shipped_before">입금전</option>
-		<option value="shipped_standby">배송준비중</option>
-		<option value="shipped_begin">배송중</option>
-		<option value="shipped_complate">배송완료</option>
-		<option value="order_cancel">취소</option>
-		<option value="order_exchange">교환</option>
-		<option value="order_return">반품</option>
+		// 페이지number처리
+		if (pageNum != null) {
+			currentPage = Integer.parseInt(pageNum);
+		}
 		
+		if (pageNum == null) {
+			pageNum = "1";
+		}
 		
-		//where O_STATUS = O_STATUS 조건 주면 상관없이 모두다 나오는듯
+		int numPerPage = 5;
 		
-		hMap.put("startDay", startDay);
-		hMap.put("endDay", endDay);
+		int dataCount = service.maxOrders(hMap);
 		
-		System.out.println(startDay);
-		System.out.println(endDay);
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
-		List<OrdersDTO> lists = service.selectOrdersCondition(hMap);
+		if (currentPage > totalPage) {
+			currentPage = totalPage;
+		}
 		
-		System.out.println("2");
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
 		
-		mav.addObject("lists", lists);
+		hMap.put("start",start);
+		hMap.put("end",end);
 		
-		mav.addObject("");
-		mav.setViewName("/ordersHistory/ordersHistoryMain");
+		String listUrl = "orderHistory.action";
 		
-		return mav;
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
+		List<OrdersDTO> lists = (List<OrdersDTO>) service.selectOrders(m_Id);
+		
+		List<Integer> integerList = service.selectOrderNum(hMap);
+		
+		//System.out.println("for문돌린다====================================================");
+		
+		for(int i = 0;i<integerList.size();i++) {
+			
+			System.out.println(integerList);
+			
+			Integer O_Num = integerList.get(i);
+			
+			hMap.put("OD_NUM",O_Num);
+			
+			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
+			
+			hashMap.put(O_Num, mapList);
+		}
+		
+		//System.out.println("====================================================for문끝났다");
+		
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("dataCount", dataCount);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("hashMap", hashMap);
+		request.setAttribute("lists", lists);
+		request.setAttribute("integerList", integerList);
+		
+		//return "ordersHistory/ordersHistoryMain";
+		return "redirect:orderHistory.action";
 	}
-	*/
+
+	
 	@RequestMapping(value="/ordersHistoryDetail.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		

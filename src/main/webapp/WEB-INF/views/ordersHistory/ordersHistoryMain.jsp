@@ -97,7 +97,7 @@
 			<h2>주문조회</h2>
 		</div>
 
-<form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
+<form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory_ok.action">
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
 		<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
