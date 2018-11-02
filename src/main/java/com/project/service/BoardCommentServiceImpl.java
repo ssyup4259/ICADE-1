@@ -262,7 +262,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String cp = req.getContextPath();
 
 		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
-		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
 		String replyPageNum = req.getParameter("replyPageNum");
 		int currentPage = 1;
 
@@ -287,7 +286,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int end = currentPage * numPerPage;
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
-		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM);
+		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_BOARD);
 		String param = "";
 		param += "G_NUM=" + BC_BOARD;
 
@@ -303,8 +302,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		req.setAttribute("pageIndexList", pageIndexList_r);
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("bc_lists", bc_list);
-		req.setAttribute("rp_list", rp_list);
 		req.setAttribute("replyPageNum", replyPageNum);
+		req.setAttribute("rp_list", rp_list);
 
 		return req;
 

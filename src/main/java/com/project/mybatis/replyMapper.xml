@@ -105,7 +105,7 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 
 <!-- 대댓글 리스트 가져오기 -->
 <select id="readReply" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
- 	select BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID from board_comment where BC_PARENT =#{BC_PARENT}
+	select BC_BOARD,BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods) where BC_BOARD =G_NUM AND BC_BOARD =#{BC_BOARD}
 </select>
 
 </mapper>
