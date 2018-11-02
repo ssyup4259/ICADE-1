@@ -53,7 +53,7 @@
 			success:function(data){
 				
 				if (data == "success") {
-					alert("LOL");
+					location.href="<%=cp%>/orderHistory.action";
 				}
 				console.log(data);
 			},
