@@ -41,7 +41,6 @@
 			 //responseText가 result에 저장됨.
 			 $("#replyComment").html(result);
 		},error : function (result) {
-			alert("로딩실패");
 		}
 	 });
 });
