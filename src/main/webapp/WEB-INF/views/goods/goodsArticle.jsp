@@ -283,6 +283,7 @@ function like_func(g_num) {
 			var like_img = '';
 			var num =map.g_num;
 			var like_check = map.like_check;
+		
 		if(like_check!=1){
 			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
 			 if(document.URL.indexOf("##")==-1)

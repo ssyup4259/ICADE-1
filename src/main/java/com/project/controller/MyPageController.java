@@ -20,6 +20,7 @@ import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.MyPageService;
+import com.project.service.WishService;
 
 @Controller
 public class MyPageController {
@@ -29,7 +30,8 @@ public class MyPageController {
 	
 	@Autowired
 	AdminDAO a_dao;
-	
+	@Autowired
+	WishService w_service;
 	@RequestMapping(value="/myPage.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String mypage(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -42,7 +44,7 @@ public class MyPageController {
 		String M_ID = vo.getM_ID();
 		
 		int point = service.pointCheck(M_ID);
-		
+		w_service.wishListList(request);
 		request.setAttribute("point", point);
 		
 		//System.out.println("-----------------point------------------------");

@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.MemberDTO;
 import com.project.dto.WishDTO;
@@ -26,14 +29,22 @@ public class WishController {
 	
 	
 	@RequestMapping(value="/wishList.action",method= {RequestMethod.GET,RequestMethod.POST})
-	public String wishList(HttpServletRequest req) throws Exception{
+	public ModelAndView wishList(HttpServletRequest req) throws Exception{
+		ModelAndView mav = new ModelAndView();
 		
-		System.out.println("===================wishList.action 부분 들어왔나 체크용================================");
+		req =w_service.wishListList(req);
+		List<WishDTO> wishList = (List<WishDTO>) req.getAttribute("wishList");
+		int dataCount =  (Integer) req.getAttribute("dataCount");
+		String pageIndexList = (String) req.getAttribute("pageIndexList");
+
+	
 		
-		w_service.wishListList(req);
+		mav.addObject("wishList", wishList);
+		mav.addObject("dataCount", dataCount);
+		mav.addObject("pageIndexList", pageIndexList);
+		mav.setViewName("mypage/myPageMain");
 		
-		
-		return "wish/wish";
+		return mav;
 		
 	}
 	

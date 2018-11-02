@@ -179,7 +179,7 @@ public class WishServiceImpl implements WishService {
 		//전체데이터갯수
 		int dataCount = w_dao.dataCount();
 		//전체페이지수
-				int numPerPage = 4;
+				int numPerPage = 2;
 				int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 				
 				if (currentPage > totalPage)

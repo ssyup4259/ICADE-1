@@ -69,7 +69,7 @@
 					<a href="javascript:void(0)" class="dropbtn" id="mm">회원 메뉴</a>
 
 					<div class="dropdown-content">
-						<a href="<%=cp%>/cart/cartList.action">장바구니</a> <a href="<%=cp%>/myPage.action">마이페이지</a><a href="<%=cp%>/logout.action">로그아웃</a>
+						<a href="<%=cp%>/cart/cartList.action">장바구니</a> <a href="<%=cp%>/myPage.action?m_id=${sessionScope.userInfo.getM_ID()}">마이페이지</a><a href="<%=cp%>/logout.action">로그아웃</a>
 					</div>
 				</li>
 

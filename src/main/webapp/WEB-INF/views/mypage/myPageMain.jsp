@@ -23,8 +23,30 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<style type="text/css">
-</style>
+<script type="text/javascript">
+
+
+$(function() {
+    $('.hide').click(function(){
+        $('.toggle').hide();
+        setDisplayValue();
+        $('#ch').toggleClass('hide'); 
+        $('#ch').toggleClass('show'); 
+    });
+    $('.show').click(function(){
+        $('.toggle').show();
+        setDisplayValue();
+    });
+});
+
+function setDisplayValue() {
+    var display = $('.toggle')[0].style.display;
+    $('.displayvalue').text(display);
+}
+
+
+</script>
+
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
@@ -153,13 +175,49 @@
 			<input type="button" value="주문내역조회" id="orderHistory" onclick="location.href='orderHistory.action'" class="btnGreen" style="width: 200px;">
 			<input type="button" value="주소록" class="btnGreen" style="width: 200px;">
 			<br>
+	
+			
 			<br>
 		</div>
 	</div>
 
 
-	<jsp:include page="../include/footer.jsp" flush="false" />
+	<p>
+    <button id="ch" class="hide" value="찜리스트 펼치기">찜리스트 숨기기</button>
+    <button class="show" value="찜리스트 숨기기">찜리스트 펼치기</button>
+	
+	</p>
+	
+	<div class="toggle">
+	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
+	 	<c:forEach var="w_dto" items="${wishList}">
+	<tr>
+		<td>
+		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+		<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/>
+		</a>
+		상품명:${w_dto.getW_NAME()}
+		</td>
+	</tr>
+		</c:forEach>
+	<tr>
+	 <td colspan="9">
+		<c:if test="${dataCount!=0 }">
+		${pageIndexList }
+		</c:if>
+		<c:if test="${dataCount==0 }">
+		찜 등록된 상품이 없습니다.
+		</c:if>
+	 </td>
+	</tr>
+	</table>
+	</div>
+
 <script type="text/javascript">
+
+	$("#orderHistory").click(function() {
+		document.location.href = "orderHistory.action";
+	});
 
 	function sendMode(mode) {
 		window.location.href = "infoCheckPage.action?mode=" + mode;

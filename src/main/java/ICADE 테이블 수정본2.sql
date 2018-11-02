@@ -311,7 +311,7 @@ ALTER TABLE Wish
 ALTER TABLE Wish
     ADD CONSTRAINT FK_Wish_W_GNUM_Goods_G_NUM FOREIGN KEY (W_GNUM)
         REFERENCES Goods (G_NUM) ON DELETE CASCADE;
-
+ALTER TABLE WISH add(W_CHECK NUMBER);
         
 insert into goods_kind values (1, '기본 케이스');
 insert into goods_kind values (2, '주문제작 케이스');
