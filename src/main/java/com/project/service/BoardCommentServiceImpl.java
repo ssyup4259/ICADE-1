@@ -878,7 +878,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		return req;
 	}
 
-	//대댓글 수정
+	//대댓글 수정SSSSSSS
 	@Override
 	public void updateReply(BoardCommentDTO bc_dto, HttpServletRequest req) throws Exception {
 		
