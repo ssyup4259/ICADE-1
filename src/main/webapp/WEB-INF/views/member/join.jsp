@@ -339,7 +339,7 @@ $(document).ready(function () {
 		}else{
 			$.ajax({
 				type : "POST",
-				url : "/icade/idcheck.action",
+				url : "/icade/member/idcheck.action",
 				data : {"M_ID":userId},
 				dataType : "json",
 				error : function (error) {
@@ -462,7 +462,7 @@ function nickCheck() {
 	}else{
 		$.ajax({
 			type : "POST",
-			url : "/icade/nickcheck.action",
+			url : "/icade/member/nickcheck.action",
 			data : {"M_NICKNAME" : userNick},
 			dataType :"json",
 			error : function(error) {
@@ -606,7 +606,7 @@ function check() {
 	}else{
 	  $.ajax({
 			type : "POST",
-			url : "/icade/emailcheck.action",
+			url : "/icade/member/emailcheck.action",
 			data : allData,
 			dataType :"json",
 			error : function(error) {
@@ -651,12 +651,12 @@ function check() {
 				}
 			}			
 		};
-		xhttp.open("POST","sendMail.action",true);
+		xhttp.open("POST","<%=cp%>/sendMail.action",true);
 		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 		xhttp.send("email=" + email);
 		
 		//팝업창 열기
-		window.open("sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
+		window.open("<%=cp%>/sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
 			
 		return false;
 	}  
@@ -806,7 +806,7 @@ function signUp() {
 		}
 		
 
-		f.action= "<%=cp%>/join_ok.action";
+		f.action= "<%=cp%>/member/join_ok.action";
 		f.submit();
 
 			}
