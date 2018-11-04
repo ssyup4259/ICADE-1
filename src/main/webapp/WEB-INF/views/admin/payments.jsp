@@ -45,6 +45,8 @@
 	결제 상태 : ${p_dto.status}<br/>
 	결제 시각 : ${p_dto.paid_at}<br/>
 	환불 시각 : ${p_dto.cancelled_at}<br/>
+	카드사 : ${p_dto.card_name}<br/>
+	할부개월 : ${p_dto.card_quota}<br/>
 	
 	<br/><br/>
 	</c:forEach>

@@ -150,6 +150,8 @@ public class RestAPI {
 			p_dto.setPay_method(getToken.get("pay_method").toString().substring(1, getToken.get("pay_method").toString().length() - 1));
 			p_dto.setPg_provider(getToken.get("pg_provider").toString().substring(1, getToken.get("pg_provider").toString().length() - 1));
 			p_dto.setStatus(getToken.get("status").toString().substring(1, getToken.get("status").toString().length() - 1));
+			p_dto.setCard_name(getToken.get("card_name").toString().substring(1, getToken.get("card_name").toString().length() - 1));
+			p_dto.setCard_quota(getToken.get("card_quota").getAsInt());
 
 		}
 		

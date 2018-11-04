@@ -5,11 +5,13 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -639,6 +641,31 @@ public class AdminServiceImpl implements AdminService {
 			
 			PaymentsDTO p_dto = api.getInfo(token, impUid);
 			
+			if (p_dto.getStatus().equals("ready")) {
+				p_dto.setStatus("미결제");				
+			} else if (p_dto.getStatus().equals("paid")) {
+				p_dto.setStatus("결제완료");				
+			} else if (p_dto.getStatus().equals("cancelled")) {
+				p_dto.setStatus("결제취소");				
+			} else if (p_dto.getStatus().equals("failed")) {
+				p_dto.setStatus("결제실패");				
+			}
+			
+			//유닉스타임 형식 날짜를 DateTime으로 변환
+			String source = p_dto.getPaid_at();
+			long t = Long.parseLong(source + "000"); 
+			SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.KOREA);
+			p_dto.setPaid_at(simpleDate.format(t));
+			
+			if (p_dto.getCancelled_at() != "0" && !p_dto.getCancelled_at().equals("0")) {
+				
+				source = p_dto.getCancelled_at();
+				t = Long.parseLong(source + "000"); 
+				simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.KOREA);
+				p_dto.setCancelled_at(simpleDate.format(t));
+				
+			}
+						
 			p_lists.add(p_dto);
 			
 		}

@@ -46,6 +46,28 @@ public class PaymentsDTO {
 	
 	//(integer, optional): 결제취소시점 UNIX timestamp. 결제취소가 아닐 경우 0
 	private String cancelled_at;
+	
+	//카드사 명칭
+	private String card_name;
+	
+	//할부 개월 수 0이면 일시불
+	private int card_quota;
+
+	public String getCard_name() {
+		return card_name;
+	}
+
+	public void setCard_name(String card_name) {
+		this.card_name = card_name;
+	}
+
+	public int getCard_quota() {
+		return card_quota;
+	}
+
+	public void setCard_quota(int card_quota) {
+		this.card_quota = card_quota;
+	}
 
 	public String getImp_uid() {
 		return imp_uid;
