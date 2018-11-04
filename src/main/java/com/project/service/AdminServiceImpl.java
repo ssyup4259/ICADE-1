@@ -651,6 +651,16 @@ public class AdminServiceImpl implements AdminService {
 				p_dto.setStatus("결제실패");				
 			}
 			
+			if (p_dto.getPay_method().equals("samsung")) {
+				p_dto.setPay_method("삼성페이");				
+			} else if (p_dto.getPay_method().equals("card")) {
+				p_dto.setPay_method("신용카드");				
+			} else if (p_dto.getPay_method().equals("trans")) {
+				p_dto.setPay_method("계좌이체");				
+			} else if (p_dto.getPay_method().equals("vbank")) {
+				p_dto.setPay_method("가상계좌");				
+			}
+			
 			//유닉스타임 형식 날짜를 DateTime으로 변환
 			String source = p_dto.getPaid_at();
 			long t = Long.parseLong(source + "000"); 

@@ -29,27 +29,68 @@
 <h1>주문 내역 조회</h1>
 
 <c:if test="${!empty p_lists}">
-	<c:forEach var="p_dto" items="${p_lists}">
-	아임포트 결제 고유 UID : ${p_dto.imp_uid}<br/>
-	결제 수단 : ${p_dto.pay_method}<br/>
-	결제 경로 : ${p_dto.channel}<br/>
-	PG사 명칭 : ${p_dto.pg_provider}<br/>
-	주문 명칭 : ${p_dto.name}<br/>
-	결제 금액 : ${p_dto.amount}<br/>
-	결제 취소 금액 : ${p_dto.cancel_amount}<br/>
-	주문자명 : ${p_dto.buyer_name}<br/>
-	주문자 메일 : ${p_dto.buyer_email}<br/>
-	주문자 전화번호 : ${p_dto.buyer_tel}<br/>
-	주문자 주소 : ${p_dto.buyer_addr}<br/>
-	주문자 우편번호 : ${p_dto.buyer_postcode}<br/>
-	결제 상태 : ${p_dto.status}<br/>
-	결제 시각 : ${p_dto.paid_at}<br/>
-	환불 시각 : ${p_dto.cancelled_at}<br/>
-	카드사 : ${p_dto.card_name}<br/>
-	할부개월 : ${p_dto.card_quota}<br/>
+	<table style="text-align: left;">
+		<tr>
+			<td>imp_uid</td>
+			<td>
+				결제금액<br/>
+				(취소금액)
+			</td>
+			<td>구분</td>
+			<td>PG사</td>
+			<td>결제상세</td>
+			<td>
+				주문명<br/>
+				구매자(이름/이메일/휴대폰/주소)
+			</td>
+			<td>결제시각</td>
+			<td>상태</td>
+		</tr>
+		
+		<c:forEach var="p_dto" items="${p_lists}">
+			<tr>
+				<td>${p_dto.imp_uid}</td>
+				<td>
+					${p_dto.amount}원<br/>
+					(${p_dto.cancel_amount}원)
+				</td>
+				<td>
+					${p_dto.channel}<br/>
+					${p_dto.pay_method}
+					</td>
+				<td>${p_dto.pg_provider}</td>
+				<td>
+					${p_dto.card_name}<br/>
+					<c:if test="${p_dto.card_quota == 0}">
+					(일시불)
+					</c:if>
+					<c:if test="${p_dto.card_quota != 0}">
+					(${p_dto.card_quota}개월)
+					</c:if>
+				</td>
+				<td>
+					${p_dto.name}<br/>
+					${p_dto.buyer_name}<br/>
+					${p_dto.buyer_email}<br/>
+					${p_dto.buyer_tel}<br/>
+					${p_dto.buyer_addr}<br/>
+				</td>
+				<td>${p_dto.paid_at}</td>
+				<td>
+				${p_dto.status}<br/>
+				<c:if test="${p_dto.status == '결제완료'}">
+					<input type="button" value="취소하기" class="btnGreen"/>
+				</c:if>
+				<c:if test="${p_dto.status == '결제취소'}">
+					환불 정보 : [${p_dto.cancelled_at}] ${p_dto.cancel_amount}원
+				</c:if>
+				</td>
+			</tr>
+		
+		</c:forEach>
 	
-	<br/><br/>
-	</c:forEach>
+	</table>
+	
 </c:if>
 
 <c:if test="${empty p_lists}">
