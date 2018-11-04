@@ -17,12 +17,13 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.project.dto.PaymentsDTO;
 
 @Service
 public class RestAPI {
 	
 	//토큰 얻기
-	public String getToken(HttpServletRequest req, HttpServletResponse resp, JsonObject json) throws Exception{
+	public String getToken(JsonObject json) throws Exception{
 
 		String _token = "";
 
@@ -89,7 +90,7 @@ public class RestAPI {
 	}
 	
 	//고유번호로 조회
-	public Map<String,String> getInfo(HttpServletRequest req, HttpServletResponse resp, String token, String imp_uid) throws Exception{
+	public PaymentsDTO getInfo(String token, String imp_uid) throws Exception{
 
 		URL url = new URL("https://api.iamport.kr/payments/" + imp_uid);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -99,9 +100,6 @@ public class RestAPI {
 		httpURLConnection.setUseCaches(false);
 		httpURLConnection.setDoInput(true);
 		httpURLConnection.setDoOutput(true);
-		
-		System.out.println(token);
-		
 		httpURLConnection.connect();
 		
 		String requestString = "";
@@ -131,18 +129,31 @@ public class RestAPI {
 		JsonParser jsonParser = new JsonParser();
 		JsonObject jsonObj = (JsonObject) jsonParser.parse(requestString);
 		
-		Map<String, String> map = new HashMap<String, String>();
+		PaymentsDTO p_dto = new PaymentsDTO();
 		
 		if(jsonObj.get("code").getAsInt() == 0){
 
 			JsonObject getToken = (JsonObject) jsonObj.get("response");
-			map.put("imp_uid", getToken.get("imp_uid").toString());
-			map.put("status", getToken.get("status").toString());
-			map.put("amount", getToken.get("amount").toString());
+			
+			p_dto.setAmount(getToken.get("amount").getAsInt());
+			p_dto.setBuyer_addr(getToken.get("buyer_addr").toString());
+			p_dto.setBuyer_email(getToken.get("buyer_email").toString());
+			p_dto.setBuyer_name(getToken.get("buyer_name").toString());
+			p_dto.setBuyer_postcode(getToken.get("buyer_postcode").toString());
+			p_dto.setBuyer_tel(getToken.get("buyer_tel").toString());
+			p_dto.setCancel_amount(getToken.get("cancel_amount").getAsInt());
+			p_dto.setCancelled_at(getToken.get("cancelled_at").toString());
+			p_dto.setChannel(getToken.get("channel").toString());
+			p_dto.setImp_uid(imp_uid);
+			p_dto.setName(getToken.get("name").toString());
+			p_dto.setPaid_at(getToken.get("paid_at").toString());
+			p_dto.setPay_method(getToken.get("pay_method").toString());
+			p_dto.setPg_provider(getToken.get("pg_provider").toString());
+			p_dto.setStatus(getToken.get("status").toString());
 
 		}
 		
-		return map;
+		return p_dto;
 
 	}
 

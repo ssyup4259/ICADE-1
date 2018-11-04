@@ -205,8 +205,8 @@ public class AdminDAOImpl implements AdminDAO {
 
 	//회원 주문내역 조회
 	@Override
-	public List<OrdersDTO> ordersList() throws Exception  {
-		return null;
+	public List<String> imp_uidList() throws Exception  {
+		return sessionTemplate.selectList(adminMapper + ".getReadImpUid");
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,12 +13,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
+import com.project.controller.AdminController;
 import com.project.dao.AdminDAO;
 import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
@@ -26,16 +31,23 @@ import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
+import com.project.dto.PaymentsDTO;
 import com.project.util.MyUtil;
+import com.project.util.RestAPI;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	
+	Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
 	
 	@Autowired
 	private AdminDAO a_dao;
 	
 	@Autowired
 	MyUtil myUtil;
+	
+	@Autowired
+	RestAPI api;
 	
 	//상품 종류 목록 (완료)
 	@Override
@@ -604,14 +616,53 @@ public class AdminServiceImpl implements AdminService {
 
 	//회원 주문내역 조회
 	@Override
-	public List<OrdersDTO> ordersList() throws Exception  {
+	public List<PaymentsDTO> payments() throws Exception  {
+		
+		List<PaymentsDTO> p_lists = new ArrayList<PaymentsDTO>();
+		
+		String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
+		String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
+		JsonObject json = new JsonObject();
 
-		return a_dao.ordersList();
+		json.addProperty("imp_key", imp_key);
+		json.addProperty("imp_secret", imp_secret);
+		
+		String token = api.getToken(json);
+		
+		List<String> imp_uid = a_dao.imp_uidList();
+		
+		Iterator<String> it = imp_uid.iterator();
+		
+		while (it.hasNext()) {
+			
+			String impUid = it.next();
+			
+			PaymentsDTO p_dto = api.getInfo(token, impUid);
+			
+			log.info(p_dto.getBuyer_addr());
+			log.info(p_dto.getBuyer_email());
+			log.info(p_dto.getBuyer_name());
+			log.info(p_dto.getBuyer_postcode());
+			log.info(p_dto.getBuyer_tel());
+			log.info(p_dto.getCancelled_at());
+			log.info(p_dto.getChannel());
+			log.info(p_dto.getImp_uid());
+			log.info(p_dto.getName());
+			log.info(p_dto.getPaid_at());
+			log.info(p_dto.getPay_method());
+			log.info(p_dto.getPg_provider());
+			log.info(p_dto.getStatus());
+			log.info(Integer.toString(p_dto.getAmount()));
+			log.info(Integer.toString(p_dto.getCancel_amount()));
+			
+			log.info("-----------------------------------------------------------------");
+			
+			p_lists.add(p_dto);
+			
+		}
+
+		return p_lists;
 		
 	}
-	
-	
-
-	
 
 }
