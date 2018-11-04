@@ -639,24 +639,6 @@ public class AdminServiceImpl implements AdminService {
 			
 			PaymentsDTO p_dto = api.getInfo(token, impUid);
 			
-			log.info(p_dto.getBuyer_addr());
-			log.info(p_dto.getBuyer_email());
-			log.info(p_dto.getBuyer_name());
-			log.info(p_dto.getBuyer_postcode());
-			log.info(p_dto.getBuyer_tel());
-			log.info(p_dto.getCancelled_at());
-			log.info(p_dto.getChannel());
-			log.info(p_dto.getImp_uid());
-			log.info(p_dto.getName());
-			log.info(p_dto.getPaid_at());
-			log.info(p_dto.getPay_method());
-			log.info(p_dto.getPg_provider());
-			log.info(p_dto.getStatus());
-			log.info(Integer.toString(p_dto.getAmount()));
-			log.info(Integer.toString(p_dto.getCancel_amount()));
-			
-			log.info("-----------------------------------------------------------------");
-			
 			p_lists.add(p_dto);
 			
 		}

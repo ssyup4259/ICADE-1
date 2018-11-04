@@ -136,20 +136,20 @@ public class RestAPI {
 			JsonObject getToken = (JsonObject) jsonObj.get("response");
 			
 			p_dto.setAmount(getToken.get("amount").getAsInt());
-			p_dto.setBuyer_addr(getToken.get("buyer_addr").toString());
-			p_dto.setBuyer_email(getToken.get("buyer_email").toString());
-			p_dto.setBuyer_name(getToken.get("buyer_name").toString());
-			p_dto.setBuyer_postcode(getToken.get("buyer_postcode").toString());
-			p_dto.setBuyer_tel(getToken.get("buyer_tel").toString());
+			p_dto.setBuyer_addr(getToken.get("buyer_addr").toString().substring(1, getToken.get("buyer_addr").toString().length() - 1));
+			p_dto.setBuyer_email(getToken.get("buyer_email").toString().substring(1, getToken.get("buyer_email").toString().length() - 1));
+			p_dto.setBuyer_name(getToken.get("buyer_name").toString().substring(1, getToken.get("buyer_name").toString().length() - 1));
+			p_dto.setBuyer_postcode(getToken.get("buyer_postcode").toString().substring(1, getToken.get("buyer_postcode").toString().length() - 1));
+			p_dto.setBuyer_tel(getToken.get("buyer_tel").toString().substring(1, getToken.get("buyer_tel").toString().length() - 1));
 			p_dto.setCancel_amount(getToken.get("cancel_amount").getAsInt());
 			p_dto.setCancelled_at(getToken.get("cancelled_at").toString());
-			p_dto.setChannel(getToken.get("channel").toString());
+			p_dto.setChannel(getToken.get("channel").toString().substring(1, getToken.get("channel").toString().length() - 1));
 			p_dto.setImp_uid(imp_uid);
-			p_dto.setName(getToken.get("name").toString());
+			p_dto.setName(getToken.get("name").toString().substring(1, getToken.get("name").toString().length() - 1));
 			p_dto.setPaid_at(getToken.get("paid_at").toString());
-			p_dto.setPay_method(getToken.get("pay_method").toString());
-			p_dto.setPg_provider(getToken.get("pg_provider").toString());
-			p_dto.setStatus(getToken.get("status").toString());
+			p_dto.setPay_method(getToken.get("pay_method").toString().substring(1, getToken.get("pay_method").toString().length() - 1));
+			p_dto.setPg_provider(getToken.get("pg_provider").toString().substring(1, getToken.get("pg_provider").toString().length() - 1));
+			p_dto.setStatus(getToken.get("status").toString().substring(1, getToken.get("status").toString().length() - 1));
 
 		}
 		
