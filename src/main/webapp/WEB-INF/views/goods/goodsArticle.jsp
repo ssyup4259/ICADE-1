@@ -194,6 +194,13 @@ $(function() {
 			return;
 		}
 		
+		if (f.GD_COUNT.value < 1 || f.GD_COUNT.value == "") {
+			alert("수량을 확인해 주세요.");
+			f.GD_COUNT.value = "1";
+			f.GD_COUNT.focus();
+			return;
+		}
+		
 		var allData = $("#myForm").serialize();
 		
 		$.ajax({
@@ -249,9 +256,16 @@ $(function() {
 			return;
 		}
 		
+		if (f.GD_COUNT.value < 1 || f.GD_COUNT.value == "") {
+			alert("수량을 확인해 주세요.");
+			f.GD_COUNT.value = "1";
+			f.GD_COUNT.focus();
+			return;
+		}
+		
 		if (f.GD_COUNT.value > parseInt($("#code"+code).val())) {
 			alert("구매하고자 하는 수량이 재고 수량보다 많습니다.");
-			f.GD_COUNT.value = "";
+			f.GD_COUNT.value = "1";
 			f.GD_COUNT.focus();
 			return;
 		}
