@@ -286,36 +286,19 @@ function like_func(g_num) {
 		
 		if(like_check!=1){
 			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
-			 if(document.URL.indexOf("##")==-1)
-	            {
-	                // Set the URL to whatever it was plus "#".
-	                url = document.URL+"##";
-	                location = "##";
-
-	                //Reload the page
-	                location.reload(true);
-
-	            }
+			 
 			
 		}else if(like_check==1){
 			
 			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
-			 if(document.URL.indexOf("##")==-1)
-	            {
-	                // Set the URL to whatever it was plus "#".
-	                url = document.URL+"##";
-	                location = "##";
-
-	                //Reload the page
-	                location.reload(true);
-
-	            }
+			
 		}
 		
 	},
 	error: function(){
 		
-		alert("실패");
+		alert("message:"+request.responseText);
+
 		}
 		
 	});

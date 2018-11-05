@@ -66,6 +66,7 @@ public class GoodsController {
 		c_service.cookieList(req);
 		HttpSession session = req.getSession();
 		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
+		
 		if(mdto != null) {
 		w_service.wishList(req);
 		}

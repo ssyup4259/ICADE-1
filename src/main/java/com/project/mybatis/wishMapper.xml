@@ -61,7 +61,7 @@ select W_CHECK from WISH WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 </select>
 <!-- 찜 전체 삭제 -->
 <delete id="deleteAllWish" parameterType="map">
-	delete wish WHERE AND W_ID = #{m_id}
+	delete WISH WHERE W_ID = #{m_id}
 </delete>
 <!-- 찜 삭제 -->
 <delete id="deleteWish" parameterType="map">

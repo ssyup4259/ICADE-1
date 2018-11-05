@@ -51,17 +51,26 @@ public class WishController {
 	@RequestMapping(value="/deleteWish.action",method= {RequestMethod.POST})
 	public String deleteWish()throws Exception{
 		
+		
+		
 		return "redirect:/myPage.action" ;
 		
 	}
 	@RequestMapping(value="/deleteAllWish.action",method= {RequestMethod.POST})
-	public String deleteAllWish(int g_num ,HttpServletRequest req)throws Exception{
-	
+	@ResponseBody
+	public String deleteAllWish(HttpServletRequest req)throws Exception{
+		System.out.println("------------------------wishdelete 들어옴!!!!!!!!!");
+		HttpSession info = req.getSession();
+		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
+		String m_id = m_dto.getM_ID();
+		System.out.println("------------------------wishdelete 체크");
+		System.out.println(m_id);
+		
+		w_service.deleteAllWish(m_id);
 		
 		
 		
-		
-		return "redirect:/myPage.action" ;
+		return "success";
 		
 	}
 	

@@ -47,6 +47,24 @@ function setDisplayValue() {
 
 </script>
 
+<script type="text/javascript">
+	function deleteAllWish(){
+
+		$.ajax({
+		url:'<%=cp%>/wish/deleteAllWish.action',
+		type:'POST',
+		datatype:  'text',
+		}).done(function() {
+			$('#wishList').load(document.URL +  ' #wishList');
+		}).fail(function(){
+			alert("실패");
+		});
+		
+		
+		
+	}
+</script>
+
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
@@ -188,9 +206,9 @@ function setDisplayValue() {
 	
 	</p>
 	
-	<div class="toggle">
+	<div class="toggle" id="wishList">
+	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 200px;"/>
 	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
-	 	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteWish();" style="width: 200px;"/>
 	 	<c:forEach var="w_dto" items="${wishList}">
 	<tr>
 		<td>
