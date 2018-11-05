@@ -74,6 +74,8 @@ public class GoodsController {
 		
 	}
 	
+	
+	
 	//상품 상세 페이지
 	@RequestMapping(value="/goodsArticle.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String goodsArticle(HttpServletRequest req, HttpServletResponse resp) throws Exception{
@@ -113,6 +115,7 @@ public class GoodsController {
 				setCookie.setMaxAge(0);
 				setCookie.setPath("/");
 				resp.addCookie(setCookie);
+				
 				break;
 			}
 			
@@ -122,13 +125,15 @@ public class GoodsController {
 		setCookie.setMaxAge(60*60*24);
 		setCookie.setPath("/");
 		resp.addCookie(setCookie);
+	
 		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
 		if(mdto != null) {
 		w_service.wishList(req);
 		}
 		
 		req.setAttribute("w_Check", w_Check);
-	
+		
+
 		
 		g_service.goodsArticle(req);
 		
@@ -170,7 +175,10 @@ public class GoodsController {
 				
 			}
 		}
+		
 	
+		
+		
 		req.setAttribute("c_lists", c_lists);
 		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();

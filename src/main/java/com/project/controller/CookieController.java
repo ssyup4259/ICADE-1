@@ -1,17 +1,81 @@
 package com.project.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.dto.GoodsDTO;
+import com.project.service.CookieService;
+
 @Controller
 @RequestMapping("/cookies/*")
 public class CookieController {
+	@Autowired
+	CookieService c_service;
+	
+	
+	@RequestMapping(value="/cookiedirect.action", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String cookiedirect(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		Cookie[] cookies = req.getCookies();
+		List<String> c_lists = new ArrayList<String>();
+	
+		if(cookies != null){
+	
+			for(int i=0; i<cookies.length; i++){
+				
+				Cookie ck = cookies[i];
+				if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
+					
+				} else {
+					
+					String g_num = ck.getName();
+					c_lists.add(g_num);
+					
+				}
+				
+			}
+		}
+		
+		List<String> lists = c_lists;
+		String g_num = req.getParameter("G_NUM");
+		Iterator<String> it = lists.iterator();
+		
+		while (it.hasNext()) {
+			
+			String num = it.next();
+			
+			if (num == g_num || num.equals(g_num)) {
+				Cookie setCookie = new Cookie(g_num, null);
+				setCookie.setMaxAge(0);
+				setCookie.setPath("/");
+				resp.addCookie(setCookie);
+				break;
+			}
+			
+		}
+		Cookie setCookie = new Cookie(g_num, g_num);
+		setCookie.setMaxAge(60*60*24);
+		setCookie.setPath("/");
+		resp.addCookie(setCookie);
+	
+		
+	
+		return "success";
+	}
+	
 	
 	@RequestMapping(value="/cookieDelete.action", method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
@@ -19,7 +83,7 @@ public class CookieController {
 		
 		String g_num = req.getParameter("G_NUM");
 		
-		System.out.println(g_num);
+		
 		
 		Cookie kc = new Cookie(g_num, null); // choiceCookieName(쿠키 이름)에 대한 값을 null로 지정
 		
