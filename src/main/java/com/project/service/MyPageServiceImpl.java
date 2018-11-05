@@ -51,6 +51,12 @@ public class MyPageServiceImpl implements MyPageService {
 		my_dao.cancelMembership(M_ID);
 	}
 
+	@Override
+	public int usedPointCheck(String M_ID) throws Exception {
+
+		return my_dao.usedPointCheck(M_ID);
+	}
+
 	
 
 }

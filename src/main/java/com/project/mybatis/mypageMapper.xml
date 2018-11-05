@@ -20,6 +20,11 @@
 		select M_POINT from member where M_ID = #{M_ID}
 	</select>
 
+<!-- 사용한 포인트 조회 -->
+	<select id="usedPointCheck" parameterType="String" resultType="int">
+		select sum(O_Point) from orders where O_ID = #{O_ID} order by O_ID
+	</select>
+
 <!-- 회원탈퇴 -->
 
 	<!-- Leave 테이블의 넘버부여 -->

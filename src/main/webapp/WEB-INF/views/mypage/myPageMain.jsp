@@ -103,10 +103,10 @@
 
 					<div class="row">
 						<div class="col-sm-2" style="text-align: right;">
-							<p>총포인트 :</p>
+							<p>누적포인트 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
-							<p>2,700원</p>
+							<p>${point+usedPoint}Point</p>
 						</div>
 					</div>
 					<div class="row">
@@ -114,7 +114,7 @@
 							<p>사용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p>사용한 포인트 적는데</p>
+							<p>${usedPoint}Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
 							<a href="/myshop/deposits/historyList.html" class="button"><input type="button" class="btnGray" style="width: 200px;" value="조회"></a>

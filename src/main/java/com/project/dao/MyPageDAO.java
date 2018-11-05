@@ -24,6 +24,6 @@ public interface MyPageDAO {
 	
 	public void cancelMembership(String M_ID) throws Exception;
 	
-	
+	public int usedPointCheck(String M_ID) throws Exception;
 	
 }

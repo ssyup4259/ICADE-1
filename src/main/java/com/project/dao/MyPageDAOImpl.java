@@ -65,4 +65,10 @@ public class MyPageDAOImpl implements MyPageDAO {
 		sessionTemplate.delete("com.project.mybatis.myPageMapper.cancelMembership",M_ID);
 		
 	}
+
+	@Override
+	public int usedPointCheck(String M_ID) throws Exception {
+		
+		return sessionTemplate.selectOne("com.project.mybatis.myPageMapper.usedPointCheck",M_ID);
+	}
 }

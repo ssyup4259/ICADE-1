@@ -15,8 +15,9 @@ public interface MyPageService {
 	public int maxLeaveNum() throws Exception;
 	
 	public void insertLeaveData(HashMap<String, Object> hMap) throws Exception;
-	
-	
+		
 	public void cancelMembership(String M_ID) throws Exception;
+	
+	public int usedPointCheck(String M_ID) throws Exception;
 	
 }

@@ -22,7 +22,7 @@ public class OrderDetailDTO {
 	private int GD_NUM;
 	//상품의 저장된 이미지 이름
 	private String G_SAVEFILENAME;
-	
+
 	public int getOD_NUM() {
 		return OD_NUM;
 	}

@@ -2,7 +2,6 @@ package com.project.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
-
-import oracle.net.aso.h;
 
 @Repository
 public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
@@ -28,68 +25,47 @@ public class OrdersHistoryDAOImpl implements OrderHistoryDAO {
 	
 	public static String ordersHistory = "com.project.mybatis.ordersHistoryMapper";
 
-	
+	//주문내역조회
 	@Override
 	public List<Integer> selectOrderNum(HashMap<String, Object> hMap) throws Exception {
 		return sessionTemplate.selectList(ordersHistory + ".selectOrderNum",hMap);
 	}
 
-	@Override
-	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
-		
-		List<OrdersDTO> lists = new ArrayList<OrdersDTO>();
-				
-		lists = sessionTemplate.selectList(ordersHistory + ".selectOrders", O_ID);
-		
-		return lists;
-	}
-
-	@Override
-	public int selectGoodsPage(int GD_CODE) throws Exception {
-		return sessionTemplate.selectOne(ordersHistory + ".selectGoodsPage", GD_CODE);
-	}
-
-	@Override
-	public String selectSaveFile(int G_NUM) throws Exception {
-		return sessionTemplate.selectOne(ordersHistory + ".selectSaveFile", G_NUM);
-	}
-
-	@Override
-	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception {
-		return sessionTemplate.selectList(ordersHistory + "selectOrdersCondition");
-	}
-
-	@Override
-	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception {
-
-		List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
-		
-		lists = sessionTemplate.selectList(ordersHistory + ".selectOrderDetail",O_Num);
-		
-		return lists;
-	}
-
+	//페이징 처리를 위한 아이디의 해당 주문한 횟수
 	@Override
 	public int maxOrders(HashMap<String, Object> hMap) throws Exception {
 		return sessionTemplate.selectOne(ordersHistory + ".maxOrders",hMap);
 	}
 
+	//상세정보보기 에서 뿌릴 셀렉트문
 	@Override
-	public List<OrderDetailDTO> selectOdSaveFileName(HashMap<String, Object> hMap) throws Exception {
+	public List<OrderDetailDTO> selectOrderDetail(HashMap<String, Object> hMap) throws Exception {
 
 		 List<OrderDetailDTO> lists = new ArrayList<OrderDetailDTO>();
 		 
-		 lists = sessionTemplate.selectList(ordersHistory + ".selectOdSaveFileName", hMap); 
+		 lists = sessionTemplate.selectList(ordersHistory + ".selectOrderDetail", hMap); 
 		
 		return lists;
 	}
 
+	//주문내역조회 메인 화면 뿌리기
 	@Override
 	public List<OrderHistoryDTO> OrderHistoryMain(HashMap<String, Object> hMap) throws Exception {
 
 		List<OrderHistoryDTO> lists = sessionTemplate.selectList(ordersHistory + ".OrderHistoryMain",hMap);
 		
 		return lists;
+	}
+
+	//주문상세페이지 받는사람 정보
+	@Override
+	public OrdersDTO selectRecipientInfo(HashMap<String, Object> hMap) throws Exception {
+		
+		OrdersDTO dto = new OrdersDTO();
+		
+		dto = sessionTemplate.selectOne(ordersHistory + ".selectRecipientInfo",hMap);
+		
+		return dto;
 	}
 
 

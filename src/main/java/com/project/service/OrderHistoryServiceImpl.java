@@ -44,53 +44,34 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 	public List<Integer> selectOrderNum(HashMap<String, Object> hMap) throws Exception {
 		return oh_dao.selectOrderNum(hMap);
 	}
-
-	//주문내역 메인에 뿌려줄 값 조회
+	
+	//상세정보보기 에서 뿌릴 셀렉트문
 	@Override
-	public List<OrdersDTO> selectOrders(String O_ID) throws Exception {
-		return oh_dao.selectOrders(O_ID);
+	public List<OrderDetailDTO> selectOrderDetail(HashMap<String, Object> hMap) throws Exception {
+
+		return oh_dao.selectOrderDetail(hMap);
 	}
-
-	//상품코드를 통한 글번호(상품번호) 조회
-	@Override
-	public int selectGoodsPage(int GD_CODE) throws Exception {
-		return oh_dao.selectGoodsPage(GD_CODE);
-	}
-
-	//상품번호로 저장된 이미지의 saveFileName 받기
-	@Override
-	public String selectSaveFile(int G_NUM) throws Exception {
-		return oh_dao.selectSaveFile(G_NUM);
-	}
-
-	//기간 지정 주문 내역 검사용 
-	@Override
-	public List<OrdersDTO> selectOrdersCondition(HashMap<String, Object> hmap) throws Exception {
-		return oh_dao.selectOrdersCondition(hmap);
-	}
-
-	@Override
-	public List<OrderDetailDTO> selectOrderDetail(int O_Num) throws Exception {
-		return oh_dao.selectOrderDetail(O_Num);
-	}
-
-		@Override
-	public List<OrderDetailDTO> selectOdSaveFileName(HashMap<String, Object> hMap) throws Exception {
-
-		return oh_dao.selectOdSaveFileName(hMap);
-	}
-
+	
+	// 주문내역조회 메인에 뿌려줄 데이터를 뽑아내는 부분
 	@Override
 	public List<OrderHistoryDTO> OrderHistoryMain(HashMap<String, Object> hMap) throws Exception {
 
 		return oh_dao.OrderHistoryMain(hMap);
 	}
 
+	//페이징 처리를 위한 아이디의 조건에 해당하는 주문한 횟수
 	@Override
 	public int maxOrders(HashMap<String, Object> hMap) throws Exception {
 
 		return oh_dao.maxOrders(hMap);
 	}
+	
+	@Override
+	public OrdersDTO selectRecipientInfo(HashMap<String, Object> hMap) throws Exception {
+
+		return oh_dao.selectRecipientInfo(hMap);
+	}
+
 
 	//개인 주문내역 주문 환불
 	@Override
@@ -186,5 +167,6 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		
 		return "success";
 	}
+
 
 }

@@ -47,6 +47,9 @@ public class MyPageController {
 		w_service.wishListList(request);
 		request.setAttribute("point", point);
 		
+		int usedPoint = service.usedPointCheck(M_ID);
+		request.setAttribute("usedPoint", usedPoint);
+		
 		//System.out.println("-----------------point------------------------");
 		//System.out.println(point);
 		
