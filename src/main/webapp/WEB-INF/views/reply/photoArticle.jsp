@@ -128,7 +128,6 @@ function writeReply(BC_BOARD,BC_NUM,BC_CONTENT) {
 					</c:if>
 					<br>
 					${bc_dto.getBC_CONTENT()}
-					<!-- 포토후기 부분 -->
 				</div>
 				</td>
 			</tr>
