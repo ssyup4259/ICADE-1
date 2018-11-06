@@ -1,12 +1,14 @@
 package com.project.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.dao.MyPageDAO;
 import com.project.dto.MemberDTO;
+import com.project.dto.OrdersDTO;
 
 @Service
 public class MyPageServiceImpl implements MyPageService {
@@ -55,6 +57,12 @@ public class MyPageServiceImpl implements MyPageService {
 	public int usedPointCheck(String M_ID) throws Exception {
 
 		return my_dao.usedPointCheck(M_ID);
+	}
+
+	@Override
+	public List<OrdersDTO> selectusedPointHistory(String M_ID) throws Exception {
+		
+		return my_dao.selectusedPointHistory(M_ID);
 	}
 
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
@@ -48,7 +49,10 @@ public class MyPageController {
 		request.setAttribute("point", point);
 		
 		int usedPoint = service.usedPointCheck(M_ID);
+		String jsonM_id = new Gson().toJson(M_ID);
+		
 		request.setAttribute("usedPoint", usedPoint);
+		request.setAttribute("jsonM_id", jsonM_id);
 		
 		//System.out.println("-----------------point------------------------");
 		//System.out.println(point);
@@ -287,11 +291,9 @@ public class MyPageController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/testAjax.action", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/pwCheckAjax.action", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public boolean testAjax(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
-		System.out.println("1111111111111111111111111111111111111111탔다 아작스111111111111111111111111");
+	public boolean pwCheckAjax(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
 		
@@ -300,14 +302,29 @@ public class MyPageController {
 		String userPw = dto.getM_PW();
 		String inputPw = (String)request.getParameter("pw");
 		
-		System.out.println(userPw);
-		System.out.println(inputPw);
+		//System.out.println(userPw);
+		//System.out.println(inputPw);
 		
 		if(userPw!=inputPw&&!userPw.equals(inputPw)) {
 			return false;
 		}
 		
 		return true;
+	}
+	
+	@RequestMapping(value="/refreshAjax.action", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public int refreshAjax(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		int point = 0;
+		
+		String M_ID = request.getParameter("M_ID");
+		
+		point = service.pointCheck(M_ID);
+		
+		System.out.println(point);
+		
+		return point;
 	}
 	
 	@ModelAttribute

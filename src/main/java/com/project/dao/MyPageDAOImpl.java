@@ -1,12 +1,15 @@
 package com.project.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.MemberDTO;
+import com.project.dto.OrdersDTO;
 
 @Repository
 public class MyPageDAOImpl implements MyPageDAO {
@@ -70,5 +73,15 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public int usedPointCheck(String M_ID) throws Exception {
 		
 		return sessionTemplate.selectOne("com.project.mybatis.myPageMapper.usedPointCheck",M_ID);
+	}
+
+	@Override
+	public List<OrdersDTO> selectusedPointHistory(String M_ID) throws Exception {
+		
+		List<OrdersDTO> lists = new ArrayList<OrdersDTO>();
+		
+		lists = sessionTemplate.selectList("com.project.mybatis.myPageMapper.selectusedPointHistory",M_ID);
+		
+		return lists;
 	}
 }

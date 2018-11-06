@@ -24,6 +24,11 @@
 		select nvl(sum(O_Point),0) from orders where O_ID = #{O_ID} order by O_ID
 	</select>
 
+	<!-- 사용한 포인트 내역 -->
+	<select id="selectusedPointHistory" parameterType="String" resultType="com.project.dto.OrdersDTO">
+		select O_NUM,O_DATE,O_TOT,O_POINT from orders where O_ID = #{O_ID} order by O_DATE desc
+	</select>
+
 <!-- 회원탈퇴 -->
 
 	<!-- Leave 테이블의 넘버부여 -->
