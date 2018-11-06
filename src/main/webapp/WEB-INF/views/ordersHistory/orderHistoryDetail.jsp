@@ -29,9 +29,11 @@
 
 <script language="JavaScript" type="text/javascript" src="https://iniweb.inicis.com/js/auth.js"></script>
 
+<!-- 배송준비~배송완료이미지 -->
 <div class="mypage_change_banner">                                 
     <img src="//image.wemakeprice.com/images/resources/wmp/pages/mypage/banner/mypage-invoice.jpg" alt="1.배송준비중2.상품출고대기3.상품출고4.배송중5.배송완료">                                                           
 </div>
+
 <h3 class="tit_mypage tit_buylist_view">구매상세내역</h3>
 <div class="box_buylist_info">
 	<div class="noti_area">
@@ -42,8 +44,7 @@
 
 	<div class="btn-area">
 		<a id="btn_all_cancel" class="btn_flexible btn_flexible01" onclick="popUp('/mypage/cancel_request_pop/648361552', 'wemakeprice_pop_cancel', 820, 700, 1, 1, 0);" style="display: none;"><span class="inner">전체주문취소</span></a>
-<!-- 									<a style="cursor:pointer;" class="btn_flexible btn_flexible04" onclick="showReceipt('https://iniweb.inicis.com/app/publication/apReceipt.jsp?noTid=StdpayISP_wemake000320181008215742908451&amp;noMethod=1', '4','648361552');"><span class="inner">영수증 조회</span></a> -->
-							</div>
+	</div>
 </div>
 <table cellspacing="0" width="100%" class="tbl_mypage tbl_detail" summary="구매목록의 주문일자(주문번호),주문 상품 정보, 총 결제금액,상태등을 노출하는 테이블">
 	<caption class="hidden">구매목록</caption>
@@ -171,7 +172,8 @@
 
 
 
-<%-- <jsp:include page="../include/footer.jsp" flush="false" /> --%>
+<jsp:include page="../include/footer.jsp" flush="false" />
+
 <script type="text/javascript">
 
 $(document).ready(function(){

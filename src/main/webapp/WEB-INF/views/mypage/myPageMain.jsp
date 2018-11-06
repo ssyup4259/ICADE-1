@@ -97,7 +97,7 @@
 							<p>${point}Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
-							<a href="/myshop/mileage/historyList.html" class="button"><input type="button" class="btnGray" style="width: 200px;" value="조회"></a>
+							<a href="#" class="button"><input type="button" class="btnGray" style="width: 200px;" value="조회"></a>
 						</div>
 					</div>
 
