@@ -49,28 +49,53 @@ public class WishController {
 		
 	}
 	@RequestMapping(value="/deleteWish.action",method= {RequestMethod.POST})
-	public String deleteWish()throws Exception{
+	@ResponseBody
+	public HashMap<String, Object> deleteWish(HttpServletRequest req,int G_NUM)throws Exception{
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int g_num =G_NUM;
+	
+		System.out.println("------------------------------");
+		System.out.println(g_num);
+		HttpSession info = req.getSession();
+		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
+		String m_id = m_dto.getM_ID();
 		
-		
-		
-		return "redirect:/myPage.action" ;
+		String g_name=w_service.oneWish(g_num);
+		map.put("G_NUM",g_num);
+		map.put("G_NAME",g_name);
+		w_service.deleteWish(g_num, m_id);
+		return map ;
 		
 	}
 	@RequestMapping(value="/deleteAllWish.action",method= {RequestMethod.POST})
 	@ResponseBody
 	public String deleteAllWish(HttpServletRequest req)throws Exception{
-		System.out.println("------------------------wishdelete 들어옴!!!!!!!!!");
+		
 		HttpSession info = req.getSession();
 		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
 		String m_id = m_dto.getM_ID();
-		System.out.println("------------------------wishdelete 체크");
-		System.out.println(m_id);
-		
 		w_service.deleteAllWish(m_id);
 		
 		
 		
 		return "success";
+		
+	}
+	@RequestMapping(value="/wishCheck.action",method= {RequestMethod.POST})
+	@ResponseBody
+	public HashMap<String, Object> wishCheck(HttpServletRequest req,int G_NUM)throws Exception{
+		
+		HttpSession info = req.getSession();
+		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
+		String m_id = m_dto.getM_ID();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int count = w_service.checkWish(G_NUM, m_id);//데이터가 있는지 없는지 확인
+		System.out.println("----------카운트카운트~~~--------------------");
+		System.out.println(count);
+		map.put("count",count);
+		map.put("G_NUM",G_NUM);
+		
+		return map;
 		
 	}
 	
@@ -83,30 +108,22 @@ public class WishController {
 		
 		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
 		String m_id = m_dto.getM_ID();
-		System.out.println("------------id체크");
-		System.out.println(m_id);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 	
 		int count = w_service.checkWish(g_num, m_id);//데이터가 있는지 없는지 확인
-		System.out.println("------------------------------------------카운트");
-		System.out.println(count);
-		
 		
 		if(count==0) {//찜목록에 있으면
 			
 			w_service.wishInsert(g_num, req);
+			map.put("msg", "찜목록이 추가되었습니다.");
 			
 		}else if(count!=0) {
 			
-			int like_check = w_service.wCheck(g_num, m_id);//체크값 확인
-			System.out.println("------------------------------------------------------------------");	
-			System.out.println(like_check);
 			
 				
 				w_service.deleteWish(g_num, m_id);
 				map.put("msg", "찜목록이 삭제되었습니다.");
-				map.put("like_check", 0);
 				map.put("g_num", g_num);
 			
 		
@@ -119,21 +136,6 @@ public class WishController {
 		return map;
 		
 	}
-	
-	/*	if (count > 0) { // 찜목록에 있으면
-	
-	w_service.likeCheckCancel(g_num, "aaa"); //체크값을 0으로 만든다.(찜을 해제한다)
-	
-	if(check == 0) { 
-		w_service.likeCheck(g_num, "aaa");
-	}
-	w_service.deleteWish(g_num, "aaa");
-} else if (count == 0) { //찜목록에 없으면
-	
-	
-} else {
-	w_service.wishInsert(g_num, req);
-}*/
-	
+
 	
 }

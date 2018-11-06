@@ -49,6 +49,10 @@ select nvl(count(*), 0) from WISH
 	set W_CHECK = 1
  	WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 </update>
+<!-- 찜리스트 하나 갖고오기 -->
+<select id="oneWish" parameterType="int" resultType="String">
+	select W_NAME FROM WISH WHERE W_GNUM = #{G_NUM}
+</select>
 <!--찜 리스트 체크  -->
 <update id="like_check_cancel" parameterType="map">
 	update WISH

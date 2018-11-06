@@ -86,7 +86,7 @@ public class GoodsController {
 		String g_num = Integer.toString(g_dto.getG_NUM());
 		int w_Check=0;
 		//List<String> lists = (List<String>) addAttributes(req);
-		
+	
 		List<WishDTO> w_lists = new ArrayList<WishDTO>();
 		w_lists = (List<WishDTO>) session.getAttribute("wishInfo");
 		if(w_lists != null) {
@@ -100,7 +100,6 @@ public class GoodsController {
 				w_Check=wdto.getW_CHECK();
 			}
 		}
-		System.out.println(w_Check);
 		}
 		
 		List<String> lists = (List<String>) req.getAttribute("c_lists");

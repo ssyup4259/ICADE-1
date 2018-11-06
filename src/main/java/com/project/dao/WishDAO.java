@@ -34,4 +34,7 @@ public interface WishDAO {
 	public List<WishDTO> selectWish(String M_ID)throws Exception;
 	//찜목록 리스트 출력
 	public List<WishDTO> wishListList(int start, int end,String m_id)throws Exception;
+	//찜목록 한개의 값 
+	public String oneWish(int g_num)throws Exception;
+	
 }

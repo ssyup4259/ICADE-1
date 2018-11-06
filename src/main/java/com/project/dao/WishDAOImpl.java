@@ -56,7 +56,6 @@ public class WishDAOImpl implements WishDAO{
 		 maxNum = sessionTemplete.selectOne(wishMapper+".wishMaxNum");
 		 w_dto.setW_NUM(maxNum+1);
 		 
-		 System.out.println("wishInsert 탔다=====================================");
 		 System.out.println(w_dto.getW_ID());
 		 
 		 sessionTemplete.selectList(wishMapper + ".insertWish",w_dto);
@@ -157,6 +156,12 @@ public class WishDAOImpl implements WishDAO{
 		map.put("m_id", m_id);
 		sessionTemplete.delete(wishMapper + ".deleteAllWish",map);
 		
+	}
+
+	@Override
+	public String oneWish(int g_num) throws Exception {
+		String w_name= sessionTemplete.selectOne(wishMapper+".oneWish",g_num);
+		return w_name;
 	}
 
 

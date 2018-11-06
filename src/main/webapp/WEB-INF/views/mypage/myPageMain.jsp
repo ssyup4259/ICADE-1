@@ -56,6 +56,28 @@ function setDisplayValue() {
 		datatype:  'text',
 		}).done(function() {
 			$('#wishList').load(document.URL +  ' #wishList');
+			alert("찜목록이 전체 삭제되었습니다");
+		}).fail(function(){
+			alert("실패");
+		});
+		
+		
+		
+	}
+</script>
+<script type="text/javascript">
+	function deleteWish(G_NUM){
+	
+		$.ajax({
+		url:'<%=cp%>/wish/deleteWish.action',
+		type:'POST',
+		data:{"G_NUM":G_NUM},
+		datatype:  'text',
+		}).done(function(map) {
+			var G_NAME=map.G_NAME;
+			var G_NUM =map.G_NUM;
+			$('#wishList').load(document.URL +  ' #wishList');
+			alert("상품명 :"+G_NAME+"가 삭제 되었습니다");
 		}).fail(function(){
 			alert("실패");
 		});

@@ -270,7 +270,7 @@ $(function() {
 
 <script type="text/javascript">
 function like_func(g_num) {
-	
+
 	
 	$.ajax({
 		url:"<%=cp%>/wish/wishInsert.action",
@@ -283,15 +283,15 @@ function like_func(g_num) {
 			var like_img = '';
 			var num =map.g_num;
 			var like_check = map.like_check;
-		
-		if(like_check!=1){
+			var msg = map.msg
+		if(like_check == 1){
 			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
-			 
+			alert(msg);
+
 			
-		}else if(like_check==1){
-			
+		}else if(like_check==null){
 			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
-			
+			alert(msg);
 		}
 		
 	},
@@ -313,6 +313,38 @@ function login_need() {
 	
 	
 }
+
+</script>
+
+<script>
+	$(document).ready(function(){
+		var url = document.URL;
+		var urlarray = url.split("=");
+		var G_NUM = urlarray[1];
+	
+		if(G_NUM != null){	
+			$.ajax({
+			url:'<%=cp%>/wish/wishCheck.action',
+			type:'POST',
+			data:{"G_NUM":G_NUM},
+			async:false,
+			datatype:  'text',
+			}).done(function(map) {
+				var count = map.count;
+				var num = map.G_NUM;
+				if(count!=0){
+					$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
+				}else{
+					$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");	
+				}
+			}).fail(function(){
+			});
+		}else{
+			
+		
+		}
+		
+	});
 
 </script>
 
@@ -389,29 +421,29 @@ function login_need() {
 							</div>
 						</div>
 						<div class="row" style="height: 60px;">
-							<div class="col-sm-3" style="text-align: left;">총 상품금액</div>
+							<div class="col-sm-3" style="text-align: left;">총 상품금액 ${g_dto.getG_NUM()}</div>
 							<div class="col-sm-9" style="text-align: left">
 								<input type="text" id="sum" class="inputBox" name="sum" value="${g_dto.getG_PRICE()}" readonly="readonly" style="width: 100%;" />
 							</div>
 						</div>
 						<hr style="border-top: 2px solid black">
-						<div class="row" style="height: 60px;">
+						<div class="row" id="heart11" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
 									<c:when test="${!empty sessionScope.userInfo}">
 										<c:choose>
 											<c:when test="${w_Check ==1}">
-												<a href='#'> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												<a href=''> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href='#'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												<a href=''> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
 											</c:otherwise>
 										</c:choose>
 									</c:when>
 									<c:otherwise>
-										<a href='javascript: login_need();'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
+										<a href='javascript: login_need();'><img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
 										</a>
 									</c:otherwise>
 								</c:choose>

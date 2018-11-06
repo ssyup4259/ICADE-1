@@ -69,7 +69,6 @@ public class WishServiceImpl implements WishService {
 				int start = (currentPage - 1) * numPerPage + 1;
 				int end = currentPage * numPerPage;
 		
-		System.out.println("wishList ServiceImpl 까지 들어왔고");
 		
 		
 		List<WishDTO> wishList = w_dao.wishList(start,end,m_id);
@@ -156,7 +155,6 @@ public class WishServiceImpl implements WishService {
 
 	@Override
 	public List<WishDTO> selectWish(String M_ID) throws Exception {
-		System.out.println("----------------------서비스 탓다");
 		List<WishDTO> lists =new ArrayList<WishDTO>();
 		lists =w_dao.selectWish(M_ID);
 		 return lists;
@@ -211,6 +209,13 @@ public class WishServiceImpl implements WishService {
 		
 		w_dao.deleteAllWish(m_id);
 		
+	}
+
+	@Override
+	public String oneWish(int g_num) throws Exception {
+		String w_name;
+		w_name=w_dao.oneWish(g_num);
+		return w_name;
 	}
 
 

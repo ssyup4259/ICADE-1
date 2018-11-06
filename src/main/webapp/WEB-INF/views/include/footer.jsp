@@ -66,27 +66,21 @@
 </script>
 
 <script>
+function deleteCookie(G_NUM){
+	$.ajax({
+		url:'<%=cp%>/cookies/cookieDelete.action',
+		type:'POST',
+		data:{"G_NUM":G_NUM},
+		datatype:  'text',})
+		.done(function() {
+			$('#ckList').load(document.URL +  ' #ckList');
+		})
+		.fail(function(){
+			alert("error");
+		});
 
-	function footer_sendIt(g_num) {
-		
-		$.ajax({
-			url:'<%=cp%>/cookies/cookieDelete.action',
-			type:'POST',
-			data:{"G_NUM":g_num},
-			datatype:  'text'
-			}).done(function() {
-				$('#ckList').load(document.URL +  ' #ckList');
-				
-			}).fail(function(){
-				alert("error");
-			});
-		
-		<%-- var f = document.searchForm;
-		
-		f.action = "<%=cp%>/cookies/cookieDelete.action?g_num=" + g_num;
-		f.submit() --%>
-		
-	} 
+	
+} 
 
 </script>
 
@@ -107,20 +101,20 @@ function deleteAllCookies(){
 </script>
 <script>
 	$(document).ready(function(){
+		
 		var url = document.URL;
 		var urlarray = url.split("=");
 		var G_NUM = urlarray[1];
-		
 		if(G_NUM != null){	
 			$.ajax({
 			url:'<%=cp%>/cookies/cookiedirect.action',
 			type:'POST',
 			data:{"G_NUM":G_NUM},
+			async:false,
 			datatype:  'text',
 			}).done(function() {
 				$('#ckList').load(document.URL +  ' #ckList');
 			}).fail(function(){
-			
 			});
 		}else{
 			
@@ -144,7 +138,7 @@ function deleteAllCookies(){
 			<c:forEach var="ck" items="${ck_lists}">
 				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}"></a>
-				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
+				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="deleteCookie(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 			</c:forEach>
 		</form>
 		<h3>찜한</h3>
