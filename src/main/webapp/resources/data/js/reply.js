@@ -1,12 +1,8 @@
-/**
- * 
- */
 
-	var BC_NUM =$("#BC_UPDATE").val();
 
+   var BC_NUM = document.getElementsByTagName('inputBC_NUMdetale');
  
 	function replyListUpdate(){
-		
 		$.ajax({
 			 type:"get",
 			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
