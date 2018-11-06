@@ -286,11 +286,13 @@ function like_func(g_num) {
 			var msg = map.msg
 		if(like_check == 1){
 			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
+			$('#ckList').load(document.URL +  ' #ckList');
 			alert(msg);
 
 			
-		}else if(like_check==null){
+		}else if(like_check==0){
 			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
+			$('#ckList').load(document.URL +  ' #ckList');
 			alert(msg);
 		}
 		
@@ -433,11 +435,11 @@ function login_need() {
 									<c:when test="${!empty sessionScope.userInfo}">
 										<c:choose>
 											<c:when test="${w_Check ==1}">
-												<a href=''> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												<a href="#"> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href=''> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												<a href="#"> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
 											</c:otherwise>
 										</c:choose>

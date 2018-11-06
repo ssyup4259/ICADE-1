@@ -105,7 +105,6 @@ public class WishController {
 	public HashMap<String, Object> wishInsert(HttpServletRequest req,int g_num) throws Exception{
 		
 		HttpSession info = req.getSession();
-		
 		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
 		String m_id = m_dto.getM_ID();
 		
@@ -116,15 +115,19 @@ public class WishController {
 		if(count==0) {//찜목록에 있으면
 			
 			w_service.wishInsert(g_num, req);
+			
 			map.put("msg", "찜목록이 추가되었습니다.");
+			map.put("g_num", g_num);
+			map.put("like_check",1);
 			
 		}else if(count!=0) {
 			
 			
 				
-				w_service.deleteWish(g_num, m_id);
 				map.put("msg", "찜목록이 삭제되었습니다.");
 				map.put("g_num", g_num);
+				w_service.deleteWish(g_num, m_id);
+				map.put("like_check",0);
 			
 		
 			
