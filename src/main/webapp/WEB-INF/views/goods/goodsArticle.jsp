@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -117,7 +117,7 @@ $(function() {
 			
 			error: function() {
 
-				alert("안된다");
+				swal("안된다");
 				
 			}				
 		});
@@ -183,13 +183,13 @@ $(function() {
 		var f = document.myForm;
 		
 		if (f.GD_DEVICE.value == "none") {
-			alert("기종을 선택 해 주세요.");
+			swal("기종을 선택 해 주세요.");
 			f.GD_DEVICE.focus();
 			return;
 		}
 		
 		if (f.GD_COLOR.value == "none") {
-			alert("색상을 선택 해 주세요.");
+			swal("색상을 선택 해 주세요.");
 			f.GD_COLOR.focus();
 			return;
 		}
@@ -207,11 +207,11 @@ $(function() {
 				if (data == "success") {
 					insertCart();
 				} else if (data == "reduplication") {
-					alert("이미 장바구니에 존재하는 상품입니다.");
+					swal("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
-					alert("담고자하는 수량이 재고 수량보다 많습니다.");
+					swal("담고자하는 수량이 재고 수량보다 많습니다.");
 				} else {
-					alert("로그인 후 사용 가능합니다.");
+					swal("로그인 후 사용 가능합니다.");
 				}
 
 				console.log(data);
@@ -220,7 +220,7 @@ $(function() {
 
 			error : function(data) {
 	
-				alert("error");
+				swal("error");
 				console.log(data);
 
 			}
@@ -238,19 +238,19 @@ $(function() {
 		var code = $("#sub").val();
 		
 		if (f.GD_DEVICE.value == "none") {
-			alert("기종을 선택 해 주세요.");
+			swal("기종을 선택 해 주세요.");
 			f.GD_DEVICE.focus();
 			return;
 		}
 		
 		if (f.GD_COLOR.value == "none") {
-			alert("색상을 선택 해 주세요.");
+			swal("색상을 선택 해 주세요.");
 			f.GD_COLOR.focus();
 			return;
 		}
 		
 		if (f.GD_COUNT.value > parseInt($("#code"+code).val())) {
-			alert("구매하고자 하는 수량이 재고 수량보다 많습니다.");
+			swal("구매하고자 하는 수량이 재고 수량보다 많습니다.");
 			f.GD_COUNT.value = "";
 			f.GD_COUNT.focus();
 			return;
@@ -261,7 +261,7 @@ $(function() {
 		if (login != "") {
 			f.submit();	
 		} else {
-			alert("로그인 후 사용 가능합니다.");
+			swal("로그인 후 사용 가능합니다.");
 		}
 
 	}
@@ -287,19 +287,18 @@ function like_func(g_num) {
 		if(like_check == 1){
 			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
 			$('#ckList').load(document.URL +  ' #ckList');
-			alert(msg);
+			swal(msg);
 
 			
 		}else if(like_check==0){
 			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
 			$('#ckList').load(document.URL +  ' #ckList');
-			alert(msg);
+			swal(msg);
 		}
 		
 	},
 	error: function(){
 		
-		alert("message:"+request.responseText);
 
 		}
 		
@@ -311,7 +310,7 @@ function like_func(g_num) {
 <script type="text/javascript">
 function login_need() {
 	
-	alert("로그인 후 찜목록을 눌러주세요!");
+	swal("로그인 후 찜목록을 눌러주세요!");
 	
 	
 }

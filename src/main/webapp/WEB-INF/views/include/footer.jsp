@@ -4,7 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 .lg img {
 	margin: 0 auto;
@@ -52,7 +52,7 @@
 			var m_id= "${sessionScope.userInfo.getM_ID()}";
 			
 			if(m_id==""){
-				alert("로그인을 하셔야 됩니다");
+				swal("로그인을 하셔야 됩니다");
 				
 				
 			
@@ -76,7 +76,7 @@ function deleteCookie(G_NUM){
 			$('#ckList').load(document.URL +  ' #ckList');
 		})
 		.fail(function(){
-			alert("error");
+			swal("error");
 		});
 
 	
@@ -141,7 +141,14 @@ function deleteAllCookies(){
 				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="deleteCookie(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 			</c:forEach>
 		</form>
-		<h3>찜한</h3>
+		<c:choose>
+		<c:when test="${!empty sessionScope.userInfo }">
+		<h3>찜 List</h3>
+		</c:when>
+		<c:otherwise>
+		<h3>로그인 해주세요</h3>
+		</c:otherwise>
+		</c:choose>
 		<c:forEach var="w_dto" items="${wishList}">
 		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
 			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/><br/><br/>

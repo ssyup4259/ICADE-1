@@ -164,6 +164,12 @@ public class WishDAOImpl implements WishDAO{
 		return w_name;
 	}
 
+	@Override
+	public int idDataCount(String m_id) throws Exception {
+		int idDataCount = sessionTemplete.selectOne(wishMapper+".idDataCount",m_id);
+		return idDataCount;
+	}
+
 
 
 }

@@ -18,7 +18,7 @@
 
 <title>마이 쇼핑</title>
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -54,11 +54,13 @@ function setDisplayValue() {
 		url:'<%=cp%>/wish/deleteAllWish.action',
 		type:'POST',
 		datatype:  'text',
-		}).done(function() {
+		}).done(function(map) {
+			var msg =map.msg;
 			$('#wishList').load(document.URL +  ' #wishList');
-			alert("찜목록이 전체 삭제되었습니다");
+			swal(msg);
+			
 		}).fail(function(){
-			alert("실패");
+			swal("실패");
 		});
 		
 		
@@ -77,9 +79,9 @@ function setDisplayValue() {
 			var G_NAME=map.G_NAME;
 			var G_NUM =map.G_NUM;
 			$('#wishList').load(document.URL +  ' #wishList');
-			alert("상품명 :"+G_NAME+"가 삭제 되었습니다");
+			swal("상품명 :"+G_NAME+"가 삭제 되었습니다");
 		}).fail(function(){
-			alert("실패");
+			swal("실패");
 		});
 		
 		

@@ -32,12 +32,16 @@ update WISH set W_CHECK = 0 where W_MNO =#{G_NUM}
 </select>
 <!--찜리스트 등록-->
 <insert id="insertWish" parameterType="com.project.dto.WishDTO">
-insert into WISH (W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK) 
-values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},1)
+	insert into WISH (W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK) 
+	values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},1)
 </insert>
 <!-- 전체 데이터수 -->
 <select id="dataCount" resultType="int">
-select nvl(count(*), 0) from WISH
+	select nvl(count(*), 0) from WISH
+</select>
+<!--아이디 전체 데이터수 -->
+<select id="idDataCount" parameterType="String" resultType="int">
+	select nvl(count(*), 0) from WISH where W_ID = #{m_id}
 </select>
 <!--데이터 중복  -->
 <select id="checkWish" parameterType="map" resultType="int">

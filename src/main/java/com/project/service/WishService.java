@@ -29,5 +29,7 @@ public interface WishService {
 	public HttpServletRequest wishListList(HttpServletRequest req)throws Exception;
 	
 	public String oneWish(int g_num)throws Exception;
+	
+	public int idDataCount(String m_id)throws Exception;
 
 }

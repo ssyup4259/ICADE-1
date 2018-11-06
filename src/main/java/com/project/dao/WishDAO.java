@@ -37,4 +37,6 @@ public interface WishDAO {
 	//찜목록 한개의 값 
 	public String oneWish(int g_num)throws Exception;
 	
+	public int idDataCount(String m_id)throws Exception;
+	
 }
