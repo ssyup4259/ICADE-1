@@ -1,6 +1,7 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -73,7 +74,7 @@ function goodsSearchIt() {
 
 			</form>
 
-			<table cellpadding="10" cellspacing="0">
+			<table cellpadding="10" cellspacing="0" style="width: 80%; margin: auto;">
 				<thead style="border: none;">
 					<tr>
 						<th>상품 종류</th>
@@ -91,14 +92,14 @@ function goodsSearchIt() {
 					<c:forEach var="g_dto" items="${g_lists}">
 						<tr>
 							<td>${g_dto.getGK_KIND()}</td>
-							<td><a href="#">${g_dto.getG_NAME()}</a></td>
-							<td><a href="<%=cp%>/admin/updateGoodsDetailCount.action?g_num=${g_dto.getG_NUM()}">${g_dto.getG_COUNT()}</a></td>
-							<td>${g_dto.getG_PRICE()}</td>
-							<td>${g_dto.getG_SELLCOUNT()}</td>
+							<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">${g_dto.getG_NAME()}</a></td>
+							<td><a href="<%=cp%>/admin/updateGoodsDetailCount.action?g_num=${g_dto.getG_NUM()}"><fmt:formatNumber>${g_dto.getG_COUNT()}</fmt:formatNumber>개</a></td>
+							<td><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</td>
+							<td><fmt:formatNumber>${g_dto.getG_SELLCOUNT()}</fmt:formatNumber>개</td>
 							<td>${g_dto.getG_CONTENT()}</td>
-							<td>${g_dto.getG_DISCOUNT()}</td>
+							<td>${g_dto.getG_DISCOUNT()}%</td>
 							<td><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="100" height="100" /></td>
-							<td><a onclick="window.open('updateGoods.action?g_num=${g_dto.getG_NUM()}', '상품 수정', 'width=400, height=900')">수정</a> / <a href="<%=cp%>/admin/deleteGoods.action?g_num=${g_dto.getG_NUM()}">삭제</a></td>
+							<td><a style="cursor: pointer;" onclick="window.open('updateGoods.action?g_num=${g_dto.getG_NUM()}', '상품 수정', 'width=400, height=900')">수정</a> / <a href="<%=cp%>/admin/deleteGoods.action?g_num=${g_dto.getG_NUM()}">삭제</a></td>
 							<!-- <a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a> -->
 						</tr>
 					</c:forEach>
