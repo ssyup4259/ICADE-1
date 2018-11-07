@@ -164,6 +164,13 @@ public class BoardCommentController {
 		 
 		 return "reply/replyComment";
 	}
+	@RequestMapping("/photoReplyCommentList.action")
+	public String photoReplyCommentList(HttpServletRequest req)throws Exception{
+		
+		 bc_service.replyCommentList(req);
+		 
+		 return "reply/photoReplyComment";
+	}
 	//상품 상세페이지에서 대댓글 상세보기
 	@RequestMapping(value="/goodsReplyComment.action", method=RequestMethod.GET)
 	@ResponseBody
@@ -177,6 +184,23 @@ public class BoardCommentController {
 		
 		mav.addObject("bc_dto",bc_dto);
 		mav.setViewName("reply/goodsReplyModify");
+		
+		System.out.println("타냐");
+		
+		return mav;
+	}
+	@RequestMapping(value="/photoReplyComment.action", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView photoReplyComment(@RequestParam("BC_NUM")int BC_NUM ,BoardCommentDTO bc_dto,ModelAndView mav)throws Exception{
+		
+		bc_dto = bc_service.getReadReply(BC_NUM);
+		
+		System.out.println(bc_dto.getBC_ID());
+		System.out.println(bc_dto.getBC_BOARD());
+		
+		
+		mav.addObject("bc_dto",bc_dto);
+		mav.setViewName("reply/photoReplyModify");
 		
 		System.out.println("타냐");
 		

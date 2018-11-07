@@ -1,15 +1,21 @@
 
 
-   var BC_NUM = document.getElementsByTagName('inputBC_NUMdetale');
- 
+   
+/*	var BC_NUM= $("#inputBC_NUMdetale").val();
+	
 	function replyListUpdate(){
+		alert("inputBC_NUMdetale");
+		alert(BC_NUM);
+		
 		$.ajax({
 			 type:"get",
-			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+			 url :"replyCommentList.action?BC_NUM="+BC_NUM,
 			 success : function(result) {
-				 //responseText가 result에 저장됨.
+				 alert("BC_NUM");
+				 alert("성공");
+				 
 				 $("#replyComment").html(result);
 			},error : function (result) {
 			}
 		 });
-	}
+		}*/

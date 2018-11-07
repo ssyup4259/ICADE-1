@@ -14,8 +14,6 @@
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 
 	<title>답글</title>
-	
-	
 
 <script type="text/javascript">
 	function cmUpdateOpen(BC_NUM) {
@@ -34,21 +32,7 @@
 	}
 </script>
 
-<script type="text/javascript">
-	function replyListUpdate(){
-		
-		var BC_NUM =$("#BC_UPDATE").val();
-		$.ajax({
-			 type:"get",
-			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
-			 success : function(result) {
-				 //responseText가 result에 저장됨.
-				 $("#replyComment").html(result);
-			},error : function (result) {
-			}
-		 });
-	}
-</script>
+
 
 </head>
 <body>

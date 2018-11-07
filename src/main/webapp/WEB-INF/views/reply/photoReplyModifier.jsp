@@ -39,7 +39,7 @@ $("#btnReplyUpdate").click(function() {
 		success : function(result) {
 				$("#goodsReplyModifier").html(result);
 				$('#goodsReplyModifier').css('visibility','hidden');
-				replyListUpdate();
+				photoReplyListUpdate();
 		},error: function(result) {
 			alert("실패");
 		}
@@ -60,7 +60,7 @@ $("#btnReplyDelete").click(function() {
 			var BC_NUM =$("#inputBC_NUMdetale").val();
 				$("#goodsReplyModifier").html(result);
 				$("#goodsReplyModifier").css("visibility","hidden");
-				replyListUpdate();
+				photoReplyListUpdate();
 		},error: function(result) {
 			alert("실패");
 		}
