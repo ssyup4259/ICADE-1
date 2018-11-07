@@ -25,13 +25,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('.hideWish').click(function() {
+		$('.showWish').click(function() {
 			$('.toggle').hide();
 			setDisplayValue();
 			$('#ch').toggleClass('hideWish');
 			$('#ch').toggleClass('showWish');
 		});
-		$('.showWish').click(function() {
+		$('.hideWish').click(function() {
 			$('.toggle').show();
 			setDisplayValue();
 		});
@@ -126,8 +126,9 @@
 
 					<font style="font-size: 30px;"><b>마이 쇼핑</b></font>
 					<p>
-						<button id="ch" class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
+						
 						<button class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						<button id="ch" class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
 
 					</p>
 					<hr style="border: 3px solid #DDDADB;">
@@ -260,11 +261,7 @@
 
 
 
-	<p>
-    <button id="ch" class="hide" value="찜리스트 펼치기">찜리스트 숨기기</button>
-    <button class="show" value="찜리스트 숨기기">찜리스트 펼치기</button>
 	
-	</p>
 	
 	<div class="toggle" id="wishList">
 	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 200px;"/>
