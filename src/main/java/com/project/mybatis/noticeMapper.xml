@@ -4,17 +4,17 @@
 
 <mapper namespace="com.project.mybatis.noticeMapper">
 
-	<!-- GoodsNum의 최댓값 -->
+	<!-- 공지 NUM 의 최댓값 -->
 	<select id="noticeMaxNum" resultType="int">
 		select nvl(max(BN_NUM), 0) from Board_Notice
 	</select>
 
-	<!-- 상품 전체 데이터 갯수 -->
+	<!-- 공지 전체 데이터 갯수 -->
 	<select id="getNoticeCount" parameterType="hashMap" resultType="int">
 		select nvl(count(*), 0) from Board_Notice where ${searchKey} like '%' || #{searchValue} || '%'
 	</select>
 
-	<!-- 상품 리스트 출력 -->
+	<!-- 공지 리스트 출력 -->
 	<select id="getNoticeLists" parameterType="hashMap" resultType="com.project.dto.NoticeDTO">
 		select * from (
 		select rownum rnum, data.* from (
@@ -25,4 +25,15 @@
 		where rnum>=#{start} and rnum<=#{end}
 		]]>
 	</select>
+
+	<!-- 공지 한개의 데이터 -->
+	<select id="getReadNoticeDetail" parameterType="int" resultType="com.project.dto.NoticeDTO">
+		select DISTINCT BN_NUM, BN_SUBJECT, BN_CONTENT, to_char(BN_DATE, 'YYYY-MM-DD') BN_DATE
+		from Board_Notice where BN_NUM = #{BN_NUM}
+	</select>
+	
+	<!-- 데이터 등록 -->
+	<insert id="insertNotice" parameterType="com.project.dto.NoticeDTO">
+		insert into Board_Notice values (#{BN_NUM}, #{BN_SUBJECT}, #{BN_CONTENT}, #{BN_DATE})	
+	</insert>
 </mapper>

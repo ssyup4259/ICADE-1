@@ -11,4 +11,6 @@ public interface NoticeDAO {
 
 	List<NoticeDTO> noticeList(int start, int end, String searchKey, String searchValue) throws Exception;
 
+	NoticeDTO getReadNoticeDetail(int BN_NUM) throws Exception;
+
 }
