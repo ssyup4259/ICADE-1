@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <body>
-
+<jsp:include page="../include/header.jsp" flush="false" />
 <form action="cancelMembership_ok.action" method="post" id="cancelMembership" name="cancelMembership" onsubmit="return changInfoAuthorization_sendIt">
 
 <div class="mytmall_title">
@@ -48,7 +48,7 @@
 </form>
 
 
-
+<jsp:include page="../include/footer.jsp" flush="false" />
 <script type="text/javascript">
 
 	$(function(){
