@@ -10,6 +10,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
 </head>
 <script>
 $("#btnReplyUpdate").click(function() {
@@ -21,10 +36,13 @@ $("#btnReplyUpdate").click(function() {
 		url : "<%=cp%>/goods/goodsReplyUpdate.action",
 		data:{"BC_CONTENT":updateReply,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM},
 		success : function(result) {
-				 $("#goodsReplyModifier").html(result); 
-				$("#goodsReplyModifier").css("visibility","hidden");
-				 $("#replyComment").load("<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM);
+				$("#goodsReplyModifier").html(result);
+				$("#replyComment").html($("#replyComment").html());
 				alert("성공");
+				alert("div 새로고침");
+				$('#goodsReplyModifier').css('visibility','hidden');
+				$("#replyComment").load("<%=cp%>/goods/replyCommentList.action");
+				replyListUpdate();
 		},error: function(result) {
 			alert("실패");
 		}
@@ -46,7 +64,8 @@ $("#btnReplyDelete").click(function() {
 				alert("성공");
 				$("#goodsReplyModifier").html(result);
 				$("#goodsReplyModifier").css("visibility","hidden");
-				<%-- $(#replyComment).load("<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM); --%>
+			<%-- 	$("#replyComment").load("<%=cp%>/goods/replyCommentList.action"); --%>
+				$("#replyComment").html(result);
 				
 		},error: function(result) {
 			alert("실패");
@@ -68,6 +87,8 @@ $("#btnReplyDelete").click(function() {
 		<input type="hidden" id="inputBC_BOARDdetale" value="${bc_dto.getBC_BOARD()}">
 		<input type="hidden" id="inputBC_NUMdetale" value="${bc_dto.getBC_NUM()}">
 	</div>
+
+<script src="js/reply.js"></script>
 
 </body>
 </html>

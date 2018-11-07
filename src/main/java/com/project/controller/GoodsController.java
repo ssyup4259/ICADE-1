@@ -66,6 +66,7 @@ public class GoodsController {
 		c_service.cookieList(req);
 		HttpSession session = req.getSession();
 		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
+		
 		if(mdto != null) {
 		w_service.wishList(req);
 		}
@@ -73,6 +74,8 @@ public class GoodsController {
 		return "goods/goodsList";
 		
 	}
+	
+	
 	
 	//상품 상세 페이지
 	@RequestMapping(value="/goodsArticle.action", method= {RequestMethod.GET,RequestMethod.POST})
@@ -83,7 +86,7 @@ public class GoodsController {
 		String g_num = Integer.toString(g_dto.getG_NUM());
 		int w_Check=0;
 		//List<String> lists = (List<String>) addAttributes(req);
-		
+	
 		List<WishDTO> w_lists = new ArrayList<WishDTO>();
 		w_lists = (List<WishDTO>) session.getAttribute("wishInfo");
 		if(w_lists != null) {
@@ -97,7 +100,6 @@ public class GoodsController {
 				w_Check=wdto.getW_CHECK();
 			}
 		}
-		System.out.println(w_Check);
 		}
 		
 		List<String> lists = (List<String>) req.getAttribute("c_lists");
@@ -113,6 +115,7 @@ public class GoodsController {
 				setCookie.setMaxAge(0);
 				setCookie.setPath("/");
 				resp.addCookie(setCookie);
+				
 				break;
 			}
 			
@@ -122,13 +125,15 @@ public class GoodsController {
 		setCookie.setMaxAge(60*60*24);
 		setCookie.setPath("/");
 		resp.addCookie(setCookie);
+	
 		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
 		if(mdto != null) {
 		w_service.wishList(req);
 		}
 		
 		req.setAttribute("w_Check", w_Check);
-	
+		
+
 		
 		g_service.goodsArticle(req);
 		
@@ -170,7 +175,10 @@ public class GoodsController {
 				
 			}
 		}
+		
 	
+		
+		
 		req.setAttribute("c_lists", c_lists);
 		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();

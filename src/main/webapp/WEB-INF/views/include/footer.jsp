@@ -4,7 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 .lg img {
 	margin: 0 auto;
@@ -52,7 +52,8 @@
 			var m_id= "${sessionScope.userInfo.getM_ID()}";
 			
 			if(m_id==""){
-				alert("로그인을 하셔야 됩니다");
+
+				swal("로그인을 하셔야 됩니다");
 				
 				
 			
@@ -66,32 +67,27 @@
 </script>
 
 <script>
+function deleteCookie(G_NUM){
+	$.ajax({
+		url:'<%=cp%>/cookies/cookieDelete.action',
+		type:'POST',
+		data:{"G_NUM":G_NUM},
+		datatype:  'text',})
+		.done(function() {
+			$('#ckList').load(document.URL +  ' #ckList');
+		})
+		.fail(function(){
+			swal("error");
+		});
 
-	function footer_sendIt(g_num) {
-		
-		$.ajax({
-			url:'<%=cp%>/cookies/cookieDelete.action',
-			type:'POST',
-			data:{"G_NUM":g_num},
-			datatype:  'text'
-			}).done(function() {
-				$('#ckList').load(document.URL +  ' #ckList');
-				
-			}).fail(function(){
-				alert("error");
-			});
-		
-		<%-- var f = document.searchForm;
-		
-		f.action = "<%=cp%>/cookies/cookieDelete.action?g_num=" + g_num;
-		f.submit() --%>
-		
-	} 
+	
+} 
 
 </script>
+
+
 <script>
-	$(document).ready(function(){
-		$('#btn5').on('click',function() {
+function deleteAllCookies(){
 		
 			$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete_ok.action',
@@ -102,28 +98,34 @@
 			}).fail(function(){
 			
 			});
-		});
+}
+
+</script>
+<script>
+	$(document).ready(function(){
+		
+		var url = document.URL;
+		var urlarray = url.split("=");
+		var G_NUM = urlarray[1];
+		if(G_NUM != null){	
+			$.ajax({
+			url:'<%=cp%>/cookies/cookiedirect.action',
+			type:'POST',
+			data:{"G_NUM":G_NUM},
+			async:false,
+			datatype:  'text',
+			}).done(function() {
+				$('#ckList').load(document.URL +  ' #ckList');
+			}).fail(function(){
+			});
+		}else{
+			
+		
+		}
 		
 	});
 
 </script>
-
-<script type="text/javascript">
-        $(document).ready(function(){
-
-            //Check if the current URL contains '#' 
-            if(document.URL.indexOf("#")==-1)
-            {
-                // Set the URL to whatever it was plus "#".
-                url = document.URL+"#";
-                location = "#";
-
-                //Reload the page
-                location.reload(true);
-
-            }
-        });
- </script>
 
 
 
@@ -133,15 +135,23 @@
 <div class="latestGoods" id="ckList">
 	<div class="lg text-center" style="width: 70px; height: 830px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
-		<input type="button" id="btn5" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;"/>
+		<input type="button" id="btn5" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;" onclick="deleteAllCookies();"/>
 		<form action="" name="searchForm" method="post">
 			<c:forEach var="ck" items="${ck_lists}">
 				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}"></a>
-				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="footer_sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
+				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="deleteCookie(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
+
 			</c:forEach>
 		</form>
-		<h3>찜한</h3>
+		<c:choose>
+		<c:when test="${!empty sessionScope.userInfo }">
+		<h3>찜 List</h3>
+		</c:when>
+		<c:otherwise>
+		<h3>로그인 해주세요</h3>
+		</c:otherwise>
+		</c:choose>
 		<c:forEach var="w_dto" items="${wishList}">
 		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
 			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/><br/><br/>
