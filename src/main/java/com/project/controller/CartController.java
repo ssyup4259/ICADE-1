@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,8 @@ import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.CartService;
+import com.project.service.CookieService;
+import com.project.service.WishService;
 
 @Controller
 @RequestMapping("/cart/*")
@@ -32,20 +35,26 @@ public class CartController {
 	
 	@Autowired
 	CartService c_service;
-	
+	@Autowired
+	CookieService cokie_service;
 	@Autowired
 	AdminDAO a_dao;
-	
+	@Autowired
+	WishService w_service;
 	@Autowired
 	CartDAO c_dao;
 	
 	//장바구니 리스트 (완성)
 	@RequestMapping(value="/cartList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String cartList(HttpServletRequest req) throws Exception {
-		
+		cokie_service.cookieList(req);
 		HttpSession session = req.getSession();
 		
 		MemberDTO m_dto = (MemberDTO) session.getAttribute("userInfo");
+		
+		if(m_dto != null) {
+			w_service.wishList(req);
+			}
 		String c_id = m_dto.getM_ID();
 		
 		c_service.cartList(req, c_id);
@@ -181,12 +190,39 @@ public class CartController {
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
+		Cookie[] cookies = req.getCookies();
+		
+		List<String> c_lists = new ArrayList<String>();
+		
+		if(cookies != null){
+	
+			for(int i=0; i<cookies.length; i++){
+				
+				Cookie ck = cookies[i];
+				
+				if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
+					
+				} else {
+					
+					String g_num = ck.getName();
+					c_lists.add(g_num);
+					
+				}
+				
+			}
+		}
+	
+		
+		req.setAttribute("c_lists", c_lists);
+		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		
 		req.setAttribute("gk_lists", gk_lists);
 		
 		return req;
         
-    }
+    
+    
+}
 
 }
