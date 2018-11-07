@@ -412,7 +412,7 @@ function login_need() {
 							<div class="col-sm-9" style="text-align: left">
 								<c:if test="${!empty gd_list}">
 									<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
-									<select name="GD_DEVICE" id="product" class="sel" style="width: 100%;">
+									<select name="GD_DEVICE" id="product" class="selGreen" style="width: 100%;">
 										<option value="none">::기종을 선택하세요::</option>
 										<c:forEach var="gd_dto" items="${d_list}">
 											<option value="${gd_dto.getGD_DEVICE()}">${gd_dto.getDK_NAME()}</option>
@@ -424,7 +424,7 @@ function login_need() {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: left;">색상</div>
 							<div class="col-sm-9" style="text-align: left">
-								<select name="GD_COLOR" id="sub" class="sel" style="width: 100%;">
+								<select name="GD_COLOR" id="sub" class="selGreen" style="width: 100%;">
 									<option value="none">:: 색상을 선택해주세요 ::</option>
 								</select>
 							</div>
