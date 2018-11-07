@@ -26,13 +26,13 @@
 <script type="text/javascript">
 
 	$(function() {
-		$('.showWish').click(function() {
+		$('.hideWish').click(function() {
 			$('.toggle').hide();
 			setDisplayValue();
 			$('#ch').toggleClass('hideWish');
 			$('#ch').toggleClass('showWish');
 		});
-		$('.hideWish').click(function() {
+		$('.showWish').click(function() {
 			$('.toggle').show();
 			setDisplayValue();
 		});
@@ -128,8 +128,8 @@
 					<font style="font-size: 30px;"><b>마이 쇼핑</b></font>
 					<p>
 						
-						<button class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
-						<button id="ch" class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
+						<button id="ch" class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						<button  class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
 
 					</p>
 					<hr style="border: 3px solid #DDDADB;">
@@ -258,8 +258,7 @@
 					<br>
 
 				</div>
-				<div class="col-sm-4 toggle" style="display: none;">
-
+				<div class="col-sm-4 toggle">
 
 
 	
