@@ -46,6 +46,26 @@
 });
 
 </script>
+<script type="text/javascript">
+	function replyListUpdate(){
+		
+		var BC_NUM =$("#BC_NUM").val();
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+			 success : function(result) {
+				 
+				 var BC_NUM =$("#BC_NUM").val();
+				 
+				 $("#replyComment").get('<%=cp%>/goods/replyCommentList.action?BC_NUM=+BC_NUM');
+				 $("#replyComment").html(result);
+				 
+			},error : function (result) {
+			}
+		 });
+	}
+</script>
+
 
 <script>
 	function show(BC_NUM) {
@@ -60,8 +80,8 @@
 		        var state = $('.'+BC_NUM).css('display'); 
 		        if(state == 'none'){
 		            $('.'+BC_NUM).show(); 
-		        }else{ 
 		            $('.'+BC_NUM).hide();
+		        }else{ 
 		        }
      	 }
 		

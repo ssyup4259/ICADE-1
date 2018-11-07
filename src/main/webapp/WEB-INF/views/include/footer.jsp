@@ -58,7 +58,7 @@
 				
 			
 			}else{
-			location.href = "<%=cp%>/wish/wishList.action?m_id=" + m_id;
+			location.href = "<%=cp%>/myPage.action?m_id=" + m_id;
 			
 			}
 		
@@ -158,7 +158,7 @@ function deleteAllCookies(){
 		</a>
 		</c:forEach>
 		
-			<c:if test="${dataCount==0 }">
+			<c:if test="${cookieDataCount==0 }">
 				등록된 상품이 없습니다.
 			</c:if>
 		<form action="" name="wishForm">

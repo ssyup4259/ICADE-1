@@ -1,10 +1,12 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,7 +24,10 @@ import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrderHistoryDTO;
+import com.project.dto.OrdersDTO;
+import com.project.service.CookieService;
 import com.project.service.OrderHistoryService;
+import com.project.service.WishService;
 import com.project.util.MyUtil;
 
 @Controller
@@ -33,10 +38,14 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	@Autowired
+	CookieService c_service;
+	@Autowired
+	WishService w_service;
 	
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
+		c_service.cookieList(request);
 		System.out.println("==================orderHistory.action 두번타는지 테스트용================================================");
 		
 		HttpSession session = request.getSession();
@@ -45,6 +54,7 @@ public class OrdersHistoryController {
 		
 		//로그인시 있는 유저의 세션정보를 받아온다.
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
 		
 		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
 		String startDate = (String) request.getParameter("startDay");
@@ -151,109 +161,7 @@ public class OrdersHistoryController {
 		
 		return "ordersHistory/ordersHistoryMain";
 	}
-/*	
-	@RequestMapping(value="/orderHistory_ok.action",method= {RequestMethod.POST,RequestMethod.GET})
-	public String ordersHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
-		System.out.println("_ok 들어온거 확인===============================================");
-		
-		HttpSession session = request.getSession();
-		MyUtil myUtil = new MyUtil();
-		Date date = new Date();
-		
-		//로그인시 있는 유저의 세션정보를 받아온다.
-		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
-		
-		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
-		String startDate = (String) request.getParameter("startDate");
-		String endDate = (String) request.getParameter("endDay");
-		
-		System.out.println("startDate : " + startDate);
-		
-		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
-		String pageNum = request.getParameter("pageNum");
-		
-		if(startDate==null || startDate.equals(null)){
-			startDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate()); 
-		}
-		if(endDate==null || endDate.equals(null)) {
-			endDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
-		}
-		
-		String m_Id = dto.getM_ID();
-		
-		LinkedHashMap<Integer, List<OrderHistoryDTO>> hashMap = new LinkedHashMap<Integer, List<OrderHistoryDTO>>();
-		
-		HashMap<String, Object> hMap = new HashMap<String, Object>();
-		
-		hMap.put("O_ID", m_Id);
-		hMap.put("start_date",startDate);
-		hMap.put("end_date",endDate);	
-		
-		//현재 페이지
-        int currentPage = 1;
-		
-		// 페이지number처리
-		if (pageNum != null) {
-			currentPage = Integer.parseInt(pageNum);
-		}
-		
-		if (pageNum == null) {
-			pageNum = "1";
-		}
-		
-		int numPerPage = 5;
-		
-		int dataCount = service.maxOrders(hMap);
-		
-		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
-		
-		if (currentPage > totalPage) {
-			currentPage = totalPage;
-		}
-		
-		int start = (currentPage - 1) * numPerPage + 1;
-		int end = currentPage * numPerPage;
-		
-		hMap.put("start",start);
-		hMap.put("end",end);
-		
-		String listUrl = "orderHistory.action";
-		
-		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
-		
-		List<Integer> integerList = service.selectOrderNum(hMap);
-		
-		System.out.println("for문돌린다====================================================");
-		
-		for(int i = 0;i<integerList.size();i++) {
-			
-			System.out.println(integerList);
-			
-			Integer O_Num = integerList.get(i);
-			
-			hMap.put("OD_NUM",O_Num);
-			
-			List<OrderHistoryDTO> mapList = service.OrderHistoryMain(hMap);
-			
-			hashMap.put(O_Num, mapList);
-		}
-		
-		System.out.println("====================================================for문끝났다");
-		
-		System.out.println(" for문 끝났다 " + startDate);
-		
-		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("startDate", startDate);
-		request.setAttribute("dataCount", dataCount);
-		request.setAttribute("pageIndexList", pageIndexList);
-		request.setAttribute("hashMap", hashMap);
-		
-		//return "ordersHistory/ordersHistoryMain";
-		return "redirect:orderHistory.action";
-	}
-*/
-	
+
 	@RequestMapping(value="/ordersHistoryDetail.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ordersHistoryDetail(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -271,12 +179,15 @@ public class OrdersHistoryController {
 		hMap.put("O_ID", m_Id);
 		hMap.put("O_NUM", O_Num);
 		
-		List<OrderDetailDTO> detailLists = service.selectOdSaveFileName(hMap);
+		List<OrderDetailDTO> detailLists = service.selectOrderDetail(hMap);
+		System.out.println("=======================detailLists통과====================");
+		OrdersDTO Recipientdto = service.selectRecipientInfo(hMap);
 		
 		mav.addObject("O_Num", O_Num);
 		//mav.addObject("detailLists",detailLists);
 		
 		request.setAttribute("detailLists", detailLists);
+		request.setAttribute("Recipientdto", Recipientdto);
 		
 		mav.setViewName("/ordersHistory/orderHistoryDetail");
 		
@@ -304,13 +215,45 @@ public class OrdersHistoryController {
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
+
+		Cookie[] cookies = req.getCookies();
+		
+		List<String> c_lists = new ArrayList<String>();
+		
+		if(cookies != null){
+	
+			for(int i=0; i<cookies.length; i++){
+				
+				Cookie ck = cookies[i];
+				
+				if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
+					
+				} else {
+					
+					String g_num = ck.getName();
+					c_lists.add(g_num);
+					
+				}
+				
+			}
+		}
+		HttpSession session = req.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		if(dto != null) {
+			w_service.wishList(req);
+			}
+		
+		req.setAttribute("c_lists", c_lists);
+		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		
 		req.setAttribute("gk_lists", gk_lists);
 		
 		return req;
         
-    }
+    
+    
+}
 	
 
 }

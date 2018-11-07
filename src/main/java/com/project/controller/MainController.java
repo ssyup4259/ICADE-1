@@ -97,5 +97,12 @@ public class MainController {
 		return req;
         
     }
+	@RequestMapping(value="/faq.action")
+		public ModelAndView faq() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("faq/faq");
+		return mav;
+	}
 	
 }

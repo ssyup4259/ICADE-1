@@ -5,19 +5,28 @@
 <mapper namespace="com.project.mybatis.myPageMapper">
 
 
-<!-- 아이디로 개인정보 뿌리기 -->
+	<!-- 아이디로 개인정보 뿌리기 -->
 	<select id="infocheck" parameterType="String" resultType="com.project.dto.MemberDTO">
 		select M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_DATE, M_POINT, M_NICKNAME from member where M_ID = #{M_ID}
 	</select>
 	
-<!-- 업데이트 -->
+	<!-- 업데이트 -->
 	<update id="updateInfo" parameterType="map">
 		update member set M_PW = #{M_PW}, M_ZIPCODE = #{M_ZIPCODE}, M_ADDRESS1=#{M_ADDRESS1}, M_ADDRESS2=#{M_ADDRESS2}, M_EMAIL_ID=#{M_EMAIL_ID}, M_EMAIL_DOMAIN=#{M_EMAIL_DOMAIN}, 
 							M_CELLPHONE1 = #{M_CELLPHONE1}, M_CELLPHONE2 = #{M_CELLPHONE2}, M_CELLPHONE3 = #{M_CELLPHONE3}, M_NICKNAME = #{M_NICKNAME} where M_ID = #{M_ID}
 	</update>
-<!-- 포인트 조회 -->
+	<!-- 포인트 조회 -->
 	<select id="pointCheck" parameterType="String" resultType="int">
 		select M_POINT from member where M_ID = #{M_ID}
+	</select>
+	<!-- 사용한 포인트 조회 -->
+	<select id="usedPointCheck" parameterType="String" resultType="int">
+		select nvl(sum(O_Point),0) from orders where O_ID = #{O_ID} order by O_ID
+	</select>
+
+	<!-- 사용한 포인트 내역 -->
+	<select id="selectusedPointHistory" parameterType="String" resultType="com.project.dto.OrdersDTO">
+		select O_NUM,O_DATE,O_TOT,O_POINT from orders where O_ID = #{O_ID} order by O_DATE desc
 	</select>
 
 <!-- 회원탈퇴 -->

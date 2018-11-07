@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -18,7 +18,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
-
 <script type="text/javascript">
 
 	function cancelIt(imp_uid, o_num) {
@@ -85,7 +84,6 @@
 	color: white;
 }
 </style>
-
 </head>
 <body>
 
@@ -122,8 +120,10 @@
 		</div>
 		<div>
 			기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.
-			<br />
+			<br/>
 			주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.
+			<br/>
+			기간 버튼의 기준점은 오른쪽 날짜를 기준으로 합니다.
 		</div>
 	</div>
 </form>
@@ -154,7 +154,7 @@
 
 				<tbody>
 					<c:forEach var="map" items="${hashMap}">
-						<c:forEach var="dto" items="${map.value }">
+						<c:forEach var="dto" items="${map.value }" varStatus="i">
 							<tr>
 								<td class="gubun">
 									<p>${dto.getO_DATE()}<br />
@@ -169,9 +169,9 @@
 									<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <strong>${dto.getOD_NAME()}</strong></a>
 										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
 								<td>${dto.getOD_COUNT()}</td>
-								<td><strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong></td>
+								<td><strong><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###"/>원</strong></td>
 								<td class="gubun">
-									<p style="display: none;">${dto.getO_IMP()}</p>
+									<p style="display: none;">${dto.getO_NUM()}</p>
 									<p>${dto.getO_STATUS()}</p>
 								</td>
 								<td class="gubun">

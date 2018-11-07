@@ -177,7 +177,7 @@ public class WishServiceImpl implements WishService {
 		//전체데이터갯수
 		int dataCount = w_dao.dataCount();
 		//전체페이지수
-				int numPerPage = 2;
+				int numPerPage = 5;
 				int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 				
 				if (currentPage > totalPage)
@@ -195,7 +195,7 @@ public class WishServiceImpl implements WishService {
 	
 		String pageIndexList =myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
-		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("cookieDataCount",dataCount);
 		req.setAttribute("wishList",wishList);
 		req.setAttribute("pageIndexList",pageIndexList);
 		

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -15,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
-
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"></script><!-- 네이버 로그인 용 안쓸꺼면 삭제예정 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="<%=cp%>/resources/data/js/loginScript.js"></script>
@@ -60,6 +63,7 @@
 						<tr style="border-bottom: 1px solid black;">
 							<td style="border-right: 1;"><input type="checkbox" id="saveId" name="idSaveCheck">아이디 저장</td>
 							<td><input type="button" value="로그인" id="login" onClick="loginProcess()" class="btnGreen" style="width: 150px;"></td>
+							<td> <div id="naverIdLogin"></div></td>
 						</tr>
 					</table>
 				</div>
@@ -77,5 +81,22 @@
 
 	<jsp:include page="../include/footer.jsp" flush="false" />
 
+
+<!-- 네이버아디디로로그인 초기화 Script -->
+<script type="text/javascript">
+   var naverLogin = new naver.LoginWithNaverId(
+      {
+         clientId: "dnvfDSWWZdZLlC4W0n7E",
+         callbackUrl: "http://localhost:8080/icade/callbackTest",
+         isPopup: false, /* 팝업을 통한 연동처리 여부 */
+         loginButton: {color: "green", type: 1, height: 60} /* 로그인 버튼의 타입을 지정 */
+      }
+   );
+   
+   /* 설정정보를 초기화하고 연동을 준비 */
+   naverLogin.init();
+   
+</script>
+<!-- // 네이버아이디로로그인 초기화 Script -->
 </body>
 </html>
