@@ -233,8 +233,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public int getOrdersCount() throws Exception {
-		return sessionTemplate.selectOne(adminMapper + ".getOrdersCount");
+	public int getOrdersCount(String o_status, String searchKey, String searchValue) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("o_status", o_status);
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		
+		return sessionTemplate.selectOne(adminMapper + ".getOrdersCount", map);
 	}
 
 }

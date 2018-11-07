@@ -21,12 +21,55 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>구매/환불 내역</title>
+
+<script type="text/javascript">
+
+function o_searchIt(){
+	
+	var f = document.OrdersSearchForm;
+	
+	f.action = "<%=cp%>/admin/payments.action";
+	f.submit();
+
+}
+
+</script>
+
 </head>
 <body>
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
 <h1>주문 내역 조회</h1>
+
+<form action="" name="OrdersSearchForm" method="post">
+
+	<c:if test="${empty o_status}">
+		<label class="btnGray"><input type="radio" name="o_status" value="" checked="checked"/>전체</label>
+	<label class="btnGray"><input type="radio" name="o_status" value="환불 완료"/>결제취소</label>
+	<label class="btnGray"><input type="radio" name="o_status" value="배송준비중"/>결제완료</label>
+	</c:if>
+	
+	<c:if test="${o_status == '환불 완료'}">
+		<label class="btnGray"><input type="radio" name="o_status" value=""/>전체</label>
+	<label class="btnGray"><input type="radio" name="o_status" value="환불 완료" checked="checked"/>결제취소</label>
+	<label class="btnGray"><input type="radio" name="o_status" value="배송준비중"/>결제완료</label>
+	</c:if>
+	
+	<c:if test="${o_status == '배송준비중'}">
+		<label class="btnGray"><input type="radio" name="o_status" value=""/>전체</label>
+	<label class="btnGray"><input type="radio" name="o_status" value="환불 완료"/>결제취소</label>
+	<label class="btnGray"><input type="radio" name="o_status" value="배송준비중" checked="checked"/>결제완료</label>
+	</c:if>
+	
+	<select name="searchKey" class="selGreen" style="width: 100px; cursor: pointer;">
+		<option value="O_ID">아이디</option>
+		<option value="O_NAME">이름</option>
+	</select>
+	<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;" onkeypress="if(event.keyCode==13) searchIt();">
+	<div style="display: none;"><input type="text" value=""/></div>
+	<button type="button" class="btnGreen" style="width: 100px;" onclick="o_searchIt();">검색</button>
+</form>
 
 <c:if test="${!empty p_lists}">
 	<table style="text-align: left;">
@@ -97,16 +140,12 @@
 	
 </c:if>
 
-<c:if test="${empty p_lists}">
-	내역이 존재하지 않습니다.
-</c:if>
-
 <div class="paging">
 	<c:if test="${dataCount!=0 }">
 		${pageIndexList }
 	</c:if>
 	<c:if test="${dataCount==0 }">
-		등록된 상품이 없습니다.
+		내역이 존재하지 않습니다.
 	</c:if>
 </div>
 

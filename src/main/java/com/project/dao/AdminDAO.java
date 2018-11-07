@@ -45,7 +45,7 @@ public interface AdminDAO {
 	//회원에게 권한 부여
 	public void	authorityChange(String m_id, String new_rank) throws Exception;
 	//Orders 테이블 전체 갯수 조회
-	public int getOrdersCount() throws Exception;
+	public int getOrdersCount(String o_status, String searchKey, String searchValue) throws Exception;
 	//회원 주문내역 imp_uid 조회
 	public List<String> imp_uidList(Map<String, Object> map) throws Exception;
 	//imp_uid로 Orders 테이블 조회
