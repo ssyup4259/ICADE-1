@@ -37,46 +37,70 @@
 });
 
 </script>
+<script type="text/javascript">
+	function photoReplyListUpdate(){
+		
+		var BC_NUM =$("#articleBC_NUM").val();
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+			 success : function(result) {
+				 
+				 var BC_NUM =$("#BC_NUM").val();
+				 
+				 $("#replyComment").get('<%=cp%>/goods/replyCommentList.action?BC_NUM=+BC_NUM');
+				 $("#replyComment").html(result);
+				 
+			},error : function (result) {
+			}
+		 });
+	}
+</script>
+
+
+
+
 <script>
-function writeReply(BC_BOARD,BC_NUM,BC_CONTENT) {
-	
-	var BC_CONTENT =$("#articleBC_board").val();
-	var BC_NUM =$("#articleBC_NUM").val();
-	var BC_ID =${sessionScope.userInfo.getM_ID()};
-	var BC_BOARD = BC_BOARD;
-	
-	alert(BC_ID);
-	alert(BC_CONTENT);
-	alert(BC_BOARD);
-	
-	var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
-	
-	$.ajax({
-		type : "post",
-		url :"<%=cp%>/goods/replyComment.action",
-		data : formData,
-		success:function(result){
-			
-			console.log(result);
-			
-			var BC_NUM =$("#articleBC_NUM").val()
-			
-			alert("댓글이 등록되었습니다.");
-			$.ajax({
-				 type:"get",
-				 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
-				 success : function(result) {
-					 //responseText가 result에 저장됨.
-					 $("#photoReply").html(result);
-				}
-			 });
-		},
-		error: function(result) {
-			alert("안된다");
-			alert(result);
-		}
-	});
-}
+	function writePhotoReply() {
+		
+		var BC_CONTENT =$("#BC_CONTENT").val();
+		var BC_BOARD =$("#articleBC_board").val();
+		var BC_NUM =$("#articleBC_NUM").val();
+		var BC_ID =${sessionScope.userInfo.getM_ID()};
+		var BC_BOARD = BC_BOARD;
+		
+		alert(BC_ID);
+		alert(BC_CONTENT);
+		alert(BC_BOARD);
+		
+		var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
+		
+		$.ajax({
+			type : "post",
+			url :"<%=cp%>/goods/commentInsert.action",
+			data : formData,
+			success:function(result){
+				
+				console.log(result);
+				
+				var BC_NUM =$("#articleBC_NUM").val()
+				
+				alert("댓글이 등록되었습니다.");
+				$.ajax({
+					 type:"get",
+					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+					 success : function(result) {
+						 //responseText가 result에 저장됨.
+						 $("#photoReply").html(result);
+					}
+				 });
+			},
+			error: function(result) {
+				alert("안된다");
+				alert(result);
+			}
+		});
+	}
 
 </script>
 
@@ -135,7 +159,7 @@ function writeReply(BC_BOARD,BC_NUM,BC_CONTENT) {
 	</div>
 				<div align="center">
 					<textarea id="BC_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
-					<input type="button" onclick="writeReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px;">
+					<input type="button" onclick="writePhotoReply()" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px;">
 					<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 					value="${sessionScope.userInfo.getM_ID()}"/>
 					

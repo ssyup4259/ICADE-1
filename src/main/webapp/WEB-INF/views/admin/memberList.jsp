@@ -111,7 +111,7 @@ input[type='radio'] {
 				<input type="hidden" name="M_RANK" value="${M_RANK}" />
 				<input type="hidden" name="searchKey" value="${searchKey}" />
 				<input type="hidden" name="searchValue" value="${searchValue}" />
-				<table cellpadding="10" cellspacing="0">
+				<table cellpadding="10" cellspacing="0" style="margin: auto; width: 80%;">
 					<thead style="border: none;">
 						<tr>
 							<th>회원 권한</th>
@@ -132,7 +132,7 @@ input[type='radio'] {
 						<tbody style="border: none;">
 							<tr>
 								<td>${m_dto.getM_RANK()}</td>
-								<td><input type="button" value="권한 변경" class="btn" onclick="authorityChange('${m_dto.getM_ID()}', '${m_dto.getM_RANK()}')" /></td>
+								<td><input type="button" value="권한 변경" class="btnGreen" onclick="authorityChange('${m_dto.getM_ID()}', '${m_dto.getM_RANK()}')" /></td>
 								<td>${m_dto.getM_ID()}</td>
 								<td>${m_dto.getM_NAME()}</td>
 								<td>${m_dto.getM_NICKNAME()}</td>

@@ -50,7 +50,11 @@ public class CookieServiceImpl implements CookieService{
 		for (int i = c_lists.size(); i > 0; i--) {
 				
 			GoodsDTO c_dto = new GoodsDTO();
-			
+		
+			if(c_lists.get(i-1).equals("change")||c_lists.get(i-1).equals("cancel")) {
+				
+				continue;
+			}
 			int c_num = Integer.parseInt(c_lists.get(i-1));
 			
 			c_dto = a_service.getReadGoods(c_num);
@@ -64,7 +68,7 @@ public class CookieServiceImpl implements CookieService{
 			}
 				
 		}
-		
+	
 		req.setAttribute("ck_lists", ck_lists);
 		
 		return req;

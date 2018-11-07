@@ -11,7 +11,7 @@
 <title>비밀번호 찾기</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -123,34 +123,35 @@ function idFind() {
 				
 				<div style="margin: 10px 0px 10px 0px;">
 					<strong style="margin-right: 20%;">아이디</strong>
-					<input type="text" id="M_ID" name="M_ID" class="inputBox" style="width: 257px;" autofocus>
+					<input type="text" id="M_ID" name="M_ID" class="inputBoxGray" style="width: 257px;" autofocus>
 				</div>
 				
 				<div style="margin: 10px 0px 10px 0px;">
 					<strong style="margin-right: 23%;">이름</strong>
-					<input type="text" id="M_NAME" name="M_NAME" class="inputBox" style="width: 257px;">
+					<input type="text" id="M_NAME" name="M_NAME" class="inputBoxGray" style="width: 257px;">
 				</div>
 				
 				<div id="email_view" style="margin: 10px 0px 10px 0px;">
 					<strong style="margin-right: 8%;">이메일로 찾기</strong>
-					<input id="M_EMAIL_ID" name="M_EMAIL_ID" style="width: 115px;" class="inputBox" fw-filter="isEmail" value="" type="text"> @ 
-					<input id="M_EMAIL_DOMAIN" name="M_EMAIL_DOMAIN" style="width: 115px;" class="inputBox" fw-filter="isEmail" value="" type="text">
+					<input id="M_EMAIL_ID" name="M_EMAIL_ID" style="width: 115px;" class="inputBoxGray" fw-filter="isEmail" value="" type="text"> @ 
+					<input id="M_EMAIL_DOMAIN" name="M_EMAIL_DOMAIN" style="width: 115px;" class="inputBoxGray" fw-filter="isEmail" value="" type="text">
 				</div>
 				
 				<div id="phone_view" style="margin: 10px 0px 10px 0px; display: none;">
 					<strong>휴대폰 번호로 찾기</strong>
-					<input id="M_CELLPHONE1" name="M_CELLPHONE1" style="width: 73px;" class="inputBox" maxlength="3" value="" type="text">
+					<input id="M_CELLPHONE1" name="M_CELLPHONE1" style="width: 73px;" class="inputBoxGray" maxlength="3" value="" type="text">
 					 - 
-					<input id="M_CELLPHONE2" name="M_CELLPHONE2" style="width: 73px;" class="inputBox" maxlength="4" value="" type="text">
+					<input id="M_CELLPHONE2" name="M_CELLPHONE2" style="width: 73px;" class="inputBoxGray" maxlength="4" value="" type="text">
 					 - 
-					<input id="M_CELLPHONE3" name="M_CELLPHONE3" style="width: 73px;" class="inputBox" maxlength="4" value="" type="text">
+					<input id="M_CELLPHONE3" name="M_CELLPHONE3" style="width: 73px;" class="inputBoxGray" maxlength="4" value="" type="text">
 				</div>
 				<br/>
 				
 				<div id="result" style="width: 100%; text-align: center;"></div>
 				
 				<div style="width: 100%; text-align: center;">
-					<input type="button" value="확인" class="btn" onclick="idFind();" style="width: 150px;"/>
+					<input type="button" value="확인" class="btnGreen" onclick="idFind();" style="width: 150px;"/>
+					<input type="button" value="취소" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="width: 150px;"/>
 				</div>
 				<br/>
 			</div>

@@ -644,8 +644,29 @@ public class AdminServiceImpl implements AdminService {
 		if (pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
+		String o_status = req.getParameter("o_status");
+		
+		if (o_status == null || o_status.equals("")) {
+			o_status = "";
+		}
+		
+		String searchKey = req.getParameter("searchKey");
+		String searchValue = req.getParameter("searchValue");
+		
+		if (searchKey == null) {
+			
+			searchKey = "O_ID";
+			searchValue = "";
+			
+		} else {
+			
+			if (req.getMethod().equalsIgnoreCase("GET"))
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			
+		}
+		
 		//전체데이터갯수
-		int dataCount = a_dao.getOrdersCount();
+		int dataCount = a_dao.getOrdersCount(o_status, searchKey, searchValue);
 		
 		//전체페이지수
 		int numPerPage = 10;
@@ -659,6 +680,9 @@ public class AdminServiceImpl implements AdminService {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("o_status", o_status);
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -666,6 +690,12 @@ public class AdminServiceImpl implements AdminService {
 		
 		//페이징 처리
 		String param = "";
+		if (!searchValue.equals("")) {
+			param = "o_status=" + o_status;
+			param = "&searchKey=" + searchKey;
+			param+= "&searchValue=" 
+				+ URLEncoder.encode(searchValue, "UTF-8");
+		}
 		
 		String listUrl = cp + "/admin/payments.action";
 		if (!param.equals("")) {
@@ -674,13 +704,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		String pageIndexList =
 			myUtil.pageIndexList(currentPage, totalPage, listUrl);
-		
-		//글보기 주소 정리
-		String articleUrl = 
-			cp + "/goodsArticle.action?pageNum=" + currentPage;
-			
-		if (!param.equals(""))
-			articleUrl = articleUrl + "&" + param;
 		
 		Iterator<String> it = imp_uid.iterator();
 		
@@ -735,7 +758,7 @@ public class AdminServiceImpl implements AdminService {
 		req.setAttribute("p_lists", p_lists);
 		req.setAttribute("pageIndexList",pageIndexList);
 		req.setAttribute("dataCount",dataCount);
-		req.setAttribute("articleUrl",articleUrl);
+		req.setAttribute("o_status", o_status);
 
 		return req;
 		
