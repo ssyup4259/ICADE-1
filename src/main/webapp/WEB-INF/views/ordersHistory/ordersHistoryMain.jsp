@@ -97,7 +97,7 @@
 			<h2>주문조회</h2>
 		</div>
 
-<form method="post" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action">
+<form method="get" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action?pageNum=${pageNum}&startDay=${startDate}">
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
 		<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
@@ -111,13 +111,13 @@
 			</div>
 		<!-- 기간 지정부분 -->
 			<div class="col-sm-6" style="text-align: left;">
-				<input type="text" id="sdate" class="inputBoxGray" name="startDay" style="width: 200px; height: 30px;">
+				<input type="text" id="sdate" class="inputBoxGray" name="startDay" style="width: 200px; height: 30px;" value="${startDate}">
 				~
-				<input type="text" id="edate" class="inputBoxGray" name="endDay" style="width: 200px; height: 30px;">
+				<input type="text" id="edate" class="inputBoxGray" name="endDay" style="width: 200px; height: 30px;" value="${endDate}">
 			</div>
 		<!-- 조회 버튼 -->
 			<div class="col-sm-2">
-				<input type="button" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
+				<input type="submit" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
 			</div>
 		</div>
 		<div>
@@ -201,10 +201,6 @@
 
 <br/><br/>
 
-<form method="get">
-	<input type="hidden" name="endPage" value="${endPgae}">
-</form>
-
 	</div>
 </div>
 
@@ -220,18 +216,6 @@
 	        }
 	    });
 	});
-
-
-	$(document).ready(function (){
-		var startDate = <%=request.getParameter("startDate")%>;
-		
-		if(!startDate){
-			alert("없다");
-		}else{
-			alert("있다?");
-		}
-	});
-	
 </script>
 </body>
 </html>

@@ -103,7 +103,7 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 		json.addProperty("imp_key", imp_key);
 		json.addProperty("imp_secret", imp_secret);
 		
-		String token = api.getToken(req, resp, json);
+		String token = api.getToken(json);
 		String header = "Bearer " + token;
 		
 		String imp_uid = req.getParameter("imp_uid");

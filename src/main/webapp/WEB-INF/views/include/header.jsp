@@ -57,7 +57,10 @@
 				<a href="javascript:void(0)" class="dropbtn" id="mm">관리자 메뉴</a>
 
 				<div class="dropdown-content">
-					<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a> <a href="<%=cp%>/admin/memberList.action">회원 목록</a><a href="<%=cp%>/logout.action">로그아웃</a>
+					<a href="<%=cp%>/admin/goodsList.action">관리자 상품 목록</a> 
+					<a href="<%=cp%>/admin/memberList.action">회원 목록</a>
+					<a href="<%=cp%>/admin/payments.action">회원 결제 내역</a>
+					<a href="<%=cp%>/logout.action">로그아웃</a>
 				</div>
 			</li>
 		</c:if>

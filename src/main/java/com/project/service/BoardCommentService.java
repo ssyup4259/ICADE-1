@@ -26,6 +26,11 @@ public interface BoardCommentService {
 	public HttpServletRequest replyArticle(HttpServletRequest req)throws Exception;
 	//대댓글 등록
 	public HttpServletRequest replyComment(BoardCommentDTO bc_dto,HttpServletRequest req)throws Exception;
-	
+	//대댓글 리스트
+	public HttpServletRequest replyCommentList(HttpServletRequest req)throws Exception;
+	//대댓글 업데이트
+	public void updateReply(BoardCommentDTO bc_dto, HttpServletRequest req)throws Exception;
+	//사진없는 댓글 삭제
+	public void deleteReply(int BC_NUM)throws Exception;
 	
 }

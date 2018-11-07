@@ -16,31 +16,43 @@
 	<title>답글</title>
 	
 	
-<script type="text/javascript">	
-	
-	
-	function cmDelete(BC_NUM,BC_BOARD) {
 
-		var	data={"BC_NUM":BC_NUM, "BC_BOARD":BC_BOARD};
-			
-		if(confirm("삭제하시겠습니까?")) {
+<script type="text/javascript">
+	function cmUpdateOpen(BC_NUM) {
+		
 		$.ajax({
-			type :"post",
-			data : data,
-			url : "<%=cp%>/goods/replyDelete.action",
+			type :"GET",
+			url : "<%=cp%>/goods/goodsReplyComment.action?BC_NUM="+BC_NUM,
 			success:function(result){
-					alert("삭제되었습니다");
-					("#replyCatalog"+BC_NUM).remove();
+					 $("#goodsReplyModifier").html(result); 
+					$('#goodsReplyModifier').css('visibility','visible');
 			},
 			error: function(result) {
 				alert("안된다");
 	 	    }
 	     });
-	   }
-	  }
+	}
 </script>
+
+<script type="text/javascript">
+	function replyListUpdate(){
+		
+		var BC_NUM =$("#BC_UPDATE").val();
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+			 success : function(result) {
+				 //responseText가 result에 저장됨.
+				 $("#replyComment").html(result);
+			},error : function (result) {
+			}
+		 });
+	}
+</script>
+
 </head>
 <body>
+	<form action="" name="replylistForm" method="post">
 	 <c:forEach var="rp_dto" items="${rp_list}">
 			<!-- 대댓글 목록 -->
 			<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;" id="replyCatalog">
@@ -65,15 +77,16 @@
 							<div id="btn" style="text-align: center;">
 								<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 								<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-									<a href="#" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()},${rp_dto.getBC_CONTENT()}">[수정]</a>
-								<br>
-							<a href="#" onclick="cmDelete(${rp_dto.getBC_NUM()},${rp_dto.getBC_BOARD()});">[삭제]</a>
-									<br>
+									<%-- <a href="" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})">[수정]</a> --%>
+									<button type="button"  onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGreen">수정</button>
 								</c:if>
 							</div> 
+									<input type="hidden" id="BC_UPDATE" value="${rp_dto.getBC_NUM()}">
 						</td>
 					</tr>
 				</table>
 		</c:forEach> 	
+	<div id="goodsReplyModifier"></div>
+</form>
 </body>
 </html>

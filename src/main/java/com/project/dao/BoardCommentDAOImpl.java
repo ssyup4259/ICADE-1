@@ -141,7 +141,11 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		return sessionTemplate.selectOne(replyMapper+".readSubject", bc_num);
 	}
 	@Override
-	public List<BoardCommentDTO> readReply() throws Exception {
-		return sessionTemplate.selectList(replyMapper + ".readReply");
+	public List<BoardCommentDTO> readReply(int bc_num) throws Exception {
+		return sessionTemplate.selectList(replyMapper + ".readReply",bc_num);
+	}
+	@Override
+	public void deleteReply(int BC_NUM) throws Exception {
+		sessionTemplate.delete(replyMapper + ".deleteData",BC_NUM);
 	}
 }

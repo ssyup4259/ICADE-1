@@ -107,6 +107,11 @@
 	delete Goods where G_NUM = #{G_NUM}
 </delete>
 
+<!-- 모든 주문내역의 imp_uid 출력 -->
+<select id="getReadImpUid" resultType="String">
+	select O_IMP from orders order by o_date
+</select>
+
 
 
 <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ회원 관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->

@@ -5,19 +5,26 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
+import com.project.controller.AdminController;
 import com.project.dao.AdminDAO;
 import com.project.dto.DeviceKindDTO;
 import com.project.dto.GoodsColorDTO;
@@ -26,16 +33,23 @@ import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
+import com.project.dto.PaymentsDTO;
 import com.project.util.MyUtil;
+import com.project.util.RestAPI;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	
+	Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
 	
 	@Autowired
 	private AdminDAO a_dao;
 	
 	@Autowired
 	MyUtil myUtil;
+	
+	@Autowired
+	RestAPI api;
 	
 	//상품 종류 목록 (완료)
 	@Override
@@ -604,14 +618,70 @@ public class AdminServiceImpl implements AdminService {
 
 	//회원 주문내역 조회
 	@Override
-	public List<OrdersDTO> ordersList() throws Exception  {
+	public List<PaymentsDTO> payments() throws Exception  {
+		
+		List<PaymentsDTO> p_lists = new ArrayList<PaymentsDTO>();
+		
+		String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
+		String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
+		JsonObject json = new JsonObject();
 
-		return a_dao.ordersList();
+		json.addProperty("imp_key", imp_key);
+		json.addProperty("imp_secret", imp_secret);
+		
+		String token = api.getToken(json);
+		
+		List<String> imp_uid = a_dao.imp_uidList();
+		
+		Iterator<String> it = imp_uid.iterator();
+		
+		while (it.hasNext()) {
+			
+			String impUid = it.next();
+			
+			PaymentsDTO p_dto = api.getInfo(token, impUid);
+			
+			if (p_dto.getStatus().equals("ready")) {
+				p_dto.setStatus("미결제");				
+			} else if (p_dto.getStatus().equals("paid")) {
+				p_dto.setStatus("결제완료");				
+			} else if (p_dto.getStatus().equals("cancelled")) {
+				p_dto.setStatus("결제취소");				
+			} else if (p_dto.getStatus().equals("failed")) {
+				p_dto.setStatus("결제실패");				
+			}
+			
+			if (p_dto.getPay_method().equals("samsung")) {
+				p_dto.setPay_method("삼성페이");				
+			} else if (p_dto.getPay_method().equals("card")) {
+				p_dto.setPay_method("신용카드");				
+			} else if (p_dto.getPay_method().equals("trans")) {
+				p_dto.setPay_method("계좌이체");				
+			} else if (p_dto.getPay_method().equals("vbank")) {
+				p_dto.setPay_method("가상계좌");				
+			}
+			
+			//유닉스타임 형식 날짜를 DateTime으로 변환
+			String source = p_dto.getPaid_at();
+			long t = Long.parseLong(source + "000"); 
+			SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.KOREA);
+			p_dto.setPaid_at(simpleDate.format(t));
+			
+			if (p_dto.getCancelled_at() != "0" && !p_dto.getCancelled_at().equals("0")) {
+				
+				source = p_dto.getCancelled_at();
+				t = Long.parseLong(source + "000"); 
+				simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.KOREA);
+				p_dto.setCancelled_at(simpleDate.format(t));
+				
+			}
+						
+			p_lists.add(p_dto);
+			
+		}
+
+		return p_lists;
 		
 	}
-	
-	
-
-	
 
 }

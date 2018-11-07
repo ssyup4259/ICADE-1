@@ -134,6 +134,7 @@ function sample6_execDaumPostcode() {
 		var total = parseInt($("#O_TOT").val());
 		var name = "${b_lists[0].getName()}";
 		var count = ${b_lists.size()};
+		var m_id = "${sessionScope.userInfo.getM_ID()}";
 		
 		if (count > 1) {
 			name = name + " 외 " + (count-1) + "개";
@@ -153,7 +154,7 @@ function sample6_execDaumPostcode() {
 			name : name,
 			amount : 500,
 			buyer_email : email,
-			buyer_name : name,
+			buyer_name : m_id,
 			buyer_tel : tel,
 			buyer_addr : addr,
 			buyer_postcode : zipcode

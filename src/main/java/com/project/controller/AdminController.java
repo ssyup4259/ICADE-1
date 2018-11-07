@@ -23,6 +23,7 @@ import com.project.dto.GoodsColorDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.dto.GoodsKindDTO;
+import com.project.dto.PaymentsDTO;
 import com.project.service.AdminService;
 import com.project.util.RestAPI;
 
@@ -33,7 +34,7 @@ public class AdminController {
 	Logger log = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
-	private AdminService service;
+	private AdminService a_service;
 	
 	@Autowired
 	AdminDAO a_dao;
@@ -53,9 +54,9 @@ public class AdminController {
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.GET)
 	public String insertForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
-		List<DeviceKindDTO> dk_lists = service.getDeviceList();
-		List<GoodsColorDTO> gc_lists = service.getColorList();
+		List<GoodsKindDTO> gk_lists = a_service.getGoodsKindList();
+		List<DeviceKindDTO> dk_lists = a_service.getDeviceList();
+		List<GoodsColorDTO> gc_lists = a_service.getColorList();
 		
 		req.setAttribute("gk_lists", gk_lists);
 		req.setAttribute("dk_lists", dk_lists);
@@ -69,7 +70,7 @@ public class AdminController {
 	@RequestMapping(value="/insertGoods.action", method=RequestMethod.POST)
 	public String insertGoods(GoodsDTO g_dto, GoodsDetailDTO gd_dto, MultipartHttpServletRequest req) throws Exception {
 		
-		service.insertGoods(g_dto, gd_dto, req);
+		a_service.insertGoods(g_dto, gd_dto, req);
 		
 		return "redirect:/admin/goodsList.action";
 		
@@ -79,9 +80,9 @@ public class AdminController {
 	@RequestMapping(value="/goodsList.action", method= {RequestMethod.POST, RequestMethod.GET})
 	public String goodsList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		List<GoodsKindDTO> gk_lists = service.getGoodsKindList();
+		List<GoodsKindDTO> gk_lists = a_service.getGoodsKindList();
 		
-		req = service.goodsList(req);
+		req = a_service.goodsList(req);
 		
 		req.setAttribute("gk_lists", gk_lists);
 		
@@ -98,7 +99,7 @@ public class AdminController {
 		String path = req.getSession().getServletContext().getRealPath("/resources/goodsImage");
 		String cPath = req.getSession().getServletContext().getRealPath("/resources/goodsContentImage");
 		
-		service.deleteGoods(g_num, path, cPath);
+		a_service.deleteGoods(g_num, path, cPath);
 		
 		return "redirect:/admin/goodsList.action";
 		
@@ -108,7 +109,7 @@ public class AdminController {
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.GET)
 	public String updateForm(int g_num, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		GoodsDTO g_dto = service.getReadGoods(g_num);
+		GoodsDTO g_dto = a_service.getReadGoods(g_num);
 		
 		req.setAttribute("g_dto", g_dto);
 		
@@ -120,7 +121,7 @@ public class AdminController {
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.POST)
 	public String updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		service.updateGoods(g_dto, req);
+		a_service.updateGoods(g_dto, req);
 		
 		return "redirect:/admin/goodsList.action";
 		
@@ -130,9 +131,9 @@ public class AdminController {
 	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.GET)
 	public String updateGoodsDetailCountForm(int g_num, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		GoodsDTO g_dto = service.getReadGoods(g_num);
+		GoodsDTO g_dto = a_service.getReadGoods(g_num);
 		
-		List<GoodsDetailDTO> gd_lists = service.getReadGoodsDetail(g_num);
+		List<GoodsDetailDTO> gd_lists = a_service.getReadGoodsDetail(g_num);
 		
 		req.setAttribute("gd_lists", gd_lists);
 		req.setAttribute("g_name", g_dto.getG_NAME());
@@ -145,7 +146,7 @@ public class AdminController {
 	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.POST)
 	public String updateGoodsDetailCount(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		service.updateGoodsDetailCount(req);
+		a_service.updateGoodsDetailCount(req);
 		
 		return "redirect:/admin/goodsList.action";
 		
@@ -155,7 +156,7 @@ public class AdminController {
 	@RequestMapping(value="/memberList.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String memberList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-		req = service.memberList(req);
+		req = a_service.memberList(req);
 		
 		return "admin/memberList";
 		
@@ -165,7 +166,7 @@ public class AdminController {
 	@RequestMapping(value="/authorityChange.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String authorityChange(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		service.authorityChange(req);
+		a_service.authorityChange(req);
 		
 		return memberList(req, resp);
 		
@@ -175,24 +176,9 @@ public class AdminController {
 	@RequestMapping(value="/payments.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String payments(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		String imp_key = URLEncoder.encode("0721555779852842", "UTF-8");
-		String imp_secret = URLEncoder.encode("qSKG3wd6friMZRuJNne1gGg0CQ2gFks6ddNhJ0nZsGMrxgalEpnU5DUIuXYairhwF4Np4boxRaYpr9K5", "UTF-8");
-		JsonObject json = new JsonObject();
-
-		json.addProperty("imp_key", imp_key);
-		json.addProperty("imp_secret", imp_secret);
+		List<PaymentsDTO> p_lists = a_service.payments();
 		
-		String token = api.getToken(req, resp, json);
-		
-		String imp_uid = "imp_493354362170";
-		
-		Map<String,String> map = api.getInfo(req, resp, token, imp_uid);
-		
-		log.info(map.get("imp_uid"));
-		log.info(map.get("status"));
-		log.info(map.get("amount"));
-		
-		req.setAttribute("token", token);
+		req.setAttribute("p_lists", p_lists);
 		
 		return "admin/payments";
 		
