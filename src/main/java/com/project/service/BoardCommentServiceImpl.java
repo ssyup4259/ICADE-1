@@ -894,6 +894,14 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		bc_dao.deleteReply(BC_NUM);
 		
 	}
+
+	@Override
+	public HttpServletRequest searchGoodsList(HttpServletRequest req) throws Exception {
+		
+		
+		
+		return null;
+	}
 	
 	
 

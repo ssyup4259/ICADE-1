@@ -63,15 +63,20 @@
 <script>
 	function writePhotoReply() {
 		
-		var BC_CONTENT =$("#BC_CONTENT").val();
+		var BC_CONTENT =$("#PhotoReply_CONTENT").val();
 		var BC_BOARD =$("#articleBC_board").val();
 		var BC_NUM =$("#articleBC_NUM").val();
 		var BC_ID =${sessionScope.userInfo.getM_ID()};
 		var BC_BOARD = BC_BOARD;
 		
-		alert(BC_ID);
-		alert(BC_CONTENT);
-		alert(BC_BOARD);
+		if (BC_CONTENT.length<1) {
+			alert("내용을 입력해주세요!");
+			f.BC_CONTENT.focus();
+		}
+		
+		BC_CONTENT = BC_CONTENT.replace(/\r\n/g, '<br>');
+		BC_CONTENT = BC_CONTENT.replace(/\r/g, '<br>');
+		BC_CONTENT = BC_CONTENT.replace(/\n/g, '<br>')
 		
 		var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
 		
@@ -85,7 +90,6 @@
 				
 				var BC_NUM =$("#articleBC_NUM").val()
 				
-				alert("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
 					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
@@ -94,6 +98,7 @@
 						 $("#photoReply").html(result);
 					}
 				 });
+				$("#PhotoReply_CONTENT").val("");
 			},
 			error: function(result) {
 				alert("안된다");
@@ -157,13 +162,25 @@
 			</tr>
 			</table>
 	</div>
-				<div align="center">
-					<textarea id="BC_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
-					<input type="button" onclick="writePhotoReply()" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px;">
-					<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
-					value="${sessionScope.userInfo.getM_ID()}"/>
-					
-				</div>
+				<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+									<div align="right">
+										<textarea id="PhotoReply_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
+										<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px; padding-bottom: 20px">
+										<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
+										value="${sessionScope.userInfo.getM_ID()}"/>
+									</div>
+								</c:if>
+								
+								<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+									<div align="center">
+										<p>
+											<input type="button" style="width: 80%;" value="댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+										</p>
+									</div>
+								</c:if>
+									
+									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
+									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
 			<!-- 댓글 목록부분 -->
 			<div id="photoReply"></div>
 		

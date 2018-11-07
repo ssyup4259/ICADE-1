@@ -69,19 +69,9 @@
 
 <script>
 	function show(BC_NUM) {
-		
-		
-		 /* $('.replyImage').attr('class', function(num){
-
-			    alert(BC_NUM);
-			    
-			    return  BC_NUM;
-			}); */
 		        var state = $('.'+BC_NUM).css('display'); 
 		        if(state == 'none'){
-		            $('.'+BC_NUM).show(); 
-		            $('.'+BC_NUM).hide();
-		        }else{ 
+		            $('.'+BC_NUM).show("slow"); 
 		        }
      	 }
 		
@@ -90,15 +80,22 @@
 <script>
 	function writeCmt(BC_BOARD,BC_NUM,BC_CONTENT) {
 		
+		var f = document.replyForm;
+		
 		var BC_CONTENT =$("#BC_CONTENT").val();
 		var BC_ID =${sessionScope.userInfo.getM_ID()};
 		var BC_NUM =BC_NUM;
 		var BC_BOARD = BC_BOARD;
 		
-		alert(BC_ID);
-		alert(BC_CONTENT);
-		alert(BC_BOARD);
+		BC_CONTENT = BC_CONTENT.replace(/\r\n/g, '<br>');
+		BC_CONTENT = BC_CONTENT.replace(/\r/g, '<br>');
+		BC_CONTENT = BC_CONTENT.replace(/\n/g, '<br>')
 		
+		
+		if (BC_CONTENT.length<1) {
+			alert("내용을 입력해주세요");
+			f.BC_CONTENT.focus();
+		}
 		var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
 		
 		$.ajax({
@@ -120,6 +117,7 @@
 						 $("#replyComment").html(result);
 					}
 				 });
+				$("#BC_CONTENT").val("");
 			},
 			error: function(result) {
 				alert("안된다");
@@ -184,7 +182,7 @@
 								${bc_dto.getBC_CONTENT()}
 								
 								<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-									<div>
+									<div >
 										<textarea id="BC_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
 										<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px; padding-bottom: 20px">
 										<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"

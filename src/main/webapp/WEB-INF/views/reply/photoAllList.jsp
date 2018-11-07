@@ -46,7 +46,7 @@
 		 <c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 			<p>
 				<input type="button" value="포토후기 작성하기" style="width: 80%"  
-				onclick="javascript:location.href='<%=cp%>/goods/articleCreate.action';" class="btnGreen" height="20px">
+				onclick="javascript:location.href='<%=cp%>/goods/photoInsertData.action';" class="btnGreen" height="20px">
 			</p>
 		 </c:if>
 		  <!-- 로그인 안하면 작성 불가능 -->

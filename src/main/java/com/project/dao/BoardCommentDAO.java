@@ -4,6 +4,7 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.dto.BoardCommentDTO;
+import com.project.dto.GoodsDTO;
 
 public interface BoardCommentDAO {
 	
@@ -23,6 +24,8 @@ public interface BoardCommentDAO {
 	public List<BoardCommentDTO> replyAllList(int start,int end) throws Exception;
 	//전체 댓글 갯수
 	public int countAllReply()throws Exception;
+	//포토후기 작성시 상품 정보 읽어오기 및 검색
+	public List<GoodsDTO>searchGoodsList(String searchKey, String searchValue,int start, int end,String G_NAME)throws Exception;
 	//하나의 댓글에 담긴 상품 정보
 	public BoardCommentDTO getReadOne(int bc_num)throws Exception;
 	//이전글 다음글 설정하기

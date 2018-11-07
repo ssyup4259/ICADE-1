@@ -17,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.project.dao.AdminDAO;
+import com.project.dao.BoardCommentDAO;
+import com.project.dao.BoardCommentDAOImpl;
 import com.project.dto.BoardCommentDTO;
+import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.service.BoardCommentService;
 
@@ -31,6 +34,9 @@ public class BoardCommentController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	
+	@Autowired
+	BoardCommentDAO bc_dao;
 	
 	// 상품페이지 내 포토후기 입력
 	@RequestMapping(value="/replyinsert.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -251,12 +257,37 @@ public class BoardCommentController {
 	}
 	*/
 	//포토후기 상세페이지에서 대댓글 삭제
-	@RequestMapping(value="/photoReplyDelete.action")
+	@RequestMapping(value="/photoReplyDelete.action",method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public void photoReplyDelete(BoardCommentDTO bc_dto, HttpServletRequest req)throws Exception{
 		
 		bc_service.replyComment(bc_dto, req);
 	}
+	//포토후기 게시판에서 포토후기 작성하기
+	@RequestMapping(value="/photoInsertData.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String photoInsertData(HttpServletRequest req)throws Exception{
+		
+	 	return "reply/photoArticleCreate";
+	}
+	@RequestMapping(value="/photoInsertData_ok.action", method= {RequestMethod.GET, RequestMethod.POST})
+	public String photoInsertData_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
+		
+		int BC_BOARD = Integer.parseInt(request.getParameter("G_NUM"));
+	 	bc_service.insertData(bc_dto, req, request);
+	 	
+	 	return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
+	}
+	@RequestMapping(value="/searchGoodsList.action",method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public ModelAndView searchGoodsList(GoodsDTO g_dto,HttpServletRequest req,ModelAndView mav) {
+		
+		
+	 
+		
+		return mav;
+	}
+	
+	
 	
 	
 	@ModelAttribute
@@ -264,6 +295,8 @@ public class BoardCommentController {
 		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		req.setAttribute("gk_lists", gk_lists);
+		
+		
 		
 		return req;
         

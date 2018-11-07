@@ -10,7 +10,7 @@ import com.project.dto.BoardCommentDTO;
 
 public interface BoardCommentService {
 	
-	//댓글등록
+	//포토후기등록
 	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req,HttpServletRequest request) throws Exception;
 	//댓글 리스트
 	public HttpServletRequest replyList(HttpServletRequest req) throws Exception;
@@ -32,5 +32,7 @@ public interface BoardCommentService {
 	public void updateReply(BoardCommentDTO bc_dto, HttpServletRequest req)throws Exception;
 	//사진없는 댓글 삭제
 	public void deleteReply(int BC_NUM)throws Exception;
+	//상품 검색하기
+	public HttpServletRequest searchGoodsList(HttpServletRequest req) throws Exception;
 	
 }

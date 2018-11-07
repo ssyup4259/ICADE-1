@@ -597,7 +597,8 @@ function check() {
 	var allData = {"M_EMAIL_ID" : email1,"M_EMAIL_DOMAIN" : email2}
 	
 	if (email1.length < 1) {
-		alert("이메일을 입력해주세요")		
+		alert("이메일을 입력해주세요")
+		
 	}
 	if (email2.length < 1) {
 		alert("정확한 형식을 기입해주세요.")

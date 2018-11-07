@@ -33,10 +33,10 @@
 * { margin:0; padding:0; }
 ul,li { list-style:none; }
 a { text-decoration:none; color:#000; }
-.tab { border:1px solid #8F9493; border-left:none; background:white; overflow:hidden; }
+.tab { border:1px solid #8F9493; border-color:#A3C838; border-left:none; background:white; overflow:hidden; color:black; }
 .tab li { float:left; width:25%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
 .tab li { display:inline-block; padding:20px; cursor:pointer; }
-.tab li.on { background-color:#eee; color:#f00; }
+.tab li.on { background-color:#eee; color:#A3C838; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
 .tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
 
@@ -47,7 +47,6 @@ a { text-decoration:none; color:#000; }
 
 <script>
 $(document).ready(function () {
-	
 	for (var i = 0; i < 11; i++) {
 		$('#answer'+ i).hide();
 	}
@@ -58,9 +57,6 @@ $(document).ready(function () {
 	});
 	
 	function tab(e, num){
-		
-		
-		
 	    var num = num || 0;
 	    var menu = $(e).children();
 	    var con = $(e+'_con').children();
@@ -83,10 +79,6 @@ $(document).ready(function () {
 	        con.eq(i).show();
 	    });
 	}
-	
-	
-		
-		
 	<!-- SHOW.HIDE -->
 
 	function faqMove(num) {
@@ -113,7 +105,7 @@ $(document).ready(function () {
 <jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container">
 	  <div  class="container-fluid">
-		<div align="left" style="font-size: 6px">
+		<div align="left" style="font-size: 30px">
 			FAQ:자주묻는질문 답변
 		</div>
 
@@ -143,7 +135,7 @@ $(document).ready(function () {
 			        </ul>
 			      </li>
 		     </ul>
-		     <ul>
+		     <ul style="border-radius: 6px; padding-top:0px; margin-top: 0px">
 			    <li class="dropbtn" style="text-align: left">
 			        <a href="#answer2" onclick="faqMove(2);">2. 결제안내</a>
 			      	<ul id="answer2">

@@ -58,7 +58,9 @@ ICADE 기능구현
  - 사진 후기 게시판o
 
 - FAQ 게시판
-  - (예시)https://www.cjlogistics.com/ko/support/faq - 자바스크립트 이용
+  - (예시)https://www.cjlogistics.com/ko/support/faq 제이쿼리 이용 o
+
+
 
 
 --------------------------------------------------------------------------------------------------------
