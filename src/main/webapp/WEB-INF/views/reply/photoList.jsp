@@ -80,8 +80,8 @@
 		        var state = $('.'+BC_NUM).css('display'); 
 		        if(state == 'none'){
 		            $('.'+BC_NUM).show(); 
-		        }else{ 
 		            $('.'+BC_NUM).hide();
+		        }else{ 
 		        }
      	 }
 		
