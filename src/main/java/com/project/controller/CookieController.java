@@ -51,22 +51,22 @@ public class CookieController {
 		List<String> lists = c_lists;
 		String g_num = req.getParameter("G_NUM");
 		Iterator<String> it = lists.iterator();
+		endJIndx = g_num.indexOf("&");//주소에 특수문자가 올경우 자르기(특수 문자 3개 올경우)ㄴ
+		endIdx = g_num.indexOf("#");
+
+		if(	endJIndx ==-1) {
+			if(endIdx ==-1) {
+				g_num = g_num.substring(0);
+			}else {
+			g_num = g_num.substring(0,endIdx);
+			}
+		}else {
+			g_num = g_num.substring(0,endJIndx);
+			
+		}
 		
 		while (it.hasNext()) {
 			String num = it.next();
-			startIdx = g_num.indexOf("="); //주소에 특수문자가 올경우 자르기(특수 문자 3개 올경우)ㄴ
-			endJIndx = g_num.indexOf("&");
-			endIdx = g_num.indexOf("#");
-			if(	endJIndx ==-1) {
-				if(endIdx ==-1) {
-					g_num = g_num.substring(startIdx+1);
-				}else {
-				g_num = g_num.substring(startIdx,endIdx);
-				}
-			}else {
-				g_num = g_num.substring(startIdx,endJIndx);
-				
-			}
 				
 			if (num == g_num || num.equals(g_num)) {
 				Cookie setCookie = new Cookie(g_num, null);
