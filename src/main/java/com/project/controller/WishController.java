@@ -35,7 +35,7 @@ public class WishController {
 		
 		req =w_service.wishListList(req);
 		List<WishDTO> wishList = (List<WishDTO>) req.getAttribute("wishList");
-		int dataCount =  (Integer) req.getAttribute("dataCount");
+		int dataCount =  (Integer) req.getAttribute("cookieDataCount");
 		String pageIndexList = (String) req.getAttribute("pageIndexList");
 
 	
@@ -43,7 +43,6 @@ public class WishController {
 		mav.addObject("wishList", wishList);
 		mav.addObject("dataCount", dataCount);
 		mav.addObject("pageIndexList", pageIndexList);
-		mav.setViewName("mypage/myPageMain");
 		
 		return mav;
 		

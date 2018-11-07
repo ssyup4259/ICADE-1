@@ -195,7 +195,7 @@ public class WishServiceImpl implements WishService {
 	
 		String pageIndexList =myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
-		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("cookieDataCount",dataCount);
 		req.setAttribute("wishList",wishList);
 		req.setAttribute("pageIndexList",pageIndexList);
 		

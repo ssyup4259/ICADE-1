@@ -68,7 +68,7 @@ public class CookieServiceImpl implements CookieService{
 			}
 				
 		}
-		
+	
 		req.setAttribute("ck_lists", ck_lists);
 		
 		return req;
