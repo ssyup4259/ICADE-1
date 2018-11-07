@@ -105,8 +105,12 @@ function deleteAllCookies(){
 	$(document).ready(function(){
 		
 		var url = document.URL;
+		var cookieCheckNum =url.indexOf("G_NUM");
+		if(cookieCheckNum !=-1){
+		
 		var urlarray = url.split("=");
 		var G_NUM = urlarray[1];
+		
 		if(G_NUM != null){	
 			$.ajax({
 			url:'<%=cp%>/cookies/cookiedirect.action',
@@ -122,7 +126,7 @@ function deleteAllCookies(){
 			
 		
 		}
-		
+		}
 	});
 
 </script>

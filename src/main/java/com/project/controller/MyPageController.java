@@ -63,7 +63,7 @@ public class MyPageController {
 		
 		//System.out.println("-----------------point------------------------");
 		//System.out.println(point);
-		
+		c_service.cookieList(request);
 		return "/mypage/myPageMain";
 	}
 	
