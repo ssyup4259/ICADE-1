@@ -40,7 +40,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 		if (searchKey == null) {
 
-			searchKey = "BN_NAME";
+			searchKey = "BN_SUBJECT";
 			searchValue = "";
 
 		} else {
@@ -103,5 +103,11 @@ public class NoticeServiceImpl implements NoticeService {
 		req.setAttribute("articleUrl", articleUrl);
 
 		return req;
+	}
+	
+	//공지 1개 
+	@Override
+	public NoticeDTO getNoticeDetail(int BN_NUM) throws Exception{
+		return n_dao.getReadNoticeDetail(BN_NUM);
 	}
 }

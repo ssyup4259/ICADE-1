@@ -19,13 +19,13 @@ public class NoticeDAOImpl implements NoticeDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 
-	public static String noticeMapper = "com.project.mybatis.NoticeMapper";
+	public static String noticeMapper = "com.project.mybatis.noticeMapper";
 
 	//공지 개수 구하기 (완료)
 	@Override
 	public int getNoticeCount(String searchKey, String searchValue) throws Exception {
 			
-		HashMap<String, Object> params = new HashMap<String, Object>();
+		HashMap<String, String> params = new HashMap<String, String>();
 		
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
@@ -50,5 +50,18 @@ public class NoticeDAOImpl implements NoticeDAO {
 			return sessionTemplate.selectList(noticeMapper + ".getNoticeLists", params);
 				
 		}
+	
+    //공지 하나 보기
+	@Override
+	public NoticeDTO getReadNoticeDetail(int BN_NUM) throws Exception{
+		return sessionTemplate.selectOne(noticeMapper+".getReadNoticeDetail", BN_NUM);
+	}
+	
+	//공지 등록하기
+	/*@Override
+	public void NoticeRegister(NoticeDTO n_dto) throws Exception{
+		sessionTemplate.insert(noticeMapper+".insertNotice", n_dto);
+	}*/
+		
 
 }
