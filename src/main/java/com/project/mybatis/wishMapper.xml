@@ -32,12 +32,16 @@ update WISH set W_CHECK = 0 where W_MNO =#{G_NUM}
 </select>
 <!--찜리스트 등록-->
 <insert id="insertWish" parameterType="com.project.dto.WishDTO">
-insert into WISH (W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK) 
-values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},1)
+	insert into WISH (W_NUM, W_ID, W_GNUM, W_NAME, W_CHECK) 
+	values(#{W_NUM}, #{W_ID}, #{W_GNUM}, #{W_NAME},1)
 </insert>
 <!-- 전체 데이터수 -->
 <select id="dataCount" resultType="int">
-select nvl(count(*), 0) from WISH
+	select nvl(count(*), 0) from WISH
+</select>
+<!--아이디 전체 데이터수 -->
+<select id="idDataCount" parameterType="String" resultType="int">
+	select nvl(count(*), 0) from WISH where W_ID = #{m_id}
 </select>
 <!--데이터 중복  -->
 <select id="checkWish" parameterType="map" resultType="int">
@@ -49,6 +53,10 @@ select nvl(count(*), 0) from WISH
 	set W_CHECK = 1
  	WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 </update>
+<!-- 찜리스트 하나 갖고오기 -->
+<select id="oneWish" parameterType="int" resultType="String">
+	select W_NAME FROM WISH WHERE W_GNUM = #{G_NUM}
+</select>
 <!--찜 리스트 체크  -->
 <update id="like_check_cancel" parameterType="map">
 	update WISH
@@ -59,7 +67,10 @@ select nvl(count(*), 0) from WISH
 <select id="wCheck" parameterType="map" resultType="int">
 select W_CHECK from WISH WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}
 </select>
-
+<!-- 찜 전체 삭제 -->
+<delete id="deleteAllWish" parameterType="map">
+	delete WISH WHERE W_ID = #{m_id}
+</delete>
 <!-- 찜 삭제 -->
 <delete id="deleteWish" parameterType="map">
 	delete wish WHERE W_GNUM = #{g_num} AND W_ID = #{m_id}

@@ -18,7 +18,7 @@
 
 <title>마이 쇼핑</title>
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -73,6 +73,48 @@
 }
 
 </style>
+
+<script type="text/javascript">
+	function deleteAllWish(){
+
+		$.ajax({
+		url:'<%=cp%>/wish/deleteAllWish.action',
+		type:'POST',
+		datatype:  'text',
+		}).done(function(map) {
+			var msg =map.msg;
+			$('#wishList').load(document.URL +  ' #wishList');
+			swal(msg);
+			
+		}).fail(function(){
+			swal("실패");
+		});
+		
+		
+		
+	}
+</script>
+<script type="text/javascript">
+	function deleteWish(G_NUM){
+	
+		$.ajax({
+		url:'<%=cp%>/wish/deleteWish.action',
+		type:'POST',
+		data:{"G_NUM":G_NUM},
+		datatype:  'text',
+		}).done(function(map) {
+			var G_NAME=map.G_NAME;
+			var G_NUM =map.G_NUM;
+			$('#wishList').load(document.URL +  ' #wishList');
+			swal("상품명 :"+G_NAME+"가 삭제 되었습니다");
+		}).fail(function(){
+			swal("실패");
+		});
+		
+		
+		
+	}
+</script>
 
 </head>
 <body>
@@ -217,15 +259,30 @@
 				<div class="col-sm-4 toggle" style="display: none;">
 
 
-					<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
-						<c:forEach var="w_dto" items="${wishList}">
-							<tr>
-								<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}"> <img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" />
-								</a> 상품명:${w_dto.getW_NAME()}</td>
-							</tr>
-						</c:forEach>
-						<tr>
-							<td colspan="9"><c:if test="${dataCount!=0 }">
+
+	<p>
+    <button id="ch" class="hide" value="찜리스트 펼치기">찜리스트 숨기기</button>
+    <button class="show" value="찜리스트 숨기기">찜리스트 펼치기</button>
+	
+	</p>
+	
+	<div class="toggle" id="wishList">
+	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 200px;"/>
+	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
+	 	<c:forEach var="w_dto" items="${wishList}">
+	<tr>
+		<td>
+		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+		<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/>
+		</a>
+		상품명:${w_dto.getW_NAME()}
+		<input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGreen" style="width: 200px;" value="찜 삭제">
+		</td>
+	</tr>
+		</c:forEach>
+	<tr>
+	 <td colspan="9">
+		<c:if test="${dataCount!=0 }">
 		${pageIndexList }
 		</c:if> <c:if test="${dataCount==0 }">
 		찜 등록된 상품이 없습니다.

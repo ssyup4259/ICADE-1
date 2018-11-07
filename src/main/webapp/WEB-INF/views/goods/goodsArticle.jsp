@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -117,7 +117,7 @@ $(function() {
 			
 			error: function() {
 
-				alert("안된다");
+				swal("안된다");
 				
 			}				
 		});
@@ -183,24 +183,27 @@ $(function() {
 		var f = document.myForm;
 		
 		if (f.GD_DEVICE.value == "none") {
-			alert("기종을 선택 해 주세요.");
+
+			swal("기종을 선택 해 주세요.");
 			f.GD_DEVICE.focus();
 			return;
 		}
 		
 		if (f.GD_COLOR.value == "none") {
-			alert("색상을 선택 해 주세요.");
+
+			swal("색상을 선택 해 주세요.");
 			f.GD_COLOR.focus();
 			return;
 		}
 		
 		if (f.GD_COUNT.value < 1 || f.GD_COUNT.value == "") {
-			alert("수량을 확인해 주세요.");
+			swal("수량을 확인해 주세요.");
 			f.GD_COUNT.value = "1";
 			f.GD_COUNT.focus();
 			return;
 		}
 		
+
 		var allData = $("#myForm").serialize();
 		
 		$.ajax({
@@ -214,11 +217,11 @@ $(function() {
 				if (data == "success") {
 					insertCart();
 				} else if (data == "reduplication") {
-					alert("이미 장바구니에 존재하는 상품입니다.");
+					swal("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
-					alert("담고자하는 수량이 재고 수량보다 많습니다.");
+					swal("담고자하는 수량이 재고 수량보다 많습니다.");
 				} else {
-					alert("로그인 후 사용 가능합니다.");
+					swal("로그인 후 사용 가능합니다.");
 				}
 
 				console.log(data);
@@ -227,7 +230,7 @@ $(function() {
 
 			error : function(data) {
 	
-				alert("error");
+				swal("error");
 				console.log(data);
 
 			}
@@ -245,26 +248,26 @@ $(function() {
 		var code = $("#sub").val();
 		
 		if (f.GD_DEVICE.value == "none") {
-			alert("기종을 선택 해 주세요.");
+			swal("기종을 선택 해 주세요.");
 			f.GD_DEVICE.focus();
 			return;
 		}
 		
 		if (f.GD_COLOR.value == "none") {
-			alert("색상을 선택 해 주세요.");
+			swal("색상을 선택 해 주세요.");
 			f.GD_COLOR.focus();
 			return;
 		}
 		
 		if (f.GD_COUNT.value < 1 || f.GD_COUNT.value == "") {
-			alert("수량을 확인해 주세요.");
+			swal("수량을 확인해 주세요.");
 			f.GD_COUNT.value = "1";
 			f.GD_COUNT.focus();
 			return;
 		}
 		
 		if (f.GD_COUNT.value > parseInt($("#code"+code).val())) {
-			alert("구매하고자 하는 수량이 재고 수량보다 많습니다.");
+			swal("구매하고자 하는 수량이 재고 수량보다 많습니다.");
 			f.GD_COUNT.value = "1";
 			f.GD_COUNT.focus();
 			return;
@@ -275,7 +278,7 @@ $(function() {
 		if (login != "") {
 			f.submit();	
 		} else {
-			alert("로그인 후 사용 가능합니다.");
+			swal("로그인 후 사용 가능합니다.");
 		}
 
 	}
@@ -284,7 +287,7 @@ $(function() {
 
 <script type="text/javascript">
 function like_func(g_num) {
-	
+
 	
 	$.ajax({
 		url:"<%=cp%>/wish/wishInsert.action",
@@ -297,39 +300,23 @@ function like_func(g_num) {
 			var like_img = '';
 			var num =map.g_num;
 			var like_check = map.like_check;
-		
-		if(like_check!=1){
+			var msg = map.msg
+		if(like_check == 1){
 			$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
-			 if(document.URL.indexOf("##")==-1)
-	            {
-	                // Set the URL to whatever it was plus "#".
-	                url = document.URL+"##";
-	                location = "##";
+			$('#ckList').load(document.URL +  ' #ckList');
+			swal(msg);
 
-	                //Reload the page
-	                location.reload(true);
-
-	            }
 			
-		}else if(like_check==1){
-			
+		}else if(like_check==0){
 			$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");
-			 if(document.URL.indexOf("##")==-1)
-	            {
-	                // Set the URL to whatever it was plus "#".
-	                url = document.URL+"##";
-	                location = "##";
-
-	                //Reload the page
-	                location.reload(true);
-
-	            }
+			$('#ckList').load(document.URL +  ' #ckList');
+			swal(msg);
 		}
 		
 	},
 	error: function(){
 		
-		alert("실패");
+
 		}
 		
 	});
@@ -340,10 +327,42 @@ function like_func(g_num) {
 <script type="text/javascript">
 function login_need() {
 	
-	alert("로그인 후 찜목록을 눌러주세요!");
+	swal("로그인 후 찜목록을 눌러주세요!");
 	
 	
 }
+
+</script>
+
+<script>
+	$(document).ready(function(){
+		var url = document.URL;
+		var urlarray = url.split("=");
+		var G_NUM = urlarray[1];
+	
+		if(G_NUM != null){	
+			$.ajax({
+			url:'<%=cp%>/wish/wishCheck.action',
+			type:'POST',
+			data:{"G_NUM":G_NUM},
+			async:false,
+			datatype:  'text',
+			}).done(function(map) {
+				var count = map.count;
+				var num = map.G_NUM;
+				if(count!=0){
+					$("#"+num).attr("src","<%=cp%>/resources/images/like.png");
+				}else{
+					$("#"+num).attr("src","<%=cp%>/resources/images/dislike.png");	
+				}
+			}).fail(function(){
+			});
+		}else{
+			
+		
+		}
+		
+	});
 
 </script>
 
@@ -426,23 +445,24 @@ function login_need() {
 							</div>
 						</div>
 						<hr style="border-top: 2px solid black">
-						<div class="row" style="height: 60px;">
+						<div class="row" id="heart11" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
 								<c:choose>
 									<c:when test="${!empty sessionScope.userInfo}">
 										<c:choose>
 											<c:when test="${w_Check ==1}">
-												<a href='#'> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+
+												<a href="#"> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href='#'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												<a href="#"> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
 											</c:otherwise>
 										</c:choose>
 									</c:when>
 									<c:otherwise>
-										<a href='javascript: login_need();'> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
+										<a href='javascript: login_need();'><img src="<%=cp%>/resources/images/dislike.png" style="width: 30px">
 										</a>
 									</c:otherwise>
 								</c:choose>
@@ -573,7 +593,26 @@ function login_need() {
 					<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
 						<!-- 로그인 했을 경우만 댓글 작성가능 -->
 						<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+<<<<<<< HEAD
 						
+=======
+							<%-- 	<tr>
+									<tr bgcolor="lightgray" height="60px;">
+										<!-- 아이디-->
+										<td width="15%">
+											<div>${sessionScope.userInfo.getM_ID()}</div>
+										</td>
+										<!-- 본문 작성-->
+										<td width="75%">
+											<div>
+												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color:transparent;"></textarea>
+												<input type="file" id="upload" name="bcFile">
+											</div>
+										</td>
+										<!-- 댓글 등록 버튼 -->
+										
+									</tr> --%>
+>>>>>>> 찜목록작업용
 						</c:if>
 
 
@@ -584,7 +623,11 @@ function login_need() {
 								<td width="100%">
 									<div>
 										<p>
+<<<<<<< HEAD
 											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+=======
+											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px">
+>>>>>>> 찜목록작업용
 										</p>
 									</div>
 								</td>
