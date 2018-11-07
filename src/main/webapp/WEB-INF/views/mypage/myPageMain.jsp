@@ -259,6 +259,7 @@
 					<br>
 
 				</div>
+			</div>	
 				<div class="col-sm-4 toggle">
 
 

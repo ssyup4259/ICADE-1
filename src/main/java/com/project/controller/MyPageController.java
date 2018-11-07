@@ -1,8 +1,10 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
+import com.project.service.CookieService;
 import com.project.service.MyPageService;
 import com.project.service.WishService;
 
@@ -28,7 +31,8 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService service;
-	
+	@Autowired
+	CookieService c_service;
 	@Autowired
 	AdminDAO a_dao;
 	@Autowired
@@ -40,8 +44,11 @@ public class MyPageController {
 		
 		MemberDTO vo = new MemberDTO();
 		
-		vo = (MemberDTO) session.getAttribute("userInfo");
 		
+		vo = (MemberDTO) session.getAttribute("userInfo");
+		if(vo != null) {
+			w_service.wishList(request);
+			}
 		String M_ID = vo.getM_ID();
 		
 		int point = service.pointCheck(M_ID);
@@ -68,7 +75,17 @@ public class MyPageController {
 		
 		//System.out.println(mode);
 		
+		if(mode.equals("")||mode=="") {
+			return "/mypage/myPageMain";
+		}
+		
 		request.setAttribute("mode", mode);
+		HttpSession session2 = request.getSession();
+		MemberDTO mdto=(MemberDTO) session2.getAttribute("userInfo");
+		if(mdto != null) {
+		w_service.wishList(request);
+		}
+		c_service.cookieList(request);
 		
 		return "/mypage/infoCheckPage";
 	}
@@ -77,7 +94,7 @@ public class MyPageController {
 	@RequestMapping(value="/infoCheckPage_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String cancelCheckStep1(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		//탈퇴버튼 클릭후 나오는 본인확인을 위한 인증 컨트롤러
-		
+		c_service.cookieList(request);
 		System.out.println("infoCheckPage_ok.action 들어옴---------------------------------------");
 		
 		HttpSession session = request.getSession();
@@ -93,6 +110,9 @@ public class MyPageController {
 		String M_PW = dto.getM_PW();
 		
 		MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
+		if(vo != null) {
+		w_service.wishList(request);
+		}
 		
 		String session_PW = vo.getM_PW();
 		
@@ -115,7 +135,7 @@ public class MyPageController {
 		}else if(mode=="cancel"||mode.equals("cancel")){	
 			return "/mypage/cancelMembership";
 		}
-				
+		
 		return "/mypage/mypageMain";
 	}
 	
@@ -124,13 +144,21 @@ public class MyPageController {
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("userInfo")==null) {
+		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
+		System.out.println(mdto);
+		if(mdto != null) {
+		w_service.wishList(request);
+		}
+		
+		if(mdto==null) {
 			
 			System.out.println("세션이 널이라 돌아간다 나중엔 인터셉터로");
+			
 			
 			return "home";
 		}
 		
+		c_service.cookieList(request);
 		return "/mypage/ChangeInfo";
 	}
 	
@@ -163,7 +191,10 @@ public class MyPageController {
 		}
 		
 		System.out.println("맞으면 여기로");
-		
+		if(vo != null) {
+			System.out.println("----------------------mdto");
+		w_service.wishList(request);
+		}
 		return "/mypage/changInfoAuthorization";
 	}
 	
@@ -178,7 +209,10 @@ public class MyPageController {
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		
 		MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
-		
+		if(vo != null) {
+			System.out.println("----------------------mdto");
+		w_service.wishList(request);
+		}
 		String M_ID = vo.getM_ID();
 		//String M_PW = vo.getM_PW();
 		
@@ -330,13 +364,43 @@ public class MyPageController {
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
-		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		
-		req.setAttribute("gk_lists", gk_lists);
+			
+			Cookie[] cookies = req.getCookies();
+			
+			List<String> c_lists = new ArrayList<String>();
+			
+			if(cookies != null){
 		
-		return req;
+				for(int i=0; i<cookies.length; i++){
+					
+					Cookie ck = cookies[i];
+					
+					if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
+						
+					} else {
+						
+						String g_num = ck.getName();
+						c_lists.add(g_num);
+						
+					}
+					
+				}
+			}
+		
+			
+			req.setAttribute("c_lists", c_lists);
+			
+			List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+			
+			req.setAttribute("gk_lists", gk_lists);
+			
+			return req;
+	        
+	    
         
     }
+	
 	
 	
 }

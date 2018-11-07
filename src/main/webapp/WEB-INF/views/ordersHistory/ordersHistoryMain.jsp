@@ -120,8 +120,10 @@
 		</div>
 		<div>
 			기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.
-			<br />
+			<br/>
 			주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.
+			<br/>
+			기간 버튼의 기준점은 오른쪽 날짜를 기준으로 합니다.
 		</div>
 	</div>
 </form>
@@ -152,7 +154,7 @@
 
 				<tbody>
 					<c:forEach var="map" items="${hashMap}">
-						<c:forEach var="dto" items="${map.value }">
+						<c:forEach var="dto" items="${map.value }" varStatus="i">
 							<tr>
 								<td class="gubun">
 									<p>${dto.getO_DATE()}<br />
@@ -169,7 +171,7 @@
 								<td>${dto.getOD_COUNT()}</td>
 								<td><strong><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###"/>원</strong></td>
 								<td class="gubun">
-									<p style="display: none;">${dto.getO_IMP()}</p>
+									<p style="display: none;">${dto.getO_NUM()}</p>
 									<p>${dto.getO_STATUS()}</p>
 								</td>
 								<td class="gubun">

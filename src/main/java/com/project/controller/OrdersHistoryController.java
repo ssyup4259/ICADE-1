@@ -1,10 +1,12 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +25,9 @@ import com.project.dto.MemberDTO;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
+import com.project.service.CookieService;
 import com.project.service.OrderHistoryService;
+import com.project.service.WishService;
 import com.project.util.MyUtil;
 
 @Controller
@@ -34,10 +38,14 @@ public class OrdersHistoryController {
 	
 	@Autowired
 	AdminDAO a_dao;
+	@Autowired
+	CookieService c_service;
+	@Autowired
+	WishService w_service;
 	
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
+		c_service.cookieList(request);
 		System.out.println("==================orderHistory.action 두번타는지 테스트용================================================");
 		
 		HttpSession session = request.getSession();
@@ -46,6 +54,7 @@ public class OrdersHistoryController {
 		
 		//로그인시 있는 유저의 세션정보를 받아온다.
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
 		
 		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
 		String startDate = (String) request.getParameter("startDay");
@@ -206,13 +215,45 @@ public class OrdersHistoryController {
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
+
+		Cookie[] cookies = req.getCookies();
+		
+		List<String> c_lists = new ArrayList<String>();
+		
+		if(cookies != null){
+	
+			for(int i=0; i<cookies.length; i++){
+				
+				Cookie ck = cookies[i];
+				
+				if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
+					
+				} else {
+					
+					String g_num = ck.getName();
+					c_lists.add(g_num);
+					
+				}
+				
+			}
+		}
+		HttpSession session = req.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		if(dto != null) {
+			w_service.wishList(req);
+			}
+		
+		req.setAttribute("c_lists", c_lists);
+		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		
 		req.setAttribute("gk_lists", gk_lists);
 		
 		return req;
         
-    }
+    
+    
+}
 	
 
 }
