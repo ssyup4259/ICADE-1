@@ -13,14 +13,20 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.project.dao.AdminDAO;
+import com.project.dto.OrdersDTO;
 import com.project.dto.PaymentsDTO;
 
 @Service
 public class RestAPI {
+	
+	@Autowired
+	AdminDAO a_dao;
 	
 	//토큰 얻기
 	public String getToken(JsonObject json) throws Exception{
@@ -152,6 +158,11 @@ public class RestAPI {
 			p_dto.setStatus(getToken.get("status").toString().substring(1, getToken.get("status").toString().length() - 1));
 			p_dto.setCard_name(getToken.get("card_name").toString().substring(1, getToken.get("card_name").toString().length() - 1));
 			p_dto.setCard_quota(getToken.get("card_quota").getAsInt());
+			
+			OrdersDTO o_dto = a_dao.getReadOrder(imp_uid);
+			
+			p_dto.setM_id(o_dto.getO_ID());
+			p_dto.setM_name(o_dto.getO_NAME());
 
 		}
 		

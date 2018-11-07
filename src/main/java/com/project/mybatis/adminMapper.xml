@@ -107,12 +107,26 @@
 	delete Goods where G_NUM = #{G_NUM}
 </delete>
 
-<!-- 모든 주문내역의 imp_uid 출력 -->
-<select id="getReadImpUid" resultType="String">
-	select O_IMP from orders order by o_date
+<!-- 주문 전체 데이터 갯수 -->
+<select id="getOrdersCount" resultType="int">
+	select nvl(count(*), 0) from Orders	where O_IMP is not null
 </select>
 
+<!-- 모든 주문내역의 imp_uid 출력 -->
+<select id="getReadImpUid" parameterType="map" resultType="String">
+	select O_IMP from (
+	select rownum rnum, data.* from (
+	select O_IMP from orders where O_IMP is not null order by o_date desc) data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
 
+<!-- imp_uid로 Orders 테이블 조회 -->
+<select id="getReadOrder" parameterType="String" resultType="com.project.dto.OrdersDTO">
+	select O_NUM, O_ID, O_DATE, O_NAME, O_PH, O_ZIPCODE, O_ADDRESS1, O_ADDRESS2, O_STATUS, O_WAY, O_TOT, O_TNUM, O_IMP, O_POINT
+	from orders where O_IMP = #{imp_uid}
+</select>
 
 <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ회원 관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 

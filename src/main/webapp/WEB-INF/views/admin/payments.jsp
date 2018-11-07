@@ -31,6 +31,8 @@
 <c:if test="${!empty p_lists}">
 	<table style="text-align: left;">
 		<tr>
+			<td>아이디</td>
+			<td>이름</td>
 			<td>imp_uid</td>
 			<td>
 				결제금액<br/>
@@ -49,6 +51,8 @@
 		
 		<c:forEach var="p_dto" items="${p_lists}">
 			<tr>
+				<td>${p_dto.m_id}</td>
+				<td>${p_dto.m_name}</td>
 				<td>${p_dto.imp_uid}</td>
 				<td>
 					${p_dto.amount}원<br/>
@@ -96,6 +100,15 @@
 <c:if test="${empty p_lists}">
 	내역이 존재하지 않습니다.
 </c:if>
+
+<div class="paging">
+	<c:if test="${dataCount!=0 }">
+		${pageIndexList }
+	</c:if>
+	<c:if test="${dataCount==0 }">
+		등록된 상품이 없습니다.
+	</c:if>
+</div>
 
 <jsp:include page="../include/footer.jsp" flush="false" />
 
