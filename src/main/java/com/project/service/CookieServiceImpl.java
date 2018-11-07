@@ -39,6 +39,8 @@ public class CookieServiceImpl implements CookieService{
 	@Override
 	public HttpServletRequest cookieList(HttpServletRequest req) throws Exception {
 		
+		String startDate = req.getParameter("startDate");
+		System.out.println(startDate + "-----------------사타타타타타타");
 		List<String> c_lists = new ArrayList<String>();		
 		
 		c_lists = (List<String>) req.getAttribute("c_lists");

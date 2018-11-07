@@ -24,36 +24,41 @@
 </style>
 <script type="text/javascript">
 
-function registerNotice(){
+function noticeRegisterOk(){
 	
-	var f = document.noticeForm;
+	var f = document.noticeRegister;
 	
-	f.action = "<%=cp%>/notice/noticeRegister.action";
-		f.submit();
-
+	f.action = "<%=cp%>/notice/noticeRegisterOK.action";
+	f.submit();
 	}
 </script>
 
 </head>
-<body style="font-family: LeeHyunJi; text-align: center; padding-top: 60px">
+<body>
+
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
-		<div class="container">
-			<form name="noticeForm" method="post">
-				<h1>공지사항</h1>
-				<div style="text-align: left">
-					<c:forEach var="n_dto" items="${n_lists }">
-						<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}">${n_dto.getBN_SUBJECT() }</a>
-						<hr>
-						<br>
-					</c:forEach>
-
+		<form action="" method="post" name="noticeRegister">
+			<div class="container">
+				<h1>공지사항 등록</h1>
+				<div class="row">
+					<div class="col-sm-3">제목</div>
+					<div class="col-sm-9">
+						<input type="text" class="inputBoxGray" name="BN_SUBJECT">
+					</div>
 				</div>
-
-				<input type="button" class="btnGreen" value="공지사항 등록" onclick="registerNotice();">
-
-			</form>
-		</div>
+				<div class="row">
+					<div class="col-sm-3">내용</div>
+					<div class="col-sm-9">
+						<textarea rows="30" cols="80" name="BN_CONTENT"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+				</div>
+				<input type="button" class="btnGreen" value="등록" onclick="noticeRegisterOk();">
+			</div>
+		</form>
 	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>

@@ -24,35 +24,30 @@
 </style>
 <script type="text/javascript">
 
-function registerNotice(){
-	
-	var f = document.noticeForm;
-	
-	f.action = "<%=cp%>/notice/noticeRegister.action";
+	function sendIt(){
+		
+		var f = document.searchForm;
+		
+		f.action = "<%=cp%>/notice/noticeList.action";
 		f.submit();
 
 	}
 </script>
-
 </head>
-<body style="font-family: LeeHyunJi; text-align: center; padding-top: 60px">
+<body>
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<form name="noticeForm" method="post">
-				<h1>공지사항</h1>
-				<div style="text-align: left">
-					<c:forEach var="n_dto" items="${n_lists }">
-						<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}">${n_dto.getBN_SUBJECT() }</a>
-						<hr>
-						<br>
-					</c:forEach>
+			<h1>공지사항</h1>
+			<div style="text-align: left">
+				${n_dto.getBN_NUM() }
+				${n_dto.getBN_SUBJECT() }
+				${n_dto.getBN_CONTENT() }
+				${n_dto.getBN_DATE() }
+			<hr>
+					<br>
 
-				</div>
-
-				<input type="button" class="btnGreen" value="공지사항 등록" onclick="registerNotice();">
-
-			</form>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
