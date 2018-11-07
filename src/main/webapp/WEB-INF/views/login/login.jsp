@@ -5,6 +5,19 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String clientId = "dnvfDSWWZdZLlC4W0n7E";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8080/icade/callbackTest", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    
+    
+    session.setAttribute("state", state);
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -63,7 +76,7 @@
 						<tr style="border-bottom: 1px solid black;">
 							<td style="border-right: 1;"><input type="checkbox" id="saveId" name="idSaveCheck">아이디 저장</td>
 							<td><input type="button" value="로그인" id="login" onClick="loginProcess()" class="btnGreen" style="width: 150px;"></td>
-							<td> <div id="naverIdLogin"></div></td>
+							<td><a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a></td>
 						</tr>
 					</table>
 				</div>
@@ -83,7 +96,7 @@
 
 
 <!-- 네이버아디디로로그인 초기화 Script -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
    var naverLogin = new naver.LoginWithNaverId(
       {
          clientId: "dnvfDSWWZdZLlC4W0n7E",
@@ -96,7 +109,7 @@
    /* 설정정보를 초기화하고 연동을 준비 */
    naverLogin.init();
    
-</script>
+</script> -->
 <!-- // 네이버아이디로로그인 초기화 Script -->
 </body>
 </html>

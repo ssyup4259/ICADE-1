@@ -249,20 +249,6 @@ callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바
 				
 				var params = JSON.stringify(snsDTO);
 				
-				if(snsDTO.sns_id){
-					$.ajax({
-						type : "POST",
-						dataType : "json",
-						url : "<%=cp%>/snslogin.action",
-						data : {json : params},
-						success : function(data) {
-							alert(data);
-						},
-						error:function(request,status,error){
-						    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						}
-					});
-				}
 				if( email == undefined || email == null) {
 					alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
 					/* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */
