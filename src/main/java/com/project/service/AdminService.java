@@ -41,6 +41,6 @@ public interface AdminService {
 	//회원에게 권한 부여
 	public void	authorityChange(HttpServletRequest req) throws Exception;
 	//회원 주문내역 조회
-	public List<PaymentsDTO> payments() throws Exception;
+	public HttpServletRequest payments(HttpServletRequest req) throws Exception;
 
 }

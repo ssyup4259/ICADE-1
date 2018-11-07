@@ -137,9 +137,16 @@
 	});
 	
 	
-	
-	
-	
+	/*
+	$(document).ready(function (){
+		var h = document.URL;
+		alert(h);
+		var b = h.indexOf("G_NUM");
+		alert(b)
+		var a = h.substring(b);
+		alert(a);
+	});
+	*/
 	
 	
 	

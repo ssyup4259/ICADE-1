@@ -40,20 +40,18 @@
 	   and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
 	]]>
 	</select>
-
-	<!-- 주문내역 메인페이지에 뿌려줄 정보 -->
-	<select id="selectOrders" parameterType="String" resultType="com.project.dto.OrdersDTO">
-		select O_NUM,O_ID,to_char(trunc(O_DATE),'YYYY-MM-DD') O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM, 
-			(select count(OD_NUM) from ORDER_DETAIL where O_NUM=OD_NUM) as O_COUNT from orders where O_ID = #{O_ID}
-	</select>
-	
-	<!-- 글번호+세이브파일네임 -->
-	<select id="selectOdSaveFileName" parameterType="map" resultType="com.project.dto.OrderDetailDTO">
+	<!-- 상세정보보기 에서 뿌릴 상품관련 정보 for문 -->
+	<select id="selectOrderDetail" parameterType="map" resultType="com.project.dto.OrderDetailDTO">
 		select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME from(
 			(select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME,O_NUM,O_ID from ORDER_DETAIL,
 			(select GD_NUM,GD_CODE from GOODS_DETAIL),(select G_NUM,G_SAVEFILENAME from goods),(select O_ID,O_NUM from ORDERS)
-				where O_NUM=OD_NUM AND OD_CODE = GD_CODE and GD_NUM = G_NUM) data) 
+				where O_NUM=OD_NUM AND OD_CODE = GD_CODE and GD_NUM = G_NUM) data)
 		where OD_NUM = #{O_NUM} and O_ID = #{O_ID}
+	</select>
+	
+	<!-- 상세정보보기 받는사람 정보 및 결제 관련 dto -->
+	<select id="selectRecipientInfo" parameterType="map" resultType="com.project.dto.OrdersDTO">
+		select O_NUM,O_ID,O_DATE,O_NAME,O_PH,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2,O_STATUS,O_WAY,O_TOT,O_TNUM,O_IMP,O_POINT from orders where O_ID = #{O_ID} and O_NUM=#{O_NUM}
 	</select>
 
 	<select id="OrderHistoryMain" parameterType="map" resultType="com.project.dto.OrderHistoryDTO">

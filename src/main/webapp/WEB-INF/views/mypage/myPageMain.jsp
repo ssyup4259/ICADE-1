@@ -124,11 +124,13 @@
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-sm-8" style="border: 3px solid #A3C838; border-radius: 12px; font-size: 20px; padding-top: 20px;">
-
-					<font style="font-size: 30px;"><b>마이 쇼핑</b></font>
+					<font style="font-size: 30px;">
+						<b>마이 쇼핑</b>
+					</font>
 					<p>
-						<button id="ch" class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
-						<button class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						
+						<button id="ch" class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						<button  class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
 
 					</p>
 					<hr style="border: 3px solid #DDDADB;">
@@ -137,19 +139,19 @@
 							<p>가용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p>${point}Point</p>
+							<p id="availablePoint">${point}Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
-							<a href="/myshop/mileage/historyList.html" class="button"><input type="button" class="btnGray" style="width: 200px;" value="조회"></a>
+							<input type="button" class="btnGray" style="width: 200px; cursor:pointer;" id="refresh" value="refresh">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-sm-2" style="text-align: right;">
-							<p>총포인트 :</p>
+							<p>누적포인트 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
-							<p>2,700원</p>
+							<p>${point+usedPoint}Point</p>
 						</div>
 					</div>
 					<div class="row">
@@ -157,10 +159,12 @@
 							<p>사용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p>사용한 포인트 적는데</p>
+							<p>${usedPoint}Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
-							<a href="/myshop/deposits/historyList.html" class="button"><input type="button" class="btnGray" style="width: 200px;" value="조회"></a>
+							<a href="/myshop/deposits/historyList.html" class="button">
+								<input type="button" class="btnGray" style="width: 200px;" value="사용내역">
+							</a>
 						</div>
 					</div>
 					<div class="row">
@@ -209,10 +213,16 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-2" style="text-align: right;">
-							<p>주 소 :</p>
+							<p>우편번호 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
-							<p>${sessionScope.userInfo.getM_ZIPCODE()}${sessionScope.userInfo.getM_ADDRESS1()}${sessionScope.userInfo.getM_ADDRESS2()}</p>
+							<p>${sessionScope.userInfo.getM_ZIPCODE()} </p>
+						</div>
+						<div class="col-sm-2" style="text-align: right;">
+							<p>주 소 :</p>
+						</div>
+						<div>
+							<p>${sessionScope.userInfo.getM_ADDRESS1()} - ${sessionScope.userInfo.getM_ADDRESS2()}</p>
 						</div>
 					</div>
 					<div class="row">
@@ -233,14 +243,6 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-2" style="text-align: right;">
-							<p>포 인 트 :</p>
-						</div>
-						<div class="col-sm-10" style="text-align: left;">
-							<p>${point}</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-2" style="text-align: right;">
 							<p>가 입 일 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
@@ -257,15 +259,10 @@
 					<br>
 
 				</div>
-				<div class="col-sm-4 toggle" style="display: none;">
+				<div class="col-sm-4 toggle">
 
 
-
-	<p>
-    <button id="ch" class="hide" value="찜리스트 펼치기">찜리스트 숨기기</button>
-    <button class="show" value="찜리스트 숨기기">찜리스트 펼치기</button>
 	
-	</p>
 	
 	<div class="toggle" id="wishList">
 	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 200px;"/>
@@ -297,14 +294,36 @@
 	</div>
 
 
-	<script type="text/javascript">
-		$("#orderHistory").click(function() {
-			document.location.href = "orderHistory.action";
-		});
+<script type="text/javascript">
 
-		function sendMode(mode) {
-			window.location.href = "infoCheckPage.action?mode=" + mode;
-		}
-	</script>
+	$("#orderHistory").click(function() {
+		document.location.href = "orderHistory.action";
+	});
+
+	function sendMode(mode) {
+		window.location.href = "infoCheckPage.action?mode=" + mode;
+	}
+	
+	$(document).ready(function (){
+		$("#refresh").click(function(){
+
+			var m_Id = ${jsonM_id};
+			
+			$.ajax({
+				url:'<%=cp%>/refreshAjax.action',
+				type:'POST',
+				async: false,
+				data:{"M_ID":m_Id},
+				datatype: 'text',
+				})
+				.done(function(data){
+					document.getElementById('availablePoint').innerHTML = data + "Point"; 
+				})
+				.fail(function(){
+					alert("Point Loading Fail...");
+				});
+		});
+	});
+</script>
 </body>
 </html>

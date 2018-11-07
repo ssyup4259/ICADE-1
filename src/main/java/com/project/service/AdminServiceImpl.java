@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -618,7 +619,7 @@ public class AdminServiceImpl implements AdminService {
 
 	//회원 주문내역 조회
 	@Override
-	public List<PaymentsDTO> payments() throws Exception  {
+	public HttpServletRequest payments(HttpServletRequest req) throws Exception  {
 		
 		List<PaymentsDTO> p_lists = new ArrayList<PaymentsDTO>();
 		
@@ -631,13 +632,86 @@ public class AdminServiceImpl implements AdminService {
 		
 		String token = api.getToken(json);
 		
-		List<String> imp_uid = a_dao.imp_uidList();
+		String cp = req.getContextPath();
+		
+		String pageNum = req.getParameter("pageNum");
+		int currentPage = 1;
+		
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
+		if (pageNum != null)
+			currentPage = Integer.parseInt(pageNum);
+		
+		String o_status = req.getParameter("o_status");
+		
+		if (o_status == null || o_status.equals("")) {
+			o_status = "";
+		}
+		
+		String searchKey = req.getParameter("searchKey");
+		String searchValue = req.getParameter("searchValue");
+		
+		if (searchKey == null) {
+			
+			searchKey = "O_ID";
+			searchValue = "";
+			
+		} else {
+			
+			if (req.getMethod().equalsIgnoreCase("GET"))
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			
+		}
+		
+		//전체데이터갯수
+		int dataCount = a_dao.getOrdersCount(o_status, searchKey, searchValue);
+		
+		//전체페이지수
+		int numPerPage = 10;
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		
+		if (currentPage > totalPage)
+			currentPage = totalPage;
+		
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("o_status", o_status);
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<String> imp_uid = a_dao.imp_uidList(map);
+		
+		//페이징 처리
+		String param = "";
+		if (!searchValue.equals("")) {
+			param = "o_status=" + o_status;
+			param = "&searchKey=" + searchKey;
+			param+= "&searchValue=" 
+				+ URLEncoder.encode(searchValue, "UTF-8");
+		}
+		
+		String listUrl = cp + "/admin/payments.action";
+		if (!param.equals("")) {
+			listUrl = listUrl + "?" + param;
+		}
+		
+		String pageIndexList =
+			myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
 		Iterator<String> it = imp_uid.iterator();
 		
 		while (it.hasNext()) {
 			
 			String impUid = it.next();
+			
+			log.info(impUid);
 			
 			PaymentsDTO p_dto = api.getInfo(token, impUid);
 			
@@ -679,8 +753,14 @@ public class AdminServiceImpl implements AdminService {
 			p_lists.add(p_dto);
 			
 		}
+		
+		//포워딩 될 페이지에 데이터를 넘긴다
+		req.setAttribute("p_lists", p_lists);
+		req.setAttribute("pageIndexList",pageIndexList);
+		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("o_status", o_status);
 
-		return p_lists;
+		return req;
 		
 	}
 

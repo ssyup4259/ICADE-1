@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -18,7 +18,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
-
 <script type="text/javascript">
 
 	function cancelIt(imp_uid, o_num) {
@@ -85,7 +84,6 @@
 	color: white;
 }
 </style>
-
 </head>
 <body>
 
@@ -169,7 +167,7 @@
 									<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <strong>${dto.getOD_NAME()}</strong></a>
 										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
 								<td>${dto.getOD_COUNT()}</td>
-								<td><strong><fmt:formatNumber>${dto.getOD_PRICE()}</fmt:formatNumber>원</strong></td>
+								<td><strong><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###"/>원</strong></td>
 								<td class="gubun">
 									<p style="display: none;">${dto.getO_IMP()}</p>
 									<p>${dto.getO_STATUS()}</p>

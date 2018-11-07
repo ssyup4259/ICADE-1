@@ -24,7 +24,14 @@
 <script type="text/javascript">
 
 	function infoCheckPage_sendIt() {
-
+		
+		var pw = $("#pw").val();
+		
+		if(pw==""){
+			alert("비밀번호를 입력해주세요.");
+			return;
+		}
+		
 		var msg = $("#msg").val();
 		var f = document.myForm;
 
@@ -62,7 +69,7 @@
 
 					<input type="hidden" id="mode" name="mode" value="${mode}">
 					<input type="hidden" id="msg" name="msg" value="${msg}">
-
+					<input type="text" style="display: none;">
 					<table style="border: none;">
 						<tr>
 							<td colspan="2" style="text-align: left">아 이 디 : ${sessionScope.userInfo.getM_ID()}</td>
@@ -81,32 +88,31 @@
 	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 
-	<script type="text/javascript">
-		$("#pw").keyup(function(event) {
-			var pw = $("#pw").val();
+<script type="text/javascript">
+//keyup 이벤트시에 입력마다 서버로 값을 보내서 포커스에서 벗어날시 작동하는 스크립트로 변경
+		
+	$("#pw").blur(function(event) {
+		var pw = $("#pw").val();
 
-			//alert(pw);
-
-			$.ajax({
-				type : "POST",
-				url : "testAjax.action",
-				data : {
-					"pw" : pw
-				},
-				dataType : "json",
-				error : function(error) {
-					alert(error);
-				},
-				success : function(data) {
-					if (data == false) {
-						//alert("false : " + data);
-						$("#msg").val("비밀번호가 틀립니다.");
-					} else if (data == true) {
-						$("#msg").val("");
-					}
+		$.ajax({
+			type : "POST",
+			url : "pwCheckAjax.action",
+			data : {"pw" : pw},
+			dataType : "json",
+			error : function(error) {
+				alert(error);
+			},
+			success : function(data) {
+				if (data == false) {
+					//alert("false : " + data);
+					$("#msg").val("비밀번호가 틀립니다.");
+				} else if (data == true) {
+					$("#msg").val("");
 				}
-			});
+			}
 		});
-	</script>
+	});
+	
+</script>
 </body>
 </html>

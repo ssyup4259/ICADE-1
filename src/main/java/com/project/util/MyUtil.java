@@ -74,9 +74,9 @@ public class MyUtil {
 		
 		while(page <= totalPage && page <= (currentPageSetup + numPerBlock)){
 			
-			if(page == currentPage){				
+			if(page == currentPage){
 				
-				sb.append("<font color=\"Fuchsia\">" + page + "</font>&nbsp;");				
+				sb.append("<font color=\"#A3C838\">" + page + "</font>&nbsp;");				
 			
 			}else{
 				
