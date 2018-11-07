@@ -176,9 +176,7 @@ public class AdminController {
 	@RequestMapping(value="/payments.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String payments(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		List<PaymentsDTO> p_lists = a_service.payments();
-		
-		req.setAttribute("p_lists", p_lists);
+		a_service.payments(req);
 		
 		return "admin/payments";
 		

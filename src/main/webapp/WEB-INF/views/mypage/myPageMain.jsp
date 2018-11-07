@@ -128,8 +128,9 @@
 						<b>마이 쇼핑</b>
 					</font>
 					<p>
-						<button id="ch" class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
-						<button class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						
+						<button id="ch" class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
+						<button  class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
 
 					</p>
 					<hr style="border: 3px solid #DDDADB;">
@@ -258,15 +259,10 @@
 					<br>
 
 				</div>
-				<div class="col-sm-4 toggle" style="display: none;">
+				<div class="col-sm-4 toggle">
 
 
-
-	<p>
-    <button id="ch" class="hide" value="찜리스트 펼치기">찜리스트 숨기기</button>
-    <button class="show" value="찜리스트 숨기기">찜리스트 펼치기</button>
 	
-	</p>
 	
 	<div class="toggle" id="wishList">
 	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 200px;"/>

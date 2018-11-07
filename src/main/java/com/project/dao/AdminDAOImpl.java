@@ -205,8 +205,8 @@ public class AdminDAOImpl implements AdminDAO {
 
 	//회원 주문내역 조회
 	@Override
-	public List<String> imp_uidList() throws Exception  {
-		return sessionTemplate.selectList(adminMapper + ".getReadImpUid");
+	public List<String> imp_uidList(Map<String, Object> map) throws Exception  {
+		return sessionTemplate.selectList(adminMapper + ".getReadImpUid", map);
 	}
 
 	@Override
@@ -226,8 +226,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	
-	
+	//imp_uid로 Orders 테이블 조회
+	@Override
+	public OrdersDTO getReadOrder(String imp_uid) throws Exception {
+		return sessionTemplate.selectOne(adminMapper + ".getReadOrder", imp_uid);
+	}
 
-	
+	@Override
+	public int getOrdersCount() throws Exception {
+		return sessionTemplate.selectOne(adminMapper + ".getOrdersCount");
+	}
 
 }
