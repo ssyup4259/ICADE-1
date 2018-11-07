@@ -593,9 +593,7 @@ function login_need() {
 					<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
 						<!-- 로그인 했을 경우만 댓글 작성가능 -->
 						<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-<<<<<<< HEAD
-						
-=======
+
 							<%-- 	<tr>
 									<tr bgcolor="lightgray" height="60px;">
 										<!-- 아이디-->
@@ -612,7 +610,6 @@ function login_need() {
 										<!-- 댓글 등록 버튼 -->
 										
 									</tr> --%>
->>>>>>> 찜목록작업용
 						</c:if>
 
 
@@ -623,11 +620,8 @@ function login_need() {
 								<td width="100%">
 									<div>
 										<p>
-<<<<<<< HEAD
 											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
-=======
-											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btn" height="20px">
->>>>>>> 찜목록작업용
+
 										</p>
 									</div>
 								</td>

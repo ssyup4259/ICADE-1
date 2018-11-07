@@ -52,11 +52,8 @@
 			var m_id= "${sessionScope.userInfo.getM_ID()}";
 			
 			if(m_id==""){
-<<<<<<< HEAD
-				alert("로그인을 하셔야 됩니다");
-=======
+
 				swal("로그인을 하셔야 됩니다");
->>>>>>> 찜목록작업용
 				
 				
 			
@@ -88,12 +85,9 @@ function deleteCookie(G_NUM){
 
 </script>
 
-<<<<<<< HEAD
-	function footer_sendIt(g_num) {
-=======
+
 <script>
 function deleteAllCookies(){
->>>>>>> 찜목록작업용
 		
 			$.ajax({
 			url:'<%=cp%>/cookies/cookieDelete_ok.action',
@@ -146,8 +140,7 @@ function deleteAllCookies(){
 			<c:forEach var="ck" items="${ck_lists}">
 				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}"></a>
-<<<<<<< HEAD
-				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="footer_sendIt(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
+				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="deleteCookie(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 
 			</c:forEach>
 		</form>
