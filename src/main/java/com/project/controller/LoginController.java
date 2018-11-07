@@ -89,6 +89,8 @@ public class LoginController {
 	@RequestMapping(value="/callbackTest", method= {RequestMethod.GET,RequestMethod.POST})
 	public String callbackTest(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		
+		
+		
 		return "callbackTest";
 	}
 	

@@ -68,6 +68,10 @@ public class MyPageController {
 		
 		//System.out.println(mode);
 		
+		if(mode.equals("")||mode=="") {
+			return "/mypage/myPageMain";
+		}
+		
 		request.setAttribute("mode", mode);
 		
 		return "/mypage/infoCheckPage";

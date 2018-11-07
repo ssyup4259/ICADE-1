@@ -161,7 +161,7 @@
 	<tr>
 		<th scope="row" class="fst">결제금액</th>
 		<td>
-			<strong class="point">${Recipientdto.getO_TOT()}원</strong>
+			<strong class="point"><fmt:formatNumber value="${Recipientdto.getO_TOT()}" pattern="#,###"/>원</strong>
 		</td>
 		<td>${Recipientdto.getO_WAY()}</td>
 	</tr>
@@ -176,14 +176,14 @@
 
 <script type="text/javascript">
 
-$(document).ready(function(){
-	$('.btnHelpOption').hover(function() {
-		$(this).next().show();
-	}
-	, function() {
-		$(this).next().hide();
+	$(document).ready(function(){
+		$('.btnHelpOption').hover(function() {
+			$(this).next().show();
+		}
+		, function() {
+			$(this).next().hide();
+		});
 	});
-    });
 </script></div>
 
 
