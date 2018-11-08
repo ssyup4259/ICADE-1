@@ -52,10 +52,18 @@ function goodsUpdateIt() {
 	
 	window.opener.top.location.reload();
 	
+	$.ajax({
+		url : 'sub/data.json',
+		type : 'get', dataType : 'json',
+		success : function () { window.close(); },
+		error : function () { window.close(); }
+	});
+
+	
 }
 
 
-	
+
 </script>
 
 </head>
