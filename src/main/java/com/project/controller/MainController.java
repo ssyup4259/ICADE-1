@@ -37,10 +37,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(HttpServletRequest req) throws Exception {
-		System.out.println("------------------------------req 확인");
-		System.out.println(req);
 		List<String> lists = (List<String>) req.getAttribute("c_lists");
-		System.out.println("-------------------------------------lists 체크");
 		System.out.println(lists);
 		g_service.goodsMain(req);
 		c_service.cookieList(req);

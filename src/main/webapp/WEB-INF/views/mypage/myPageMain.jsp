@@ -259,9 +259,8 @@
 					<br>
 
 				</div>
-			</div>	
 				<div class="col-sm-4 toggle">
-
+			
 
 	
 	
@@ -293,7 +292,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 
 <script type="text/javascript">
 
