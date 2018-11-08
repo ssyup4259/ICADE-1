@@ -119,11 +119,9 @@ public class AdminController {
 	
 	//상품 수정(관리자용)
 	@RequestMapping(value="/updateGoods.action", method=RequestMethod.POST)
-	public String updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public void updateGoods(GoodsDTO g_dto, MultipartHttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		a_service.updateGoods(g_dto, req);
-		
-		return "redirect:/admin/goodsList.action";
 		
 	}
 	

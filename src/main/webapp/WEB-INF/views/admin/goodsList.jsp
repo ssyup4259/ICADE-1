@@ -42,6 +42,28 @@ function goodsSearchIt() {
 }
 </style>
 
+<script type="text/javascript">
+
+function updateGoods(g_num) {
+	
+	window.open("updateGoods.action?g_num=" + g_num, "상품 수정", "width=400, height=800");
+	
+}
+
+function deleteGoods(g_num) {
+	
+	if (confirm("삭제 하시겠습니까?") == true) {
+		
+		location.href = "<%=cp%>/admin/deleteGoods.action?g_num=" + g_num;
+
+	} else {
+		return;
+	}
+	
+}
+
+</script>
+
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
@@ -99,7 +121,7 @@ function goodsSearchIt() {
 							<td>${g_dto.getG_CONTENT()}</td>
 							<td>${g_dto.getG_DISCOUNT()}%</td>
 							<td><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="100" height="100" /></td>
-							<td><a style="cursor: pointer;" onclick="window.open('updateGoods.action?g_num=${g_dto.getG_NUM()}', '상품 수정', 'width=400, height=900')">수정</a> / <a href="<%=cp%>/admin/deleteGoods.action?g_num=${g_dto.getG_NUM()}">삭제</a></td>
+							<td><a style="cursor: pointer;" onclick="updateGoods('${g_dto.getG_NUM()}');">수정</a> / <a style="cursor: pointer;" onclick="deleteGoods('${g_dto.getG_NUM()}');">삭제</a></td>
 							<!-- <a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a> -->
 						</tr>
 					</c:forEach>
