@@ -896,11 +896,24 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	}
 
 	@Override
-	public HttpServletRequest searchGoodsList(HttpServletRequest req) throws Exception {
+	public HttpServletRequest searchGoodsList(GoodsDTO g_dto,HttpServletRequest req) throws Exception {
+		
+		String searchKey = req.getParameter("searchKey");
+		String searchValue = req.getParameter("searchValue");
+		
+		System.out.println(searchKey);
+		System.out.println(searchValue);
+		
+		if (searchKey == null  || searchKey.equals("")) {
+			searchKey = "G_NAME";
+		}
+		
+		List<GoodsDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue); 
 		
 		
+		req.setAttribute("g_list", g_list);
 		
-		return null;
+		return req;
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dto.BoardCommentDTO;
+import com.project.dto.GoodsDTO;
 
 public interface BoardCommentService {
 	
@@ -33,6 +34,6 @@ public interface BoardCommentService {
 	//사진없는 댓글 삭제
 	public void deleteReply(int BC_NUM)throws Exception;
 	//상품 검색하기
-	public HttpServletRequest searchGoodsList(HttpServletRequest req) throws Exception;
+	public HttpServletRequest searchGoodsList(GoodsDTO g_dto,HttpServletRequest req) throws Exception;
 	
 }

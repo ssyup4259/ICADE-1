@@ -184,14 +184,8 @@ public class BoardCommentController {
 		
 		bc_dto = bc_service.getReadReply(BC_NUM);
 		
-		System.out.println(bc_dto.getBC_ID());
-		System.out.println(bc_dto.getBC_BOARD());
-		
-		
 		mav.addObject("bc_dto",bc_dto);
 		mav.setViewName("reply/goodsReplyModify");
-		
-		System.out.println("타냐");
 		
 		return mav;
 	}
@@ -201,14 +195,8 @@ public class BoardCommentController {
 		
 		bc_dto = bc_service.getReadReply(BC_NUM);
 		
-		System.out.println(bc_dto.getBC_ID());
-		System.out.println(bc_dto.getBC_BOARD());
-		
-		
 		mav.addObject("bc_dto",bc_dto);
 		mav.setViewName("reply/photoReplyModify");
-		
-		System.out.println("타냐");
 		
 		return mav;
 	}
@@ -230,32 +218,7 @@ public class BoardCommentController {
 	
 	
 	
-	/*//포토후기 상세페이지에서 대댓글 업데이트
-	@RequestMapping(value="/photoReplyComment.action")
-	@ResponseBody
-	public String photoReplyComment(BoardCommentDTO bc_dto, HttpServletRequest req)throws Exception{
-		
-		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
-		System.out.println(BC_NUM);
-		bc_dto = bc_service.getReadReply(BC_NUM);
-		
-		req.setAttribute("bc_dto", bc_dto);
-		return "reply/goodsReplyModify";
-	}
-	//수정확인
-	@RequestMapping(value="/photoReplyComment_ok.action")
-	@ResponseBody
-	public String photoReplyComment_ok(BoardCommentDTO bc_dto, HttpServletRequest req)throws Exception{
-		
-		
 	
-		int BC_BOARD =Integer.parseInt(req.getParameter("BC_BOARD"));
-		
-		
-		bc_service.updateReply(bc_dto, req);
-		return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
-	}
-	*/
 	//포토후기 상세페이지에서 대댓글 삭제
 	@RequestMapping(value="/photoReplyDelete.action",method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
@@ -272,18 +235,24 @@ public class BoardCommentController {
 	@RequestMapping(value="/photoInsertData_ok.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String photoInsertData_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
 		
-		int BC_BOARD = Integer.parseInt(request.getParameter("G_NUM"));
 	 	bc_service.insertData(bc_dto, req, request);
+	 
+	 	System.out.println(bc_dto.getBC_NUM());
+	 	int BC_NUM = bc_dto.getBC_NUM();
 	 	
-	 	return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
+	 	return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM;
 	}
+	
 	@RequestMapping(value="/searchGoodsList.action",method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public ModelAndView searchGoodsList(GoodsDTO g_dto,HttpServletRequest req,ModelAndView mav) {
 		
-		
-	 
-		
+			try {
+				bc_service.searchGoodsList(g_dto, req);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("reply/searchList");
 		return mav;
 	}
 	
@@ -295,9 +264,6 @@ public class BoardCommentController {
 		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		req.setAttribute("gk_lists", gk_lists);
-		
-		
-		
 		return req;
         
     }
