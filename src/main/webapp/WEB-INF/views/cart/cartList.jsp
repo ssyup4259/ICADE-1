@@ -163,41 +163,42 @@ input[type=checkbox] {
 	</tr>
 	
 	<c:forEach var="c_dto" items="${c_lists}">
-	<tr>
-		<td>
-			<input type="checkbox" id="chk${c_dto.getC_NUM()}" name="chk" value="${c_dto.getC_NUM()}"/>
-		</td>
-		<td>
-			<label for="chk${c_dto.getC_NUM()}">
-				<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>
-			</label>
-		</td>
-		<td>
-			<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${c_dto.getC_GNUM()}">
-				${c_dto.getC_NAME()}&nbsp;
-				[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
-			</a>
-		</td>
-		<td>
-			<fmt:formatNumber>${c_dto.getC_PRICE()}</fmt:formatNumber>원
-		</td>
-		<td>
-			<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
-			<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
-			<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
-		</td>
-		<td>
-			<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})" class="btnGray"/>
-		</td>
-		<td>
-			<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원
-		</td>
-		<td>
-			<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
-		</td>
-	</tr>
 	
-</c:forEach>
+		<tr>
+			<td>
+				<input type="checkbox" id="chk${c_dto.getC_NUM()}" name="chk" value="${c_dto.getC_NUM()}"/>
+			</td>
+			<td>
+				<label for="chk${c_dto.getC_NUM()}">
+					<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>
+				</label>
+			</td>
+			<td>
+				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${c_dto.getC_GNUM()}">
+					${c_dto.getC_NAME()}&nbsp;
+					[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
+				</a>
+			</td>
+			<td>
+				<fmt:formatNumber>${c_dto.getC_PRICE()}</fmt:formatNumber>원
+			</td>
+			<td>
+				<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
+				<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
+				<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
+			</td>
+			<td>
+				<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})" class="btnGray"/>
+			</td>
+			<td>
+				<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원
+			</td>
+			<td>
+				<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
+			</td>
+		</tr>
+	
+	</c:forEach>
 
 	<tr>
 		<td colspan="8">
