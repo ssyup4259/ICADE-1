@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle2.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -100,7 +100,7 @@ function buyIt() {
 	
 	f.action = "<%=cp%>/buy/buyForm.action";
 	
-	if ($("input:checkbox[id='chk']").is(":checked") == true) {
+	if ($("input:checkbox[name='chk']").is(":checked") == true) {
 		f.submit();
 	} else {
 		alert("상품을 선택 해 주세요.");
@@ -146,42 +146,82 @@ input[type=checkbox] {
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
-<h3>장바구니 리스트</h3>
+<h1>장바구니 리스트</h1>
 <form action="" method="post" name="myForm">
 <input type="hidden" name="pageNum" value="${pageNum}"/>
-<c:forEach var="c_dto" items="${c_lists}">
-	<label>
-		<input type="checkbox" id="chk" name="chk" value="${c_dto.getC_NUM()}"/>
-		<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>&nbsp;
-	</label>
-	<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${c_dto.getC_GNUM()}">
-		${c_dto.getC_NAME()}&nbsp;
-		[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
-	</a>
-	<fmt:formatNumber>${c_dto.getC_PRICE()}</fmt:formatNumber>원&nbsp;&nbsp;&nbsp;
-	<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
-	<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
-	<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
-	<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})" class="btn"/>	
-	<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원&nbsp;&nbsp;
-	<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
-	<br/>
+
+<table cellpadding="0" cellspacing="0" style="width: 75%; margin: auto;">
+	<tr>
+		<td>선택</td>
+		<td>상품 이미지</td>
+		<td>상품 정보</td>
+		<td>상품 가격</td>
+		<td>상품 수량</td>
+		<td>수량 수정</td>
+		<td>총 가격</td>
+		<td>삭제</td>
+	</tr>
+	
+	<c:forEach var="c_dto" items="${c_lists}">
+	<tr>
+		<td>
+			<input type="checkbox" id="chk${c_dto.getC_NUM()}" name="chk" value="${c_dto.getC_NUM()}"/>
+		</td>
+		<td>
+			<label for="chk${c_dto.getC_NUM()}">
+				<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>
+			</label>
+		</td>
+		<td>
+			<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${c_dto.getC_GNUM()}">
+				${c_dto.getC_NAME()}&nbsp;
+				[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
+			</a>
+		</td>
+		<td>
+			<fmt:formatNumber>${c_dto.getC_PRICE()}</fmt:formatNumber>원
+		</td>
+		<td>
+			<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
+			<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
+			<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
+		</td>
+		<td>
+			<input type="button" value="변경" onclick="updateCheck('${c_dto.getC_CODE()}', ${c_dto.getC_COUNT()})" class="btnGray"/>
+		</td>
+		<td>
+			<fmt:formatNumber>${c_dto.getC_PRICE() * c_dto.getC_COUNT()}</fmt:formatNumber>원
+		</td>
+		<td>
+			<a href="<%=cp%>/cart/deleteCartItem.action?c_num=${c_dto.getC_NUM()}&pageNum=${pageNum}">삭제</a>
+		</td>
+	</tr>
+	
 </c:forEach>
 
-</form>
+	<tr>
+		<td colspan="8">
+			<c:if test="${dataCount!=0 }">
+				<input type="button" value="모두 비우기" onclick="javascript:location.href='<%=cp%>/cart/deleteCartAll.action';" class="btnGray"/>
+				<input type="button" value="구매하기" onclick="buyIt();" class="btnGray"/>
+			</c:if>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="8">
+			<c:if test="${dataCount!=0 }">
+				${pageIndexList }
+			</c:if>
+			<c:if test="${dataCount==0 }">
+				등록된 상품이 없습니다.
+			</c:if>
+		</td>
+	</tr>
+	
+</table>
 
-<c:if test="${dataCount!=0 }">
-	<br/>
-	<input type="button" value="모두 비우기" onclick="javascript:location.href='<%=cp%>/cart/deleteCartAll.action';" class="btn"/>
-	<input type="button" value="구매하기" onclick="buyIt();" class="btn"/>
-	<br/><br/>
-</c:if>
-<c:if test="${dataCount!=0 }">
-	${pageIndexList }
-</c:if>
-<c:if test="${dataCount==0 }">
-	등록된 상품이 없습니다.
-</c:if>
+</form>
 
 <jsp:include page="../include/footer.jsp" flush="false" />
 
