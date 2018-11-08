@@ -10,6 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품 재고 수정</title>
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <!-- 재고 수정하기 버튼 submit -->
 <script type="text/javascript">
 
@@ -19,6 +21,15 @@ function countUpdateIt() {
 	        
 	f.action = "<%=cp%>/admin/updateGoodsDetailCount.action";
 	f.submit();
+	
+	window.opener.top.location.reload();
+	
+	$.ajax({
+		url : 'sub/data.json',
+		type : 'get', dataType : 'json',
+		success : function () { window.close(); },
+		error : function () { window.close(); }
+	});
 	
 }
 
@@ -45,13 +56,13 @@ function countUpdateIt() {
 		
 		<c:set var="i" value="${gd_dto.DK_NAME}"/>
 		
-		${gd_dto.GC_COLOR} : <input type="text" name="GD_COUNT" value="${gd_dto.GD_COUNT}" size="3"/>개&nbsp;
+		${gd_dto.GC_COLOR} : <input type="text" name="GD_COUNT" value="${gd_dto.GD_COUNT}" size="3" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개&nbsp;
 		<input type="hidden" name="GD_CODE" value="${gd_dto.GD_CODE}"/>
 		
 	</c:forEach>
 	<br/><br/>
 	<input type="button" onclick="countUpdateIt()" value="재고 수정"/>
-	<input type="button" onclick="javascript:history.back();" value="취 소"/>
+	<input type="button" onclick="javascript:window.close();" value="취 소"/>
 
 </form>
 

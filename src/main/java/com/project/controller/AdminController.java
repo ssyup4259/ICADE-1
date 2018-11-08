@@ -142,11 +142,9 @@ public class AdminController {
 	
 	//상품 재고 수정(관리자용)
 	@RequestMapping(value="/updateGoodsDetailCount.action", method=RequestMethod.POST)
-	public String updateGoodsDetailCount(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public void updateGoodsDetailCount(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		a_service.updateGoodsDetailCount(req);
-		
-		return "redirect:/admin/goodsList.action";
 		
 	}
 	
