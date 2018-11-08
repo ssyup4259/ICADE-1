@@ -50,6 +50,12 @@ function updateGoods(g_num) {
 	
 }
 
+function updateGoodsCount(g_num) {
+	
+	window.open("updateGoodsDetailCount.action?g_num=" + g_num, "상품재고 수정", "width=400, height=800");
+	
+}
+
 function deleteGoods(g_num) {
 	
 	if (confirm("삭제 하시겠습니까?") == true) {
@@ -115,7 +121,7 @@ function deleteGoods(g_num) {
 						<tr>
 							<td>${g_dto.getGK_KIND()}</td>
 							<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}">${g_dto.getG_NAME()}</a></td>
-							<td><a href="<%=cp%>/admin/updateGoodsDetailCount.action?g_num=${g_dto.getG_NUM()}"><fmt:formatNumber>${g_dto.getG_COUNT()}</fmt:formatNumber>개</a></td>
+							<td><a style="cursor: pointer;" onclick="updateGoodsCount('${g_dto.getG_NUM()}');"><fmt:formatNumber>${g_dto.getG_COUNT()}</fmt:formatNumber>개</a></td>
 							<td><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</td>
 							<td><fmt:formatNumber>${g_dto.getG_SELLCOUNT()}</fmt:formatNumber>개</td>
 							<td>${g_dto.getG_CONTENT()}</td>
