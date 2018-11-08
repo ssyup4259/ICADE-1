@@ -17,7 +17,7 @@
 
 function goodsUpdateIt() {
 	
-	var f = document.myForm;
+	var f = document.updateGoodsForm;
     
     str = f.G_NAME.value;
     str = str.trim();
@@ -46,10 +46,16 @@ function goodsUpdateIt() {
     }
     f.G_CONTENT.value = str;
 	        
+    
 	f.action = "<%=cp%>/admin/updateGoods.action";
 	f.submit();
+	
+	window.opener.top.location.reload();
+	
 }
 
+
+	
 </script>
 
 </head>
@@ -57,7 +63,7 @@ function goodsUpdateIt() {
 
 <h3>상품수정 테스트</h3>
 
-<form action="" name="myForm" method="POST" enctype="multipart/form-data">
+<form action="" name="updateGoodsForm" method="POST" enctype="multipart/form-data">
 
 <input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}"/>
 상품 종류 : ${g_dto.getGK_KIND()} <br/>
@@ -70,8 +76,8 @@ function goodsUpdateIt() {
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 
-<input type="button" onclick="goodsUpdateIt()" value="상품수정">
-<input type="button" onclick="javascript:history.back();" value="취 소"/>
+<input type="button" onclick="goodsUpdateIt();" value="상품수정">
+<input type="button" onclick="javascript:window.close();" value="취 소"/>
 
 </form>
 
