@@ -108,16 +108,9 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 
 <!-- 상품후기 작성을 위한 상품리스트 검색 -->
 <select id="searchGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
-
 	select G_NUM,G_NAME 
 		FROM GOODS
     where 
     	G_NAME like '%' || #{searchValue} || '%' ORDER BY G_NUM desc
-
 </select>
-
-
-
-
-
 </mapper>
