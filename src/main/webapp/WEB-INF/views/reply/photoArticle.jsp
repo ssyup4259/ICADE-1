@@ -163,9 +163,9 @@
 			</table>
 	</div>
 				<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-									<div align="right">
-										<textarea id="PhotoReply_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
-										<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px; padding-bottom: 20px">
+									<div align="center">
+										<textarea id="PhotoReply_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea><br>
+										<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="댓글등록" class="btnGreen" class="btnGreen" height="40px" style="width: 15%"/>
 										<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 										value="${sessionScope.userInfo.getM_ID()}"/>
 									</div>
@@ -174,7 +174,7 @@
 								<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 									<div align="center">
 										<p>
-											<input type="button" style="width: 80%;" value="댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+											<input type="button" style="width: 80%;" value="로그인 하고 댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
 										</p>
 									</div>
 								</c:if>

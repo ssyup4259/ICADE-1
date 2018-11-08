@@ -45,7 +45,7 @@
  		 	상품정보선택
  		</div>
 	 	<c:forEach var="g_dto" items="${g_list}">
-	 		<table align="left">
+	 		<table align="center" width="600">
 	 			<tr>
 	 				<td>
 	 					상품명

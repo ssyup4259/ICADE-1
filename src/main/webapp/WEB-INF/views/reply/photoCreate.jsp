@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>댓글 입력</title>
 
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -63,19 +63,19 @@
 
 </head>
 <body>
-
-<div id="bbs">
+<jsp:include page="../include/header.jsp" flush="false" />
+<div id="bbs" align="center">
 	
 	<form action="" name="myForm" method="post" enctype="multipart/form-data">
 	
-	<input type="text" name="G_NUM" value="${G_NUM}">
+	<input type="hidden" name="G_NUM" value="${G_NUM}">
 	
 	<div id="bbsCreated">
 		<div class="bbsCreated_bottomLine">
 			<dl>
 				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
 				<dd>
-					<input type="text" name="BC_SUBJECT" size="74" maxlength="100" class="boxTF"/>
+					<input type="text" name="BC_SUBJECT" style="width: 33%" maxlength="100" class="inputBoxGreen"/>
 				</dd>							
 			</dl>		
 		</div>
@@ -84,8 +84,8 @@
 			<dl>
 				<dt>작성자</dt>
 				<dd>
-					<input type="text" name="BC_ID" size="35" maxlength="20" class="boxTF"
-					value="${sessionScope.userInfo.getM_ID()}"/>
+					<input type="text" name="BC_ID" maxlength="20" class="inputBoxGreen"
+					value="${sessionScope.userInfo.getM_ID()}" style="width: 33%"/>
 				</dd>							
 			</dl>		
 		</div>
@@ -93,26 +93,28 @@
 		<div id="bbsCreated_content" >
 			<dl>
 				<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
-				<dd>
-					<textarea rows="12" cols="63" name="BC_CONTENT" class="boxTA"></textarea>
-				</dd>							
+				<dd style="float: center;padding-right: 7px">
+					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 33%" class="boxTA" placeholder="내용을 입력하세요"></textarea>
+				</dd>
+				<dt style="float: center;padding-right: 260px">
+					<input type="file" id="upload" name="bcfile" class="btnGray"><br>
+					<input type="file" id="upload1" name="bcfile1" class="btnGray"><br>
+					<input type="file" id="upload2" name="bcfile2" class="btnGray"><br>
+					<input type="file" id="upload3" name="bcfile3" class="btnGray"><br>
+				</dt>							
 			</dl>		
 		</div>
-		<input type="file" id="upload" name="bcfile"><br>
-		<input type="file" id="upload1" name="bcfile1"><br>
-		<input type="file" id="upload2" name="bcfile2"><br>
-		<input type="file" id="upload3" name="bcfile3"><br>
 	</div>	
 	
 	<div id="bbsCreated_footer">
-	<input type="button" value=" 등록하기 " class="btn2" onclick="sendIt();"/>
-	<input type="reset" value=" 다시입력 " class="btn2" onclick="document.myForm.subject.focus();"/>
-	<input type="button" value=" 작성취소 " class="btn2"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
+	<input type="button" value=" 등록하기 " class="btnGreen" onclick="sendIt();"/>
+	<input type="reset" value=" 다시입력 " class="btnGreen" onclick="document.myForm.subject.focus();"/>
+	<input type="button" value=" 작성취소 " class="btnGray" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
 	</div>
 	
 	</form>
 	
 </div>
-
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

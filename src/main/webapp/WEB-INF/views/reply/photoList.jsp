@@ -130,11 +130,11 @@
 
 <body>
 	<form id="replyForm" method="post" enctype="multipart/form-data">
-		 <div id="bbs">
+		 <div id="bbs" align="center">
 				<div id="bbsArticle">
 				 <c:forEach var="bc_dto" items="${bc_lists}">
 				 	<c:if test="${!empty bc_dto.getBC_SUBJECT()}">
-					<div id="replyHeader" style="padding-left: 35px; font-size: 20px">
+					<div id="replyHeader" style="font-size: 20px" align="center">
 						<ul>
 							<li>
 								<p style="font-size: 20px; float:left">
@@ -157,7 +157,7 @@
 						</ul>
 					</div>
 				
-					<div class="${bc_dto.getBC_NUM()}" style="display:none">
+					<div class="${bc_dto.getBC_NUM()}" style="display:none" align="center">
 						<table width="600" border="0">
 						<tr>
 							<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
@@ -182,18 +182,19 @@
 								${bc_dto.getBC_CONTENT()}
 								
 								<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-									<div >
-										<textarea id="BC_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>&nbsp;&nbsp;&nbsp;
-										<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" height="40px" style="padding-left: 10px; font-size: 18px; padding-bottom: 20px">
+									<div align="center" style="float: center">
+										<textarea id="BC_CONTENT" name="BC_CONTENT"  rows="2" cols="100"></textarea><br>
+										<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" style="width: 15%">
 										<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 										value="${sessionScope.userInfo.getM_ID()}"/>
 									</div>
 								</c:if>
-								
+								<br>
+								<br>
 								<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-									<div style="float: right;">
+									<div style="float: center;">
 										<p>
-											<input type="button" value="댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+											<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px" style="width: 100%">
 										</p>
 									</div>
 								</c:if>
@@ -204,7 +205,7 @@
 							</c:if>
 							</c:forEach>
 							
-						<div id="replyComment"></div>
+							<div id="replyComment" align="center"></div>
 							</div>
 							</td>
 						</table>

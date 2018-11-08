@@ -9,11 +9,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-
-<link href="${pageContext.request.contextPath}/css/sangyeop.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 	<title>답글</title>
+<script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 
 <script type="text/javascript">
 	function cmUpdateOpen(BC_NUM) {

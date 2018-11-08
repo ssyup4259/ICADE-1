@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>댓글 수정</title>
+<title>포토리뷰 수정</title>
 
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -63,10 +63,10 @@
 
 </head>
 <body>
-
+<jsp:include page="../include/header.jsp" flush="false" />
 	<form action="" name="myForm" method="post" enctype="multipart/form-data">
 	
-	<div id="bbs">
+	<div id="container" align="center">
 	
 	<input type="hidden" name="BC_BOARD" value="${bc_dto.getBC_BOARD()}">
 	<input type="hidden" name="BC_NUM" value="${bc_dto.getBC_NUM()}">
@@ -75,17 +75,17 @@
 		<div class="bbsCreated_bottomLine">
 			<dl>
 				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-				<dd>
-					<input type="text" name="BC_SUBJECT" value="${bc_dto.getBC_SUBJECT()}" size="74" maxlength="100" class="boxTF"/>
+				<dd style="float: center; padding-right: 22px;">
+					<input type="text" name="BC_SUBJECT" value="${bc_dto.getBC_SUBJECT()}" size="74" maxlength="100" class="inputBoxGreen"/>
 				</dd>							
 			</dl>		
 		</div>
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt>작성자</dt>
-				<dd>
-					<input type="text" name="BC_ID" size="35" maxlength="20" class="boxTF"
+				<dt style="float: center">작성자</dt>
+				<dd style="float: center; padding-right: 22px;">
+					<input type="text" name="BC_ID" size="74" maxlength="100" class="inputBoxGreen"
 					value="${sessionScope.userInfo.getM_ID()}"/>
 				</dd>							
 			</dl>		
@@ -94,28 +94,28 @@
 		<div id="bbsCreated_content" >
 			<dl>
 				<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
-				<dd>
-					<textarea rows="12" cols="63" name="BC_CONTENT" class="boxTA">${bc_dto.getBC_CONTENT()}</textarea>
+				<dd style="float: center; padding-right: 7px;">
+					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 30%" class="boxTA">${bc_dto.getBC_CONTENT()}</textarea>
 				</dd>							
 			</dl>		
 		</div>
 		<div id="bbsCreated_image" >
 			<dl>
 				<dt>사&nbsp;&nbsp;&nbsp;&nbsp;진</dt>
-					<dd>
-						<input type="file"  name="bcfile"><br>
+					<dd style="float: center; padding-right: 240px;" >
+						<input type="file"  name="bcfile" class="btnGray"><br>
 						${bc_dto.getBC_IMAGE()}
 					</dd>
-					<dd>							
-						<input type="file"  name="bcfile1"><br>
+					<dd style="float: center; padding-right: 240px;">							
+						<input type="file"  name="bcfile1" class="btnGray"><br>
 						${bc_dto.getBC_CONTENTFILE1()}
 					</dd>
-					<dd>
-						<input type="file"  name="bcfile2"><br>
+					<dd style="float: center; padding-right: 240px;">
+						<input type="file"  name="bcfile2"class="btnGray"><br>
 						${bc_dto.getBC_CONTENTFILE2()}
 					</dd>
-					<dd>
-						<input type="file"  name="bcfile3"><br>
+					<dd style="float: center; padding-right: 240px;">
+						<input type="file"  name="bcfile3"class="btnGray"><br>
 						${bc_dto.getBC_CONTENTFILE3()}
 					</dd>
 			</dl>		
@@ -123,14 +123,14 @@
 		
 	</div>	
 	
-	<div id="bbsCreated_footer">
-	<input type="button" value="수정하기 " class="btn2" onclick="sendIt();"/>
-	<input type="reset" value=" 다시입력 " class="btn2" onclick="document.myForm.subject.focus();"/>
-	<input type="button" value=" 작성취소 " class="btn2"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
+	<div id="bbsCreated_footer" style="padding-left: 15px">
+	<input type="button" value="수정하기 " class="btnGreen" onclick="sendIt();"class="btnGreen"/>
+	<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.myForm.subject.focus();"class="btnGray"/>
+	<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
 	</div>
 	
 	</div>
 	</form>
-
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
