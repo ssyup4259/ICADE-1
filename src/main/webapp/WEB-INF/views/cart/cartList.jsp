@@ -176,7 +176,7 @@ input[type=checkbox] {
 			<td>
 				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${c_dto.getC_GNUM()}">
 					${c_dto.getC_NAME()}&nbsp;
-					[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]&nbsp;&nbsp;&nbsp;
+					[${c_dto.getC_DEVICE()} / ${c_dto.getC_COLOR()}]
 				</a>
 			</td>
 			<td>
