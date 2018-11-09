@@ -111,154 +111,154 @@
 </script>
 
 <body>
-<jsp:include page="../include/header2.jsp" flush="false" />
-
-<div id="container">
-<%-- 	<div style="font-size:25px; padding-left: 35px">
-		<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 92px; height: 87.6px" id="">
-		<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">#${bc_dto.getG_NAME()}</a></h3>
-		<p class="price">₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
-	</div> --%>
-	<div class="row">
-		<hr style="border: 1px solid #E4F7BA; width: 100%;float: left ">
-	</div>
-	
-	<div class="row">
-		<div class="col-sm-1"style="text-align: right;padding-right: 20px">
-           <h2><font color="#000000" size="6">포토리뷰</font></h2>
-        </div>
-        <div class="col-sm-4" style="text-align: left;margin-left: none; padding-left: 0px;padding-top: 10px">
-          <p><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font></p>
-        </div>
-    </div>
-
-	
-	<div style="font-size:25px; margin: none">
-		<div class="row">
-			<div class="col-sm-1" style="float: left;height: 130px;">
-					<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
-			</div>
-			<div class="col-sm-2" style="float: right;">
-				<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a></h3>
-					<p class="price" >₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
-					<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
-			</div>
-		</div>	
-	</div>
-	
-	
-	<hr style="border: 1px solid #A3C838;">
-	<div id="bbsArticle">
-		<div id="bbsArticle_header" style="padding-left: 35px; font-size: 20px">
-			<ul>
-				<li>
-					<p style="font-size: 20px; float: left">
-				 		${bc_dto.getBC_SUBJECT()}
-				 	</p>
-				</li>
-				
-				<li style="float: right; padding-top: 17px; padding-right: 35px">
-					#${bc_dto.getBC_ID()}&nbsp;&nbsp;&nbsp;&nbsp;등록일 : ${bc_dto.getBC_DATE()}
-				</li>
-				
-			</ul>
-		</div>
-		
-		<div id="reply_content">
-			<table width="90%" border="0">
-			<tr>
-				<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
-				 <div>
-					 <c:if test="${!empty bc_dto.getBC_SAVEFILENAME()}">
-						<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
-					 </c:if>
-					<br>
-					
-					<c:if test="${!empty bc_dto.getBC_SAVE1()}">
-					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto" id="">
-					</c:if>
-					<br>
-					<c:if test="${!empty bc_dto.getBC_SAVE2()}">
-					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: auto; height: auto" id="">
-					</c:if>
-					<br>
-					<c:if test="${!empty bc_dto.getBC_SAVE3()}">
-					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: auto; height: auto" id="">
-					</c:if>
-					<br>
-					${bc_dto.getBC_CONTENT()}
+	<jsp:include page="../include/header2.jsp" flush="false" />
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+		<div class="container-fluid" style="width: 80%;">
+			
+			<h1>포토리뷰</h1><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font>
+			
+			<div class="row">
+				<div class="col-sm-3" style="text-align: right; padding-right: 20px">
+					<h2>
+						<font color="#000000" size="6">포토리뷰</font>
+					</h2>
 				</div>
-				</td>
-			</tr>
-			</table>
-	</div>
+				<div class="col-sm-6" style="text-align: left; margin-left: none; padding-left: 0px; padding-top: 10px">
+					<p>
+						<font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font>
+					</p>
+				</div>
+			</div>
+
+
+			<div style="font-size: 25px; margin: none">
+				<div class="row">
+					<div class="col-sm-1" style="float: left; height: 130px;">
+						<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px; padding-left: 35px"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
+					</div>
+					<div class="col-sm-2" style="float: right;">
+						<h3>
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a>
+						</h3>
+						<p class="price">
+							₩${bc_dto.getG_PRICE()}
+							<span id="sPrdTaxText"></span>
+						</p>
+						<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+					</div>
+				</div>
+			</div>
+
+
+			<hr style="border: 1px solid #A3C838;">
+			<div id="bbsArticle">
+				<div id="bbsArticle_header" style="padding-left: 35px; font-size: 20px">
+					<ul style="background: transparent;">
+						<li>
+							<p style="font-size: 20px; float: left">${bc_dto.getBC_SUBJECT()}</p>
+						</li>
+
+						<li style="float: right; padding-top: 17px; padding-right: 35px">#${bc_dto.getBC_ID()}&nbsp;&nbsp;&nbsp;&nbsp;등록일 : ${bc_dto.getBC_DATE()}</li>
+
+					</ul>
+				</div>
+
+				<div id="reply_content">
+					<table width="90%" border="0">
+						<tr>
+							<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
+								<div>
+									<c:if test="${!empty bc_dto.getBC_SAVEFILENAME()}">
+										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" style="width: auto; height: auto" id="">
+									</c:if>
+									<br>
+
+									<c:if test="${!empty bc_dto.getBC_SAVE1()}">
+										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}" style="width: auto;; height: auto" id="">
+									</c:if>
+									<br>
+									<c:if test="${!empty bc_dto.getBC_SAVE2()}">
+										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}" style="width: auto; height: auto" id="">
+									</c:if>
+									<br>
+									<c:if test="${!empty bc_dto.getBC_SAVE3()}">
+										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}" style="width: auto; height: auto" id="">
+									</c:if>
+									<br>
+									${bc_dto.getBC_CONTENT()}
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 				<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-									<div align="center">
-										<textarea id="PhotoReply_CONTENT" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea><br>
-										<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="댓글등록" class="btnGreen" class="btnGreen" height="40px" style="width: 15%"/>
-										<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
-										value="${sessionScope.userInfo.getM_ID()}"/>
-									</div>
+					<div align="center">
+						<textarea id="PhotoReply_CONTENT" class="textAreaGray" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
+						<br>
+						<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="댓글등록" class="btnGreen" class="btnGreen" height="40px" style="width: 15%" />
+						<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF" value="${sessionScope.userInfo.getM_ID()}" />
+					</div>
+				</c:if>
+
+				<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+					<div align="center">
+						<p>
+							<input type="button" style="width: 80%;" value="로그인 하고 댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+						</p>
+					</div>
+				</c:if>
+
+				<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
+				<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}">
+				<!-- 댓글 목록부분 -->
+				<div id="photoReply"></div>
+
+				<div class="row">
+					<div class="col-sm-8">
+						<ul style="background: transparent;">
+							<li>
+								<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
+									<strong>이전글 :</strong>
+									<a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
 								</c:if>
-								
-								<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-									<div align="center">
-										<p>
-											<input type="button" style="width: 80%;" value="로그인 하고 댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
-										</p>
-									</div>
-								</c:if>
-									
-									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
-									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
-			<!-- 댓글 목록부분 -->
-			<div id="photoReply"></div>
-		
-		<div class="row">
-			<div class="col-sm-8">
-				<ul>
-				    <li>
-						<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
-							<strong>이전글 :</strong><a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-8">
+						<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
+							<strong>다음글 :</strong>
+							<a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
 						</c:if>
-					</li>
-				</ul>	
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-8">
-				<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
-					<strong>다음글 :</strong><a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
-				</c:if>
+			<div id="bbsArticle_footer">
+				<div id="leftFooter">
+					<ul style="background: transparent;">
+						<c:if test="${bc_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
+							<li>
+								<input type="button" value=" 수정 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}';" />
+								<input type="button" value=" 삭제 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleDelete.action?BC_NUM=${bc_dto.getBC_NUM()}&BC_BOARD=${bc_dto.getBC_BOARD()}&replyPageNum=${replyPageNum}';" />
+							</li>
+						</c:if>
+
+						<li style="float: right">
+							<input type="hidden" id="articleBC_board" value="${bc_dto.getBC_BOARD()}">
+							<input type="hidden" id="articleBC_NUM" value="${bc_dto.getBC_NUM()}">
+							<input type="hidden" value="${replyPageNum}" />
+							<input type="button" value=" 목록으로 돌아가기 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${replyPageNum}';" />
+						</li>
+					</ul>
+
+				</div>
 			</div>
-		</div>
-	</div>
-	<div id="bbsArticle_footer">
-		<div id="leftFooter">
-			<ul>
-				<c:if test="${bc_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-				<li>
-	               <input type="button" value=" 수정 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}';" />
-	               <input type="button" value=" 삭제 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleDelete.action?BC_NUM=${bc_dto.getBC_NUM()}&BC_BOARD=${bc_dto.getBC_BOARD()}&replyPageNum=${replyPageNum}';" />
-				</li>
-				</c:if>
-					
-				<li style="float: right">
-					<input type="hidden" id="articleBC_board" value="${bc_dto.getBC_BOARD()}">
-					<input type="hidden" id="articleBC_NUM" value="${bc_dto.getBC_NUM()}">
-					<input type="hidden" value="${replyPageNum}"/>
-               	    <input type="button" value=" 목록으로 돌아가기 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${replyPageNum}';"/>
-				</li>
-			</ul>
-		
+
 		</div>
 	</div>
 
-</div>
 
-<br/>&nbsp;<br/>
-
-
-<jsp:include page="../include/footer.jsp" flush="false" />
+	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

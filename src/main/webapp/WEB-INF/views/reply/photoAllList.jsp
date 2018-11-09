@@ -35,83 +35,68 @@
 </script>
 
 <body>
-<jsp:include page="../include/header2.jsp" flush="false" />
-  <form action="" method="post" name="replyForm">
-  
-  <c:set var = "i" value="0" />
-  <c:set var = "j" value="5" />
-  
-	 <div id="" style="text-align: center;">
-	 
-	 	 <!-- 로그인 안하면 작성 불가능 -->
-		 <c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-			<p>
-				<input type="button" value="포토후기 작성하기" style="width: 80%"  
-				onclick="javascript:location.href='<%=cp%>/goods/photoInsertData.action';" class="btnGreen" height="20px">
-			</p>
-		 </c:if>
-		  <!-- 로그인 안하면 작성 불가능 -->
-		 <c:if test="${empty sessionScope.userInfo.getM_ID()}">
-			<p>
-				<input type="button" value="포토후기 작성하기" style="width: 80%"   
-				onclick="login();" class="btnGreen" height="20px">
-			</p>
-		 </c:if>
-	 </div>
+	<jsp:include page="../include/header2.jsp" flush="false" />
+	<form action="" method="post" name="replyForm">
+		<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+			<div class="container-fluid" style="width: 80%;">
+				<h1>포토후기</h1>
 
-  
-  <table  align="center">
-	 <tr>
-		 <td width="20%">
-		 <td width="20%">
-		 <td width="20%">
-		 <td width="20%">
-		 <td width="20%">
-	 </tr>
-	 
-  <c:forEach var="bc_dto" items="${bc_Alllist }">
-		  <c:if test="${i%j == 0} ">
-		 <tr align="center">
-		  </c:if>
-	      	<td colspan="1" style=" margin: 0; padding:0">
-	      	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
-	      	 <img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 30px; height: 30px">
-	      	 ${bc_dto.getG_NAME()}</a><br>
-	     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}">
-	     	 <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px; margin: 0px; "><br>
-	    	 ${bc_dto.getBC_SUBJECT()}
-	    	 </a>
-	    	</td>
-	  	<c:if test="${i%j == j-1}">
-	    </tr>
-	  	</c:if>
-  	<c:set var ="i" value="${i+1}" />
-  </c:forEach>
-   
-  </table>
-  
-  <table align="center">
-	<tr>
-		<td>
-	
-			<c:if test="${dataCount!=0 }">
-						${pageIndexList}
+				<c:set var="i" value="0" />
+				<c:set var="j" value="5" />
+
+				<div id="" style="text-align: center;">
+
+					<!-- 로그인 안하면 작성 불가능 -->
+					<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+					<p>
+						<input type="button" value="포토후기 작성하기" style="width: 100%; border-radius: 12px;" onclick="javascript:location.href='<%=cp%>/goods/photoInsertData.action';" class="btnGreen" height="20px">
+					</p>
 					</c:if>
-					<c:if test="${dataCount==0}">
+					<!-- 로그인 안하면 작성 불가능 -->
+					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+					<p>
+							<input type="button" value="포토후기 작성하기" style="width: 100%; border-radius: 12px;" onclick="login();" class="btnGreen" height="20px">
+							</p>
+					</c:if>
+				</div>
+
+
+				<table align="center" style="border-radius: 12px;">
+					<tr>
+						<td width="20%">
+						<td width="20%">
+						<td width="20%">
+						<td width="20%">
+						<td width="20%">
+					</tr>
+
+					<c:forEach var="bc_dto" items="${bc_Alllist }">
+						<c:if test="${i%j == 0} ">
+							<tr align="center" style="border-bottom: none;">
+						</c:if>
+						<td colspan="1" style="margin: 0; padding: 0; border-bottom: none;"><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"> <img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 30px; height: 30px"> ${bc_dto.getG_NAME()}
+						</a> <br> <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}"> <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" style="width: 100%; height: 400px; margin: 0px; border-radius: 20px;"> <br> ${bc_dto.getBC_SUBJECT()}
+						</a></td>
+						<c:if test="${i%j == j-1}">
+							</tr>
+						</c:if>
+						<c:set var="i" value="${i+1}" />
+					</c:forEach>
+
+	
+					<tr style="font-size: 20px;">
+						<td colspan="5"><c:if test="${dataCount!=0 }">
+						${pageIndexList}
+					</c:if> <c:if test="${dataCount==0}">
 						데이터가 없습니다
-  			 </c:if>
-   
-   		</td>
-   </tr>
-	</table>
-  </form>
+  			 </c:if></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</form>
 
-
-
- 
-
-<jsp:include page="../include/footer.jsp" flush="false" />
-
+	<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>
