@@ -53,7 +53,7 @@ select count(*) from board_comment where BC_BOARD = #{BC_BOARD}
 
 <!-- 댓글 전체 갯수 구하기 -->
 <select id="countAllReply" resultType="int">
-select count(*) from board_comment
+select count(*) from board_comment where BC_PARENT=0
 </select>
 
 
@@ -64,7 +64,7 @@ select count(*) from board_comment
 	select BC_NUM,BC_BOARD,BC_ID,TO_CHAR(BC_DATE,'YYYY-MM-DD') BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,
 	BC_SAVEFILENAME,BC_CONTENTFILE1,BC_CONTENTFILE2,
 	BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT,G_NUM,G_NAME
-	FROM BOARD_COMMENT,(select g_name,g_num from goods) WHERE BC_BOARD = G_NUM AND BC_PARENT =0)data)
+	FROM BOARD_COMMENT,(select g_name,g_num from goods) WHERE BC_BOARD = G_NUM AND BC_PARENT =0 ORDER BY BC_NUM DESC)data)
 <![CDATA[
 	where rnum >= #{start} and rnum <= #{end}
 ]]>
@@ -106,4 +106,11 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
          	
 </select>
 
+<!-- 상품후기 작성을 위한 상품리스트 검색 -->
+<select id="searchGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
+	select G_NUM,G_NAME 
+		FROM GOODS
+    where 
+    	G_NAME like '%' || #{searchValue} || '%' ORDER BY G_NUM desc
+</select>
 </mapper>
