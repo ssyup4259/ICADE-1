@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icadeStyle2.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -364,7 +364,7 @@ function sample6_execDaumPostcode() {
 					
 					<tr>
 						<td>받으시는 분</td>
-						<td align="left"><input type="text" class="inputBox" id="O_NAME" name="O_NAME" value="${m_dto.getM_NAME()}"/></td>
+						<td align="left"><input type="text" class="inputBoxGray" id="O_NAME" name="O_NAME" value="${m_dto.getM_NAME()}"/></td>
 					</tr>
 					
 					<tr>
@@ -379,19 +379,19 @@ function sample6_execDaumPostcode() {
 								
 								<tr>
 									<td colspan="2" align="left">
-									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBox" readonly="readonly" value="${m_dto.getM_ZIPCODE()}"/>
+									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBoxGray" readonly="readonly" value="${m_dto.getM_ZIPCODE()}"/>
 									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
 									</td>
 								</tr>
 								<tr>
 									<td align="left">
-									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBox" readonly="readonly" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS1()}"/>
+									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBoxGray" readonly="readonly" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS1()}"/>
 									</td>
 									<td>기본주소</td>
 								</tr>
 								<tr>
 									<td align="left">
-									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBox" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS2()}"/>
+									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBoxGray" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS2()}"/>
 									</td>
 									<td>나머지주소</td>
 								</tr>
@@ -402,9 +402,9 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>휴대전화</td>
 						<td align="left">
-							<input type="text" name="O_PH1" class="inputBox" size="6" maxlength="3" value="${m_dto.getM_CELLPHONE1()}"/> -
-							<input type="text" name="O_PH2" class="inputBox" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE2()}"/> -
-							<input type="text" name="O_PH3" class="inputBox" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE3()}"/>  
+							<input type="text" name="O_PH1" class="inputBoxGray" size="6" maxlength="3" value="${m_dto.getM_CELLPHONE1()}"/> -
+							<input type="text" name="O_PH2" class="inputBoxGray" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE2()}"/> -
+							<input type="text" name="O_PH3" class="inputBoxGray" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE3()}"/>  
 						</td>
 					</tr>
 					
@@ -464,9 +464,9 @@ function sample6_execDaumPostcode() {
 					<tr>
 						<td>포인트</td>
 						<td>
-							<input type="text" name="O_POINT" style="text-align: right;" size="6" value="0" onchange="pFlagChange();"/>원
+							<input type="text" class="inputBoxGray" name="O_POINT" style="text-align: right;" size="6" value="0" onchange="pFlagChange();"/>원
 							 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) 
-							 <input type="button" value="적용" class="btn2" onclick="pointUse();"/>
+							 <input type="button" value="적용" class="btnGray" onclick="pointUse();"/>
 						</td>
 					</tr>
 					<tr>
@@ -482,7 +482,7 @@ function sample6_execDaumPostcode() {
 					</tr>
 					<tr>
 						<td align="center" colspan="2">
-							<input type="button" class="btn2" value="결제하기" onclick="payIt();"/>
+							<input type="button" class="btnGray" value="결제하기" onclick="payIt();"/>
 						</td>
 					</tr>
 				</table>
