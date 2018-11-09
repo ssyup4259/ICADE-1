@@ -84,4 +84,14 @@ public class MyPageDAOImpl implements MyPageDAO {
 		
 		return lists;
 	}
+
+	@Override
+	public int selectSumTot(String O_ID) throws Exception {
+		return sessionTemplate.selectOne("com.project.mybatis.myPageMapper.selectSumTot",O_ID);
+	}
+
+	@Override
+	public int selectCountOnum(String O_ID) throws Exception {
+		return sessionTemplate.selectOne("com.project.mybatis.myPageMapper.selectCountOnum",O_ID);
+	}
 }

@@ -24,14 +24,6 @@ function getCookie(cookieName) {
     return unescape(cookieValue);
 }
 
-//쿠키 삭제
-function deleteCookie(cookieName){
-    var expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() - 1);
-    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-}
-
-
 $(function(){
     var userId = getCookie("Cookie_userid");
     $("#userId").val(userId);
@@ -47,11 +39,11 @@ function loginProcess(){
     var loginForm = document.getElementById('loginForm');
     
     if(!id){
-        swal("Enter ID");
+        swal("아이디를 입력해주세요.");
         id.focus();
         return false;
     }else if(!pw){
-        swal("Enter password");
+        swal("비밀번호를 입력해주세요.");
         password.focus();
         return false;
     }else if($("#saveId").is(":checked")){
@@ -59,15 +51,27 @@ function loginProcess(){
         setCookie("Cookie_userid", userId, 30);
         loginForm.submit();
     }else{
-        deleteCookie("Cookie_userid");
+    	var expireDate = new Date();
+    	expireDate.setDate(expireDate.getDate() - 1);
+        document.cookie = "Cookie_userid= " + "; expires=" + expireDate.toGMTString();
         loginForm.submit();
     }
 }
 
 
+/*
+   var naverLogin = new naver.LoginWithNaverId(
+      {
+         clientId: "dnvfDSWWZdZLlC4W0n7E",
+         callbackUrl: "http://localhost:8080/icade/callbackTest",
+         isPopup: false,  팝업을 통한 연동처리 여부 
+         loginButton: {color: "green", type: 1, height: 60}  로그인 버튼의 타입을 지정 
+      }
+   );
+   
+   naverLogin.init();
 
-
-
+*/
 
 
 
