@@ -234,7 +234,7 @@ public class AdminServiceImpl implements AdminService {
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
 		
-		if (searchKey == null) {
+		if (searchKey == null || searchKey.equals("")) {
 			
 			searchKey = "G_NAME";
 			searchValue = "";
@@ -246,8 +246,14 @@ public class AdminServiceImpl implements AdminService {
 			
 		}
 		
+		String gdKindNum = req.getParameter("GD_KIND_NUM");
+		
+		if (gdKindNum == null || gdKindNum.equals("")) {
+			gdKindNum = "";
+		}
+		
 		//전체데이터갯수
-		int dataCount = a_dao.getGoodsCount(searchKey, searchValue);
+		int dataCount = a_dao.getGoodsCount(searchKey, searchValue, gdKindNum);
 		
 		//전체페이지수
 		int numPerPage = 10;
@@ -259,15 +265,7 @@ public class AdminServiceImpl implements AdminService {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
-		String gdKindNum = req.getParameter("GD_KIND_NUM");
-		
-		if (gdKindNum == null || gdKindNum.equals("")) {
-			gdKindNum = "";
-		}
-		
 		List<GoodsDTO> g_lists = a_dao.goodsList(start, end, gdKindNum, searchKey, searchValue);
-		
-		Iterator<GoodsDTO> it = g_lists.iterator();
 		
 		//페이징 처리
 		String param = "";
