@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -93,7 +94,7 @@
 		
 		
 		if (BC_CONTENT.length<1) {
-			alert("내용을 입력해주세요");
+			swal("내용을 입력해주세요");
 			f.BC_CONTENT.focus();
 		}
 		var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
@@ -108,7 +109,7 @@
 				
 				var BC_NUM =$("#BC_NUM").val()
 				
-				alert("댓글이 등록되었습니다.");
+				swal("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
 					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
@@ -120,8 +121,8 @@
 				$("#BC_CONTENT").val("");
 			},
 			error: function(result) {
-				alert("안된다");
-				alert(result);
+				swal("안된다");
+				swal(result);
 			}
 		});
 	}

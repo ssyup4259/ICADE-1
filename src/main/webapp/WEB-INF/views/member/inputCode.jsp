@@ -18,7 +18,7 @@
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 	function check() {
@@ -27,16 +27,16 @@
 		var joinCode = ${sessionScope.joinCode};
 
 		if (!f.inputCode.value) {
-			alert("인증번호를 입력하세요");
+			swal("인증번호를 입력하세요");
 			return false;
 		}
 
 		if (f.inputCode.value != joinCode) {
-			alert("입력하신 인증번호가 다릅니다.")
+			swal("입력하신 인증번호가 다릅니다.")
 			return false;
 		}
 		if (f.inputCode.value == joinCode) {
-			alert("인증완료");
+			swal("인증완료");
 			opener.document.joinForm.checkNum.value = document.joinCodeForm.CcheckNum.value;
 			self.close();
 		}

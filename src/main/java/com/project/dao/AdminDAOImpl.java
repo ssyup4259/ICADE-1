@@ -98,6 +98,8 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		GoodsDTO g_dto = sessionTemplate.selectOne(adminMapper + ".getReadGoods", g_num);
 		
+		sessionTemplate.delete(adminMapper + ".deleteGoods", g_num);
+		
 		String filePath = path + File.separator + g_dto.getG_SAVEFILENAME();
 		String cFilePath = cPath + File.separator + g_dto.getG_CONTENT_SAVE_FILE();
 		
@@ -113,7 +115,6 @@ public class AdminDAOImpl implements AdminDAO {
 			f2.delete(); //물리적 파일 삭제
 		}
 		
-		sessionTemplate.delete(adminMapper + ".deleteGoods", g_num);
 	}
 
 	//상품 리스트 (완료)

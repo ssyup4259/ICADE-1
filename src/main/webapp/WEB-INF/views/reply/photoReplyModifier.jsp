@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -41,7 +42,7 @@ $("#btnReplyUpdate").click(function() {
 				$('#goodsReplyModifier').css('visibility','hidden');
 				photoReplyListUpdate();
 		},error: function(result) {
-			alert("실패");
+			swal("실패");
 		}
 	});
 });
@@ -62,7 +63,7 @@ $("#btnReplyDelete").click(function() {
 				$("#goodsReplyModifier").css("visibility","hidden");
 				photoReplyListUpdate();
 		},error: function(result) {
-			alert("실패");
+			swal("실패");
 		}
 	});
 });

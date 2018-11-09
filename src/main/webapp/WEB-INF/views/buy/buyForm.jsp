@@ -19,7 +19,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
 
@@ -115,19 +114,19 @@ function sample6_execDaumPostcode() {
 		var pf = document.payForm;
 		
 		if (pf.O_NAME.value == "") {
-			alert("받으시는 분 이름을 작성 해 주세요.");
+			swal("받으시는 분 이름을 작성 해 주세요.");
 			pf.O_NAME.focus();
 			return;
 		} else if (pf.O_ZIPCODE.value == "" || pf.O_ADDRESS1.value == "" || pf.O_ADDRESS2.value == "") {
-			alert("주소를 작성 해 주세요.");
+			swal("주소를 작성 해 주세요.");
 			return;
 		} else if (pf.O_PH1.value == "" || pf.O_PH2.value == "" || pf.O_PH2.value == "") {
-			alert("휴대전화 번호를 작성 해 주세요.");
+			swal("휴대전화 번호를 작성 해 주세요.");
 			return;
 		} else if (pf.O_POINT.value == "") {
 			pf.O_POINT.value = "0";
 		} else if (pf.pFlag.value != "true") {
-			alert("포인트를 적용 해 주세요.");
+			swal("포인트를 적용 해 주세요.");
 			return;
 		}
 		
@@ -187,7 +186,7 @@ function sample6_execDaumPostcode() {
 				    		
 				    		error : function(data) {
 				    			
-				    			alert("Ajax Error");
+				    			swal("Ajax Error");
 				    			console.log(data);
 				    			
 				    		}
@@ -198,7 +197,7 @@ function sample6_execDaumPostcode() {
 		    		
 		    		error : function(data) {
 		    			
-		    			alert("Ajax Error");
+		    			swal("Ajax Error");
 		    			console.log(data);
 		    			
 		    		}
@@ -210,7 +209,7 @@ function sample6_execDaumPostcode() {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
 
-		        alert(msg);
+		        swal(msg);
 		        
 		    }
 		});
@@ -229,7 +228,7 @@ function sample6_execDaumPostcode() {
 		var mPoint = ${m_dto.getM_POINT()};
 		
 		if (pf.O_POINT.value > mPoint) {
-			alert("보유하신 적립금 보다 초과해서 사용 하실 수 없습니다.");
+			swal("보유하신 적립금 보다 초과해서 사용 하실 수 없습니다.");
 			pf.O_POINT.value = "";
 			pf.O_POINT.focus();
 			$("#o_tot").html(parseInt(totalPay) + "원");
@@ -239,7 +238,7 @@ function sample6_execDaumPostcode() {
 		}
 		
 		if (pf.O_POINT.value > parseInt(totalPay)) {
-			alert("최종 결제 금액보다 초과해서 사용 하실 수 없습니다.");
+			swal("최종 결제 금액보다 초과해서 사용 하실 수 없습니다.");
 			pf.O_POINT.value = "";
 			pf.O_POINT.focus();
 			$("#o_tot").html(parseInt(totalPay) + "원");

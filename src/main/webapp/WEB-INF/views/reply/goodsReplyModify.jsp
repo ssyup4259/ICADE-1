@@ -22,7 +22,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -41,7 +41,7 @@ $("#btnReplyUpdate").click(function() {
 				$('#goodsReplyModifier').css('visibility','hidden');
 				replyListUpdate();
 		},error: function(result) {
-			alert("실패");
+			swal("실패");
 		}
 	});
 });
@@ -62,7 +62,7 @@ $("#btnReplyDelete").click(function() {
 				$("#goodsReplyModifier").css("visibility","hidden");
 				replyListUpdate();
 		},error: function(result) {
-			alert("실패");
+			swal("실패");
 		}
 	});
 });
