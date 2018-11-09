@@ -10,18 +10,6 @@ $("#alert-emailsuccess").hide();
 $("#alert-emaildanger").hide();
 $("#alert-emailfresh").hide();
 
-
-$(document).ready(function() {
-	
-	$("#user_Id").change(function() {
-		
-		$('#checkId').val('2');
-		$("#alert-idsuccess").hide();
-		$("#alert-idrefresh").show();
-		
-	});
-});
-
 $(document).ready(function () {
 	
 	$("#checkNiCK,#user_NickName").change(function() {
