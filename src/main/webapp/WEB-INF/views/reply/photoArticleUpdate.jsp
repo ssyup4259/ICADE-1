@@ -6,6 +6,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+
+.textAreaGreen{
+	padding-left: 10px;
+	border-color: #A3C838;
+	color: #8F9493;
+	font-size: 16px;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+}
+
+</style>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>포토리뷰 수정</title>
 
@@ -22,7 +36,7 @@
 
 <script type="text/javascript">
 
-	 function sendIt(){
+	 function photoArticleUpdate(){
 		
 		f = document.myForm;
 		
@@ -65,18 +79,18 @@
 </head>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
-	<form action="" name="myForm" method="post" enctype="multipart/form-data">
+	<form action="" name="photoUpdateArticle" method="post" enctype="multipart/form-data">
 	
 	<div id="container" align="center">
 	
 	<input type="hidden" name="BC_BOARD" value="${bc_dto.getBC_BOARD()}">
 	<input type="hidden" name="BC_NUM" value="${bc_dto.getBC_NUM()}">
 	
-	<div id="bbsCreated">
+	<div id="photoUpdated">
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-				<dd style="float: center; padding-right: 22px;">
+				<dt style="float: center; padding-right: 510px;font-size: 20px">제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
+				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_SUBJECT" value="${bc_dto.getBC_SUBJECT()}" size="74" maxlength="100" class="inputBoxGreen"/>
 				</dd>							
 			</dl>		
@@ -84,8 +98,8 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center">작성자</dt>
-				<dd style="float: center; padding-right: 22px;">
+				<dt style="float: center; padding-right: 510px;font-size: 20px">작성자</dt>
+				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_ID" size="74" maxlength="100" class="inputBoxGreen"
 					value="${sessionScope.userInfo.getM_ID()}"/>
 				</dd>							
@@ -94,28 +108,28 @@
 		
 		<div id="bbsCreated_content" >
 			<dl>
-				<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+				<dt style="float: center; padding-right: 510px;font-size: 20px">내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
 				<dd style="float: center; padding-right: 7px;">
-					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 30%" class="boxTA">${bc_dto.getBC_CONTENT()}</textarea>
+					<textarea rows="12" cols="63" name="BC_CONTENT" class="textAreaGreen" style="width: 33%" class="boxTA">${bc_dto.getBC_CONTENT()}</textarea>
 				</dd>							
 			</dl>		
 		</div>
 		<div id="bbsCreated_image" >
 			<dl>
-				<dt>사&nbsp;&nbsp;&nbsp;&nbsp;진</dt>
-					<dd style="float: center; padding-right: 240px;" >
+				<dt style="float: center; padding-right: 510px;font-size: 20px">사&nbsp;&nbsp;&nbsp;&nbsp;진</dt>
+					<dd style="float: center; padding-right: 300px;" >
 						<input type="file"  name="bcfile" class="btnGray"><br>
 						${bc_dto.getBC_IMAGE()}
 					</dd>
-					<dd style="float: center; padding-right: 240px;">							
+					<dd style="float: center; padding-right: 300px;">							
 						<input type="file"  name="bcfile1" class="btnGray"><br>
 						${bc_dto.getBC_CONTENTFILE1()}
 					</dd>
-					<dd style="float: center; padding-right: 240px;">
+					<dd style="float: center; padding-right: 300px;">
 						<input type="file"  name="bcfile2"class="btnGray"><br>
 						${bc_dto.getBC_CONTENTFILE2()}
 					</dd>
-					<dd style="float: center; padding-right: 240px;">
+					<dd style="float: center; padding-right: 300px;">
 						<input type="file"  name="bcfile3"class="btnGray"><br>
 						${bc_dto.getBC_CONTENTFILE3()}
 					</dd>
@@ -124,9 +138,9 @@
 		
 	</div>	
 	
-	<div id="bbsCreated_footer" style="padding-left: 15px">
-	<input type="button" value="수정하기 " class="btnGreen" onclick="sendIt();"class="btnGreen"/>
-	<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.myForm.subject.focus();"class="btnGray"/>
+	<div align="center" style="margin-left: 30px">
+	<input type="button" value="수정하기 " class="btnGreen" onclick="photoArticleUpdate();"class="btnGreen"/>
+	<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.photoUpdateArticle.subject.focus();"class="btnGray"/>
 	<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
 	</div>
 	
