@@ -256,7 +256,7 @@ public class AdminServiceImpl implements AdminService {
 		int dataCount = a_dao.getGoodsCount(searchKey, searchValue, gdKindNum);
 		
 		//전체페이지수
-		int numPerPage = 10;
+		int numPerPage = 5;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if (currentPage > totalPage)
@@ -270,10 +270,12 @@ public class AdminServiceImpl implements AdminService {
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
-			param = "gdKindNum=" + gdKindNum;
+			param = "GD_KIND_NUM=" + gdKindNum;
 			param = "&searchKey=" + searchKey;
 			param+= "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
+		} else {
+			param = "GD_KIND_NUM=" + gdKindNum;
 		}
 		
 		String listUrl = cp + "/admin/goodsList.action";
