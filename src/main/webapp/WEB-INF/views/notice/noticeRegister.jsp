@@ -32,7 +32,6 @@ function noticeRegisterOk(){
 	f.submit();
 	}
 </script>
-
 </head>
 <body>
 
@@ -50,7 +49,7 @@ function noticeRegisterOk(){
 				<div class="row">
 					<div class="col-sm-3">내용</div>
 					<div class="col-sm-9">
-						<textarea rows="30" cols="80" name="BN_CONTENT"></textarea>
+						<textarea rows="30" cols="80" name="BN_CONTENT" class=textAreaGray></textarea>
 					</div>
 				</div>
 				<div class="row">
