@@ -13,4 +13,6 @@ public interface NoticeDAO {
 
 	NoticeDTO getReadNoticeDetail(int BN_NUM) throws Exception;
 
+	void noticeRegister(NoticeDTO n_dto) throws Exception;
+
 }

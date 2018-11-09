@@ -110,4 +110,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public NoticeDTO getNoticeDetail(int BN_NUM) throws Exception{
 		return n_dao.getReadNoticeDetail(BN_NUM);
 	}
+	
+	@Override
+	public void noticeRegister(NoticeDTO n_dto) throws Exception{
+		n_dao.noticeRegister(n_dto);
+	}
 }

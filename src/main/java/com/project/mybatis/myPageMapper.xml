@@ -28,6 +28,17 @@
 	<select id="selectusedPointHistory" parameterType="String" resultType="com.project.dto.OrdersDTO">
 		select O_NUM,O_DATE,O_TOT,O_POINT from orders where O_ID = #{O_ID} order by O_DATE desc
 	</select>
+	
+	<!-- 아이디의 총 주문 금액 -->
+	<select id="selectSumTot" parameterType="String" resultType="int">
+		select sum(O_TOT) from ORDERS where o_id = #{O_ID}
+	</select>
+	
+	<!-- 아이디의 총 주문 횟수 -->
+	<select id="selectCountOnum" parameterType="String" resultType="int">
+		select count(o_NUM) from orders where o_id = #{O_ID}
+	</select>
+	
 
 <!-- 회원탈퇴 -->
 
