@@ -151,7 +151,7 @@ function sample6_execDaumPostcode() {
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : name,
-			amount : total,
+			amount : 500,
 			buyer_email : email,
 			buyer_name : m_id,
 			buyer_tel : tel,
@@ -223,11 +223,7 @@ function sample6_execDaumPostcode() {
 
 		var pf = document.payForm;
 
-		var mPoint = $
-		{
-			m_dto.getM_POINT()
-		}
-		;
+		var mPoint = ${m_dto.getM_POINT()};
 
 		if (pf.O_POINT.value > mPoint) {
 			swal("보유하신 적립금 보다 초과해서 사용 하실 수 없습니다.");
