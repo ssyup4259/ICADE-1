@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mybatis.supportCenterMapper">
+<!-- 상담글 최대값 -->
+<select id="supportMaxNum" resultType="int">
+	select nvl(max(SC_NUM), 0) from Support_Center
+</select>
+
+<!-- 상담글 및 답변 입력 -->
+<insert id="insertData" parameterType="com.project.dto.SupportCenterDTO">
+insert into Support_Center (SC_NUM,SC_ID,SC_DATE,SC_PARENT,SC_CONTENT,SC_IMAGE,SC_SAVEFILENAME,SC_SUBJECT,SC_STATUS) 
+values (#{SC_NUM},#{SC_ID},sysdate,#{SC_PARENT},#{SC_CONTENT},#{SC_IMAGE,jdbcType=VARCHAR},#{SC_SAVEFILENAME,jdbcType=VARCHAR},#{SC_SUBJECT},#{SC_STATUS})
+</insert>
+
+<!-- 상담글 및 답변 입력 -->
+<insert id="insertData" parameterType="com.project.dto.SupportCenterDTO">
+insert into Support_Center (SC_NUM,SC_ID,SC_DATE,SC_PARENT,SC_CONTENT,SC_IMAGE,SC_SAVEFILENAME,SC_SUBJECT,SC_STATUS) 
+values (#{SC_NUM},#{SC_ID},sysdate,#{SC_PARENT},#{SC_CONTENT},#{SC_IMAGE,jdbcType=VARCHAR},#{SC_SAVEFILENAME,jdbcType=VARCHAR},#{SC_SUBJECT},#{SC_STATUS,jdbcType=VARCHAR})
+</insert>
+
+<!-- 답변대기중 멤버가 보는 내역 -->
+<select id="nonMemberCommentList" parameterType="hashMap" resultType="com.project.dto.SupportCenterDTO">
+	select * from(
+	select rownum rnum,data.* from(
+	select SC_NUM,SC_ID,TO_CHAR(SC_DATE,'YYYY-MM-DD') SC_DATE,SC_PARENT,SC_CONTENT,SC_IMAGE,
+	SC_SAVEFILENAME,SC_SUBJECT
+	FROM Support_Center WHERE SC_ID = #{SC_ID} AND SC_STATUS= 'N' ORDER BY SC_NUM DESC)data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 답변완료된 멤버가 보는 내역 -->
+<select id="memberCommentList" parameterType="hashMap" resultType="com.project.dto.SupportCenterDTO">
+	select * from(
+	select rownum rnum,data.* from(
+	select SC_NUM,SC_ID,TO_CHAR(SC_DATE,'YYYY-MM-DD') SC_DATE,SC_PARENT,SC_CONTENT,SC_IMAGE,
+	SC_SAVEFILENAME,SC_SUBJECT
+	FROM Support_Center WHERE SC_ID = #{SC_ID} AND SC_STATUS= 'Y' ORDER BY SC_NUM DESC)data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 답변완료된 관리자가 보는 내역 -->
+<select id="nonCommentList" parameterType="hashMap" resultType="com.project.dto.SupportCenterDTO">
+	select * from(
+	select rownum rnum,data.* from(
+	select SC_NUM,SC_ID,TO_CHAR(SC_DATE,'YYYY-MM-DD') SC_DATE,SC_PARENT,SC_CONTENT,SC_IMAGE,
+	SC_SAVEFILENAME,SC_SUBJECT
+	FROM Support_Center WHERE SC_ID = #{SC_ID} AND SC_STATUS= 'N' SC_RANK ='admin' ORDER BY SC_NUM DESC)data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+
+<!-- 답변완료된 관리자가 보는 내역 -->
+<select id="completeCommentList" parameterType="hashMap" resultType="com.project.dto.SupportCenterDTO">
+	select * from(
+	select rownum rnum,data.* from(
+	select SC_NUM,SC_ID,TO_CHAR(SC_DATE,'YYYY-MM-DD') SC_DATE,SC_PARENT,SC_CONTENT,SC_IMAGE,
+	SC_SAVEFILENAME,SC_SUBJECT
+	FROM Support_Center WHERE SC_ID = #{SC_ID} AND  AND SC_STATUS= 'Y' AND  SC_RANK ='admin' ORDER BY SC_NUM DESC)data)
+<![CDATA[
+	where rnum >= #{start} and rnum <= #{end}
+]]>
+</select>
+<!-- 답변 완료가 되지 않은  개수 구하기 -->
+<select id="nonCommentCountReply" parameterType="int" resultType="int">
+select count(*) from Support_Center where SC_STATUS= 'N'
+</select>
+
+<!-- 답변 완료된 개수 구하기 -->
+<select id="commentCountReply" parameterType="int" resultType="int">
+select count(*) from Support_Center where  SC_STATUS= 'Y'
+</select>
+
+
+<!-- 상담 완료시 상태 업데이트 -->
+<update id="updateStatus" parameterType="com.project.dto.SupportCenterDTO">
+update Support_Center set SC_STATUS = 'Y' WHERE SC_PARENT =#{SC_PARENT}
+</update>
+
+<!-- 멤버가 글 업데이트 -->
+<update id="memberUpdateContent" parameterType="com.project.dto.SupportCenterDTO">
+update Support_Center set SC_PARENT=#{SC_PARENT},SC_CONTENT=#{SC_CONTENT},SC_IMAGE=#{SC_IMAGE},SC_SAVEFILENAME=#{SC_SAVEFILENAME},SC_SUBJECT=#{SC_SUBJECT} WHERE SC_NUM =#{SC_NUM}
+</update>
+
+<!-- 관리자가 글 업데이트 -->
+<update id="adminUpdateContent" parameterType="com.project.dto.SupportCenterDTO">
+update Support_Center set SC_CONTENT=#{SC_CONTENT},SC_SUBJECT=#{SC_SUBJECT} WHERE SC_NUM =#{SC_NUM}
+</update>
+
+<!--  사용자 관리자 상담글 삭제 -->
+<delete id="deleteData" parameterType="int">
+delete board_comment where BC_NUM = #{BC_NUM} connect by prior SC_NUM = SC_PARENT
+</delete>
+
+
+
+</mapper>

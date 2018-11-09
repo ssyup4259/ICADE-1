@@ -43,7 +43,7 @@ BC_SAVE3 = #{BC_SAVE3,jdbcType=VARCHAR}, BC_SUBJECT = #{BC_SUBJECT,jdbcType=VARC
 
 <!--  댓글 삭제 -->
 <delete id="deleteData" parameterType="int">
-delete board_comment where BC_NUM = #{BC_NUM}
+delete board_comment where BC_NUM = #{BC_NUM} connect by prior BC_NUM = BC_PARENT
 </delete>
 
 <!-- 댓글 개수 구하기 -->
