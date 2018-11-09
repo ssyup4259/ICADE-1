@@ -278,7 +278,7 @@ public class AdminServiceImpl implements AdminService {
 				+ URLEncoder.encode(searchValue, "UTF-8");
 		}
 		
-		String listUrl = cp + "/goodsList.action";
+		String listUrl = cp + "/admin/goodsList.action";
 		if (!param.equals("")) {
 			listUrl = listUrl + "?" + param;
 		}
