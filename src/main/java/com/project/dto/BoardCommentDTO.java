@@ -29,6 +29,13 @@ public class BoardCommentDTO {
 	//부모글 번호
 	private int G_NUM;
 	
+	private int G_DISCOUNT;
+	private int G_PRICE;
+	private String G_SAVEFILENAME;
+	
+	//G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME
+	
+	
 	//이전글, 다음글
 	private int NEXT_BC_NUM;
 	private int PREV_BC_NUM;
@@ -260,6 +267,30 @@ public class BoardCommentDTO {
 
 	public void setPREV_BC_SUBJECT(String pREV_BC_SUBJECT) {
 		PREV_BC_SUBJECT = pREV_BC_SUBJECT;
+	}
+
+	public int getG_DISCOUNT() {
+		return G_DISCOUNT;
+	}
+
+	public void setG_DISCOUNT(int g_DISCOUNT) {
+		G_DISCOUNT = g_DISCOUNT;
+	}
+
+	public int getG_PRICE() {
+		return G_PRICE;
+	}
+
+	public void setG_PRICE(int g_PRICE) {
+		G_PRICE = g_PRICE;
+	}
+
+	public String getG_SAVEFILENAME() {
+		return G_SAVEFILENAME;
+	}
+
+	public void setG_SAVEFILENAME(String g_SAVEFILENAME) {
+		G_SAVEFILENAME = g_SAVEFILENAME;
 	}
 	
 	

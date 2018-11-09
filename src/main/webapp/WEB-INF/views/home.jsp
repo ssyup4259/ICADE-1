@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -41,6 +40,44 @@
 	border-top-left-radius: 30px;
 	border-top-right-radius: 30px;
 }
+
+.carousel {
+	position: relative;
+	overflow: hidden;
+	height: 500px;
+}
+
+.carousel>li {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 1;
+	animation: slide 16s ease infinite forwards;
+}
+
+.carousel>li:nth-child(1) {
+	opacity: 1;
+	z-index: 3;
+}
+
+.carousel>li:nth-child(2) {
+	z-index: 2;
+	animation-delay: 4s;
+}
+
+.carousel>li:nth-child(3) {
+	z-index: 1;
+	animation-delay: 8s;
+}
+
+@keyframes slide{
+    0%{opacity:1; left:0;}
+    33.33%{opacity:0.5; left:-120%;}
+    34%{opacity:0;}
+    66.66%{left:0; opacity:0;}
+    100%{opacity:1;}
+}
+
 </style>
 </head>
 <body>

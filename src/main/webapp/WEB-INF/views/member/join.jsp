@@ -38,28 +38,28 @@
 <body>
 
 	<!-- 본문 시작 -->
-	<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 
 	<!-- 내용 -->
 	<form name="joinForm" action="" method="post" id="joinForm">
-		<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
-			<div class="container text-center">
+		<div class="container-fluid"  style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+			<div class="container text-center" >
 				<div class="row">
 					<div class="col-sm-6" style="text-align: left;">
 						<h2>회원 가입</h2>
-						<span style="font-size: 15px; font-weight: 300;">아이케이드의 다양한 회원혜택을 받으세요.</span>
+						<span style="font-size: 15px; font-weight: 300;">ICADE의 다양한 회원혜택을 받으세요.</span>
 					</div>
 					<div class="col-sm-6" style="text-align: right;">
 
-						<h3 class="">기본정보</h3>
+						<!-- <h3 class="" style="padding-top: 5px">기본정보</h3>
 						<p class="required ">
 							<img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수">
 							필수입력사항
-						</p>
+						</p> -->
 					</div>
 				</div>
 				<hr style="border: 1px solid black;">
-				<div class="col-sm-8">
+				<div class="col-sm-8" align="center">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
@@ -149,42 +149,47 @@
 						<div class="col-sm-2">
 							<p>이메일</p>
 						</div>
-						<div class="col-sm-4" style="text-align: left;">
-							<input type="text" class="memberInputBox" placeholder="Ex) ssyup4259" id="email1" name="M_EMAIL_ID" maxlength="30" size="15" />
-							<br>
-							<div class="alert alert-emailsuccess" id="alert-emailsuccess">
-								<font style="color: blue">사용할 수 있는 이메일 입니다</font>
-							</div>
-							<div class="alert alert-emaildanger" id="alert-emaildanger">
-								<font style="color: red">사용할 수 없는 이메일 입니다</font>
-							</div>
-							<div class="alert alert-emailfresh" id="alert-emailfresh">
-								<font style="color: red">중복검사를 실행해주세요</font>
-							</div>
+						<div class="col-sm-4" style="text-align: left;float: left;">
+							<input type="text" class="memberInputBox" placeholder="Ex) ssyup4259" id="email1" name="M_EMAIL_ID" maxlength="30" style="width: 100%;margin: 0px;padding: 0px"/>
 							<input type="hidden" id="checkEmail" name="checkEmail" value="N">
 							<input type="hidden" id="checkNum" name="checkNum" value="">
 						</div>
-						<div class="col-sm-4">
-							<input id="email2" class="memberInputBox" name="M_EMAIL_DOMAIN" placeholder="Ex) hanmail.net" maxlength="30" />
-							<!--  <select id="email3" fw-filter="isFill" fw-label="이메일" fw-alone="N" fw-msg="">
-                <option value="" selected="selected">- 이메일 선택 -</option>
-                <option value="naver.com">naver.com</option>
-                <option value="daum.net">daum.net</option>
-                <option value="nate.com">nate.com</option>
-                <option value="hotmail.com">hotmail.com</option> 
-                <option value="yahoo.com">yahoo.com</option>
-                <option value="empas.com">empas.com</option>
-                <option value="korea.com">korea.com</option>
-                <option value="dreamwiz.com">dreamwiz.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="etc">직접입력</option>
-                </select> -->
+						<div class="col-sm-1">
+						<font style="font-size: 30px;border: 0px">@</font>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-3" >
+							<!-- <input id="email2" class="memberInputBox" name="M_EMAIL_DOMAIN" placeholder="Ex) hanmail.net" maxlength="30" style="width: 100%;;margin-left: 0px"/> -->
+							<select id="email2" name="M_EMAIL_DOMAIN" class="memberInputBox">
+			                <option value="" selected="selected">- 이메일 선택 -</option>
+			                <option value="naver.com">naver.com</option>
+			                <option value="daum.net">daum.net</option>
+			                <option value="nate.com">nate.com</option>
+			                <option value="hotmail.com">hotmail.com</option> 
+			                <option value="yahoo.com">yahoo.com</option>
+			                <option value="empas.com">empas.com</option>
+			                <option value="korea.com">korea.com</option>
+			                <option value="dreamwiz.com">dreamwiz.com</option>
+			                <option value="gmail.com">gmail.com</option>
+			                <option value="etc">직접입력</option>
+			                </select>
+						</div>
+						<div class="col-sm-2" style="float: right">
 							<input type="button" style="width: 120px;" value="중복확인" class="btnGray" id="user_Email_checkBtn" />
 						</div>
 					</div>
-
+					<div class="row">
+						<div class="col-sm-8" style="float: center;">
+							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px">
+								<font style="color: blue">사용할 수 있는 이메일 입니다</font>
+							</div>
+							<div class="alert alert-emaildanger" id="alert-emaildanger" style="padding-bottom: 10px;text-align: center">
+								<font style="color: red">사용할 수 없는 이메일 입니다</font>
+							</div>
+							<div class="alert alert-emailfresh" id="alert-emailfresh" style="padding-bottom: 10px">
+								<font style="color: red">중복검사를 실행해주세요</font>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-8" style="text-align: left;">
@@ -292,6 +297,7 @@ $(document).ready(function () {
 		$('#checkEmail').val('2');
  		$("#alert-emailsuccess").hide();
 		$("#alert-emailfresh").show();
+		$("#alert-emaildanger").hide();
 	});
 	
 });
@@ -593,14 +599,17 @@ function check() {
 	var email2 =$("#email2").val();
 	var checkEmail =$("#checkEmail").val();
 	
+	var f= document.joinForm;
+	
 	var allData = {"M_EMAIL_ID" : email1,"M_EMAIL_DOMAIN" : email2}
 	
 	if (email1.length < 1) {
 		swal("이메일을 입력해주세요")
-		
+		f.M_EMAIL_ID.focus();
 	}
 	if (email2.length < 1) {
 		swal("정확한 형식을 기입해주세요.")
+		f.M_EMAIL_DOMAIN.focus();
 	}else{
 	  $.ajax({
 			type : "POST",
@@ -615,10 +624,11 @@ function check() {
 					$("#alert-emailsuccess").show();
 					$("#alert-emaildanger").hide();
 					$("#alert-emailfresh").hide();
-					$('input[id=checkEmail]').attr('value','1');
+					$("#checkEmail").attr('value','1');
 				}else if(result==1){
 					$("#alert-emailsuccess").hide();
 					$("#alert-emaildanger").show();
+					$("#alert-emailfresh").hide();
 				}else{
 					alert("에러가 발생했습니다.");					
 				}
@@ -642,13 +652,13 @@ function check() {
 		
 		xhttp.onreadystatechange =function(){
 			if (xhttp.readyState == 4 ) {
-				if (xhttp.status== 200) {
-					swal("등록하신 이메일로 인증번호를 발송했습니다.");
+				if (xhttp.status == 200) {
+					/* swal("등록하신 이메일로 인증번호를 발송했습니다."); */
 				}else{
-					swal("등록하신 이메일로 인증번호를 발송했습니다.");
+					/* swal("메일발송 실패"); */
 				}
 			}			
-		};
+		}; 
 		xhttp.open("POST","<%=cp%>/sendMail.action",true);
 		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 		xhttp.send("email=" + email);
@@ -656,7 +666,7 @@ function check() {
 		//팝업창 열기
 		window.open("<%=cp%>/sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
 			
-		return false;
+		
 	}  
 </script>
 

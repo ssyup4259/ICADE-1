@@ -6,6 +6,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+
+.textAreaGreen{
+	padding-left: 10px;
+	border-color: #A3C838;
+	color: #8F9493;
+	font-size: 16px;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+}
+
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>포토리뷰 작성</title>
 
@@ -106,7 +119,7 @@
 
 </head>
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 <div id="" align="center" style="float: center;padding-right: 30px">
 	<form action="" name="searchForm" id="searchForm" method="post">
 		<div style="float: center; padding-right: 480px;font-size: 20px">
@@ -122,7 +135,7 @@
 	
 	<form action="" name="photoInsertForm" method="post" enctype="multipart/form-data">
 	
-	<div id="bbsCreated">
+	<div id="photoCreted">
 		<div  class="bbsCreated_bottomLine">
 			<dl>
 				<dt style="float: center; padding-right: 510px;font-size: 20px" >상품정보</dt>
@@ -157,7 +170,7 @@
 			<dl>
 				<dt style="float: center; padding-right: 510px;font-size: 20px">내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
 				<dd style="float: center; padding-right: 7px;">
-					<textarea rows="12" cols="63" name="BC_CONTENT" class="boxTA" style="width: 33%" placeholder="내용을 입력하세요"></textarea>
+					<textarea rows="12" cols="63" name="BC_CONTENT" class="textAreaGreen" style="width: 33%" placeholder="내용을 입력하세요"></textarea>
 				</dd>
 				<dd style="float: center; padding-right: 220px;">
 				첨부파일 :
@@ -176,7 +189,7 @@
 	
 	<div id="bbsCreated_footer">
 		<input type="button" value=" 등록하기 " class="btnGreen" onclick="sendPhotoCreate();"/>
-		<input type="reset" value=" 다시입력 " class="btnGreen" onclick="document.myForm.subject.focus();"/>
+		<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.searchForm.subject.focus();"/>
 		<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
 	</div>
 	

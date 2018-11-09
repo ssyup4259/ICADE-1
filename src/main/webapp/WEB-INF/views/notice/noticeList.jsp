@@ -36,7 +36,7 @@ function registerNotice(){
 
 </head>
 <body style="font-family: LeeHyunJi; text-align: center; padding-top: 60px">
-	<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container" style="width: 800px;">
 			<form name="noticeForm" method="post">

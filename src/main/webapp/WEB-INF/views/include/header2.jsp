@@ -85,23 +85,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-2">
-				<ul class="carousel" style="height: 150px; margin-top: 50px;">
-					<li>
-						<img src="/icade/resources/data/img/event1.jpg" style="height: 100px; width: 150px;">
-					</li>
-					<li>
-						<img src="/icade/resources/data/img/event2.jpg" style="height: 100px; width: 150px;">
-					</li>
-					<li>
-						<img src="/icade/resources/data/img/event3.jpg" style="height: 100px; width: 150px;">
-					</li>
-				</ul>
-				<img src="/icade/resources/data/img/left.png" style="height: 50px; width: 50px;">
-				<img src="/icade/resources/data/img/right.png" style="height: 50px; width: 50px;">
 			</div>
 			<div class="col-sm-8">
 				<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="">주문조회</a>&nbsp;&nbsp; <a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
-				<img src="/icade/resources/data/logo/logo1.png" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
+				<img src="/icade/resources/data/logo/logo2.png" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
 				&nbsp;<a href="<%=cp%>/faq.action"> FAQ</a>&nbsp;&nbsp;<a href="">고객센터</a>&nbsp;&nbsp;<a href="<%=cp%>/notice/noticeList.action">공지사항</a>
 			</div>
 			<div class="col-sm-2"></div>

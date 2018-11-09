@@ -43,7 +43,7 @@ public class WishController {
 		mav.addObject("wishList", wishList);
 		mav.addObject("dataCount", dataCount);
 		mav.addObject("pageIndexList", pageIndexList);
-		
+		mav.setViewName("mypage/myPageMain");
 		return mav;
 		
 	}

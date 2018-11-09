@@ -52,8 +52,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" flush="false" />
-
+	<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
 			<h2><font color="#000000">공지사항</font></h2><p></p>

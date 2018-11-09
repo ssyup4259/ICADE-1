@@ -35,7 +35,7 @@
 </script>
 
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
   <form action="" method="post" name="replyForm">
   
   <c:set var = "i" value="0" />
@@ -74,9 +74,11 @@
 		 <tr align="center">
 		  </c:if>
 	      	<td colspan="1" style=" margin: 0; padding:0">
-	      	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">${bc_dto.getG_NAME()}</a><br>
+	      	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+	      	 <img src="<%=cp%>/resources/reply/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 30px; height: 30px">
+	      	 ${bc_dto.getG_NAME()}</a><br>
 	     	 <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}">
-	     	 <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px; margin: 0px; " id=""><br>
+	     	 <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 300px; height: 400px; margin: 0px; "><br>
 	    	 ${bc_dto.getBC_SUBJECT()}
 	    	 </a>
 	    	</td>

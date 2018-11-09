@@ -23,7 +23,7 @@
 </head>
 <body>
 
-	<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 	<form action="cancelCheckStep1.action" name="cancelCheck" method="post">
 
 

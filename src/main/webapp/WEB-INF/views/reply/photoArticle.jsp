@@ -111,14 +111,43 @@
 </script>
 
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
-<div id="bbs">
-	<div id="bbs_title" style="font-size:25px; padding-left: 35px">
-	 #${bc_dto.getG_NAME()}
-	 <br>
-	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"><font size="5" >상품상세보기</font></a>
+<div id="container">
+<%-- 	<div style="font-size:25px; padding-left: 35px">
+		<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 92px; height: 87.6px" id="">
+		<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">#${bc_dto.getG_NAME()}</a></h3>
+		<p class="price">₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
+	</div> --%>
+	<div class="row">
+		<hr style="border: 1px solid #E4F7BA; width: 100%;float: left ">
 	</div>
+	
+	<div class="row">
+		<div class="col-sm-1"style="text-align: right;padding-right: 20px">
+           <h2><font color="#000000" size="6">포토리뷰</font></h2>
+        </div>
+        <div class="col-sm-4" style="text-align: left;margin-left: none; padding-left: 0px;padding-top: 10px">
+          <p><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font></p>
+        </div>
+    </div>
+
+	
+	<div style="font-size:25px; margin: none">
+		<div class="row">
+			<div class="col-sm-1" style="float: left;height: 130px;">
+					<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/reply/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
+			</div>
+			<div class="col-sm-2" style="float: right;">
+				<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a></h3>
+					<p class="price" >₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
+					<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+			</div>
+		</div>	
+	</div>
+	
+	
+	<hr style="border: 1px solid #A3C838;">
 	<div id="bbsArticle">
 		<div id="bbsArticle_header" style="padding-left: 35px; font-size: 20px">
 			<ul>
@@ -136,7 +165,7 @@
 		</div>
 		
 		<div id="reply_content">
-			<table width="600" border="0">
+			<table width="90%" border="0">
 			<tr>
 				<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
 				 <div>
@@ -146,7 +175,7 @@
 					<br>
 					
 					<c:if test="${!empty bc_dto.getBC_SAVE1()}">
-					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
+					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto" id="">
 					</c:if>
 					<br>
 					<c:if test="${!empty bc_dto.getBC_SAVE2()}">
@@ -185,19 +214,24 @@
 			<!-- 댓글 목록부분 -->
 			<div id="photoReply"></div>
 		
-		
-		<div class="bbsArticle_bottomLine">
-				<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
-					이전글 : <a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
-				</c:if>	
+		<div class="row">
+			<div class="col-sm-8">
+				<ul>
+				    <li>
+						<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
+							<strong>이전글 :</strong><a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
+						</c:if>
+					</li>
+				</ul>	
+			</div>
 		</div>
-		
-		<div class="bbsArticle_noLine">
+		<div class="row">
+			<div class="col-sm-8">
 				<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
-					다음글 : <a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
+					<strong>다음글 :</strong><a href ="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
 				</c:if>
+			</div>
 		</div>
-		
 	</div>
 	<div id="bbsArticle_footer">
 		<div id="leftFooter">

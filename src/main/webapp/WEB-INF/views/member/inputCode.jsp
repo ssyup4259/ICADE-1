@@ -7,56 +7,63 @@
 %>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>이메일 인증코드</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/sangyeop.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<script>
+
+$(document).ready(function(){
+		swal("등록하신 이메일로 인증번호를 발송했습니다.");
+	});
+
+</script>
+
+
 <script type="text/javascript">
-	function check() {
+
+	function checkInputCode() {
 
 		var f = document.joinCodeForm;
+		
+		var inputCode = $("#inputCode").val();
 		var joinCode = ${sessionScope.joinCode};
-
-		if (!f.inputCode.value) {
+		if ($("#inputCode").val().length == 0 ) {
 			swal("인증번호를 입력하세요");
-			return false;
-		}
-
-		if (f.inputCode.value != joinCode) {
-			swal("입력하신 인증번호가 다릅니다.")
-			return false;
-		}
-		if (f.inputCode.value == joinCode) {
+			f.inputCode.focus();
+		}else if (inputCode != joinCode) {
+			swal("입력하신 인증번호가 다릅니다.");
+			f.inputCode.focus();
+		}else if (inputCode == joinCode) {
 			swal("인증완료");
 			opener.document.joinForm.checkNum.value = document.joinCodeForm.CcheckNum.value;
 			self.close();
 		}
-
 	}
 </script>
 </head>
 <body>
-	<div class="container-fluid text-center">
-		<br />
-		<br />
+	<div class="container-fluid" style="text-align: center">
+		<br/>
+		<br/>
 		<h3>인증번호를 입력하세요</h3>
 		<div class="container">
-			<form method="post" name="joinCodeForm" onclick="check();">
-				<input type="text" name="inputCode" style="width: 100%; height: 40px; text-align: center; font-size: 16px;" />
+			<form method="post" name="joinCodeForm" >
+				<input type="text" name="inputCode" class="inputBoxGreen" id="inputCode" style="width: 100%; height: 40px; text-align: center; font-size: 16px;" />
 				<br>
 				<br>
-				<input type="submit" class="btn" value="인증하기" />
-				<input type="text" name="joinCode" value="${sessionScope.joinCode}">
-				<input type="text" name="CcheckNum" value="1">
+				<input type="button" class="btnGreen" value="인증하기" onclick="checkInputCode();" />
+				<input type="hidden" name="joinCode" value="${sessionScope.joinCode}">
+				<input type="hidden" name="CcheckNum" value="1">
 			</form>
 		</div>
 	</div>

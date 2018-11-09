@@ -72,7 +72,7 @@ function deleteGoods(g_num) {
 
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 
 		<div class="container-fluid text-center">
@@ -92,7 +92,6 @@ function deleteGoods(g_num) {
 
 				<select name="searchKey" class="selGreen" style="width: 150px;">
 					<option value="G_NAME">상품명</option>
-					<option value="G_CONTENT">내용</option>
 				</select>
 
 				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
@@ -110,7 +109,6 @@ function deleteGoods(g_num) {
 						<th>상품 개수</th>
 						<th>상품 가격</th>
 						<th>판매 개수</th>
-						<th>상품 내용</th>
 						<th>할인율</th>
 						<th>섬네일</th>
 						<th>수정/삭제</th>
@@ -124,15 +122,13 @@ function deleteGoods(g_num) {
 							<td><a style="cursor: pointer;" onclick="updateGoodsCount('${g_dto.getG_NUM()}');"><fmt:formatNumber>${g_dto.getG_COUNT()}</fmt:formatNumber>개</a></td>
 							<td><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</td>
 							<td><fmt:formatNumber>${g_dto.getG_SELLCOUNT()}</fmt:formatNumber>개</td>
-							<td>${g_dto.getG_CONTENT()}</td>
 							<td>${g_dto.getG_DISCOUNT()}%</td>
 							<td><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="100" height="100" /></td>
 							<td><a style="cursor: pointer;" onclick="updateGoods('${g_dto.getG_NUM()}');">수정</a> / <a style="cursor: pointer;" onclick="deleteGoods('${g_dto.getG_NUM()}');">삭제</a></td>
-							<!-- <a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a> -->
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="9">
+						<td colspan="8">
 						<div class="paging">
 						<c:if test="${dataCount!=0 }">
 				${pageIndexList }

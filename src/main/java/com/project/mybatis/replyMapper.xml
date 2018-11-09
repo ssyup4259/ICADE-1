@@ -73,8 +73,8 @@ select count(*) from board_comment where BC_PARENT=0
 <!-- 하나의 댓글정보 읽어오기 -->
 <select id="readOne" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
 select BC_NUM,BC_BOARD,BC_ID,BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME,BC_CONTENTFILE1,
-BC_CONTENTFILE2,BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT ,G_NUM,G_NAME
-from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND BC_BOARD = G_NUM
+BC_CONTENTFILE2,BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT ,G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME
+from board_comment,(select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME from goods) where BC_NUM = #{BC_NUM} AND BC_BOARD = G_NUM
 </select>
 
 <!-- 날짜순으로 이전글 다음글 설정하기  -->
@@ -93,7 +93,7 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 	    lead (BC_SUBJECT,1) over (order by BC_DATE) next_BC_SUBJECT,
 	    lag (BC_NUM,1) over (order by BC_DATE) prev_BC_NUM,
 	    lag (BC_SUBJECT,1) over (order by BC_DATE) prev_BC_SUBJECT
-	    from BOARD_COMMENT
+	    from BOARD_COMMENT where BC_PARENT = 0
 	    order by BC_DATE desc
 	)
 	where BC_NUM = #{BC_NUM}
@@ -108,7 +108,7 @@ from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND
 
 <!-- 상품후기 작성을 위한 상품리스트 검색 -->
 <select id="searchGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
-	select G_NUM,G_NAME 
+	select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME
 		FROM GOODS
     where 
     	G_NAME like '%' || #{searchValue} || '%' ORDER BY G_NUM desc

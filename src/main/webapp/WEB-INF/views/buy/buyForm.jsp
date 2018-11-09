@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% 
+<%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
@@ -151,7 +151,7 @@ function sample6_execDaumPostcode() {
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : name,
-			amount : 500,
+			amount : total,
 			buyer_email : email,
 			buyer_name : m_id,
 			buyer_tel : tel,
@@ -182,51 +182,53 @@ function sample6_execDaumPostcode() {
 				    		data: allData ,
 				    		success: function(data) {
 				    			location.href="<%=cp%>/orderHistory.action";
-				    		},
-				    		
-				    		error : function(data) {
-				    			
-				    			swal("Ajax Error");
-				    			console.log(data);
-				    			
-				    		}
-				    		
-		    			});
-		    			
-		    		},
-		    		
-		    		error : function(data) {
-		    			
-		    			swal("Ajax Error");
-		    			console.log(data);
-		    			
-		    		}
-		    		
-		    	});
-				
-		    } else {
-		    	
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
+							},
 
-		        swal(msg);
-		        
-		    }
+							error : function(data) {
+
+								swal("Ajax Error");
+								console.log(data);
+
+							}
+
+						});
+
+					},
+
+					error : function(data) {
+
+						swal("Ajax Error");
+						console.log(data);
+
+					}
+
+				});
+
+			} else {
+
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+
+				swal(msg);
+
+			}
 		});
 	}
-
 </script>
 
 <script type="text/javascript">
-
 	function pointUse() {
-		
+
 		var totalPay = $("#totalPay").val();
-		
+
 		var pf = document.payForm;
-		
-		var mPoint = ${m_dto.getM_POINT()};
-		
+
+		var mPoint = $
+		{
+			m_dto.getM_POINT()
+		}
+		;
+
 		if (pf.O_POINT.value > mPoint) {
 			swal("보유하신 적립금 보다 초과해서 사용 하실 수 없습니다.");
 			pf.O_POINT.value = "";
@@ -236,7 +238,7 @@ function sample6_execDaumPostcode() {
 			pf.pFlag.value = "false";
 			return;
 		}
-		
+
 		if (pf.O_POINT.value > parseInt(totalPay)) {
 			swal("최종 결제 금액보다 초과해서 사용 하실 수 없습니다.");
 			pf.O_POINT.value = "";
@@ -246,252 +248,224 @@ function sample6_execDaumPostcode() {
 			pf.pFlag.value = "false";
 			return;
 		}
-		
+
 		var tot = $("#O_TOT").val();
 		tot = parseInt(totalPay);
 		tot = totalPay - pf.O_POINT.value;
-		
+
 		$("#o_tot").html(tot + "원");
 		$("#O_TOT").val(tot);
-		
+
 		pf.pFlag.value = "true";
-		
-	}
-	
-	function pFlagChange() {
-		
-		var pf = document.payForm;
-		
-		pf.pFlag.value = "false";
-		
+
 	}
 
+	function pFlagChange() {
+
+		var pf = document.payForm;
+
+		pf.pFlag.value = "false";
+
+	}
 </script>
+<style type="text/css">
+tr{
+	border: none;
+}
+
+table{
+	border: 3px solid #8F9493;
+}
+
+</style>
 
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 
-<form action="" method="post" id="payForm" name="payForm">
-	<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">
-		<div class="row">
-			<div class="col-sm-7">
-				<table border="1" cellpadding="0" cellspacing="0" width="100%">
-					<colgroup>
-						<col width="15%"/>
-						<col width="80%"/>
-					</colgroup>
-					
-					<tr>
-						<td colspan="2">주문자 정보</td>
-					</tr>
-					
-					<tr>
-						<td>주문하시는 분</td>
-						<td align="left">
-							${m_dto.getM_NAME()}
-							<input type="hidden" name="name" value="${m_dto.getM_NAME()}"/>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>주소</td>
-						<td>
-							<table border="1" cellpadding="0" cellspacing="0" width="100%">
-							
-								<colgroup>
-									<col width="82%"/>
-									<col width="18%"/>
-								</colgroup>
-							
+	<form action="" method="post" id="payForm" name="payForm">
+		<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+			<div class="container-fluid text-center" style="width: 80%;">
+			<h1>주문하기</h1>
+				<div class="row">
+					<div class="col-sm-7">
+						<h2>주문자 정보</h2>
+						<table cellpadding="0" cellspacing="0" width="100%" style="border-radius: 12px;">
+							<colgroup>
+								<col width="15%" />
+								<col width="80%" />
+							</colgroup>
+
+							<!-- <tr style="border: none;">
+								<td colspan="2">주문자 정보</td>
+							</tr> -->
+
+							<tr>
+								<td>주문하시는 분</td>
+								<td align="left">${m_dto.getM_NAME()} <input type="hidden" name="name" value="${m_dto.getM_NAME()}" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>주소</td>
+								<td>
+									<table cellpadding="0" cellspacing="0" width="100%" style="border:3px solid #A3C838;">
+
+										<colgroup>
+											<col width="82%" />
+											<col width="18%" />
+										</colgroup>
+
+										<tr>
+											<td align="left">${m_dto.getM_ZIPCODE()} <input type="hidden" name="zipcode" value="${m_dto.getM_ZIPCODE()}" />
+											</td>
+											<td>우편번호</td>
+										</tr>
+										<tr>
+											<td align="left">${m_dto.getM_ADDRESS1()} <input type="hidden" name="address1" value="${m_dto.getM_ADDRESS1()}" />
+											</td>
+											<td>기본주소</td>
+										</tr>
+										<tr>
+											<td align="left">${m_dto.getM_ADDRESS2()} <input type="hidden" name="address2" value="${m_dto.getM_ADDRESS2()}" />
+											</td>
+											<td>나머지주소</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+
+							<tr>
+								<td>휴대전화</td>
+								<td align="left">${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()} <input type="hidden" name="phone1" value="${m_dto.getM_CELLPHONE1()}" /> <input type="hidden" name="phone2" value="${m_dto.getM_CELLPHONE2()}" /> <input type="hidden" name="phone3" value="${m_dto.getM_CELLPHONE3()}" />
+								</td>
+							</tr>
+
+						</table>
+						<br />
+						<h2>배송지 정보</h2>
+						<table cellpadding="0" cellspacing="0" width="100%" style="border-radius: 12px;">
+							<colgroup>
+								<col width="15%" />
+								<col width="80%" />
+							</colgroup>
+
+							<!-- <tr>
+								<td colspan="2">배송지 정보</td>
+							</tr> -->
+
+							<tr>
+								<td>배송지 선택</td>
+								<td align="left"><input type="radio" id="test1" name="test" checked="checked" onclick="deliveryAddr();" /> <label for="test1">주문자 정보와 동일</label> <input type="radio" id="test2" name="test" onclick="newAddr();" /> <label for="test2">새로운배송지</label></td>
+							</tr>
+
+							<tr>
+								<td>받으시는 분</td>
+								<td align="left"><input type="text" class="inputBoxGray" id="O_NAME" name="O_NAME" value="${m_dto.getM_NAME()}" /></td>
+							</tr>
+
+							<tr>
+								<td>주소</td>
+								<td>
+									<table  cellpadding="0" cellspacing="0" width="100%" style="border: 3px solid #A3C838">
+
+										<colgroup>
+											<col width="70%" />
+											<col width="30%" />
+										</colgroup>
+
+										<tr>
+											<td colspan="2" align="left"><input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBoxGray" readonly="readonly" value="${m_dto.getM_ZIPCODE()}" /> <input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGreen" value="우편번호 찾기"></td>
+										</tr>
+										<tr>
+											<td align="left"><input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBoxGray" readonly="readonly" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS1()}" /></td>
+											<td>기본주소</td>
+										</tr>
+										<tr>
+											<td align="left"><input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBoxGray" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS2()}" /></td>
+											<td>나머지주소</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+
+							<tr>
+								<td>휴대전화</td>
+								<td align="left"><input type="text" name="O_PH1" class="inputBoxGray" size="6" maxlength="3" value="${m_dto.getM_CELLPHONE1()}" /> - <input type="text" name="O_PH2" class="inputBoxGray" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE2()}" /> - <input type="text" name="O_PH3" class="inputBoxGray" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE3()}" /></td>
+							</tr>
+
+						</table>
+					</div>
+
+					<div class="col-sm-5">
+						<h2>주문 상품</h2>
+						<table cellpadding="0" cellspacing="0" width="100%" style="border-radius: 12px;">
+							<colgroup>
+								<col width="15%" />
+								<col width="70%" />
+								<col width="15%" />
+							</colgroup>
+
+							<!-- <tr>
+								<td colspan="3">주문 상품</td>
+							</tr> -->
+
+							<tr>
+								<td>이미지</td>
+								<td>상품정보</td>
+								<td>합계</td>
+							</tr>
+
+							<c:set var="total" value="0" />
+							<c:set var="discount" value="0" />
+							<c:forEach var="b_dto" items="${b_lists}">
 								<tr>
-									<td align="left">
-										${m_dto.getM_ZIPCODE()}
-										<input type="hidden" name="zipcode" value="${m_dto.getM_ZIPCODE()}"/>
+									<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px" /></td>
+									<td align="left">${b_dto.getName()}<br /> <input type="hidden" name="code" value="${b_dto.getCode()}" /> <input type="hidden" name="count" value="${b_dto.getCount()}" /> [옵션: ${b_dto.getKind()} / ${b_dto.getColor()}]<br /> <fmt:formatNumber>${b_dto.getPrice()}</fmt:formatNumber>원 / ${b_dto.getCount()}개
 									</td>
-									<td>우편번호</td>
+									<td><fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원 <input name="cnum" type="hidden" value="${b_dto.getCnum()}" /></td>
 								</tr>
-								<tr>
-									<td align="left">
-										${m_dto.getM_ADDRESS1()}
-										<input type="hidden" name="address1" value="${m_dto.getM_ADDRESS1()}"/>
-									</td>
-									<td>기본주소</td>
-								</tr>
-								<tr>
-									<td align="left">
-										${m_dto.getM_ADDRESS2()}
-										<input type="hidden" name="address2" value="${m_dto.getM_ADDRESS2()}"/>
-									</td>
-									<td>나머지주소</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>휴대전화</td>
-						<td align="left">
-							${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}
-							<input type="hidden" name="phone1" value="${m_dto.getM_CELLPHONE1()}"/>
-							<input type="hidden" name="phone2" value="${m_dto.getM_CELLPHONE2()}"/>
-							<input type="hidden" name="phone3" value="${m_dto.getM_CELLPHONE3()}"/>
-						</td>
-					</tr>
-					
-				</table>
-				<br/>
-				<table border="1" cellpadding="0" cellspacing="0" width="100%">
-					<colgroup>
-						<col width="15%"/>
-						<col width="80%"/>
-					</colgroup>
-					
-					<tr>
-						<td colspan="2">배송지 정보</td>
-					</tr>
-					
-					<tr>
-						<td>배송지 선택</td>
-						<td align="left">
-							<input type="radio" id="test1" name="test" checked="checked" onclick="deliveryAddr();"/>
-							<label for="test1">주문자 정보와 동일</label> 
-							<input type="radio" id="test2" name="test" onclick="newAddr();"/>
-							<label for="test2">새로운배송지</label> 
-						</td>
-					</tr>
-					
-					<tr>
-						<td>받으시는 분</td>
-						<td align="left"><input type="text" class="inputBoxGray" id="O_NAME" name="O_NAME" value="${m_dto.getM_NAME()}"/></td>
-					</tr>
-					
-					<tr>
-						<td>주소</td>
-						<td>
-							<table border="1" cellpadding="0" cellspacing="0" width="100%">
-								
-								<colgroup>
-									<col width="70%"/>
-									<col width="30%"/>
-								</colgroup>
-								
-								<tr>
-									<td colspan="2" align="left">
-									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBoxGray" readonly="readonly" value="${m_dto.getM_ZIPCODE()}"/>
-									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGreen" value="우편번호 찾기">
-									</td>
-								</tr>
-								<tr>
-									<td align="left">
-									<input type="text" size="50" id="sample6_address" name="O_ADDRESS1" class="inputBoxGray" readonly="readonly" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS1()}"/>
-									</td>
-									<td>기본주소</td>
-								</tr>
-								<tr>
-									<td align="left">
-									<input type="text" size="50" id="sample6_address2" name="O_ADDRESS2" class="inputBoxGray" style="text-align: left; padding-left: 10px" value="${m_dto.getM_ADDRESS2()}"/>
-									</td>
-									<td>나머지주소</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>휴대전화</td>
-						<td align="left">
-							<input type="text" name="O_PH1" class="inputBoxGray" size="6" maxlength="3" value="${m_dto.getM_CELLPHONE1()}"/> -
-							<input type="text" name="O_PH2" class="inputBoxGray" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE2()}"/> -
-							<input type="text" name="O_PH3" class="inputBoxGray" size="6" maxlength="4" value="${m_dto.getM_CELLPHONE3()}"/>  
-						</td>
-					</tr>
-					
-				</table>
-			</div>
-		
-			<div class="col-sm-5">
-			
-				<table border="1" cellpadding="0" cellspacing="0" width="100%">
-					<colgroup>
-						<col width="15%"/>
-						<col width="70%"/>
-						<col width="15%"/>
-					</colgroup>
-					
-					<tr>
-						<td colspan="3">주문 상품</td>
-					</tr>
-					
-					<tr>
-						<td>이미지</td>
-						<td>상품정보</td>
-						<td>합계</td>
-					</tr>
-					
-					<c:set var="total" value="0"/>
-					<c:set var="discount" value="0"/>
-					<c:forEach var="b_dto" items="${b_lists}">
-						<tr>
-							<td><img src="<%=cp%>/resources/goodsImage/${b_dto.getSaveFileName()}" width="80px" height="80px"/></td>
-							<td align="left">
-								${b_dto.getName()}<br/>
-								<input type="hidden" name="code" value="${b_dto.getCode()}"/>
-								<input type="hidden" name="count" value="${b_dto.getCount()}"/>
-								[옵션: ${b_dto.getKind()} / ${b_dto.getColor()}]<br/>
-								<fmt:formatNumber>${b_dto.getPrice()}</fmt:formatNumber>원 / ${b_dto.getCount()}개
-							</td>
-							<td>
-								<fmt:formatNumber>${b_dto.getPrice() * b_dto.getCount()}</fmt:formatNumber>원
-								<input name="cnum" type="hidden" value="${b_dto.getCnum()}"/>
-							</td>
-						</tr>
-						<c:set var="discount" value="${discount + b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount()}"/>
-						<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}"/>
-					</c:forEach>
-				</table>
-				<br/>
-				<table border="1" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>총 주문 금액</td>
-						<td><fmt:formatNumber>${total}</fmt:formatNumber>원</td>
-					</tr>
-					<tr>
-						<td>총 할인 금액</td>
-						<td><fmt:formatNumber>${discount}</fmt:formatNumber>원</td>
-					</tr>
-					<tr>
-						<td>포인트</td>
-						<td>
-							<input type="text" class="inputBoxGray" name="O_POINT" style="text-align: right;" size="6" value="0" onchange="pFlagChange();"/>원
-							 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) 
-							 <input type="button" value="적용" class="btnGreen" onclick="pointUse();"/>
-						</td>
-					</tr>
-					<tr>
-						<td>최종 결제 금액</td>
-						<td>
-							<div id="o_tot">
-								<fmt:formatNumber>${total - discount}</fmt:formatNumber>원
-							</div>							
-							<input type="hidden" id="O_TOT" name="O_TOT" value="${total - discount}"/>
-							<input type="hidden" id="totalPay" value="${total - discount}"/>
-							<input type="hidden" name="pFlag" value="false"/>
-						</td>
-					</tr>
-					<tr>
-						<td align="center" colspan="2">
-							<input type="button" class="btnGreen" value="결제하기" onclick="payIt();"/>
-						</td>
-					</tr>
-				</table>
+								<c:set var="discount" value="${discount + b_dto.getPrice() * (b_dto.getDiscount() / 100) * b_dto.getCount()}" />
+								<c:set var="total" value="${total + b_dto.getPrice() * b_dto.getCount()}" />
+							</c:forEach>
+						</table>
+						<br />
+						
+						<h2>결제</h2>
+						<table cellpadding="0" cellspacing="0" style="border-radius: 12px;">
+							<tr>
+								<td>총 주문 금액</td>
+								<td><fmt:formatNumber>${total}</fmt:formatNumber>원</td>
+							</tr>
+							<tr>
+								<td>총 할인 금액</td>
+								<td><fmt:formatNumber>${discount}</fmt:formatNumber>원</td>
+							</tr>
+							<tr>
+								<td>포인트</td>
+								<td><input type="text" class="inputBoxGray" name="O_POINT" style="text-align: right; padding-right: 10px;" size="6" value="0" onchange="pFlagChange(); " />원 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) <input type="button" value="적용" class="btnGreen" onclick="pointUse();" /></td>
+							</tr>
+							<tr>
+								<td>최종 결제 금액</td>
+								<td>
+									<div id="o_tot">
+										<fmt:formatNumber>${total - discount}</fmt:formatNumber>
+										원
+									</div> <input type="hidden" id="O_TOT" name="O_TOT" value="${total - discount}" /> <input type="hidden" id="totalPay" value="${total - discount}" /> <input type="hidden" name="pFlag" value="false" />
+								</td>
+							</tr>
+							<tr>
+								<td align="center" colspan="2"><input type="button" class="btnGreen" value="결제하기" onclick="payIt();" /></td>
+							</tr>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
 
-<jsp:include page="../include/footer.jsp" flush="false" />
+	<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>
