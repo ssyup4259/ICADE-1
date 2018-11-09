@@ -328,11 +328,11 @@ $(document).ready(function () {
 		
 		//유효성검사
 		if(userId.length <1){
-			alert("아이디를 입력해주세요.");
+			swal("아이디를 입력해주세요.");
 		}else if(userId.length<8){
-			alert("아이디는 8자리 이상으로 입력해주세요")
+			swal("아이디는 8자리 이상으로 입력해주세요")
 		}else if(userId.length>16){
-			alert("아이디는 16자리 이하로 입력해주세요")
+			swal("아이디는 16자리 이하로 입력해주세요")
 		}else{
 			$.ajax({
 				type : "POST",
@@ -451,11 +451,11 @@ function nickCheck() {
 	var checkNick =$("#checkNick").val();
 	
 	if (userNick.length <1) {
-		alert("닉네임을 입력해주세요.")
+		swal("닉네임을 입력해주세요.")
 	}else if(userNick.length<2){
-		alert("닉네임은 최소 2글자 이상입니다.")
+		swal("닉네임은 최소 2글자 이상입니다.")
 	}else if(userNick.length>12){
-		alert("닉네임은 12글자 이하입니다.")
+		swal("닉네임은 12글자 이하입니다.")
 	}else{
 		$.ajax({
 			type : "POST",
