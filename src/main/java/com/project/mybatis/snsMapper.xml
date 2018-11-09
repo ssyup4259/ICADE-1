@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mybatis.snsLoginMapper">
+
+	<!-- 기존에 회원의 데이터가 들어와있다면 바로 로그인 세션처리 -->
+	<select id="selectNaverJoin" parameterType="String" resultType="com.project.dto.SnsLoginDTO">
+		select ID,SNS_ID,SNS_NAME,SNS_EMAIL,SNS_TYPE,SNS_CONNECT_DATE from SNS_MEMBER where sns_id = #{sns_id}
+	</select>
+
+	<!-- 네이버 로그인한 이용자의 정보 입력 -->
+	<insert id="joinNaverLogin" parameterType="map">
+		insert into SNS_member values ('customer',#{id},#{sns_id},#{sns_name},#{sns_email},'naver',sysdate)
+	</insert>
+	
+	<!-- 랜덤발생 아이디 중복체크 -->
+	<select id="randomIdCheck" parameterType="String" resultType="String">
+		select id from SNS_MEMBER where id = #{id}
+	</select>
+
+	<!-- sns 테이블을 이용한 회원가입 -->
+	<insert id="insertNaverMember" parameterType="map" >
+		insert into member (M_RANK, M_ID, M_PW, M_NAME, M_ZIPCODE, M_ADDRESS1, M_ADDRESS2, M_EMAIL_ID, M_EMAIL_DOMAIN, M_CELLPHONE1, M_CELLPHONE2, M_CELLPHONE3, M_POINT, M_DATE, M_NICKNAME)
+		values ('customer', #{id}, ' ', #{sns_name}, ' ', ' ', ' ', #{email_id}, #{email_domain}, ' ', ' ', ' ',1500,sysdate,#{M_NICKNAME})
+	</insert>
+
+	<select id="countMember" resultType="int">
+		select count(m_id) from member
+	</select>
+	
+	<!-- 유니크값을 통한 회원가입 여부 -->
+	<select id="snsJoinCheck" parameterType="String" resultType="com.project.dto.MemberDTO">
+		select M_RANK,M_ID,M_PW,M_NAME,M_ZIPCODE,M_ADDRESS1,M_ADDRESS2,M_EMAIL_ID,M_EMAIL_DOMAIN,M_CELLPHONE1,M_CELLPHONE2,M_CELLPHONE3,M_POINT,M_DATE,M_NICKNAME
+		from MEMBER,(select id,sns_id from SNS_MEMBER)
+		where m_id = id and sns_id = #{sns_id}
+	</select>
+
+</mapper>

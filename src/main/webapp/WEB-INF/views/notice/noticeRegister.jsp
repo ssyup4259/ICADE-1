@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -32,7 +32,6 @@ function noticeRegisterOk(){
 	f.submit();
 	}
 </script>
-
 </head>
 <body>
 
@@ -50,7 +49,7 @@ function noticeRegisterOk(){
 				<div class="row">
 					<div class="col-sm-3">내용</div>
 					<div class="col-sm-9">
-						<textarea rows="30" cols="80" name="BN_CONTENT"></textarea>
+						<textarea rows="30" cols="80" name="BN_CONTENT" class=textAreaGray></textarea>
 					</div>
 				</div>
 				<div class="row">

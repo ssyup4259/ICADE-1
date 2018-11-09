@@ -19,7 +19,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -30,6 +30,7 @@
 	function searchFix() {
 		var G_NAME = $("#g_listName").val();
 		var G_NUM = $("#g_listNum").val();
+
 		dataHandler(G_NAME,G_NUM);
 		
 	}

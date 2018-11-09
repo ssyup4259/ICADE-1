@@ -8,8 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>상품 수정 화면</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
+<script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<title>상품 수정 화면</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- 상품수정하기 버튼 submit -->
@@ -22,7 +33,7 @@ function goodsUpdateIt() {
     str = f.G_NAME.value;
     str = str.trim();
     if(!str) {
-        alert("상품명을 입력하세요.");
+        swal("상품명을 입력하세요.");
         f.G_NAME.focus();
         return;
     }
@@ -31,7 +42,7 @@ function goodsUpdateIt() {
     str = f.G_PRICE.value;
     str = str.trim();
     if(!str) {
-        alert("상품의 가격을 입력해주세요.");
+        swal("상품의 가격을 입력해주세요.");
         f.G_PRICE.focus();
         return;
     }
@@ -40,7 +51,7 @@ function goodsUpdateIt() {
     str = f.G_CONTENT.value;
     str = str.trim();
     if(!str) {
-        alert("상품의 설명을 입력해주세요.");
+        swal("상품의 설명을 입력해주세요.");
         f.G_CONTENT.focus();
         return;
     }

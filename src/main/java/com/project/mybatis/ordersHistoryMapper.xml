@@ -64,6 +64,6 @@
 	    and to_char(trunc(O_DATE),'YYYY-MM-DD') >= to_date(#{start_date}, 'YYYY-MM-DD' )
 	    and to_char(trunc(O_DATE),'YYYY-MM-DD') <= to_date(#{end_date}, 'YYYY-MM-DD')
 	]]>
-	
 	</select>
+	
 </mapper>
