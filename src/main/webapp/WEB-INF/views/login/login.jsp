@@ -16,11 +16,12 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"></script><!-- 네이버 로그인 용 안쓸꺼면 삭제예정 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<%=cp%>/resources/data/js/loginScript.js"></script>
 <script type="text/javascript">
 	$(document).keyup(function(e) {
