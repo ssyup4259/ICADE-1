@@ -52,7 +52,7 @@
 	<form action="" name="replylistForm" method="post">
 	 <c:forEach var="rp_dto" items="${rp_list}">
 			<!-- 대댓글 목록 -->
-			<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;" id="replyCatalog">
+			<table border="1" bordercolor="#b3cccc" align="center" width="80%" style="border-radius: 20px;" id="replyCatalog">
 				<!-- 댓글 목록 -->
 					<tr height="60px;" class="even">
 						<!-- 아이디, 작성날짜 -->

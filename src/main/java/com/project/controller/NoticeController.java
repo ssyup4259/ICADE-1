@@ -1,10 +1,7 @@
 package com.project.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.dao.AdminDAO;
 import com.project.dao.NoticeDAO;
-import com.project.dto.GoodsKindDTO;
 import com.project.dto.NoticeDTO;
-import com.project.service.AdminService;
 import com.project.service.NoticeService;
 
 @Controller
@@ -52,6 +46,36 @@ public class NoticeController {
 	@RequestMapping(value = "/noticeRegister.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public String noticeRegister( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "notice/noticeRegister";
+	}
+	
+	//공지 삭제
+	@RequestMapping(value = "/noticeDelete.action", method = { RequestMethod.POST, RequestMethod.GET })
+	public String noticeDelete( HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int BN_NUM = Integer.parseInt(request.getParameter("BN_NUM"));
+		n_service.deleteNotice(BN_NUM);
+		return "faq/faq";
+	}
+	
+	//공지 수정페이지
+	@RequestMapping(value = "/noticeUpdate.action", method = { RequestMethod.POST, RequestMethod.GET })
+	public String noticeUpdate( HttpServletRequest request, HttpServletResponse response) throws Exception {
+		NoticeDTO n_dto = new NoticeDTO();
+		int BN_NUM = Integer.parseInt(request.getParameter("BN_NUM"));
+		n_dto = n_service.getNoticeDetail(BN_NUM);
+		request.setAttribute("n_dto", n_dto);
+		
+		return "notice/noticeUpdate";
+	}
+	
+	//공지 수정하기
+	@RequestMapping(value = "/noticeUpdateOk.action", method = { RequestMethod.POST, RequestMethod.GET })
+	public String noticeUpdateOk( HttpServletRequest request, HttpServletResponse response) throws Exception {
+		n_service.updateNotice(request);
+		String BN_NUM = request.getParameter("BN_NUM");		
+		String cp = request.getContextPath();
+		String lists = "/notice/noticeDetail.action?BN_NUM="+ BN_NUM;
+		
+		return "redirect:" + lists;
 	}
 	
 	

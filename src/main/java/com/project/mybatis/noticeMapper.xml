@@ -37,4 +37,14 @@
 	<insert id="insertNotice" parameterType="com.project.dto.NoticeDTO">
 		insert into Board_Notice (BN_NUM, BN_SUBJECT, BN_CONTENT, BN_DATE) values (#{BN_NUM}, #{BN_SUBJECT}, #{BN_CONTENT}, sysdate)	
 	</insert>
+	
+	<!-- 데이터 수정 -->
+	<update id="updateNotice" parameterType="map">
+		update Board_Notice set BN_SUBJECT=#{BN_SUBJECT},BN_CONTENT=#{BN_CONTENT} where bn_num = #{BN_NUM}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete board_notice where bn_num = #{bn_num}
+	</delete>
+	
 </mapper>
