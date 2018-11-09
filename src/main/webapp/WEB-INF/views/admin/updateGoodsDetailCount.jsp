@@ -8,8 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>상품 재고 수정</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
+<script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<title>상품 재고 수정</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- 재고 수정하기 버튼 submit -->
@@ -37,34 +48,43 @@ function countUpdateIt() {
 
 </head>
 <body>
+<div>
 
-<h3>상품 재고 수정</h3>
-<h1>${g_name}</h1>
-<form action="" method="post" name="myForm">
+	<h1>${g_name}</h1>
 
-	<c:set var="i" value="plz"/>
+	<form action="" method="post" name="myForm">
 	
-	<c:forEach var="gd_dto" items="${gd_lists}">
+		<c:set var="i" value="plz"/>
+		
+		<table style="border: 0px solid;">
+			<c:forEach var="gd_dto" items="${gd_lists}">
+				<tr>
+					<td colspan="2">
+						<c:if test="${i ne gd_dto.DK_NAME}">
+							<br/>${gd_dto.DK_NAME}
+						</c:if>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td style="padding-top: 0px; padding-bottom: 0px;">
+						${gd_dto.GC_COLOR}
+					</td>
+					<td style="padding-top: 0px; padding-bottom: 0px;">
+						<c:set var="i" value="${gd_dto.DK_NAME}"/>
+						<input type="text" name="GD_COUNT" value="${gd_dto.GD_COUNT}" size="3" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="inputBoxGray"/>개
+						<input type="hidden" name="GD_CODE" value="${gd_dto.GD_CODE}"/>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<br>
+		<input type="button" onclick="countUpdateIt()" class="btnGray" value="재고 수정"/>
+		<input type="button" onclick="javascript:window.close();" class="btnGray" value="취 소"/>
 	
-		<c:if test="${i ne gd_dto.DK_NAME}">
-			<br/><br/>${gd_dto.DK_NAME}<br/>
-		</c:if>
-		
-		<c:if test="${i eq gd_dto.DK_NAME}">
-			<br/>
-		</c:if>
-		
-		<c:set var="i" value="${gd_dto.DK_NAME}"/>
-		
-		${gd_dto.GC_COLOR} : <input type="text" name="GD_COUNT" value="${gd_dto.GD_COUNT}" size="3" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개&nbsp;
-		<input type="hidden" name="GD_CODE" value="${gd_dto.GD_CODE}"/>
-		
-	</c:forEach>
-	<br/><br/>
-	<input type="button" onclick="countUpdateIt()" value="재고 수정"/>
-	<input type="button" onclick="javascript:window.close();" value="취 소"/>
-
-</form>
-
+	</form>
+	
+</div>
 </body>
 </html>

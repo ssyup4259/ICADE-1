@@ -27,6 +27,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function cmUpdateOpen(BC_NUM) {
 		
@@ -38,7 +39,7 @@
 					$('#goodsReplyModifier').css('visibility','visible');
 			},
 			error: function(result) {
-				alert("안된다");
+				swal("안된다");
 	 	    }
 	     });
 	}

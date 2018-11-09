@@ -7,14 +7,13 @@
 <title>회원정보 수정 본인 인증</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 	function changInfoAuthorization_sendIt() {
 		
 		var f = document.myForm;
-		alert("a");
 		var mode = $("#mode").val();
-		alert(mode);
 		
 		if(mode=="changeInfo"){
 			f.action = "changeInfo.action";
@@ -25,7 +24,7 @@
 		}
 		
 		if(!mode){
-			alert("mode가 널이다");
+			swal("mode가 널이다");
 		}
 		
 	}

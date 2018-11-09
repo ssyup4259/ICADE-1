@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <title>주문 내역 조회</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=cp%>/resources/data/js/ordersHistoryScript.js"></script>
@@ -35,8 +36,8 @@
 					cancelOK(data);
 				},
 				error : function(data) {
-					alert("error");
-					alert(data);
+					swal("error");
+					swal(data);
 				}
 			});
 		}
@@ -57,8 +58,8 @@
 				console.log(data);
 			},
 			error: function(data) {
-				alert("error");
-				alert(data);
+				swal("error");
+				swal(data);
 			}
 		});
 	}

@@ -227,108 +227,19 @@ keyframes slide { 0%{
 	left: 0;
 }
 
-33
-.33
-
-
-
-
-%{
-opacity
-
-
-
-
-:
-
-
-
-
-
-0
-.5
-
-
-
-
-
-;
-left
-
-
-
-
-:
-
-
-
-
-
--120%;
+33.33%{
+opacity : 0.5;
+left : -120%;
 }
 34%{
-opacity
-
-
-
-
-
-:
-
-
-
-
-
-0;
+opacity : 0;
 }
-66
-.66
-
-
-
-
-
-%{
-left
-
-
-
-
-
-:
-
-
-
-
-0;
-opacity
-
-
-
-
-
-:
-
-
-
-
-
-0;
+66.66%{
+left : 0;
+opacity : 0;
 }
 100%{
-opacity
-
-
-
-
-
-:
-
-
-
-
-
-1;
+opacity : 1;
 }
 }
 .thumbnail a>img, .thumbnail>img {
@@ -510,4 +421,27 @@ tr:hover {
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
+}
+
+.textAreaGreen{
+	padding-left: 10px;
+	border-color: #A3C838;
+	color: #8F9493;
+	font-size: 16px;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+}
+
+.textAreaGray{
+	padding-left: 10px;
+	border-color: #8F9493;
+	color: #8F9493;
+	text-align: center;
+	font-size: 16px;
+	border: 3px solid #8F9493;
+	border-radius: 6px;
+}
+
+input,textarea :focus{
+    outline: none !important;
 }
