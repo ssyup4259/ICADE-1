@@ -122,14 +122,13 @@ function deleteGoods(g_num) {
 							<td><a style="cursor: pointer;" onclick="updateGoodsCount('${g_dto.getG_NUM()}');"><fmt:formatNumber>${g_dto.getG_COUNT()}</fmt:formatNumber>개</a></td>
 							<td><fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>원</td>
 							<td><fmt:formatNumber>${g_dto.getG_SELLCOUNT()}</fmt:formatNumber>개</td>
-							<td>${g_dto.getG_CONTENT()}</td>
+							<td>${g_dto.getG_DISCOUNT()}%</td>
 							<td><img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" width="100" height="100" /></td>
 							<td><a style="cursor: pointer;" onclick="updateGoods('${g_dto.getG_NUM()}');">수정</a> / <a style="cursor: pointer;" onclick="deleteGoods('${g_dto.getG_NUM()}');">삭제</a></td>
-							<!-- <a href="<%=cp%>/admin/updateGoods.action?g_num=${g_dto.getG_NUM()}">수정</a> -->
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="9">
+						<td colspan="8">
 						<div class="paging">
 						<c:if test="${dataCount!=0 }">
 				${pageIndexList }
