@@ -8,6 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+
+<script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
+
 <title>상품 등록 화면</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -106,61 +119,99 @@ function enableTextBox(name) {
 </head>
 <body>
 
-<h3>상품등록 테스트</h3>
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <form action="" name="gInsertForm" method="POST" enctype="multipart/form-data">
 
-상품 종류 : 
+<table style="width: 55%; margin: auto;">
 
-<c:forEach var="gk_dto" items="${gk_lists}">
-	<c:if test="${gk_dto.GK_NUM == 1}">
-		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
-	</c:if>
-	<c:if test="${gk_dto.GK_NUM > 1}">
-		<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
-	</c:if>
-</c:forEach>
+	<colgroup>
+	    <col style="width: 20%;"/>
+	    <col style="width: 80%;"/>
+	</colgroup>
 
-<br/>
-상품 이름 : <input type="text" name="G_NAME"/> <br/>
-상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>원 <br/>
-지원 기종 : <br/>
-
-<c:forEach var="dk_dto" items="${dk_lists}">
-
-	<label><input type="checkbox" id="${dk_dto.DK_CODE}" name="GD_DEVICE" value="${dk_dto.DK_CODE}" onclick="toggleShow('${dk_dto.DK_CODE}')"/>${dk_dto.DK_NAME}</label><br/>
+	<tr>
+		<td colspan="2">
+			<h1>상품등록</h1>
+		</td>
+	</tr>
 	
-	<div id="D${dk_dto.DK_CODE}" class="subCats" style="display: none;">
-	
-		<c:forEach var="gc_dto" items="${gc_lists}">
-		
-			<label>
-			<input type="checkbox" name="${dk_dto.DK_CODE}_GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
-			${gc_dto.GC_COLOR}
-			</label>
-			<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" name="${dk_dto.DK_CODE}_GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
-				
-		</c:forEach>
-		
-	<br/><br/>
-	
-	</div>
-
-</c:forEach>
-
-<br/>
-상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT"></textarea> <br/>
-상품 설명 사진 : <input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
-할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="0"/>% <br/>
-상품 사진 : 
-<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
-
-<input type="button" onclick="insertIt()" value="상품등록">
-<input type="reset" value=" 다시입력 " onclick="document.gInsertForm.G_NAME.focus();"/>
-<input type="button" onclick="javascript:location.href='<%=cp%>';" value="취 소"/>
+	<tr>
+		<td>상품 종류</td>
+		<td align="left">
+			<c:forEach var="gk_dto" items="${gk_lists}">
+				<c:if test="${gk_dto.GK_NUM == 1}">
+					<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
+				</c:if>
+				<c:if test="${gk_dto.GK_NUM > 1}">
+					<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+				</c:if>
+			</c:forEach>
+		</td>
+	</tr>
+	<tr>
+		<td>상품 이름</td>
+		<td align="left">
+			<input type="text" name="G_NAME" class="inputBoxGreen"/>
+		</td>
+	</tr>
+	<tr>
+		<td>상품 가격</td>
+		<td align="left">
+			<input type="text" name="G_PRICE" class="inputBoxGreen" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>원
+		</td>
+	</tr>
+	<tr>
+		<td>지원 기종</td>
+		<td align="left">
+			<c:forEach var="dk_dto" items="${dk_lists}">
+				<label>
+					<input type="checkbox" id="${dk_dto.DK_CODE}" name="GD_DEVICE" value="${dk_dto.DK_CODE}" onclick="toggleShow('${dk_dto.DK_CODE}')"/>${dk_dto.DK_NAME}
+				</label>
+				<br/>
+				<div id="D${dk_dto.DK_CODE}" class="subCats" style="display: none; width: 100%;">
+					<c:forEach var="gc_dto" items="${gc_lists}">
+						<label>
+							<input type="checkbox" name="${dk_dto.DK_CODE}_GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
+								${gc_dto.GC_COLOR}
+						</label>
+						<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" class="inputBoxGreen" name="${dk_dto.DK_CODE}_GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+					</c:forEach>
+					<br/><br/>
+				</div>
+			</c:forEach>
+		</td>
+	</tr>
+	<tr>
+		<td>상품 설명 사진</td>
+		<td align="left">
+			<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/>
+		</td>
+	</tr>
+	<tr>
+		<td>할인율</td>
+		<td align="left">
+			<input type="text" name="G_DISCOUNT" class="inputBoxGreen" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="0"/>%
+		</td>
+	</tr>
+	<tr>
+		<td>상품 사진</td>
+		<td align="left">
+			<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" class="btnGray" onclick="insertIt()" value="상품등록">
+			<input type="reset" class="btnGray" value=" 다시입력 " onclick="document.gInsertForm.G_NAME.focus();"/>
+			<input type="button" class="btnGray" onclick="javascript:history.back();" value="취 소"/>
+		</td>
+	</tr>
+</table>
 
 </form>
 
+<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 </html>

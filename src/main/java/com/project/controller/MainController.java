@@ -20,6 +20,7 @@ import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.CookieService;
 import com.project.service.GoodsService;
+import com.project.service.NoticeService;
 import com.project.service.WishService;
 
 
@@ -34,6 +35,9 @@ public class MainController {
 	WishService w_service;
 	@Autowired
 	AdminDAO a_dao;
+	@Autowired
+	NoticeService n_service;
+
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(HttpServletRequest req) throws Exception {
@@ -95,8 +99,8 @@ public class MainController {
         
     }
 	@RequestMapping(value="/faq.action")
-		public ModelAndView faq() {
-		
+		public ModelAndView faq(HttpServletRequest request) throws Exception {
+		n_service.noticeList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("faq/faq");
 		return mav;
