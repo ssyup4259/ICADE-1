@@ -380,7 +380,7 @@ function sample6_execDaumPostcode() {
 								<tr>
 									<td colspan="2" align="left">
 									<input type="text" size="7" id="sample6_postcode" name="O_ZIPCODE" class="inputBoxGray" readonly="readonly" value="${m_dto.getM_ZIPCODE()}"/>
-									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btn2" value="우편번호 찾기">
+									<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGreen" value="우편번호 찾기">
 									</td>
 								</tr>
 								<tr>
@@ -466,7 +466,7 @@ function sample6_execDaumPostcode() {
 						<td>
 							<input type="text" class="inputBoxGray" name="O_POINT" style="text-align: right;" size="6" value="0" onchange="pFlagChange();"/>원
 							 (총 사용가능 적립금 : <fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>원) 
-							 <input type="button" value="적용" class="btnGray" onclick="pointUse();"/>
+							 <input type="button" value="적용" class="btnGreen" onclick="pointUse();"/>
 						</td>
 					</tr>
 					<tr>
@@ -482,7 +482,7 @@ function sample6_execDaumPostcode() {
 					</tr>
 					<tr>
 						<td align="center" colspan="2">
-							<input type="button" class="btnGray" value="결제하기" onclick="payIt();"/>
+							<input type="button" class="btnGreen" value="결제하기" onclick="payIt();"/>
 						</td>
 					</tr>
 				</table>
