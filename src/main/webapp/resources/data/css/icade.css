@@ -221,27 +221,14 @@ li.dropdown {
 	animation-delay: 8s;
 }
 
-@
-keyframes slide { 0%{
-	opacity: 1;
-	left: 0;
+@keyframes slide{
+    0%{opacity:1; left:0;}
+    33.33%{opacity:0.5; left:-120%;}
+    34%{opacity:0;}
+    66.66%{left:0; opacity:0;}
+    100%{opacity:1;}
 }
 
-33.33%{
-opacity : 0.5;
-left : -120%;
-}
-34%{
-opacity : 0;
-}
-66.66%{
-left : 0;
-opacity : 0;
-}
-100%{
-opacity : 1;
-}
-}
 .thumbnail a>img, .thumbnail>img {
 	display: block;
 	max-width: 100%;
