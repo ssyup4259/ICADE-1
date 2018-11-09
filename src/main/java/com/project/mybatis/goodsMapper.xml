@@ -19,7 +19,7 @@
 	(select GD_NUM as GD_NUM2, sum(GD_COUNT)G_COUNT, sum(GD_SELLCOUNT)G_SELLCOUNT from GOODS_DETAIL group by GD_NUM)
 	where G_NUM = GD_NUM and G_NUM = GD_NUM2 and GD_KIND_NUM = GK_NUM order by G_SELLCOUNT desc) data)
 <![CDATA[
-	where rnum >= 1 and rnum <= 4
+	where rnum >= 1 and rnum <= 6
 ]]>
 </select>
 
