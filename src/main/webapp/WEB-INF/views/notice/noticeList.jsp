@@ -28,7 +28,8 @@ function registerNotice(){
 	
 	var f = document.noticeForm;
 	
-	f.action = "<%=cp%>/notice/noticeRegister.action";
+	f.action = "<%=cp%>
+	/notice/noticeRegister.action";
 		f.submit();
 
 	}
@@ -38,20 +39,20 @@ function registerNotice(){
 <body style="font-family: LeeHyunJi; text-align: center; padding-top: 60px">
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
-		<div class="container">
+		<div class="container" style="width: 800px;">
 			<form name="noticeForm" method="post">
 				<h1>공지사항</h1>
 				<div style="text-align: left">
 					<c:forEach var="n_dto" items="${n_lists }">
-						<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}">${n_dto.getBN_SUBJECT() }</a>
-						<hr>
+						<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}" style="color: black;">${n_dto.getBN_NUM() }. ${n_dto.getBN_SUBJECT() }</a>
+						<hr style="border: 1px solid #8F9493;">
 						<br>
 					</c:forEach>
 
 				</div>
-
-				<input type="button" class="btnGreen" value="공지사항 등록" onclick="registerNotice();">
-
+				<c:if test="${sessionScope.userInfo.getM_RANK() != 'admin'}">
+					<input type="button" class="btnGreen" value="공지사항 등록" onclick="registerNotice();">
+				</c:if>
 			</form>
 		</div>
 	</div>

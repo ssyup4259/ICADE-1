@@ -14,23 +14,17 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
 <style type="text/css">
 </style>
 <script type="text/javascript">
-
 function noticeRegisterOk(){
-	
 	var f = document.noticeRegister;
-	
-	f.action = "<%=cp%>/notice/noticeRegisterOK.action";
+	f.action = "<%=cp%>/notice/noticeRegisterOK.action";		
 	f.submit();
-	}
+}
 </script>
 </head>
 <body>
@@ -60,5 +54,6 @@ function noticeRegisterOk(){
 		</form>
 	</div>
 	<jsp:include page="../include/footer.jsp" flush="false" />
+	
 </body>
 </html>

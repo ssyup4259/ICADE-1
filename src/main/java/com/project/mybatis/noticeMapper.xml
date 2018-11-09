@@ -24,6 +24,7 @@
 		<![CDATA[
 		where rnum>=#{start} and rnum<=#{end}
 		]]>
+		order by BN_NUM asc
 	</select>
 
 	<!-- 공지 한개의 데이터 -->
@@ -34,6 +35,6 @@
 	
 	<!-- 데이터 등록 -->
 	<insert id="insertNotice" parameterType="com.project.dto.NoticeDTO">
-		insert into Board_Notice values (#{BN_NUM}, #{BN_SUBJECT}, #{BN_CONTENT}, #{BN_DATE})	
+		insert into Board_Notice (BN_NUM, BN_SUBJECT, BN_CONTENT, BN_DATE) values (#{BN_NUM}, #{BN_SUBJECT}, #{BN_CONTENT}, sysdate)	
 	</insert>
 </mapper>

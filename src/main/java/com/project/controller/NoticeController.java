@@ -55,11 +55,11 @@ public class NoticeController {
 		return "notice/noticeRegister";
 	}
 	
+	
 	@RequestMapping(value = "/noticeRegisterOK.action", method = { RequestMethod.POST, RequestMethod.GET })
-	public String noticeRegisterOK(HttpServletRequest request, HttpServletResponse response, NoticeDTO dto) throws Exception {
-		NoticeDTO n_dto = new NoticeDTO();
-		
-		return "redirect:/noticeList.action";
+	public String noticeRegisterOK(NoticeDTO n_dto,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		n_service.noticeRegister(n_dto);
+		return "redirect:/notice/noticeList.action";
 	}
 	
 }

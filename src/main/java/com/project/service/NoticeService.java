@@ -10,4 +10,6 @@ public interface NoticeService {
 
 	public NoticeDTO getNoticeDetail(int BN_NUM) throws Exception;
 
+	void noticeRegister(NoticeDTO n_dto) throws Exception;
+
 }
