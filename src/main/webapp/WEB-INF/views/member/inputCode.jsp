@@ -52,7 +52,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<div class="container-fluid text-center">
+	<div class="container-fluid" style="text-align: center">
 		<br/>
 		<br/>
 		<h3>인증번호를 입력하세요</h3>
@@ -62,7 +62,7 @@ $(document).ready(function(){
 				<br>
 				<br>
 				<input type="button" class="btnGreen" value="인증하기" onclick="checkInputCode();" />
-				<input type="text" name="joinCode" value="${sessionScope.joinCode}">
+				<input type="hidden" name="joinCode" value="${sessionScope.joinCode}">
 				<input type="hidden" name="CcheckNum" value="1">
 			</form>
 		</div>

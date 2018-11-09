@@ -42,24 +42,24 @@
 
 	<!-- 내용 -->
 	<form name="joinForm" action="" method="post" id="joinForm">
-		<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
-			<div class="container text-center">
+		<div class="container-fluid"  style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+			<div class="container text-center" >
 				<div class="row">
 					<div class="col-sm-6" style="text-align: left;">
 						<h2>회원 가입</h2>
-						<span style="font-size: 15px; font-weight: 300;">아이케이드의 다양한 회원혜택을 받으세요.</span>
+						<span style="font-size: 15px; font-weight: 300;">ICADE의 다양한 회원혜택을 받으세요.</span>
 					</div>
 					<div class="col-sm-6" style="text-align: right;">
 
-						<h3 class="">기본정보</h3>
+						<!-- <h3 class="" style="padding-top: 5px">기본정보</h3>
 						<p class="required ">
 							<img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수">
 							필수입력사항
-						</p>
+						</p> -->
 					</div>
 				</div>
 				<hr style="border: 1px solid black;">
-				<div class="col-sm-8">
+				<div class="col-sm-8" align="center">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
@@ -624,7 +624,7 @@ function check() {
 					$("#alert-emailsuccess").show();
 					$("#alert-emaildanger").hide();
 					$("#alert-emailfresh").hide();
-					$('input[id=checkEmail]').attr('value','1');
+					$("#checkEmail").attr('value','1');
 				}else if(result==1){
 					$("#alert-emailsuccess").hide();
 					$("#alert-emaildanger").show();

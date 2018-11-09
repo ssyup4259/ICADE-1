@@ -113,12 +113,41 @@
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
 
-<div id="bbs">
-	<div id="bbs_title" style="font-size:25px; padding-left: 35px">
-	 #${bc_dto.getG_NAME()}
-	 <br>
-	 <a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"><font size="5" >상품상세보기</font></a>
+<div>
+<%-- 	<div style="font-size:25px; padding-left: 35px">
+		<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width: 92px; height: 87.6px" id="">
+		<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">#${bc_dto.getG_NAME()}</a></h3>
+		<p class="price">₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
+	</div> --%>
+	
+<!-- 					<hr style="border: 1px solid #A3C838; width: 20%;float: left "> -->
+	
+	<div class="row">
+		<div class="col-sm-1"style="text-align: right;padding-right: 20px">
+           <h2><font color="#000000" size="6">포토리뷰</font></h2>
+        </div>
+        <div class="col-sm-4" style="text-align: left;margin-left: none; padding-left: 0px;padding-top: 10px">
+          <p><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font></p>
+        </div>
+    </div>
+
+<%-- 	<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"><font size="5" >상품상세보기</font></a> --%>
+	
+	<div style="font-size:25px; margin: none">
+		<div class="row">
+			<div class="col-sm-1" style="float: left;height: 130px;">
+					<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
+			</div>
+			<div class="col-sm-2" style="float: right;">
+				<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a></h3>
+					<p class="price" >₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
+					<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+			</div>
+		</div>	
 	</div>
+	
+	
+	<hr style="border: 1px solid #A3C838;">
 	<div id="bbsArticle">
 		<div id="bbsArticle_header" style="padding-left: 35px; font-size: 20px">
 			<ul>
@@ -146,7 +175,7 @@
 					<br>
 					
 					<c:if test="${!empty bc_dto.getBC_SAVE1()}">
-					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
+					<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto" id="">
 					</c:if>
 					<br>
 					<c:if test="${!empty bc_dto.getBC_SAVE2()}">

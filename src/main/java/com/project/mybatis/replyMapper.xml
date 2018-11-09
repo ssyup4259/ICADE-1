@@ -73,8 +73,8 @@ select count(*) from board_comment where BC_PARENT=0
 <!-- 하나의 댓글정보 읽어오기 -->
 <select id="readOne" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
 select BC_NUM,BC_BOARD,BC_ID,BC_DATE,BC_PARENT,BC_CONTENT,BC_IMAGE,BC_SAVEFILENAME,BC_CONTENTFILE1,
-BC_CONTENTFILE2,BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT ,G_NUM,G_NAME
-from board_comment,(select g_name,g_num from goods) where BC_NUM = #{BC_NUM} AND BC_BOARD = G_NUM
+BC_CONTENTFILE2,BC_CONTENTFILE3,BC_SAVE1,BC_SAVE2,BC_SAVE3,BC_SUBJECT ,G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME
+from board_comment,(select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME from goods) where BC_NUM = #{BC_NUM} AND BC_BOARD = G_NUM
 </select>
 
 <!-- 날짜순으로 이전글 다음글 설정하기  -->
