@@ -33,7 +33,7 @@ public interface AdminDAO {
 	//상품 리스트
 	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception;
 	//상품 개수 구하기
-	public int getGoodsCount(String searchKey,String searchValue) throws Exception;
+	public int getGoodsCount(String searchKey,String searchValue, String gdKindNum) throws Exception;
 	//상세 상품의 정보
 	public List<GoodsDetailDTO> getReadGoodsDetail(int g_num) throws Exception;
 	//재고 수정

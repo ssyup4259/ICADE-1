@@ -137,15 +137,15 @@
 					<c:set var="i" value="0" />
 					<c:forEach var="g_dto" items="${popularList}">
 
-						<c:if test="${i % 2 == 0}">
+						<c:if test="${i % 3 == 0}">
 							<div class="row">
 						</c:if>
 
-						<div class="col-sm-6" style="padding: 4px;">
+						<div class="col-sm-4" style="padding: 4px;">
 							<div class="panel panel-primary">
 								<div class="panel-heading">${g_dto.getG_NAME()}</div>
-								<div class="panel-body">
-									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 100%" alt="Image">
+								<div class="panel-body text-center">
+									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 60%" alt="Image">
 									</a>
 								</div>
 								<div class="panel-footer" style="text-align: right;">
@@ -156,7 +156,7 @@
 							</div>
 						</div>
 
-						<c:if test="${i % 2 == 1 || popularList.size() == i+1}">
+						<c:if test="${i % 3 == 2 || popularList.size() == i+1}">
 				</div>
 				</c:if>
 

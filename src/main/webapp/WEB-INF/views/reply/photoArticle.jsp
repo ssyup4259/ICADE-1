@@ -136,7 +136,7 @@
 	<div style="font-size:25px; margin: none">
 		<div class="row">
 			<div class="col-sm-1" style="float: left;height: 130px;">
-					<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/reply/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
+					<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
 			</div>
 			<div class="col-sm-2" style="float: right;">
 				<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a></h3>
