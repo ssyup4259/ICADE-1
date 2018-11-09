@@ -74,7 +74,7 @@
 						<c:if test="${i%j == 0} ">
 							<tr align="center" style="border-bottom: none;">
 						</c:if>
-						<td colspan="1" style="margin: 0; padding: 0; border-bottom: none;"><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"> <img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 30px; height: 30px"> ${bc_dto.getG_NAME()}
+						<td colspan="1" style="margin: 0; padding: 0; border-bottom: none;"><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}"> <img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 50px; height: 60px"> ${bc_dto.getG_NAME()}
 						</a> <br> <a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}"> <img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}" style="width: 100%; height: 400px; margin: 0px; border-radius: 20px;"> <br> ${bc_dto.getBC_SUBJECT()}
 						</a></td>
 						<c:if test="${i%j == j-1}">

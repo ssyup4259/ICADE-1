@@ -135,12 +135,13 @@ public class AdminDAOImpl implements AdminDAO {
 
 	//상품 개수 구하기 (완료)
 	@Override
-	public int getGoodsCount(String searchKey, String searchValue) throws Exception {
+	public int getGoodsCount(String searchKey, String searchValue, String gdKindNum) throws Exception {
 			
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
+		params.put("gdKindNum", gdKindNum);
 		
 		int result = sessionTemplate.selectOne(adminMapper + ".getGoodsCount", params);
 		
