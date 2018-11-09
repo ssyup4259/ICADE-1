@@ -85,9 +85,11 @@
 	color: white;
 }
 
+.ui-datepicker-year,
+.ui-datepicker-month,
 .ui-datepicker-trigger{
-	    	background-color: white;
-	    	color: #A3C838;
+			background-color: white;
+	    	color: #000000;
 	    	text-align: center;
 	    	text-decoration: none;
 	    	display: inline-block;
@@ -116,7 +118,7 @@
 			<h2>주문조회</h2>
 		</div>
 
-<form method="get" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action?pageNum=${pageNum}&startDay=${startDate}">
+<form method="get" id="OrderHistoryFormId" name="OrderHistoryForm" action="orderHistory.action?pageNum=${pageNum}&startDay=${startDate}" autocomplete=off>
 	<div class="container-fluid" style="border: 2px solid black; border-radius: 6px; padding-bottom: 30px;">
 		<h2>검색기간설정</h2>
 		<!-- 오늘,1주일,1개월,3개월,6개월 이미지 버튼 -->
@@ -136,7 +138,7 @@
 			</div>
 		<!-- 조회 버튼 -->
 			<div class="col-sm-2">
-				<input type="submit" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 8px;">
+				<input type="submit" class="btnGreen" value="조회" id="order_search_btn" style="width: 100px; height: 30px; font-size: 15px;">
 			</div>
 		</div>
 		<div>

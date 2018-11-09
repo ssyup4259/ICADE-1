@@ -72,7 +72,6 @@ public class NoticeController {
 	public String noticeUpdateOk( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		n_service.updateNotice(request);
 		String BN_NUM = request.getParameter("BN_NUM");		
-		String cp = request.getContextPath();
 		String lists = "/notice/noticeDetail.action?BN_NUM="+ BN_NUM;
 		
 		return "redirect:" + lists;

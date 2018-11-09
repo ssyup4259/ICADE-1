@@ -183,6 +183,7 @@ public class OrdersHistoryController {
 		System.out.println("=======================detailLists통과====================");
 		OrdersDTO Recipientdto = service.selectRecipientInfo(hMap);
 		
+		mav.addObject("O_Date", Recipientdto.getO_DATE());
 		mav.addObject("O_Num", O_Num);
 		//mav.addObject("detailLists",detailLists);
 		

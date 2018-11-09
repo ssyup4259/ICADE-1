@@ -1,14 +1,38 @@
-$("#alert-idsuccess").hide();
-$("#alert-iddanger").hide();
-$("#alert-idrefresh").hide();
+//cp 대용
+var cp = getContextPath();
 
-$("#alert-nicksuccess").hide();
-$("#alert-nickdanger").hide();
-$("#alert-nickfresh").hide();
+function getContextPath() {
 
-$("#alert-emailsuccess").hide();
-$("#alert-emaildanger").hide();
-$("#alert-emailfresh").hide();
+    return sessionStorage.getItem("contextpath");
+
+}
+
+$(document).ready(function() {
+	$("#alert-idsuccess").hide();
+	$("#alert-iddanger").hide();
+	$("#alert-idrefresh").hide();
+	
+	$("#alert-nicksuccess").hide();
+	$("#alert-nickdanger").hide();
+	$("#alert-nickfresh").hide();
+	
+	$("#alert-emailsuccess").hide();
+	$("#alert-emaildanger").hide();
+	$("#alert-emailfresh").hide();
+	
+	$("#alert-capslock").hide();
+});
+
+$(document).ready(function() {
+	
+	$("#user_Id").change(function() {
+		
+		$('#checkId').val('2');
+		$("#alert-idsuccess").hide();
+		$("#alert-idrefresh").show();
+		
+	});
+});
 
 $(document).ready(function () {
 	
@@ -88,7 +112,7 @@ $("#alert-idsuccess").hide();
 						$("#alert-iddanger").show();
 						
 					}else{
-						alert("에러가 발생했습니다.");
+						alert("idCheck 에러가 발생했습니다.");
 					}
 				}
 			});
@@ -97,7 +121,7 @@ $("#alert-idsuccess").hide();
 
 //capslock 검사
 
-$("#alert-capslock").hide();
+
 
 function caps_lock(e) {
         var keyCode = 0;
@@ -340,6 +364,7 @@ function emailCheck() {
 		var email2 =document.getElementById("email2").value; 
 		var email = email1+ "@" + email2;
 		
+		
 		var xhttp = new XMLHttpRequest();
 		
 		xhttp.onreadystatechange =function(){
@@ -351,12 +376,12 @@ function emailCheck() {
 				}
 			}			
 		}; 
-		xhttp.open("POST","<%=cp%>/sendMail.action",true);
+		xhttp.open("POST",cp+"/sendMail.action",true);
 		xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 		xhttp.send("email=" + email);
 		
 		//팝업창 열기
-		window.open("<%=cp%>/sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
+		window.open(cp+"/sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
 			
 		
 	} 
@@ -504,7 +529,7 @@ function signUp() {
 		}
 		
 
-		f.action= "<%=cp%>/member/join_ok.action";
+		f.action= cp+"/member/join_ok.action";
 		f.submit();
 
 			}

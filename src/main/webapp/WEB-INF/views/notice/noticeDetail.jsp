@@ -65,7 +65,7 @@
 	
 	<div class="ec-base-table typeWrite ">
 	
-	<table border="1" style="width: 50%; margin: auto;">
+	<table border="1" style="width: 30%; margin: auto;">
 		<colgroup>
 			<col style="width:130px;">
 			<col style="width:auto;">
@@ -75,7 +75,8 @@
 	<tr>
 		<th scope="row">제목</th>
 		<td style="font-size:18px;font-weight:400;">
-			<input type="text" value="${n_dto.getBN_SUBJECT()}" style="border: none; width:auto; background-color: #F2F1F0">
+			<input type="hidden" value="${n_dto.getBN_SUBJECT()}" style="border: none; width:auto; background-color: #F2F1F0">
+			${n_dto.getBN_SUBJECT()}
 		</td>
 	</tr>
 	
@@ -86,7 +87,10 @@
 	
 	<tr>
 		<th scope="row">작성일</th>
-	    <td><input type="text" value="${n_dto.getBN_DATE()}" style="border: none; background-color: #F2F1F0"></td>
+	    <td>
+	    	<input type="hidden" value="${n_dto.getBN_DATE()}" style="border: none; background-color: #F2F1F0">
+	    	${n_dto.getBN_DATE()}
+	    </td>
 	</tr>
 	
 	<tr>
@@ -108,6 +112,7 @@
 		</td>
 	</tbody>
 	</table>
+	<br/>
 	</div>
 		<div class="ec-base-button" align="center">
 			<span class="gRight">

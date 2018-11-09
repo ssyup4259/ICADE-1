@@ -38,7 +38,7 @@
 <div class="box_buylist_info">
 	<div class="noti_area">
 	<span class="srno"><strong>결제번호</strong> : ${O_Num}</span>
-	<span><strong>주문일</strong> : 2018-10-08</span>
+	<span><strong>주문일</strong> : ${O_Date}</span>
 	</div>
 
 
