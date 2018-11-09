@@ -59,9 +59,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	// 공지 등록하기
 
-	/*@Override
-	public void NoticeRegister(NoticeDTO n_dto) throws Exception {
+	@Override
+	public void noticeRegister(NoticeDTO n_dto) throws Exception {
+		System.out.println(n_dto);
+		int BN_NUM = sessionTemplate.selectOne(noticeMapper +".noticeMaxNum");
+		n_dto.setBN_NUM(BN_NUM + 1);
 		sessionTemplate.insert(noticeMapper + ".insertNotice", n_dto);
-	}*/
+	}
 
 }

@@ -6,12 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>회원탈퇴</title>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
 <form action="cancelMembership_ok.action" method="post" id="cancelMembership" name="cancelMembership" onsubmit="return changInfoAuthorization_sendIt">
@@ -42,8 +48,8 @@
 	<input type="hidden" id="selected" name="selected" value="상품 다양성/가격품질 불만">
 	
 	<div class="bt_area3">
-	<input type="submit" value="회원 탈퇴 신청"> 
-	<a href="myPage.action" class=""><span>취소</span></a>
+	<input type="submit" class="btnGreen" value="회원 탈퇴 신청"> 
+	<input type="button" value="취소" class="btnGreen" onclick="location.href='myPage.action?m_id=${sessionScope.userInfo.getM_ID()}';">
 	</div>
 
 </form>
@@ -73,8 +79,6 @@
 			var selectedVal = $("#reason option:selected").val();
 			
 			if(selectedVal=="직접입력"){
-				//$("#Directinput").removeAttr("readonly");
-				//$("#Directinput2").removeAttr("readonly");
 				$("#Directinput").attr("readonly",false);
 				$("#Directinput2").attr("readonly",false);
 				$("#selected").val("");
@@ -85,10 +89,6 @@
 				$("#Directinput2").val("");
 				$("#selected").val(selectedVal);
 			}
-			
-			//alert($("#Directinput").val());
-			
-			//alert($("#selected").val());
 		});	
 	});
 </script>
@@ -108,24 +108,5 @@
 	}
 
 </script>
-<!-- 
-<script type="text/javascript">
-
-	var doubleSubmitFlag = false;
-	
-	$(function(){
-		$("#submit").click(function(){
-		
-			if(doubleSubmitFlag){
-		        alert('제출 중입니다.');
-		        return false;
-		    }else {
-		        doubleSubmitFlag = true;
-		        $("#cancelMembership").submit();
-		        
-		    }
-	    });
-	});
-</script> -->
 </body>
 </html>

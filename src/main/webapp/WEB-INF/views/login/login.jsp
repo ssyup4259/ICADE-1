@@ -16,11 +16,12 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"></script><!-- 네이버 로그인 용 안쓸꺼면 삭제예정 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<%=cp%>/resources/data/js/loginScript.js"></script>
 <script type="text/javascript">
 	$(document).keyup(function(e) {
@@ -63,13 +64,15 @@
 						<tr style="border-bottom: 1px solid black;">
 							<td style="border-right: 1;"><input type="checkbox" id="saveId" name="idSaveCheck">아이디 저장</td>
 							<td><input type="button" value="로그인" id="login" onClick="loginProcess()" class="btnGreen" style="width: 150px;"></td>
+							<!-- 
 							<td>
 								<div id="naverIdLogin" align="center">
 									<a id="naver-login-btn" href="#" role="button">
 										<img src="https://static.nid.naver.com/oauth/big_g.PNG" width="80%" height="45"/> 
 									</a>
 								</div>
-							</td>
+							</td> 
+							-->
 						</tr>
 					</table>
 				</div>
@@ -84,23 +87,6 @@
 		</div>
 	</form>
 
-
-	<jsp:include page="../include/footer.jsp" flush="false" />
-
-
-<!-- 네이버아디디로로그인 초기화 Script -->
-<script type="text/javascript">
-   var naverLogin = new naver.LoginWithNaverId(
-      {
-         clientId: "dnvfDSWWZdZLlC4W0n7E",
-         callbackUrl: "http://localhost:8080/icade/callbackTest",
-         isPopup: false, /* 팝업을 통한 연동처리 여부 */
-         loginButton: {color: "green", type: 1, height: 60} /* 로그인 버튼의 타입을 지정 */
-      }
-   );
-   
-   /* 설정정보를 초기화하고 연동을 준비 */
-   naverLogin.init();
-</script>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

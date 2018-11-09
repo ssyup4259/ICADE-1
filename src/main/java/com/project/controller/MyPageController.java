@@ -30,13 +30,14 @@ import com.project.service.WishService;
 public class MyPageController {
 	
 	@Autowired
-	private MyPageService service;
+	private MyPageService my_service;
 	@Autowired
 	CookieService c_service;
 	@Autowired
 	AdminDAO a_dao;
 	@Autowired
 	WishService w_service;
+	
 	@RequestMapping(value="/myPage.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String mypage(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -44,25 +45,27 @@ public class MyPageController {
 		
 		MemberDTO vo = new MemberDTO();
 		
-		
 		vo = (MemberDTO) session.getAttribute("userInfo");
 		if(vo != null) {
 			w_service.wishList(request);
 			}
 		String M_ID = vo.getM_ID();
 		
-		int point = service.pointCheck(M_ID);
+		int point = my_service.pointCheck(M_ID);
 		w_service.wishListList(request);
-		request.setAttribute("point", point);
 		
-		int usedPoint = service.usedPointCheck(M_ID);
+		int o_Tot = my_service.selectSumTot(M_ID);
+		int SellCount = my_service.selectCountOnum(M_ID);
+		
+		int usedPoint = my_service.usedPointCheck(M_ID);
 		String jsonM_id = new Gson().toJson(M_ID);
 		
+		request.setAttribute("SellCount", SellCount);
 		request.setAttribute("usedPoint", usedPoint);
 		request.setAttribute("jsonM_id", jsonM_id);
+		request.setAttribute("o_Tot", o_Tot);
+		request.setAttribute("point", point);
 		
-		//System.out.println("-----------------point------------------------");
-		//System.out.println(point);
 		c_service.cookieList(request);
 		return "/mypage/myPageMain";
 	}
@@ -116,16 +119,11 @@ public class MyPageController {
 		
 		String session_PW = vo.getM_PW();
 		
-		//System.out.println(M_PW);
-		//System.out.println(session_PW);
-		
 		if(M_PW!=session_PW && !M_PW.equals(session_PW)) {
 			
 			String msg = "비밀번호가 틀립니다.";
 			
 			request.setAttribute("msg", msg);
-			
-			//System.out.println(request.getAttribute("msg"));
 			
 			return "/mypage/infoCheckPage"; 
 		}
@@ -164,9 +162,6 @@ public class MyPageController {
 	
 	@RequestMapping(value="/chanegeInfo_check_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public String chanegeInfo_check_ok(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
-		//개인 정보 변경 들어가기전 본인 인증 단계
-
-		System.out.println("개인정보확인컨트롤러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ");
 		
 		HttpSession session = request.getSession();
 		
@@ -176,32 +171,23 @@ public class MyPageController {
 		
 		String session_PW = vo.getM_PW();
 		
-		//System.out.println(M_PW);
-		//System.out.println(session_PW);
-		
 		if(M_PW!=session_PW && !M_PW.equals(session_PW)) {
 			
 			String msg = "비밀번호가 틀립니다.";
 			
 			request.setAttribute("msg", msg);
-			
-			//System.out.println(request.getAttribute("msg"));
-			
 			return "/mypage/cancelAuthorization"; 
 		}
 		
 		System.out.println("맞으면 여기로");
 		if(vo != null) {
-			System.out.println("----------------------mdto");
-		w_service.wishList(request);
+			w_service.wishList(request);
 		}
 		return "/mypage/changInfoAuthorization";
 	}
 	
 	@RequestMapping(value="/changeInfo_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView chanegeInfo_ok(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
-		//System.out.println("====================================_ok 탄다===============================================");
 		
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
@@ -210,28 +196,9 @@ public class MyPageController {
 		
 		MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
 		if(vo != null) {
-			System.out.println("----------------------mdto");
-		w_service.wishList(request);
+			w_service.wishList(request);
 		}
 		String M_ID = vo.getM_ID();
-		//String M_PW = vo.getM_PW();
-		
-		/*
-		if(M_PW!=dto.getM_PW() && !M_PW.equals(dto.getM_PW())) {
-			
-			String msg = "비밀번호가 틀립니다.";
-			
-			mav.addObject("msg", msg);
-			mav.setViewName("/mypage/ChangeInfo");
-			
-			//System.out.println(request.getAttribute("msg"));
-			
-			return mav;
-		}
-		*/
-		
-		//System.out.println(M_ID);
-		//System.out.println(M_PW);
 		
 		hMap.put("M_PW", dto.getM_PW());
 		hMap.put("M_ZIPCODE", dto.getM_ZIPCODE());
@@ -245,13 +212,11 @@ public class MyPageController {
 		hMap.put("M_NICKNAME", dto.getM_NICKNAME());
 		hMap.put("M_ID", M_ID);
 		
-		service.updateInfo(hMap);
+		my_service.updateInfo(hMap);
 		
 		session.removeAttribute("userInfo");
 		
-		//System.out.println("======================================세션삭제까지 끝났다=================================");
-		
-		MemberDTO vo1 = service.userInfo(M_ID);
+		MemberDTO vo1 = my_service.userInfo(M_ID);
 		
 		session.setAttribute("userInfo", vo1);
 		
@@ -300,7 +265,7 @@ public class MyPageController {
 		
 		leaveDTO = (MemberDTO) session.getAttribute("userInfo");
 		
-		int maxNum = service.maxLeaveNum();
+		int maxNum = my_service.maxLeaveNum();
 		
 		String reason = request.getParameter("selected");
 		
@@ -316,9 +281,9 @@ public class MyPageController {
 		hMap.put("L_REASON",reason);
 		hMap.put("L_PH", ph);
 		
-		service.insertLeaveData(hMap);
+		my_service.insertLeaveData(hMap);
 			
-		service.cancelMembership(leaveDTO.getM_ID());
+		my_service.cancelMembership(leaveDTO.getM_ID());
 		
 		session.removeAttribute("userInfo");
 		
@@ -354,7 +319,7 @@ public class MyPageController {
 		
 		String M_ID = request.getParameter("M_ID");
 		
-		point = service.pointCheck(M_ID);
+		point = my_service.pointCheck(M_ID);
 		
 		System.out.println(point);
 		
@@ -363,8 +328,6 @@ public class MyPageController {
 	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
-		
-		
 			
 			Cookie[] cookies = req.getCookies();
 			
@@ -382,17 +345,12 @@ public class MyPageController {
 						
 						String g_num = ck.getName();
 						c_lists.add(g_num);
-						
 					}
-					
 				}
 			}
 		
-			
 			req.setAttribute("c_lists", c_lists);
-			
 			List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
-			
 			req.setAttribute("gk_lists", gk_lists);
 			
 			return req;

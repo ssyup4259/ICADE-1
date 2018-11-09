@@ -161,11 +161,6 @@
 						<div class="col-sm-6" style="text-align: left;">
 							<p>${usedPoint}Point</p>
 						</div>
-						<div class="col-sm-4" style="text-align: right;">
-							<a href="/myshop/deposits/historyList.html" class="button">
-								<input type="button" class="btnGray" style="width: 200px;" value="사용내역">
-							</a>
-						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-2" style="text-align: right;">
@@ -173,8 +168,8 @@
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
 							<p>
-								0원(
-								<span id="xans_myshop_bankbook_order_count">0</span>
+								${o_Tot}원(
+								<span id="xans_myshop_bankbook_order_count">${SellCount}</span>
 								회)
 							</p>
 						</div>
