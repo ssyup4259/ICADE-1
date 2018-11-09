@@ -47,11 +47,11 @@ function loginProcess(){
     var loginForm = document.getElementById('loginForm');
     
     if(!id){
-        alert("Enter ID");
+        swal("Enter ID");
         id.focus();
         return false;
     }else if(!pw){
-        alert("Enter password");
+        swal("Enter password");
         password.focus();
         return false;
     }else if($("#saveId").is(":checked")){
