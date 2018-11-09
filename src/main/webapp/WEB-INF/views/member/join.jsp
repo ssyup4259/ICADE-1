@@ -576,7 +576,7 @@ function check() {
 
 		//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
 
-		alert("이메일 형식이 올바르지 않습니다.");
+		swal("이메일 형식이 올바르지 않습니다.");
 
 		document.joinForm.email2.focus();
 
@@ -596,11 +596,11 @@ function check() {
 	var allData = {"M_EMAIL_ID" : email1,"M_EMAIL_DOMAIN" : email2}
 	
 	if (email1.length < 1) {
-		alert("이메일을 입력해주세요")
+		swal("이메일을 입력해주세요")
 		
 	}
 	if (email2.length < 1) {
-		alert("정확한 형식을 기입해주세요.")
+		swal("정확한 형식을 기입해주세요.")
 	}else{
 	  $.ajax({
 			type : "POST",
@@ -608,7 +608,7 @@ function check() {
 			data : allData,
 			dataType :"json",
 			error : function(error) {
-				alert("서버가 응답하지 않습니다");
+				swal("서버가 응답하지 않습니다");
 			},
 			success : function(result) {
 				if (result==0) {
@@ -643,9 +643,9 @@ function check() {
 		xhttp.onreadystatechange =function(){
 			if (xhttp.readyState == 4 ) {
 				if (xhttp.status== 200) {
-					alert("등록하신 이메일로 인증번호를 발송했습니다.");
+					swal("등록하신 이메일로 인증번호를 발송했습니다.");
 				}else{
-					alert("등록하신 이메일로 인증번호를 발송했습니다.");
+					swal("등록하신 이메일로 인증번호를 발송했습니다.");
 				}
 			}			
 		};
@@ -676,114 +676,114 @@ function signUp() {
 		var f = document.joinForm;
 		
 	if ($("#user_Id").val().length<1) {
-		alert("아이디를 작성해주세요");
+		swal("아이디를 작성해주세요");
 		 $('#user_Id').focus();
 		 
 	}else if($("#user_Id").val().length<8){
-		alert("아이디는 8자리 이상으로 입력해주세요")
+		swal("아이디는 8자리 이상으로 입력해주세요")
 		$('#user_Id').focus();
 		
 	}else if($("#user_Id").val().length>16){
-		alert("아이디는 16자리 이하로 입력해주세요")
+		swal("아이디는 16자리 이하로 입력해주세요")
 		$('#user_Id').focus();
 		
 	}else if($("#pw1").val().length<1){
-		alert("비밀번호를 작성해주세요");
+		swal("비밀번호를 작성해주세요");
 		$('#pw1').focus();
 		
 	}else if ($("#pw1").val().length<8 ){
-		alert("비밀번호는 8자리 이상으로 작성해주세요");
+		swal("비밀번호는 8자리 이상으로 작성해주세요");
 		$('#pw1').focus(); 
 		
 	}else if($("#pw1").val().length>16){
-		alert("비밀번호는 16자리 이하로 작성해주세요");
+		swal("비밀번호는 16자리 이하로 작성해주세요");
 		$('#pw1').focus();
 		
 	}else if($("#pw2").val().length<1){
-		alert("비밀번호 확인을 작성해주세요");
+		swal("비밀번호 확인을 작성해주세요");
 		$('#pw2').focus();
 		
 	}else if($("#name").val().length<1){
-		alert("이름을 작성해주세요");
+		swal("이름을 작성해주세요");
 		$('#name').focus();
 		
 	}else if($("#name").val().length<1){
-		alert("이름을 최소 1자리 이상 입력해주세요.");
+		swal("이름을 최소 1자리 이상 입력해주세요.");
 		$('#name').focus();
 		
 	}else if($("#user_NickName").val().length<1){
-		alert("닉네임을 작성해주세요");
+		swal("닉네임을 작성해주세요");
 		$('#user_NickName').focus();
 		
 	}else if($("#user_NickName").val().length<2){
-		alert("닉네임은 최소 2글자 이상입니다.");
+		swal("닉네임은 최소 2글자 이상입니다.");
 		$('#user_NickName').focus();
 		
 	}else if($("#user_NickName").val().length>12){
-		alert("닉네임은 12글자 이하입니다.");
+		swal("닉네임은 12글자 이하입니다.");
 		$('#user_NickName').focus();
 		
 	}else if($("#email1").val().length<1){
-		alert("이메일을 작성해주세요");
+		swal("이메일을 작성해주세요");
 		$('#email1').focus();
 		
 	}else if($("#email2").val().length<1){
-		alert("이메일을 작성해주세요");
+		swal("이메일을 작성해주세요");
 		$('#email1').focus();
 		
 	}else if($("#t1").val().length<1){
-		alert("전화번호를 작성해주세요");
+		swal("전화번호를 작성해주세요");
 		$('#t1').focus();
 		
 	}else if($("#t1").val().length<2){
-		alert("전화번호를 최소 한 자리 이상 입력해주세요");
+		swal("전화번호를 최소 한 자리 이상 입력해주세요");
 		$('#t1').focus();
 		
 	}else if($("#t1").val().length>5){
-		alert("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
+		swal("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
 		$('#t1').focus();
 		
 	}else if($("#t2").val().length<1){
-		alert("전화번호를 작성해주세요");
+		swal("전화번호를 작성해주세요");
 		$('#t2').focus();
 		
 	}else if($("#t2").val().length<2){
-		alert("전화번호를 최소 한 자리 이상 입력해주세요");
+		swal("전화번호를 최소 한 자리 이상 입력해주세요");
 		$('#t1').focus();
 		
 	}else if($("#t2").val().length>5){
-		alert("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
+		swal("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
 		$('#t2').focus();
 		
 	}else if($("#t3").val().length<1){
-		alert("전화번호를 작성해주세요");
+		swal("전화번호를 작성해주세요");
 		$('#t3').focus();
 		
 	}else if($("#t3").val().length<2){
-		alert("전화번호를 최소 한 자리 이상 입력해주세요");
+		swal("전화번호를 최소 한 자리 이상 입력해주세요");
 		$('#t3').focus();
 		
 	}else if($("#t3").val().length>5){
-		alert("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
+		swal("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
 		$('#t3').focus();
 		
 	}else if($("#sample6_postcode").val().length<1){
-		alert("우편번호를 작성해주세요");
+		swal("우편번호를 작성해주세요");
 		
 	}else if($("#sample6_address").val().length<1){
-		alert("상세주소를 작성해주세요");
+		swal("상세주소를 작성해주세요");
 		$('#sample6_address').focus();
 		
 	}else if($("#checkId").val() == 2){
-		alert("아이디 중복검사를 해주세요");
+		swal("아이디 중복검사를 해주세요");
 		
 	}else if($("#checkNick").val() == 2){
-		alert("닉네임 중복검사를 해주세요");
+		swal("닉네임 중복검사를 해주세요");
 		
 	}else if($("#checkEmail").val() == 2){
-		alert("이메일 중복검사를 해주세요");
+		swal("이메일 중복검사를 해주세요");
 	}/* else if($("#checkNum").val() != 1){
-		alert("이메일 인증을 완료해주세요")
+		swal("이메일 인증을 완료해주세요")
 	} */else{
 		var email1 =document.getElementById("email1").value; 
 		var email2 =document.getElementById("email2").value; 
@@ -795,7 +795,7 @@ function signUp() {
 
 			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
 
-			alert("이메일 형식이 올바르지 않습니다.");
+			swal("이메일 형식이 올바르지 않습니다.");
 
 			f.email2.focus();
 
