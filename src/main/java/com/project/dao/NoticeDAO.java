@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.project.dto.BoardNoticeDTO;
@@ -14,5 +15,9 @@ public interface NoticeDAO {
 	NoticeDTO getReadNoticeDetail(int BN_NUM) throws Exception;
 
 	void noticeRegister(NoticeDTO n_dto) throws Exception;
+	
+	void updateNotice(HashMap<String, Object> hMap) throws Exception;
+	
+	void deleteNotice(int BN_NUM) throws Exception;
 
 }

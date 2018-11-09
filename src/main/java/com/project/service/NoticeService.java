@@ -12,4 +12,8 @@ public interface NoticeService {
 
 	void noticeRegister(NoticeDTO n_dto) throws Exception;
 
+	void updateNotice(HttpServletRequest req) throws Exception;
+	
+	void deleteNotice(int BN_NUM) throws Exception;
+
 }

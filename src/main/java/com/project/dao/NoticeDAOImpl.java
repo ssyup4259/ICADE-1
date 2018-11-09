@@ -67,4 +67,14 @@ public class NoticeDAOImpl implements NoticeDAO {
 		sessionTemplate.insert(noticeMapper + ".insertNotice", n_dto);
 	}
 
+	@Override
+	public void updateNotice(HashMap<String, Object> hMap) throws Exception {
+		sessionTemplate.update(noticeMapper + ".updateNotice", hMap);
+	}
+
+	@Override
+	public void deleteNotice(int BN_NUM) throws Exception {
+		sessionTemplate.delete(noticeMapper + ".deleteNotice", BN_NUM);
+	}
+
 }

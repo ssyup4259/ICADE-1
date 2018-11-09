@@ -10,13 +10,11 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript"> 
-
-    
-</script>
 </head>
 <body>
-<!-- 
+
+
+
 <div class="ec-solution-layer" id="mCafe24SnsAgree" style="display: block; position: absolute; top: 0px;">
 	<div class="header">
 		<h3>회원가입</h3>
@@ -30,22 +28,11 @@
 <div class="agreeArea">
 <h4>회원정보</h4>
 <div class="ec-solution-table typeWrite">
-<form id="joinForm" name="joinForm" action="" method="post" enctype="multipart/form-data" target="ifrm_temp">
-	<input id="__addr1" name="__addr1" value="" type="hidden">
-	<input id="__city_name" name="__city_name" value="" type="hidden">
-	<input id="__state_name" name="__state_name" value="" type="hidden">
-	<input id="display_required_address" name="display_required_address" value="F" type="hidden">
-	<input id="display_required_address2" name="display_required_address2" value="F" type="hidden">
-	<input id="is_display_register_name_phonetic" name="is_display_register_name_phonetic" value="F" type="hidden">
-	<input id="display_required_name_phonetic" name="display_required_name_phonetic" value="F" type="hidden">
-	<input id="is_display_register_mobile" name="is_display_register_mobile" value="T" type="hidden">
-	<input id="display_required_cell" name="display_required_cell" value="T" type="hidden">
-	<input id="display_register_mobile" name="display_register_mobile" value="T" type="hidden">
-	<input id="is_display_password_hint" name="is_display_password_hint" value="F" type="hidden">
-	<input id="returnUrl" name="returnUrl" value="/" type="hidden">
-	<input id="sUseCountryNumberFlag" name="sUseCountryNumberFlag" value="F" type="hidden">
-	<input id="sUseSeparationNameFlag" name="sUseSeparationNameFlag" value="F" type="hidden">
-	<input id="is_use_checking_join_info" name="is_use_checking_join_info" value="F" type="hidden">
+<form method="post" id="naverForm" name="naverForm" action="">
+<input type="hidden" id="id" name="id" value="">
+<input type="hidden" id="sns_id" name="sns_id">
+<input type="hidden" id="sns_name" name="sns_name">
+<input type="hidden" id="sns_email" name="sns_email">
 <div class="xans-element- xans-member xans-member-join ">
 
 <table summary="" border="1" class="" id="sns_join">
@@ -188,80 +175,77 @@
 	</div>
 		<a class="close" href="#none" onclick="AgreementLayer.closeAgreementLayer(); return false;"><img src="//img.echosting.cafe24.com/skin/base/common/btn_close.png" alt="닫기"></a>
 	</div>
- -->
  
 
-<form method="post" id="naverForm" name="naverForm" action="">
-<input type="hidden" id="id" name="id" value="">
-<input type="hidden" id="sns_id" name="sns_id">
-<input type="hidden" id="sns_name" name="sns_name">
-<input type="hidden" id="sns_email" name="sns_email">
-</form>
 
 <script>
-var naver_id_login = new naver_id_login("{dnvfDSWWZdZLlC4W0n7E}", "http://localhost:8080/icade/callbackTest");
-
-var naverLogin = new naver.LoginWithNaverId({
-	clientId: "dnvfDSWWZdZLlC4W0n7E",
-	callbackUrl: "http://localhost:8080/icade/callbackTest",
-	isPopup: false,
-	callbackHandle: true
-	// callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */
-	});
-
-// (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
-	naverLogin.init();
-
-// (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
-window.addEventListener('load', function () {
-	naverLogin.getLoginStatus(function (status) {
-		if (status) {
-	// (5) 필수적으로 받아야하는 프로필 정보가 있다면 callback처리 시점에 체크
-			var access_token = naver_id_login.oauthParams.access_token;
-			var random = Math.floor(Math.random() * 1000000) + 1;
-				$("#id").val(random);
-			var id = naverLogin.user.getId();
-				$("#sns_id").val(id);
-			var name = naverLogin.user.getName();
-				$("#sns_name").val(name);
-			var email = naverLogin.user.getEmail();
-				$("#sns_email").val(email);
-			
-			if( name == undefined || name == null) {
-				alert("이름은 필수정보입니다. 정보제공을 동의해주세요.");
-				//(5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함
-				naverLogin.reprompt();
-				return;
-			}else if( email == undefined || email == null) {
-				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-				//(5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함
-				naverLogin.reprompt();
-				return;
+	var naver_id_login = new naver_id_login("{dnvfDSWWZdZLlC4W0n7E}", "http://localhost:8080/icade/callbackTest");
+	
+	var naverLogin = new naver.LoginWithNaverId({
+		clientId: "dnvfDSWWZdZLlC4W0n7E",
+		callbackUrl: "http://localhost:8080/icade/callbackTest",
+		isPopup: false,
+		callbackHandle: true
+		// callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */
+		});
+	
+		// (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
+		naverLogin.init();
+	
+		// (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
+	window.addEventListener('load', function () {
+		naverLogin.getLoginStatus(function (status) {
+			if (status) {
+		// (5) 필수적으로 받아야하는 프로필 정보가 있다면 callback처리 시점에 체크
+				var access_token = naver_id_login.oauthParams.access_token;
+				var random = Math.floor(Math.random() * 1000000) + 1;
+					$("#id").val(random);
+				var id = naverLogin.user.getId();
+					$("#sns_id").val(id);
+				var name = naverLogin.user.getName();
+					$("#sns_name").val(name);
+				var email = naverLogin.user.getEmail();
+					$("#sns_email").val(email);
+				
+				if( name == undefined || name == null) {
+					alert("이름은 필수정보입니다. 정보제공을 동의해주세요.");
+					//(5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함
+					naverLogin.reprompt();
+					return;
+				}else if( email == undefined || email == null) {
+					alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+					//(5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함
+					naverLogin.reprompt();
+					return;
+				}
+	
+				$.ajax({
+					url:"<%=cp%>/snsJoin.action",
+					type:"post",
+					data : {
+						"id" : random,
+						"sns_id":id,
+						"name":name,
+						"email":email},
+					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+					success : function(data) {
+				        
+						if(data=="goLogin"){
+							window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/icade");	
+						}
+						//alert(data);
+				        
+				    },
+				    error : function(error) {
+				        alert(error);
+				    },
+				});
+				
+			} else {
+				console.log("callback 처리에 실패하였습니다.");
 			}
-
-			$.ajax({
-				url:"<%=cp%>/snsJoin.action",
-				type:"post",
-				data : {
-					"id" : random,
-					"sns_id":id,
-					"name":name,
-					"email":email},
-				contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-				success : function(data) {
-			        //alert(data);
-			        window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/icade");
-			    },
-			    error : function(error) {
-			        alert(error);
-			    },
-			});
-			
-		} else {
-			console.log("callback 처리에 실패하였습니다.");
-		}
+		});
 	});
-});
 </script>
 </body>
 </html>
