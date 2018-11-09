@@ -50,15 +50,6 @@ function insertIt() {
     }
     f.G_PRICE.value = str;
     
-    str = f.G_CONTENT.value;
-    str = str.trim();
-    if(!str) {
-        swal("상품의 설명을 입력해주세요.");
-        f.G_CONTENT.focus();
-        return;
-    }
-    f.G_CONTENT.value = str;
-	
     str = f.gFile.value;
     str = str.trim();
     if(!str) {
@@ -186,6 +177,7 @@ function enableTextBox(name) {
 		<td>상품 설명 사진</td>
 		<td align="left">
 			<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/>
+			<input type="hidden" name="G_CONTENT" value=""/>
 		</td>
 	</tr>
 	<tr>
