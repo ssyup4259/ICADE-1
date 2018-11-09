@@ -30,8 +30,6 @@
 	function searchFix() {
 		var G_NAME = $("#g_listName").val();
 		var G_NUM = $("#g_listNum").val();
-		alert(G_NAME);
-		
 		dataHandler(G_NAME,G_NUM);
 		
 	}
@@ -40,18 +38,16 @@
 
 <body>
 
- 	<div>
- 		<div>
- 		 	상품정보선택
- 		</div>
+ 	<div align="center" style="float: center; width: 625px;padding-left: 29px">
+ 		
 	 	<c:forEach var="g_dto" items="${g_list}">
-	 		<table align="center" width="600">
+	 		<table>
 	 			<tr>
-	 				<td>
+	 				<td style="text-align: left">
 	 					상품명
 	 				</td>
-	 				<td>
-		 				<a href="#g_listName" id="g_listName_fix" onclick="searchFix();">${g_dto.getG_NAME()}</a>
+	 				<td style="text-align: right">
+		 				<a href="#g_listName" id="g_listName_fix" onclick="searchFix()">${g_dto.getG_NAME()}</a>
 		 				<input type="hidden" id="g_listNum" name="g_listNum" value="${g_dto.getG_NUM()}"/>
 		 				<input type="hidden" id="g_listName" name="g_listNum" value="${g_dto.getG_NAME()}"/>
 	 				</td>
