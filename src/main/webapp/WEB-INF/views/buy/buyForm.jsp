@@ -271,7 +271,7 @@ function sample6_execDaumPostcode() {
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
 <form action="" method="post" id="payForm" name="payForm">
 	<div class="container-fluid text-center" style="width: 80%; margin-top: 50px; margin-bottom: 50px;">

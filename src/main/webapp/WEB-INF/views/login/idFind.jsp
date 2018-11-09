@@ -100,7 +100,7 @@ function idFind() {
 
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
 <div style="margin-left: 15%;">
 	<h2>아이디 찾기</h2>

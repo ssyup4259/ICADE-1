@@ -19,7 +19,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 <form action="cancelMembership_ok.action" method="post" id="cancelMembership" name="cancelMembership" onsubmit="return changInfoAuthorization_sendIt">
 
 <div class="mytmall_title">

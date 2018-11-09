@@ -75,7 +75,7 @@ input[type='radio'] {
 
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 
 
 	<div class="container-fluid" style="background-color: #F2F1F0; margin-bottom: 200px; border-bottom: 200px;">

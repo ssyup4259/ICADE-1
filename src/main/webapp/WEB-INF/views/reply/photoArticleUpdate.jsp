@@ -78,7 +78,7 @@
 
 </head>
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 	<form action="" name="photoUpdateArticle" method="post" enctype="multipart/form-data">
 	
 	<div id="container" align="center">
