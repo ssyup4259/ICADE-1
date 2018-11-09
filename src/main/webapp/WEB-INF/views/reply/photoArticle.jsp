@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -31,7 +32,7 @@
 			 //responseText가 result에 저장됨.
 			 $("#photoReply").html(result);
 		},error : function (result) {
-			alert("로딩실패");
+			swal("로딩실패");
 		}
 	 });
 });
@@ -70,7 +71,7 @@
 		var BC_BOARD = BC_BOARD;
 		
 		if (BC_CONTENT.length<1) {
-			alert("내용을 입력해주세요!");
+			swal("내용을 입력해주세요!");
 			f.BC_CONTENT.focus();
 		}
 		
@@ -101,8 +102,8 @@
 				$("#PhotoReply_CONTENT").val("");
 			},
 			error: function(result) {
-				alert("안된다");
-				alert(result);
+				swal("안된다");
+				swal(result);
 			}
 		});
 	}

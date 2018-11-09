@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
 <form action="cancelMembership_ok.action" method="post" id="cancelMembership" name="cancelMembership" onsubmit="return changInfoAuthorization_sendIt">
@@ -98,7 +99,7 @@
 	function changInfoAuthorization_sendIt() {
 		
 		if(doubleSubmitFlag){
-	        alert('처리 중입니다.');
+	        swal('처리 중입니다.');
 	        return false;
 	    }else {
 	        doubleSubmitFlag = true;

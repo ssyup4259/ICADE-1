@@ -19,7 +19,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -36,7 +36,7 @@
 		str = f.BC_SUBJECT.value;
 		str = str.trim();
 		if(!str){
-			alert("\n제목을 입력하세요.");
+			swal("\n제목을 입력하세요.");
 			f.BC_SUBJECT.focus();
 			return;
 		}
@@ -47,7 +47,7 @@
 		/*if(f.email.value){
 			
 			if(!isValidEmail(f.email.value)){
-				alert("\n정상적인 E-Mail을 입력하세요.");
+				swal("\n정상적인 E-Mail을 입력하세요.");
 				f.email.focus();
 				return;
 			}
@@ -56,7 +56,7 @@
 		str = f.BC_CONTENT.value;
 		str = str.trim();
 		if(!str){
-			alert("\n내용을 입력하세요.");
+			swal("\n내용을 입력하세요.");
 			f.content.focus();
 			return;
 		}
@@ -79,7 +79,7 @@
 						$('#searchList').css('visibility','visible');
 				},
 				error: function(result) {
-					alert("안된다");
+					swal("안된다");
 		 	    }
 		     });
 		 

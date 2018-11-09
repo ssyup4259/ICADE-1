@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -26,7 +27,7 @@
 	function login() {
 		
 		var f = document.replyForm;
-		alert("로그인 후 작성 가능합니다.");
+		swal("로그인 후 작성 가능합니다.");
 		
 		f.action = "<%=cp%>/login.action";
 		f.submit();
