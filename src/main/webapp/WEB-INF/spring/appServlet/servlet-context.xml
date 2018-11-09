@@ -73,6 +73,8 @@
 		<interceptor>
 			<mapping path="/cart/*"/>
 			<mapping path="/admin/*"/>
+			<mapping path="/wish/*"/>
+			<mapping path="/buy/*"/>
 			<mapping path="/myPage.action"/>
 			<mapping path="/orderHistory.action"/>
 			<mapping path="/ordersHistoryDetail.action"/>
