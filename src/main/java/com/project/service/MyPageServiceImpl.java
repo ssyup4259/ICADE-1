@@ -18,13 +18,11 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public MemberDTO userInfo(String M_ID) throws Exception {
-		
 		return my_dao.userInfo(M_ID);
 	}
 
 	@Override
 	public int pointCheck(String M_ID) throws Exception {
-		
 		return my_dao.pointCheck(M_ID);
 	}
 
@@ -36,35 +34,38 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public int maxLeaveNum() throws Exception {
-
 		return my_dao.maxLeaveNum();
 	}
 
 	@Override
 	public void insertLeaveData(HashMap<String, Object> hMap) throws Exception {
-		
 		my_dao.insertLeaveData(hMap);
-		
 	}
 	
 	@Override
 	public void cancelMembership(String M_ID) throws Exception {
-
 		my_dao.cancelMembership(M_ID);
 	}
 
 	@Override
 	public int usedPointCheck(String M_ID) throws Exception {
-
 		return my_dao.usedPointCheck(M_ID);
 	}
 
 	@Override
 	public List<OrdersDTO> selectusedPointHistory(String M_ID) throws Exception {
-		
 		return my_dao.selectusedPointHistory(M_ID);
 	}
 
-	
+	@Override
+	public int selectSumTot(String O_ID) throws Exception {
+		return my_dao.selectSumTot(O_ID);
+	}
+
+	@Override
+	public int selectCountOnum(String O_ID) throws Exception {
+		return my_dao.selectCountOnum(O_ID);
+	}
+
 
 }
