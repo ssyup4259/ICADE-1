@@ -388,10 +388,8 @@ a:active {
 }
 
 table {
-	border-collapse: collapse;
 	width: 100%;
 	border: 3px solid #A3C838;
-	border-top-left-radius: 12px;
 	text-align: center;
 }
 
