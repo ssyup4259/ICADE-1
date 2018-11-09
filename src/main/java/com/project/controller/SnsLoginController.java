@@ -55,7 +55,7 @@ public class SnsLoginController {
 			System.out.println("if문");
 			session.setAttribute("userInfo", mDto);
 			
-			return "redirect:/home";
+			return "goLogin";
 		}
 
 		List<String> lists = sl_service.randomIdCheck(id);
@@ -69,8 +69,6 @@ public class SnsLoginController {
 			if(id.equals(usedId)){
 				int random = (int)(Math.random() * 1000000) + 1;
 				id = Integer.toString(random);
-				
-				return id;
 			}
 		}
 		System.out.println("=====================while문===================");
@@ -119,6 +117,8 @@ public class SnsLoginController {
 	
 	@RequestMapping(value="/callbackTest", method= {RequestMethod.GET,RequestMethod.POST})
 	public String callbackTest(MemberDTO dto, HttpServletRequest request, HttpServletResponse resp)throws Exception{
+		
+		
 		
 		return "callbackTest";
 	}

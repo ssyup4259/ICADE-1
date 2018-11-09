@@ -83,6 +83,26 @@
 	background-color: #8F9493;
 	color: white;
 }
+
+.ui-datepicker-trigger{
+	    	background-color: white;
+	    	color: #A3C838;
+	    	text-align: center;
+	    	text-decoration: none;
+	    	display: inline-block;
+	    	font-size: 15px;
+	    	cursor: pointer;
+	    	border: 3px solid #A3C838;
+	    	border-radius: 6px;
+	    	height: 40px;
+	    }
+
+    .ui-datepicker-trigger:hover{
+    	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+    		rgba(0, 0, 0, 0.19);
+    	background-color: #A3C838;
+    	color: white;
+    }
 </style>
 </head>
 <body>
