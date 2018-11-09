@@ -107,14 +107,14 @@
 </head>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
-<div id="bbs" align="center" style="float: center;padding-right: 30px">
+<div id="" align="center" style="float: center;padding-right: 30px">
 	<form action="" name="searchForm" id="searchForm" method="post">
-		<div>
+		<div style="float: center; padding-right: 480px;font-size: 20px">
 		 	상품정보선택
 		</div>
 		<div style="float: center;padding-left: 32px">
 			<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
-			<input type="button" value=" 검색 " class="btnGreen" onclick="photoGoodsSearch();" style="width: 200px;" />
+			<input type="button" value=" 검색 " class="btnGreen" onclick="photoGoodsSearch();" style="width: 200px;padding-bottom: 2px;text-align: center" />
 		</div>
 	</form>
 	
@@ -125,7 +125,7 @@
 	<div id="bbsCreated">
 		<div  class="bbsCreated_bottomLine">
 			<dl>
-				<dt>상품정보</dt>
+				<dt style="float: center; padding-right: 510px;font-size: 20px" >상품정보</dt>
 				<dd id="goodsInfo">
 					<input type="text"  id="photoG_NAME" name="G_NAME" size="74" maxlength="100" class="inputBoxGreen" value=""/>
 					<br>
@@ -136,18 +136,18 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
+				<dt style="float: center; padding-right: 510px;font-size: 20px">제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
 				<dd style="float: center; padding-right: 7px;">
-					<input type="text" name="BC_SUBJECT" size="74" maxlength="100" class="inputBoxGreen" placeholder="제목을 입력해주세요"/>
+					<input type="text" name="BC_SUBJECT" size="74" maxlength="100" class="inputBoxGreen" placeholder="제목을 입력해주세요" />
 				</dd>							
 			</dl>		
 		</div>
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center">작성자</dt>
-				<dd style="float: center; padding-right: 30px;">
-					<input type="text" name="BC_ID" size="35" maxlength="20" class="inputBoxGreen"
+				<dt style="float: center; padding-right: 515px;font-size: 20px">작성자</dt>
+				<dd style="float: center; padding-right: 7px;">
+					<input type="text" name="BC_ID" size="74" maxlength="100" class="inputBoxGreen" 
 					value="${sessionScope.userInfo.getM_ID()}"/>
 				</dd>							
 			</dl>		
@@ -155,11 +155,11 @@
 		
 		<div id="bbsCreated_content" >
 			<dl>
-				<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+				<dt style="float: center; padding-right: 510px;font-size: 20px">내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
 				<dd style="float: center; padding-right: 7px;">
 					<textarea rows="12" cols="63" name="BC_CONTENT" class="boxTA" style="width: 33%" placeholder="내용을 입력하세요"></textarea>
 				</dd>
-				<dd style="float: center; padding-right: 240px;">
+				<dd style="float: center; padding-right: 220px;">
 				첨부파일 :
 				<input type="file" id="upload" name="bcfile" class="btnGray"><br>
 				첨부파일 :

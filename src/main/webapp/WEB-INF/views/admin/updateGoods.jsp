@@ -8,6 +8,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+
+<script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <title>상품 수정 화면</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -75,17 +86,17 @@ function goodsUpdateIt() {
 
 <input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}"/>
 상품 종류 : ${g_dto.getGK_KIND()} <br/>
-상품 이름 : <input type="text" name="G_NAME" value="${g_dto.getG_NAME()}"/> <br/>
-상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_PRICE()}">원 <br/>
-상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT">${g_dto.getG_CONTENT()}</textarea> <br/>
+상품 이름 : <input type="text" name="G_NAME" value="${g_dto.getG_NAME()}" class="inputBoxGreen"/> <br/>
+상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_PRICE()}" class="inputBoxGreen">원 <br/>
+상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT" class="textAreaGreen">${g_dto.getG_CONTENT()}</textarea> <br/>
 상품 설명 사진 : 
 <input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
-할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_DISCOUNT()}"/>% <br/>
+할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_DISCOUNT()}" class="inputBoxGreen"/>% <br/>
 상품 사진 : 
 <input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 
-<input type="button" onclick="goodsUpdateIt();" value="상품수정">
-<input type="button" onclick="javascript:window.close();" value="취 소"/>
+<input type="button" onclick="goodsUpdateIt();" value="상품수정" class="btnGray">
+<input type="button" onclick="javascript:window.close();" value="취 소" class="btnGray"/>
 
 </form>
 
