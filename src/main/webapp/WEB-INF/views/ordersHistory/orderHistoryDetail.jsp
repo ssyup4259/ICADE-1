@@ -19,7 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
 <div id="content_area" height="100%">
 

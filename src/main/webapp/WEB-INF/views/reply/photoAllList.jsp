@@ -35,7 +35,7 @@
 </script>
 
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
   <form action="" method="post" name="replyForm">
   
   <c:set var = "i" value="0" />

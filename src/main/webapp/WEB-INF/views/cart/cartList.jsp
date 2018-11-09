@@ -144,7 +144,7 @@ input[type=checkbox] {
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
 <h1>장바구니 리스트</h1>
 <form action="" method="post" name="myForm">

@@ -38,7 +38,7 @@
 <body>
 
 	<!-- 본문 시작 -->
-	<jsp:include page="../include/header.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 
 	<!-- 내용 -->
 	<form name="joinForm" action="" method="post" id="joinForm">

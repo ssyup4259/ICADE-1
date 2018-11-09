@@ -111,7 +111,7 @@
 </script>
 
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
 <div>
 <%-- 	<div style="font-size:25px; padding-left: 35px">

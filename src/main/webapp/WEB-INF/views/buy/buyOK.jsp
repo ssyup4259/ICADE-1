@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 
 <h1>구매 완료!</h1>
 

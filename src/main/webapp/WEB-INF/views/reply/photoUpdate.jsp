@@ -76,7 +76,7 @@
 
 </head>
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 <div id="" align="center" style="float: center;padding-right: 30px">
 	<form action="" name="updateForm" method="post" enctype="multipart/form-data">
 	
