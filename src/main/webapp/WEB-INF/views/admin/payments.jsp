@@ -145,10 +145,7 @@ function o_searchIt(){
 				<div class="paging">
 					<c:if test="${dataCount!=0 }">
 						${pageIndexList }
-					</c:if>
-					<c:if test="${dataCount==0 }">
-						내역이 존재하지 않습니다.
-					</c:if>
+					</c:if>					
 				</div>
 			</td>
 		</tr>
@@ -157,7 +154,9 @@ function o_searchIt(){
 	
 </c:if>
 
-
+<c:if test="${dataCount==0 }">
+	내역이 존재하지 않습니다.
+</c:if>
 
 <jsp:include page="../include/footer.jsp" flush="false" />
 
