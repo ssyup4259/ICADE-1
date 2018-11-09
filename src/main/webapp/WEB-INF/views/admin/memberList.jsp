@@ -54,21 +54,25 @@
 
 	}
 </script>
+
 <style type="text/css">
+
 input[type='radio'] {
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	opacity: 0;
-	  left: 0;
-    top: 0;
+	left: 0;
+	top: 0;
 }
 
 .btn-group input[type='radio']:checked+label {
-    border: 1px solid #1993d1;
-    line-height: 28px;
-    color: #1993d1;
+	border: 1px solid #1993d1;
+	line-height: 28px;
+	color: #1993d1;
 }
+
 </style>
+
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />

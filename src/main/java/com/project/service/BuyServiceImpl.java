@@ -202,6 +202,23 @@ public class BuyServiceImpl implements BuyService {
 		
 		b_dao.pointMinus(hMap);
 		
+		if (m_point > 0) { //포인트를 사용했을경우
+			//포인트 적립 X
+		} else {
+			
+			//포인트 적립
+			
+			m_point = (int)(o_dto.getO_TOT() * 0.1);
+			
+			hMap = new HashMap<String, Object>();
+			
+			hMap.put("m_point", m_point);
+			hMap.put("m_id", m_id);
+			
+			b_dao.pointAdd(hMap);
+			
+		}
+		
 		//End--------------------Member 테이블 Point 감소 ------------------------
 		
 		return null;
