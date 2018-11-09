@@ -27,7 +27,7 @@
 	var BC_NUM =$("#articleBC_NUM").val();
 	$.ajax({
 		 type:"get",
-		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+		 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM,
 		 success : function(result) {
 			 //responseText가 result에 저장됨.
 			 $("#photoReply").html(result);
@@ -38,28 +38,24 @@
 });
 
 </script>
-<script type="text/javascript">
+<script>
 	function photoReplyListUpdate(){
-		
 		var BC_NUM =$("#articleBC_NUM").val();
 		$.ajax({
 			 type:"get",
-			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+			 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM,
 			 success : function(result) {
 				 
 				 var BC_NUM =$("#BC_NUM").val();
 				 
-				 $("#replyComment").get('<%=cp%>/goods/replyCommentList.action?BC_NUM=+BC_NUM');
-				 $("#replyComment").html(result);
+				 $("#photoReply").get('<%=cp%>/goods/replyCommentList.action?BC_NUM=+BC_NUM');
+				 $("#photoReply").html(result);
 				 
 			},error : function (result) {
 			}
 		 });
 	}
 </script>
-
-
-
 
 <script>
 	function writePhotoReply() {
@@ -115,15 +111,15 @@
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container-fluid" style="width: 80%;">
 			
-			<h1>포토리뷰</h1><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font>
+		<!-- 	<h1>포토리뷰</h1><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font> -->
 			
-			<div class="row">
-				<div class="col-sm-3" style="text-align: right; padding-right: 20px">
+			<div class="row" style="text-align:left">
+				<div class="col-sm-1" style="text-align: right; padding-right: 20px">
 					<h2>
 						<font color="#000000" size="6">포토리뷰</font>
 					</h2>
 				</div>
-				<div class="col-sm-6" style="text-align: left; margin-left: none; padding-left: 0px; padding-top: 10px">
+				<div class="col-sm-3" style="text-align: left; margin-left: none; padding-left: 0px; padding-top: 10px">
 					<p>
 						<font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font>
 					</p>
@@ -134,7 +130,7 @@
 			<div style="font-size: 25px; margin: none">
 				<div class="row">
 					<div class="col-sm-1" style="float: left; height: 130px;">
-						<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px; padding-left: 35px"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
+						<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
 					</div>
 					<div class="col-sm-2" style="float: right;">
 						<h3>

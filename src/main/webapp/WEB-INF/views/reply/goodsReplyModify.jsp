@@ -49,6 +49,13 @@ $("#btnReplyUpdate").click(function() {
 
 </script>
 <script>
+$("#btnReplyClose").click(function() {
+	$('#goodsReplyModifier').css('visibility','hidden');
+});
+
+</script>
+
+<script>
 $("#btnReplyDelete").click(function() {
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
@@ -70,8 +77,10 @@ $("#btnReplyDelete").click(function() {
 </script>
 
 <body>
-	<textarea id="updateReply" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
-	<div style="text-align: center;">
+	<div align="center">
+	<textarea id="updateReply" rows="5" cols="82" class="textAreaGreen">${bc_dto.getBC_CONTENT()}</textarea>
+	</div>
+	<div style="text-align: center;" align="center">
 		<!-- 작성자만 댓글 수정 삭제가 가능하도록 처리 -->
 		<c:if test="${sessionScope.userInfo.getM_ID() == bc_dto.getBC_ID()}">
 			<button type="button" id="btnReplyUpdate" class="btnGreen">수정</button>

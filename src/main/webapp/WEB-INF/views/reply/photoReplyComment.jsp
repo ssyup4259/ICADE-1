@@ -16,14 +16,14 @@
 	<title>답글</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
-	function cmUpdateOpen(BC_NUM) {
+	function photoUpdateOpen(BC_NUM) {
 		
 		$.ajax({
 			type :"GET",
-			url : "<%=cp%>/goods/goodsReplyComment.action?BC_NUM="+BC_NUM,
+			url : "<%=cp%>/goods/photoReplyComment.action?BC_NUM="+BC_NUM,
 			success:function(result){
-					 $("#goodsReplyModifier").html(result); 
-					$('#goodsReplyModifier').css('visibility','visible');
+					 $("#photoReplyModifier").html(result); 
+					$('#photoReplyModifier').css('visibility','visible');
 			},
 			error: function(result) {
 				swal("안된다");
@@ -31,7 +31,6 @@
 	     });
 	}
 </script>
-
 
 
 </head>
@@ -62,7 +61,7 @@
 								<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 								<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
 									<%-- <a href="" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})">[수정]</a> --%>
-									<button type="button"  onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGreen">수정</button>
+									<button type="button"  onclick="photoUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGreen">수정</button>
 								</c:if>
 							</div> 
 									<input type="hidden" id="BC_UPDATE" value="${rp_dto.getBC_NUM()}">
