@@ -4,9 +4,10 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function msg() {
-		alert('지금은 채용 기간이 아닙니다.');
+		swal('지금은 채용 기간이 아닙니다.');
 	}
 </script>
 

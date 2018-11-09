@@ -15,6 +15,7 @@
 
 	<title>답글</title>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function cmUpdateOpen(BC_NUM) {
 		
@@ -26,7 +27,7 @@
 					$('#goodsReplyModifier').css('visibility','visible');
 			},
 			error: function(result) {
-				alert("안된다");
+				swal("안된다");
 	 	    }
 	     });
 	}

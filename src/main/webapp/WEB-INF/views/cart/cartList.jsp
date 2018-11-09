@@ -18,7 +18,7 @@
 <title>장바구니</title>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 function updateCartItem(c_code) {
@@ -51,7 +51,7 @@ function updateCheck(c_code, count) {
 			
 			if (data == 'false') {
 				
-				alert("재고 수량 부족");
+				swal("재고 수량 부족");
 				$("#" + c_code).val(count);
 				
 			} else if (data == 'true') {
@@ -64,7 +64,7 @@ function updateCheck(c_code, count) {
 		
 		error: function() {
 
-			alert("안된다");
+			swal("안된다");
 			
 		}				
 	});
@@ -103,7 +103,7 @@ function buyIt() {
 	if ($("input:checkbox[name='chk']").is(":checked") == true) {
 		f.submit();
 	} else {
-		alert("상품을 선택 해 주세요.");
+		swal("상품을 선택 해 주세요.");
 	}
 	
 	

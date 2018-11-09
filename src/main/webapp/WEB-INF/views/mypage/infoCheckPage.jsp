@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>회원정보 수정 본인 인증</title>
@@ -28,7 +28,7 @@
 		var pw = $("#pw").val();
 		
 		if(pw==""){
-			alert("비밀번호를 입력해주세요.");
+			swal("비밀번호를 입력해주세요.");
 			return;
 		}
 		
@@ -36,7 +36,7 @@
 		var f = document.myForm;
 
 		if (msg) {
-			alert(msg);
+			swal(msg);
 		} else {
 			f.action = "infoCheckPage_ok.action";
 			f.submit();
@@ -100,7 +100,7 @@
 			data : {"pw" : pw},
 			dataType : "json",
 			error : function(error) {
-				alert(error);
+				swal(error);
 			},
 			success : function(data) {
 				if (data == false) {

@@ -320,7 +320,7 @@
 					document.getElementById('availablePoint').innerHTML = data + "Point"; 
 				})
 				.fail(function(){
-					alert("Point Loading Fail...");
+					swal("Point Loading Fail...");
 				});
 		});
 	});
