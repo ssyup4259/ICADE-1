@@ -29,7 +29,7 @@
 </head>
 <script src="<%=cp%>/resources/data/js/reply.js"></script>
 <script>
-$("#btnReplyUpdate").click(function() {
+$("#btnPhotoReplyUpdate").click(function() {
 	var updateReply = $("#updateReply").val();
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
@@ -38,19 +38,23 @@ $("#btnReplyUpdate").click(function() {
 		url : "<%=cp%>/goods/goodsReplyUpdate.action",
 		data:{"BC_CONTENT":updateReply,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM},
 		success : function(result) {
-				$("#goodsReplyModifier").html(result);
-				$('#goodsReplyModifier').css('visibility','hidden');
+				$("#photoReplyModifier").html(result);
+				$('#photoReplyModifier').css('visibility','hidden');
 				photoReplyListUpdate();
 		},error: function(result) {
 			swal("실패");
 		}
 	});
 });
-
-
+</script>
+<script type="text/javascript">
+$("#btnPhotoReplyClose").click(function() {
+	
+	$('#photoReplyModifier').css('visibility','hidden');
+});
 </script>
 <script>
-$("#btnReplyDelete").click(function() {
+$("#btnPhotoReplyDelete").click(function() {
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
 	$.ajax({
@@ -59,8 +63,8 @@ $("#btnReplyDelete").click(function() {
 		data:{"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM},
 		success : function(result) {
 			var BC_NUM =$("#inputBC_NUMdetale").val();
-				$("#goodsReplyModifier").html(result);
-				$("#goodsReplyModifier").css("visibility","hidden");
+				$("#photoReplyModifier").html(result);
+				$("#photoReplyModifier").css("visibility","hidden");
 				photoReplyListUpdate();
 		},error: function(result) {
 			swal("실패");
@@ -71,14 +75,17 @@ $("#btnReplyDelete").click(function() {
 </script>
 
 <body>
-	<textarea id="updateReply" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
+
+	<div align="center">
+		<textarea id="updateReply" class="textAreaGreen" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
+	</div>
 	<div style="text-align: center;">
 		<!-- 작성자만 댓글 수정 삭제가 가능하도록 처리 -->
 		<c:if test="${sessionScope.userInfo.getM_ID() == bc_dto.getBC_ID()}">
-			<button type="button" id="btnReplyUpdate" class="btnGreen">수정</button>
-			<button type="button" id="btnReplyDelete"  class="btnGray">삭제</button>
+			<button type="button" id="btnPhotoReplyUpdate" class="btnGreen">수정</button>
+			<button type="button" id="btnPhotoReplyDelete"  class="btnGray">삭제</button>
 		</c:if>
-		<button type="button" id="btnReplyClose"class="btnGray">닫기</button>
+		<button type="button" id="btnPhotoReplyClose"class="btnGray">닫기</button>
 		<input type="hidden" id="inputBC_BOARDdetale" value="${bc_dto.getBC_BOARD()}">
 		<input type="hidden" id="inputBC_NUMdetale" value="${bc_dto.getBC_NUM()}">
 	</div>

@@ -88,29 +88,42 @@
 .ui-datepicker-year,
 .ui-datepicker-month,
 .ui-datepicker-trigger{
-			background-color: white;
-	    	color: #000000;
-	    	text-align: center;
-	    	text-decoration: none;
-	    	display: inline-block;
-	    	font-size: 15px;
-	    	cursor: pointer;
-	    	border: 3px solid #A3C838;
-	    	border-radius: 6px;
-	    	height: 30px;
+	background-color: white;
+	color: #A3C838;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	height: 30px;
 }
 
-.ui-datepicker-trigger:hover{
+.ui-datepicker-trigger:hover {
 	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
 		rgba(0, 0, 0, 0.19);
 	background-color: #A3C838;
 	color: white;
 }
+
+tr {
+	border: none;
+}
+
+table {
+	border: 3px solid #A3C838;
+	border-radius: 12px;
+}
+
+td {
+	border-top: 1px solid #A3C838;
+}
 </style>
 </head>
 <body>
 
-<jsp:include page="../include/header2.jsp" flush="false" />
+	<jsp:include page="../include/header2.jsp" flush="false" />
 
 <div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 	<div class="container">
@@ -191,44 +204,74 @@
 								<td>
 									<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <strong>${dto.getOD_NAME()}</strong></a>
 										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
-								<td>${dto.getOD_COUNT()}</td>
-								<td><strong><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###"/>원</strong></td>
-								<td class="gubun">
-									<p style="display: none;">${dto.getO_NUM()}</p>
-									<p>${dto.getO_STATUS()}</p>
-								</td>
-								<td class="gubun">
-									<p style="display: none;">${dto.getO_IMP()}</p>
-									<form action="" method="post" name="myForm">										
-										<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
-											<input type="button" value="환불 하기" onclick="cancelIt(${dto.getO_IMP()}', ${dto.getO_NUM()});" />
-										</c:if>
-									</form>
-								</td>
-							</tr>
+									<td>${dto.getOD_COUNT()}</td>
+									<td><strong><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###" />원</strong></td>
+									<td class="gubun">
+										<p style="display: none;">${dto.getO_NUM()}</p>
+										<p>${dto.getO_STATUS()}</p>
+									</td>
+									<td class="gubun">
+										<p style="display: none;">${dto.getO_IMP()}</p>
+										<form action="" method="post" name="myForm">
+											<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
+												<input type="button" value="환불 하기" class="btnGray" onclick="cancelIt(${dto.getO_IMP()}', ${dto.getO_NUM()});" style="width: 100px;" />
+											</c:if>
+										</form>
+									</td>
+								</tr>
+							</c:forEach>
 						</c:forEach>
-					</c:forEach>
-				<tr>
-					<td colspan="7">
-						<c:if test="${dataCount==0}">
-							<p class="message">주문 내역이 없습니다.</p>
-						</c:if> 
-						<c:if test="${dataCount!=0}">
+						<tr>
+							<td colspan="7"><c:if test="${dataCount==0}">
+									<p class="message">주문 내역이 없습니다.</p>
+								</c:if> <c:if test="${dataCount!=0}">
 							${pageIndexList}
-						</c:if>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+						</c:if></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<br />
+			<br />
+
+		</div>
 	</div>
 
-<br/><br/>
+	<jsp:include page="../include/footer.jsp" flush="false" />
+	<script type="text/javascript">
 
+	$(window).load(function () {
+	    $(".gubun").each(function () {
+	        var rows = $(".gubun:contains('" + $(this).text() + "')");
+	        if (rows.length > 1) {
+	          rows.eq(0).attr("rowspan", rows.length);
+	          rows.not(":eq(0)").remove();
+	        }
+	    });
+	});
+</script>
+</body>
+</html>ach>
+						<tr>
+							<td colspan="7"><c:if test="${dataCount==0}">
+									<p class="message">주문 내역이 없습니다.</p>
+								</c:if> <c:if test="${dataCount!=0}">
+							${pageIndexList}
+						</c:if></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<br />
+			<br />
+
+		</div>
 	</div>
-</div>
 
-<jsp:include page="../include/footer.jsp" flush="false" />
-<script type="text/javascript">
+	<jsp:include page="../include/footer.jsp" flush="false" />
+	<script type="text/javascript">
 
 	$(window).load(function () {
 	    $(".gubun").each(function () {

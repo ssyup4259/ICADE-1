@@ -47,7 +47,6 @@
 
 
 <style type="text/css">
-
 .hideWish {
 	background-color: white;
 	color: #A3C838;
@@ -74,6 +73,17 @@
 	height: 40px;
 }
 
+tr {
+	border: none;
+}
+
+table {
+	border: none;
+}
+
+td{
+	border-top: 1px solid #A3C838;
+}
 </style>
 
 <script type="text/javascript">
@@ -91,8 +101,6 @@
 		}).fail(function(){
 			swal("실패");
 		});
-		
-		
 		
 	}
 </script>
@@ -113,8 +121,6 @@
 			swal("실패");
 		});
 		
-		
-		
 	}
 </script>
 
@@ -124,14 +130,13 @@
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container text-center">
 			<div class="row">
-				<div class="col-sm-8" style="border: 3px solid #A3C838; border-radius: 12px; font-size: 20px; padding-top: 20px;">
-					<font style="font-size: 30px;">
-						<b>마이 쇼핑</b>
+				<div class="col-sm-8" style="border: 3px solid #8F9493; border-radius: 12px; font-size: 20px; padding-top: 20px;">
+					<font style="font-size: 30px;"> <b>마이 쇼핑</b>
 					</font>
 					<p>
-						
+
 						<button id="ch" class="showWish" value="찜리스트 숨기기">찜리스트 펼치기</button>
-						<button  class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
+						<button class="hideWish" value="찜리스트 펼치기">찜리스트 숨기기</button>
 
 					</p>
 					<hr style="border: 3px solid #DDDADB;">
@@ -143,7 +148,7 @@
 							<p id="availablePoint">${point}Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
-							<input type="button" class="btnGray" style="width: 200px; cursor:pointer;" id="refresh" value="refresh">
+							<input type="button" class="btnGray" style="width: 200px; cursor: pointer;" id="refresh" value="refresh">
 						</div>
 					</div>
 
@@ -212,13 +217,13 @@
 							<p>우편번호 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
-							<p>${sessionScope.userInfo.getM_ZIPCODE()} </p>
+							<p>${sessionScope.userInfo.getM_ZIPCODE()}</p>
 						</div>
 						<div class="col-sm-2" style="text-align: right;">
 							<p>주 소 :</p>
 						</div>
-						<div>
-							<p>${sessionScope.userInfo.getM_ADDRESS1()} - ${sessionScope.userInfo.getM_ADDRESS2()}</p>
+						<div class="col-sm-10" style="text-align: left;">
+							<p>${sessionScope.userInfo.getM_ADDRESS1()}-${sessionScope.userInfo.getM_ADDRESS2()}</p>
 						</div>
 					</div>
 					<div class="row">
@@ -256,41 +261,37 @@
 
 				</div>
 				<div class="col-sm-4 toggle">
-			
 
-	
-	
-	<div class="toggle" id="wishList">
-	<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 200px;"/>
-	<table style="text-align: center;" border="1" cellpadding="10" cellspacing="0">
-	 	<c:forEach var="w_dto" items="${wishList}">
-	<tr>
-		<td>
-		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
-		<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/>
-		</a>
-		상품명:${w_dto.getW_NAME()}
-		<input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGreen" style="width: 200px;" value="찜 삭제">
-		</td>
-	</tr>
-		</c:forEach>
-	<tr>
-	 <td colspan="9">
-		<c:if test="${dataCount!=0 }">
-		${pageIndexList }
-		</c:if> <c:if test="${dataCount==0 }">
-		찜 등록된 상품이 없습니다.
-		</c:if></td>
-						</tr>
-					</table>
+					<div class="toggle" id="wishList" style="border: 3px solid #8F9493; border-radius: 12px; font-size: 20px; padding-top: 20px;">
+					<font style="font-size: 30px;"> <b>마이 쇼핑</b></font>
+					<p>
+						<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 90%;" />
+					</p>
+						<hr style="border: 3px solid #DDDADB;">
 
+						<table style="text-align: center;" cellpadding="10" cellspacing="0">
+							<c:forEach var="w_dto" items="${wishList}">
+								<tr>
+									<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}"> <img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" /></td>
+									<td></a> 상품명:${w_dto.getW_NAME()} <input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제"></td>
+								</tr>
+							</c:forEach>
+							<tr>
+								<td colspan="9"><c:if test="${dataCount!=0 }">
+								${pageIndexList }
+								</c:if> <c:if test="${dataCount==0 }">
+								찜 등록된 상품이 없습니다.
+								</c:if></td>
+							</tr>
+						</table>
+
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 	$("#orderHistory").click(function() {
 		document.location.href = "orderHistory.action";

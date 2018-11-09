@@ -82,20 +82,22 @@
 							<div class="row">
 						</c:if>
 
-						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}&GK_KIND_NUM=${gdKindNum}">
-							<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
-								<div style="padding-left: 10%">
-									<p>${g_dto.getG_NAME()}</p>
-								</div>
-								<div class="row">
-									<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
-									<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
-										<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
-										원
+
+						<div class="col-sm-3">
+							<div class="thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
+								<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}&GK_KIND_NUM=${gdKindNum}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="margin: auto; margin-top: 20px;"" id="goodsImage">
+									<div style="padding-left: 10%">
+										<p>${g_dto.getG_NAME()}</p>
 									</div>
-								</div>
-							</a>
+									<div class="row">
+										<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
+										<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
+											<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+											원
+										</div>
+									</div>
+								</a>
+							</div>
 						</div>
 
 						<br>
@@ -121,7 +123,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<br>
 	<br>
 	<jsp:include page="../include/footer.jsp" flush="false" />

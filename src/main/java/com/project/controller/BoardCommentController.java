@@ -189,6 +189,7 @@ public class BoardCommentController {
 		
 		return mav;
 	}
+	//포토후기에서 대댓글 상세보기
 	@RequestMapping(value="/photoReplyComment.action", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView photoReplyComment(@RequestParam("BC_NUM")int BC_NUM ,BoardCommentDTO bc_dto,ModelAndView mav)throws Exception{
@@ -196,7 +197,7 @@ public class BoardCommentController {
 		bc_dto = bc_service.getReadReply(BC_NUM);
 		
 		mav.addObject("bc_dto",bc_dto);
-		mav.setViewName("reply/photoReplyModify");
+		mav.setViewName("reply/photoReplyModifier");
 		
 		return mav;
 	}
