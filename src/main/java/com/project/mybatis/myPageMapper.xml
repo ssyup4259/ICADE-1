@@ -17,7 +17,7 @@
 	</update>
 	<!-- 포인트 조회 -->
 	<select id="pointCheck" parameterType="String" resultType="int">
-		select M_POINT from member where M_ID = #{M_ID}
+		select nvl(M_POINT,0) from member where M_ID = #{M_ID}
 	</select>
 	<!-- 사용한 포인트 조회 -->
 	<select id="usedPointCheck" parameterType="String" resultType="int">
@@ -31,12 +31,12 @@
 	
 	<!-- 아이디의 총 주문 금액 -->
 	<select id="selectSumTot" parameterType="String" resultType="int">
-		select sum(O_TOT) from ORDERS where o_id = #{O_ID}
+		select nvl(sum(O_TOT),0) from ORDERS where o_id = #{O_ID}
 	</select>
 	
 	<!-- 아이디의 총 주문 횟수 -->
 	<select id="selectCountOnum" parameterType="String" resultType="int">
-		select count(o_NUM) from orders where o_id = #{O_ID}
+		select nvl(count(o_NUM),0) from orders where o_id = #{O_ID}
 	</select>
 	
 

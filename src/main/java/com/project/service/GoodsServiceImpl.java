@@ -77,8 +77,14 @@ public class GoodsServiceImpl implements GoodsService {
 			
 		}
 		
+		String gdKindNum = req.getParameter("GK_KIND_NUM");
+		
+		if (gdKindNum == null || gdKindNum.equals("")) {
+			gdKindNum = "";
+		}
+		
 		//전체데이터갯수
-		int dataCount = g_dao.getGoodsCount(searchKey, searchValue);
+		int dataCount = g_dao.getGoodsCount(searchKey, searchValue, gdKindNum);
 		
 		//전체페이지수
 		int numPerPage = 16;
@@ -90,11 +96,7 @@ public class GoodsServiceImpl implements GoodsService {
 		int start = (currentPage - 1) * numPerPage + 1;
 		int end = currentPage * numPerPage;
 		
-		String gdKindNum = req.getParameter("GK_KIND_NUM");
 		
-		if (gdKindNum == null || gdKindNum.equals("")) {
-			gdKindNum = "";
-		}
 		
 		List<GoodsDTO> g_lists = g_dao.goodsList(start, end, gdKindNum, searchKey, searchValue);
 		//페이징 처리
@@ -104,9 +106,11 @@ public class GoodsServiceImpl implements GoodsService {
 			param = "&searchKey=" + searchKey;
 			param+= "&searchValue=" 
 				+ URLEncoder.encode(searchValue, "UTF-8");
+		} else {
+			param = "GK_KIND_NUM=" + gdKindNum;
 		}
 		
-		String listUrl = cp + "/goodsList.action";
+		String listUrl = cp + "/goods/goodsList.action";
 		if (!param.equals("")) {
 			listUrl = listUrl + "?" + param;
 		}

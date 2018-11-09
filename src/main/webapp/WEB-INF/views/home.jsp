@@ -29,7 +29,6 @@
 		f.submit();
 
 	}
-	
 </script>
 
 <style type="text/css">
@@ -39,43 +38,6 @@
 	margin-top: 15px;;
 	border-top-left-radius: 30px;
 	border-top-right-radius: 30px;
-}
-
-.carousel {
-	position: relative;
-	overflow: hidden;
-	height: 500px;
-}
-
-.carousel>li {
-	position: absolute;
-	left: 0;
-	top: 0;
-	opacity: 1;
-	animation: slide 16s ease infinite forwards;
-}
-
-.carousel>li:nth-child(1) {
-	opacity: 1;
-	z-index: 3;
-}
-
-.carousel>li:nth-child(2) {
-	z-index: 2;
-	animation-delay: 4s;
-}
-
-.carousel>li:nth-child(3) {
-	z-index: 1;
-	animation-delay: 8s;
-}
-
-@keyframes slide{
-    0%{opacity:1; left:0;}
-    33.33%{opacity:0.5; left:-120%;}
-    34%{opacity:0;}
-    66.66%{left:0; opacity:0;}
-    100%{opacity:1;}
 }
 
 </style>
@@ -118,7 +80,9 @@
 						<option value="G_CONTENT">내용</option>
 					</select>
 					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;" onkeypress="if(event.keyCode==13) searchIt();">
-					<div style="display: none;"><input type="text" value=""/></div>
+					<div style="display: none;">
+						<input type="text" value="" />
+					</div>
 					<button type="button" class="btnGreen" style="width: 100px;" onclick="searchIt();">검색</button>
 				</form>
 			</div>
@@ -179,25 +143,28 @@
 							<div class="row">
 						</c:if>
 
-						<div class="col-sm-3 thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
-								<div style="padding-left: 10%">
-									<p>${g_dto.getG_NAME()}</p>
-								</div>
-								<div class="row">
-									<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
-									<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
-										<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
-										원
+						<div class="col-sm-3">
+							<div class="thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
+								<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" id="goodsImage">
+									<div style="padding-left: 10%">
+										<p>${g_dto.getG_NAME()}</p>
 									</div>
-								</div>
-							</a>
+									<div class="row">
+										<div class="col-sm-6" style="text-align: left; padding-left: 10%;">가격 :</div>
+										<div class="col-sm-6" style="text-align: right; padding-right: 10%;">
+											<fmt:formatNumber>${g_dto.getG_PRICE()}</fmt:formatNumber>
+											원
+										</div>
+									</div>
+								</a>
+							</div>
 						</div>
-					
+
 
 						<c:if test="${i % 4 == 3 || newList.size() == i+1}">
 				</div>
-					<br><br>
+				<br>
+				<br>
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />

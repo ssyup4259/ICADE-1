@@ -17,7 +17,7 @@ public interface GoodsDAO {
 	public List<GoodsDTO> goodsList(int start, int end, String gdKindNum, String searchKey, String searchValue) throws Exception;
 	
 	//상품 개수 구하기
-	public int getGoodsCount(String searchKey,String searchValue) throws Exception;
+	public int getGoodsCount(String searchKey,String searchValue, String gdKindNum) throws Exception;
 	
 
 	

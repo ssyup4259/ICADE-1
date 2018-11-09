@@ -51,12 +51,13 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public int getGoodsCount(String searchKey, String searchValue) throws Exception {
+	public int getGoodsCount(String searchKey, String searchValue, String gdKindNum) throws Exception {
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("searchKey", searchKey);
 		params.put("searchValue", searchValue);
+		params.put("gdKindNum", gdKindNum);
 		
 		int result = sessionTemplate.selectOne(goodsMapper + ".getGoodsCount", params);
 		
