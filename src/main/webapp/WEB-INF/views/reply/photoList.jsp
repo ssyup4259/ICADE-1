@@ -133,18 +133,17 @@
 	<form id="replyForm" method="post" enctype="multipart/form-data">
 		 <div id="bbs" align="center">
 				<div id="bbsArticle">
+					<br><br><br><br>
 				 <c:forEach var="bc_dto" items="${bc_lists}">
 				 	<c:if test="${!empty bc_dto.getBC_SUBJECT()}">
-					<div id="replyHeader" style="font-size: 20px" align="center">
-						<ul>
-							<li>
+					<div id="replyHeader" style="font-size: 20px; background: transparent;">
+						<ul style="background: transparent;">
+	                		<li>
 								<p style="font-size: 20px; float:left">
 							 		<a id="replySubject" onclick="show(${bc_dto.getBC_NUM()});">${bc_dto.getBC_SUBJECT()}</a>
 							 		<%-- <input type="button"   onclick="show(${bc_dto.getBC_NUM()});"> --%>
-							 		
 							 	</p>
 							</li>
-							
 							<li style="float: right; padding-top: 16px; padding-right: 35px">
 								#${bc_dto.getBC_ID()}&nbsp;&nbsp;&nbsp;&nbsp;등록일 :${bc_dto.getBC_DATE()}
 								<br>
@@ -153,7 +152,6 @@
 			              			 <input type="button" value=" 삭제 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyDelete.action?BC_NUM=${bc_dto.getBC_NUM()}&BC_BOARD=${bc_dto.getBC_BOARD()}&replyPageNum=${replyPageNum}';" />
 		              			 </c:if>
 							</li>
-							
 							
 						</ul>
 					</div>
@@ -202,6 +200,9 @@
 									
 									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
+						</div>
+						</div>
+						
 									
 							</c:if>
 							</c:forEach>

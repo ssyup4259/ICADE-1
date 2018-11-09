@@ -261,10 +261,12 @@ td{
 				</div>
 				<div class="col-sm-4 toggle">
 
-					<div class="toggle" id="wishList" style="border: 3px solid #8F9493; border-radius: 12px; font-size: 20px; padding-top: 5px;">
-						<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 100%;" />
-						<br>
-						<br>
+					<div class="toggle" id="wishList" style="border: 3px solid #8F9493; border-radius: 12px; font-size: 20px; padding-top: 20px;">
+					<font style="font-size: 30px;"> <b>마이 쇼핑</b></font>
+					<p>
+						<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 90%;" />
+					</p>
+						<hr style="border: 3px solid #DDDADB;">
 
 						<table style="text-align: center;" cellpadding="10" cellspacing="0">
 							<c:forEach var="w_dto" items="${wishList}">
