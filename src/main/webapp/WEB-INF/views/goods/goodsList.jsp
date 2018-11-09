@@ -53,7 +53,6 @@
 
 					<select name="searchKey" class="selGreen" style="width: 100px; cursor: pointer;">
 						<option value="G_NAME">상품명</option>
-						<option value="G_CONTENT">내용</option>
 					</select>
 					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;">
 					<button type="button" class="btnGreen" style="width: 100px;" onclick="searchIt();">검색</button>

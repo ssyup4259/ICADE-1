@@ -238,12 +238,7 @@ window.addEventListener('load', function () {
 				naverLogin.reprompt();
 				return;
 			}
-			/* var params = {
-						"sns_id":id,
-						"name":name,
-						"email":email};
-					 */
-					 
+
 			$.ajax({
 				url:"<%=cp%>/snsJoin.action",
 				type:"post",

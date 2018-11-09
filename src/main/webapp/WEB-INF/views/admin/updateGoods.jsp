@@ -48,16 +48,6 @@ function goodsUpdateIt() {
     }
     f.G_PRICE.value = str;
     
-    str = f.G_CONTENT.value;
-    str = str.trim();
-    if(!str) {
-        swal("상품의 설명을 입력해주세요.");
-        f.G_CONTENT.focus();
-        return;
-    }
-    f.G_CONTENT.value = str;
-	        
-    
 	f.action = "<%=cp%>/admin/updateGoods.action";
 	f.submit();
 	
@@ -88,7 +78,7 @@ function goodsUpdateIt() {
 상품 종류 : ${g_dto.getGK_KIND()} <br/>
 상품 이름 : <input type="text" name="G_NAME" value="${g_dto.getG_NAME()}" class="inputBoxGreen"/> <br/>
 상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_PRICE()}" class="inputBoxGreen">원 <br/>
-상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT" class="textAreaGreen">${g_dto.getG_CONTENT()}</textarea> <br/>
+<div style="display: none;">상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT" class="textAreaGreen">${g_dto.getG_CONTENT()}</textarea></div>
 상품 설명 사진 : 
 <input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
 할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_DISCOUNT()}" class="inputBoxGreen"/>% <br/>

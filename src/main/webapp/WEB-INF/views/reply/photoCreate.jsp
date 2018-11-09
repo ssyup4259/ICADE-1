@@ -6,6 +6,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+
+.textAreaGreen{
+	padding-left: 10px;
+	border-color: #A3C838;
+	color: #8F9493;
+	font-size: 16px;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+}
+
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>댓글 입력</title>
 
@@ -24,7 +37,7 @@
 
 	 function sendIt(){
 		
-		f = document.myForm;
+		f = document.photoReplyForm;
 		
 		str = f.BC_SUBJECT.value;
 		str = str.trim();
@@ -65,17 +78,17 @@
 </head>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
-<div id="bbs" align="center">
+<div id="" align="center">
 	
-	<form action="" name="myForm" method="post" enctype="multipart/form-data">
+	<form action="" name="photoReplyForm" method="post" enctype="multipart/form-data">
 	
 	<input type="hidden" name="G_NUM" value="${G_NUM}">
 	
 	<div id="bbsCreated">
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-				<dd>
+				<dt style="float: center; padding-right: 510px;font-size: 20px">제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
+				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_SUBJECT" style="width: 33%" maxlength="100" class="inputBoxGreen"/>
 				</dd>							
 			</dl>		
@@ -83,8 +96,8 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt>작성자</dt>
-				<dd>
+				<dt style="float: center; padding-right: 520px;font-size: 20px">작성자</dt>
+				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_ID" maxlength="20" class="inputBoxGreen"
 					value="${sessionScope.userInfo.getM_ID()}" style="width: 33%"/>
 				</dd>							
@@ -93,9 +106,9 @@
 		
 		<div id="bbsCreated_content" >
 			<dl>
-				<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+				<dt style="float: center; padding-right: 510px;font-size: 20px">내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
 				<dd style="float: center;padding-right: 7px">
-					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 33%" class="boxTA" placeholder="내용을 입력하세요"></textarea>
+					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 33%" class="textAreaGreen" placeholder="내용을 입력하세요"></textarea>
 				</dd>
 				<dt style="float: center;padding-right: 260px">
 					<input type="file" id="upload" name="bcfile" class="btnGray"><br>
@@ -107,9 +120,9 @@
 		</div>
 	</div>	
 	
-	<div id="bbsCreated_footer">
+	<div id="bbsCreated_footer" align="center">
 	<input type="button" value=" 등록하기 " class="btnGreen" onclick="sendIt();"/>
-	<input type="reset" value=" 다시입력 " class="btnGreen" onclick="document.myForm.subject.focus();"/>
+	<input type="reset" value=" 다시입력 " class="btnGreen" onclick="document.photoReplyForm.subject.focus();"/>
 	<input type="button" value=" 작성취소 " class="btnGray" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
 	</div>
 	

@@ -84,6 +84,26 @@
 	background-color: #8F9493;
 	color: white;
 }
+
+.ui-datepicker-trigger{
+	    	background-color: white;
+	    	color: #A3C838;
+	    	text-align: center;
+	    	text-decoration: none;
+	    	display: inline-block;
+	    	font-size: 15px;
+	    	cursor: pointer;
+	    	border: 3px solid #A3C838;
+	    	border-radius: 6px;
+	    	height: 30px;
+}
+
+.ui-datepicker-trigger:hover{
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+	background-color: #A3C838;
+	color: white;
+}
 </style>
 </head>
 <body>
@@ -155,13 +175,13 @@
 
 				<tbody>
 					<c:forEach var="map" items="${hashMap}">
-						<c:forEach var="dto" items="${map.value }" varStatus="i">
+						<c:forEach var="dto" items="${map.value}" varStatus="i">
 							<tr>
 								<td class="gubun">
 									<p>${dto.getO_DATE()}<br />
 										<a href="ordersHistoryDetail.action?o_num=${dto.getO_NUM()}" class="line">[${dto.getO_NUM()}]</a>
 									</p> 
-										<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
+									<a href="#none" class="line" onclick="location.href='ordersHistoryDetail.action?o_num=${dto.getO_NUM()}'">[상세정보]</a>
 								</td>
 								<td>
 									<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <img src="/icade/resources/goodsImage/${dto.getG_SAVEFILENAME()}" width="80" height="80"></a>
@@ -179,7 +199,7 @@
 									<p style="display: none;">${dto.getO_IMP()}</p>
 									<form action="" method="post" name="myForm">										
 										<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
-											<input type="button" value="환불 하기" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" />
+											<input type="button" value="환불 하기" onclick="cancelIt(${dto.getO_IMP()}', ${dto.getO_NUM()});" />
 										</c:if>
 									</form>
 								</td>
@@ -189,9 +209,9 @@
 				<tr>
 					<td colspan="7">
 						<c:if test="${dataCount==0}">
-							<p class="message ">주문 내역이 없습니다.</p>
+							<p class="message">주문 내역이 없습니다.</p>
 						</c:if> 
-						<c:if test="${dataCount!=0 }">
+						<c:if test="${dataCount!=0}">
 							${pageIndexList}
 						</c:if>
 					</td>

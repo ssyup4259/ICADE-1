@@ -79,14 +79,16 @@
 						</tr>
 						<tr>
 							<td style="border-right: 1;"><input type="button" value="본인인증" onclick="infoCheckPage_sendIt();" class="btnGreen" style="width: 100px;"></td>
-							<td><input type="button" value="취소" onclick="location.href='myPage.action';" class="btnGreen" style="width: 100px;"></td>
+							<td>
+								<input type="button" value="취소" class="btnGreen" onclick="location.href='myPage.action?m_id=${sessionScope.userInfo.getM_ID()}';" style="width: 100px;">
+							</td>
 						</tr>
 					</table>
 				</form>
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 
 <script type="text/javascript">
 //keyup 이벤트시에 입력마다 서버로 값을 보내서 포커스에서 벗어날시 작동하는 스크립트로 변경

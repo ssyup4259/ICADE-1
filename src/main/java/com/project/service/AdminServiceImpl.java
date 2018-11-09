@@ -269,15 +269,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		Iterator<GoodsDTO> it = g_lists.iterator();
 		
-		while (it.hasNext()) {
-			
-			GoodsDTO g_dto = it.next();
-			
-			//줄바꿈 작업
-			g_dto.setG_CONTENT(g_dto.getG_CONTENT().replace("\r\n", "<br/>"));
-			
-		}
-		
 		//페이징 처리
 		String param = "";
 		if (!searchValue.equals("")) {
