@@ -18,16 +18,13 @@
 		</li>
 
 		<li class="dropdown">
-			<a href="javascript:void(0)" class="dropbtn">케이스</a>
-			<div class="dropdown-content">
-				<c:forEach var="gk_dto" items="${gk_lists}" end="1">
-					<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>
-				</c:forEach>
-			</div>
+			<c:forEach var="gk_dto" items="${gk_lists}" end="0">
+				<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>
+			</c:forEach>
 		</li>
 
 		<li class="dropdown">
-			<c:forEach var="gk_dto" items="${gk_lists}" begin="2" end="2">
+			<c:forEach var="gk_dto" items="${gk_lists}" begin="1" end="1">
 				<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>
 			</c:forEach>
 		</li>
@@ -35,7 +32,7 @@
 		<li class="dropdown">
 			<a href="javascript:void(0)" class="dropbtn">악세서리</a>
 			<div class="dropdown-content">
-				<c:forEach var="gk_dto" items="${gk_lists}" begin="3">
+				<c:forEach var="gk_dto" items="${gk_lists}" begin="2">
 					<a href="<%=cp%>/goods/goodsList.action?GK_KIND_NUM=${gk_dto.getGK_NUM()}">${gk_dto.getGK_KIND()}</a>
 				</c:forEach>
 			</div>
