@@ -21,9 +21,6 @@ DROP TABLE BOARD_COMMENT CASCADE CONSTRAINTS;
 
 PURGE RECYCLEBIN;
 
-imp userid=icade/123 file='D:\icade.dmp'
-
-
 -- Member Table Create SQL
 CREATE TABLE Member
 (
@@ -67,9 +64,6 @@ ALTER TABLE Goods
 ALTER TABLE Goods MODIFY(G_DISCOUNT NUMBER NULL);
 
 ALTER TABLE Goods MODIFY(G_CONTENT VARCHAR2(4000) NULL);
-
-ALTER TABLE Goods DROP COLUMN G_COUNT;
-ALTER TABLE Goods DROP COLUMN G_SELLCOUNT;
 
 ALTER TABLE Goods ADD (G_DATE DATE NOT NULL);
 ALTER TABLE Goods ADD (G_CONTENT_ORIGINAL_FILE VARCHAR2(40) NULL);
@@ -196,10 +190,6 @@ CREATE TABLE Order_Detail
 
 ALTER TABLE Order_Detail MODIFY(OD_DEVICE VARCHAR2(40));
 ALTER TABLE Order_Detail MODIFY(OD_COLOR VARCHAR2(20));
-
-ALTER TABLE Order_Detail
-    ADD CONSTRAINT FK_Order_Detail_OD_CODE FOREIGN KEY (OD_CODE)
-        REFERENCES Goods_Detail (GD_CODE);
         
 ALTER TABLE Order_Detail
     ADD CONSTRAINT FK_Order_Detail_OD_NUM FOREIGN KEY (OD_NUM)
@@ -283,11 +273,6 @@ ALTER TABLE Cart
     ADD CONSTRAINT FK_Cart_C_ID_Member_M_ID FOREIGN KEY (C_ID)
         REFERENCES Member (M_ID) ON DELETE CASCADE;
 
-ALTER TABLE Cart
-    ADD CONSTRAINT FK_Cart_C_CODE_Goods_Detail_GD FOREIGN KEY (C_CODE)
-        REFERENCES Goods_Detail (GD_CODE) ON DELETE CASCADE;
-
-
 -- Board_FAQ Table Create SQL
 CREATE TABLE Board_FAQ
 (
@@ -315,14 +300,14 @@ ALTER TABLE Wish
 ALTER TABLE Wish
     ADD CONSTRAINT FK_Wish_W_GNUM_Goods_G_NUM FOREIGN KEY (W_GNUM)
         REFERENCES Goods (G_NUM) ON DELETE CASCADE;
+        
 ALTER TABLE WISH add(W_CHECK NUMBER);
         
-insert into goods_kind values (1, '기본 케이스');
-insert into goods_kind values (2, '주문제작 케이스');
-insert into goods_kind values (3, '필름');
-insert into goods_kind values (4, '셀카봉/삼각대');
-insert into goods_kind values (5, '케이블/충전기');
-insert into goods_kind values (6, '이어폰');
+insert into goods_kind values (1, '케이스');
+insert into goods_kind values (2, '필름');
+insert into goods_kind values (3, '셀카봉/삼각대');
+insert into goods_kind values (4, '케이블/충전기');
+insert into goods_kind values (5, '이어폰');
 
 commit;
 
@@ -341,6 +326,7 @@ insert into DEVICE_KIND values (9, '갤럭시 S7 엣지');
 insert into DEVICE_KIND values (10, '갤럭시 S8');
 insert into DEVICE_KIND values (11, '갤럭시 S8+');
 insert into DEVICE_KIND values (12, '갤럭시노트 9');
+insert into DEVICE_KIND values(999, '공통');
 
 commit;
 
@@ -350,8 +336,9 @@ insert into GOODS_COLOR values (3, '블루');
 insert into GOODS_COLOR values (4, '핑크');
 insert into GOODS_COLOR values (5, '로즈골드');
 insert into GOODS_COLOR values (6, '실버');
+insert into GOODS_COLOR values (999, '투명');
 
 commit;
 
-insert into device_kind values(999, '공통');
-insert into goods_color values (999, '투명');
+
+

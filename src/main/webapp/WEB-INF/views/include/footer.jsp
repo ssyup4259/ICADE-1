@@ -137,7 +137,7 @@ function deleteAllCookies(){
 <input type="button" class="btnGray back_to_top" value="맨위로" style="width: 70px;">
 
 <div class="latestGoods" id="ckList">
-	<div class="lg text-center" style="width: 70px; height: 830px; border: 2px solid #A3C838; border-radius: 12px;">
+	<div class="lg text-center" style="width: 70px; height: 800px; border: 2px solid #A3C838; border-radius: 12px;">
 		<h3>최근 본</h3>
 		<input type="button" id="btn5" value="전체삭제" class="btnGreen" style="font-size: 13px; width: 100%;" onclick="deleteAllCookies();"/>
 		<form action="" name="searchForm" method="post">
