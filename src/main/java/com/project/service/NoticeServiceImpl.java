@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -114,5 +115,35 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void noticeRegister(NoticeDTO n_dto) throws Exception{
 		n_dao.noticeRegister(n_dto);
+	}
+
+	//업데이트
+	@Override
+	public void updateNotice(HttpServletRequest req) throws Exception {
+		
+		System.out.println("service");
+		
+		String cp = req.getContextPath();
+		
+		String BN_NUM = req.getParameter("BN_NUM");
+		System.out.println(BN_NUM);
+		String BN_DATE = req.getParameter("BN_DATE");
+		String BN_SUBJECT = req.getParameter("BN_SUBJECT");
+		String BN_CONTENT = req.getParameter("BN_CONTENT");
+		
+		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("BN_SUBJECT", BN_SUBJECT);
+		hMap.put("BN_CONTENT", BN_CONTENT);
+		hMap.put("BN_NUM", BN_NUM);
+		
+		n_dao.updateNotice(hMap);
+	}
+
+	//삭제
+	@Override
+	public void deleteNotice(int BN_NUM) throws Exception {
+		n_dao.deleteNotice(BN_NUM);
 	}
 }

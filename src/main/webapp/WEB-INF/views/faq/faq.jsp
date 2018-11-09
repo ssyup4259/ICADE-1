@@ -142,7 +142,7 @@ $(document).ready(function () {
 		var f = document.noticeForm;
 		
 		f.action = "<%=cp%>/notice/noticeRegister.action";
-			f.submit();
+		f.submit();
 
 		}
 
@@ -320,7 +320,7 @@ $(document).ready(function () {
 							</c:forEach>
 
 						</div>
-						<c:if test="${sessionScope.userInfo.getM_RANK() != 'admin'}">
+						<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
 							<input type="button" class="btnGreen" value="공지사항 등록" onclick="registerNotice();">
 						</c:if>
 					</form>
