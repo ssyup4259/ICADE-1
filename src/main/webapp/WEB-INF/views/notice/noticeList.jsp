@@ -28,8 +28,7 @@ function registerNotice(){
 	
 	var f = document.noticeForm;
 	
-	f.action = "<%=cp%>
-	/notice/noticeRegister.action";
+	f.action = "<%=cp%>/notice/noticeRegister.action";
 		f.submit();
 
 	}

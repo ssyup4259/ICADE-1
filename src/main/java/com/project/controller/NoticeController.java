@@ -32,11 +32,10 @@ public class NoticeController {
 	NoticeDAO n_dao;
 
 	//공지사항 게시판 
-	@RequestMapping(value = "/noticeList.action", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/faq.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public String noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    n_service.noticeList(request);
-		
-		return "notice/noticeList";
+		return "faq/faq";
 	}
 	
 	//공지 하나
@@ -59,7 +58,7 @@ public class NoticeController {
 	@RequestMapping(value = "/noticeRegisterOK.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public String noticeRegisterOK(NoticeDTO n_dto,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		n_service.noticeRegister(n_dto);
-		return "redirect:/notice/noticeList.action";
+		return "redirect:/faq.action";
 	}
 	
 }
