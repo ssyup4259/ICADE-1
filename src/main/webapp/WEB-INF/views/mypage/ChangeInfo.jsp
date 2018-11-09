@@ -8,8 +8,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="Keywords" content="회원가입" />
-<meta name="Description" content="회원가입" />
+<meta name="Keywords" content="회원정보수정" />
+<meta name="Description" content="회원정보수정" />
 <title>아이폰 케이스는 ICADE</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,8 @@
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -38,7 +39,6 @@
 
 
 <body>
-
 	<input type="hidden" id="msg" value="">
 
 	<jsp:include page="../include/header2.jsp" flush="false" />
@@ -53,12 +53,6 @@
 						<span style="font-size: 15px; font-weight: 300;">아이케이드의 다양한 회원혜택을 받으세요.</span>
 					</div>
 					<div class="col-sm-6" style="text-align: right;">
-
-						<h3 class="">기본정보</h3>
-						<p class="required ">
-							<img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수">
-							필수입력사항
-						</p>
 					</div>
 				</div>
 				<hr>
