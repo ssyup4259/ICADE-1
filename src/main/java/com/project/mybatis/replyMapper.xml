@@ -93,7 +93,7 @@ from board_comment,(select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME from g
 	    lead (BC_SUBJECT,1) over (order by BC_DATE) next_BC_SUBJECT,
 	    lag (BC_NUM,1) over (order by BC_DATE) prev_BC_NUM,
 	    lag (BC_SUBJECT,1) over (order by BC_DATE) prev_BC_SUBJECT
-	    from BOARD_COMMENT
+	    from BOARD_COMMENT where BC_PARENT = 0
 	    order by BC_DATE desc
 	)
 	where BC_NUM = #{BC_NUM}
@@ -108,7 +108,7 @@ from board_comment,(select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME from g
 
 <!-- 상품후기 작성을 위한 상품리스트 검색 -->
 <select id="searchGoodsLists" parameterType="hashMap" resultType="com.project.dto.GoodsDTO">
-	select G_NUM,G_NAME 
+	select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME
 		FROM GOODS
     where 
     	G_NAME like '%' || #{searchValue} || '%' ORDER BY G_NUM desc

@@ -42,18 +42,18 @@
  	<div align="center" style="float: center; width: 625px;padding-left: 29px">
  		
 	 	<c:forEach var="g_dto" items="${g_list}">
-	 		<table>
-	 			<tr>
-	 				<td style="text-align: left">
-	 					상품명
-	 				</td>
-	 				<td style="text-align: right">
-		 				<a href="#g_listName" id="g_listName_fix" onclick="searchFix()">${g_dto.getG_NAME()}</a>
-		 				<input type="hidden" id="g_listNum" name="g_listNum" value="${g_dto.getG_NUM()}"/>
-		 				<input type="hidden" id="g_listName" name="g_listNum" value="${g_dto.getG_NAME()}"/>
-	 				</td>
-	 			</tr>
-	 		</table>
+			<div style="font-size:25px; margin: none">
+				<div class="row">
+					<div class="col-sm-1" style="float: left;height: 130px;">
+							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/reply/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 130px; height: 190px"></a>
+					</div>
+					<div class="col-sm-2" style="float: right;">
+						<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a></h3>
+							<p class="price" >₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
+							<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+					</div>
+				</div>	
+			</div>
 	    </c:forEach>
  	</div>
 
