@@ -73,27 +73,9 @@ public class LoginController {
 			session.setAttribute("wishInfo", lists);
 			System.out.println("---------------------------");
 			
-			
 			return "redirect:/";
 		}
-		
-		
 	}
-	
-	@RequestMapping(value="/loginTest", method= {RequestMethod.GET,RequestMethod.POST})
-	public String loginTest(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
-		
-		return "loginTest";
-	}
-	
-	@RequestMapping(value="/callbackTest", method= {RequestMethod.GET,RequestMethod.POST})
-	public String callbackTest(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
-		
-		
-		
-		return "callbackTest";
-	}
-	
 	
 	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String logout(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp)throws Exception{
