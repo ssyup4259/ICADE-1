@@ -599,7 +599,7 @@ function login_need() {
 					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 						<div>
 							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;"/>
+							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;height: 80px"/>
 						</div>
 					</c:if>
 					

@@ -166,7 +166,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			System.out.println("얍얍1");
 		}
 		
-		//파일 저장 이름 세팅해주자.
+		//파일 저장 이름 세팅.
 		if (bc_dto.getBC_CONTENTFILE2().length() != 0) {
 			fileExt2 = bc_dto.getBC_CONTENTFILE2().substring(bc_dto.getBC_CONTENTFILE2().lastIndexOf("."));
 			save2 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
