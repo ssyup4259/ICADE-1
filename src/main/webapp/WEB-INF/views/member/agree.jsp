@@ -224,9 +224,9 @@
 			   <label for="chkbox2"></label>
 			    개인정보 수집 및 이용에 동의합니다.
 			    <br><br> 
-			  <ul style="background-color: transparent;display: table;margin-left: auto;margin-right: auto">
+			  <ul style="background-color: transparent;display: table;margin-left: auto;margin-right: auto;text-align: center">
 				  <li>
-				   	 <input type="button" value="동의" class="btnGreen" onclick="chkJoin();" style="margin-bottom: 4px"/>&nbsp;&nbsp;&nbsp;
+				   	 <input type="button" value="동의" class="btnGreen" onclick="chkJoin();" style="padding-top: 4px" />&nbsp;&nbsp;&nbsp;
 				  </li>
 				  <li>
 				   	 <input type="button" id="btnNochkJoin" value="동의하지 않습니다" class="btnGray" onclick="nochkJoin();"/>
