@@ -107,15 +107,6 @@
 		}
 
 </script>
-<script type="text/javascript">
-	function dataHandler(G_NAME,G_NUM) {
-		
-		$("#photoG_NAME").val(G_NAME);
-		$("#photoG_NUM").val(G_NUM);
-		
-	}
-
-</script>
 
 </head>
 <body>

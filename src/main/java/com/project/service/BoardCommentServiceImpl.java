@@ -896,7 +896,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	}
 
 	@Override
-	public HttpServletRequest searchGoodsList(GoodsDTO g_dto,HttpServletRequest req) throws Exception {
+	public HttpServletRequest searchGoodsList(BoardCommentDTO bc_dto,HttpServletRequest req) throws Exception {
 		
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
@@ -908,7 +908,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			searchKey = "G_NAME";
 		}
 		
-		List<GoodsDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue); 
+		List<BoardCommentDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue); 
 		
 		
 		req.setAttribute("g_list", g_list);

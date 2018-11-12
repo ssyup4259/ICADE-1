@@ -137,7 +137,7 @@
 							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a>
 						</h3>
 						<p class="price">
-							₩${bc_dto.getG_PRICE()}
+							₩<fmt:formatNumber>${bc_dto.getG_PRICE()}</fmt:formatNumber>
 							<span id="sPrdTaxText"></span>
 						</p>
 						<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">

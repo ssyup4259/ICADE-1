@@ -153,7 +153,7 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	}
 
 	@Override
-	public List<GoodsDTO> searchGoodsList(String searchKey, String searchValue) throws Exception {
+	public List<BoardCommentDTO> searchGoodsList(String searchKey, String searchValue) throws Exception {
 		
 		Map<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("searchValue", searchValue);
