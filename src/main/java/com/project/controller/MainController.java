@@ -105,5 +105,12 @@ public class MainController {
 		mav.setViewName("faq/faq");
 		return mav;
 	}
+	@RequestMapping(value="/agree.action")
+	public ModelAndView agree(HttpServletRequest request) throws Exception {
+	n_service.noticeList(request);
+	ModelAndView mav = new ModelAndView();
+	mav.setViewName("member/agree");
+	return mav;
+}
 	
 }

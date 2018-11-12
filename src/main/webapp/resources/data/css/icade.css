@@ -426,3 +426,38 @@ tr:hover {
 input,textarea :focus{
     outline: none !important;
 }
+
+
+input[id="chkbox1"] + label {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		cursor: pointer;
+}
+input[id="chkbox1"]:checked + label {
+	background-color: #A3C838;
+}
+input[id="chkbox1"] {
+	display: none;
+}
+
+
+input[id="chkbox2"] + label {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		cursor: pointer;
+}
+input[id="chkbox2"]:checked + label {
+	background-color: #A3C838;
+}
+input[id="chkbox2"] {
+	display: none;
+}
+
+.color {
+	color: black; 
+}
+
