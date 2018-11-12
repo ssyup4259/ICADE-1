@@ -121,13 +121,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void updateNotice(HttpServletRequest req) throws Exception {
 		
-		System.out.println("service");
-		
-		String cp = req.getContextPath();
-		
 		String BN_NUM = req.getParameter("BN_NUM");
-		System.out.println(BN_NUM);
-		String BN_DATE = req.getParameter("BN_DATE");
 		String BN_SUBJECT = req.getParameter("BN_SUBJECT");
 		String BN_CONTENT = req.getParameter("BN_CONTENT");
 		

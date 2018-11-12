@@ -42,6 +42,7 @@
 		var display = $('.toggle')[0].style.display;
 		$('.displayvalue').text(display);
 	}
+	
 </script>
 
 
@@ -298,6 +299,7 @@ td{
 
 	function sendMode(mode) {
 		window.location.href = "infoCheckPage.action?mode=" + mode;
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 	}
 	
 	$(document).ready(function (){

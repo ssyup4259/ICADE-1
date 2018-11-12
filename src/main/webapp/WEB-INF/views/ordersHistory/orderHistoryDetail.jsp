@@ -31,7 +31,7 @@ table {
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../include/header2.jsp" flush="false" />
+<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container" style="text-align: left;">
 
@@ -48,7 +48,7 @@ table {
 				<div class="col-sm-3" style="text-align: left; font-size: 20px;">
 					결제번호 : ${O_Num}
 					<br>
-					주문일 : 2018-10-08
+					주문일 : ${O_Date}
 				</div>
 				<div class="col-sm-9">
 					<img src="//image.wemakeprice.com/images/resources/wmp/pages/mypage/banner/mypage-invoice.jpg" style="width: 100%;">

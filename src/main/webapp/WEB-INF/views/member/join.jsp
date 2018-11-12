@@ -232,7 +232,7 @@
 
 					<div class="row">
 						<div class="col-sm-2"></div>
-						<div class="col-sm-8" style="text-align: left">
+						<div class="col-sm-10" style="text-align: left">
 							<input type="text" class="memberInputBox" name="M_ADDRESS2" placeholder="상세주소" id="sample6_address2">
 						</div>
 					</div>
