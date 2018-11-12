@@ -42,24 +42,16 @@
 
 	<!-- 내용 -->
 	<form name="joinForm" action="" method="post" id="joinForm">
-		<div class="container-fluid"  style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
-			<div class="container text-center" >
+		<div class="container-fluid"  style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;text-align: center">
+			<div class="container text-center">
 				<div class="row">
 					<div class="col-sm-6" style="text-align: left;">
 						<h2>회원 가입</h2>
 						<span style="font-size: 15px; font-weight: 300;">ICADE의 다양한 회원혜택을 받으세요.</span>
 					</div>
-					<div class="col-sm-6" style="text-align: right;">
-
-						<!-- <h3 class="" style="padding-top: 5px">기본정보</h3>
-						<p class="required ">
-							<img src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif" alt="필수">
-							필수입력사항
-						</p> -->
-					</div>
 				</div>
 				<hr style="border: 1px solid black;">
-				<div class="col-sm-8" align="center">
+				<div class="col-sm-8" style="margin: 0 auto;">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
@@ -232,7 +224,7 @@
 
 					<div class="row">
 						<div class="col-sm-2"></div>
-						<div class="col-sm-10" style="text-align: left">
+						<div class="col-sm-8" style="text-align: left">
 							<input type="text" class="memberInputBox" name="M_ADDRESS2" placeholder="상세주소" id="sample6_address2">
 						</div>
 					</div>
@@ -242,6 +234,7 @@
 				<hr style="border: 1px solid black;">
 				<div style="text-align: center; padding-bottom: 15px;">
 					<input type="button" class="btnGreen" id="singUpBtn" value="회원가입" style="width: 200px; height: 40px;" onclick="" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 				</div>
 			</div>

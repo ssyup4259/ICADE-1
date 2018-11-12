@@ -71,6 +71,10 @@ input.down {
 <!-- 댓글에 띄울 리스트 작성 -->
 <script>
 $(document).ready(function() {
+	
+		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		  x =  $("#sum").val();
+		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';
 	$.ajax({
 		 type:"get",
 		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
@@ -80,10 +84,6 @@ $(document).ready(function() {
 		}
 	 });
 	
-/* 	function numberWithCommas() {
-		alert(x);		
-		
-	}  */
 
 });
 </script>
@@ -589,11 +589,21 @@ function login_need() {
 				</div>
 
 				<div id="section3" class="container-fluid">
-					<div>
-						<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-						<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
-						<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
-					</div>
+					<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+						<div>
+							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+							<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
+							<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
+						</div>
+					</c:if>
+					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+						<div>
+							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;"/>
+						</div>
+					</c:if>
+					
+					
 					<br>
 					<div id="comment" class="container-fluid" style="background: transparent;">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">

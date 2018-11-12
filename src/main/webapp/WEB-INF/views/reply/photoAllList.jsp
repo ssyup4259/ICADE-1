@@ -39,6 +39,9 @@
 	<form action="" method="post" name="replyForm">
 		<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 			<div class="container-fluid" style="width: 80%;">
+				
+							<p align="center"><img src="/icade/resources/data/img/photoReview.jpg" style="margin: auto"></p>
+				
 				<h1>포토후기</h1>
 
 				<c:set var="i" value="0" />

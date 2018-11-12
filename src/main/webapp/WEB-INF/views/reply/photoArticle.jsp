@@ -48,7 +48,7 @@
 				 
 				 var BC_NUM =$("#BC_NUM").val();
 				 
-				 $("#photoReply").get('<%=cp%>/goods/replyCommentList.action?BC_NUM=+BC_NUM');
+				 $("#photoReply").get('<%=cp%>/goods/photoReplyCommentList.action?BC_NUM=+BC_NUM');
 				 $("#photoReply").html(result);
 				 
 			},error : function (result) {

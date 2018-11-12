@@ -102,7 +102,7 @@ from board_comment,(select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME from g
 <!-- 대댓글 리스트 가져오기 -->
 <select id="readReply" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
 			select BC_BOARD,BC_NUM,BC_DATE,BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods)
-		    where BC_BOARD =G_NUM AND  BC_PARENT =#{BC_NUM} ORDER BY BC_DATE
+		    where BC_BOARD =G_NUM AND  BC_PARENT =#{BC_NUM} ORDER BY BC_NUM
          	
 </select>
 
