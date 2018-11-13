@@ -75,6 +75,7 @@ $(document).ready(function() {
 		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		  x =  $("#sum").val();
 		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';
+		  
 	$.ajax({
 		 type:"get",
 		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
@@ -195,7 +196,9 @@ $(function() {
 		
 		var x= (hm) * sell_price;
 		addComma(x);
-	}  
+	} 
+	
+	
 	function addComma(x){
 		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';

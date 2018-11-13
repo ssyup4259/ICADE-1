@@ -192,7 +192,7 @@
 			   	<br>
 			   	<br>
 			   <input type="checkbox" id="chkbox1" name="req1">
-			   <label for="chkbox1"></label>
+			   <label for="chkbox1" style=”cursor:pointer“></label>
 			    위의 약관에 동의합니다.
 			   	
 			   	<br>
@@ -220,9 +220,10 @@
 			   
 			 </div>
 			   <br>
-			   <input type="checkbox" id="chkbox2" name="req2">
-			   <label for="chkbox2"></label>
-			    개인정보 수집 및 이용에 동의합니다.
+			   <div>
+			   		<label for="chkbox2" style="cursor:pointer"><input type="checkbox" id="chkbox2" name="req2"/> 개인정보 수집 및 이용에 동의합니다.</label>
+			   </div>
+			   
 			    <br><br> 
 			  <ul style="background-color: transparent;display: table;margin-left: auto;margin-right: auto;text-align: center">
 				  <li>

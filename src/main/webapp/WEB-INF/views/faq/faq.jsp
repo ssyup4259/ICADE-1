@@ -169,7 +169,7 @@ $(document).ready(function () {
 					<!-- division1 -->
 					<div class="tab_con" id="tab_con" style="background: white;">
 						<div style="float: left; font-size: 11px">
-							<ul style="">
+							<ul>
 								<li class="dropbtn" style="text-align: left; ">
 									<a href="#answer1" onclick="faqMove(1);">1.주문방법</a>
 									<ul id="answer1">
@@ -218,6 +218,7 @@ $(document).ready(function () {
 								</li>
 							</ul>
 						</div>
+					
 						<!-- division2 -->
 						<div style="float: left; font-size: 14px">
 							<ul>
