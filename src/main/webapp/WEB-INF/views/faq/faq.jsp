@@ -71,7 +71,8 @@ ul, li {
 	clear: both;
 	margin-top: 5px;
 	border: 1px solid #ddd;
-	background-color: white;
+	background-color: transparent;
+	background: transparent;
 }
 
 .tab_con div {
@@ -79,6 +80,9 @@ ul, li {
 	height: 20px;
 	background-color: white;
 	text-align: center;
+}
+.ab{
+	background: transparent;
 }
 </style>
 
@@ -150,7 +154,7 @@ $(document).ready(function () {
 </script>
 <body>
 	<jsp:include page="../include/header2.jsp" flush="false" />
-	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px; height: 800px;">
 		<div class="container" style="width: 140%;">
 			<div class="row" style="text-align: center;">
 				<div class="col-sm-7" >
@@ -169,9 +173,9 @@ $(document).ready(function () {
 					<!-- division1 -->
 					<div class="tab_con" id="tab_con" style="background: white;">
 						<div style="float: left; font-size: 11px">
-							<ul style="">
-								<li class="dropbtn" style="text-align: left; ">
-									<a href="#answer1" onclick="faqMove(1);">1.주문방법</a>
+							<ul style="" class="ab">
+								<li class="dropbtn" style="text-align: left; background: transparent;">
+									<a href="#answer1" class="ab" onclick="faqMove(1);" style="background: transparent; background-color: transparent;">1.주문방법</a>
 									<ul id="answer1">
 										<li class="" style="">
 											상품검색 → 장바구니에 담기 → 회원ID 로그인 또는 비회원 주문 → 주문서 작성 → 결제방법선택 및 결제 → 주문 성공 화면 (주문번호)
@@ -181,7 +185,7 @@ $(document).ready(function () {
 									</ul>
 								</li>
 							</ul>
-							<ul style="border-radius: 6px; padding-top: 0px; margin-top: 0px">
+							<ul style="border-radius: 6px; padding-top: 0px; margin-top: 0px" class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer2" onclick="faqMove(2);">2. 결제안내</a>
 									<ul id="answer2">
@@ -193,7 +197,7 @@ $(document).ready(function () {
 									</ul>
 								</li>
 							</ul>
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer3" onclick="faqMove(3);">3. 주문조회</a>
 									<ul id="answer3">
@@ -205,7 +209,7 @@ $(document).ready(function () {
 									</ul>
 								</li>
 							</ul>
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer4" onclick="faqMove(4);">4. 주문 후 옵션변경</a>
 									<ul id="answer4">
@@ -220,7 +224,7 @@ $(document).ready(function () {
 						</div>
 						<!-- division2 -->
 						<div style="float: left; font-size: 14px">
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer5" onclick="faqMove(5);"><font style="font-size: 13">배송</font></a>
 									<ul id="answer5">
@@ -231,7 +235,7 @@ $(document).ready(function () {
 						</div>
 						<!-- division3 -->
 						<div style="float: left; font-size: 14px">
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer6" onclick="faqMove(6);"><font style="font-size: 13">1.교환/환불</font></a>
 									<ul id="answer6">
@@ -245,7 +249,7 @@ $(document).ready(function () {
 									</ul>
 								</li>
 							</ul>
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer7" onclick="faqMove(7);"><font style="font-size: 13">2.불량 교환/환불안내</font></a>
 									<ul id="answer7">
@@ -258,7 +262,7 @@ $(document).ready(function () {
 									</ul>
 								</li>
 							</ul>
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer8" onclick="faqMove(8);"><font style="font-size: 13">3.교환/환불 처리 일정 </font></a>
 									<ul id="answer8">
@@ -280,7 +284,7 @@ $(document).ready(function () {
 						</div>
 						<!-- division4 -->
 						<div style="float: left; font-size: 14px">
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer9" onclick="faqMove(9);"><font style="font-size: 13"> 1. 적립금</font></a>
 									<ul id="answer9">
@@ -288,7 +292,7 @@ $(document).ready(function () {
 									</ul>
 								</li>
 							</ul>
-							<ul>
+							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer10" onclick="faqMove(10);"><font style="font-size: 13">2. 회원혜택</font></a>
 									<ul id="answer10">
@@ -325,7 +329,6 @@ $(document).ready(function () {
 					</form>
 				</div>
 			</div>
-			<hr style="border: 2px solid black;">
 		</div>
 	</div>
 	 <jsp:include page="../include/footer.jsp" flush="false" /> 
