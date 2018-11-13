@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <title>마이 쇼핑</title>
@@ -254,9 +255,11 @@ td{
 					<input type="button" value="정보수정" onclick="sendMode('change');" class="btnGreen" style="width: 170px;">
 					<input type="button" value="회원탈퇴" onclick="sendMode('cancel');" class="btnGreen" style="width: 170px;">
 					<input type="button" value="주문내역조회" id="orderHistory" onclick="location.href='orderHistory.action'" class="btnGreen" style="width: 170px;">
-					<input type="button" value="주소록" class="btnGreen" style="width: 170px;">
+					<input type="button" value="최근보낸주소" id="opener" class="btnGreen" style="width: 170px;">
+					<div id="dialog" title="최근 보낸 주소">
+  						<p>ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+					</div>
 					<br>
-
 					<br>
 
 				</div>
@@ -272,8 +275,8 @@ td{
 						<table style="text-align: center;" cellpadding="10" cellspacing="0">
 							<c:forEach var="w_dto" items="${wishList}">
 								<tr>
-									<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}"> <img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" /></td>
-									<td></a> 상품명:${w_dto.getW_NAME()} <input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제"></td>
+									<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}"> <img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" /></a></td>
+									<td>상품명:${w_dto.getW_NAME()} <input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제"></td>
 								</tr>
 							</c:forEach>
 							<tr>
@@ -322,6 +325,32 @@ td{
 				});
 		});
 	});
+	
+	$( function() {
+		$("#dialog").dialog({
+			bgiframe: true,
+	        autoOpen: false,
+	        height: 300,
+	        modal: true,
+	        position:[1104,1274],
+			show: {
+			effect: "blind",
+			duration: 1000
+			},
+			hide: {
+			effect: "explode",
+			duration: 1000
+		}
+	});
+		$("#opener").on( "click", function(e) {
+			var x = e.pageX;
+		    var y = e.pageY;
+		    alert(x);
+		    alert(y);
+			$( "#dialog" ).dialog( "open" );
+		});
+	});
+	
 </script>
 </body>
 </html>

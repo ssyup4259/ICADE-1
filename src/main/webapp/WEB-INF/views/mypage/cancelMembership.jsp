@@ -40,7 +40,7 @@
 <div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 	<div class="container">
 		<h3 class="t_dropOut1"><span>Icade 서비스 이용 중 불편사항을 선택해주세요.</span></h3>
-		<select id="reason">
+		<select id="reason" class="btnGray">
 			<option value="상품 다양성/가격품질 불만">상품 다양성/가격품질 불만</option>
 			<option value="교환/환불/품질불만">교환/환불/품질불만</option>
 			<option value="배송지연">배송지연</option>
@@ -52,6 +52,7 @@
 			<option value="직접입력">직접입력</option>
 		</select>
 	</div>
+	<br/>
 	<div id="DirectInputDiv" style="display: none;">
 		<div class="container">
 			<h3 class="t_dropOut2"><span>그 이외에 Icade에게 남기고 싶으신 의견이 있으시면 기재해주세요.</span></h3>

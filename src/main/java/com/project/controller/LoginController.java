@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,12 +40,13 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login_ok.action", method=RequestMethod.POST)
-	public String login_ok(HttpServletRequest req, HttpServletResponse resp)throws Exception{
+	public String login_ok(HttpServletRequest req, HttpServletResponse resp,Model model)throws Exception{
 		
 		String M_ID = req.getParameter("M_ID");
 		String M_PW = req.getParameter("M_PW");
 		
 		HttpSession session = req.getSession();
+		
 		MemberDTO dto = l_service.checkInfo(M_ID);
 		
 		if(dto==null || dto.equals(null)) {
@@ -69,12 +71,14 @@ public class LoginController {
 			lists =  w_service.selectWish(M_ID);
 			dto.setM_DATE(dto.getM_DATE().substring(0, 10));
 			
-			session.setAttribute("userInfo", dto);
 			session.setAttribute("wishInfo", lists);
-			System.out.println("---------------------------");
+			model.addAttribute("userVo", dto);
 			
-			return "redirect:/";
+			return "home";
 		}
+		
+		
+		
 	}
 	
 	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})

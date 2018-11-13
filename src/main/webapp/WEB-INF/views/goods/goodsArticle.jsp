@@ -246,10 +246,10 @@ $(function() {
 					swal("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
 					swal("담고자하는 수량이 재고 수량보다 많습니다.");
-				} else {
+				} /* else {
 					swal("로그인 후 사용 가능합니다.");
 				}
-
+ */
 				console.log(data);
 
 			},
@@ -300,12 +300,12 @@ $(function() {
 		}
 		
 		f.action = "<%=cp%>/buy/buyForm.action";
-		
-		if (login != "") {
+		f.submit();	
+		/* if (login != "") {
 			f.submit();	
 		} else {
 			swal("로그인 후 사용 가능합니다.");
-		}
+		} */
 
 	}
 
