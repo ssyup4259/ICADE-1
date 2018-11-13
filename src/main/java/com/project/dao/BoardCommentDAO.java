@@ -25,7 +25,7 @@ public interface BoardCommentDAO {
 	//전체 댓글 갯수
 	public int countAllReply()throws Exception;
 	//포토후기 작성시 상품 정보 읽어오기 및 검색
-	public List<BoardCommentDTO> searchGoodsList(String searchKey, String searchValue)throws Exception;
+	public List<BoardCommentDTO> searchGoodsList(String searchKey, String searchValue,int start,int end)throws Exception;
 	//하나의 댓글에 담긴 상품 정보
 	public BoardCommentDTO getReadOne(int bc_num)throws Exception;
 	//이전글 다음글 설정하기
@@ -34,5 +34,6 @@ public interface BoardCommentDAO {
 	public List<BoardCommentDTO> readReply(int BC_NUM)throws Exception;
 	//파일없는 댓글 삭제
 	public void deleteReply(int BC_NUM)throws Exception;
-	
+	//상품 전체 갯수
+	public int searchGoods(String searchValue, String G_name)throws Exception;
 }

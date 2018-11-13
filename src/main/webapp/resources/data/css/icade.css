@@ -399,6 +399,9 @@ tr:hover {
 	background-color: white;
 }
 
+td.attention:hover {
+	background: #A3C838;
+}
 .lg img {
 	width: 60px;
 	height: 60px;

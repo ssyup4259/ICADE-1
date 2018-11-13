@@ -153,13 +153,22 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	}
 
 	@Override
-	public List<BoardCommentDTO> searchGoodsList(String searchKey, String searchValue) throws Exception {
+	public List<BoardCommentDTO> searchGoodsList(String searchKey, String searchValue,int start,int end) throws Exception {
 		
 		Map<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("searchValue", searchValue);
 		hMap.put("searchKey", searchKey);
+		hMap.put("start", start);
+		hMap.put("end", end);
 		
 		
 		return sessionTemplate.selectList(replyMapper + ".searchGoodsLists", hMap);
+	}
+	@Override
+	public int searchGoods(String searchValue, String G_name) throws Exception {
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("searchValue", searchValue);
+		hMap.put("G_NAME", G_name);
+		return sessionTemplate.selectOne(replyMapper + ".searchGoodsCount",hMap);
 	}
 }

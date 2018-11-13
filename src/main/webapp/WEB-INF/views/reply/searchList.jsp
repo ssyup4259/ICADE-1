@@ -28,13 +28,14 @@
 </head>
 <script type="text/javascript">
 	function searchFix(G_NUM,G_NAME) {
-		
+		//값을 세팅할 곳을 초기화 한다.		
 		$("#photoG_NAME").val("");
 		$("#photoG_NUM").val("");
-		
-		
+		//값을 넣어주고
 		$("#photoG_NAME").val(G_NAME);
 		$("#photoG_NUM").val(G_NUM);
+		//히든
+		$('#searchList').hide();
 		
 	}
 
@@ -54,12 +55,32 @@
 					<div class="col-sm-6" style="float: right;text-align: left">
 						<h3><a href="#searchFix" onclick="searchFix('${bc_dto.getG_NUM()}','${bc_dto.getG_NAME()}');" style="padding-top: 10px;font-size: 15px;">#${bc_dto.getG_NAME()}</a><font size="3">&nbsp;₩<fmt:formatNumber>${bc_dto.getG_PRICE()}</fmt:formatNumber></font></h3>
 						<input type="button" class="btnGray" value="상품상세보기" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}';">
+						<input type="hidden" name="searchValue" id="prSearchValue" value="${bc_dto.getG_NAME()}">
 					</div>
 				</div>	
 			</div>
 	    </c:forEach>
+			<table style="border: none;color: #A8C838;font-size: 20px">
+					<tr>
+			            <td style="border-bottom: none;background: transparent;">
+			                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
+			                <c:if test="${replyPager.curBlock > 1}">
+			                    <a href="javascript:insertReplySearchGoods('1')">[처음]</a>
+			                </c:if>
+			                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
+			                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
+			                    <c:choose>
+			                        <c:when test="${num == replyPager.curPage}">
+			                            ${num}&nbsp;
+			                        </c:when>
+			                        <c:otherwise>
+			                            <a href="javascript:insertReplySearchGoods('${num}')">${num}</a>&nbsp;
+			                        </c:otherwise>
+			                    </c:choose>
+			                </c:forEach>
+			            </td>
+			        </tr>
+			</table>	
  	</div>
-
-
 </body>
 </html>

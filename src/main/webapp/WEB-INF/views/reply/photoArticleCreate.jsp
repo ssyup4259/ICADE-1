@@ -84,29 +84,37 @@
 		 var data = $("#searchForm").serialize();
 		 
 		 $.ajax({
-				type :"post",
+				type :"get",
 				data : data,
-				url : "<%=cp%>/goods/searchGoodsList.action",
+				url : "<%=cp%>/goods/searchGoodsList.action?curPage="+1,
 				success:function(result){
 						 $("#searchList").html(result); 
-						$('#searchList').css('visibility','visible');
+						$('#searchList').show();
 				},
 				error: function(result) {
 					swal("안된다");
 		 	    }
 		     });
-		 
-		 
-			
-			<%-- var f = document.searchForm;
-			
-			f.action = "<%=cp%>/ikeloom/list.do";
-
-			f.submit(); --%>
-
 		}
 
 </script>
+
+<script type="text/javascript">
+	function insertReplySearchGoods(num) {
+		
+		var searchUser = $("#searchUser").val();
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/searchGoodsList.action?curPage="+num+"&searchValue="+searchUser,
+			 success : function(result) {
+				 $("#searchList").html(result);
+			}
+		 });
+	}
+
+
+</script>
+
 
 </head>
 <body>
@@ -117,7 +125,7 @@
 		 	상품정보선택
 		</div>
 		<div style="float: center;padding-left: 32px">
-			<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
+			<input type="text" name="searchValue" class="inputBoxGray" id="searchUser" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
 			<input type="button" value=" 검색 " class="btnGreen" onclick="photoGoodsSearch();" style="width: 200px;padding-bottom: 2px;text-align: center" />
 		</div>
 	</form>
