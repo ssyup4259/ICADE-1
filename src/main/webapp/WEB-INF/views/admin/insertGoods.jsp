@@ -132,10 +132,12 @@ function enableTextBox(name) {
 		<td align="left">
 			<c:forEach var="gk_dto" items="${gk_lists}">
 				<c:if test="${gk_dto.GK_NUM == 1}">
-					<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>${gk_dto.GK_KIND}</label>
+					<input type="radio" id="A${gk_dto.GK_NUM}" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}" checked="checked"/>
+					<label for="A${gk_dto.GK_NUM}"><span></span>&nbsp;${gk_dto.GK_KIND}</label>
 				</c:if>
 				<c:if test="${gk_dto.GK_NUM > 1}">
-					<label><input type="radio" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>${gk_dto.GK_KIND}</label>
+					<input type="radio" id="A${gk_dto.GK_NUM}" name="GD_KIND_NUM" value="${gk_dto.GK_NUM}"/>
+					<label for="A${gk_dto.GK_NUM}"><span></span>&nbsp;${gk_dto.GK_KIND}</label>
 				</c:if>
 			</c:forEach>
 		</td>
@@ -158,14 +160,14 @@ function enableTextBox(name) {
 			<c:forEach var="dk_dto" items="${dk_lists}">
 				<input type="checkbox" id="${dk_dto.DK_CODE}" name="GD_DEVICE" value="${dk_dto.DK_CODE}" onclick="toggleShow('${dk_dto.DK_CODE}')"/>
 				<label for="${dk_dto.DK_CODE}">
-					<span></span>${dk_dto.DK_NAME}
+					<span></span>&nbsp;${dk_dto.DK_NAME}
 				</label>
 				<br/>
 				<div id="D${dk_dto.DK_CODE}" class="subCats" style="display: none; width: 100%;">
 					<c:forEach var="gc_dto" items="${gc_lists}">
 						<input type="checkbox" id="${dk_dto.DK_CODE}${gc_dto.GC_CODE}" name="${dk_dto.DK_CODE}_GD_COLOR" value="${gc_dto.GC_CODE}" onclick="enableTextBox('${dk_dto.DK_CODE}_${gc_dto.GC_CODE}')"/>
 						<label for="${dk_dto.DK_CODE}${gc_dto.GC_CODE}">
-							<span></span>${gc_dto.GC_COLOR}
+							<span></span>&nbsp;${gc_dto.GC_COLOR}
 						</label>
 						<input type="text" id="${dk_dto.DK_CODE}_${gc_dto.GC_CODE}" class="inputBoxGreen" name="${dk_dto.DK_CODE}_GD_COUNT" size="3" disabled="disabled" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 					</c:forEach>

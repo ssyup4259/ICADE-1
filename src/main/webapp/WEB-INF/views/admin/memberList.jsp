@@ -56,24 +56,6 @@
 	}
 </script>
 
-<style type="text/css">
-
-input[type='radio'] {
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	left: 0;
-	top: 0;
-}
-
-.btn-group input[type='radio']:checked+label {
-	border: 1px solid #1993d1;
-	line-height: 28px;
-	color: #1993d1;
-}
-
-</style>
-
 </head>
 <body>
 	<jsp:include page="../include/header2.jsp" flush="false" />
@@ -85,21 +67,39 @@ input[type='radio'] {
 			<form action="" name="mSearchForm" method="post">
 				<div class="btn-group" data-toggle="buttons">
 					<c:if test="${empty M_RANK}">
-						<label class="btnGray">전체<input type="radio" name="M_RANK" value="" checked="checked" /></label>
-						<label class="btnGray">customer<input type="radio" name="M_RANK" value="customer" /></label>
-						<label class="btnGray">seller<input type="radio" name="M_RANK" value="seller" /></label>
+						<input type="radio" id="m_all" name="M_RANK" value="" checked="checked"/>
+						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						
+						<input type="radio" id="m_customer" name="M_RANK" value="customer"/>
+						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						
+						<input type="radio" id="m_seller" name="M_RANK" value="seller"/>
+						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<br/><br/>
 					</c:if>
 
 					<c:if test="${M_RANK == 'customer'}">
-						<label class="btnGray"><input type="radio" name="M_RANK" value="" />전체</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="customer" checked="checked" />customer</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="seller" />seller</label>
+						<input type="radio" id="m_all" name="M_RANK" value=""/>
+						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						
+						<input type="radio" id="m_customer" name="M_RANK" value="customer" checked="checked"/>
+						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						
+						<input type="radio" id="m_seller" name="M_RANK" value="seller"/>
+						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<br/><br/>
 					</c:if>
 
 					<c:if test="${M_RANK == 'seller'}">
-						<label class="btnGray"><input type="radio" name="M_RANK" value="" />전체</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="customer" />customer</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="seller" checked="checked" />seller</label>
+						<input type="radio" id="m_all" name="M_RANK" value=""/>
+						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						
+						<input type="radio" id="m_customer" name="M_RANK" value="customer"/>
+						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						
+						<input type="radio" id="m_seller" name="M_RANK" value="seller" checked="checked"/>
+						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<br/><br/>
 					</c:if>
 				</div>
 
