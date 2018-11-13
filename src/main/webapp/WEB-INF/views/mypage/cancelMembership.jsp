@@ -52,20 +52,21 @@
 			<option value="직접입력">직접입력</option>
 		</select>
 	</div>
+	<div id="DirectInputDiv" style="display: none;">
+		<div class="container">
+			<h3 class="t_dropOut2"><span>그 이외에 Icade에게 남기고 싶으신 의견이 있으시면 기재해주세요.</span></h3>
+		</div>
+		<div class="container">
+			<textarea title="textarea" class="canceltxtarea" readonly="readonly" id="Directinput" cols="128" rows="7"></textarea>
+		</div>
+		<!-- 아무런 선택이 없을시 기본값이 들어가있어야되기에 셀렉트시 기본값을 히든값의 기본을 설정 -->
+		<input type="hidden" id="selected" name="selected" value="상품 다양성/가격품질 불만">
+	</div>	
+		<div class="container">
+			<input type="submit" class="btnGreen" value="회원 탈퇴 신청"> 
+			<input type="button" value="취소" class="btnGreen" onclick="location.href='myPage.action?m_id=${sessionScope.userInfo.getM_ID()}';">
+		</div>
 	
-	<div class="container">
-		<h3 class="t_dropOut2"><span>그 이외에 Icade에게 남기고 싶으신 의견이 있으시면 기재해주세요.</span></h3>
-	</div>
-	<div class="container">
-		<textarea title="textarea" class="canceltxtarea" readonly="readonly" id="Directinput" cols="128" rows="7" style="display: none;"></textarea>
-	</div>
-	<!-- 아무런 선택이 없을시 기본값이 들어가있어야되기에 셀렉트시 기본값을 히든값의 기본을 설정 -->
-	<input type="hidden" id="selected" name="selected" value="상품 다양성/가격품질 불만">
-	
-	<div class="container">
-		<input type="submit" class="btnGreen" value="회원 탈퇴 신청"> 
-		<input type="button" value="취소" class="btnGreen" onclick="location.href='myPage.action?m_id=${sessionScope.userInfo.getM_ID()}';">
-	</div>
 </div>
 </form>
 
@@ -97,14 +98,14 @@
 				$("#Directinput").attr("readonly",false);
 				$("#Directinput2").attr("readonly",false);
 				$("#selected").val("");
-				$("#Directinput").show();
+				$("#DirectInputDiv").show();
 			}else{
 				$("#Directinput").attr("readonly",true);
 				$("#Directinput2").attr("readonly",true);
 				$("#Directinput").val("");
 				$("#Directinput2").val("");
 				$("#selected").val(selectedVal);
-				$("#Directinput").hide();
+				$("#DirectInputDiv").hide();
 			}
 		});	
 	});
