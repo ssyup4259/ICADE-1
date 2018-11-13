@@ -21,12 +21,12 @@
 
 .canceltxtarea {
 	background-color: white;
-	color: #000000;
+	color: #8F9493;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 15px;
-	border: 3px solid #A3C838;
+	border: 3px solid #8F9493;
 	border-radius: 6px;
 	height: 100px;
 }
@@ -40,7 +40,7 @@
 <div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 	<div class="container">
 		<h3 class="t_dropOut1"><span>Icade 서비스 이용 중 불편사항을 선택해주세요.</span></h3>
-		<select id="reason" class="selGreen">
+		<select id="reason">
 			<option value="상품 다양성/가격품질 불만">상품 다양성/가격품질 불만</option>
 			<option value="교환/환불/품질불만">교환/환불/품질불만</option>
 			<option value="배송지연">배송지연</option>
@@ -54,16 +54,16 @@
 	</div>
 	
 	<div class="container">
-		<h3 class="t_dropOut2"><span>직접 Icade에게 남기고 싶으신 의견이 있으시면 기재해주세요.</span></h3>
+		<h3 class="t_dropOut2"><span>그 이외에 Icade에게 남기고 싶으신 의견이 있으시면 기재해주세요.</span></h3>
 	</div>
-	<div class="container" id="diDiv">
-		<textarea title="textarea" class="canceltxtarea" readonly="readonly" id="Directinput" cols="80" rows="7"></textarea>
+	<div class="container">
+		<textarea title="textarea" class="canceltxtarea" readonly="readonly" id="Directinput" cols="128" rows="7" style="display: none;"></textarea>
 	</div>
 	<!-- 아무런 선택이 없을시 기본값이 들어가있어야되기에 셀렉트시 기본값을 히든값의 기본을 설정 -->
 	<input type="hidden" id="selected" name="selected" value="상품 다양성/가격품질 불만">
 	
 	<div class="container">
-		<input type="submit" class="btnGreen" value="회원 탈퇴 신청" > 
+		<input type="submit" class="btnGreen" value="회원 탈퇴 신청"> 
 		<input type="button" value="취소" class="btnGreen" onclick="location.href='myPage.action?m_id=${sessionScope.userInfo.getM_ID()}';">
 	</div>
 </div>
@@ -82,6 +82,9 @@
 			if(selectedVal=="직접입력"){
 				$("#selected").val(DirectinputVar);
 			}
+			
+			//alert($("#selected").val());
+			
 		});
 	});
 
@@ -94,12 +97,14 @@
 				$("#Directinput").attr("readonly",false);
 				$("#Directinput2").attr("readonly",false);
 				$("#selected").val("");
+				$("#Directinput").show();
 			}else{
 				$("#Directinput").attr("readonly",true);
 				$("#Directinput2").attr("readonly",true);
 				$("#Directinput").val("");
 				$("#Directinput2").val("");
 				$("#selected").val(selectedVal);
+				$("#Directinput").hide();
 			}
 		});	
 	});
