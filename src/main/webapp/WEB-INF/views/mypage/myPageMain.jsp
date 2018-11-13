@@ -95,7 +95,7 @@ td{
 		datatype:  'text',
 		}).done(function(map) {
 			var msg =map.msg;
-			$('#col-sm-4').load(document.URL +  ' #wishList');
+			$('#wishList').load(document.URL +  ' #wishList');
 			swal(msg);
 			
 		}).fail(function(){
@@ -115,7 +115,7 @@ td{
 		}).done(function(map) {
 			var G_NAME=map.G_NAME;
 			var G_NUM =map.G_NUM;
-			$('#col-sm-4').load(document.URL +  ' #wishList');
+			$('#wishList').load(document.URL +  ' #wishList');
 			swal("상품명 :"+G_NAME+"가 삭제 되었습니다");
 		}).fail(function(){
 			swal("실패");
@@ -260,7 +260,7 @@ td{
 					<br>
 
 				</div>
-				<div class="col-sm-4 toggle" id="col-sm-4">
+				<div class="col-sm-4 toggle">
 
 					<div class="toggle" id="wishList" style="border: 3px solid #8F9493; border-radius: 12px; font-size: 20px; padding-top: 20px;">
 					<font style="font-size: 30px;"> <b>마이 쇼핑</b></font>

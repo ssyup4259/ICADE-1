@@ -52,7 +52,6 @@ public class MyPageController {
 		String M_ID = vo.getM_ID();
 		
 		int point = my_service.pointCheck(M_ID);
-		w_service.wishListList(request);
 		
 		int o_Tot = my_service.selectSumTot(M_ID);
 		int SellCount = my_service.selectCountOnum(M_ID);
