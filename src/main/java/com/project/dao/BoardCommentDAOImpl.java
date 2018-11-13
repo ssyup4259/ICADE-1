@@ -143,8 +143,14 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	}
 
 	@Override
-	public List<BoardCommentDTO> readReply(int bc_num) throws Exception {
-		return sessionTemplate.selectList(replyMapper + ".readReply", bc_num);
+	public List<BoardCommentDTO> readReply(int bc_num,int start,int end) throws Exception {
+		
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("start", start);
+		hMap.put("end", end);
+		hMap.put("BC_NUM", bc_num);
+		
+		return sessionTemplate.selectList(replyMapper + ".readReply", hMap);
 	}
 
 	@Override
@@ -170,5 +176,10 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		hMap.put("searchValue", searchValue);
 		hMap.put("G_NAME", G_name);
 		return sessionTemplate.selectOne(replyMapper + ".searchGoodsCount",hMap);
+	}
+
+	@Override
+	public int countPrReply(int BC_NUM) throws Exception {
+		return sessionTemplate.selectOne(replyMapper + ".countPhotoReply", BC_NUM);
 	}
 }

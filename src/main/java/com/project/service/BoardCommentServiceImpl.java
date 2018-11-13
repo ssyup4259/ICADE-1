@@ -844,10 +844,26 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	@Override
 	public HttpServletRequest replyCommentList(HttpServletRequest req) throws Exception {
 		
+		
+		int curPage = Integer.parseInt(req.getParameter("curPage"));
 		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
-		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM);
+		
+		int count = bc_dao.countPrReply(BC_NUM);
+		
+		ReplyPager replyPager = new ReplyPager(count, curPage);
+		
+		int start = replyPager.getPageBegin();
+	    int end = replyPager.getPageEnd();
+	    
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(count);
+		System.out.println(curPage);
+		
+		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM, start, end);
 		
 		req.setAttribute("rp_list", rp_list);
+		req.setAttribute("replyPager", replyPager);
 		return req;
 	}
 

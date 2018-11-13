@@ -189,7 +189,7 @@
 	<div id="bbsCreated_footer">
 		<input type="button" value=" 등록하기 " class="btnGreen" onclick="sendPhotoCreate();"/>
 		<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.searchForm.subject.focus();"/>
-		<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
+		<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${bc_dto.getReplyPageNum()}';"/>	
 	</div>
 	
 	</form>

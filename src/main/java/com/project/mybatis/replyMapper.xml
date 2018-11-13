@@ -96,19 +96,19 @@ from board_comment,(select G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME from g
 	)
 	where BC_NUM = #{BC_NUM}
 </select>
+<!-- 대댓글 갯수 구하기 -->
+<select id="countPhotoReply" resultType="int">
+select count(*) from board_comment where BC_PARENT=#{BC_NUM}
+</select>
 
 <!-- 대댓글 리스트 가져오기 -->
-<select id="readReply" parameterType="int" resultType="com.project.dto.BoardCommentDTO">
+<select id="readReply" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO">
 	  <include refid="pagingHeader"/>
-			select BC_BOARD,BC_NUM,to_char(BC_DATE, 'YYYY-MM-DD'),BC_CONTENT,BC_PARENT,BC_ID,G_NUM from board_comment,(select g_num from goods)
-		    where BC_BOARD =G_NUM AND  BC_PARENT =#{BC_NUM} ORDER BY BC_NUM
+			select BC_BOARD,BC_NUM,to_char(BC_DATE, 'YYYY-MM-DD'),BC_CONTENT,BC_PARENT,BC_ID from board_comment
+		    where  BC_PARENT = #{BC_NUM} ORDER BY BC_NUM
       <include refid="pagingFooter"/>	
 </select>
 
-<!-- 대댓글 갯수 구하기 -->
-<select id="countPhotoReply" resultType="int">
-select count(*) from board_comment where BC_PARENT=!0
-</select>
 
 <!-- 상품후기 작성을 위한 상품리스트 검색 -->
 <select id="searchGoodsLists" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO">

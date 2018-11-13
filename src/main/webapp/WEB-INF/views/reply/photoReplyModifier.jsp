@@ -33,6 +33,7 @@ $("#btnPhotoReplyUpdate").click(function() {
 	var updateReply = $("#updateReply").val();
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
+
 	$.ajax({
 		type:"post",
 		url : "<%=cp%>/goods/goodsReplyUpdate.action",
@@ -57,6 +58,7 @@ $("#btnPhotoReplyClose").click(function() {
 $("#btnPhotoReplyDelete").click(function() {
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
+	var num = $("#prNum").val();
 	$.ajax({
 		type:"post",
 		url : "<%=cp%>/goods/goodsReplyDelete.action",
@@ -65,7 +67,7 @@ $("#btnPhotoReplyDelete").click(function() {
 			var BC_NUM =$("#inputBC_NUMdetale").val();
 				$("#photoReplyModifier").html(result);
 				$("#photoReplyModifier").css("visibility","hidden");
-				photoReplyListUpdate();
+				photoReplyListUpdate(num);
 		},error: function(result) {
 			swal("실패");
 		}

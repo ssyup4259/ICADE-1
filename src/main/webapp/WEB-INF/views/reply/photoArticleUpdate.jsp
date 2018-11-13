@@ -141,9 +141,8 @@
 	<div align="center" style="margin-left: 30px">
 	<input type="button" value="수정하기 " class="btnGreen" onclick="photoArticleUpdate();"class="btnGreen"/>
 	<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.photoUpdateArticle.subject.focus();"class="btnGray"/>
-	<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
+	<input type="button" value="수정취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/replyArticle.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}';"/>	
 	</div>
-	
 	</div>
 	</form>
 <jsp:include page="../include/footer.jsp" flush="false" />
