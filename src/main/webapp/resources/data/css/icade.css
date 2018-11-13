@@ -446,6 +446,23 @@ input[type="checkbox"] {
 	display: none;
 }
 
+td input[type="checkbox"] + label span {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #8F9493;
+		vertical-align: middle;
+		cursor: pointer;
+}
+
+td input[type="checkbox"]:checked + label span {
+	background-color: #8F9493;
+}
+
+td input[type="checkbox"] {
+	display: none;
+}
+
 .color {
 	color: black; 
 }
