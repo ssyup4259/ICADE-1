@@ -145,7 +145,7 @@ td{
 							<p>가용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p id="availablePoint">${point}Point</p>
+							<p id="availablePoint"><fmt:formatNumber>${point}</fmt:formatNumber>Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
 							<input type="button" class="btnGray" style="width: 200px; cursor: pointer;" id="refresh" value="refresh">
@@ -157,7 +157,7 @@ td{
 							<p>누적포인트 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
-							<p>${point+usedPoint}Point</p>
+							<p><fmt:formatNumber>${point+usedPoint}</fmt:formatNumber>Point</p>
 						</div>
 					</div>
 					<div class="row">
@@ -165,7 +165,7 @@ td{
 							<p>사용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p>${usedPoint}Point</p>
+							<p><fmt:formatNumber>${usedPoint}</fmt:formatNumber>Point</p>
 						</div>
 					</div>
 					<div class="row">
@@ -174,9 +174,7 @@ td{
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
 							<p>
-								${o_Tot}원(
-								<span id="xans_myshop_bankbook_order_count">${SellCount}</span>
-								회)
+								<fmt:formatNumber>${o_Tot}</fmt:formatNumber>원(${SellCount}회)
 							</p>
 						</div>
 					</div>
