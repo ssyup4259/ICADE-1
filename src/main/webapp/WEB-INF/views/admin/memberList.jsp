@@ -107,7 +107,7 @@
 					<option value="M_ID">아이디</option>
 					<option value="M_NAME">이름</option>
 				</select>
-				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
+				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
 				<input type="button" value=" 검색 " class="btnGreen" onclick="memberList();" style="width: 150px;" />
 			</form>
 
