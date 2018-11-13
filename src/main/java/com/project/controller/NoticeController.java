@@ -28,8 +28,12 @@ public class NoticeController {
 	//공지사항 게시판 
 	@RequestMapping(value = "/faq.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public String noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    n_service.noticeList(request);
+	    
+		
+		
+		n_service.noticeList(request);
 		return "faq/faq";
+	
 	}
 	
 	//공지 하나
