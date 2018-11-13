@@ -192,6 +192,7 @@
 			   	<br>
 			   	<br>
 			   <input type="checkbox" id="chkbox1" name="req1">
+
 			   <label for="chkbox1"><span></span>&nbsp;위의 약관에 동의합니다.</label>
 			   	
 			   	<br>

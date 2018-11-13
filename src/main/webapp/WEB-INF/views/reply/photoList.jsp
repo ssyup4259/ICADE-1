@@ -34,7 +34,9 @@
 
 <script>
  $(document).ready(function() {
-	var BC_NUM =$("#BC_NUM").val();
+	 
+	var BC_NUM = $("#BC_NUM").val();
+	if (BC_NUM !=undefined) {
 	$.ajax({
 		 type:"get",
 		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
@@ -44,6 +46,7 @@
 		},error : function (result) {
 		}
 	 });
+	}
 });
 
 </script>
@@ -51,6 +54,8 @@
 	function replyListUpdate(){
 		
 		var BC_NUM =$("#BC_NUM").val();
+		
+		
 		$.ajax({
 			 type:"get",
 			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
