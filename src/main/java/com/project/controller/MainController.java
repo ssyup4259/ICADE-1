@@ -63,6 +63,27 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/faq.action")
+	public ModelAndView faq(HttpServletRequest request) throws Exception {
+		
+		n_service.noticeList(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("faq/faq");
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="/agree.action")
+	public ModelAndView agree(HttpServletRequest request) throws Exception {
+		
+		c_service.cookieList(request);
+		n_service.noticeList(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/agree");
+	return mav;
+	
+	}
+	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
@@ -98,20 +119,5 @@ public class MainController {
 		return req;
         
     }
-	@RequestMapping(value="/faq.action")
-		public ModelAndView faq(HttpServletRequest request) throws Exception {
-		n_service.noticeList(request);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("faq/faq");
-		return mav;
-	}
-	@RequestMapping(value="/agree.action")
-	public ModelAndView agree(HttpServletRequest request) throws Exception {
-	c_service.cookieList(request);
-	n_service.noticeList(request);
-	ModelAndView mav = new ModelAndView();
-	mav.setViewName("member/agree");
-	return mav;
-}
 	
 }
