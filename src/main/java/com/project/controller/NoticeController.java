@@ -53,7 +53,7 @@ public class NoticeController {
 	public String noticeDelete( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int BN_NUM = Integer.parseInt(request.getParameter("BN_NUM"));
 		n_service.deleteNotice(BN_NUM);
-		return "faq/faq";
+		return "redirect:/faq.action";
 	}
 	
 	//공지 수정페이지
