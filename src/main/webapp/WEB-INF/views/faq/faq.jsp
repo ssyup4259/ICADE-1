@@ -89,8 +89,11 @@ ul, li {
 
 </head>
 
+
 <script>
 $(document).ready(function () {
+ 
+
 	for (var i = 0; i < 11; i++) {
 		$('#answer'+ i).hide();
 	}
@@ -149,7 +152,7 @@ $(document).ready(function () {
 		f.submit();
 
 		}
-
+	
 
 </script>
 <body>
@@ -316,12 +319,22 @@ $(document).ready(function () {
 					<form name="noticeForm" method="post">
 						<h1>공지사항</h1>
 						<div style="text-align: left; margin-top: 30px;">
+						<table style="text-align: center;" cellpadding="10" cellspacing="0">
 							<c:forEach var="n_dto" items="${n_lists }">
-								<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}" style="color: black;">${n_dto.getBN_NUM() }. ${n_dto.getBN_SUBJECT() }</a>
+								<a href="<%=cp%>/faq.action?BN_NUM=${n_dto.getBN_NUM()}" style="color: black;">${n_dto.getBN_NUM() }. ${n_dto.getBN_SUBJECT() }</a>
 								<hr style="border: 1px solid #8F9493;">
 								<br>
 							</c:forEach>
-
+							<tr>
+								<td colspan="9" style="border: 0;">
+									<c:if test="${dataCount!=0 }">
+										${pageIndexList }
+									</c:if> <c:if test="${dataCount==0 }">
+										공지사항이 없습니다
+									</c:if>
+								</td>
+							</tr>
+						</table>
 						</div>
 						<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
 							<input type="button" class="btnGreen" value="공지사항 등록" onclick="registerNotice();">

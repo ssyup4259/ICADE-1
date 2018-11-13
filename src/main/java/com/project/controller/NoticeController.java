@@ -28,8 +28,12 @@ public class NoticeController {
 	//공지사항 게시판 
 	@RequestMapping(value = "/faq.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public String noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    n_service.noticeList(request);
+	    
+		
+		
+		n_service.noticeList(request);
 		return "faq/faq";
+	
 	}
 	
 	//공지 하나
@@ -53,7 +57,7 @@ public class NoticeController {
 	public String noticeDelete( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int BN_NUM = Integer.parseInt(request.getParameter("BN_NUM"));
 		n_service.deleteNotice(BN_NUM);
-		return "faq/faq";
+		return "redirect:/faq.action";
 	}
 	
 	//공지 수정페이지

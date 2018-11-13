@@ -94,7 +94,7 @@ function deleteGoods(g_num) {
 					<option value="G_NAME">상품명</option>
 				</select>
 
-				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
+				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
 				<input type="button" value=" 검색 " class="btnGreen" onclick="goodsSearchIt();" style="width: 150px;" />
 
 				<input type="button" value=" 상품 등록 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/admin/insertGoods.action';" style="width: 150px;" />

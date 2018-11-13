@@ -55,7 +55,7 @@ public class NoticeServiceImpl implements NoticeService {
 		int dataCount = n_dao.getNoticeCount(searchKey, searchValue);
 
 		// 전체페이지수
-		int numPerPage = 10;
+		int numPerPage = 4;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
 		if (currentPage > totalPage)
@@ -84,7 +84,7 @@ public class NoticeServiceImpl implements NoticeService {
 			param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 		}
 
-		String listUrl = cp + "/noticeList.action";
+		String listUrl = cp + "/faq.action";
 		if (!param.equals("")) {
 			listUrl = listUrl + "?" + param;
 		}
