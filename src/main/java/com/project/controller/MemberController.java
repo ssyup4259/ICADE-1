@@ -2,10 +2,13 @@ package com.project.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.dao.AdminDAO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
+import com.project.service.CookieService;
 import com.project.service.MemberService;
+import com.project.service.WishService;
 import com.project.util.CommandMap;
 
 @Controller
@@ -28,12 +33,16 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
+	CookieService c_service;
+	@Autowired
 	AdminDAO a_dao;
-	
+	@Autowired
+	WishService w_service;
 	
 	@RequestMapping(value="/join.action",method= {RequestMethod.POST,RequestMethod.GET})
-	public String joinForm(MemberDTO m_dto, HttpServletRequest req, HttpServletResponse resp) {
+	public String joinForm(MemberDTO m_dto, HttpServletRequest req, HttpServletResponse resp)throws Exception {
 		
+		c_service.cookieList(req);
 		return "member/join";
 	}
 	
@@ -79,8 +88,28 @@ public class MemberController {
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
-		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
+		Cookie[] cookies = req.getCookies();
 		
+		List<String> c_lists = new ArrayList<String>();
+		
+		if(cookies != null){
+	
+			for(int i=0; i<cookies.length; i++){
+				
+				Cookie ck = cookies[i];
+				
+				if (ck.getName().equals("JSESSIONID") || ck.getName().equals("Cookie_userid")) {
+					
+				} else {
+					
+					String g_num = ck.getName();
+					c_lists.add(g_num);
+				}
+			}
+		}
+	
+		req.setAttribute("c_lists", c_lists);
+		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();
 		req.setAttribute("gk_lists", gk_lists);
 		
 		return req;

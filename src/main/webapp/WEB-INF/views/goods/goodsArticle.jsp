@@ -75,9 +75,10 @@ $(document).ready(function() {
 		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		  x =  $("#sum").val();
 		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';
+		  
 	$.ajax({
 		 type:"get",
-		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}&curPage="+1,
 		 success : function(result) {
 			 //responseText가 result에 저장됨.
 			 $("#replyList").html(result);
@@ -87,6 +88,22 @@ $(document).ready(function() {
 
 });
 </script>
+<script type="text/javascript">
+	function listReply(num) {
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}&curPage="+num,
+			 success : function(result) {
+				 //responseText가 result에 저장됨.
+				 $("#replyList").html(result);
+			}
+		 });
+	}
+
+
+</script>
+
+
 <!-- 콤보박스 연결 -->
 <script type="text/javascript">
 $(function() {
@@ -195,7 +212,9 @@ $(function() {
 		
 		var x= (hm) * sell_price;
 		addComma(x);
-	}  
+	} 
+	
+	
 	function addComma(x){
 		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';
@@ -588,7 +607,7 @@ function login_need() {
 					</div>
 				</div>
 
-				<div id="section3" class="container-fluid">
+				<div id="section3" class="container-fluid" style="overflow: hidden;">
 					<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 						<div>
 							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
@@ -602,8 +621,6 @@ function login_need() {
 							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;height: 80px"/>
 						</div>
 					</c:if>
-					
-					
 					<br>
 					<div id="comment" class="container-fluid" style="background: transparent;">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">

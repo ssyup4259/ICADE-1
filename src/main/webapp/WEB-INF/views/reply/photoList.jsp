@@ -34,7 +34,10 @@
 
 <script>
  $(document).ready(function() {
-	var BC_NUM =$("#BC_NUM").val();
+	 
+	 
+	var BC_NUM = $("#BC_NUM").val();
+	if (BC_NUM !=undefined) {
 	$.ajax({
 		 type:"get",
 		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
@@ -44,6 +47,7 @@
 		},error : function (result) {
 		}
 	 });
+	}
 });
 
 </script>
@@ -51,6 +55,8 @@
 	function replyListUpdate(){
 		
 		var BC_NUM =$("#BC_NUM").val();
+		
+		
 		$.ajax({
 			 type:"get",
 			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
@@ -132,10 +138,9 @@
 <body>
 	<form id="replyForm" method="post" enctype="multipart/form-data">
 		 <div id="bbs" align="center">
-				<div id="bbsArticle">
+			<div id="bbsArticle">
 					<br><br><br><br>
 				 <c:forEach var="bc_dto" items="${bc_lists}">
-				 	<c:if test="${!empty bc_dto.getBC_SUBJECT()}">
 					<div id="replyHeader" style="font-size: 20px; background: transparent;">
 						<ul style="background: transparent;">
 	                		<li>
@@ -158,61 +163,71 @@
 				
 					<div class="${bc_dto.getBC_NUM()}" style="display:none" align="center">
 						<table width="600" border="0">
-						<tr>
-							<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
-							 <div>
-								 <c:if test="${!empty bc_dto.getBC_SAVEFILENAME()}">
-									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
-								 </c:if>
-								<br>
-								
-								<c:if test="${!empty bc_dto.getBC_SAVE1()}">
-								<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
-								</c:if>
-								<br>
-								<c:if test="${!empty bc_dto.getBC_SAVE2()}">
-								<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: auto; height: auto" id="">
-								</c:if>
-								<br>
-								<c:if test="${!empty bc_dto.getBC_SAVE3()}">
-								<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: auto; height: auto" id="">
-								</c:if>
-								<br>
-								${bc_dto.getBC_CONTENT()}
-								
-								<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-									<div align="center" style="float: center">
-										<textarea id="BC_CONTENT" name="BC_CONTENT"  rows="2" cols="100"></textarea><br>
-										<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" style="width: 15%">
-										<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
-										value="${sessionScope.userInfo.getM_ID()}"/>
-									</div>
-								</c:if>
-								<br>
-								<br>
-								<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-									<div style="float: center;">
-										<p>
-											<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen"  style="width: 100%;height: 60px">
-										</p>
-									</div>
-								</c:if>
-									
+							<tr>
+								<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
+									 <c:if test="${!empty bc_dto.getBC_SAVEFILENAME()}">
+										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
+									 </c:if>
+									<br>  
+									<c:if test="${!empty bc_dto.getBC_SAVE1()}">
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
+									</c:if>
+									<br>
+									<c:if test="${!empty bc_dto.getBC_SAVE2()}">
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: auto; height: auto" id="">
+									</c:if>
+									<br>
+									<c:if test="${!empty bc_dto.getBC_SAVE3()}">
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: auto; height: auto" id="">
+									</c:if>
+									<br>
+									${bc_dto.getBC_CONTENT()}
 									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
-						</div>
-						</div>
-						
-									
-							</c:if>
-							</c:forEach>
-							
-							<div id="replyComment" align="center"></div>
-							</div>
-							</td>
+								</td>
+							</tr>
 						</table>
-						</div>
-				 </div>
+							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+								<div align="center" style="float: center">
+									<textarea id="BC_CONTENT" name="BC_CONTENT"  rows="2" cols="100"></textarea><br>
+									<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" style="width: 15%">
+									<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
+									value="${sessionScope.userInfo.getM_ID()}"/>
+								</div>
+							</c:if>
+							<br>
+							<br>
+							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+								<div style="float: center;">
+									<p>
+										<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen"  style="width: 100%;height: 60px">
+									</p>
+								</div>
+							</c:if>
+					<div id="replyComment" align="center"></div>
+					</div>
+				</c:forEach>
+				<table style="border: none;border-bottom: none;background: transparent">
+					<tr>
+			            <td style="border-bottom: none;">
+			                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
+			                <c:if test="${replyPager.curBlock > 1}">
+			                    <a href="javascript:listReply('1')">[처음]</a>
+			                </c:if>
+			                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
+			                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
+			                    <c:choose>
+			                        <c:when test="${num == replyPager.curPage}">
+			                            ${num}&nbsp;
+			                        </c:when>
+			                        <c:otherwise>
+			                            <a href="javascript:listReply('${num}')">${num}</a>&nbsp;
+			                        </c:otherwise>
+			                    </c:choose>
+			                </c:forEach>
+			            </td>
+			        </tr>
+				</table>	
 			</div>
 		</div>
 	</form>

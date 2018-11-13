@@ -96,7 +96,7 @@ td{
 		datatype:  'text',
 		}).done(function(map) {
 			var msg =map.msg;
-			$('#wishList').load(document.URL +  ' #wishList');
+			$('#col-sm-4').load(document.URL +  ' #wishList');
 			swal(msg);
 			
 		}).fail(function(){
@@ -116,7 +116,7 @@ td{
 		}).done(function(map) {
 			var G_NAME=map.G_NAME;
 			var G_NUM =map.G_NUM;
-			$('#wishList').load(document.URL +  ' #wishList');
+			$('#col-sm-4').load(document.URL +  ' #wishList');
 			swal("상품명 :"+G_NAME+"가 삭제 되었습니다");
 		}).fail(function(){
 			swal("실패");
@@ -146,7 +146,7 @@ td{
 							<p>가용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p id="availablePoint">${point}Point</p>
+							<p id="availablePoint"><fmt:formatNumber>${point}</fmt:formatNumber>Point</p>
 						</div>
 						<div class="col-sm-4" style="text-align: right;">
 							<input type="button" class="btnGray" style="width: 200px; cursor: pointer;" id="refresh" value="refresh">
@@ -158,7 +158,7 @@ td{
 							<p>누적포인트 :</p>
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
-							<p>${point+usedPoint}Point</p>
+							<p><fmt:formatNumber>${point+usedPoint}</fmt:formatNumber>Point</p>
 						</div>
 					</div>
 					<div class="row">
@@ -166,7 +166,7 @@ td{
 							<p>사용포인트 :</p>
 						</div>
 						<div class="col-sm-6" style="text-align: left;">
-							<p>${usedPoint}Point</p>
+							<p><fmt:formatNumber>${usedPoint}</fmt:formatNumber>Point</p>
 						</div>
 					</div>
 					<div class="row">
@@ -175,9 +175,7 @@ td{
 						</div>
 						<div class="col-sm-10" style="text-align: left;">
 							<p>
-								${o_Tot}원(
-								<span id="xans_myshop_bankbook_order_count">${SellCount}</span>
-								회)
+								<fmt:formatNumber>${o_Tot}</fmt:formatNumber>원(${SellCount}회)
 							</p>
 						</div>
 					</div>
@@ -263,10 +261,10 @@ td{
 					<br>
 
 				</div>
-				<div class="col-sm-4 toggle">
+				<div class="col-sm-4 toggle" id="col-sm-4">
 
 					<div class="toggle" id="wishList" style="border: 3px solid #8F9493; border-radius: 12px; font-size: 20px; padding-top: 20px;">
-					<font style="font-size: 30px;"> <b>마이 쇼핑</b></font>
+					<font style="font-size: 30px;"> <b>찜리스트</b></font>
 					<p>
 						<input type="button" value="찜목록 전체 삭제" class="btnGreen" onclick="deleteAllWish();" style="width: 90%;" />
 					</p>
@@ -275,16 +273,25 @@ td{
 						<table style="text-align: center;" cellpadding="10" cellspacing="0">
 							<c:forEach var="w_dto" items="${wishList}">
 								<tr>
-									<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}"> <img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" /></a></td>
-									<td>상품명:${w_dto.getW_NAME()} <input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제"></td>
+									<td>
+										<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+											<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" />
+										</a>
+									</td>
+									<td>
+										상품명:${w_dto.getW_NAME()} 
+										<input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제">
+									</td>
 								</tr>
 							</c:forEach>
 							<tr>
-								<td colspan="9"><c:if test="${dataCount!=0 }">
-								${pageIndexList }
-								</c:if> <c:if test="${dataCount==0 }">
-								찜 등록된 상품이 없습니다.
-								</c:if></td>
+								<td colspan="9">
+									<c:if test="${dataCount!=0 }">
+										${pageIndexList }
+									</c:if> <c:if test="${dataCount==0 }">
+										찜 등록된 상품이 없습니다.
+									</c:if>
+								</td>
 							</tr>
 						</table>
 

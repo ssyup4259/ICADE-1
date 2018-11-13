@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -133,7 +134,7 @@ function o_searchIt(){
 					<input type="button" value="취소하기" class="btnGreen"/>
 				</c:if>
 				<c:if test="${p_dto.status == '결제취소'}">
-					환불 정보 : [${p_dto.cancelled_at}] ${p_dto.cancel_amount}원
+					환불 정보 : [${p_dto.cancelled_at}] <fmt:formatNumber>${p_dto.cancel_amount}</fmt:formatNumber>원
 				</c:if>
 				</td>
 			</tr>

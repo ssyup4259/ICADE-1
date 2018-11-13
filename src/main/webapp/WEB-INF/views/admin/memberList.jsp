@@ -1,6 +1,7 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -55,24 +56,6 @@
 	}
 </script>
 
-<style type="text/css">
-
-input[type='radio'] {
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	left: 0;
-	top: 0;
-}
-
-.btn-group input[type='radio']:checked+label {
-	border: 1px solid #1993d1;
-	line-height: 28px;
-	color: #1993d1;
-}
-
-</style>
-
 </head>
 <body>
 	<jsp:include page="../include/header2.jsp" flush="false" />
@@ -84,21 +67,39 @@ input[type='radio'] {
 			<form action="" name="mSearchForm" method="post">
 				<div class="btn-group" data-toggle="buttons">
 					<c:if test="${empty M_RANK}">
-						<label class="btnGray">전체<input type="radio" name="M_RANK" value="" checked="checked" /></label>
-						<label class="btnGray">customer<input type="radio" name="M_RANK" value="customer" /></label>
-						<label class="btnGray">seller<input type="radio" name="M_RANK" value="seller" /></label>
+						<input type="radio" id="m_all" name="M_RANK" value="" checked="checked"/>
+						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						
+						<input type="radio" id="m_customer" name="M_RANK" value="customer"/>
+						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						
+						<input type="radio" id="m_seller" name="M_RANK" value="seller"/>
+						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<br/><br/>
 					</c:if>
 
 					<c:if test="${M_RANK == 'customer'}">
-						<label class="btnGray"><input type="radio" name="M_RANK" value="" />전체</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="customer" checked="checked" />customer</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="seller" />seller</label>
+						<input type="radio" id="m_all" name="M_RANK" value=""/>
+						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						
+						<input type="radio" id="m_customer" name="M_RANK" value="customer" checked="checked"/>
+						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						
+						<input type="radio" id="m_seller" name="M_RANK" value="seller"/>
+						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<br/><br/>
 					</c:if>
 
 					<c:if test="${M_RANK == 'seller'}">
-						<label class="btnGray"><input type="radio" name="M_RANK" value="" />전체</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="customer" />customer</label>
-						<label class="btnGray"><input type="radio" name="M_RANK" value="seller" checked="checked" />seller</label>
+						<input type="radio" id="m_all" name="M_RANK" value=""/>
+						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						
+						<input type="radio" id="m_customer" name="M_RANK" value="customer"/>
+						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						
+						<input type="radio" id="m_seller" name="M_RANK" value="seller" checked="checked"/>
+						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<br/><br/>
 					</c:if>
 				</div>
 
@@ -106,7 +107,7 @@ input[type='radio'] {
 					<option value="M_ID">아이디</option>
 					<option value="M_NAME">이름</option>
 				</select>
-				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색한 단어를 입력해주세요.">
+				<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
 				<input type="button" value=" 검색 " class="btnGreen" onclick="memberList();" style="width: 150px;" />
 			</form>
 
@@ -144,7 +145,7 @@ input[type='radio'] {
 								<td>${m_dto.getM_ADDRESS1()}${m_dto.getM_ADDRESS2()}</td>
 								<td>${m_dto.getM_EMAIL_ID()}@${m_dto.getM_EMAIL_DOMAIN()}</td>
 								<td>${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}</td>
-								<td>${m_dto.getM_POINT()}</td>
+								<td><fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>P</td>
 								<td>${m_dto.getM_DATE()}</td>
 							</tr>
 						</tbody>
