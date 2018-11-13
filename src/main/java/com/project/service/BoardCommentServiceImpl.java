@@ -23,16 +23,17 @@ import com.project.dto.BoardCommentDTO;
 import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsDetailDTO;
 import com.project.util.MyUtil;
+import com.project.util.ReplyPager;
 
 @Service
 public class BoardCommentServiceImpl implements BoardCommentService {
 
 	@Autowired
-	private BoardCommentDAO bc_dao;
+	BoardCommentDAO bc_dao;
 
 	@Autowired
 	MyUtil myUtil;
-
+	
 	@Override
 	public void insertData(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)
 			throws Exception {
@@ -259,51 +260,23 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	@Override
 	public HttpServletRequest replyList(HttpServletRequest req) throws Exception {
 
-		String cp = req.getContextPath();
 
 		int BC_BOARD = Integer.parseInt(req.getParameter("G_NUM"));
 		String replyPageNum = req.getParameter("replyPageNum");
-		int currentPage = 1;
-
-		if (replyPageNum != null)
-			currentPage = Integer.parseInt(replyPageNum);
-
-		if (replyPageNum == null || replyPageNum.equals("")) {
-			replyPageNum = "1";
-		}
-
-		// 전체데이터갯수
-		int dataCount = bc_dao.countReply(BC_BOARD);
-
-		// 전체페이지수
-		int numPerPage = 3;
-		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
-
-		if (currentPage > totalPage)
-			currentPage = totalPage;
-
-		int start = (currentPage - 1) * numPerPage + 1;
-		int end = currentPage * numPerPage;
+		int curPage = Integer.parseInt(req.getParameter("curPage"));
+		int count = bc_dao.countReply(BC_BOARD);
+		
+		
+		ReplyPager replyPager = new ReplyPager(count, curPage);
+		
+		int start = replyPager.getPageBegin();
+	    int end = replyPager.getPageEnd();
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
 	
-		String param = "";
-		param += "G_NUM=" + BC_BOARD;
-
-		// 글보기 주소 정리
-		String replyUrl = cp + "/goods/goodsArticle.action";
-
-		if (!param.equals("")) {
-			replyUrl = replyUrl + "?" + param;
-		}
-
-		String pageIndexList_r = myUtil.pageIndexList_r(currentPage, totalPage, replyUrl);
-
-		req.setAttribute("pageIndexList", pageIndexList_r);
-		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("bc_lists", bc_list);
 		req.setAttribute("replyPageNum", replyPageNum);
-
+		req.setAttribute("replyPager", replyPager);
 		return req;
 
 	}

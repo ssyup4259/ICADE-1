@@ -10,20 +10,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.project.dao.AdminDAO;
 import com.project.dao.BoardCommentDAO;
-import com.project.dao.BoardCommentDAOImpl;
 import com.project.dto.BoardCommentDTO;
-import com.project.dto.GoodsDTO;
 import com.project.dto.GoodsKindDTO;
 import com.project.dto.MemberDTO;
 import com.project.service.BoardCommentService;
@@ -67,10 +63,12 @@ public class BoardCommentController {
 	 	
 	 	return "redirect:/goods/goodsArticle.action?G_NUM="+BC_BOARD+"&#section3";
 	}
-	//상품페이지 내 포토후기 리스트
+	//상품페이지 내 포토리뷰 리스트
 	@RequestMapping("/replyList.action")
 	public String listData(HttpServletRequest req)throws Exception{
-		c_service.cookieList(req);
+		 //쿠키
+		 c_service.cookieList(req);
+		 //포토리뷰리스트
 		 bc_service.replyList(req);
 		 
 		 return "reply/photoList";
