@@ -47,6 +47,7 @@ li a, .dropbtn {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	background: transparent;
 }
 
 li a:hover, .dropdown:hover .dropbtn {
@@ -428,32 +429,20 @@ input,textarea :focus{
 }
 
 
-input[id="chkbox1"] + label {
+input[type="checkbox"] + label span {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
 		border: 2px solid #A3C838;
+		vertical-align: bottom;
 		cursor: pointer;
 }
-input[id="chkbox1"]:checked + label {
+
+input[type="checkbox"]:checked + label span {
 	background-color: #A3C838;
 }
-input[id="chkbox1"] {
-	display: none;
-}
 
-
-input[id="chkbox2"] + label {
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		border: 2px solid #A3C838;
-		cursor: pointer;
-}
-input[id="chkbox2"]:checked + label {
-	background-color: #A3C838;
-}
-input[id="chkbox2"] {
+input[type="checkbox"] {
 	display: none;
 }
 

@@ -205,7 +205,7 @@ td {
 									<a href="/icade/goods/goodsArticle.action?G_NUM=${dto.getGD_NUM()}"> <strong>${dto.getOD_NAME()}</strong></a>
 										<div class="option ">[옵션: ${dto.getOD_NAME()}-${dto.getOD_DEVICE()}-${dto.getOD_COLOR()}]</div></td>
 									<td>${dto.getOD_COUNT()}</td>
-									<td><strong><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###" />원</strong></td>
+									<td><strong><fmt:formatNumber value="${dto.getO_TOT()}" pattern="#,###" />원</strong></td>
 									<td class="gubun">
 										<p style="display: none;">${dto.getO_NUM()}</p>
 										<p>${dto.getO_STATUS()}</p>
@@ -214,7 +214,7 @@ td {
 										<p style="display: none;">${dto.getO_IMP()}</p>
 										<form action="" method="post" name="myForm">
 											<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
-												<input type="button" value="환불 하기" class="btnGray" onclick="cancelIt(${dto.getO_IMP()}', ${dto.getO_NUM()});" style="width: 100px;" />
+												<input type="button" value="환불 하기" class="btnGray" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" style="width: 100px;" />
 											</c:if>
 										</form>
 									</td>

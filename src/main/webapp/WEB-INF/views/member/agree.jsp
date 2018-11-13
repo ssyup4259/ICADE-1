@@ -192,8 +192,8 @@
 			   	<br>
 			   	<br>
 			   <input type="checkbox" id="chkbox1" name="req1">
-			   <label for="chkbox1" style=”cursor:pointer“></label>
-			    위의 약관에 동의합니다.
+
+			   <label for="chkbox1"><span></span>&nbsp;위의 약관에 동의합니다.</label>
 			   	
 			   	<br>
 			   	<p style="text-align: left"><img src="/icade/resources/data/img/agree.png" style="width: 25px;height: 30px;padding-top: 7px"><font size="5">개인정보 수집 및 이용에 대한 안내</font></p>
@@ -220,10 +220,8 @@
 			   
 			 </div>
 			   <br>
-			   <div>
-			   		<label for="chkbox2" style="cursor:pointer"><input type="checkbox" id="chkbox2" name="req2"/> 개인정보 수집 및 이용에 동의합니다.</label>
-			   </div>
-			   
+			   <input type="checkbox" id="chkbox2" name="req2">
+			   <label for="chkbox2"><span></span>&nbsp;개인정보 수집 및 이용에 동의합니다.</label>
 			    <br><br> 
 			  <ul style="background-color: transparent;display: table;margin-left: auto;margin-right: auto;text-align: center">
 				  <li>
