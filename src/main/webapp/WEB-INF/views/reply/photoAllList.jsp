@@ -27,7 +27,6 @@
 	function login() {
 		
 		var f = document.replyForm;
-		swal("로그인 후 작성 가능합니다.");
 		
 		f.action = "<%=cp%>/login.action";
 		f.submit();
