@@ -256,7 +256,9 @@ $(function() {
 			type:"post",
 			url:"<%=cp%>/cart/insertCheck.action",
 			datatype : 'json',
+			async: false,
 			data : allData,
+			
 			success : function(data) {
 
 				if (data == "success") {
@@ -273,10 +275,13 @@ $(function() {
 
 			},
 
-			error : function(data) {
-	
-				swal("error");
-				console.log(data);
+			error : function(jqXHR,data) {
+				if(jqXHR.status==901){
+					location.href="<%=cp%>/login.action";
+				}else{
+					swal("error : " + data);
+					console.log(data);
+				}
 
 			}
 		});
@@ -517,7 +522,7 @@ function login_need() {
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
 								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
-									<input type="button" value="구매하기" onclick="orderIt('code');" class="btnGray" style="width: 100%" />
+									<input type="button" value="구매하기" onclick="orderIt();" class="btnGray" style="width: 100%" />
 								</div>
 								<div class="col-sm-6">
 									<input type="button" value="장바구니에 담기" onclick="insertCheck();" class="btnGray" style="width: 100%;" />

@@ -32,7 +32,8 @@ public class PostInterceptor extends HandlerInterceptorAdapter {
 			
 			Object dest = session.getAttribute("dest");
 			
-			System.out.println(dest);
+			System.out.println(session.getAttribute("dest"));
+			System.out.println(session.getAttribute("userInfo"));
 			
 			response.sendRedirect(dest != null ? (String)dest:"/icade");
 			

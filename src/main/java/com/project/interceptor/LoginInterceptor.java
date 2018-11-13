@@ -1,15 +1,11 @@
 package com.project.interceptor;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import com.project.dto.GoodsKindDTO;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
@@ -22,8 +18,6 @@ private void saveData(HttpServletRequest req) {
 		
 		if ("XMLHttpRequest".equals(req.getHeader("X-Requested-With"))) {
 			System.out.println("ajax 요청");
-			uri = req.getRequestURI().toString(); // 요청 uri
-			query = req.getQueryString();
 		}else {
 			uri = req.getRequestURI().toString(); // 요청 uri
 			query = req.getQueryString();
@@ -55,11 +49,15 @@ private void saveData(HttpServletRequest req) {
 		
 		if(session.getAttribute("userInfo") == null||session.getAttribute("userInfo").equals(null)) {
 			
-			System.out.println("로그인 안되있음");
+			if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+				System.out.println("ajax 요청");
+				response.sendError(901);
+			}else {
+				System.out.println("일반 url 요청");
+				saveData(request);
+				response.sendRedirect("/icade/login.action");
+			}
 			
-			saveData(request);
-			
-			response.sendRedirect("/icade/login.action");
 			System.out.println("=======================response=======================================================");
 			return false;
 		}else {

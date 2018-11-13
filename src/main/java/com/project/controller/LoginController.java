@@ -36,6 +36,8 @@ public class LoginController {
 	
 	@RequestMapping(value="/login.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login(HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		HttpSession session = req.getSession();
+		System.out.println("세션체크 : " + session.getAttribute("dest"));
 		return "login/login";
 	}
 	
