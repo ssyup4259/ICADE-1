@@ -214,7 +214,7 @@ td {
 										<p style="display: none;">${dto.getO_IMP()}</p>
 										<form action="" method="post" name="myForm">
 											<c:if test="${dto.getO_STATUS() eq '배송준비중'}">
-												<input type="button" value="환불 하기" class="btnGray" onclick="cancelIt(${dto.getO_IMP()}', ${dto.getO_NUM()});" style="width: 100px;" />
+												<input type="button" value="환불 하기" class="btnGray" onclick="cancelIt('${dto.getO_IMP()}', ${dto.getO_NUM()});" style="width: 100px;" />
 											</c:if>
 										</form>
 									</td>
