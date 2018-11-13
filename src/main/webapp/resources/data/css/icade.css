@@ -430,7 +430,7 @@ input,textarea :focus{
 
 
 input[id="chkbox1"] + label {
-		display: inline-block;
+		display: inline;
 		width: 20px;
 		height: 20px;
 		border: 2px solid #A3C838;
@@ -445,7 +445,7 @@ input[id="chkbox1"] {
 
 
 input[id="chkbox2"] + label {
-		display: inline-block;
+		display: inline;
 		width: 20px;
 		height: 20px;
 		border: 2px solid #A3C838;
