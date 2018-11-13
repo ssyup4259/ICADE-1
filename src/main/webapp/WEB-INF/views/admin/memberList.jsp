@@ -1,6 +1,7 @@
 <%@page import="org.springframework.http.HttpRequest"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -144,7 +145,7 @@ input[type='radio'] {
 								<td>${m_dto.getM_ADDRESS1()}${m_dto.getM_ADDRESS2()}</td>
 								<td>${m_dto.getM_EMAIL_ID()}@${m_dto.getM_EMAIL_DOMAIN()}</td>
 								<td>${m_dto.getM_CELLPHONE1()}-${m_dto.getM_CELLPHONE2()}-${m_dto.getM_CELLPHONE3()}</td>
-								<td>${m_dto.getM_POINT()}</td>
+								<td><fmt:formatNumber>${m_dto.getM_POINT()}</fmt:formatNumber>P</td>
 								<td>${m_dto.getM_DATE()}</td>
 							</tr>
 						</tbody>
