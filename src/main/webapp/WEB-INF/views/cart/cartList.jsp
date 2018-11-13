@@ -153,7 +153,6 @@ input[type=checkbox] {
 <table cellpadding="0" cellspacing="0" style="width: 75%; margin: auto;">
 	<tr>
 		<td>선택</td>
-		<td>상품 이미지</td>
 		<td>상품 정보</td>
 		<td>상품 가격</td>
 		<td>상품 수량</td>
@@ -167,9 +166,8 @@ input[type=checkbox] {
 		<tr>
 			<td>
 				<input type="checkbox" id="chk${c_dto.getC_NUM()}" name="chk" value="${c_dto.getC_NUM()}"/>
-			</td>
-			<td>
 				<label for="chk${c_dto.getC_NUM()}">
+					<span></span>
 					<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>
 				</label>
 			</td>
@@ -184,7 +182,7 @@ input[type=checkbox] {
 			</td>
 			<td>
 				<input type="button" id="down" class="down" onclick="countDown('${c_dto.getC_CODE()}');"/>
-				<input type="text" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
+				<input type="text" class="inputBoxGreen" id="${c_dto.getC_CODE()}" value="${c_dto.getC_COUNT()}" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>개
 				<input type="button" id="up" class="up" onclick="countUp('${c_dto.getC_CODE()}');"/>
 			</td>
 			<td>
