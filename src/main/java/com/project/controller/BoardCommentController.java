@@ -192,7 +192,6 @@ public class BoardCommentController {
 	@RequestMapping(value="/goodsReplyComment.action", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView goodsReplyComment(@RequestParam("BC_NUM")int BC_NUM ,BoardCommentDTO bc_dto,ModelAndView mav)throws Exception{
-		c_service.cookieList(req);
 		bc_dto = bc_service.getReadReply(BC_NUM);
 		
 		mav.addObject("bc_dto",bc_dto);
@@ -204,7 +203,6 @@ public class BoardCommentController {
 	@RequestMapping(value="/photoReplyComment.action", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView photoReplyComment(@RequestParam("BC_NUM")int BC_NUM ,BoardCommentDTO bc_dto,ModelAndView mav)throws Exception{
-		c_service.cookieList(req);
 		bc_dto = bc_service.getReadReply(BC_NUM);
 		
 		mav.addObject("bc_dto",bc_dto);
