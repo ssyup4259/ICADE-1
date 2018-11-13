@@ -62,10 +62,9 @@ private void saveData(HttpServletRequest req) {
 			response.sendRedirect("/icade/login.action");
 			System.out.println("=======================response=======================================================");
 			return false;
+		}else {
+			return true;
 		}
-		
-		return true;
-		
 	}
 	
 	@ModelAttribute
