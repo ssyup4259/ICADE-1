@@ -86,7 +86,7 @@ table {
 
 							<td>${dto.getOD_COUNT()}</td>
 							<!--1 노출갯수-->
-							<td><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###" />원</td>
+							<td><fmt:formatNumber value="${dto.getO_TOT()}" pattern="#,###" />원</td>
 							<td rowspan="1">
 								<div class="buy_dl_info">0원(배송비)</div>
 							</td>

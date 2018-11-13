@@ -22,7 +22,15 @@ public class OrderDetailDTO {
 	private int GD_NUM;
 	//상품의 저장된 이미지 이름
 	private String G_SAVEFILENAME;
+	//구매 총액
+	private int O_TOT;
 
+	public int getO_TOT() {
+		return O_TOT;
+	}
+	public void setO_TOT(int o_TOT) {
+		O_TOT = o_TOT;
+	}
 	public int getOD_NUM() {
 		return OD_NUM;
 	}
