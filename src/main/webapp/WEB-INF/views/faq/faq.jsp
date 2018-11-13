@@ -307,7 +307,6 @@ $(document).ready(function () {
 							</ul>
 						</div>
 					</div>
-
 				</div>
 				<div class="col-sm-5">
 					<form name="noticeForm" method="post">
@@ -327,13 +326,9 @@ $(document).ready(function () {
 				</div>
 			</div>
 			<hr style="border: 2px solid black;">
-			<!-- 문의사항 넣는곳 -->
-			<div class="row">
-				
-			</div>
 		</div>
 	</div>
-	<%--  <jsp:include page="../include/footer.jsp" flush="false" />  --%>
+	 <jsp:include page="../include/footer.jsp" flush="false" /> 
 
 </body>
 </html>

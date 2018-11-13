@@ -268,22 +268,6 @@ CREATE TABLE Cart
     C_COUNT    NUMBER           NOT NULL, 
     CONSTRAINT CART_PK PRIMARY KEY (C_NUM)
 );
--- Support_Center Create SQL
-CREATE TABLE Support_Center
-(
-    SC_NUM             VARCHAR2(20)     NULL, 
-    SC_PARENT          VARCHAR2(20)     NULL, 
-    SC_ID              VARCHAR2(20)     NULL, 
-    SC_DATE            DATE             NULL, 
-    SC_CONTENT         VARCHAR2(80)     NULL, 
-    SC_IMAGE           VARCHAR2(100)    NOT NULL, 
-    SC_SAVEFILENAME    VARCHAR2(200)    NOT NULL, 
-    SC_NAME            VARCHAR2(20)     NULL, 
-    SC_RANK            VARCHAR2(20)     NULL, 
-    SC_STATUS          VARCHAR2(10)     NOT NULL, 
-    CONSTRAINT SUPPORT_CENTER_PK PRIMARY KEY (SC_NUM)
-);
-
 
 
 ALTER TABLE Cart

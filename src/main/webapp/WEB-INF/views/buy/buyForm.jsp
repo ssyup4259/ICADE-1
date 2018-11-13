@@ -151,7 +151,7 @@ function sample6_execDaumPostcode() {
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : name,
-			amount : 500,
+			amount : total,
 			buyer_email : email,
 			buyer_name : m_id,
 			buyer_tel : tel,

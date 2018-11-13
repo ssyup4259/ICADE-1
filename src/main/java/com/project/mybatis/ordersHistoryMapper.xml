@@ -42,9 +42,9 @@
 	</select>
 	<!-- 상세정보보기 에서 뿌릴 상품관련 정보 for문 -->
 	<select id="selectOrderDetail" parameterType="map" resultType="com.project.dto.OrderDetailDTO">
-		select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME from(
-			(select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME,O_NUM,O_ID from ORDER_DETAIL,
-			(select GD_NUM,GD_CODE from GOODS_DETAIL),(select G_NUM,G_SAVEFILENAME from goods),(select O_ID,O_NUM from ORDERS)
+		select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME, O_TOT from(
+			(select OD_NUM,OD_CODE,OD_NAME,OD_DEVICE,OD_COLOR,OD_COUNT,OD_PRICE,OD_DISCOUNT,GD_NUM,G_SAVEFILENAME,O_NUM,O_ID, O_TOT from ORDER_DETAIL,
+			(select GD_NUM,GD_CODE from GOODS_DETAIL),(select G_NUM,G_SAVEFILENAME from goods),(select O_ID,O_NUM, O_TOT from ORDERS)
 				where O_NUM=OD_NUM AND OD_CODE = GD_CODE and GD_NUM = G_NUM) data)
 		where OD_NUM = #{O_NUM} and O_ID = #{O_ID}
 	</select>

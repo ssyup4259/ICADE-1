@@ -1,4 +1,4 @@
-/* ÀüÃ¼ °ñ°Ý */
+/* ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ */
 html {
 	font-family: 'Jua', sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -21,7 +21,7 @@ body {
 	padding: 10px;
 }
 
-/* »ó´Ü navµå·Ó´Ù¿î*/
+/* ï¿½ï¿½ï¿½ navï¿½ï¿½Ó´Ù¿ï¿½*/
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -86,7 +86,7 @@ li.dropdown {
 	display: block;
 }
 
-/* ·Î±×ÀÎ µîµî ¹öÆ°µé */
+/* ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ */
 .btnGreen {
 	background-color: white;
 	color: #A3C838;
@@ -162,7 +162,7 @@ li.dropdown {
 	webkit-ime-mode: disabled;
 }
 
-/* select ¹Ú½ºµé */
+/* select ï¿½Ú½ï¿½ï¿½ï¿½ */
 .selGreen {
 	width: 400px;
 	height: 40px;
@@ -316,7 +316,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 	background-size: 120% 120%;
 }
 
-/* °íÁ¤ */
+/* ï¿½ï¿½ï¿½ï¿½ */
 .sticky {
 	position: sticky;
 	top: 0px;
@@ -327,7 +327,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 	top: 3px;
 }
 
-/* ¸µÅ©½ºÅ¸ÀÏ */
+/* ï¿½ï¿½Å©ï¿½ï¿½Å¸ï¿½ï¿½ */
 a:link {
 	color: #8F9493;
 	text-decoration: none;
@@ -346,7 +346,7 @@ a:active {
 	color: #A3C838;
 }
 
-/* ¿ìÃø À§·Î°¡±â¶û ÃÖ±Ù º»»óÇ° */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½Ç° */
 .back_to_top {
 	position: fixed;
 	bottom: 10px;
@@ -426,3 +426,38 @@ tr:hover {
 input,textarea :focus{
     outline: none !important;
 }
+
+
+input[id="chkbox1"] + label {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		cursor: pointer;
+}
+input[id="chkbox1"]:checked + label {
+	background-color: #A3C838;
+}
+input[id="chkbox1"] {
+	display: none;
+}
+
+
+input[id="chkbox2"] + label {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		cursor: pointer;
+}
+input[id="chkbox2"]:checked + label {
+	background-color: #A3C838;
+}
+input[id="chkbox2"] {
+	display: none;
+}
+
+.color {
+	color: black; 
+}
+

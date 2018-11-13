@@ -34,6 +34,6 @@ public interface BoardCommentService {
 	//사진없는 댓글 삭제
 	public void deleteReply(int BC_NUM)throws Exception;
 	//상품 검색하기
-	public HttpServletRequest searchGoodsList(GoodsDTO g_dto,HttpServletRequest req) throws Exception;
+	public HttpServletRequest searchGoodsList(BoardCommentDTO bc_dto,HttpServletRequest req) throws Exception;
 	
 }

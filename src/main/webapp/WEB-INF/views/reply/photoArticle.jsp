@@ -48,7 +48,7 @@
 				 
 				 var BC_NUM =$("#BC_NUM").val();
 				 
-				 $("#photoReply").get('<%=cp%>/goods/replyCommentList.action?BC_NUM=+BC_NUM');
+				 $("#photoReply").get('<%=cp%>/goods/photoReplyCommentList.action?BC_NUM=+BC_NUM');
 				 $("#photoReply").html(result);
 				 
 			},error : function (result) {
@@ -137,10 +137,10 @@
 							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a>
 						</h3>
 						<p class="price">
-							₩${bc_dto.getG_PRICE()}
+							₩<fmt:formatNumber>${bc_dto.getG_PRICE()}</fmt:formatNumber>
 							<span id="sPrdTaxText"></span>
 						</p>
-						<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+						<input type="button" class="btnGray" value="상품상세보기" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}';">
 					</div>
 				</div>
 			</div>
@@ -199,7 +199,7 @@
 				<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 					<div align="center">
 						<p>
-							<input type="button" style="width: 80%;" value="로그인 하고 댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
+							<input type="button" style="width: 80%;height: 60px" value="로그인 하고 댓글작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" >
 						</p>
 					</div>
 				</c:if>

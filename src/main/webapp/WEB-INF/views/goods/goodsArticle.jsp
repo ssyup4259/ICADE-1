@@ -68,7 +68,25 @@ input.down {
 }
 </style>
 
+<!-- 댓글에 띄울 리스트 작성 -->
+<script>
+$(document).ready(function() {
+	
+		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		  x =  $("#sum").val();
+		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';
+	$.ajax({
+		 type:"get",
+		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
+		 success : function(result) {
+			 //responseText가 result에 저장됨.
+			 $("#replyList").html(result);
+		}
+	 });
+	
 
+});
+</script>
 <!-- 콤보박스 연결 -->
 <script type="text/javascript">
 $(function() {
@@ -172,8 +190,16 @@ $(function() {
 			if (hm < 0) {
 				hm = 0;
 			}
+			
 		document.getElementById("sum").value = (hm) * sell_price;
+		
+		var x= (hm) * sell_price;
+		addComma(x);
 	}  
+	function addComma(x){
+		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		  document.getElementById("sum").value = x.toString().replace(regexp, ',')+'원';
+	}
 
 	
 	
@@ -433,7 +459,7 @@ function login_need() {
 							<div class="col-sm-3" style="text-align: left;">수량</div>
 							<div class="col-sm-9" style="text-align: left">
 								<input type="button" id="down" class="down" onclick="countDown();" />
-								<input type="text" class="inputBox" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" style="width: 50px;" />
+								<input type="text" class="inputBoxGreen" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" style="width: 50px;" />
 								개
 								<input type="button" id="up" class="up" onclick="countUp();" />
 							</div>
@@ -563,15 +589,26 @@ function login_need() {
 				</div>
 
 				<div id="section3" class="container-fluid">
-					<div>
-						<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-						<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
-						<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
-					</div>
+					<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+						<div>
+							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+							<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
+							<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
+						</div>
+					</c:if>
+					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
+						<div>
+							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
+							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;height: 80px"/>
+						</div>
+					</c:if>
+					
+					
 					<br>
 					<div id="comment" class="container-fluid" style="background: transparent;">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
 						<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
+						<input type="hidden" id="G_PRICE" name="G_PRICE" value="${g_dto.getG_PRICE()} ">
 					</div>
 						<div id="replyList"></div>
 				</div>
@@ -579,86 +616,8 @@ function login_need() {
 			</form>
 		</div>
 	</div>
-
-
-	<%-- <!-- 댓글부분 -->
-	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-bottom: 50px;">
-		<div id="section3" class="container-fluid" style="width: 80%;">
-			<ul style="background: transparent">
-				<li style="float: left; padding-left: 15px">
-					<p style="font-size: 30px">REVIEW | 포토리뷰 작성하고 적립금 받자!</p>
-				</li>
-
-				<li style="float: right; padding-top: 6px; padding-right: 15px">
-					<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" />
-				</li>
-				<li style="float: right; padding-top: 6px; padding-right: 11px">
-					<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" class="btn" height="20px">
-				</li>
-			</ul>
-			<div id="comment" class="container-fluid">
-				<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
-				<input type="hidden" name="BC_BOARD" value="${g_dto.getG_NUM()}">
-
-				<form id="commentForm" method="post" enctype="multipart/form-data">
-					<table border="1" bordercolor="#b3cccc" align="center" width="1000" style="border-radius: 20px;">
-						<!-- 로그인 했을 경우만 댓글 작성가능 -->
-						<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
-
-								<tr>
-									<tr bgcolor="lightgray" height="60px;">
-										<!-- 아이디-->
-										<td width="15%">
-											<div>${sessionScope.userInfo.getM_ID()}</div>
-										</td>
-										<!-- 본문 작성-->
-										<td width="75%">
-											<div>
-												<textarea id="inputbox" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color:transparent;"></textarea>
-												<input type="file" id="upload" name="bcFile">
-											</div>
-										</td>
-										<!-- 댓글 등록 버튼 -->
-										
-									</tr>
-						</c:if>
-
-
-						<!-- 로그인 하지 않았을때만 보이는 화면 -->
-						<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-							<tr bgcolor="lightgray" height="60px;">
-								<!-- 본문 작성-->
-								<td width="100%">
-									<div>
-										<p>
-											<input type="button" value="포토후기 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px">
-
-										</p>
-									</div>
-								</td>
-							</tr>
-						</c:if>
-					</table>
-					<div id="replyList"></div>
-				</form>
-
-			</div>
-		</div>
-	</div> --%>
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
-<!-- 댓글에 띄울 리스트 작성 -->
-<script>
-$(document).ready(function() {
-	$.ajax({
-		 type:"get",
-		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}",
-		 success : function(result) {
-			 //responseText가 result에 저장됨.
-			 $("#replyList").html(result);
-		}
-	 });
-});
-</script>
+
 
 </html>

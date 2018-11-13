@@ -246,10 +246,10 @@ public class BoardCommentController {
 	
 	@RequestMapping(value="/searchGoodsList.action",method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public ModelAndView searchGoodsList(GoodsDTO g_dto,HttpServletRequest req,ModelAndView mav) {
+	public ModelAndView searchGoodsList(BoardCommentDTO bc_dto,HttpServletRequest req,ModelAndView mav) {
 		
 			try {
-				bc_service.searchGoodsList(g_dto, req);
+				bc_service.searchGoodsList(bc_dto, req);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -38,7 +38,7 @@
 
 	 function photoArticleUpdate(){
 		
-		f = document.myForm;
+		f = document.photoUpdateArticle;
 		
 		str = f.BC_SUBJECT.value;
 		str = str.trim();

@@ -41,7 +41,7 @@
 		<c:if test="${empty sessionScope.userInfo}">
 
 			<li style="float: right">
-				<a href="<%=cp%>/member/join.action">회원가입</a>
+				<a href="<%=cp%>/agree.action">회원가입</a>
 			</li>
 
 			<li style="float: right">

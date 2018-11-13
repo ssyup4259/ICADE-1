@@ -193,7 +193,7 @@
 								<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 									<div style="float: center;">
 										<p>
-											<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen" height="20px" style="width: 100%">
+											<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen"  style="width: 100%;height: 60px">
 										</p>
 									</div>
 								</c:if>

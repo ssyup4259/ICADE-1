@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -27,11 +27,14 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <script type="text/javascript">
-	function searchFix() {
-		var G_NAME = $("#g_listName").val();
-		var G_NUM = $("#g_listNum").val();
-
-		dataHandler(G_NAME,G_NUM);
+	function searchFix(G_NUM,G_NAME) {
+		
+		$("#photoG_NAME").val("");
+		$("#photoG_NUM").val("");
+		
+		
+		$("#photoG_NAME").val(G_NAME);
+		$("#photoG_NUM").val(G_NUM);
 		
 	}
 
@@ -41,16 +44,16 @@
 
  	<div align="center" style="float: center; width: 625px;padding-left: 29px">
  		
-	 	<c:forEach var="g_dto" items="${g_list}">
+	 		<p>후기를 작성할 상품을 선택하세요</p>
+	 	<c:forEach var="bc_dto" items="${g_list}">
 			<div style="font-size:25px; margin: none">
 				<div class="row">
 					<div class="col-sm-1" style="float: left;height: 130px;">
-							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;padding-left: 35px"><img src="<%=cp%>/resources/reply/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 130px; height: 190px"></a>
+							<a><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-circle" style="width: 50px; height: 60px"></a>
 					</div>
-					<div class="col-sm-2" style="float: right;">
-						<h3><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a></h3>
-							<p class="price" >₩${bc_dto.getG_PRICE()}<span id="sPrdTaxText"></span></p>
-							<input type="button" class="btnGray" value="상품상세보기" onclick="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}">
+					<div class="col-sm-6" style="float: right;text-align: left">
+						<h3><a href="#searchFix" onclick="searchFix('${bc_dto.getG_NUM()}','${bc_dto.getG_NAME()}');" style="padding-top: 10px;font-size: 15px;">#${bc_dto.getG_NAME()}</a><font size="3">&nbsp;₩<fmt:formatNumber>${bc_dto.getG_PRICE()}</fmt:formatNumber></font></h3>
+						<input type="button" class="btnGray" value="상품상세보기" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}';">
 					</div>
 				</div>	
 			</div>

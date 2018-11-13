@@ -166,7 +166,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			System.out.println("얍얍1");
 		}
 		
-		//파일 저장 이름 세팅해주자.
+		//파일 저장 이름 세팅.
 		if (bc_dto.getBC_CONTENTFILE2().length() != 0) {
 			fileExt2 = bc_dto.getBC_CONTENTFILE2().substring(bc_dto.getBC_CONTENTFILE2().lastIndexOf("."));
 			save2 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
@@ -896,7 +896,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	}
 
 	@Override
-	public HttpServletRequest searchGoodsList(GoodsDTO g_dto,HttpServletRequest req) throws Exception {
+	public HttpServletRequest searchGoodsList(BoardCommentDTO bc_dto,HttpServletRequest req) throws Exception {
 		
 		String searchKey = req.getParameter("searchKey");
 		String searchValue = req.getParameter("searchValue");
@@ -908,7 +908,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			searchKey = "G_NAME";
 		}
 		
-		List<GoodsDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue); 
+		List<BoardCommentDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue); 
 		
 		
 		req.setAttribute("g_list", g_list);
