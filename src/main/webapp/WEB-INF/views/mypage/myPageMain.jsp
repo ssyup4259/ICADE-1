@@ -270,16 +270,25 @@ td{
 						<table style="text-align: center;" cellpadding="10" cellspacing="0">
 							<c:forEach var="w_dto" items="${wishList}">
 								<tr>
-									<td><a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}"> <img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" /></td>
-									<td></a> 상품명:${w_dto.getW_NAME()} <input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제"></td>
+									<td>
+										<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
+											<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100" />
+										</a>
+									</td>
+									<td>
+										상품명:${w_dto.getW_NAME()} 
+										<input type="button" onclick="deleteWish(${w_dto.getW_GNUM()});" class="btnGray" style="width: 200px;" value="찜 삭제">
+									</td>
 								</tr>
 							</c:forEach>
 							<tr>
-								<td colspan="9"><c:if test="${dataCount!=0 }">
-								${pageIndexList }
-								</c:if> <c:if test="${dataCount==0 }">
-								찜 등록된 상품이 없습니다.
-								</c:if></td>
+								<td colspan="9">
+									<c:if test="${dataCount!=0 }">
+										${pageIndexList }
+									</c:if> <c:if test="${dataCount==0 }">
+										찜 등록된 상품이 없습니다.
+									</c:if>
+								</td>
 							</tr>
 						</table>
 
