@@ -24,31 +24,50 @@
 </head>
 <script>
  $(document).ready(function() {
+	 
+
 	var BC_NUM =$("#articleBC_NUM").val();
 	$.ajax({
 		 type:"get",
-		 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM,
+		 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
 		 success : function(result) {
 			 //responseText가 result에 저장됨.
 			 $("#photoReply").html(result);
 		},error : function (result) {
-			swal("로딩실패");
 		}
 	 });
 });
 
 </script>
-<script>
-	function photoReplyListUpdate(){
+<script type="text/javascript">
+	function prReplyLoder(num) {
+		
 		var BC_NUM =$("#articleBC_NUM").val();
 		$.ajax({
 			 type:"get",
-			 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM,
+			 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
+			 success : function(result) {
+				 //responseText가 result에 저장됨.
+				 $("#photoReply").html(result);
+			},error : function (result) {
+			}
+		 });
+	}
+</script>
+
+<script>
+	function photoReplyListUpdate(){
+		var BC_NUM =$("#articleBC_NUM").val();
+		var num = $("#prNum").val();
+		alert(num);	
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
 			 success : function(result) {
 				 
 				 var BC_NUM =$("#BC_NUM").val();
 				 
-				 $("#photoReply").get('<%=cp%>/goods/photoReplyCommentList.action?BC_NUM=+BC_NUM');
+				 $("#photoReply").get('<%=cp%>/goods/photoReplyCommentList.action?BC_NUM=+BC_NUM+&num=+num');
 				 $("#photoReply").html(result);
 				 
 			},error : function (result) {
@@ -235,7 +254,7 @@
 					<ul style="background: transparent;">
 						<c:if test="${bc_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
 							<li>
-								<input type="button" value=" 수정 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}';" />
+								<input type="button" value=" 수정 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleUpdate.action?BC_NUM=${bc_dto.getBC_NUM()}&replyPageNum=${replyPageNum}';" />
 								<input type="button" value=" 삭제 " class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/articleDelete.action?BC_NUM=${bc_dto.getBC_NUM()}&BC_BOARD=${bc_dto.getBC_BOARD()}&replyPageNum=${replyPageNum}';" />
 							</li>
 						</c:if>

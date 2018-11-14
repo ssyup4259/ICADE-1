@@ -844,10 +844,26 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	@Override
 	public HttpServletRequest replyCommentList(HttpServletRequest req) throws Exception {
 		
+		
+		int curPage = Integer.parseInt(req.getParameter("curPage"));
 		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
-		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM);
+		
+		int count = bc_dao.countPrReply(BC_NUM);
+		
+		ReplyPager replyPager = new ReplyPager(count, curPage);
+		
+		int start = replyPager.getPageBegin();
+	    int end = replyPager.getPageEnd();
+	    
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(count);
+		System.out.println(curPage);
+		
+		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM, start, end);
 		
 		req.setAttribute("rp_list", rp_list);
+		req.setAttribute("replyPager", replyPager);
 		return req;
 	}
 
@@ -872,19 +888,34 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	public HttpServletRequest searchGoodsList(BoardCommentDTO bc_dto,HttpServletRequest req) throws Exception {
 		
 		String searchKey = req.getParameter("searchKey");
+		String G_NAME = req.getParameter("G_NAME");
 		String searchValue = req.getParameter("searchValue");
+		int curPage = Integer.parseInt(req.getParameter("curPage"));
+		
+		
+		if (searchKey == null || searchKey.equals("")) {
+			searchKey = "G_NAME";
+		} else {
+			if (req.getMethod().equalsIgnoreCase("GET"))
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		}
 		
 		System.out.println(searchKey);
 		System.out.println(searchValue);
 		
-		if (searchKey == null  || searchKey.equals("")) {
-			searchKey = "G_NAME";
-		}
+		int count =bc_dao.searchGoods(searchValue, G_NAME);
 		
-		List<BoardCommentDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue); 
+		ReplyPager replyPager = new ReplyPager(count, curPage);
+		
+		int start = replyPager.getPageBegin();
+	    int end = replyPager.getPageEnd();
+		
+		
+		List<BoardCommentDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue, start, end);
 		
 		
 		req.setAttribute("g_list", g_list);
+		req.setAttribute("replyPager", replyPager);
 		
 		return req;
 	}

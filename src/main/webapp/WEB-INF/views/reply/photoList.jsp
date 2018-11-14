@@ -207,9 +207,9 @@
 					<div id="replyComment" align="center"></div>
 					</div>
 				</c:forEach>
-				<table style="border: none;border-bottom: none;background: transparent">
+				<table style="border: none;background: transparent;color: #A8C838;font-size: 20px">
 					<tr>
-			            <td style="border-bottom: none;">
+			            <td style="border-bottom: none;background: transparent;">
 			                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
 			                <c:if test="${replyPager.curBlock > 1}">
 			                    <a href="javascript:listReply('1')">[처음]</a>

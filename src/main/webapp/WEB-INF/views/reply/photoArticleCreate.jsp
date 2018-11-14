@@ -84,29 +84,37 @@
 		 var data = $("#searchForm").serialize();
 		 
 		 $.ajax({
-				type :"post",
+				type :"get",
 				data : data,
-				url : "<%=cp%>/goods/searchGoodsList.action",
+				url : "<%=cp%>/goods/searchGoodsList.action?curPage="+1,
 				success:function(result){
 						 $("#searchList").html(result); 
-						$('#searchList').css('visibility','visible');
+						$('#searchList').show();
 				},
 				error: function(result) {
 					swal("안된다");
 		 	    }
 		     });
-		 
-		 
-			
-			<%-- var f = document.searchForm;
-			
-			f.action = "<%=cp%>/ikeloom/list.do";
-
-			f.submit(); --%>
-
 		}
 
 </script>
+
+<script type="text/javascript">
+	function insertReplySearchGoods(num) {
+		
+		var searchUser = $("#searchUser").val();
+		$.ajax({
+			 type:"get",
+			 url :"<%=cp%>/goods/searchGoodsList.action?curPage="+num+"&searchValue="+searchUser,
+			 success : function(result) {
+				 $("#searchList").html(result);
+			}
+		 });
+	}
+
+
+</script>
+
 
 </head>
 <body>
@@ -117,7 +125,7 @@
 		 	상품정보선택
 		</div>
 		<div style="float: center;padding-left: 32px">
-			<input type="text" name="searchValue" class="inputBoxGray" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
+			<input type="text" name="searchValue" class="inputBoxGray" id="searchUser" style="width: 400px;" placeholder="검색할 단어를 입력해주세요.">
 			<input type="button" value=" 검색 " class="btnGreen" onclick="photoGoodsSearch();" style="width: 200px;padding-bottom: 2px;text-align: center" />
 		</div>
 	</form>
@@ -181,7 +189,7 @@
 	<div id="bbsCreated_footer">
 		<input type="button" value=" 등록하기 " class="btnGreen" onclick="sendPhotoCreate();"/>
 		<input type="reset" value=" 다시입력 " class="btnGray" onclick="document.searchForm.subject.focus();"/>
-		<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
+		<input type="button" value=" 작성취소 " class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action?replyPageNum=${bc_dto.getReplyPageNum()}';"/>	
 	</div>
 	
 	</form>
