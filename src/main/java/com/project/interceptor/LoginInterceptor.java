@@ -55,6 +55,7 @@ private void saveData(HttpServletRequest req) {
 			}else {
 				System.out.println("일반 url 요청");
 				saveData(request);
+				System.out.println(session.getAttribute("dest"));
 				response.sendRedirect("/icade/login.action");
 			}
 			

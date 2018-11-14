@@ -363,27 +363,21 @@ function like_func(g_num) {
 			swal(msg);
 		}
 		
-	},
-	error: function(){
-		
-
+		},
+		error : function(jqXHR,data) {
+			if(jqXHR.status==901){
+				location.href="<%=cp%>/login.action";
+			}else{
+				swal("error : " + data);
+				console.log(data);
+			}
+	
 		}
-		
 	});
 	
 	
 }
 </script>
-<script type="text/javascript">
-function login_need() {
-	
-	swal("로그인 후 찜목록을 눌러주세요!");
-	
-	
-}
-
-</script>
-
 <script>
 	$(document).ready(function(){
 		var url = document.URL;
@@ -497,24 +491,24 @@ function login_need() {
 						<hr style="border-top: 2px solid black">
 						<div class="row" id="heart11" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: right;">
-								<c:choose>
+								<%-- <c:choose>
 									<c:when test="${!empty sessionScope.userInfo}">
 										<c:choose>
 											<c:when test="${w_Check ==1}">
-
-												<a href="#"> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
-												</a>
-											</c:when>
-											<c:otherwise>
+ --%>
+												<%-- <a href="#"> <img src="<%=cp%>/resources/images/like.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
+												</a> --%>
+										<%-- 	</c:when>
+											<c:otherwise> --%>
 												<a href="#"> <img src="<%=cp%>/resources/images/dislike.png" style="width: 30px" id="${g_dto.getG_NUM()}" onclick="like_func(${g_dto.getG_NUM()});">
 												</a>
-											</c:otherwise>
+											<%-- </c:otherwise>
 										</c:choose>
-									</c:when>
-									<c:otherwise>
+									</c:when> --%>
+									<%-- <c:otherwise>
 										<a href='javascript: login_need();'><img src="<%=cp%>/resources/images/dislike.png" style="width: 30px"> </a>
 									</c:otherwise>
-								</c:choose>
+								</c:choose> --%>
 								<a href="#section3"> <img src="<%=cp%>/resources/images/speech-bubble.png" style="width: 30px">
 								</a>
 							</div>
@@ -613,19 +607,19 @@ function login_need() {
 				</div>
 
 				<div id="section3" class="container-fluid" style="overflow: hidden;">
-					<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
+					<%-- <c:if test="${!empty sessionScope.userInfo.getM_ID()}"> --%>
 						<div>
 							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 							<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
 							<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
 						</div>
-					</c:if>
+					<%-- </c:if>
 					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
 						<div>
 							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;height: 80px"/>
 						</div>
-					</c:if>
+					</c:if> --%>
 					<br>
 					<div id="comment" class="container-fluid" style="background: transparent;">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
