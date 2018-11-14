@@ -125,7 +125,7 @@
 
 </script>
 
-
+<script src="<%=cp%>/resources/data/js/fileBox.js"></script>
 </head>
 <body>
 <jsp:include page="../include/header2.jsp" flush="false" />
@@ -184,13 +184,29 @@
 				</dd>
 				<dd style="float: center; padding-right: 290px;">
 				메인사진 :
-				<input type="file" id="prUpload" name="bcfile" class="btnGray"><br>
+				<div class="filebox bs3-primary preview-image1">
+					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+					<label for="prUpload">업로드</label> 
+					<input type="file"  name="bcfile" id="prUpload" class="upload-hidden"><br>
+				</div>
 				내용사진 :
-				<input type="file" id="prUpload1" name="bcfile1" class="btnGray"><br>
+				<div class="filebox bs3-primary preview-image2">
+					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+					<label for="prUpload1">업로드</label> 
+					<input type="file"  name="bcfile1" id="prUpload1" class="upload-hidden"><br>
+				</div>
 				내용사진 :
-				<input type="file" id="prUpload2" name="bcfile2" class="btnGray"><br>
+				<div class="filebox bs3-primary preview-image3">
+					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+					<label for="prUpload2">업로드</label> 
+					<input type="file"  name="bcfile2" id="prUpload2" class="upload-hidden"><br>
+				</div>
 				내용사진 :
-				<input type="file" id="prUpload3" name="bcfile3" class="btnGray"><br>
+				<div class="filebox bs3-primary preview-image4">
+					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+					<label for="prUpload3">업로드</label> 
+					<input type="file"  name="bcfile3" id="prUpload3" class="upload-hidden"><br>
+				</div>
 				</dd>							
 			</dl>		
 		</div>

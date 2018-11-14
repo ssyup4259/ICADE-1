@@ -84,7 +84,7 @@
 	}
 
 </script>
-
+<script src="<%=cp%>/resources/data/js/fileBox.js"></script>
 </head>
 <body>
 <jsp:include page="../include/header2.jsp" flush="false" />
@@ -121,10 +121,30 @@
 					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 33%" class="textAreaGreen" placeholder="내용을 입력하세요"></textarea>
 				</dd>
 				<dt style="float: center;padding-right: 260px">
-					메인사진 : <input type="file" id="upload" name="bcfile" class="btnGray"><br>
-					내용사진 : <input type="file" id="upload1" name="bcfile1" class="btnGray"><br>
-					내용사진 : <input type="file" id="upload2" name="bcfile2" class="btnGray"><br>
-					내용사진 : <input type="file" id="upload3" name="bcfile3" class="btnGray"><br>
+					메인사진 :
+					<div class="filebox bs3-primary preview-image1">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="upload">업로드</label> 
+						<input type="file"  name="bcfile" id="upload" class="upload-hidden"><br>
+					</div>
+					내용사진 :
+					<div class="filebox bs3-primary preview-image2">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="upload1">업로드</label> 
+						<input type="file"  name="bcfile1" id="upload1" class="upload-hidden"><br>
+					</div>
+					내용사진 :
+					<div class="filebox bs3-primary preview-image3">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="upload2">업로드</label> 
+						<input type="file"  name="bcfile2" id="upload2" class="upload-hidden"><br>
+					</div>
+					내용사진 :
+					<div class="filebox bs3-primary preview-image4">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="upload3">업로드</label> 
+						<input type="file"  name="bcfile3" id="upload3" class="upload-hidden"><br>
+					</div>
 				</dt>							
 			</dl>		
 		</div>
