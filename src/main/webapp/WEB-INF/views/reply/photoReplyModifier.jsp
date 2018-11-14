@@ -28,21 +28,29 @@
 
 </head>
 <script src="<%=cp%>/resources/data/js/reply.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var BC_CONTENT =$("#updatePhotoReply").val();
+	BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r\n");
+	BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\n");
+	BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r");
+	$("#updatePhotoReply").val(BC_CONTENT);	
+});
+</script>
+
 <script>
 $("#btnPhotoReplyUpdate").click(function() {
-	var updateReply = $("#updateReply").val();
+	var BC_CONTENT = $("#updatePhotoReply").val();
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
 
-	BC_CONTENT = updateReply.replace(/\r\n/g, '<br>');
-	BC_CONTENT = updateReply.replace(/\r/g, '<br>');
-	BC_CONTENT = updateReply.replace(/\n/g, '<br>')
-	
-	
+	BC_CONTENT = BC_CONTENT.replace(/\r\n/gi, '<br>');
+	BC_CONTENT = BC_CONTENT.replace(/\r/gi, '<br>');
+	BC_CONTENT = BC_CONTENT.replace(/\n/gi, '<br>');
 	$.ajax({
 		type:"post",
 		url : "<%=cp%>/goods/goodsReplyUpdate.action",
-		data:{"BC_CONTENT":updateReply,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM},
+		data:{"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM},
 		success : function(result) {
 				$("#photoReplyModifier").html(result);
 				$('#photoReplyModifier').css('visibility','hidden');

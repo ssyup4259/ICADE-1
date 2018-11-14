@@ -17,23 +17,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function photoUpdateOpen(BC_NUM) {
-		
 		var num = $("#prNum").val();
-		
-		
-		
 		$.ajax({
 			type :"GET",
 			url : "<%=cp%>/goods/photoReplyComment.action?BC_NUM="+BC_NUM+"&curPage="+num,
 			success:function(result){
-				
-					var BC_CONTENT =$("#updatePhotoReply").val();
-					
-					BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r\n");
-					BC_CONTENT = BC_CONTENT.replace('<br>','\n');
-					BC_CONTENT = BC_CONTENT.replace('<br>','\r');
-					
-					$("#updatePhotoReply").val(BC_CONTENT);	
 					$("#photoReplyModifier").html(result); 
 					$('#photoReplyModifier').css('visibility','visible');
 			},
