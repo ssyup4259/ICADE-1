@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<head><link rel="shortcut icon" type="image⁄x-icon" href="<%=cp%>/resources/images/logo3.png"></head>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function msg() {
