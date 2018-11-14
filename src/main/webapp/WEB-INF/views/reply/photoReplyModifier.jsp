@@ -84,7 +84,7 @@ $("#btnPhotoReplyDelete").click(function() {
 <body>
 
 	<div align="center">
-		<textarea id="updateReply"  name="updateReply" class="textAreaGreen" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
+		<textarea id="updatePhotoReply"  name="updatePhotoReply" class="textAreaGreen" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
 	</div>
 	<div style="text-align: center;">
 		<!-- 작성자만 댓글 수정 삭제가 가능하도록 처리 -->

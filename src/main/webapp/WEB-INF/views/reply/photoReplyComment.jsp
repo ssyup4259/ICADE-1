@@ -20,11 +20,21 @@
 		
 		var num = $("#prNum").val();
 		
+		
+		
 		$.ajax({
 			type :"GET",
 			url : "<%=cp%>/goods/photoReplyComment.action?BC_NUM="+BC_NUM+"&curPage="+num,
 			success:function(result){
-					 $("#photoReplyModifier").html(result); 
+				
+					var BC_CONTENT =$("#updatePhotoReply").val();
+					
+					BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r\n");
+					BC_CONTENT = BC_CONTENT.replace('<br>','\n');
+					BC_CONTENT = BC_CONTENT.replace('<br>','\r');
+					
+					$("#updatePhotoReply").val(BC_CONTENT);	
+					$("#photoReplyModifier").html(result); 
 					$('#photoReplyModifier').css('visibility','visible');
 			},
 			error: function(result) {
