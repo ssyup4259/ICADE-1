@@ -100,7 +100,7 @@
 				<img src="/icade/resources/data/img/right.png" style="height: 50px; width: 50px;">
 			</div>
 			<div class="col-sm-8">
-				<a href="" onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;<a href="<%=cp%>/faq.action"> FAQ / 공지사항</a>
+				<a onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;<a href="<%=cp%>/faq.action"> FAQ / 공지사항</a>
 				<img src="/icade/resources/data/logo/logo1.png" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
 				&nbsp;&nbsp;<a href="orderHistory.action">주문조회</a>&nbsp;&nbsp; <a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
 			</div>
