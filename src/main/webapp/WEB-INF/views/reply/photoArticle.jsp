@@ -226,23 +226,27 @@
 				<div id="photoReply"></div>
 
 				<div class="row">
-					<div class="col-sm-8">
+					<div class="col-sm-12">
 						<ul style="background: transparent;">
 							<li>
 								<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
-									<strong>이전글 :</strong>
-									<a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
+									<strong style="font-size: 25px"><a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"><img src="<%=cp%>/resources/data/img/up-arrow.png" style="width: 30px;height: 30px">&nbsp;&nbsp;이전글 :
+									${sub_dto.getPREV_BC_SUBJECT()}</a></strong>
 								</c:if>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-8">
-						<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
-							<strong>다음글 :</strong>
-							<a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
-						</c:if>
+					<div class="col-sm-4">
+						<ul style="background: transparent;">
+							<li>
+								<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
+									<strong style="font-size: 25px"><a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"><img src="<%=cp%>/resources/data/img/down-arrow.png" style="width: 30px;height: 30px;">&nbsp;&nbsp;다음글 :
+									${sub_dto.getNEXT_BC_SUBJECT()}</a></strong>
+								</c:if>
+							</li>
+						</ul>		
 					</div>
 				</div>
 			</div>

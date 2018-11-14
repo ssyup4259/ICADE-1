@@ -86,8 +86,6 @@ $(document).ready(function() {
 			 $("#replyList").html(result);
 		}
 	 });
-	
-
 });
 </script>
 <script type="text/javascript">
@@ -101,11 +99,7 @@ $(document).ready(function() {
 			}
 		 });
 	}
-
-
 </script>
-
-
 <!-- 콤보박스 연결 -->
 <script type="text/javascript">
 $(function() {
@@ -602,19 +596,11 @@ function like_func(g_num) {
 				</div>
 
 				<div id="section3" class="container-fluid" style="overflow: hidden;">
-					<%-- <c:if test="${!empty sessionScope.userInfo.getM_ID()}"> --%>
 						<div>
 							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 							<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
 							<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
 						</div>
-					<%-- </c:if>
-					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-						<div>
-							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;height: 80px"/>
-						</div>
-					</c:if> --%>
 					<br>
 					<div id="comment" class="container-fluid" style="background: transparent;">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">

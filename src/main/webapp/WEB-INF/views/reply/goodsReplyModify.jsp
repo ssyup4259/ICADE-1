@@ -33,6 +33,11 @@ $("#btnReplyUpdate").click(function() {
 	var updateReply = $("#updateReply").val();
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
+	
+	updateReply = updateReply.replace(/\r\n/g, '<br>');
+	updateReply = updateReply.replace(/\r/g, '<br>');
+	updateReply = updateReply.replace(/\n/g, '<br>')
+	
 	$.ajax({
 		type:"post",
 		url : "<%=cp%>/goods/goodsReplyUpdate.action",

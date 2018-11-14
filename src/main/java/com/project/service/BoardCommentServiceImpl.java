@@ -853,10 +853,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 		int curPage = Integer.parseInt(req.getParameter("curPage"));
 		
-		
-		System.out.println(curPage);
-		
-		
 		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
 		
 		int count = bc_dao.countPrReply(BC_NUM);
