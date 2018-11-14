@@ -25,6 +25,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
+<script src="<%=cp%>/resources/data/js/fileBox.js"></script>
+
 <!-- 상품등록하기 버튼 submit -->
 <script type="text/javascript">
 
@@ -179,8 +181,12 @@ function enableTextBox(name) {
 	<tr>
 		<td>상품 설명 사진</td>
 		<td align="left">
-			<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/>
-			<input type="hidden" name="G_CONTENT" value=""/>
+			<div class="filebox bs3-primary preview-image1">
+				<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+				<label for="input_file">업로드</label> 
+				<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요" id="input_file" class="upload-hidden"/>
+				<input type="hidden" name="G_CONTENT" value=""/>
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -192,7 +198,12 @@ function enableTextBox(name) {
 	<tr>
 		<td>상품 사진</td>
 		<td align="left">
-			<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/>
+			<div class="filebox bs3-primary preview-image2">
+				<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+				<label for="input_file2">업로드</label> 
+				<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요" id="input_file2" class="upload-hidden"/>
+				<input type="hidden" name="G_CONTENT" value=""/>
+			</div>
 		</td>
 	</tr>
 	<tr>
