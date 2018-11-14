@@ -63,6 +63,20 @@
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="text" id="user_Id" name="M_ID" value="${sessionScope.userInfo.getM_ID()}" class="memberInputBox" readonly="readonly" maxlength="30" />
+							<br>
+							<div class="alert alert-idsuccess" id="alert-idsuccess">
+								<font style="color: blue">사용할 수 있는 아이디 입니다</font>
+							</div>
+							<div class="alert alert-iddanger" id="alert-iddanger">
+								<font style="color: red">사용할 수 없는 아이디 입니다</font>
+							</div>
+							<div class="alert alert-idrefresh" id="alert-idrefresh">
+								<font style="color: red">중복검사를 실행해주세요</font>
+							</div>
+							<input type="hidden" id="checkId" name="checkId" value="">
+						</div>
+						<div class="col-sm-2" style="padding-top: 0;">
+							<input type="button" value="중복확인" style="width: 120px; display: none;" class="btnGray" id="user_id_checkBtn" />
 						</div>
 					</div>
 					<div class="row">
@@ -104,29 +118,34 @@
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>닉네임</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							닉네임
 						</div>
-						<div class="col-sm-8 row" style="text-align: left;">
-								<input type="text" id="user_NickName" style="position: absolute; width: 94%; margin-left: 15px" value="${sessionScope.userInfo.getM_NICKNAME()}" name="M_NICKNAME" maxlength="30" class="memberInputBox" size="15"/>
-								<br>
-								<div class="alert alert-nicksuccess" id="alert-nicksuccess">
-									<font style="color: blue">사용할 수 있는 닉네임 입니다</font>
-								</div>
-								<div class="alert alert-nickdanger" id="alert-nickdanger">
-									<font style="color: red">사용할 수 없는 닉네임 입니다</font>
-								</div>
-								<div class="alert alert-nickfresh" id="alert-nickfresh">
-									<font style="color: red">중복검사를 실행해주세요</font>
-								</div>
+						<div class="col-sm-8" style="text-align: left;">
+							<input type="text" id="user_NickName" style="position: absolute; width: 94%; margin-left: 15px" value="${sessionScope.userInfo.getM_NICKNAME()}" name="M_NICKNAME" maxlength="30" class="memberInputBox" size="15"/>
+							<input type="hidden" id="user_NickName_session" value="${sessionScope.userInfo.getM_NICKNAME()}" >
+							<br>
+							<div>&nbsp;</div>
+							<div class="alert alert-nickequals" id="alert-nickequals">
+								<font style="color: blue">현재 사용하시는 닉네임 입니다</font>
+							</div>
+							<div class="alert alert-nicksuccess" id="alert-nicksuccess">
+								<font style="color: blue">사용할 수 있는 닉네임 입니다</font>
+							</div>
+							<div class="alert alert-nickdanger" id="alert-nickdanger">
+								<font style="color: red">사용할 수 없는 닉네임 입니다</font>
+							</div>
+							<div class="alert alert-nickfresh" id="alert-nickfresh">
+								<font style="color: red">중복검사를 실행해주세요</font>
+							</div>
 							<input type="hidden" id="checkNick" name="checkNick" value="">
 						</div>
-							<div class="col-sm-2">
-								<input type="button" class="btnGray" style="width: 97%; position: absolute; margin-left:-16px;" value="중복확인" id="user_nickName_checkBtn" />
-							</div>
+						<div class="col-sm-2">
+							<input type="button" class="btnGray" style="width: 120px;" value="중복확인" id="user_nickName_checkBtn" />
+						</div>
 					</div>
 
-					<div class="row">
+					<div class="row" style="margin-top: 30px;">
 						<div class="col-sm-2">
 							<p>이메일</p>
 						</div>
@@ -140,18 +159,19 @@
 						</div>
 						<div class="col-sm-3" >
 							<!-- <input id="email2" class="memberInputBox" name="M_EMAIL_DOMAIN" placeholder="Ex) hanmail.net" maxlength="30" style="width: 100%;;margin-left: 0px"/> -->
+							<input type="hidden" id="Sessiondomain" value="${sessionScope.userInfo.getM_EMAIL_DOMAIN()}"/>
 							<select id="email2" name="M_EMAIL_DOMAIN" class="memberInputBox">
-			                <option value="" selected="selected">- 이메일 선택 -</option>
-			                <option value="naver.com">naver.com</option>
-			                <option value="daum.net">daum.net</option>
-			                <option value="nate.com">nate.com</option>
-			                <option value="hotmail.com">hotmail.com</option> 
-			                <option value="yahoo.com">yahoo.com</option>
-			                <option value="empas.com">empas.com</option>
-			                <option value="korea.com">korea.com</option>
-			                <option value="dreamwiz.com">dreamwiz.com</option>
-			                <option value="gmail.com">gmail.com</option>
-			                <option value="etc">직접입력</option>
+				                <option value="" selected="selected">- 이메일 선택 -</option>
+				                <option value="naver.com">naver.com</option>
+				                <option value="daum.net">daum.net</option>
+				                <option value="nate.com">nate.com</option>
+				                <option value="hotmail.com">hotmail.com</option> 
+				                <option value="yahoo.com">yahoo.com</option>
+				                <option value="empas.com">empas.com</option>
+				                <option value="korea.com">korea.com</option>
+				                <option value="dreamwiz.com">dreamwiz.com</option>
+				                <option value="gmail.com">gmail.com</option>
+				                <option value="etc">직접입력</option>
 			                </select>
 						</div>
 						<div class="col-sm-2" style="float: right;">
@@ -160,6 +180,9 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-8" style="float: center;">
+							<div class="alert alert-emailequals" id="alert-emailequals" style="padding-bottom: 10px">
+								<font style="color: blue">현재 사용하시는 이메일 입니다</font>
+							</div>
 							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px">
 								<font style="color: blue">사용할 수 있는 이메일 입니다</font>
 							</div>
