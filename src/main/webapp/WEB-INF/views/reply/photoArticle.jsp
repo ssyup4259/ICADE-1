@@ -146,7 +146,7 @@
 						<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
 					</div>
 					&nbsp;&nbsp;
-					<div class="col-sm-2" style="float: right;">
+					<div class="col-sm-3" style="float: right;">
 						<h3>
 							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a>
 						</h3>
