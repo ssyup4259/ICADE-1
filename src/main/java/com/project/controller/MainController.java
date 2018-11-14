@@ -73,7 +73,7 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value="/agree.action")
+	@RequestMapping(value="/member/agree.action")
 	public ModelAndView agree(HttpServletRequest request) throws Exception {
 		
 		c_service.cookieList(request);
