@@ -3,6 +3,14 @@ imp userid=icade/123 file='D:\icade.dmp'
 
 select * from tab;
 
+SELECT A.uniqueness, A.status, b.*
+  FROM ALL_INDEXES a,
+       ALL_IND_COLUMNS b
+ WHERE a.index_name = b.index_name
+   AND a.table_name=upper('WISH');
+
+ALTER INDEX INDEX_NAME REBUILD;
+
 DROP TABLE GOODS CASCADE CONSTRAINTS;
 DROP TABLE GOODS_DETAIL CASCADE CONSTRAINTS;
 DROP TABLE WISH CASCADE CONSTRAINTS;

@@ -67,13 +67,14 @@ public class MainController {
 	public ModelAndView faq(HttpServletRequest request) throws Exception {
 		
 		n_service.noticeList(request);
+		c_service.cookieList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("faq/faq");
 		return mav;
 		
 	}
 	
-	@RequestMapping(value="/agree.action")
+	@RequestMapping(value="/member/agree.action")
 	public ModelAndView agree(HttpServletRequest request) throws Exception {
 		
 		c_service.cookieList(request);
@@ -87,6 +88,15 @@ public class MainController {
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
 		
+		
+		HttpSession session = req.getSession();
+		
+		MemberDTO vo = new MemberDTO();
+		
+		vo = (MemberDTO) session.getAttribute("userInfo");
+		if(vo != null) {
+			w_service.wishList(req);
+			}
 		Cookie[] cookies = req.getCookies();
 		
 		List<String> c_lists = new ArrayList<String>();

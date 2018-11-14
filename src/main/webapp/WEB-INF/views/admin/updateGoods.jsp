@@ -22,6 +22,7 @@
 <title>상품 수정 화면</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="<%=cp%>/resources/data/js/fileBox.js"></script>
 
 <!-- 상품수정하기 버튼 submit -->
 <script type="text/javascript">
@@ -80,10 +81,20 @@ function goodsUpdateIt() {
 상품 가격 : <input type="text" name="G_PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_PRICE()}" class="inputBoxGreen">원 <br/>
 <div style="display: none;">상품 설명 : <textarea rows="30" cols="50" name="G_CONTENT" class="textAreaGreen">${g_dto.getG_CONTENT()}</textarea></div>
 상품 설명 사진 : 
-<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
+<div class="filebox bs3-primary preview-image1">
+	<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+	<label for="input_file">업로드</label> 
+	<input type="file" name="gFile2" placeholder="클릭후 이미지를 업로드해 주세요" id="input_file" class="upload-hidden"/>
+	<input type="hidden" name="G_CONTENT" value=""/>
+</div>
 할인율 : <input type="text" name="G_DISCOUNT" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="${g_dto.getG_DISCOUNT()}" class="inputBoxGreen"/>% <br/>
 상품 사진 : 
-<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요"/> <br/>
+<div class="filebox bs3-primary preview-image2">
+	<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+	<label for="input_file2">업로드</label> 
+	<input type="file" name="gFile" placeholder="클릭후 이미지를 업로드해 주세요" id="input_file2" class="upload-hidden"/>
+	<input type="hidden" name="G_CONTENT" value=""/>
+</div>
 
 <input type="button" onclick="goodsUpdateIt();" value="상품수정" class="btnGray">
 <input type="button" onclick="javascript:window.close();" value="취 소" class="btnGray"/>

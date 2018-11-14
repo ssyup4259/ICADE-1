@@ -59,7 +59,6 @@
 	function photoReplyListUpdate(){
 		var BC_NUM =$("#articleBC_NUM").val();
 		var num = $("#prNum").val();
-		alert(num);	
 		$.ajax({
 			 type:"get",
 			 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
@@ -102,13 +101,12 @@
 			data : formData,
 			success:function(result){
 				
-				console.log(result);
 				
 				var BC_NUM =$("#articleBC_NUM").val()
 				
 				$.ajax({
 					 type:"get",
-					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+					 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
 					 success : function(result) {
 						 //responseText가 result에 저장됨.
 						 $("#photoReply").html(result);
@@ -133,15 +131,11 @@
 		<!-- 	<h1>포토리뷰</h1><font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font> -->
 			
 			<div class="row" style="text-align:left">
-				<div class="col-sm-1" style="text-align: right; padding-right: 20px">
+				<div class="col-sm-7" style="text-align: left; padding-right: 20px">
 					<h2>
-						<font color="#000000" size="6">포토리뷰</font>
-					</h2>
-				</div>
-				<div class="col-sm-3" style="text-align: left; margin-left: none; padding-left: 0px; padding-top: 10px">
-					<p>
+						<font color="#000000" size="7">포토리뷰</font>
 						<font size="5" color="#8F9493">ICADE 포토리뷰 상품후기 게시판</font>
-					</p>
+					</h2>
 				</div>
 			</div>
 
@@ -151,7 +145,8 @@
 					<div class="col-sm-1" style="float: left; height: 130px;">
 						<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px;"><img src="<%=cp%>/resources/goodsImage/${bc_dto.getG_SAVEFILENAME()}" class="img-thumbnail" style="width: 130px; height: 190px"></a>
 					</div>
-					<div class="col-sm-2" style="float: right;">
+					&nbsp;&nbsp;
+					<div class="col-sm-3" style="float: right;">
 						<h3>
 							<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}" style="padding-top: 10px">#${bc_dto.getG_NAME()}</a>
 						</h3>

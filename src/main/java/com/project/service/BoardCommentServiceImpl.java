@@ -256,7 +256,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		bc_num = bc_dao.insertData(bc_dto);
 	}
 
-	// 댓글 리스트
+	// 포토리뷰 리스트
 	@Override
 	public HttpServletRequest replyList(HttpServletRequest req) throws Exception {
 
@@ -757,7 +757,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		int dataCount = bc_dao.countAllReply();
 
 		// 전체페이지수
-		int numPerPage = 12;
+		int numPerPage = 10;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
 		if (currentPage > totalPage)

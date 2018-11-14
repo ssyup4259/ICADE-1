@@ -73,7 +73,7 @@
 	}
 
 </script>
-
+<script src="<%=cp%>/resources/data/js/fileBox.js"></script>
 </head>
 <body>
 <jsp:include page="../include/header2.jsp" flush="false" />
@@ -116,22 +116,39 @@
 		<div id="bbsCreated_image" >
 			<dl>
 				<dt style="float: center; padding-right: 510px;font-size: 20px">사&nbsp;&nbsp;&nbsp;&nbsp;진</dt>
-					<dd style="float: center; padding-right: 300px;" >
-						<input type="file"  name="bcfile" class="btnGray"><br>
+				
+				<dd style="float: center; padding-right: 300px;" >
+					<div class="filebox bs3-primary preview-image1">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="input_file1">업로드</label> 
+						<input type="file"  name="bcfile" id="input_file1" class="upload-hidden"><br>
 						${bc_dto.getBC_IMAGE()}
-					</dd>
-					<dd style="float: center; padding-right: 300px;" >							
-						<input type="file"  name="bcfile1"class="btnGray"><br>
+					</div>
+				</dd>
+				<dd style="float: center; padding-right: 300px;">
+					<div class="filebox bs3-primary preview-image2">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="input_file2">업로드</label> 
+						<input type="file"  name="bcfile1" id="input_file2" class="upload-hidden"><br>
 						${bc_dto.getBC_CONTENTFILE1()}
-					</dd>
-					<dd style="float: center; padding-right: 300px;" >
-						<input type="file"  name="bcfile2"class="btnGray"><br>
+					</div>
+				</dd>
+				<dd style="float: center; padding-right: 300px;">
+					<div class="filebox bs3-primary preview-image3">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="input_file3">업로드</label> 
+						<input type="file"  name="bcfile2" id="input_file3" class="upload-hidden"><br>
 						${bc_dto.getBC_CONTENTFILE2()}
-					</dd>
-					<dd style="float: center; padding-right: 300px;" >
-						<input type="file"  name="bcfile3"class="btnGray"><br>
+					</div>
+				</dd>
+				<dd style="float: center; padding-right: 300px;">
+					<div class="filebox bs3-primary preview-image4">
+						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						<label for="input_file4">업로드</label> 
+						<input type="file"  name="bcfile3" id="input_file4" class="upload-hidden"><br>
 						${bc_dto.getBC_CONTENTFILE3()}
-					</dd>
+					</div>
+				</dd>
 			</dl>		
 		</div>
 		

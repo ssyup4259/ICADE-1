@@ -91,7 +91,7 @@
 		var BC_ID =${sessionScope.userInfo.getM_ID()};
 		var BC_NUM =BC_NUM;
 		var BC_BOARD = BC_BOARD;
-		
+		var num = $("#gaPrNum").val();
 		BC_CONTENT = BC_CONTENT.replace(/\r\n/g, '<br>');
 		BC_CONTENT = BC_CONTENT.replace(/\r/g, '<br>');
 		BC_CONTENT = BC_CONTENT.replace(/\n/g, '<br>')
@@ -116,7 +116,7 @@
 				swal("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
-					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
 					 success : function(result) {
 						 //responseText가 result에 저장됨.
 						 $("#replyComment").html(result);

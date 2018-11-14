@@ -53,8 +53,9 @@
 				<hr style="border: 1px solid black;">
 				<div class="col-sm-8" style="margin: 0 auto;">
 					<div class="row">
-						<div class="col-sm-2">
-							<p>아이디</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							
+							아이디
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="text" id="user_Id" class="memberInputBox" placeholder="아이디 : 8글자이상 입력하세요(한글 불가)" name="M_ID" value="" maxlength="30" />
@@ -77,28 +78,24 @@
 
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>패스워드</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							비밀번호
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="password" name="M_PW" id="pw1" class="memberInputBox" maxlength="30" size="15" />
+							<input type="password" name="M_PW" id="pw1" class="memberInputBox" maxlength="30" size="15" placeholder="비밀번호는 8~16자리로 작성해주세요" />
 							<br>
 							<div class="alert alert-capslock" id="alert-capslock">
-								<font style="color: red">capslock키가 눌려 있습니다.</font>
+								<font style="color: red">capslock키가 켜져 있습니다.</font>
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>
-								패스워드
-								<br>
-								확인
-							</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+								비밀번호 확인
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="password" name="M_PWCorre" class="memberInputBox" id="pw2" maxlength="30" size="15" />
+							<input type="password" name="M_PWCorre" class="memberInputBox" id="pw2" maxlength="30" size="15" placeholder="작성하신 비밀번호와 일치해야합니다"/>
 							<br>
 							<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
 							<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
@@ -106,8 +103,8 @@
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>이름</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							이름
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="text" placeholder="이름 : Ex)박명성" class="memberInputBox" name="M_NAME" id="name" maxlength="10" size="15" />
@@ -115,8 +112,8 @@
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>닉네임</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							닉네임
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="text" id="user_NickName" class="memberInputBox" placeholder="닉네임 : 2글자 이상 입력하세요" name="M_NICKNAME" maxlength="30" size="15" />
@@ -138,8 +135,8 @@
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>이메일</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							이메일
 						</div>
 						<div class="col-sm-4" style="text-align: left;float: left;">
 							<input type="text" class="memberInputBox" placeholder="Ex) ssyup4259" id="email1" name="M_EMAIL_ID" maxlength="30" style="width: 100%;margin: 0px;padding: 0px"/>
@@ -192,8 +189,8 @@
 					<hr style="border: 1px solid black;">
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>전화번호</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							전화번호
 						</div>
 						<div class="col-sm-2" style="text-align: left;">
 
@@ -208,8 +205,8 @@
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2">
-							<p>주소</p>
+						<div class="col-sm-2" style="margin-top: 11px">
+							주소
 						</div>
 						<div class="col-sm-3" style="text-align: left">
 							<input type="text" class="memberInputBox" name="M_ZIPCODE" readonly="readonly" placeholder="우편번호" id="sample6_postcode">
@@ -405,9 +402,6 @@ $(document).ready(function () {
 		        $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
 		    }
 		}); 
-    
-    
-
  $(function () {
 	$("#alert-success").hide();
 	$("#alert-danger").hide();
@@ -534,13 +528,8 @@ function nickCheck() {
 	}
 </script>
 
-
-	<!-- 이메일 중복 및 정규식 확인 -->
-	<script>
-
-
-
-
+<!-- 이메일 중복 및 정규식 확인 -->
+<script>
 $("#alert-emailsuccess").hide();
 $("#alert-emaildanger").hide();
 $("#alert-emailfresh").hide();
@@ -632,8 +621,8 @@ function check() {
  </script>
 
 
-	<!-- 이메일 보내기 -->
-	<script>
+<!-- 이메일 보내기 -->
+<script>
  	function sendMail(email1,email2){
  		
 		
@@ -658,8 +647,6 @@ function check() {
 		
 		//팝업창 열기
 		window.open("<%=cp%>/sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
-			
-		
 	}  
 </script>
 
@@ -785,16 +772,16 @@ function signUp() {
 		
 	}else if($("#checkEmail").val() == 2){
 		swal("이메일 중복검사를 해주세요");
-	}/* else if($("#checkNum").val() != 1){
+	}else if($("#checkNum").val() != 1){
 		swal("이메일 인증을 완료해주세요")
-	} */else{
+	}else{
 		var email1 =document.getElementById("email1").value; 
 		var email2 =document.getElementById("email2").value; 
 		var email = email1+ "@" + email2;
 		
 		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
-				if(exptext.test(email)==false){
+			if(exptext.test(email)==false){
 
 			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
 

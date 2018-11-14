@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<link rel="shortcut icon" type="image⁄x-icon" href="<%=cp%>/resources/images/logo3.png">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function msg() {
@@ -41,7 +42,7 @@
 		<c:if test="${empty sessionScope.userInfo}">
 
 			<li style="float: right">
-				<a href="<%=cp%>/agree.action">회원가입</a>
+				<a href="<%=cp%>/member/agree.action">회원가입</a>
 			</li>
 
 			<li style="float: right">
@@ -100,9 +101,9 @@
 				<img src="/icade/resources/data/img/right.png" style="height: 50px; width: 50px;">
 			</div>
 			<div class="col-sm-8">
-				<a onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;<a href="<%=cp%>/faq.action"> FAQ / 공지사항</a>
+				<a onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="<%=cp%>/faq.action">FAQ&공지사항</a>
 				<img src="/icade/resources/data/logo/logo1.png" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
-				&nbsp;&nbsp;<a href="orderHistory.action">주문조회</a>&nbsp;&nbsp; <a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
+				<a href="orderHistory.action">주문조회</a>&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>

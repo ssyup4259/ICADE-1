@@ -51,7 +51,7 @@
 					<!-- 로그인 안하면 작성 불가능 -->
 					<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 					<p>
-						<input type="button" value="포토후기 작성하기" style="width: 100%; border-radius: 12px;height: 80px;font-size: 25px" onclick="javascript:location.href='<%=cp%>/goods/photoInsertData.action';" class="btnGreen" height="20px">
+						<input type="button" value="포토후기 작성하기" style="width: 100%; border-radius: 12px;height: 80px;font-size: 25px" onclick="javascript:location.href='<%=cp%>/goods/photoInsertData.action?replyPageNum=${replyPageNum}';" class="btnGreen" height="20px">
 					</p>
 					</c:if>
 					<!-- 로그인 안하면 작성 불가능 -->

@@ -191,6 +191,8 @@ public class AdminServiceImpl implements AdminService {
 			
 		}
 		
+		g_dto.setG_CONTENT("");
+		
 		g_num = a_dao.insertGoods(g_dto);
 		
 		String[] deviceKind = req.getParameterValues("GD_DEVICE");

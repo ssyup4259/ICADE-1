@@ -30,12 +30,18 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function cmUpdateOpen(BC_NUM) {
-		
 		$.ajax({
 			type :"GET",
 			url : "<%=cp%>/goods/goodsReplyComment.action?BC_NUM="+BC_NUM,
 			success:function(result){
-					 $("#goodsReplyModifier").html(result); 
+					 $("#goodsReplyModifier").html(result);
+					 
+						var BC_CONTENT =$("#updateReply").val();
+						
+						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r\n");
+						
+						$("#updateReply").val(BC_CONTENT);
+					 
 					$('#goodsReplyModifier').css('visibility','visible');
 			},
 			error: function(result) {
