@@ -12,6 +12,7 @@
 	height: 60px;
 	border-radius: 12px;
 }
+
 </style>
 
 
@@ -65,6 +66,8 @@
 	}
 
 </script>
+
+
 
 <script>
 function deleteCookie(G_NUM){
@@ -156,12 +159,16 @@ function deleteAllCookies(){
 		<h3>로그인 해주세요</h3>
 		</c:otherwise>
 		</c:choose>
+		<ul class="carousel" style="height: 10%">
 		<c:forEach var="w_dto" items="${wishList}">
+		<li style="margin: -13px">
 		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
 			<img src="<%=cp%>/resources/goodsImage/${w_dto.getW_SAVEFILENAME()}" width="100" height="100"/><br/><br/>
 		</a>
+		</li>
 		</c:forEach>
-		
+		</ul>
+
 			<c:if test="${cookieDataCount==0 }">
 				등록된 상품이 없습니다.
 			</c:if>
