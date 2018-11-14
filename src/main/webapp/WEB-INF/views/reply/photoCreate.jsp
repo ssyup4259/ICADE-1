@@ -20,12 +20,13 @@
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>포토리뷰 입력</title>
+<title>포토리뷰 작성하기</title>
 
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -106,7 +107,7 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center; padding-right: 520px;font-size: 20px">작성자</dt>
+				<dt style="float: center; padding-right: 510px;font-size: 20px">작&nbsp;성&nbsp;자</dt>
 				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_ID" maxlength="20" class="inputBoxGreen"
 					value="${sessionScope.userInfo.getM_ID()}" style="width: 33%"/>
@@ -120,27 +121,27 @@
 				<dd style="float: center;padding-right: 7px">
 					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 33%" class="textAreaGreen" placeholder="내용을 입력하세요"></textarea>
 				</dd>
-				<dt style="float: center;padding-right: 260px">
-					메인사진 :
+				<dt style="float: center;padding-right: 235px">
 					<div class="filebox bs3-primary preview-image1">
+					메인사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="upload">업로드</label> 
 						<input type="file"  name="bcfile" id="upload" class="upload-hidden"><br>
 					</div>
-					내용사진 :
 					<div class="filebox bs3-primary preview-image2">
+					내용사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="upload1">업로드</label> 
 						<input type="file"  name="bcfile1" id="upload1" class="upload-hidden"><br>
 					</div>
-					내용사진 :
 					<div class="filebox bs3-primary preview-image3">
+					내용사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="upload2">업로드</label> 
 						<input type="file"  name="bcfile2" id="upload2" class="upload-hidden"><br>
 					</div>
-					내용사진 :
 					<div class="filebox bs3-primary preview-image4">
+					내용사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="upload3">업로드</label> 
 						<input type="file"  name="bcfile3" id="upload3" class="upload-hidden"><br>
@@ -150,7 +151,7 @@
 		</div>
 	</div>	
 	
-	<div id="bbsCreated_footer" align="center">
+	<div id="bbsCreated_footer" align="center" style="padding-left: 60px">
 	<input type="button" value=" 등록하기 " class="btnGreen" onclick="goodsPhotoReview();"/>
 	<input type="reset" value=" 다시입력 " class="btnGreen" onclick="document.photoReplyForm.subject.focus();"/>
 	<input type="button" value=" 작성취소 " class="btnGray" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${G_NUM}';"/>	

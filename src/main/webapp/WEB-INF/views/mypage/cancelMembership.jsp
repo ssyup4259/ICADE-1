@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

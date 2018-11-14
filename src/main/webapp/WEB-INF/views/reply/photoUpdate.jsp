@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>포토후기</title>
+<title>포토리뷰 수정하기</title>
 <style type="text/css">
 
 .textAreaGreen{
@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -97,7 +98,7 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center; padding-right: 515px;font-size: 20px">작성자</dt>
+				<dt style="float: center; padding-right: 515px;font-size: 20px">작&nbsp;성&nbsp;자</dt>
 				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_ID" size="74" maxlength="20" class="inputBoxGreen"
 					value="${sessionScope.userInfo.getM_ID()}"/>
@@ -115,34 +116,36 @@
 		</div>
 		<div id="bbsCreated_image" >
 			<dl>
-				<dt style="float: center; padding-right: 510px;font-size: 20px">사&nbsp;&nbsp;&nbsp;&nbsp;진</dt>
-				
-				<dd style="float: center; padding-right: 300px;" >
+				<dd style="float: center; padding-right: 265px;" >
 					<div class="filebox bs3-primary preview-image1">
+					메인사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="input_file1">업로드</label> 
 						<input type="file"  name="bcfile" id="input_file1" class="upload-hidden"><br>
 						${bc_dto.getBC_IMAGE()}
 					</div>
 				</dd>
-				<dd style="float: center; padding-right: 300px;">
+				<dd style="float: center; padding-right: 265px;">
 					<div class="filebox bs3-primary preview-image2">
+					내용사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="input_file2">업로드</label> 
 						<input type="file"  name="bcfile1" id="input_file2" class="upload-hidden"><br>
 						${bc_dto.getBC_CONTENTFILE1()}
 					</div>
 				</dd>
-				<dd style="float: center; padding-right: 300px;">
+				<dd style="float: center; padding-right: 265px;">
 					<div class="filebox bs3-primary preview-image3">
+					내용사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="input_file3">업로드</label> 
 						<input type="file"  name="bcfile2" id="input_file3" class="upload-hidden"><br>
 						${bc_dto.getBC_CONTENTFILE2()}
 					</div>
 				</dd>
-				<dd style="float: center; padding-right: 300px;">
+				<dd style="float: center; padding-right: 265px;">
 					<div class="filebox bs3-primary preview-image4">
+					내용사진 :
 						<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 						<label for="input_file4">업로드</label> 
 						<input type="file"  name="bcfile3" id="input_file4" class="upload-hidden"><br>
@@ -154,7 +157,7 @@
 		
 	</div>	
 	
-	<div  align="center" style="padding-left: 60px">
+	<div  align="center" style="padding-left: 70px">
 	<input type="button" value="수정하기" class="btnGreen" onclick="updateSend();"/>
 	<input type="reset" value="다시입력" class="btnGray" onclick="document.updateForm.subject.focus();"/>
 	<input type="button" value="작성취소" class="btnGray"onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}&#section3';"/>	
