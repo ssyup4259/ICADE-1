@@ -69,6 +69,7 @@
 			return;
 		}
 		f.BC_CONTENT.value = str;
+		
 
 		f.action = "<%=cp%>/goods/articleUpdate_ok.action?replyPageNum=${replyPageNum}";
 		f.submit();

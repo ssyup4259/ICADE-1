@@ -68,6 +68,8 @@
 		}
 		f.BC_CONTENT.value = str;
 
+		
+		
 		f.action = "<%=cp%>/goods/replyUpdate_ok.action";
 		f.submit();
 		

@@ -104,7 +104,7 @@
 				
 				
 				var BC_NUM =$("#articleBC_NUM").val()
-				
+				swal("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
 					 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
@@ -204,6 +204,7 @@
 				</div>
 				<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 					<div align="center">
+						<!-- 댓글 목록부분 -->
 						<textarea id="PhotoReply_CONTENT" class="textAreaGray" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
 						<br>
 						<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="댓글등록" class="btnGreen" class="btnGreen" height="40px" style="width: 15%" />

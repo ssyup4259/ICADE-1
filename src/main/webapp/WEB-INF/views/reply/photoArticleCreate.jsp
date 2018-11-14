@@ -75,6 +75,8 @@
 			return;
 		}
 		f.BC_CONTENT.value = str;
+		
+		
 		fileUpload = $("#prUpload").val();
 		
 		if (prUpload.length<1) {

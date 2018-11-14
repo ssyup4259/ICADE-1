@@ -40,6 +40,8 @@
 						var BC_CONTENT =$("#updateReply").val();
 						
 						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r\n");
+						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\n");
+						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r");
 						
 						$("#updateReply").val(BC_CONTENT);
 					 

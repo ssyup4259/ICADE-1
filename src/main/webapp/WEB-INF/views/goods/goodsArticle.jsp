@@ -70,7 +70,8 @@ input.down {
 }
 </style>
 
-<!-- 댓글에 띄울 리스트 작성 -->
+
+<!-- 포토리뷰에 띄울 리스트 작성 -->
 <script>
 $(document).ready(function() {
 	
@@ -82,7 +83,6 @@ $(document).ready(function() {
 		 type:"get",
 		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}&curPage="+1,
 		 success : function(result) {
-			 //responseText가 result에 저장됨.
 			 $("#replyList").html(result);
 		}
 	 });

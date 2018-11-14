@@ -42,6 +42,7 @@
 		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
 		 success : function(result) {
 			 //responseText가 result에 저장됨.
+			 
 			 $("#replyComment").html(result);
 		},error : function (result) {
 		}
@@ -84,24 +85,27 @@
 </script>
 <!-- 대댓글 등록하기 -->
 <script>
-	function writeCmt(BC_BOARD,BC_NUM,BC_CONTENT) {
+	function writeCmt(BC_BOARD,BC_NUM) {
 		
-		var f = document.replyForm;
+	
 		
-		var BC_CONTENT =$("#BC_CONTENT").val();
+		var BC_CONTENT = $("#plBC_CONTENT").val();
+		/* var BC_CONTENT = $("#plBC_CONTENT").val(); */
 		var BC_ID =${sessionScope.userInfo.getM_ID()};
 		var BC_NUM =BC_NUM;
 		var BC_BOARD = BC_BOARD;
 		var num = $("#gaPrNum").val();
+		
+ 		alert(BC_CONTENT);
+ 		if (BC_CONTENT.length<1) {
+			swal("내용을 입력해주세요!");
+			f.BC_CONTENT.focus();
+		}
 		BC_CONTENT = BC_CONTENT.replace(/\r\n/g, '<br>');
 		BC_CONTENT = BC_CONTENT.replace(/\r/g, '<br>');
 		BC_CONTENT = BC_CONTENT.replace(/\n/g, '<br>')
-		
-		
-		if (BC_CONTENT.length<1) {
-			swal("내용을 입력해주세요");
-			f.BC_CONTENT.focus();
-		}
+ 		
+
 		var formData = {"BC_ID":BC_ID,"BC_CONTENT":BC_CONTENT,"BC_BOARD":BC_BOARD,"BC_NUM":BC_NUM};
 		
 		$.ajax({
@@ -110,32 +114,29 @@
 			data : formData,
 			success:function(result){
 				
-				console.log(result);
-				
 				var BC_NUM =$("#BC_NUM").val()
-				
 				swal("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
 					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
 					 success : function(result) {
-						 //responseText가 result에 저장됨.
 						 $("#replyComment").html(result);
 					}
 				 });
-				$("#BC_CONTENT").val("");
+				$("#plBC_CONTENT").val('');
 			},
 			error: function(result) {
 				swal("안된다");
 				swal(result);
 			}
 		});
+	
 	}
 </script>
 
 
 <body>
-	<form id="replyForm" method="post" enctype="multipart/form-data">
+	<form id="replyForm" name="replyForm" method="post" enctype="multipart/form-data">
 		 <div id="bbs" align="center">
 			<div id="bbsArticle">
 					<br><br><br><br>
@@ -180,15 +181,15 @@
 									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: auto; height: auto" id="">
 									</c:if>
 									<br>
-									${bc_dto.getBC_CONTENT()}
-									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
+									<span id="gBC_CONTENT">${bc_dto.getBC_CONTENT()}</span>
+									<input type="text" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
 								</td>
 							</tr>
 						</table>
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 								<div align="center" style="float: center">
-									<textarea id="BC_CONTENT" name="BC_CONTENT"  rows="2" cols="100"></textarea><br>
+									<textarea id="plBC_CONTENT" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea><br>
 									<input type="button" onclick="writeCmt(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="[댓글등록]" class="btnGreen" style="width: 15%">
 									<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 									value="${sessionScope.userInfo.getM_ID()}"/>
