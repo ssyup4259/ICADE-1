@@ -53,52 +53,58 @@ public class CookieController {
 		Iterator<String> it = lists.iterator();
 		endJIndx = g_num.indexOf("&");//주소에 특수문자가 올경우 자르기(특수 문자 3개 올경우)ㄴ
 		endIdx = g_num.indexOf("#");
-
-		if(	endJIndx ==-1) {
-			if(endIdx ==-1) {
-				g_num = g_num.substring(0);
+		if(isNumeric(g_num)){
+			if(	endJIndx ==-1) {
+				if(endIdx ==-1) {
+					g_num = g_num.substring(0);
+				}else {
+				g_num = g_num.substring(0,endIdx);
+				}
 			}else {
-			g_num = g_num.substring(0,endIdx);
-			}
-		}else {
-			g_num = g_num.substring(0,endJIndx);
-			
-		}
-		
-		while (it.hasNext()) {
-			String num = it.next();
+				g_num = g_num.substring(0,endJIndx);
 				
-			if (num == g_num || num.equals(g_num)) {
-				Cookie setCookie = new Cookie(g_num, null);
-				setCookie.setMaxAge(0);
-				setCookie.setPath("/");
-				resp.addCookie(setCookie);
-				break;
 			}
 			
-		}
-	
-		startIdx = g_num.indexOf("=");
-		endJIndx = g_num.indexOf("&");
-		endIdx = g_num.indexOf("#");
-	if(	endJIndx ==-1) {
-		if(endIdx ==-1) {
-			g_num = g_num.substring(startIdx+1);
+			while (it.hasNext()) {
+				String num = it.next();
+					
+				if (num == g_num || num.equals(g_num)) {
+					Cookie setCookie = new Cookie(g_num, null);
+					setCookie.setMaxAge(0);
+					setCookie.setPath("/");
+					resp.addCookie(setCookie);
+					break;
+				}
+				
+			}
+		
+				startIdx = g_num.indexOf("=");
+				endJIndx = g_num.indexOf("&");
+				endIdx = g_num.indexOf("#");
+				
+			if(	endJIndx ==-1) {
+				if(endIdx ==-1) {
+					g_num = g_num.substring(startIdx+1);
+				}else {
+					g_num = g_num.substring(startIdx,endIdx);
+				}
 		}else {
-		g_num = g_num.substring(startIdx,endIdx);
+			g_num = g_num.substring(startIdx,endJIndx);
+			
 		}
-	}else {
-		g_num = g_num.substring(startIdx,endJIndx);
+			Cookie setCookie = new Cookie(g_num, g_num);
+			setCookie.setMaxAge(60*60*24);
+			setCookie.setPath("/");
+			resp.addCookie(setCookie);
 		
-	}
-		Cookie setCookie = new Cookie(g_num, g_num);
-		setCookie.setMaxAge(60*60*24);
-		setCookie.setPath("/");
-		resp.addCookie(setCookie);
-	
+			return "success";
+			
+		}else {
+			return "false";
+		}
 		
-	
-		return "success";
+		
+		
 	}
 	
 	
@@ -148,4 +154,14 @@ public class CookieController {
 		return "success";
 	}
 
+	public static boolean isNumeric(String s) {
+		try {
+			Double.parseDouble(s);
+			return true;
+		} catch(NumberFormatException e) {
+			return false;
+		}
+	}
 }
+
+

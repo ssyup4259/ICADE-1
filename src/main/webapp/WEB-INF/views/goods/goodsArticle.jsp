@@ -4,6 +4,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	Object dest = session.getAttribute("dest");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -268,19 +269,14 @@ $(function() {
 					swal("이미 장바구니에 존재하는 상품입니다.");
 				} else if (data == "lack") {
 					swal("담고자하는 수량이 재고 수량보다 많습니다.");
-				} /* else {
-					swal("로그인 후 사용 가능합니다.");
 				}
- */
 				console.log(data);
-
 			},
-
 			error : function(jqXHR,data) {
-				if(jqXHR.status==901){
+				if(jqXHR.status==911){
 					location.href="<%=cp%>/login.action";
 				}else{
-					swal("error : " + data);
+					swal("error : " + data + "jqXHR.status : " + jqXHR.status);
 					console.log(data);
 				}
 
@@ -293,10 +289,14 @@ $(function() {
 <script type="text/javascript">
 
 	function orderIt() {
-		
 		var f = document.myForm;
 		var login = "${sessionScope.userInfo.getM_ID()}";
 		var code = $("#sub").val();
+		var GD_NUM = $("#GD_NUM").val();
+		var GD_KIND_NUM = $("#GD_KIND_NUM").val();
+		var GD_COLOR = $("#sub option:selected").val();
+		var GD_COUNT = $("#GD_COUNT").val();
+		var GD_DEVICE = $("#product option:selected").val();
 		
 		if (f.GD_DEVICE.value == "none") {
 			swal("기종을 선택 해 주세요.");
@@ -324,14 +324,8 @@ $(function() {
 			return;
 		}
 		
-		f.action = "<%=cp%>/buy/buyForm.action";
-		f.submit();	
-		/* if (login != "") {
-			f.submit();	
-		} else {
-			swal("로그인 후 사용 가능합니다.");
-		} */
-
+		f.action = "<%=cp%>/buy/buyForm.action?GD_NUM=" + GD_NUM + "&GD_KIND_NUM=" + GD_KIND_NUM + "&GD_DEVICE=" + 1 + "&GD_COLOR=" + GD_COLOR + "&GD_COUNT=" + GD_COUNT ;
+		f.submit();
 	}
 
 </script>
@@ -366,7 +360,7 @@ function like_func(g_num) {
 		
 		},
 		error : function(jqXHR,data) {
-			if(jqXHR.status==901){
+			if(jqXHR.status==911){
 				location.href="<%=cp%>/login.action";
 			}else{
 				swal("error : " + data);
@@ -417,7 +411,7 @@ function like_func(g_num) {
 	<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<form id="myForm" name="myForm" method="post" action="" enctype="multipart/form-data">
+			<form id="myForm" name="myForm" method="get" action="" enctype="multipart/form-data">
 				<div align="left" style="font-size: 30px; margin-bottom: 10px; padding-left: 80px;">${g_dto.getG_NAME()}</div>
 				<div class="row">
 					<div class="col-sm-5">
@@ -456,7 +450,7 @@ function like_func(g_num) {
 							<div class="col-sm-3" style="text-align: left;">기종</div>
 							<div class="col-sm-9" style="text-align: left">
 								<c:if test="${!empty gd_list}">
-									<input type="hidden" name="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
+									<input type="hidden" name="GD_KIND_NUM" id="GD_KIND_NUM" value="${gd_list[0].getGD_KIND_NUM()}" />
 									<select name="GD_DEVICE" id="product" class="selGreen" style="width: 100%;">
 										<option value="none">::기종을 선택하세요::</option>
 										<c:forEach var="gd_dto" items="${d_list}">
@@ -515,7 +509,7 @@ function like_func(g_num) {
 							</div>
 							<div class="row col-sm-9" style="text-align: left">
 								<input type="hidden" name="G_NUM" value="${g_dto.getG_NUM()}">
-								<input type="hidden" name="GD_NUM" value="${g_dto.getG_NUM()}">
+								<input type="hidden" name="GD_NUM" id="GD_NUM" value="${g_dto.getG_NUM()}">
 								<div class="col-sm-6">
 									<input type="button" value="구매하기" onclick="orderIt();" class="btnGray" style="width: 100%" />
 								</div>

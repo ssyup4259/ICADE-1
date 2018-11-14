@@ -256,7 +256,7 @@ td{
 					<input type="button" value="주문내역조회" id="orderHistory" onclick="location.href='orderHistory.action'" class="btnGreen" style="width: 170px;">
 					<input type="button" value="최근보낸주소" id="opener" class="btnGreen" style="width: 170px;">
 					<div id="dialog" title="최근 보낸 주소">
-  						<p>ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+  						<p></p>
 					</div>
 					<br>
 					<br>
@@ -340,7 +340,6 @@ td{
 	        autoOpen: false,
 	        height: 300,
 	        modal: true,
-	        position:[1104,1274],
 			show: {
 			effect: "blind",
 			duration: 1000

@@ -45,6 +45,12 @@ public class BuyServiceImpl implements BuyService {
 		
 		req.setAttribute("m_dto", m_dto);
 		
+		gd_dto.setGD_NUM(Integer.parseInt(req.getParameter("GD_NUM")));
+		gd_dto.setGD_KIND_NUM(Integer.parseInt(req.getParameter("GD_KIND_NUM")));
+		gd_dto.setGD_DEVICE(Integer.parseInt(req.getParameter("GD_DEVICE")));
+		gd_dto.setGD_COLOR(Integer.parseInt(req.getParameter("GD_COLOR")));
+		gd_dto.setGD_COUNT(Integer.parseInt(req.getParameter("GD_COUNT")));
+		
 		String gd_code = gd_dto.getGD_NUM() + "-" + gd_dto.getGD_KIND_NUM() + "-" + gd_dto.getGD_DEVICE() + "-" + gd_dto.getGD_COLOR();
 		
 		GoodsDTO g_dto = a_dao.getReadGoods(gd_dto.getGD_NUM());
