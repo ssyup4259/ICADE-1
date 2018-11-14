@@ -239,7 +239,7 @@ td {
 	</div>
 
 	<jsp:include page="../include/footer.jsp" flush="false" />
-	<script type="text/javascript">
+<script type="text/javascript">
 
 	$(window).load(function () {
 	    $(".gubun").each(function () {
@@ -250,38 +250,7 @@ td {
 	        }
 	    });
 	});
-</script>
-</body>
-</html>ach>
-						<tr>
-							<td colspan="7"><c:if test="${dataCount==0}">
-									<p class="message">주문 내역이 없습니다.</p>
-								</c:if> <c:if test="${dataCount!=0}">
-							${pageIndexList}
-						</c:if></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<br />
-			<br />
-
-		</div>
-	</div>
-
-	<jsp:include page="../include/footer.jsp" flush="false" />
-	<script type="text/javascript">
-
-	$(window).load(function () {
-	    $(".gubun").each(function () {
-	        var rows = $(".gubun:contains('" + $(this).text() + "')");
-	        if (rows.length > 1) {
-	          rows.eq(0).attr("rowspan", rows.length);
-	          rows.not(":eq(0)").remove();
-	        }
-	    });
-	});
+	
 </script>
 </body>
 </html>
