@@ -10,12 +10,13 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>회원가입 창</title>
+<title>회원가입 약관 동의</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -228,7 +229,7 @@
 				   	 <input type="button" value="동의" class="btnGreen" onclick="chkJoin();" style="padding-top: 4px" />&nbsp;&nbsp;&nbsp;
 				  </li>
 				  <li>
-				   	 <input type="button" id="btnNochkJoin" value="동의하지 않습니다" class="btnGray" onclick="nochkJoin();"/>
+				   	 <input type="button" id="btnNochkJoin" value="메인으로" class="btnGray" onclick="nochkJoin();"/>
 				  </li>
 		     </ul>
 			</form>

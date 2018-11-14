@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <title>마이 쇼핑</title>
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>

@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

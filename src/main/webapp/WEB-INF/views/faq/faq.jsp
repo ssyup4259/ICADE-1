@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>

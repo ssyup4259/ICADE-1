@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 	<title>답글</title>
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>

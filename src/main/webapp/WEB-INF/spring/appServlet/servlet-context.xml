@@ -41,7 +41,7 @@
    		 <beans:property name="contentType" value="application/json;charset=UTF-8"> </beans:property>
 	</beans:bean>
 	
-		
+
 	<!-- <beans:bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg ref="sessionFactory"/>
 	</beans:bean>
