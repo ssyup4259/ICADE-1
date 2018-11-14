@@ -20,7 +20,7 @@
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>댓글 입력</title>
+<title>포토리뷰 입력</title>
 
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 
-	 function sendIt(){
+	 function goodsPhotoReview(){
 		
 		f = document.photoReplyForm;
 		
@@ -82,7 +82,7 @@
 	
 	<form action="" name="photoReplyForm" method="post" enctype="multipart/form-data">
 	
-	<input type="hidden" name="G_NUM" value="${G_NUM}">
+	<input type="text" name="G_NUM" value="${G_NUM}">
 	
 	<div id="bbsCreated">
 		<div class="bbsCreated_bottomLine">
@@ -121,9 +121,9 @@
 	</div>	
 	
 	<div id="bbsCreated_footer" align="center">
-	<input type="button" value=" 등록하기 " class="btnGreen" onclick="sendIt();"/>
+	<input type="button" value=" 등록하기 " class="btnGreen" onclick="goodsPhotoReview();"/>
 	<input type="reset" value=" 다시입력 " class="btnGreen" onclick="document.photoReplyForm.subject.focus();"/>
-	<input type="button" value=" 작성취소 " class="btnGray" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}';"/>	
+	<input type="button" value=" 작성취소 " class="btnGray" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${G_NUM}';"/>	
 	</div>
 	
 	</form>

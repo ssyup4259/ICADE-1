@@ -82,7 +82,29 @@
 						</td>
 					</tr>
 				</table>
-		</c:forEach> 	
+		</c:forEach>
+			<table style="border: none;background: transparent;color: #A8C838;font-size: 20px">
+				<tr>
+		            <td style="border-bottom: none;background: transparent;">
+		                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
+		                <c:if test="${replyPager.curBlock > 1}">
+		                    <a href="javascript:listReply('1')">[처음]</a>
+		                </c:if>
+		                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
+		                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
+		                    <c:choose>
+		                        <c:when test="${num == replyPager.curPage}">
+				                <input type="hidden" name="gaPrNum" id="gaPrNum" value="${num}">
+		                            ${num}&nbsp;
+		                        </c:when>
+		                        <c:otherwise>
+		                            <a href="javascript:listReply('${num}')">${num}</a>&nbsp;
+		                        </c:otherwise>
+		                    </c:choose>
+		                </c:forEach>
+		            </td>
+		        </tr>
+			</table>	
 	<div id="goodsReplyModifier"></div>
 </form>
 </body>

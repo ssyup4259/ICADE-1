@@ -34,13 +34,11 @@
 
 <script>
  $(document).ready(function() {
-	 
-	 
 	var BC_NUM = $("#BC_NUM").val();
 	if (BC_NUM !=undefined) {
 	$.ajax({
 		 type:"get",
-		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+		 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
 		 success : function(result) {
 			 //responseText가 result에 저장됨.
 			 $("#replyComment").html(result);
@@ -55,11 +53,11 @@
 	function replyListUpdate(){
 		
 		var BC_NUM =$("#BC_NUM").val();
-		
+		var num = $("#gaPrNum").val();
 		
 		$.ajax({
 			 type:"get",
-			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM,
+			 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
 			 success : function(result) {
 				 
 				 var BC_NUM =$("#BC_NUM").val();
