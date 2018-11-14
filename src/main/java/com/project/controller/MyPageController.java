@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -312,15 +313,18 @@ public class MyPageController {
 	
 	@RequestMapping(value="/refreshAjax.action", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public int refreshAjax(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String refreshAjax(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
-		int point = 0;
+		int pointInt = 0;
 		
 		String M_ID = request.getParameter("M_ID");
 		
-		point = my_service.pointCheck(M_ID);
+		pointInt = my_service.pointCheck(M_ID);
 		
-		System.out.println(point);
+		DecimalFormat df = new DecimalFormat("#,###");
+		String point = df.format(pointInt);
+		
+		//System.out.println(point);
 		
 		return point;
 	}

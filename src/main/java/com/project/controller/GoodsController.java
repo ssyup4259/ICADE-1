@@ -132,8 +132,8 @@ public class GoodsController {
 		}
 		
 		req.setAttribute("w_Check", w_Check);
-		
-
+	
+		session.setAttribute("g_num", g_num);
 		
 		g_service.goodsArticle(req);
 		

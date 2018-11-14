@@ -78,9 +78,6 @@ public class LoginController {
 			
 			return "home";
 		}
-		
-		
-		
 	}
 	
 	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})

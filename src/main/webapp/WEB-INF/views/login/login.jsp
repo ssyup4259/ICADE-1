@@ -62,7 +62,10 @@
 							<td colspan="2" style="text-align: left">비밀번호 : <input type="password" name="M_PW" id="userPw" class="inputBoxGray" style="width: 380px; background: transparent"></td>
 						</tr>
 						<tr style="border-bottom: 1px solid black;">
-							<td style="border-right: 1;"><input type="checkbox" id="saveId" name="idSaveCheck">아이디 저장</td>
+							<td style="border-right: 1;">
+								<input type="checkbox" id="saveId" name="idSaveCheck">
+								<label for="saveId"><span></span>&nbsp;아이디 저장</label>
+							</td>
 							<td><input type="button" value="로그인" id="login" onClick="loginProcess()" class="btnGreen" style="width: 150px;"></td>
 							<!-- 
 							<td>

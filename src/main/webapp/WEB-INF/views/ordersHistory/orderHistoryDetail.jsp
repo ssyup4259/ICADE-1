@@ -91,7 +91,7 @@ table {
 								<div class="buy_dl_info">0원(배송비)</div>
 							</td>
 							<td class="cont2" rowspan="1">배송완료</td>
-							<td><a class="btn_flexible btn_flexible02" onclick="window.open('/mypage/delivery_popup/801797022/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;"> <span class="inner">배송조회</span>
+							<td><a class="btn_flexible btn_flexible02" onclick="window.open('http://www.deliverytracking.kr/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;"> <span class="inner">배송조회</span>
 							</a></td>
 						</tr>
 					</c:forEach>

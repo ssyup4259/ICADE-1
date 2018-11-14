@@ -11,21 +11,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 private void saveData(HttpServletRequest req) {
 		
-		String uri = null;
-		String query = null;
-		
 		HttpSession session = req.getSession();
 		
-		if ("XMLHttpRequest".equals(req.getHeader("X-Requested-With"))) {
-			System.out.println("ajax 요청");
-		}else {
-			uri = req.getRequestURI().toString(); // 요청 uri
-			query = req.getQueryString();
-			
-			System.out.println(uri);
-		}
-		
-		System.out.println(uri);
+		String uri = req.getRequestURI().toString(); // 요청 uri
+		String query = req.getQueryString();
 		
 		if(query==null||query.equals("null")) {
 			query = "";
@@ -34,8 +23,9 @@ private void saveData(HttpServletRequest req) {
 		}
 		
 		if(req.getMethod().equals("GET")) {
-			System.out.println("dest : " + (uri+query));
 			session.setAttribute("dest", uri+query);
+		}else {
+			session.setAttribute("dest", uri);
 		}
 	}
 	
@@ -43,24 +33,23 @@ private void saveData(HttpServletRequest req) {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		System.out.println("===================================intercepter");
-		
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("userInfo") == null||session.getAttribute("userInfo").equals(null)) {
-			
 			if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-				System.out.println("ajax 요청");
-				response.sendError(901);
+				if(request.getRequestURI().toString().equals("/icade/cart/insertCheck.action")||request.getRequestURI().toString().equals("/icade/wish/wishInsert.action")) {
+					session.setAttribute("dest", "/icade/goods/goodsArticle.action?G_NUM="+session.getAttribute("g_num"));
+					response.sendError(911);
+					return false;
+				}else {
+					response.sendError(901);
+					return false;
+				}
 			}else {
-				System.out.println("일반 url 요청");
 				saveData(request);
-				System.out.println(session.getAttribute("dest"));
 				response.sendRedirect("/icade/login.action");
+				return false;
 			}
-			
-			System.out.println("=======================response=======================================================");
-			return false;
 		}else {
 			return true;
 		}
@@ -68,9 +57,7 @@ private void saveData(HttpServletRequest req) {
 	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
-		
 		return req;
-        
     }
 	
 	
