@@ -34,6 +34,11 @@ $("#btnPhotoReplyUpdate").click(function() {
 	var BC_BOARD = $("#inputBC_BOARDdetale").val();
 	var BC_NUM =$("#inputBC_NUMdetale").val();
 
+	BC_CONTENT = updateReply.replace(/\r\n/g, '<br>');
+	BC_CONTENT = updateReply.replace(/\r/g, '<br>');
+	BC_CONTENT = updateReply.replace(/\n/g, '<br>')
+	
+	
 	$.ajax({
 		type:"post",
 		url : "<%=cp%>/goods/goodsReplyUpdate.action",
@@ -79,7 +84,7 @@ $("#btnPhotoReplyDelete").click(function() {
 <body>
 
 	<div align="center">
-		<textarea id="updateReply" class="textAreaGreen" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
+		<textarea id="updateReply"  name="updateReply" class="textAreaGreen" rows="5" cols="82">${bc_dto.getBC_CONTENT()}</textarea>
 	</div>
 	<div style="text-align: center;">
 		<!-- 작성자만 댓글 수정 삭제가 가능하도록 처리 -->

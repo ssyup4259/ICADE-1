@@ -62,7 +62,6 @@
 							<div id="btn" style="text-align: center;">
 								<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 								<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-									<%-- <a href="" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})">[수정]</a> --%>
 									<button type="button"  onclick="photoUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGreen">수정</button>
 								</c:if>
 							</div> 

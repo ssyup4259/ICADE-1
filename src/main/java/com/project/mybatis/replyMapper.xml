@@ -105,7 +105,7 @@ select count(*) from board_comment where BC_PARENT=#{BC_NUM}
 <select id="readReply" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO">
 	  <include refid="pagingHeader"/>
 			select BC_BOARD,BC_NUM,to_char(BC_DATE, 'YYYY-MM-DD'),BC_CONTENT,BC_PARENT,BC_ID from board_comment
-		    where  BC_PARENT = #{BC_NUM} ORDER BY BC_NUM
+		    where  BC_PARENT = #{BC_NUM} ORDER BY BC_NUM desc
       <include refid="pagingFooter"/>	
 </select>
 
