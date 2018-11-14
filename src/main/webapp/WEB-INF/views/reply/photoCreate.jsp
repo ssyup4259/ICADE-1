@@ -67,6 +67,16 @@
 			return;
 		}
 		f.BC_CONTENT.value = str;
+		
+		fileUpload = $("#upload").val();
+		
+		if (fileUpload.length<1) {
+			swal("메인사진을 등록해주세요");
+			f.bcfile.focus();
+			return;
+		}
+		
+		
 
 		f.action = "<%=cp%>/goods/replyinsert_ok.action";
 		f.submit();
@@ -82,7 +92,7 @@
 	
 	<form action="" name="photoReplyForm" method="post" enctype="multipart/form-data">
 	
-	<input type="text" name="G_NUM" value="${G_NUM}">
+	<input type="hidden" name="G_NUM" value="${G_NUM}">
 	
 	<div id="bbsCreated">
 		<div class="bbsCreated_bottomLine">
@@ -111,10 +121,10 @@
 					<textarea rows="12" cols="63" name="BC_CONTENT" style="width: 33%" class="textAreaGreen" placeholder="내용을 입력하세요"></textarea>
 				</dd>
 				<dt style="float: center;padding-right: 260px">
-					<input type="file" id="upload" name="bcfile" class="btnGray"><br>
-					<input type="file" id="upload1" name="bcfile1" class="btnGray"><br>
-					<input type="file" id="upload2" name="bcfile2" class="btnGray"><br>
-					<input type="file" id="upload3" name="bcfile3" class="btnGray"><br>
+					메인사진 : <input type="file" id="upload" name="bcfile" class="btnGray"><br>
+					내용사진 : <input type="file" id="upload1" name="bcfile1" class="btnGray"><br>
+					내용사진 : <input type="file" id="upload2" name="bcfile2" class="btnGray"><br>
+					내용사진 : <input type="file" id="upload3" name="bcfile3" class="btnGray"><br>
 				</dt>							
 			</dl>		
 		</div>
