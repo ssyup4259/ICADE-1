@@ -113,7 +113,7 @@ select count(*) from board_comment where BC_PARENT=#{BC_NUM}
 <!-- 상품후기 작성을 위한 상품리스트 검색 -->
 <select id="searchGoodsLists" parameterType="hashMap" resultType="com.project.dto.BoardCommentDTO">
 	<include refid="pagingHeader"/>
-	select DISTINCT G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME,BC_BOARD
+	select DISTINCT G_NUM,G_NAME,G_DISCOUNT,G_PRICE,G_SAVEFILENAME
 		FROM GOODS,(select BC_BOARD from BOARD_COMMENT)
     where 
     	G_NAME like '%' || #{searchValue} || '%' ORDER BY G_NUM desc

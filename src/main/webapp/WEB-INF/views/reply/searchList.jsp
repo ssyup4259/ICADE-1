@@ -54,7 +54,7 @@
 					</div>
 					<div class="col-sm-6" style="float: right;text-align: left">
 						<h3><a href="#searchFix" onclick="searchFix('${bc_dto.getG_NUM()}','${bc_dto.getG_NAME()}');" style="padding-top: 10px;font-size: 15px;">#${bc_dto.getG_NAME()}</a><font size="3">&nbsp;₩<fmt:formatNumber>${bc_dto.getG_PRICE()}</fmt:formatNumber></font></h3>
-						<input type="button" class="btnGray" value="상품상세보기" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getBC_BOARD()}';">
+						<input type="button" class="btnGray" value="상품상세보기" onclick="javascript:location.href='<%=cp%>/goods/goodsArticle.action?G_NUM=${bc_dto.getG_NUM()}';">
 						<input type="hidden" name="searchValue" id="prSearchValue" value="${bc_dto.getG_NAME()}">
 					</div>
 				</div>	

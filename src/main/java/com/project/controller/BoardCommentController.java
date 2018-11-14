@@ -131,21 +131,24 @@ public class BoardCommentController {
 	public String articleUpdate(HttpServletRequest req)throws Exception{
 		
 		int BC_NUM = Integer.parseInt(req.getParameter("BC_NUM"));
-		System.out.println(BC_NUM);
+		int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
 		BoardCommentDTO bc_dto = bc_service.getReadReply(BC_NUM);
 		
+		req.setAttribute("replyPageNum", replyPageNum);
 		req.setAttribute("bc_dto", bc_dto);
 		
 	 	return "reply/photoArticleUpdate";
 	}
-	//포토리뷰 상세 페이지 수정-1
+	//포토리뷰 상세 페이지 수정
 	@RequestMapping("/articleUpdate_ok.action")
 	public String articleUpdate_ok(BoardCommentDTO bc_dto, MultipartHttpServletRequest req, HttpServletRequest request)throws Exception{
 		
 		int BC_NUM = Integer.parseInt(request.getParameter("BC_NUM"));
+		int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
 		bc_service.updateData(bc_dto, req, request);
 		
-		return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM;
+		req.setAttribute("replyPageNum", replyPageNum);
+		return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM+"&replyPageNum="+replyPageNum;
 	}
 	//포토리뷰 삭제
 	@RequestMapping(value="/articleDelete.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -237,7 +240,11 @@ public class BoardCommentController {
 	//포토후기 게시판에서 포토후기 작성하기
 	@RequestMapping(value="/photoInsertData.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String photoInsertData(HttpServletRequest req)throws Exception{
+		
+		int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
 		c_service.cookieList(req);
+		
+		req.setAttribute("replyPageNum", replyPageNum);
 	 	return "reply/photoArticleCreate";
 	}
 	@RequestMapping(value="/photoInsertData_ok.action", method= {RequestMethod.GET, RequestMethod.POST})
@@ -247,8 +254,9 @@ public class BoardCommentController {
 	 
 	 	System.out.println(bc_dto.getBC_NUM());
 	 	int BC_NUM = bc_dto.getBC_NUM();
+	 	int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
 	 	
-	 	return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM;
+	 	return "redirect:/goods/replyArticle.action?BC_NUM="+BC_NUM+"&replyPageNum="+replyPageNum;
 	}
 	
 	@RequestMapping(value="/searchGoodsList.action",method= {RequestMethod.GET, RequestMethod.POST})
