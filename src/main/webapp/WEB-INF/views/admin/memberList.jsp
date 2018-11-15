@@ -69,37 +69,37 @@
 				<div class="btn-group" data-toggle="buttons">
 					<c:if test="${empty M_RANK}">
 						<input type="radio" id="m_all" name="M_RANK" value="" checked="checked"/>
-						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						<label for="m_all" style="cursor: pointer;"><span></span>&nbsp;전체&nbsp;</label>
 						
 						<input type="radio" id="m_customer" name="M_RANK" value="customer"/>
-						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						<label for="m_customer" style="cursor: pointer;"><span></span>&nbsp;customer&nbsp;</label>
 						
 						<input type="radio" id="m_seller" name="M_RANK" value="seller"/>
-						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<label for="m_seller" style="cursor: pointer;"><span></span>&nbsp;seller&nbsp;</label>
 						<br/><br/>
 					</c:if>
 
 					<c:if test="${M_RANK == 'customer'}">
 						<input type="radio" id="m_all" name="M_RANK" value=""/>
-						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						<label for="m_all" style="cursor: pointer;"><span></span>&nbsp;전체&nbsp;</label>
 						
 						<input type="radio" id="m_customer" name="M_RANK" value="customer" checked="checked"/>
-						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						<label for="m_customer" style="cursor: pointer;"><span></span>&nbsp;customer&nbsp;</label>
 						
 						<input type="radio" id="m_seller" name="M_RANK" value="seller"/>
-						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<label for="m_seller" style="cursor: pointer;"><span></span>&nbsp;seller&nbsp;</label>
 						<br/><br/>
 					</c:if>
 
 					<c:if test="${M_RANK == 'seller'}">
 						<input type="radio" id="m_all" name="M_RANK" value=""/>
-						<label for="m_all"><span></span>&nbsp;전체&nbsp;</label>
+						<label for="m_all" style="cursor: pointer;"><span></span>&nbsp;전체&nbsp;</label>
 						
 						<input type="radio" id="m_customer" name="M_RANK" value="customer"/>
-						<label for="m_customer"><span></span>&nbsp;customer&nbsp;</label>
+						<label for="m_customer" style="cursor: pointer;"><span></span>&nbsp;customer&nbsp;</label>
 						
 						<input type="radio" id="m_seller" name="M_RANK" value="seller" checked="checked"/>
-						<label for="m_seller"><span></span>&nbsp;seller&nbsp;</label>
+						<label for="m_seller" style="cursor: pointer;"><span></span>&nbsp;seller&nbsp;</label>
 						<br/><br/>
 					</c:if>
 				</div>

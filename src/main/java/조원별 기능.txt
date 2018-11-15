@@ -153,7 +153,7 @@ ICADE 기능구현
 문제점
 
 - join.jsp에서 이메일 직접입력시 문제
-
+- cartList.jsp CSS 수정!
 
 
 
