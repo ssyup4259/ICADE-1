@@ -40,33 +40,17 @@ public class MyPageController {
 	WishService w_service;
 	
 	@RequestMapping(value="/myPage.action", method = {RequestMethod.POST,RequestMethod.GET})
-	public String mypage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String myPageMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
 		
-		MemberDTO vo = new MemberDTO();
-		
-		vo = (MemberDTO) session.getAttribute("userInfo");
-		if(vo != null) {
+		if(session.getAttribute("userInfo") != null) {
 			w_service.wishList(request);
-			}
-		String M_ID = vo.getM_ID();
+		}
 		
-		int point = my_service.pointCheck(M_ID);
-		
-		int o_Tot = my_service.selectSumTot(M_ID);
-		int SellCount = my_service.selectCountOnum(M_ID);
-		
-		int usedPoint = my_service.usedPointCheck(M_ID);
-		String jsonM_id = new Gson().toJson(M_ID);
-		
-		request.setAttribute("SellCount", SellCount);
-		request.setAttribute("usedPoint", usedPoint);
-		request.setAttribute("jsonM_id", jsonM_id);
-		request.setAttribute("o_Tot", o_Tot);
-		request.setAttribute("point", point);
-		
+		my_service.myPageMain(request);
 		c_service.cookieList(request);
+		
 		return "/mypage/myPageMain";
 	}
 	
@@ -76,13 +60,12 @@ public class MyPageController {
 		
 		String mode = request.getParameter("mode");
 		
-		//System.out.println(mode);
-		
 		if(mode.equals("")||mode=="") {
 			return "/mypage/myPageMain";
 		}
 		
 		request.setAttribute("mode", mode);
+		
 		HttpSession session2 = request.getSession();
 		MemberDTO mdto=(MemberDTO) session2.getAttribute("userInfo");
 		if(mdto != null) {
@@ -103,8 +86,6 @@ public class MyPageController {
 		
 		String mode = request.getParameter("mode");
 		
-		System.out.println(mode);
-		
 		if(mode.equals(null)||mode==""){
 			return "/mypage/myPageMain";
 		}
@@ -113,7 +94,7 @@ public class MyPageController {
 		
 		MemberDTO vo = (MemberDTO) session.getAttribute("userInfo");
 		if(vo != null) {
-		w_service.wishList(request);
+			w_service.wishList(request);
 		}
 		
 		String session_PW = vo.getM_PW();
@@ -143,13 +124,10 @@ public class MyPageController {
 		
 		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
 
-		if(mdto != null) {
-		w_service.wishList(request);
-		}
-		
 		if(mdto==null) {
-			
 			return "home";
+		}else {
+			w_service.wishList(request);
 		}
 		
 		c_service.cookieList(request);
@@ -175,18 +153,17 @@ public class MyPageController {
 			return "/mypage/cancelAuthorization"; 
 		}
 		
-		System.out.println("맞으면 여기로");
 		if(vo != null) {
 			w_service.wishList(request);
 		}
+		
 		return "/mypage/changInfoAuthorization";
 	}
 	
 	@RequestMapping(value="/changeInfo_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView chanegeInfo_ok(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String chanegeInfo_ok(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView();
 		
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		
@@ -216,9 +193,8 @@ public class MyPageController {
 		
 		session.setAttribute("userInfo", vo1);
 		
-		mav.setViewName("loginTest");
 		
-		return mav;
+		return "redirect:/myPage.action?m_id=" + vo.getM_ID();
 	}
 	
 	@RequestMapping(value="/chanege_check.action", method = {RequestMethod.POST,RequestMethod.GET})

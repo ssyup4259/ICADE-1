@@ -3,6 +3,8 @@ package com.project.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.project.dto.MemberDTO;
 import com.project.dto.OrdersDTO;
 
@@ -29,4 +31,9 @@ public interface MyPageService {
 	//해당 아이디의 총 주문 횟수
 	public int selectCountOnum(String O_ID) throws Exception;
 	
+	//마이페이지 메인
+	public HttpServletRequest myPageMain(HttpServletRequest request) throws Exception;
+	
+	//본인인증 페이지
+	public HttpServletRequest infoCheckPage(HttpServletRequest request) throws Exception;
 }

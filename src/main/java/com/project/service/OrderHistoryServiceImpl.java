@@ -7,13 +7,16 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.JsonObject;
 import com.project.dao.BuyDAO;
 import com.project.dao.OrderHistoryDAO;
+import com.project.dto.MemberDTO;
 import com.project.dto.OrderDetailDTO;
 import com.project.dto.OrderHistoryDTO;
 import com.project.dto.OrdersDTO;
+import com.project.util.MyUtil;
 import com.project.util.RestAPI;
 
 @Service
@@ -39,37 +44,145 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 	@Autowired
 	RestAPI api;
 	
-	//주문내역조회
+	//주문내역조회 메인페이지
 	@Override
-	public List<Integer> selectOrderNum(HashMap<String, Object> hMap) throws Exception {
-		return oh_dao.selectOrderNum(hMap);
+	public HttpServletRequest OrderHistoryMain(HttpServletRequest request) throws Exception {
+
+		HttpSession session = request.getSession();
+		MyUtil myUtil = new MyUtil();
+		Date date = new Date();
+		
+		//로그인시 있는 유저의 세션정보를 받아온다.
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
+		//처음 날짜 검색하고 반환시 값일 있을경우 받고 아닐시 기본값처리 
+		String startDate = (String) request.getParameter("startDay");
+		String endDate = (String) request.getParameter("endDay");
+		
+		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
+		String pageNum = request.getParameter("pageNum");
+		
+		String basicStartDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate());
+		
+		String basicEndDate = (date.getYear()+1900) + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		
+		if(startDate==null || startDate.equals(null)){
+			startDate = basicStartDate; 
+		}
+		if(endDate==null || endDate.equals(null)) {
+			endDate = basicEndDate;
+		}
+		
+		String m_Id = dto.getM_ID();
+		
+		LinkedHashMap<Integer, List<OrderHistoryDTO>> hashMap = new LinkedHashMap<Integer, List<OrderHistoryDTO>>();
+		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("O_ID", m_Id);
+		hMap.put("start_date",startDate);
+		hMap.put("end_date",endDate);	
+		
+		//현재 페이지
+        int currentPage = 1;
+		
+		// 페이지number처리
+		if (pageNum != null) {
+			currentPage = Integer.parseInt(pageNum);
+		}
+		
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int numPerPage = 5;
+		
+		//기간별 총 주문횟수
+		int dataCount = oh_dao.maxOrders(hMap);
+		
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		
+		if (currentPage > totalPage) {
+			currentPage = totalPage;
+		}
+		
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+		
+		hMap.put("start",start);
+		hMap.put("end",end);
+		
+		// 페이징 처리
+
+		String param = "";
+		
+		// 검색하고 기존의 창으로 돌아가기 위한 코딩
+		if (!startDate.equals(basicStartDate)) {
+			param = "startDay=" + startDate;
+			param += "&endDay=" + endDate;
+		}
+
+		String listUrl = "orderHistory.action";
+
+		if (!param.equals("")) {
+			listUrl = listUrl + "?" + param;
+		}
+		
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
+		//기간별 주문 번호 리스트
+		List<Integer> integerList = oh_dao.selectOrderNum(hMap);
+		
+		for(int i = 0;i<integerList.size();i++) {
+			
+			System.out.println(integerList);
+			
+			Integer O_Num = integerList.get(i);
+			
+			hMap.put("OD_NUM",O_Num);
+			
+			//for문으로 뿌려줄 리스트
+			List<OrderHistoryDTO> mapList = oh_dao.OrderHistoryMain(hMap);
+			
+			//key값으로 주문번호를 벨류값으로 주문번호에 따른 주문 내역
+			hashMap.put(O_Num, mapList);
+		}
+		
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
+		request.setAttribute("orderDataCount", dataCount);
+		request.setAttribute("orderPageIndexList", pageIndexList);
+		request.setAttribute("hashMap", hashMap);
+		
+		return request;
 	}
-	
-	//상세정보보기 에서 뿌릴 셀렉트문
+
+	//주문 상세 페이지
 	@Override
-	public List<OrderDetailDTO> selectOrderDetail(HashMap<String, Object> hMap) throws Exception {
+	public HttpServletRequest OrderHistoryDetail(HttpServletRequest request) throws Exception {
 
-		return oh_dao.selectOrderDetail(hMap);
-	}
-	
-	// 주문내역조회 메인에 뿌려줄 데이터를 뽑아내는 부분
-	@Override
-	public List<OrderHistoryDTO> OrderHistoryMain(HashMap<String, Object> hMap) throws Exception {
-
-		return oh_dao.OrderHistoryMain(hMap);
-	}
-
-	//페이징 처리를 위한 아이디의 조건에 해당하는 주문한 횟수
-	@Override
-	public int maxOrders(HashMap<String, Object> hMap) throws Exception {
-
-		return oh_dao.maxOrders(hMap);
-	}
-	
-	@Override
-	public OrdersDTO selectRecipientInfo(HashMap<String, Object> hMap) throws Exception {
-
-		return oh_dao.selectRecipientInfo(hMap);
+		HttpSession session = request.getSession();
+		
+		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
+		
+		String m_Id = dto.getM_ID();
+		
+		int O_Num = Integer.parseInt(request.getParameter("o_num"));
+		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("O_ID", m_Id);
+		hMap.put("O_NUM", O_Num);
+		
+		List<OrderDetailDTO> detailLists = oh_dao.selectOrderDetail(hMap);
+		OrdersDTO Recipientdto = oh_dao.selectRecipientInfo(hMap);
+		
+		request.setAttribute("O_Date", Recipientdto.getO_DATE());
+		request.setAttribute("O_Num", O_Num);
+		request.setAttribute("detailLists", detailLists);
+		request.setAttribute("Recipientdto", Recipientdto);
+		
+		return request;
 	}
 
 

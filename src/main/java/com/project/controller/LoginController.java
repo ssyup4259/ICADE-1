@@ -36,8 +36,6 @@ public class LoginController {
 	
 	@RequestMapping(value="/login.action", method= {RequestMethod.GET,RequestMethod.POST})
 	public String login(HttpServletRequest req, HttpServletResponse resp)throws Exception{
-		HttpSession session = req.getSession();
-		System.out.println("세션체크 : " + session.getAttribute("dest"));
 		return "login/login";
 	}
 	
@@ -51,23 +49,7 @@ public class LoginController {
 		
 		MemberDTO dto = l_service.checkInfo(req);
 		
-		if(dto==null || dto.equals(null)) {
-			
-			String msg = "아이디가 없습니다";
-			
-			req.setAttribute("msg", msg);
-			
-			return "login/login";
-		
-		} else if(dto.getM_PW()!=M_PW && !dto.getM_PW().equals(M_PW)){
-			
-			String msg = "비밀번호가 틀립니다.";
-			
-			req.setAttribute("msg", msg);
-			
-			return "login/login";
-			
-		} else {
+		if(dto!=null && !dto.equals(null)) {
 			List<WishDTO> lists =new ArrayList<WishDTO>();
 			
 			lists =  w_service.selectWish(M_ID);
@@ -77,6 +59,8 @@ public class LoginController {
 			model.addAttribute("userVo", dto);
 			
 			return "home";
+		} else {
+			return "login/login";
 		}
 	}
 	

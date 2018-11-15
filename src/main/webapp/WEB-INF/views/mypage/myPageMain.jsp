@@ -352,8 +352,6 @@ td{
 		$("#opener").on( "click", function(e) {
 			var x = e.pageX;
 		    var y = e.pageY;
-		    alert(x);
-		    alert(y);
 			$( "#dialog" ).dialog( "open" );
 		});
 	});

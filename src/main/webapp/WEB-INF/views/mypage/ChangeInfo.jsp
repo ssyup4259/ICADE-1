@@ -151,6 +151,7 @@
 						</div>
 						<div class="col-sm-4" style="text-align: left; float: left;">
 								<input type="text" class="memberInputBox" value="${sessionScope.userInfo.getM_EMAIL_ID()}" id="email1" name="M_EMAIL_ID" maxlength="30" style="width: 100%;margin: 0px;padding: 0px"/>
+								<input type="hidden" id="Sessionid" value="${sessionScope.userInfo.getM_EMAIL_ID()}""/>
 								<input type="hidden" id="checkEmail" name="checkEmail" value="N">
 								<input type="hidden" id="checkNum" name="checkNum" value="">
 						</div>
