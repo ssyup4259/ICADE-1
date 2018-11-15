@@ -287,6 +287,7 @@ $(document).ready(function(){
 	$('#email2').change(function(){
 		var email = $('#email2').val(); //id선택자로 email select box값 추출하여 저장
 		if(email == 'custom'){ //selectbox value가 custom이면
+			$("#checkNum").val("0");
 			$("#email").replaceWith("<input type = 'text' id='email' placeholder='직접입력'>");
 			//selectbox 태그를 input 태그로 변경
 		}
@@ -404,7 +405,8 @@ function emailCheck() {
 			
 		
 	} 
-
+ 
+ 	
 //회원가입 완료
 
 $(document).ready(function(){
