@@ -21,6 +21,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="<%=cp%>/resources/data/js/fileBox.js"></script>
 
 <script type="text/javascript">
 
@@ -118,10 +119,12 @@ function idFind() {
 				<br/>
 				<div style="padding: 10px 0px 10px 0px; width: 170px; margin: 0 auto;">
 					<input id="check_email" name="check" value="2" type="radio" checked="checked" onclick="change('email')">
-					<label for="check_email">이메일</label>
+					<label for="check_email">
+						<span></span>&nbsp;이메일
+					</label>
 					<input id="check_phone" name="check" value="3" type="radio" onclick="change('phone')">
 					<label for="check_phone">
-						<span style="display: inline;">휴대폰번호</span>
+						<span></span>&nbsp;휴대폰번호
 					</label>
 				</div>
 				
