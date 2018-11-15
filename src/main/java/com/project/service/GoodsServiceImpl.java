@@ -127,8 +127,8 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		//포워딩 될 페이지에 데이터를 넘긴다
 		req.setAttribute("g_lists", g_lists);
-		req.setAttribute("pageIndexList",pageIndexList);
-		req.setAttribute("dataCount",dataCount);
+		req.setAttribute("goodsPageIndexList",pageIndexList);
+		req.setAttribute("goodsDataCount",dataCount);
 		req.setAttribute("articleUrl",articleUrl);
 		req.setAttribute("gdKindNum", gdKindNum);
 		

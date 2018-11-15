@@ -114,11 +114,11 @@
 					</c:forEach>
 					
 					<div style="text-align: center;">
-						<c:if test="${dataCount != 0 }">
-							${pageIndexList}
+						<c:if test="${goodsDataCount ne 0 }">
+							${goodsPageIndexList}
 						</c:if>
 	
-						<c:if test="${dataCount == 0 }">
+						<c:if test="${goodsDataCount eq 0 }">
 							등록된 상품이 없습니다.
 						</c:if>
 					</div>

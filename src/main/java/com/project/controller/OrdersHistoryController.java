@@ -46,7 +46,6 @@ public class OrdersHistoryController {
 	@RequestMapping(value="/orderHistory.action",method= {RequestMethod.POST,RequestMethod.GET})
 	public String ordersHistoryMain(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		c_service.cookieList(request);
-		System.out.println("==================orderHistory.action 두번타는지 테스트용================================================");
 		
 		HttpSession session = request.getSession();
 		MyUtil myUtil = new MyUtil();
@@ -60,12 +59,8 @@ public class OrdersHistoryController {
 		String startDate = (String) request.getParameter("startDay");
 		String endDate = (String) request.getParameter("endDay");
 		
-		System.out.println("startDate : " + startDate);
-		
 		//페이징 처리를 위한 pgaeNum과 해당페이지의 시작 부분
 		String pageNum = request.getParameter("pageNum");
-		
-		System.out.println("pageNum : " + pageNum);
 		
 		String basicStartDate = (date.getYear()+1900) + "-" + (date.getMonth()-2) + "-" + (date.getDate());
 		
@@ -136,8 +131,6 @@ public class OrdersHistoryController {
 		
 		List<Integer> integerList = service.selectOrderNum(hMap);
 		
-		System.out.println("for문돌린다====================================================");
-		
 		for(int i = 0;i<integerList.size();i++) {
 			
 			System.out.println(integerList);
@@ -151,12 +144,10 @@ public class OrdersHistoryController {
 			hashMap.put(O_Num, mapList);
 		}
 		
-		//System.out.println("====================================================for문끝났다");
-		
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
-		request.setAttribute("dataCount", dataCount);
-		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("orderDataCount", dataCount);
+		request.setAttribute("orderPageIndexList", pageIndexList);
 		request.setAttribute("hashMap", hashMap);
 		
 		return "ordersHistory/ordersHistoryMain";
@@ -180,7 +171,6 @@ public class OrdersHistoryController {
 		hMap.put("O_NUM", O_Num);
 		
 		List<OrderDetailDTO> detailLists = service.selectOrderDetail(hMap);
-		System.out.println("=======================detailLists통과====================");
 		OrdersDTO Recipientdto = service.selectRecipientInfo(hMap);
 		
 		mav.addObject("O_Date", Recipientdto.getO_DATE());

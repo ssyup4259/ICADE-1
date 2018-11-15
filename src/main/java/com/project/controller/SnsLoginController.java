@@ -37,11 +37,6 @@ public class SnsLoginController {
 		String sns_id = req.getParameter("sns_id");
 		String sns_name = req.getParameter("name");
 		String sns_email = req.getParameter("email");
-		System.out.println(id);
-		System.out.println(sns_id);
-		System.out.println(sns_name);
-		System.out.println(sns_email);
-		
 		
 		int index = sns_email.indexOf("@");
 		String email_id = sns_email.substring(0,index);
@@ -62,7 +57,6 @@ public class SnsLoginController {
 		
 		Iterator<String> it =  lists.iterator();
 		
-		System.out.println("=====================while문===================");
 		while(it.hasNext()){
 			String usedId = it.next();
 
@@ -71,7 +65,6 @@ public class SnsLoginController {
 				id = Integer.toString(random);
 			}
 		}
-		System.out.println("=====================while문===================");
 		
 		int maxNum = sl_service.countMember();
 		
