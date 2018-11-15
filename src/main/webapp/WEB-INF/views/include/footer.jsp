@@ -49,9 +49,12 @@
 <script type="text/javascript">
 	
 	function wishsList(){
+		
 		var f = document.wishForm;
+		var m_id= "${sessionScope.userInfo.getM_ID()}";
 		
 		location.href = "<%=cp%>/myPage.action?m_id=" + m_id;
+		
 	}
 
 </script>
@@ -148,7 +151,7 @@ function deleteAllCookies(){
 		<h3>로그인 해주세요</h3>
 		</c:otherwise>
 		</c:choose>
-		<ul class="carousel" style="height: 10%">
+		<ul class="carousel" style="height: 10%; background: transparent;">
 		<c:forEach var="w_dto" items="${wishList}">
 		<li style="margin: -13px">
 		<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${w_dto.getW_GNUM()}">
