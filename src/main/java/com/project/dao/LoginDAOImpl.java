@@ -25,9 +25,6 @@ public class LoginDAOImpl implements LoginDAO {
 
 		MemberDTO dto = new MemberDTO();
 		
-		//System.out.println("LoginDAO:" + M_ID);
-		
-		System.out.println("-----------------------------------------------------------------" + loginMapper);
 		dto = sessionTemplate.selectOne(loginMapper + ".loginChecker", M_ID);
 		
 		return dto;
