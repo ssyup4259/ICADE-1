@@ -39,6 +39,21 @@ ALTER TABLE WISH MOVE;
 
 PURGE RECYCLEBIN;
 
+-- tablespace 积己
+create tablespace ICADE
+datafile 'C:\APP\ITWILL\ORADATA\TESTDB\ICADE.DBF'
+size 10m segment space management auto;
+
+-- user 积己
+create user ICADE
+identified by 123
+default tablespace ICADE
+temporary tablespace temp;
+
+-- 鼻茄何咯
+grant connect,resource,unlimited tablespace to ICADE;
+
+
 -- Member Table Create SQL
 CREATE TABLE Member
 (
