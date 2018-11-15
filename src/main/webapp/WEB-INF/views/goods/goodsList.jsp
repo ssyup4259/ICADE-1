@@ -104,23 +104,25 @@
 						<br>
 
 						<c:if test="${i % 4 == 3 || g_lists.size() == i+1}">
-				</div>
-				<br>
-				<br>
-				</c:if>
+							</div>
+							<br>
+							<br>
+						</c:if>
 
-				<c:set var="i" value="${i+1}" />
+						<c:set var="i" value="${i+1}" />
 
-				</c:forEach>
-				<div style="text-align: center;">
-					<c:if test="${dataCount != 0 }">
+					</c:forEach>
+					
+					<div style="text-align: center;">
+						<c:if test="${dataCount != 0 }">
 							${pageIndexList}
 						</c:if>
-
-					<c:if test="${dataCount == 0 }">
+	
+						<c:if test="${dataCount == 0 }">
 							등록된 상품이 없습니다.
 						</c:if>
-				</div>
+					</div>
+					
 			</div>
 		</div>
 	</div>
