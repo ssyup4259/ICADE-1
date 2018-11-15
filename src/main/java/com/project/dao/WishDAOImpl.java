@@ -51,12 +51,9 @@ public class WishDAOImpl implements WishDAO{
 	@Override
 	public void wishInsert(WishDTO w_dto) throws Exception {
 		
-		 System.out.println(w_dto.getW_ID());
 		 int maxNum = 0;
 		 maxNum = sessionTemplete.selectOne(wishMapper+".wishMaxNum");
 		 w_dto.setW_NUM(maxNum+1);
-		 
-		 System.out.println(w_dto.getW_ID());
 		 
 		 sessionTemplete.selectList(wishMapper + ".insertWish",w_dto);
 		
@@ -126,12 +123,9 @@ public class WishDAOImpl implements WishDAO{
 	@Override
 	public List<WishDTO> selectWish(String M_ID) throws Exception {
 		
-		
-		System.out.println("---------------------------dao 탔다");
 		List<WishDTO> lists =new ArrayList<WishDTO>();
 				
 		lists = sessionTemplete.selectList(wishMapper +".selectWish",M_ID);
-		
 		
 		return lists;
 		
@@ -169,7 +163,5 @@ public class WishDAOImpl implements WishDAO{
 		int idDataCount = sessionTemplete.selectOne(wishMapper+".idDataCount",m_id);
 		return idDataCount;
 	}
-
-
 
 }

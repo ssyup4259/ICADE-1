@@ -98,7 +98,6 @@ public class MyPageController {
 	public String cancelCheckStep1(MemberDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		//탈퇴버튼 클릭후 나오는 본인확인을 위한 인증 컨트롤러
 		c_service.cookieList(request);
-		System.out.println("infoCheckPage_ok.action 들어옴---------------------------------------");
 		
 		HttpSession session = request.getSession();
 		
@@ -143,15 +142,12 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		
 		MemberDTO mdto=(MemberDTO) session.getAttribute("userInfo");
-		System.out.println(mdto);
+
 		if(mdto != null) {
 		w_service.wishList(request);
 		}
 		
 		if(mdto==null) {
-			
-			System.out.println("세션이 널이라 돌아간다 나중엔 인터셉터로");
-			
 			
 			return "home";
 		}
@@ -229,8 +225,6 @@ public class MyPageController {
 	@ResponseBody
 	public String chanegeInfo_pwck(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
-		//System.out.println("ajax 탄다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-		
 		HttpSession session = request.getSession();
 		
 		MemberDTO dto = (MemberDTO) session.getAttribute("userInfo");
@@ -242,8 +236,6 @@ public class MyPageController {
 		if(pw!=dto.getM_PW() && !pw.equals(dto.getM_PW())) {
 			
 			String msg = "비밀번호가 틀립니다.";
-			
-			//System.out.println(request.getAttribute("msg"));
 			
 			return msg; 
 		}
@@ -271,10 +263,6 @@ public class MyPageController {
 		
 		String ph = leaveDTO.getM_CELLPHONE1() + "-" + leaveDTO.getM_CELLPHONE2() + "-" + leaveDTO.getM_CELLPHONE3();
 		
-		System.out.println(ph);
-		
-		System.out.println(reason);
-		
 		hMap.put("L_NUM", maxNum);
 		hMap.put("L_ID", leaveDTO.getM_ID());
 		hMap.put("L_NAME",leaveDTO.getM_NAME());
@@ -300,10 +288,7 @@ public class MyPageController {
 		
 		String userPw = dto.getM_PW();
 		String inputPw = (String)request.getParameter("pw");
-		
-		//System.out.println(userPw);
-		//System.out.println(inputPw);
-		
+
 		if(userPw!=inputPw&&!userPw.equals(inputPw)) {
 			return false;
 		}
@@ -323,8 +308,6 @@ public class MyPageController {
 		
 		DecimalFormat df = new DecimalFormat("#,###");
 		String point = df.format(pointInt);
-		
-		//System.out.println(point);
 		
 		return point;
 	}
@@ -357,11 +340,7 @@ public class MyPageController {
 			req.setAttribute("gk_lists", gk_lists);
 			
 			return req;
-	        
-	    
-        
-    }
-	
-	
+
+	}
 	
 }

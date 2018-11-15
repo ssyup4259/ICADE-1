@@ -167,7 +167,7 @@ input[type=checkbox] {
 		<tr>
 			<td>
 				<input type="checkbox" id="chk${c_dto.getC_NUM()}" name="chk" value="${c_dto.getC_NUM()}"/>
-				<label for="chk${c_dto.getC_NUM()}">
+				<label for="chk${c_dto.getC_NUM()}" style="cursor: pointer;">
 					<span></span>
 					<img src="<%=cp%>/resources/goodsImage/${c_dto.getC_SAVEFILENAME()}" width="100" height="100" align="middle"/>
 				</label>

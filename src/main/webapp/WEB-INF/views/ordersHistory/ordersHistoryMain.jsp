@@ -223,10 +223,10 @@ td {
 							</c:forEach>
 						</c:forEach>
 						<tr>
-							<td colspan="7"><c:if test="${dataCount==0}">
+							<td colspan="7"><c:if test="${orderDataCount==0}">
 									<p class="message">주문 내역이 없습니다.</p>
-								</c:if> <c:if test="${dataCount!=0}">
-							${pageIndexList}
+								</c:if> <c:if test="${orderDataCount!=0}">
+							${orderPageIndexList}
 						</c:if></td>
 						</tr>
 					</tbody>

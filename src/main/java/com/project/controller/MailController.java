@@ -26,12 +26,8 @@ public class MailController {
 	public ModelAndView sendMail(HttpSession session, HttpServletRequest request) {
 		
 		String email = request.getParameter("email");
-		
-		
-		System.out.println(email);
+
 		ModelAndView mav = new ModelAndView();
-		
-		//System.out.println(email);
 		
 		int ran = new Random().nextInt(100000) +10000;
 		
@@ -41,16 +37,12 @@ public class MailController {
 		StringBuilder sb = new StringBuilder();
 		sb.append("귀하의 인증코드는 " + joinCode + " 입니다.");
 		
-		
 		session.setAttribute("joinCode", joinCode);
 		
-		
-		System.out.println(joinCode);
 		MailService.send(subject, sb.toString(), "jo42047014@gmail.com", email);
 		
 		mav.addObject("joinCode", joinCode);
 		mav.addObject("email", email);
-		
 		
 		return mav; 
 	}

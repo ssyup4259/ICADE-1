@@ -40,7 +40,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 		int BC_BOARD = Integer.parseInt(request.getParameter("G_NUM"));
 
-		System.out.println(BC_BOARD);
 		bc_dto.setBC_BOARD(BC_BOARD);
 		int bc_num;
 		String saveFileName;
@@ -55,23 +54,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 		String path = req.getSession().getServletContext().getRealPath("/resources/reply");
 
-		System.out.println(file);
-		System.out.println(file1);
-		System.out.println(file2);
-		System.out.println(file3);
-		System.out.println(bc_dto.getBC_BOARD());
-		System.out.println(bc_dto.getBC_CONTENT());
-		System.out.println(bc_dto.getBC_ID());
-		System.out.println(bc_dto.getBC_IMAGE());
-		System.out.println(bc_dto.getBC_NUM());
-		System.out.println(bc_dto.getBC_PARENT());
-		
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
 		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT().replaceAll("\n", "<br/>"));
-		System.out.println(bc_dto.getBC_CONTENT());	
+			
 		File f = new File(path);
 
 		if (!f.exists()) {
@@ -88,11 +72,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		bc_dto.setBC_CONTENTFILE1(file1.getOriginalFilename());
 		bc_dto.setBC_CONTENTFILE2(file2.getOriginalFilename());
 		bc_dto.setBC_CONTENTFILE3(file3.getOriginalFilename());
-		
-		System.out.println(bc_dto.getBC_IMAGE());
-		System.out.println(bc_dto.getBC_CONTENTFILE1().length());
-		System.out.println(bc_dto.getBC_CONTENTFILE2().length());
-		System.out.println(bc_dto.getBC_CONTENTFILE3());
 		
 		//메인 사진은 무조건 등록해야함
 		fileExt = bc_dto.getBC_IMAGE().substring(bc_dto.getBC_IMAGE().lastIndexOf("."));
@@ -320,21 +299,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		String image3 =null;
 		String image4 =null;
 		
-		
-		
-		
 		int BC_NUM = Integer.parseInt(request.getParameter("BC_NUM"));
-
-		System.out.println(bc_dto.getBC_BOARD());
-		System.out.println(bc_dto.getBC_CONTENT());
-		System.out.println(bc_dto.getBC_ID());
-		System.out.println(bc_dto.getBC_SAVEFILENAME());
-		System.out.println(bc_dto.getBC_NUM());
-		System.out.println(bc_dto.getBC_PARENT());
-		System.out.println(bc_dto.getBcfile());
-		System.out.println(bc_dto.getBcfile1());
-		System.out.println(bc_dto.getBcfile2());
-		System.out.println(bc_dto.getBcfile3());
 
 		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT().replaceAll("\n", "<br/>"));
 		
@@ -721,10 +686,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		}else {
 			bc_dto.setBC_SAVE3(newSaveFileName4);
 		}
-		
-		
-		
-		
+
 		bc_dto.setBC_NUM(BC_NUM);
 		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT());
 		bc_dto.setBC_ID(bc_dto.getBC_ID());
@@ -831,11 +793,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		int BC_PARENT = BC_NUM;
 		
-		System.out.println(BC_BOARD);
-		System.out.println(BC_ID);
-		System.out.println(BC_CONTENT);
-		System.out.println(BC_PARENT);
-		
 		bc_dto.setBC_BOARD(BC_BOARD);
 		bc_dto.setBC_ID(BC_ID);
 		bc_dto.setBC_CONTENT(BC_CONTENT);
@@ -861,12 +818,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		int start = replyPager.getPageBegin();
 	    int end = replyPager.getPageEnd();
-	    
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println(count);
-		System.out.println(curPage);
-		
+
 		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM, start, end);
 		
 		req.setAttribute("rp_list", rp_list);
@@ -906,9 +858,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			if (req.getMethod().equalsIgnoreCase("GET"))
 				searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		}
-		
-		System.out.println(searchKey);
-		System.out.println(searchValue);
 		
 		int count =bc_dao.searchGoods(searchValue, G_NAME);
 		

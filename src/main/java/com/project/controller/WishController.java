@@ -53,8 +53,6 @@ public class WishController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int g_num =G_NUM;
 	
-		System.out.println("------------------------------");
-		System.out.println(g_num);
 		HttpSession info = req.getSession();
 		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
 		String m_id = m_dto.getM_ID();
@@ -69,16 +67,12 @@ public class WishController {
 	@RequestMapping(value="/deleteAllWish.action",method= {RequestMethod.POST})
 	@ResponseBody
 	public HashMap<String, Object> deleteAllWish(HttpServletRequest req)throws Exception{
-		System.out.println("------------------111111111111111");
+		
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		HttpSession info = req.getSession();
 		MemberDTO m_dto = (MemberDTO) info.getAttribute("userInfo");
-		System.out.println("------------------222222222222222222");
 		String m_id = m_dto.getM_ID();
-		System.out.println(m_id);
 		int idDataCount=w_service.idDataCount(m_id);
-		System.out.println("------------------3333333333333333");
-		System.out.println(idDataCount);
 		if(idDataCount !=0) {
 		w_service.deleteAllWish(m_id);
 		map.put("msg","찜목록이 삭제되었습니다");
@@ -87,7 +81,6 @@ public class WishController {
 		map.put("msg","찜목록이 없습니다");	
 			
 		}
-		
 		
 		return map;
 		

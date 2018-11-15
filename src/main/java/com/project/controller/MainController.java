@@ -42,7 +42,6 @@ public class MainController {
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(HttpServletRequest req) throws Exception {
 		List<String> lists = (List<String>) req.getAttribute("c_lists");
-		System.out.println(lists);
 		g_service.goodsMain(req);
 		c_service.cookieList(req);
 		
@@ -70,6 +69,7 @@ public class MainController {
 		c_service.cookieList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("faq/faq");
+		
 		return mav;
 		
 	}
@@ -81,13 +81,13 @@ public class MainController {
 		n_service.noticeList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/agree");
-	return mav;
+		
+		return mav;
 	
 	}
 	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {
-		
 		
 		HttpSession session = req.getSession();
 		
@@ -119,7 +119,6 @@ public class MainController {
 			}
 		}
 	
-		
 		req.setAttribute("c_lists", c_lists);
 		
 		List<GoodsKindDTO> gk_lists = a_dao.getGoodsKindList();

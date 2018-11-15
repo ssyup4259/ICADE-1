@@ -79,8 +79,6 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 
 		BoardCommentDTO bc_dto = sessionTemplate.selectOne(replyMapper + ".readData", BC_NUM);
 
-		System.out.println(BC_NUM + "adsasdasfafasdasdsd");
-
 		String filePath = path + File.separator + bc_dto.getBC_SAVEFILENAME();
 		String filePath1 = path + File.separator + bc_dto.getBC_SAVE1();
 		String filePath2 = path + File.separator + bc_dto.getBC_SAVE2();
@@ -166,7 +164,6 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		hMap.put("searchKey", searchKey);
 		hMap.put("start", start);
 		hMap.put("end", end);
-		
 		
 		return sessionTemplate.selectList(replyMapper + ".searchGoodsLists", hMap);
 	}

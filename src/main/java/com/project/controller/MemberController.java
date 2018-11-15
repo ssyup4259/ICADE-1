@@ -57,6 +57,7 @@ public class MemberController {
 	@RequestMapping(value="/idcheck.action")
 	@ResponseBody
 	public int idCheck(CommandMap commandMap)throws Exception{
+		
 		int idCheckResult = memberService.idCheck(commandMap.getMap());
 		
 		return idCheckResult;
@@ -66,7 +67,6 @@ public class MemberController {
 	@RequestMapping(value="/nickcheck.action")
 	@ResponseBody
 	public int nickCheck(CommandMap commandMap)throws Exception{
-		
 		
 		int nickCheckResult = memberService.nickCheck(commandMap.getMap());
 		
@@ -79,7 +79,6 @@ public class MemberController {
 	public int emailCheck(CommandMap commandMap)throws Exception{
 		
 		int emailCheckResult = memberService.emailCheck(commandMap.getMap());
-		
 		
 		return emailCheckResult;
 		
@@ -115,6 +114,5 @@ public class MemberController {
 		return req;
         
     }
-		
 		
 }

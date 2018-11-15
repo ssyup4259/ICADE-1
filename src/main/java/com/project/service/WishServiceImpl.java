@@ -222,11 +222,8 @@ public class WishServiceImpl implements WishService {
 	public int idDataCount(String m_id) throws Exception {
 		
 		int idDataCount =w_dao.idDataCount(m_id);
-		System.out.println("서비스 확인----------------------------");
-		System.out.println(idDataCount);
+
 		return idDataCount;
 	}
-
-
 	
 }
