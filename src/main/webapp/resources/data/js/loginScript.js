@@ -39,16 +39,20 @@ function loginProcess(){
     var checker = loginIdCheck(id,pw);
     
     if(!id){
+    	$("#userId").val("");
     	swal("아이디를 입력해주세요.");
-        id.focus();
+    	$("#userId").focus();
         return;
     }else if(!pw){
+    	$("#userPw").val("")
     	swal("비밀번호를 입력해주세요.");
-        password.focus();
+    	$("#userPw").focus();
         return;
     }else if(checker){
+    	$("#userId").val("");
+    	$("#userPw").val("")
     	swal("아이디 혹은 비밀번호가 틀립니다");
-        id.focus();
+    	$("#userId").focus();
         return;
     }else if($("#saveId").is(":checked")){
         var userId = $("#userId").val();
