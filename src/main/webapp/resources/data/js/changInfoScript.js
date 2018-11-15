@@ -286,8 +286,10 @@ $("#alert-emailfresh").hide();
 $(document).ready(function(){
 	$('#email2').change(function(){
 		var email = $('#email2').val(); //id선택자로 email select box값 추출하여 저장
-		if(email == 'custom'){ //selectbox value가 custom이면
-			$("#checkNum").val("0");
+		var check = $("#checkNum").val();//이메일 도메인 부분 바꿀시 다시 인증 받도록 초기화
+        $("#checkNum").val("0");
+
+        if(email == 'custom'){ //selectbox value가 custom이면
 			$("#email").replaceWith("<input type = 'text' id='email' placeholder='직접입력'>");
 			//selectbox 태그를 input 태그로 변경
 		}
@@ -448,7 +450,7 @@ function signUp() {
 	}else if($("#pw2").val().length<1){
 		swal("비밀번호 확인을 작성해주세요");
 		$('#pw2').focus();
-	}else if(pw2 != pw1){
+	}else if($("#pw2").val() != $("#pw1").val()){
 		swal("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 		$('#pw2').focus();
 	}else if($("#name").val().length<1){

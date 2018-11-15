@@ -33,19 +33,23 @@ $(function(){
 });
  
 function loginProcess(){
-	
     var id = $("#userId").val();
     var pw = $("#userPw").val();
     var loginForm = document.getElementById('loginForm');
+    var checker = loginIdCheck(id,pw);
     
     if(!id){
-        swal("아이디를 입력해주세요.");
+    	swal("아이디를 입력해주세요.");
         id.focus();
-        return false;
+        return;
     }else if(!pw){
-        swal("비밀번호를 입력해주세요.");
+    	swal("비밀번호를 입력해주세요.");
         password.focus();
-        return false;
+        return;
+    }else if(checker){
+    	swal("아이디 혹은 비밀번호가 틀립니다");
+        id.focus();
+        return;
     }else if($("#saveId").is(":checked")){
         var userId = $("#userId").val();
         setCookie("Cookie_userid", userId, 30);
@@ -57,6 +61,25 @@ function loginProcess(){
         loginForm.submit();
     }
 }
+
+	function loginIdCheck(id,pw) {
+		var checker;
+
+		$.ajax({
+			type : "POST",
+			url : "loginCheckAjax.action",
+			data : {"M_PW" : pw,"M_ID" : id},
+			async: false,
+			dataType : "json",
+			error : function(error) {
+				swal(error);
+			},
+			success : function(data) {
+				checker = data;
+			}
+		});
+		return checker;
+	}
 
 
 /*

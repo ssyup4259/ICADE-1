@@ -142,7 +142,7 @@
 						<div class="col-sm-4" style="text-align: left;float: left;">
 							<input type="text" class="memberInputBox" placeholder="Ex) ssyup4259" id="email1" name="M_EMAIL_ID" maxlength="30" style="width: 100%;margin: 0px;padding: 0px"/>
 							<input type="hidden" id="checkEmail" name="checkEmail" value="N">
-							<input type="hidden" id="checkNum" name="checkNum" value="">
+							<input type="hidden" id="checkNum" name="checkNum" value="0">
 						</div>
 						<div class="col-sm-1">
 						<font style="font-size: 30px;border: 0px">@</font>
@@ -213,7 +213,7 @@
 							<input type="text" class="memberInputBox" name="M_ZIPCODE" readonly="readonly" placeholder="우편번호" id="sample6_postcode">
 						</div>
 						<div class="col-sm-5" style="text-align: left">
-							<input type="text" class="memberInputBox" name="M_ADDRESS1" placeholder="주소" id="sample6_address">
+							<input type="text" class="memberInputBox" name="M_ADDRESS1" readonly="readonly" placeholder="주소" id="sample6_address">
 						</div>
 						<div class="col-sm-2">
 							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGray" value="우편번호 찾기">
@@ -283,7 +283,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$("#checkEmail,#email1").change(function() {
+	$("#checkEmail,#email1,#email2").change(function() {
 		
 		$('#checkEmail').val('2');
  		$("#alert-emailsuccess").hide();
@@ -312,8 +312,6 @@ $(document).ready(function () {
 			$("#user_id_checkBtn").unbind("click").click(function(e) {
 				e.preventDefault();
 				idCheck();		
-				
-		
 			});
 		});
 
@@ -538,6 +536,8 @@ $("#alert-emailfresh").hide();
 $(document).ready(function(){
     $('#email2').change(function(){
         var email = $("#email2").val(); //id선택자로 email select box값 추출하여 저장
+        var check = $("#checkNum").val();
+        $("#checkNum").val("0");
         if(email == "etc"){ //selectbox value가 etc이면
             $("#email2").replaceWith("<input type='text' id='email2' name='M_EMAIL_DOMAIN' placeholder='직접입력' class='memberInputBox'>");
             //selectbox 태그를 input 태그로 변경
@@ -695,7 +695,7 @@ function signUp() {
 	}else if($("#pw2").val().length<1){
 		swal("비밀번호 확인을 작성해주세요");
 		$('#pw2').focus();
-	}else if(pw2 != pw1){
+	}else if($("#pw2").val() != $("#pw1").val()){
 		swal("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 		$('#pw2').focus();
 	}else if($("#name").val().length<1){

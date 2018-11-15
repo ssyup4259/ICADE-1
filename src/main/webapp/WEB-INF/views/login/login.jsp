@@ -53,7 +53,6 @@
 					<br>
 				</div>
 				<hr style="border: 1px solid black">
-					<font style="color: red;">${msg }</font>
 				<div style="margin-top: 30px;">
 					<table style="border: none;">
 						<tr>

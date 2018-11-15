@@ -49,7 +49,7 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		
-		MemberDTO dto = l_service.checkInfo(M_ID);
+		MemberDTO dto = l_service.checkInfo(req);
 		
 		if(dto==null || dto.equals(null)) {
 			
@@ -78,6 +78,28 @@ public class LoginController {
 			
 			return "home";
 		}
+	}
+	
+	@RequestMapping(value="/loginCheckAjax.action", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public boolean loginCheckAjax(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		String inputId = (String)request.getParameter("M_ID");
+		String inputPw = (String)request.getParameter("M_PW");
+		
+		System.out.println(inputId);
+		System.out.println(inputPw);
+		
+		MemberDTO dto = l_service.checkInfo(request);
+		
+		if(dto==null||dto.equals(null)) {
+			return true;
+		}else if(dto.getM_PW()!=inputPw&&!dto.getM_PW().equals(inputPw)){
+			return true;
+		}
+		return false;
 	}
 	
 	@RequestMapping(value="/logout.action", method= {RequestMethod.GET,RequestMethod.POST})

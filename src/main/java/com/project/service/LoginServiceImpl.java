@@ -18,7 +18,10 @@ public class LoginServiceImpl implements LoginService {
 	private LoginDAO l_dao;
 	
 	@Override
-	public MemberDTO checkInfo(String M_ID) throws Exception {
+	public MemberDTO checkInfo(HttpServletRequest request) throws Exception {
+
+		String M_ID = request.getParameter("M_ID");
+		
 		return l_dao.checkInfo(M_ID);
 	}
 
