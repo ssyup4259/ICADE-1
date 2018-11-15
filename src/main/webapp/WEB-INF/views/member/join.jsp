@@ -537,9 +537,9 @@ $("#alert-emailfresh").hide();
 
 $(document).ready(function(){
     $('#email2').change(function(){
-        var email = $('#email2').val(); //id선택자로 email select box값 추출하여 저장
-        if(email == 'custom'){ //selectbox value가 custom이면
-            $("#email").replaceWith("<input type = 'text' id='email' placeholder='직접입력'>");
+        var email = $("#email2").val(); //id선택자로 email select box값 추출하여 저장
+        if(email == "etc"){ //selectbox value가 etc이면
+            $("#email2").replaceWith("<input type='text' id='email2' name='M_EMAIL_DOMAIN' placeholder='직접입력' class='memberInputBox'>");
             //selectbox 태그를 input 태그로 변경
         }
     });

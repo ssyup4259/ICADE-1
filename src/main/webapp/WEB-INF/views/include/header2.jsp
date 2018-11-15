@@ -90,7 +90,7 @@
 			<div class="col-sm-8">
 				<a onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="<%=cp%>/faq.action">FAQ&공지사항</a>
 				<img src="/icade/resources/data/logo/logo2.png" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
-				<a href="orderHistory.action">주문조회</a>&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
+				<a href="<%=cp%>/orderHistory.action">주문조회</a>&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
