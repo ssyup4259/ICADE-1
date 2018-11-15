@@ -49,20 +49,9 @@
 <script type="text/javascript">
 	
 	function wishsList(){
-			var f = document.wishForm;
-			var m_id= "${sessionScope.userInfo.getM_ID()}";
-			
-			if(m_id==""){
-
-				swal("로그인을 하셔야 됩니다");
-				
-				
-			
-			}else{
-			location.href = "<%=cp%>/myPage.action?m_id=" + m_id;
-			
-			}
+		var f = document.wishForm;
 		
+		location.href = "<%=cp%>/myPage.action?m_id=" + m_id;
 	}
 
 </script>

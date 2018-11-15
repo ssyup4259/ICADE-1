@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 	<title>답글</title>
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
@@ -39,7 +40,8 @@
 						var BC_CONTENT =$("#updateReply").val();
 						
 						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r\n");
-						
+						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\n");
+						BC_CONTENT = BC_CONTENT.replace(/<br>/gi,"\r");
 						$("#updateReply").val(BC_CONTENT);
 					 
 					$('#goodsReplyModifier').css('visibility','visible');
@@ -65,9 +67,6 @@
 						<td width="15%" valign="top">
 							<div style="width: 120px; height: 40px;">
 							<div style="margin-top: 15%"></div>
-								<c:if test="${rp_dto.getLevel() > 1}">
-								&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
-								</c:if>
 								${rp_dto.getBC_ID()}<br> <font color="b3cccc" size="2">${rp_dto.getBC_DATE()}</font>
 							</div>
 						</td>
@@ -80,21 +79,20 @@
 							<div id="btn" style="text-align: center;">
 								<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 								<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-									<%-- <a href="" onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})">[수정]</a> --%>
 									<button type="button"  onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGreen">수정</button>
 								</c:if>
 							</div> 
-									<input type="hidden" id="BC_UPDATE" value="${rp_dto.getBC_NUM()}">
+									<input type="hidden" id="BC_UPDATE" value="${rp_dto.getBC_PARENT()}">
 						</td>
 					</tr>
 				</table>
 		</c:forEach>
-			<table style="border: none;background: transparent;color: #A8C838;font-size: 20px">
+			<table style="border: none;background: transparent;color: black;font-size: 17px;padding-left: 3px">
 				<tr>
 		            <td style="border-bottom: none;background: transparent;">
 		                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
 		                <c:if test="${replyPager.curBlock > 1}">
-		                    <a href="javascript:listReply('1')">[처음]</a>
+		                    <a href="javascript:goodsPhotoReplylist('1')">[처음]</a>
 		                </c:if>
 		                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
 		                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
@@ -104,7 +102,7 @@
 		                            ${num}&nbsp;
 		                        </c:when>
 		                        <c:otherwise>
-		                            <a href="javascript:listReply('${num}')">${num}</a>&nbsp;
+		                            <a href="javascript:goodsPhotoReplylist('${num}')">${num}</a>&nbsp;
 		                        </c:otherwise>
 		                    </c:choose>
 		                </c:forEach>

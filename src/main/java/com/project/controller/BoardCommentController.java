@@ -71,6 +71,7 @@ public class BoardCommentController {
 		 //포토리뷰리스트
 		 bc_service.replyList(req);
 		 
+		 
 		 return "reply/photoList";
 	}
 	
@@ -82,6 +83,7 @@ public class BoardCommentController {
 		System.out.println(BC_NUM);
 		BoardCommentDTO bc_dto = bc_service.getReadReply(BC_NUM);
 		
+		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT().replaceAll("<br/>","\n"));
 		req.setAttribute("bc_dto", bc_dto);
 		
 	 	return "reply/photoUpdate";
@@ -134,6 +136,8 @@ public class BoardCommentController {
 		int replyPageNum = Integer.parseInt(req.getParameter("replyPageNum"));
 		BoardCommentDTO bc_dto = bc_service.getReadReply(BC_NUM);
 		
+		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT().replaceAll("<br/>","\n"));
+		
 		req.setAttribute("replyPageNum", replyPageNum);
 		req.setAttribute("bc_dto", bc_dto);
 		
@@ -174,7 +178,7 @@ public class BoardCommentController {
 		
 		
 	}
-	//전체에서 대댓글 리스트
+	//상품페이지에서 대댓글 리스트
 	@RequestMapping("/replyCommentList.action")
 	public String replyCommentList(HttpServletRequest req)throws Exception{
 		c_service.cookieList(req);
@@ -182,6 +186,7 @@ public class BoardCommentController {
 		 
 		 return "reply/replyComment";
 	}
+	//사진페이지에서 대댓글 리스트
 	@RequestMapping("/photoReplyCommentList.action")
 	public String photoReplyCommentList(HttpServletRequest req)throws Exception{
 		c_service.cookieList(req);

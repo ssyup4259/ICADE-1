@@ -9,12 +9,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>포토후기</title>
+<title>포토리뷰</title>
 
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -103,7 +104,7 @@
 				
 				
 				var BC_NUM =$("#articleBC_NUM").val()
-				
+				swal("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
 					 url :"<%=cp%>/goods/photoReplyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
@@ -203,6 +204,7 @@
 				</div>
 				<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 					<div align="center">
+						<!-- 댓글 목록부분 -->
 						<textarea id="PhotoReply_CONTENT" class="textAreaGray" name="BC_CONTENT" rows="2" cols="100" style="padding-left: 10px; font-size: 18px; background-color: transparent;"></textarea>
 						<br>
 						<input type="button" onclick="writePhotoReply(${bc_dto.getBC_BOARD()},${bc_dto.getBC_NUM()})" value="댓글등록" class="btnGreen" class="btnGreen" height="40px" style="width: 15%" />
@@ -224,23 +226,27 @@
 				<div id="photoReply"></div>
 
 				<div class="row">
-					<div class="col-sm-8">
+					<div class="col-sm-12">
 						<ul style="background: transparent;">
 							<li>
 								<c:if test="${!empty sub_dto.getPREV_BC_SUBJECT()}">
-									<strong>이전글 :</strong>
-									<a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"> ${sub_dto.getPREV_BC_SUBJECT()}</a>
+									<strong style="font-size: 25px"><a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getPREV_BC_NUM()}"><img src="<%=cp%>/resources/data/img/up-arrow.png" style="width: 30px;height: 30px">&nbsp;&nbsp;이전글 :
+									${sub_dto.getPREV_BC_SUBJECT()}</a></strong>
 								</c:if>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-8">
-						<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
-							<strong>다음글 :</strong>
-							<a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"> ${sub_dto.getNEXT_BC_SUBJECT()}</a>
-						</c:if>
+					<div class="col-sm-4">
+						<ul style="background: transparent;">
+							<li>
+								<c:if test="${!empty sub_dto.getNEXT_BC_SUBJECT()}">
+									<strong style="font-size: 25px"><a href="<%=cp%>/goods/replyArticle.action?BC_NUM=${sub_dto.getNEXT_BC_NUM()}"><img src="<%=cp%>/resources/data/img/down-arrow.png" style="width: 30px;height: 30px;">&nbsp;&nbsp;다음글 :
+									${sub_dto.getNEXT_BC_SUBJECT()}</a></strong>
+								</c:if>
+							</li>
+						</ul>		
 					</div>
 				</div>
 			</div>

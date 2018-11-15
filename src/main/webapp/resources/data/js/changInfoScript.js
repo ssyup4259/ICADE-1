@@ -12,10 +12,12 @@ $(document).ready(function() {
 	$("#alert-iddanger").hide();
 	$("#alert-idrefresh").hide();
 	
+	$("#alert-nickequals").hide();
 	$("#alert-nicksuccess").hide();
 	$("#alert-nickdanger").hide();
 	$("#alert-nickfresh").hide();
 	
+	$("#alert-emailequals").hide();
 	$("#alert-emailsuccess").hide();
 	$("#alert-emaildanger").hide();
 	$("#alert-emailfresh").hide();
@@ -185,6 +187,7 @@ $(function () {
  	
 	var userNick =$("#user_NickName").val();
 	var checkNick =$("#checkNick").val();
+	var userSessionNick = $("#user_NickName_session").val();
 	
 	if (userNick.length <1) {
 		swal("닉네임을 입력해주세요.")
@@ -193,6 +196,7 @@ $(function () {
 	}else if(userNick.length>12){
 		swal("닉네임은 12글자 이하입니다.")
 	}else{
+	
 		$.ajax({
 			type : "POST",
 			url : "/icade/member/nickcheck.action",
@@ -203,7 +207,15 @@ $(function () {
 			console.log(e.resposneText);
 			},
 			success : function(result) {
-				if (result==0) {
+				
+				if(userSessionNick==userNick){
+					$("#alert-nickequals").show();
+					$("#alert-nicksuccess").hide();
+					$("#alert-nickdanger").hide();
+					$("#alert-nickfresh").hide();
+					$('input[id=checkNick]').attr('value','1');
+				}else if(result==0) {
+					$("#alert-nickequals").hide();
 					$("#alert-nicksuccess").show();
 					$("#alert-nickdanger").hide();
 					$("#alert-nickfresh").hide();
@@ -317,7 +329,7 @@ function emailCheck() {
 	var email1 =$("#email1").val();
 	var email2 =$("#email2").val();
 	var checkEmail =$("#checkEmail").val();
-	
+	var Sessiondomain = $("#Sessiondomain").val();
 	var f= document.joinForm;
 	
 	var allData = {"M_EMAIL_ID" : email1,"M_EMAIL_DOMAIN" : email2}
@@ -339,7 +351,14 @@ function emailCheck() {
 				swal("서버가 응답하지 않습니다");
 			},
 			success : function(result) {
-				if (result==0) {
+				if(email2==Sessiondomain){
+					$("#alert-emailequals").show();
+					$("#alert-emailsuccess").hide();
+					$("#alert-emaildanger").hide();
+					$("#alert-emailfresh").hide();
+					$("#checkEmail").attr('value','1');
+				}else if(result==0){
+					$("#alert-emailequals").hide();
 					$("#alert-emailsuccess").show();
 					$("#alert-emaildanger").hide();
 					$("#alert-emailfresh").hide();
@@ -427,7 +446,7 @@ function signUp() {
 	}else if($("#pw2").val().length<1){
 		swal("비밀번호 확인을 작성해주세요");
 		$('#pw2').focus();
-		
+		return;
 	}else if($("#name").val().length<1){
 		swal("이름을 작성해주세요");
 		$('#name').focus();

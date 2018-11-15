@@ -67,6 +67,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		System.out.println(bc_dto.getBC_PARENT());
 		
 		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT().replaceAll("\n", "<br/>"));
+		System.out.println(bc_dto.getBC_CONTENT());	
 		File f = new File(path);
 
 		if (!f.exists()) {
@@ -95,7 +100,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		saveFileName += System.nanoTime();
 		saveFileName += fileExt;
 		bc_dto.setBC_SAVEFILENAME(saveFileName);
-		System.out.println("얍얍3");
 		
 		// 댓글 메인사진
 		if (file.getSize() > 0 || file != null) {
@@ -164,7 +168,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		} else if (bc_dto.getBC_CONTENTFILE1().length() == 0) {
 			save1 = null;
 			bc_dto.setBC_SAVE1(save1);
-			System.out.println("얍얍1");
 		}
 		
 		//파일 저장 이름 세팅.
@@ -253,6 +256,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 			bc_dto.setBC_SAVE3(save3);
 		}
 
+		
+		
 		bc_num = bc_dao.insertData(bc_dto);
 	}
 
@@ -273,7 +278,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	    int end = replyPager.getPageEnd();
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
-	
+		
+		
 		req.setAttribute("bc_lists", bc_list);
 		req.setAttribute("replyPageNum", replyPageNum);
 		req.setAttribute("replyPager", replyPager);
@@ -330,8 +336,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		System.out.println(bc_dto.getBcfile2());
 		System.out.println(bc_dto.getBcfile3());
 
+		bc_dto.setBC_CONTENT(bc_dto.getBC_CONTENT().replaceAll("\n", "<br/>"));
 		
-
 		// 상품 메인사진
 		if (!bc_dto.getBcfile().isEmpty()) {
 
@@ -846,10 +852,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 	
 		int curPage = Integer.parseInt(req.getParameter("curPage"));
-		
-		
-		System.out.println(curPage);
-		
 		
 		int BC_NUM =Integer.parseInt(req.getParameter("BC_NUM"));
 		

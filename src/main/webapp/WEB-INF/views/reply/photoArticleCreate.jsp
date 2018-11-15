@@ -20,12 +20,13 @@
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>포토리뷰 작성</title>
+<title>포토리뷰 작성하기</title>
 
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
 <script src="<%=cp%>/resources/data/js/bootstrap.min.js"></script>
 
@@ -74,6 +75,8 @@
 			return;
 		}
 		f.BC_CONTENT.value = str;
+		
+		
 		fileUpload = $("#prUpload").val();
 		
 		if (prUpload.length<1) {
@@ -132,7 +135,7 @@
 <div id="" align="center" style="float: center;padding-right: 30px">
 	<form action="" name="searchForm" id="searchForm" method="post">
 		<input type="hidden" name="replyPageNum"  value="${replyPageNum}"/>
-		<div style="float: center; padding-right: 550px;font-size: 20px">
+		<div style="float: center; padding-right: 480px;font-size: 20px">
 		 	상품정보선택
 		</div>
 		<div style="float: center;padding-left: 32px">
@@ -148,7 +151,7 @@
 	<div id="photoCreted">
 		<div  class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center; padding-right: 570px;font-size: 20px" >상품정보</dt>
+				<dt style="float: center; padding-right: 500px;font-size: 20px" >상품정보</dt>
 				<dd id="goodsInfo">
 					<input type="text"  id="photoG_NAME" name="G_NAME" style="width: 33%" maxlength="100" class="inputBoxGreen" value=""/>
 					<br>
@@ -159,7 +162,7 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center; padding-right: 570px;font-size: 20px">제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
+				<dt style="float: center; padding-right: 500px;font-size: 20px">제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
 				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_SUBJECT" style="width: 33%" maxlength="100" class="inputBoxGreen" placeholder="제목을 입력해주세요" />
 				</dd>							
@@ -168,7 +171,7 @@
 		
 		<div class="bbsCreated_bottomLine">
 			<dl>
-				<dt style="float: center; padding-right: 575px;font-size: 20px">작성자</dt>
+				<dt style="float: center; padding-right: 495px;font-size: 20px">작&nbsp;성&nbsp;자</dt>
 				<dd style="float: center; padding-right: 7px;">
 					<input type="text" name="BC_ID" style="width: 33%" maxlength="100" class="inputBoxGreen" 
 					value="${sessionScope.userInfo.getM_ID()}"/>
@@ -178,31 +181,31 @@
 		
 		<div id="bbsCreated_content" >
 			<dl>
-				<dt style="float: center; padding-right: 570px;font-size: 20px">내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+				<dt style="float: center; padding-right: 500px;font-size: 20px">내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
 				<dd style="float: center; padding-right: 7px;">
 					<textarea rows="12" cols="63" name="BC_CONTENT" class="textAreaGreen" style="width: 33%" placeholder="내용을 입력하세요"></textarea>
 				</dd>
-				<dd style="float: center; padding-right: 290px;">
-				메인사진 :
+				<dd style="float: center; padding-right: 260px;">
 				<div class="filebox bs3-primary preview-image1">
+				메인사진 :
 					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 					<label for="prUpload">업로드</label> 
 					<input type="file"  name="bcfile" id="prUpload" class="upload-hidden"><br>
 				</div>
-				내용사진 :
 				<div class="filebox bs3-primary preview-image2">
+				내용사진 :
 					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 					<label for="prUpload1">업로드</label> 
 					<input type="file"  name="bcfile1" id="prUpload1" class="upload-hidden"><br>
 				</div>
-				내용사진 :
 				<div class="filebox bs3-primary preview-image3">
+				내용사진 :
 					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 					<label for="prUpload2">업로드</label> 
 					<input type="file"  name="bcfile2" id="prUpload2" class="upload-hidden"><br>
 				</div>
-				내용사진 :
 				<div class="filebox bs3-primary preview-image4">
+				내용사진 :
 					<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 					<label for="prUpload3">업로드</label> 
 					<input type="file"  name="bcfile3" id="prUpload3" class="upload-hidden"><br>

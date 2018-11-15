@@ -11,11 +11,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>아이폰 케이스는 ICADE</title>
+<title>핸드폰 케이스는 ICADE</title>
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -69,7 +70,8 @@ input.down {
 }
 </style>
 
-<!-- 댓글에 띄울 리스트 작성 -->
+
+<!-- 포토리뷰에 띄울 리스트 작성 -->
 <script>
 $(document).ready(function() {
 	
@@ -81,12 +83,9 @@ $(document).ready(function() {
 		 type:"get",
 		 url :"<%=cp%>/goods/replyList.action?G_NUM=${g_dto.getG_NUM()}&curPage="+1,
 		 success : function(result) {
-			 //responseText가 result에 저장됨.
 			 $("#replyList").html(result);
 		}
 	 });
-	
-
 });
 </script>
 <script type="text/javascript">
@@ -100,11 +99,7 @@ $(document).ready(function() {
 			}
 		 });
 	}
-
-
 </script>
-
-
 <!-- 콤보박스 연결 -->
 <script type="text/javascript">
 $(function() {
@@ -601,19 +596,11 @@ function like_func(g_num) {
 				</div>
 
 				<div id="section3" class="container-fluid" style="overflow: hidden;">
-					<%-- <c:if test="${!empty sessionScope.userInfo.getM_ID()}"> --%>
 						<div>
 							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
 							<input type="button" value="전체리뷰보기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyAllList.action';" style="float: right; margin-top: 20px; width: 200px;"/>
 							<input type="button" value="포토후기 작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/goods/replyinsert.action?G_NUM=${g_dto.getG_NUM()}';" style="float: right; margin-top: 20px; width: 200px;">
 						</div>
-					<%-- </c:if>
-					<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-						<div>
-							<h1 style="float: left">REVIEW | 포토리뷰 작성하고 적립금 받자!</h1>
-							<input type="button" value="로그인하고 포토리뷰작성하기" class="btnGreen" onclick="javascript:location.href='<%=cp%>/login.action';" style="float: right; margin-top: 20px; width: 100%;height: 80px"/>
-						</div>
-					</c:if> --%>
 					<br>
 					<div id="comment" class="container-fluid" style="background: transparent;">
 						<input type="hidden" name="BC_ID" value="${sessionScope.userInfo.getM_ID()}">
