@@ -665,6 +665,8 @@ $(document).ready(function(){
 function signUp() {
 	
 		var f = document.joinForm;
+		var pw1 = $("#pw1").val()
+		var pw2 = $("#pw2").val()
 		
 	if ($("#user_Id").val().length<1) {
 		swal("아이디를 작성해주세요");
@@ -693,7 +695,9 @@ function signUp() {
 	}else if($("#pw2").val().length<1){
 		swal("비밀번호 확인을 작성해주세요");
 		$('#pw2').focus();
-		
+	}else if(pw2 != pw1){
+		swal("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		$('#pw2').focus();
 	}else if($("#name").val().length<1){
 		swal("이름을 작성해주세요");
 		$('#name').focus();

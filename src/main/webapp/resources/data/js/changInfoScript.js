@@ -446,7 +446,9 @@ function signUp() {
 	}else if($("#pw2").val().length<1){
 		swal("비밀번호 확인을 작성해주세요");
 		$('#pw2').focus();
-		return;
+	}else if(pw2 != pw1){
+		swal("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		$('#pw2').focus();
 	}else if($("#name").val().length<1){
 		swal("이름을 작성해주세요");
 		$('#name').focus();
