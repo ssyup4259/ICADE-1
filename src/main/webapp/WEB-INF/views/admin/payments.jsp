@@ -37,129 +37,154 @@ function o_searchIt(){
 
 </script>
 
+<style type="text/css">
+
+td input[type="radio"] + label span {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		vertical-align: middle;
+		cursor: pointer;
+}
+
+td input[type="radio"]:checked + label span {
+	background-color: #A3C838;
+}
+
+td input[type="radio"] {
+	display: none;
+}
+
+
+</style>
+
 </head>
 <body>
 
 <jsp:include page="../include/header2.jsp" flush="false" />
 
+<table style="text-align: left; margin: auto; width: 80%; border-radius: 12px;">
+	<tr>
+		<td colspan="10">
+			<h1>주문 내역 조회</h1>
+			<form action="" name="OrdersSearchForm" method="post">
+				<c:if test="${empty o_status}">
+					<input type="radio" name="o_status" id="o_all" value="" checked="checked"/>
+					<label for="o_all" style="cursor: pointer;"><span></span>&nbsp;전체&nbsp;</label>
+					<input type="radio" name="o_status" id="o_refundOK" value="환불 완료"/>
+					<label for="o_refundOK" style="cursor: pointer;"><span></span>&nbsp;결제취소&nbsp;</label>
+					<input type="radio" name="o_status" id="o_ready" value="배송준비중"/>
+					<label for="o_ready" style="cursor: pointer;"><span></span>&nbsp;결제완료&nbsp;</label>
+				</c:if>
+				
+				<c:if test="${o_status == '환불 완료'}">
+					<input type="radio" name="o_status" id="o_all" value=""/>
+					<label for="o_all" style="cursor: pointer;"><span></span>&nbsp;전체&nbsp;</label>
+					<input type="radio" name="o_status" id="o_refundOK" value="환불 완료" checked="checked"/>
+					<label for="o_refundOK" style="cursor: pointer;"><span></span>&nbsp;결제취소&nbsp;</label>
+					<input type="radio" name="o_status" id="o_ready" value="배송준비중"/>
+					<label for="o_ready" style="cursor: pointer;"><span></span>&nbsp;결제완료&nbsp;</label>
+				</c:if>
+				
+				<c:if test="${o_status == '배송준비중'}">
+					<input type="radio" name="o_status" id="o_all" value=""/>
+					<label for="o_all" style="cursor: pointer;"><span></span>&nbsp;전체&nbsp;</label>
+					<input type="radio" name="o_status" id="o_refundOK" value="환불 완료"/>
+					<label for="o_refundOK" style="cursor: pointer;"><span></span>&nbsp;결제취소&nbsp;</label>
+					<input type="radio" name="o_status" id="o_ready" value="배송준비중" checked="checked"/>
+					<label for="o_ready" style="cursor: pointer;"><span></span>&nbsp;결제완료&nbsp;</label>
+				</c:if>
+				
+				<select name="searchKey" class="selGreen" style="width: 100px; cursor: pointer;">
+					<option value="O_ID">아이디</option>
+					<option value="O_NAME">이름</option>
+				</select>
+				<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;" onkeypress="if(event.keyCode==13) searchIt();">
+				<div style="display: none;"><input type="text" value=""/></div>
+				<button type="button" class="btnGreen" style="width: 100px;" onclick="o_searchIt();">검색</button>
+			</form>
+		</td>
+	</tr>
 
-
-<c:if test="${!empty p_lists}">
-	<table style="text-align: left; margin: auto; width: 80%;">
+	<tr>
+		<td>아이디</td>
+		<td>이름</td>
+		<td>imp_uid</td>
+		<td>
+			결제금액<br/>
+			(취소금액)
+		</td>
+		<td>구분</td>
+		<td>PG사</td>
+		<td>결제상세</td>
+		<td>
+			주문명<br/>
+			구매자(이름/이메일/휴대폰/주소)
+		</td>
+		<td>결제시각</td>
+		<td>상태</td>
+	</tr>
+	
+	<c:forEach var="p_dto" items="${p_lists}">
 		<tr>
-			<td colspan="10">
-				<h1>주문 내역 조회</h1>
-				<form action="" name="OrdersSearchForm" method="post">
-					<c:if test="${empty o_status}">
-						<label class="btnGray"><input type="radio" name="o_status" value="" checked="checked"/>전체</label>
-					<label class="btnGray"><input type="radio" name="o_status" value="환불 완료"/>결제취소</label>
-					<label class="btnGray"><input type="radio" name="o_status" value="배송준비중"/>결제완료</label>
-					</c:if>
-					
-					<c:if test="${o_status == '환불 완료'}">
-						<label class="btnGray"><input type="radio" name="o_status" value=""/>전체</label>
-					<label class="btnGray"><input type="radio" name="o_status" value="환불 완료" checked="checked"/>결제취소</label>
-					<label class="btnGray"><input type="radio" name="o_status" value="배송준비중"/>결제완료</label>
-					</c:if>
-					
-					<c:if test="${o_status == '배송준비중'}">
-						<label class="btnGray"><input type="radio" name="o_status" value=""/>전체</label>
-					<label class="btnGray"><input type="radio" name="o_status" value="환불 완료"/>결제취소</label>
-					<label class="btnGray"><input type="radio" name="o_status" value="배송준비중" checked="checked"/>결제완료</label>
-					</c:if>
-					
-					<select name="searchKey" class="selGreen" style="width: 100px; cursor: pointer;">
-						<option value="O_ID">아이디</option>
-						<option value="O_NAME">이름</option>
-					</select>
-					<input type="text" class="inputBoxGray" name="searchValue" placeholder="검색할 단어를 입력하세요" style="width: 300px;" onkeypress="if(event.keyCode==13) searchIt();">
-					<div style="display: none;"><input type="text" value=""/></div>
-					<button type="button" class="btnGreen" style="width: 100px;" onclick="o_searchIt();">검색</button>
-				</form>
-			</td>
-		</tr>
-
-		<tr>
-			<td>아이디</td>
-			<td>이름</td>
-			<td>imp_uid</td>
+			<td>${p_dto.m_id}</td>
+			<td>${p_dto.m_name}</td>
+			<td>${p_dto.imp_uid}</td>
 			<td>
-				결제금액<br/>
-				(취소금액)
+				${p_dto.amount}원<br/>
+				(${p_dto.cancel_amount}원)
 			</td>
-			<td>구분</td>
-			<td>PG사</td>
-			<td>결제상세</td>
 			<td>
-				주문명<br/>
-				구매자(이름/이메일/휴대폰/주소)
+				${p_dto.channel}<br/>
+				${p_dto.pay_method}
+				</td>
+			<td>${p_dto.pg_provider}</td>
+			<td>
+				${p_dto.card_name}<br/>
+				<c:if test="${p_dto.card_quota == 0}">
+				(일시불)
+				</c:if>
+				<c:if test="${p_dto.card_quota != 0}">
+				(${p_dto.card_quota}개월)
+				</c:if>
 			</td>
-			<td>결제시각</td>
-			<td>상태</td>
+			<td>
+				${p_dto.name}<br/>
+				${p_dto.buyer_name}<br/>
+				${p_dto.buyer_email}<br/>
+				${p_dto.buyer_tel}<br/>
+				${p_dto.buyer_addr}<br/>
+			</td>
+			<td>${p_dto.paid_at}</td>
+			<td>
+			${p_dto.status}<br/>
+			<c:if test="${p_dto.status == '결제완료'}">
+				<input type="button" value="취소하기" class="btnGreen"/>
+			</c:if>
+			<c:if test="${p_dto.status == '결제취소'}">
+				환불 정보 : [${p_dto.cancelled_at}] <fmt:formatNumber>${p_dto.cancel_amount}</fmt:formatNumber>원
+			</c:if>
+			</td>
 		</tr>
 		
-		<c:forEach var="p_dto" items="${p_lists}">
-			<tr>
-				<td>${p_dto.m_id}</td>
-				<td>${p_dto.m_name}</td>
-				<td>${p_dto.imp_uid}</td>
-				<td>
-					${p_dto.amount}원<br/>
-					(${p_dto.cancel_amount}원)
-				</td>
-				<td>
-					${p_dto.channel}<br/>
-					${p_dto.pay_method}
-					</td>
-				<td>${p_dto.pg_provider}</td>
-				<td>
-					${p_dto.card_name}<br/>
-					<c:if test="${p_dto.card_quota == 0}">
-					(일시불)
-					</c:if>
-					<c:if test="${p_dto.card_quota != 0}">
-					(${p_dto.card_quota}개월)
-					</c:if>
-				</td>
-				<td>
-					${p_dto.name}<br/>
-					${p_dto.buyer_name}<br/>
-					${p_dto.buyer_email}<br/>
-					${p_dto.buyer_tel}<br/>
-					${p_dto.buyer_addr}<br/>
-				</td>
-				<td>${p_dto.paid_at}</td>
-				<td>
-				${p_dto.status}<br/>
-				<c:if test="${p_dto.status == '결제완료'}">
-					<input type="button" value="취소하기" class="btnGreen"/>
-				</c:if>
-				<c:if test="${p_dto.status == '결제취소'}">
-					환불 정보 : [${p_dto.cancelled_at}] <fmt:formatNumber>${p_dto.cancel_amount}</fmt:formatNumber>원
-				</c:if>
-				</td>
-			</tr>
-			
-		</c:forEach>
-		
-		<tr>
-			<td colspan="10" align="center">
-				<div class="paging">
-					<c:if test="${dataCount!=0 }">
-						${pageIndexList }
-					</c:if>					
-				</div>
-			</td>
-		</tr>
+	</c:forEach>
 	
-	</table>
+	<tr>
+		<td colspan="10" align="center">
+			<div class="paging">
+				<c:if test="${dataCount!=0 }">
+					${pageIndexList }
+				</c:if>			
+				<c:if test="${dataCount==0 }">
+					내역이 존재하지 않습니다.
+				</c:if>		
+			</div>
+		</td>
+	</tr>
+
+</table>
 	
-</c:if>
-
-<c:if test="${dataCount==0 }">
-	내역이 존재하지 않습니다.
-</c:if>
-
 <jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>

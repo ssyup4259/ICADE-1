@@ -117,9 +117,13 @@
 				 });
 				$("#txt"+BC_NUM).val("");
 			},
-			error: function(result) {
-				swal("안된다");
-				swal(result);
+			error: function(jqXHR,result) {
+				if(jqXHR.status==911){
+					location.href="<%=cp%>/login.action";
+				}else{
+					swal("error : " + result + "jqXHR.status : " + jqXHR.status);
+					console.log(result);
+				}
 			}
 		});
 	

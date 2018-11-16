@@ -233,7 +233,7 @@
 				<div style="text-align: center; padding-bottom: 15px;">
 					<input type="button" class="btnGreen" id="singUpBtn" value="회원가입" style="width: 200px; height: 40px;" onclick="" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
+					<input type="button" class="btnGray" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 				</div>
 			</div>
 		</div>
