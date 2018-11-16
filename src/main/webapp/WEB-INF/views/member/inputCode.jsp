@@ -23,14 +23,12 @@
 
 <script>
 
+
+
 $(document).ready(function(){
 		swal("등록하신 이메일로 인증번호를 발송했습니다.");
 	});
 
-</script>
-
-
-<script type="text/javascript">
 
 	function checkInputCode() {
 
@@ -50,6 +48,15 @@ $(document).ready(function(){
 			self.close();
 		}
 	}
+	
+	$(document).keyup(function(e) {
+		var keyCode = e.keyCode;
+
+		if (keyCode == 13) {
+			checkInputCode();
+		}
+	});
+	
 </script>
 </head>
 <body>
@@ -59,6 +66,7 @@ $(document).ready(function(){
 		<h3>인증번호를 입력하세요</h3>
 		<div class="container">
 			<form method="post" name="joinCodeForm" >
+				<input type="text" style="display: none;">
 				<input type="text" name="inputCode" class="inputBoxGreen" id="inputCode" style="width: 100%; height: 40px; text-align: center; font-size: 16px;" />
 				<br>
 				<br>

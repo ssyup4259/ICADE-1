@@ -92,6 +92,15 @@
 		f.submit();
 		
 	}
+	 
+	$(document).keyup(function(e) {
+		var keyCode = e.keyCode;
+
+		if (keyCode == 13) {
+			photoGoodsSearch();
+		}
+	});
+	 
 	 function photoGoodsSearch() {
 		 
 		 var data = $("#searchForm").serialize();
@@ -139,6 +148,7 @@
 		 	상품정보선택
 		</div>
 		<div style="float: center;padding-left: 32px">
+			<input type="text" style="display: none;">
 			<input type="text" name="searchValue" class="inputBoxGray" id="searchUser" style="width: 21%;" placeholder="검색할 단어를 입력해주세요.">&nbsp;&nbsp;
 			<input type="button" value=" 검색 " class="btnGreen" onclick="photoGoodsSearch();" style="width: 11%;padding-bottom: 2px;text-align: center" />
 		</div>
