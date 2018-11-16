@@ -193,15 +193,16 @@
 						<div class="col-sm-2" style="margin-top: 11px">
 							전화번호
 						</div>
-						<div class="col-sm-2" style="text-align: left;">
-
-							<input type="text" class="memberInputBox" id="t1" placeholder="Ex) 010" name="M_CELLPHONE1" maxlength="30" size="15" />
+						<div class="col-sm-2" style="text-align: left;padding-right: 22px">
+							<input type="text" class="memberInputBox" id="t1" placeholder="Ex) 010" name="M_CELLPHONE1" maxlength="30"  />
 						</div>
-						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" class="memberInputBox" id="t2" placeholder="Ex) 0000" name="M_CELLPHONE2" maxlength="30" size="15" />
+						<span style="padding-top: 11px">-</span>
+						<div class="col-sm-3" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;">
+							<input type="text" class="memberInputBox" id="t2" placeholder="Ex) 0000" name="M_CELLPHONE2" maxlength="30" style="width: 135px" />
 						</div>
+						<span style="padding-top: 11px">-</span>
 						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" class="memberInputBox" id="t3" placeholder="Ex) 1234" name="M_CELLPHONE3" maxlength="30" size="15" />
+							<input type="text" class="memberInputBox" id="t3" placeholder="Ex) 1234" name="M_CELLPHONE3" maxlength="30" style="width: 140px;padding-left: 20px;padding-right: 10px"  />
 						</div>
 					</div>
 
@@ -212,11 +213,12 @@
 						<div class="col-sm-3" style="text-align: left">
 							<input type="text" class="memberInputBox" name="M_ZIPCODE" readonly="readonly" placeholder="우편번호" id="sample6_postcode">
 						</div>
-						<div class="col-sm-5" style="text-align: left">
-							<input type="text" class="memberInputBox" name="M_ADDRESS1" readonly="readonly" placeholder="주소" id="sample6_address">
+						<span style="padding-top: 11px">-</span>
+						<div class="col-sm-4" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 15px;padding-right: 0px;">
+							<input type="text" class="memberInputBox" name="M_ADDRESS1" readonly="readonly" placeholder="주소" id="sample6_address"style="width: 95%;padding-right: 250px;padding-left: 15px">
 						</div>
-						<div class="col-sm-2">
-							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGray" value="우편번호 찾기">
+						<div class="col-sm-2" style="padding-left: 22px">
+							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px; padding-left: 15px;margin-left: 48px;" class="btnGray" value="우편번호 찾기">
 						</div>
 					</div>
 
