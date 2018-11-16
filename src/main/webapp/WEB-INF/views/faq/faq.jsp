@@ -176,7 +176,7 @@ $(document).ready(function () {
 					<!-- SHOW.HIDE -->
 					<!-- division1 -->
 					<div class="tab_con" id="tab_con" style="background: white;">
-						<div style="float: left; font-size: 11px">
+						<div style="float: left; font-size: 11px; background: transparent;">
 							<ul style="" class="ab">
 								<li class="dropbtn" style="text-align: left; background: transparent;">
 									<a href="#answer1" class="ab" onclick="faqMove(1);" style="background: transparent; background-color: transparent;">1.주문방법</a>
@@ -227,7 +227,7 @@ $(document).ready(function () {
 							</ul>
 						</div>
 						<!-- division2 -->
-						<div style="float: left; font-size: 14px">
+						<div style="float: left; font-size: 14px; background: transparent;">
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer5" onclick="faqMove(5);"><font style="font-size: 13">배송</font></a>
@@ -238,7 +238,7 @@ $(document).ready(function () {
 							</ul>
 						</div>
 						<!-- division3 -->
-						<div style="float: left; font-size: 14px">
+						<div style="float: left; font-size: 14px; background: transparent;">
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer6" onclick="faqMove(6);"><font style="font-size: 13">1.교환/환불</font></a>
@@ -287,7 +287,7 @@ $(document).ready(function () {
 							</ul>
 						</div>
 						<!-- division4 -->
-						<div style="float: left; font-size: 14px">
+						<div style="float: left; font-size: 14px; background: transparent;">
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
 									<a href="#answer9" onclick="faqMove(9);"><font style="font-size: 13"> 1. 적립금</font></a>
