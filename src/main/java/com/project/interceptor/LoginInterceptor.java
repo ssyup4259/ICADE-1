@@ -42,6 +42,7 @@ private void saveData(HttpServletRequest req) {
 					response.sendError(911);
 					return false;
 				}else if(request.getRequestURI().toString().equals("/icade/goods/commentInsert.action")){
+					System.out.println("요청 경로 확인 : " + request.getRequestURI().toString());
 					session.setAttribute("dest", "/icade/goods/goodsArticle.action?G_NUM="+session.getAttribute("g_num"));
 					response.sendError(911);
 					return false;
