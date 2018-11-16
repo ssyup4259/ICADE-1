@@ -226,10 +226,10 @@
 			    <br><br> 
 			  <ul style="background-color: transparent;display: table;margin-left: auto;margin-right: auto;text-align: center">
 				  <li>
-				   	 <input type="button" value="동의" class="btnGreen" onclick="chkJoin();" style="padding-top: 4px" />&nbsp;&nbsp;&nbsp;
+				   	 <input type="button" value="동의" class="btnGreen" onclick="chkJoin();" style="padding-top: 4px; width: 200px;" />&nbsp;&nbsp;&nbsp;
 				  </li>
 				  <li>
-				   	 <input type="button" id="btnNochkJoin" value="메인으로" class="btnGray" onclick="nochkJoin();"/>
+				   	 <input type="button" id="btnNochkJoin" value="메인으로" class="btnGray" onclick="nochkJoin();" style="width: 200px;"/>
 				  </li>
 		     </ul>
 			</form>

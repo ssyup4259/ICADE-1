@@ -12,33 +12,46 @@
 	}
 </script>
 <style type="text/css">
-.animation{
+.animation1{
+	position: relative;
+    animation-name: example1;
+    animation-duration: 6s;
+    animation-delay: 2s;
+}
 
- position: relative;
-    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-    -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-    animation-name: example;
+.animation2{
+	position: relative;
+    animation-name: example2;
     animation-duration: 6s;
     animation-delay: 2s;
 }
 
 
 /* Standard syntax */
-@keyframes example {
-   0%   {left:0px; top:0px;}
+@keyframes example1 {
+    0%   {left:0px; top:0px;}
     20%  {left:400px; top:0px;}
     40%  {left:-400px; top:0px;}
     60%  {left:800px; top:0px;}
     80% {left:-800px; top:0px;}
     100% {left:0px; top:0px;}
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }
+
+@keyframes example2 {
+    0%   {left:0px; top:0px;}
+    100% {left:0px; top:0px;}
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
 </style>
 
 <div class="navbar container-fluid sticky" style="z-index: 90;">
 	<ul>
 		<li>
-			<img src="/icade/resources/data/logo/logo2.png" width="140" height="47" style="cursor: pointer;" onclick="javascript:location.href='<%=cp%>';">
+			<img src="/icade/resources/data/logo/logo2.png" class="animation2" width="140" height="47" style="cursor: pointer;" onclick="javascript:location.href='<%=cp%>';">
 		</li>
 
 		<li class="dropdown">
@@ -111,7 +124,7 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
 				<a onclick="msg();" style="cursor: pointer;">입사지원</a>&nbsp;&nbsp;<a href="<%=cp%>/faq.action">FAQ&공지사항</a>
-				<img src="/icade/resources/data/logo/logo1.png" class="animation" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
+				<img src="/icade/resources/data/logo/logo1.png" class="animation1" onclick="javascript:location.href='<%=cp%>';" style="cursor: pointer;">
 				<a href="<%=cp%>/orderHistory.action">주문조회</a>&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/goods/replyAllList.action">포토후기</a>
 			</div>
 			<div class="col-sm-2"></div>
