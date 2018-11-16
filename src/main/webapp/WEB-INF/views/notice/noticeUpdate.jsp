@@ -7,7 +7,7 @@
 %>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>공지사항 수정</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
@@ -36,25 +36,31 @@ function noticeUpdateOk(){
 		<form action="" method="post" name="noticeRegister">
 			<input type="hidden" value="${n_dto.getBN_NUM()}" name="BN_NUM">
 			<input type="hidden" value="${n_dto.getBN_DATE()}" name="BN_DATE">
-			<div class="container">
+			<div class="container" style="margin-left: 33.5%">
 				<h1>공지사항 수정</h1>
 				<div class="row">
-					<div class="col-sm-3">제목</div>
+					<div class="col-sm-10"><h2>제목</h2></div>
 					<div class="col-sm-9">
-						<input type="text" class="inputBoxGray" name="BN_SUBJECT" value="${n_dto.getBN_SUBJECT()}">
+						<input type="text" class="inputBoxGray" name="BN_SUBJECT" value="${n_dto.getBN_SUBJECT()}" style="width: 81.5%;">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">내용</div>
-					<div class="col-sm-9">
+					<div class="col-sm-3"><h2>내용</h2></div>
+					<div class="col-sm-10">
 						<textarea rows="30" cols="80" name="BN_CONTENT" class=textAreaGray>${n_dto.getBN_CONTENT()}</textarea>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3"></div>
+					<div class="col-sm-9"></div>
 				</div>
-				<input type="button" class="btnGreen" value="수정" onclick="noticeUpdateOk();">
-				<input type="button" class="btnGreen" value="취소" onclick="history.back();">
+				<div class="row" >
+					<div class="col-sm-3"></div>
+					<div style="margin-top: 20px">
+						<input type="button" class="btnGreen" value="수정" onclick="noticeUpdateOk();">
+						<input type="button" class="btnGreen" value="취소" onclick="history.back();">
+					</div>
+				</div>
 			</div>
 		</form>
 	</div>
