@@ -66,9 +66,11 @@
 </script>
 <script>
 	function show(BC_NUM) {
-		        var state = $('.'+BC_NUM).css('display'); 
+		        var state = $('.'+BC_NUM).css('display');
 		        if(state == 'none'){
 		            $('.'+BC_NUM).show("slow"); 
+		        } else {
+		        	$('.'+BC_NUM).hide("slow");
 		        }
 		    	$.ajax({
 		    		 type:"get",
