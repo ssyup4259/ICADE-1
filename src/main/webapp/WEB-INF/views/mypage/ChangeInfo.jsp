@@ -1,7 +1,12 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String cp = request.getContextPath();
+	Date dt = new Date();
+	
+	Object v = dt.getTime();
+	
 %>
 
 <!DOCTYPE html>
@@ -15,7 +20,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-panel.css">
-<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css">
+<link rel="stylesheet" href="<%=cp%>/resources/data/css/icade.css?<%=v%>">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <link rel="shortcut icon" href="<%=cp%>/resources/images/favicon.ico">
 
@@ -35,6 +40,27 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180928/1538455030985/180928.js"></script>
 <style type="text/css">
+
+.Dash{
+	margin-top : 10px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.memberInputBoxGray {
+	border-color: #8F9493;
+	color: black;
+	text-align: center;
+	font-size: 18px;
+	border: 3px solid #A3C838;
+	border-radius: 6px;
+	height: 40px;
+	width: 100%;
+	height: 40px;
+	background-color: transparent;
+	webkit-ime-mode: disabled;
+}
+
 </style>
 </head>
 
@@ -55,22 +81,26 @@
 					<div class="col-sm-6" style="text-align: right;">
 					</div>
 				</div>
-				<hr style="border: 1px solid black; width:100%; margin-left: -9px">
-				<div class="col-sm-8" align="center"  style="margin: 0 auto;">
+				
+				<div class="col-sm-8">
+					<hr style="border: 1px solid black; width:108%; margin-left: -9px">
+				</div>
+				
+				<div class="col-sm-8" align="center">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="text" id="user_Id" name="M_ID" value="${sessionScope.userInfo.getM_ID()}" class="memberInputBox" readonly="readonly" maxlength="30" />
+							<input type="text" style="border-color: #8F9493" id="user_Id" name="M_ID" value="${sessionScope.userInfo.getM_ID()}" class="memberInputBoxGray" readonly="readonly" maxlength="30" />
 							<br>
-							<div class="alert alert-idsuccess" id="alert-idsuccess">
+							<div class="alert alert-idsuccess" id="alert-idsuccess" style="display: none;">
 								<font style="color: blue">사용할 수 있는 아이디 입니다</font>
 							</div>
-							<div class="alert alert-iddanger" id="alert-iddanger">
+							<div class="alert alert-iddanger" id="alert-iddanger" style="display: none;">
 								<font style="color: red">사용할 수 없는 아이디 입니다</font>
 							</div>
-							<div class="alert alert-idrefresh" id="alert-idrefresh">
+							<div class="alert alert-idrefresh" id="alert-idrefresh" style="display: none;">
 								<font style="color: red">중복검사를 실행해주세요</font>
 							</div>
 							<input type="hidden" id="checkId" name="checkId" value="">
@@ -81,13 +111,13 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-2">
-							<p>비밀번호</p>
+							<p>패스워드</p>
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="password" name="M_PW" id="pw1" maxlength="30" class="memberInputBox" size="15"/>
+							<input type="password" name="M_PW" id="pw1" maxlength="30" class="memberInputBox" size="15" onkeypress="caps_lock(event);">
 							<br>
-							<div class="alert alert-capslock" id="alert-capslock">
-								<font style="color: red">capslock키가 눌려 있습니다.</font>
+							<div class="alert alert-capslock" id="alert-capslock" style="display: none;">
+								<font style="color: red;">capslock키가 눌려 있습니다.</font>
 							</div>
 						</div>
 					</div>
@@ -95,14 +125,14 @@
 					<div class="row">
 						<div class="col-sm-2">
 							<p>
-							 	비밀번호 확인
+								패스워드 확인
 							</p>
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="password" name="M_PWCorre" id="pw2" maxlength="30" class="memberInputBox" size="15"/>
 							<br>
-							<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
-							<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+							<div class="alert alert-success" id="alert-success" style="display: none;">비밀번호가 일치합니다.</div>
+							<div class="alert alert-danger" id="alert-danger" style="display: none;">비밀번호가 일치하지 않습니다.</div>
 						</div>
 					</div>
 
@@ -111,7 +141,7 @@
 							<p>이름</p>
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="text" value="${sessionScope.userInfo.getM_NAME()}" readonly="readonly" name="M_NAME" id="name" maxlength="10" class="memberInputBox" size="15"/>
+							<input type="text" style="border-color: #8F9493" value="${sessionScope.userInfo.getM_NAME()}" readonly="readonly" name="M_NAME" id="name" maxlength="10" class="memberInputBoxGray" size="15"/>
 						</div>
 					</div>
 
@@ -124,16 +154,16 @@
 							<input type="hidden" id="user_NickName_session" value="${sessionScope.userInfo.getM_NICKNAME()}" >
 							<br>
 							<div>&nbsp;</div>
-							<div class="alert alert-nickequals" id="alert-nickequals">
+							<div class="alert alert-nickequals" id="alert-nickequals" style="display: none;">
 								<font style="color: blue">현재 사용하시는 닉네임 입니다</font>
 							</div>
-							<div class="alert alert-nicksuccess" id="alert-nicksuccess">
+							<div class="alert alert-nicksuccess" id="alert-nicksuccess" style="display: none;">
 								<font style="color: blue">사용할 수 있는 닉네임 입니다</font>
 							</div>
-							<div class="alert alert-nickdanger" id="alert-nickdanger">
+							<div class="alert alert-nickdanger" id="alert-nickdanger" style="display: none;">
 								<font style="color: red">사용할 수 없는 닉네임 입니다</font>
 							</div>
-							<div class="alert alert-nickfresh" id="alert-nickfresh">
+							<div class="alert alert-nickfresh" id="alert-nickfresh" style="display: none;">
 								<font style="color: red">중복검사를 실행해주세요</font>
 							</div>
 							<input type="hidden" id="checkNick" name="checkNick" value="">
@@ -174,21 +204,21 @@
 			                </select>
 						</div>
 						<div class="col-sm-2" style="float: right;">
-							<input id="user_Email_checkBtn" class="btnGray" value="중복확인" style="width: 120px; position: absolute; margin-left:-47px;" type="button">
+							<input id="user_Email_checkBtn" class="btnGray" value="중복확인" style="width: 100%; position: absolute; margin-left:-45px;" type="button">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-8" style="float: center;">
-							<div class="alert alert-emailequals" id="alert-emailequals" style="padding-bottom: 10px">
+							<div class="alert alert-emailequals" id="alert-emailequals" style="padding-bottom: 10px; display: none;">
 								<font style="color: blue">현재 사용하시는 이메일 입니다</font>
 							</div>
-							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px">
+							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px; display: none;">
 								<font style="color: blue">사용할 수 있는 이메일 입니다</font>
 							</div>
-							<div class="alert alert-emaildanger" id="alert-emaildanger" style="padding-bottom: 10px;text-align: center">
+							<div class="alert alert-emaildanger" id="alert-emaildanger" style="padding-bottom: 10px;text-align: center; display: none;">
 								<font style="color: red">사용할 수 없는 이메일 입니다</font>
 							</div>
-							<div class="alert alert-emailfresh" id="alert-emailfresh" style="padding-bottom: 10px">
+							<div class="alert alert-emailfresh" id="alert-emailfresh" style="padding-bottom: 10px; display: none;">
 								<font style="color: red">중복검사를 실행해주세요</font>
 							</div>
 						</div>
@@ -200,22 +230,25 @@
 						</div>
 						<div class="col-sm-2"></div>
 					</div>
-					<hr style="border: 1px solid black; width:108%; margin-left: -9px">
-
+					
+					<div class="col-sm-8">
+						<hr style="border: 1px solid black; width:108%; margin-left: -9px">
+					</div>
+					
 					<div class="row">
 						<div class="col-sm-2">
 							<p>전화번호</p>
 						</div>
-						<div class="col-sm-2" style="text-align:left;padding-right: 22px">
-							<input type="text" id="t1" value="${sessionScope.userInfo.getM_CELLPHONE1()}" name="M_CELLPHONE1" maxlength="30" class="memberInputBox" size="15" />
+						<div class="col-sm-2" style="text-align: left;">
+							<input type="text" id="t1" value="${sessionScope.userInfo.getM_CELLPHONE1()}" name="M_CELLPHONE1" maxlength="3" class="memberInputBox" size="15" />
 						</div>
-						<span style="padding-top: 11px">-</span>
-						<div class="col-sm-3" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;">
-							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="30" class="memberInputBox" style="width: 135px;"/>
-						</div>
-						<span style="padding-top: 11px">-</span>
+						<div class="Dash">-</div>
 						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="30" class="memberInputBox" style="width: 135px; padding-left: 0px" />
+							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="4" class="memberInputBox" size="15" />
+						</div>
+						<div class="Dash">-</div>
+						<div class="col-sm-3" style="text-align: left;">
+							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="4" class="memberInputBox" size="15" />
 						</div>
 					</div>
 
@@ -226,28 +259,33 @@
 					<div class="col-sm-3" style="text-align: left">
 						<input type="text" name="M_ZIPCODE" readonly="readonly" class="memberInputBox" value="${sessionScope.userInfo.getM_ZIPCODE()}" id="sample6_postcode">
 					</div>
-					<span style="padding-top: 11px">-</span>
-					<div class="col-sm-4" style="text-align: left;">
-						<input type="text" name="M_ADDRESS1" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS1()}" id="sample6_address" style="width: 95%;padding-right: 267px;" >
+					<div class="col-sm-5" style="text-align: left">
 					</div>
 					<div class="col-sm-2">
-						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;margin-left: 55px" class="btnGray" value="우편번호 찾기">
+						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGray" value="우편번호 찾기">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-sm-2"></div>
-					<div class="col-sm-10" style="text-align: left">
-						<input type="text" name="M_ADDRESS2" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS2()}" id="sample6_address2" style="width: 464px">
+					<div class="col-sm-5" style="text-align: left">
+						<input type="text" name="M_ADDRESS1" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS1()}" id="sample6_address" readonly="readonly">
+					</div>
+					<div class="Dash">-</div>
+					<div class="col-sm-3" style="text-align: left">
+						<input type="text" name="M_ADDRESS2" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS2()}" id="sample6_address2" style="width:105%;">
 					</div>
 				</div>
 				<div class="row"></div>
 			</div>
 			<div class="col-sm-4"></div>
-			<hr style="border: 1px solid black; width:100%; margin-left: -9px">
-			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;margin: 0 auto">
+			
+			<div class="col-sm-8">
+				<hr style="border: 1px solid black; width:108%; margin-left: -9px">
+			</div>
+			
+			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;">
 				<input type="button" class="btnGreen" id="singUpBtn" value="정보수정" style="width: 200px; height: 40px;" onclick="" />
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 			</div>
 		</div>
@@ -269,6 +307,7 @@
 				$(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));
 			}
 		});
+		
 	</script>
 </body>
 </html>

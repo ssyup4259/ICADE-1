@@ -7,42 +7,12 @@ function getContextPath() {
 
 }
 
-$(document).ready(function() {
-	$("#alert-idsuccess").hide();
-	$("#alert-iddanger").hide();
-	$("#alert-idrefresh").hide();
-	
-	$("#alert-nickequals").hide();
-	$("#alert-nicksuccess").hide();
-	$("#alert-nickdanger").hide();
-	$("#alert-nickfresh").hide();
-	
-	$("#alert-emailequals").hide();
-	$("#alert-emailsuccess").hide();
-	$("#alert-emaildanger").hide();
-	$("#alert-emailfresh").hide();
-	
-	$("#alert-capslock").hide();
-});
-
-$(document).ready(function() {
-	
-	$("#user_Id").change(function() {
-		
-		$('#checkId').val('2');
-		$("#alert-idsuccess").hide();
-		$("#alert-idrefresh").show();
-		
-	});
-});
-
 $(document).ready(function () {
 	
 	$("#checkNiCK,#user_NickName").change(function() {
 		
 		$('#checkNick').val('2');
-		$("#alert-nicksuccess").hide();
-		$("#alert-nickfresh").show();
+		$("#alert-nickfresh").css("display","");
 	});
 });
 
@@ -51,9 +21,12 @@ $(document).ready(function () {
 	$("#checkEmail,#email1,#email2").change(function() {
 		
 		$('#checkEmail').val('2');
- 		$("#alert-emailsuccess").hide();
-		$("#alert-emailfresh").show();
-		$("#alert-emaildanger").hide();
+		
+ 		$("#alert-emailequals").css("display","none");
+ 		$("#alert-emailsuccess").css("display","none");
+ 		$("#alert-emaildanger").css("display","none");
+ 		$("#alert-emailfresh").css("display","");
+ 		
 	});
 	
 });
@@ -103,16 +76,10 @@ $("#alert-idsuccess").hide();
 				},
 				success : function(result) {
 					if (result == 0) {
-						$("#alert-idsuccess").show();
-						$("#alert-iddanger").hide(); 
-						$("#alert-idrefresh").hide();
-						
+						$("#alert-idsuccess").css("display","");
 						$('input[id=checkId]').attr('value','1'	);
-						
 					}else if(result ==1 ){
-						$("#alert-idsuccess").hide();
-						$("#alert-iddanger").show();
-						
+						$("#alert-iddanger").css("display","");
 					}else{
 						alert("idCheck 에러가 발생했습니다.");
 					}
@@ -123,33 +90,26 @@ $("#alert-idsuccess").hide();
 
 //capslock 검사
 
-
-
-function caps_lock(e) {
+	function caps_lock(event) {
         var keyCode = 0;
-        var shiftKey = false;
-        keyCode = e.keyCode;
-        shiftKey = e.shiftKey;
+        var shiftKey;
+        
+        keyCode = event.keyCode;
+        shiftKey = event.shiftKey;
+        
         if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
                 || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
-            show_caps_lock();
-            setTimeout("hide_caps_lock()", 3500);
+        	$("#alert-capslock").css("display","");
         } else {
-            hide_caps_lock();
+        	$("#alert-capslock").css("display","none");
         }
     }
 
-function show_caps_lock() {
-     $("#alert-capslock").show();
-}
 
-function hide_caps_lock() {
-     $("#alert-capslock").hide();
-}
 
 $(function () {
-	$("#alert-success").hide();
-	$("#alert-danger").hide();
+	$("#alert-success").css("display","none");
+	$("#alert-danger").css("display","none");
 	$("input").keyup(function() {
 	
 	var pw1 =$("#pw1").val();
@@ -157,11 +117,11 @@ $(function () {
 	
 		if (pw1 !="" || pw2 != ""){		
 			if (pw1 ==pw2) {
-				$("#alert-success").show();
+				$("#alert-success").css("display","");
 				$("#alert-danger").hide();
 			}else{
+				$("#alert-danger").css("display","");
 				$("#alert-success").hide();
-				$("#alert-danger").show();
 			}
 		 }
 	});
@@ -171,10 +131,6 @@ $(function () {
 
 //닉네임 중복확인 시작
 
-
- $("#alert-nicksuccess").hide();
- $("#alert-nickdanger").hide();
- $("#alert-nickfresh").hide();
 
  $(document).ready(function() {
  	$("#user_nickName_checkBtn").unbind("click").click(function(e) {
@@ -209,20 +165,20 @@ $(function () {
 			success : function(result) {
 				
 				if(userSessionNick==userNick){
-					$("#alert-nickequals").show();
-					$("#alert-nicksuccess").hide();
-					$("#alert-nickdanger").hide();
-					$("#alert-nickfresh").hide();
+					$("#alert-nickequals").css("display","");
+					$("#alert-nicksuccess").css("display","none");
+					$("#alert-nickdanger").css("display","none");
+					$("#alert-nickfresh").css("display","none");
 					$('input[id=checkNick]').attr('value','1');
 				}else if(result==0) {
-					$("#alert-nickequals").hide();
-					$("#alert-nicksuccess").show();
-					$("#alert-nickdanger").hide();
-					$("#alert-nickfresh").hide();
+					$("#alert-nickequals").css("display","none");
+					$("#alert-nicksuccess").css("display","");
+					$("#alert-nickdanger").css("display","none");
+					$("#alert-nickfresh").css("display","none");
 					$('input[id=checkNick]').attr('value','1');
 				}else if(result==1){
-					$("#alert-nicksuccess").hide();
-					$("#alert-nickdanger").show();
+					$("#alert-nicksuccess").css("display","none");
+					$("#alert-nickdanger").css("display","");
 				}else{
 					alert("에러가 발생했습니다.");					
 				}
@@ -289,8 +245,8 @@ $(document).ready(function(){
 		var check = $("#checkNum").val();//이메일 도메인 부분 바꿀시 다시 인증 받도록 초기화
         $("#checkNum").val("0");
 
-        if(email == 'custom'){ //selectbox value가 custom이면
-			$("#email").replaceWith("<input type = 'text' id='email' placeholder='직접입력'>");
+        if(email == 'etc'){ //selectbox value가 custom이면
+			$("#email2").replaceWith("<input type = 'text' class='memberInputBox' id='email2' placeholder='직접입력'>");
 			//selectbox 태그를 input 태그로 변경
 		}
 	});
@@ -356,22 +312,22 @@ function emailCheck() {
 			},
 			success : function(result) {
 				if(email2==Sessiondomain){
-					$("#alert-emailequals").show();
-					$("#alert-emailsuccess").hide();
-					$("#alert-emaildanger").hide();
-					$("#alert-emailfresh").hide();
+					$("#alert-emailequals").css("display","");
+					$("#alert-emailsuccess").css("display","none");
+					$("#alert-emaildanger").css("display","none");
+					$("#alert-emailfresh").css("display","none");
 					$("#checkEmail").attr('value','1');
 				}else if(result==0){
-					$("#alert-emailequals").hide();
-					$("#alert-emailsuccess").show();
-					$("#alert-emaildanger").hide();
-					$("#alert-emailfresh").hide();
+					$("#alert-emailequals").css("display","none");
+					$("#alert-emailsuccess").css("display","");
+					$("#alert-emaildanger").css("display","none");
+					$("#alert-emailfresh").css("display","none");
 					$("#checkEmail").attr('value','1');
 				}else if(result==1){
-					$("#alert-emailequals").hide();
-					$("#alert-emailsuccess").hide();
-					$("#alert-emaildanger").show();
-					$("#alert-emailfresh").hide();
+					$("#alert-emailequals").css("display","none");
+					$("#alert-emailsuccess").css("display","none");
+					$("#alert-emaildanger").css("display","");
+					$("#alert-emailfresh").css("display","none");
 				}else{
 					alert("에러가 발생했습니다.");					
 				}
