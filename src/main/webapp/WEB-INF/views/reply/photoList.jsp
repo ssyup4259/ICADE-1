@@ -115,7 +115,7 @@
 						 $("#"+BC_NUM).html(result);
 					}
 				 });
-				$("#"+BC_NUM).val('');
+				$("#txt"+BC_NUM).val("");
 			},
 			error: function(result) {
 				swal("안된다");
@@ -178,7 +178,8 @@
 						</table>
 							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 								<div align="center" style="float: center">
-									<textarea id="txt${bc_dto.getBC_NUM()}" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
+									<textarea id="txt${bc_dto.getBC_NUM()}" class="textAreaGreen" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
+									<br>
 									<input type="button" onclick="writeCmt(${bc_dto.getBC_NUM()});" value="[댓글등록]" class="btnGreen" style="width: 15%">
 									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
