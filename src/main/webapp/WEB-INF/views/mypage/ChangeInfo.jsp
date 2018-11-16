@@ -55,8 +55,8 @@
 					<div class="col-sm-6" style="text-align: right;">
 					</div>
 				</div>
-				<hr style="border: 1px solid black; width:70%; margin-left: -9px">
-				<div class="col-sm-8" align="center">
+				<hr style="border: 1px solid black; width:100%; margin-left: -9px">
+				<div class="col-sm-8" align="center"  style="margin: 0 auto;">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
@@ -211,10 +211,10 @@
 						</div>
 						<span style="padding-top: 11px">-</span>
 						<div class="col-sm-3" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;">
-							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="30" class="memberInputBox" style="width: 135px;margin-right: 0px;padding-right: 0px;padding-left: 0px"/>
+							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="30" class="memberInputBox" style="width: 135px;"/>
 						</div>
 						<span style="padding-top: 11px">-</span>
-						<div class="col-sm-3" style="text-align: left;padding-left: 22px">
+						<div class="col-sm-3" style="text-align: left;">
 							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="30" class="memberInputBox" style="width: 135px; padding-left: 0px" />
 						</div>
 					</div>
@@ -244,9 +244,10 @@
 				<div class="row"></div>
 			</div>
 			<div class="col-sm-4"></div>
-			<hr style="border: 1px solid black; width:70%; margin-left: -9px">
-			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;">
+			<hr style="border: 1px solid black; width:100%; margin-left: -9px">
+			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;margin: 0 auto">
 				<input type="button" class="btnGreen" id="singUpBtn" value="정보수정" style="width: 200px; height: 40px;" onclick="" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 			</div>
 		</div>

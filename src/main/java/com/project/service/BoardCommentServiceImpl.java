@@ -258,7 +258,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 		List<BoardCommentDTO> bc_list = bc_dao.replyList(start, end, BC_BOARD);
 		
-		
+		req.setAttribute("count", count);
 		req.setAttribute("bc_lists", bc_list);
 		req.setAttribute("replyPageNum", replyPageNum);
 		req.setAttribute("replyPager", replyPager);
@@ -821,6 +821,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 		List<BoardCommentDTO> rp_list = bc_dao.readReply(BC_NUM, start, end);
 		
+		req.setAttribute("count", count);
 		req.setAttribute("rp_list", rp_list);
 		req.setAttribute("replyPager", replyPager);
 		return req;
@@ -869,7 +870,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 		List<BoardCommentDTO> g_list = bc_dao.searchGoodsList(searchKey, searchValue, start, end);
 		
-		
+		req.setAttribute("count", count);
 		req.setAttribute("g_list", g_list);
 		req.setAttribute("replyPager", replyPager);
 		

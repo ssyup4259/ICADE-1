@@ -89,11 +89,8 @@
 		</c:forEach>
 			<table style="border: none;background: transparent;color: black;font-size: 17px;padding-left: 3px">
 				<tr>
+				 <c:if test="${count != 0 }">
 		            <td style="border-bottom: none;background: transparent;">
-		                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
-		                <c:if test="${replyPager.curBlock > 1}">
-		                    <a href="javascript:goodsPhotoReplylist('1')">[처음]</a>
-		                </c:if>
 		                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
 		                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
 		                    <c:choose>
@@ -107,7 +104,15 @@
 		                    </c:choose>
 		                </c:forEach>
 		            </td>
+		            </c:if>
 		        </tr>
+		          <tr>
+				      <c:if test="${count == 0 }">
+				        	<td style="border-bottom: none">
+				        		등록된 댓글이 없습니다.
+				        	</td>
+			        	</c:if>
+			        </tr>
 			</table>	
 	<div id="goodsReplyModifier"></div>
 </form>
