@@ -81,7 +81,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-2">
-							<p>패스워드</p>
+							<p>비밀번호</p>
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="password" name="M_PW" id="pw1" maxlength="30" class="memberInputBox" size="15"/>
@@ -95,9 +95,7 @@
 					<div class="row">
 						<div class="col-sm-2">
 							<p>
-								패스워드
-								<br>
-								확인
+							 	비밀번호 확인
 							</p>
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
@@ -122,7 +120,7 @@
 							닉네임
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="text" id="user_NickName" style="position: absolute; width: 94%; margin-left: 15px" value="${sessionScope.userInfo.getM_NICKNAME()}" name="M_NICKNAME" maxlength="30" class="memberInputBox" size="15"/>
+							<input type="text" id="user_NickName" style="position: absolute; width: 94%;" value="${sessionScope.userInfo.getM_NICKNAME()}" name="M_NICKNAME" maxlength="30" class="memberInputBox" size="15"/>
 							<input type="hidden" id="user_NickName_session" value="${sessionScope.userInfo.getM_NICKNAME()}" >
 							<br>
 							<div>&nbsp;</div>
@@ -176,7 +174,7 @@
 			                </select>
 						</div>
 						<div class="col-sm-2" style="float: right;">
-							<input id="user_Email_checkBtn" class="btnGray" value="중복확인" style="width: 100%; position: absolute; margin-left:-45px;" type="button">
+							<input id="user_Email_checkBtn" class="btnGray" value="중복확인" style="width: 120px; position: absolute; margin-left:-47px;" type="button">
 						</div>
 					</div>
 					<div class="row">
