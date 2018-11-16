@@ -66,9 +66,11 @@
 </script>
 <script>
 	function show(BC_NUM) {
-		        var state = $('.'+BC_NUM).css('display'); 
+		        var state = $('.'+BC_NUM).css('display');
 		        if(state == 'none'){
 		            $('.'+BC_NUM).show("slow"); 
+		        } else {
+		        	$('.'+BC_NUM).hide("slow");
 		        }
 		    	$.ajax({
 		    		 type:"get",
@@ -86,7 +88,11 @@
 	function writeCmt(BC_NUM) {
 		
 		var BC_CONTENT = $("#txt"+BC_NUM).val();
-		var BC_ID =${sessionScope.userInfo.getM_ID()};
+		
+		if ($("#sessionID").val()) {
+			var BC_ID = $("#sessionID").val();
+		}
+		
 		var BC_BOARD =  $("#BC_BOARD").val();
 		var num = $("#gaPrNum").val();
 		
@@ -186,8 +192,7 @@
 									<input type="button" onclick="writeCmt(${bc_dto.getBC_NUM()});" value="[댓글등록]" class="btnGreen" style="width: 15%">
 									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
-									<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
-									value="${sessionScope.userInfo.getM_ID()}"/>
+									<input type="hidden" id="sessionID" value="${sessionScope.userInfo.getM_ID()}"/>
 								</div>
 							<br>
 							<br>
