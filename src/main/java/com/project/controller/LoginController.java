@@ -55,7 +55,9 @@ public class LoginController {
 			lists =  w_service.selectWish(M_ID);
 			dto.setM_DATE(dto.getM_DATE().substring(0, 10));
 			
-			session.setAttribute("wishInfo", lists);
+			if(lists!=null) {
+				session.setAttribute("wishInfo", lists);
+			}
 			model.addAttribute("userVo", dto);
 			
 			return "home";

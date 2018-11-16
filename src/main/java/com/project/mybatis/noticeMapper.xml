@@ -11,20 +11,18 @@
 
 	<!-- 공지 전체 데이터 갯수 -->
 	<select id="getNoticeCount" parameterType="hashMap" resultType="int">
-		select nvl(count(*), 0) from Board_Notice where ${searchKey} like '%' || #{searchValue} || '%'
+		select nvl(count(*), 0) from Board_Notice
 	</select>
 
 	<!-- 공지 리스트 출력 -->
 	<select id="getNoticeLists" parameterType="hashMap" resultType="com.project.dto.NoticeDTO">
 		select * from (
 		select rownum rnum, data.* from (
-		select DISTINCT BN_NUM, BN_SUBJECT, BN_CONTENT, to_char(BN_DATE, 'YYYY-MM-DD') BN_DATE
-		from Board_Notice
-		where ${searchKey} like '%' || #{searchValue} || '%' order by BN_NUM desc) data)
+		select BN_NUM, BN_SUBJECT, BN_CONTENT, BN_DATE
+		from Board_Notice order by BN_DATE desc) data)
 		<![CDATA[
 		where rnum>=#{start} and rnum<=#{end}
 		]]>
-		order by BN_NUM asc
 	</select>
 
 	<!-- 공지 한개의 데이터 -->
