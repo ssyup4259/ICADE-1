@@ -45,9 +45,6 @@
 						<td width="15%" valign="top">
 							<div style="width: 120px; height: 40px;">
 							<div style="margin-top: 15%"></div>
-								<c:if test="${rp_dto.getLevel() > 1}">
-								&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
-								</c:if>
 								${rp_dto.getBC_ID()}<br> <font color="b3cccc" size="2">${rp_dto.getBC_DATE()}</font>
 							</div>
 						</td>
@@ -71,10 +68,6 @@
 		<table style="border: none;color: #A8C838;font-size: 20px">
 				<tr>
 		            <td style="border-bottom: none;background: transparent;">
-		                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
-		                <c:if test="${replyPager.curBlock > 1}">
-		                    <a href="javascript:prReplyLoder('1')">[처음]</a>
-		                </c:if>
 		                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
 		                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
 		                    <c:choose>

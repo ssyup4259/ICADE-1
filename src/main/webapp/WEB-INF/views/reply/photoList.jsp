@@ -115,7 +115,7 @@
 						 $("#"+BC_NUM).html(result);
 					}
 				 });
-				$("#"+BC_NUM).val('');
+				$("#txt"+BC_NUM).val("");
 			},
 			error: function(result) {
 				swal("안된다");
@@ -176,25 +176,17 @@
 								</td>
 							</tr>
 						</table>
-							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 								<div align="center" style="float: center">
-									<textarea id="txt${bc_dto.getBC_NUM()}" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
+									<textarea id="txt${bc_dto.getBC_NUM()}" class="textAreaGreen" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
+									<br>
 									<input type="button" onclick="writeCmt(${bc_dto.getBC_NUM()});" value="[댓글등록]" class="btnGreen" style="width: 15%">
 									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
 									<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 									value="${sessionScope.userInfo.getM_ID()}"/>
 								</div>
-							</c:if>
 							<br>
 							<br>
-							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-								<div style="float: center;">
-									<p>
-										<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen"  style="width: 100%;height: 60px">
-									</p>
-								</div>
-							</c:if>
 					<div id="${bc_dto.getBC_NUM()}"></div>
 					</div>
 				</c:forEach>
