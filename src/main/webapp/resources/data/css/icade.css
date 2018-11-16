@@ -47,6 +47,7 @@ li a, .dropbtn {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	background: transparent;
 }
 
 li a:hover, .dropdown:hover .dropbtn {
@@ -398,6 +399,9 @@ tr:hover {
 	background-color: white;
 }
 
+td.attention:hover {
+	background: #A3C838;
+}
 .lg img {
 	width: 60px;
 	height: 60px;
@@ -428,32 +432,37 @@ input,textarea :focus{
 }
 
 
-input[id="chkbox1"] + label {
+input[type="checkbox"] + label span {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
 		border: 2px solid #A3C838;
+		vertical-align: bottom;
 		cursor: pointer;
 }
-input[id="chkbox1"]:checked + label {
+
+input[type="checkbox"]:checked + label span {
 	background-color: #A3C838;
 }
-input[id="chkbox1"] {
+
+input[type="checkbox"] {
 	display: none;
 }
 
-
-input[id="chkbox2"] + label {
+td input[type="checkbox"] + label span {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
 		border: 2px solid #A3C838;
+		vertical-align: middle;
 		cursor: pointer;
 }
-input[id="chkbox2"]:checked + label {
+
+td input[type="checkbox"]:checked + label span {
 	background-color: #A3C838;
 }
-input[id="chkbox2"] {
+
+td input[type="checkbox"] {
 	display: none;
 }
 
@@ -461,3 +470,127 @@ input[id="chkbox2"] {
 	color: black; 
 }
 
+input[type="radio"] + label span {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		vertical-align: bottom;
+		cursor: pointer;
+}
+
+input[type="radio"]:checked + label span {
+	background-color: #A3C838;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+td input[type="radio"] + label span {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #A3C838;
+		vertical-align: bottom;
+		cursor: pointer;
+}
+
+td input[type="radio"]:checked + label span {
+	background-color: #A3C838;
+}
+
+td input[type="radio"] {
+	display: none;
+}
+
+
+/* 파일박스 CSS */
+
+.where {
+	display: block;
+	margin: 25px 15px;
+	font-size: 11px;
+	color: #000;
+	text-decoration: none;
+	font-family: verdana;
+	font-style: italic;
+} 
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip:rect(0,0,0,0);
+	border: 0;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+/* named upload */
+.filebox .upload-name {
+	display: inline-block;
+	padding: .5em .75em;
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
+/* imaged preview */
+.filebox .upload-display {
+	margin-bottom: 5px;
+}
+
+@media(min-width: 768px) {
+	.filebox .upload-display {
+		display: inline-block;
+		margin-right: 5px;
+		margin-bottom: 0;
+	}
+}
+
+.filebox .upload-thumb-wrap {
+	display: inline-block;
+	width: 54px;
+	padding: 2px;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+.filebox .upload-display img {
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	height: auto;
+}
+
+.filebox.bs3-primary label {
+  color: #fff;
+  background-color: #8F9493;
+	border-color: #8F9493;
+}
