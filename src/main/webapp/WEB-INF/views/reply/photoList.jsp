@@ -176,7 +176,6 @@
 								</td>
 							</tr>
 						</table>
-							<c:if test="${!empty sessionScope.userInfo.getM_ID()}">
 								<div align="center" style="float: center">
 									<textarea id="txt${bc_dto.getBC_NUM()}" class="textAreaGreen" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
 									<br>
@@ -186,16 +185,8 @@
 									<input type="hidden" name="BC_ID" size="35" maxlength="20" class="boxTF"
 									value="${sessionScope.userInfo.getM_ID()}"/>
 								</div>
-							</c:if>
 							<br>
 							<br>
-							<c:if test="${empty sessionScope.userInfo.getM_ID()}">
-								<div style="float: center;">
-									<p>
-										<input type="button" value="로그인 하고 댓글 작성하기" onclick="javascript:location.href='<%=cp%>/login.action';" class="btnGreen"  style="width: 100%;height: 60px">
-									</p>
-								</div>
-							</c:if>
 					<div id="${bc_dto.getBC_NUM()}"></div>
 					</div>
 				</c:forEach>

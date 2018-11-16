@@ -111,8 +111,14 @@
 			}
 		});	
 	});
-</script>
-<script type="text/javascript">
+	
+	$(document).keyup(function(e) {
+		var keyCode = e.keyCode;
+
+		if (keyCode == 13) {
+			$("#cancelMembership").submit();
+		}
+	});
 
 	var doubleSubmitFlag = false;
 

@@ -41,6 +41,10 @@ private void saveData(HttpServletRequest req) {
 					session.setAttribute("dest", "/icade/goods/goodsArticle.action?G_NUM="+session.getAttribute("g_num"));
 					response.sendError(911);
 					return false;
+				}else if(request.getRequestURI().toString().equals("/icade/goods/commentInsert.action")){
+					session.setAttribute("dest", "/icade/goods/goodsArticle.action?G_NUM="+session.getAttribute("g_num"));
+					response.sendError(911);
+					return false;
 				}else {
 					response.sendError(901);
 					return false;
