@@ -55,8 +55,8 @@
 					<div class="col-sm-6" style="text-align: right;">
 					</div>
 				</div>
-				<hr style="border: 1px solid black; width:70%; margin-left: -9px">
-				<div class="col-sm-8" align="center">
+				<hr style="border: 1px solid black; width:100%; margin-left: -9px">
+				<div class="col-sm-8" align="center"  style="margin: 0 auto;">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
@@ -206,15 +206,16 @@
 						<div class="col-sm-2">
 							<p>전화번호</p>
 						</div>
-						<div class="col-sm-2" style="text-align: left;">
+						<div class="col-sm-2" style="text-align:left;padding-right: 22px">
 							<input type="text" id="t1" value="${sessionScope.userInfo.getM_CELLPHONE1()}" name="M_CELLPHONE1" maxlength="30" class="memberInputBox" size="15" />
 						</div>
-						<div>-</div>
-						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="30" class="memberInputBox" size="15" />
+						<span style="padding-top: 11px">-</span>
+						<div class="col-sm-3" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;">
+							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="30" class="memberInputBox" style="width: 135px;"/>
 						</div>
+						<span style="padding-top: 11px">-</span>
 						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="30" class="memberInputBox" size="15" />
+							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="30" class="memberInputBox" style="width: 135px; padding-left: 0px" />
 						</div>
 					</div>
 
@@ -225,26 +226,28 @@
 					<div class="col-sm-3" style="text-align: left">
 						<input type="text" name="M_ZIPCODE" readonly="readonly" class="memberInputBox" value="${sessionScope.userInfo.getM_ZIPCODE()}" id="sample6_postcode">
 					</div>
-					<div class="col-sm-5" style="text-align: left">
-						<input type="text" name="M_ADDRESS1" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS1()}" id="sample6_address" >
+					<span style="padding-top: 11px">-</span>
+					<div class="col-sm-4" style="text-align: left;">
+						<input type="text" name="M_ADDRESS1" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS1()}" id="sample6_address" style="width: 95%;padding-right: 267px;" >
 					</div>
 					<div class="col-sm-2">
-						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGray" value="우편번호 찾기">
+						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;margin-left: 55px" class="btnGray" value="우편번호 찾기">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-10" style="text-align: left">
-						<input type="text" name="M_ADDRESS2" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS2()}" id="sample6_address2" style="width:105%;">
+						<input type="text" name="M_ADDRESS2" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS2()}" id="sample6_address2" style="width: 464px">
 					</div>
 				</div>
 				<div class="row"></div>
 			</div>
 			<div class="col-sm-4"></div>
-			<hr style="border: 1px solid black; width:70%; margin-left: -9px">
-			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;">
+			<hr style="border: 1px solid black; width:100%; margin-left: -9px">
+			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;margin: 0 auto">
 				<input type="button" class="btnGreen" id="singUpBtn" value="정보수정" style="width: 200px; height: 40px;" onclick="" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
 			</div>
 		</div>

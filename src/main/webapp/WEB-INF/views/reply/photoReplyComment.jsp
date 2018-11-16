@@ -65,8 +65,9 @@
 					</tr>
 				</table>
 		</c:forEach> 
-		<table style="border: none;color: #A8C838;font-size: 20px">
+		<table style="border: none;color: black;font-size: 20px">
 				<tr>
+					<c:if test="${count != 0 }">
 		            <td style="border-bottom: none;background: transparent;">
 		                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
 		                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
@@ -81,7 +82,15 @@
 		                    </c:choose>
 		                </c:forEach>
 		            </td>
+		            </c:if>
 		        </tr>
+		          <tr>
+				      <c:if test="${count == 0 }">
+				        	<td style="border-bottom: none">
+				        		등록된 댓글이 없습니다.
+				        	</td>
+			        	</c:if>
+			        </tr>
 		</table>	
 	<div id="photoReplyModifier"></div>
 </form>
