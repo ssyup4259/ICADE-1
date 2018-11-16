@@ -44,8 +44,9 @@
 <body>
 
  	<div align="center" style="float: center; width: 625px;padding-left: 29px">
- 		
-	 		<p>후기를 작성할 상품을 선택하세요</p>
+ 		 <c:if test="${count != 0 }">
+ 		 	<p>후기를 작성할 상품을 선택하세요</p>
+ 		 </c:if>
 	 	<c:forEach var="bc_dto" items="${g_list}">
 			<div style="font-size:25px; margin: none">
 				<div class="row">
@@ -62,11 +63,8 @@
 	    </c:forEach>
 			<table style="border: none;color: #A8C838;font-size: 20px">
 					<tr>
+					<c:if test="${count !=0}">
 			            <td style="border-bottom: none;background: transparent;">
-			                <!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->
-			                <c:if test="${replyPager.curBlock > 1}">
-			                    <a href="javascript:insertReplySearchGoods('1')">[처음]</a>
-			                </c:if>
 			                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->
 			                <c:forEach var="num" begin="${replyPager.blockBegin}" end="${replyPager.blockEnd}">
 			                    <c:choose>
@@ -79,6 +77,14 @@
 			                    </c:choose>
 			                </c:forEach>
 			            </td>
+			          </c:if>
+			        </tr>
+			         <tr>
+				      <c:if test="${count == 0 }">
+				        	<td style="border-bottom: none">
+				        		찾으시는 상품이 없습니다.
+				        	</td>
+			        	</c:if>
 			        </tr>
 			</table>	
  	</div>
