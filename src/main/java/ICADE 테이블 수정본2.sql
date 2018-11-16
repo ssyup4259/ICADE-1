@@ -53,6 +53,17 @@ temporary tablespace temp;
 -- 권한부여
 grant connect,resource,unlimited tablespace to ICADE;
 
+-- Leave Table Create SQL
+CREATE TABLE Leave
+(
+    L_NUM       NUMBER           NOT NULL, 
+    L_ID        VARCHAR2(40)     NOT NULL, 
+    L_NAME      VARCHAR2(40)     NOT NULL, 
+    L_REASON    VARCHAR2(4000)    NOT NULL, 
+    L_DATE      DATE             NOT NULL, 
+    L_PH        VARCHAR2(13)     NOT NULL, 
+    CONSTRAINT LEAVE_PK PRIMARY KEY (L_NUM)
+);
 
 -- Member Table Create SQL
 CREATE TABLE Member
