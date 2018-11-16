@@ -465,12 +465,12 @@ function like_func(g_num) {
 						<div class="row" style="height: 60px;">
 							<div class="col-sm-3" style="text-align: left;">수량</div>
 							<div class="col-sm-9" style="text-align: left">
-							<img src="<%=cp%>/resources/images/down.png" onclick="countDown();" style="width: 30px; height: 30px; vertical-align: middle;">
+							<img src="<%=cp%>/resources/images/down.png" onclick="countDown();" style="width: 30px; height: 30px; vertical-align: middle; cursor: pointer;">
 							<!-- 	<input type="button" id="down" class="down" onclick="countDown();" /> -->
 								<input type="text" class="inputBoxGreen" id="GD_COUNT" value="1" name="GD_COUNT" size="2" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onchange="change();" style="width: 50px;" />
 								개
 								<!-- <input type="button" id="up" class="up" onclick="countUp();" /> -->
-								<img src="<%=cp%>/resources/images/up.png" onclick="countUp();" style="width: 30px; height: 30px; vertical-align: middle;">
+								<img src="<%=cp%>/resources/images/up.png" onclick="countUp();" style="width: 30px; height: 30px; vertical-align: middle; cursor: pointer;">
 							</div>
 						</div>
 						<div class="row" style="height: 60px;">
