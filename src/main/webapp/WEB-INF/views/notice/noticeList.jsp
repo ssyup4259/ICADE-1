@@ -7,7 +7,7 @@
 %>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>FAQ & 공지사항</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">

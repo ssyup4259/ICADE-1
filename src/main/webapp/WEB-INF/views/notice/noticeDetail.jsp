@@ -7,7 +7,7 @@
 %>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>${n_dto.getBN_SUBJECT()}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<%=cp%>/resources/data/css/bootstrap-grid.min.css">
@@ -117,8 +117,10 @@
 	</div>
 		<div class="ec-base-button" align="center">
 			<span class="gRight">
+			<c:if test="${sessionScope.userInfo.getM_RANK() == 'admin'}">
 				<input type="button" value="수정" class="btnGreen" onclick="noticeUpdateSendit()">
 				<input type="button" value="삭제" class="btnGreen" onclick="noticeDeleteSendit();">
+			</c:if>
 				<input type="button" value="목록" class="btnGreen" onclick="noticeListSendIt();">
 			</span>
 		</div>

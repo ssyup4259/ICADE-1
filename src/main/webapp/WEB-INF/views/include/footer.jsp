@@ -139,7 +139,7 @@ function deleteAllCookies(){
 			<c:forEach var="ck" items="${ck_lists}">
 				<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${ck.getG_NUM()}">
 				<img src="<%=cp%>/resources/goodsImage/${ck.getG_SAVEFILENAME()}"></a>
-				<input type="button" id="btn1" value=" 삭제 " class="btnGray" onclick="deleteCookie(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
+				<input type="button" value=" 삭제 " class="btnGray" onclick="deleteCookie(${ck.getG_NUM()});" style="width: 100%; height: 25px;"/>
 
 			</c:forEach>
 		</form>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -18,7 +19,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<title>회원정보 수정 본인 인증</title>
+<title>Icade 회원정보 본인인증</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -50,8 +51,10 @@
 	<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container text-center" style="width: 500px;">
-			<h1>회원정보 수정</h1>
-			<div style="text-align: left">
+			<c:if test="${mode eq 'change'}">
+				<h1>회원정보 수정</h1>
+				<div style="text-align: left">
+			
 				<b>회원정보를 수정하기 위해서는 비밀번호를 입력하셔야 합니다.</b>
 				<br>
 				-회원님의 아이디를 확인해 주세요.
@@ -63,6 +66,24 @@
 				-취소를 누르면 이전 페이지로 돌아갑니다.
 				<br>
 			</div>
+			</c:if>
+			<c:if test="${mode eq 'cancel'}">
+				<h1>회원탈퇴</h1>
+					<div style="text-align: left">
+			
+				<b>회원님의 계정을 탈퇴하기 위해서는 비밀번호를 입력하셔야 합니다.</b>
+				<br>
+				-회원님의 아이디를 확인해 주세요.
+				<br>
+				-회원님의 비밀번호를 확인합니다.
+				<br>
+				-비밀번호 입력후 본인 인증을 눌려주세요.
+				<br>
+				-취소를 누르면 이전 페이지로 돌아갑니다.
+				<br>
+			</div>
+			</c:if>
+		
 			<hr style="border: 1px solid black">
 
 			<div style="margin-top: 30px;">
