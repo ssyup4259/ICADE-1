@@ -146,7 +146,7 @@
 	
 	<div id="searchList"></div>
 	
-	<form action="" name="photoInsertForm" method="post" enctype="multipart/form-data">
+	<form  name="photoInsertForm" method="post" enctype="multipart/form-data">
 	
 	<div id="photoCreted">
 		<div  class="bbsCreated_bottomLine">

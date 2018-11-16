@@ -114,7 +114,7 @@
 				swal("댓글이 등록되었습니다.");
 				$.ajax({
 					 type:"get",
-					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+num,
+					 url :"<%=cp%>/goods/replyCommentList.action?BC_NUM="+BC_NUM+"&curPage="+1,
 					 success : function(result) {
 						 $("#"+BC_NUM).html(result);
 					}
@@ -200,7 +200,7 @@
 				<div></div>
 				<br>
 				<br>
-				<table style="background: transparent;color: #A8C838;font-size: 20px;border-color: #A8C837;">
+				<table style="background: transparent;color: #A8C838;font-size: 20px;border-color: #A8C837;border-radius: 12px">
 					<tr>
 			            <td style="background: transparent;border-bottom: none">
 			                <!-- 페이지 블럭 처음부터 마지막 블럭까지 1씩 증가하는 페이지 출력 -->

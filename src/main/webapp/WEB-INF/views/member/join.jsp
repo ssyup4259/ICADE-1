@@ -779,6 +779,9 @@ function signUp() {
 		swal("이메일 중복검사를 해주세요");
 	}else if($("#checkNum").val() != 1){
 		swal("이메일 인증을 완료해주세요")
+	}else if($("#sample6_address2").val().length<1){
+		swal("상세주소를 작성해주세요");
+		$('#sample6_address2').focus();
 	}else{
 		var email1 =document.getElementById("email1").value; 
 		var email2 =document.getElementById("email2").value; 
