@@ -210,18 +210,20 @@
 						<div class="col-sm-2" style="margin-top: 11px">
 							주소
 						</div>
-						<div class="col-sm-3" style="text-align: left">
+						<div class="col-sm-3" style="text-align: right">
 							<input type="text" class="memberInputBox" name="M_ZIPCODE" readonly="readonly" placeholder="우편번호" id="sample6_postcode">
 						</div>
-						<span style="padding-top: 11px">-</span>
-						<div class="col-sm-4" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 15px;padding-right: 0px;">
-							<input type="text" class="memberInputBox" name="M_ADDRESS1" readonly="readonly" placeholder="주소" id="sample6_address"style="width: 95%;padding-right: 250px;padding-left: 15px">
-						</div>
-						<div class="col-sm-2" style="padding-left: 22px">
+						<div class="col-sm-5" style="text-align: right">
 							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px; padding-left: 15px;margin-left: 48px;" class="btnGray" value="우편번호 찾기">
 						</div>
+						<br>
 					</div>
-
+					<div class="row">	
+					<div class="col-sm-2"></div>					
+						<div class="col-sm-8" style="text-align: center;">
+							<input type="text" class="memberInputBox" name="M_ADDRESS1" readonly="readonly" placeholder="주소" id="sample6_address">
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-8" style="text-align: left">
