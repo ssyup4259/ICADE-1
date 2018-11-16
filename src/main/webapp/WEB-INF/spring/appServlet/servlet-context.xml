@@ -76,6 +76,7 @@
 			<mapping path="/buy/*"/>
 			<mapping path="/wish/*"/>
 			<mapping path="/myPage.action"/>
+			<mapping path="/goods/commentInsert.action"/>
 			<mapping path="/goods/replyAllList.action"/>
 			<mapping path="/goods/replyinsert.action"/>
 			<mapping path="/orderHistory.action"/>
