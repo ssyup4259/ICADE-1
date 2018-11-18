@@ -68,7 +68,7 @@
 	function show(BC_NUM) {
 		        var state = $('.'+BC_NUM).css('display');
 		        if(state == 'none'){
-		            $('.'+BC_NUM).show("slow"); 
+		            $('.'+BC_NUM).toggle("slow"); 
 		        } else {
 		        	$('.'+BC_NUM).hide("slow");
 		        }
@@ -165,37 +165,37 @@
 					<div class="${bc_dto.getBC_NUM()}" style="display:none" align="center">
 						<table width="600" border="0">
 							<tr>
-								<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
+								<td style="padding: 20px 62px 20px 62px;" valign="top" height="200">
 									 <c:if test="${!empty bc_dto.getBC_SAVEFILENAME()}">
-										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:auto; height: auto" id="">
+										<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVEFILENAME()}"  style="width:800px; height: auto" id="">
 									 </c:if>
 									<br>  
 									<c:if test="${!empty bc_dto.getBC_SAVE1()}">
-									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: auto; ; height: auto;" id="">
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE1()}"  style="width: 800px; ; height: auto;" id="">
 									</c:if>
 									<br>
 									<c:if test="${!empty bc_dto.getBC_SAVE2()}">
-									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: auto; height: auto" id="">
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE2()}"  style="width: 800px; height: auto" id="">
 									</c:if>
 									<br>
 									<c:if test="${!empty bc_dto.getBC_SAVE3()}">
-									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: auto; height: auto" id="">
+									<img src="<%=cp%>/resources/reply/${bc_dto.getBC_SAVE3()}"  style="width: 800px; height: auto" id="">
 									</c:if>
 									<br>
 									<span id="gBC_CONTENT">${bc_dto.getBC_CONTENT()}</span>
 								</td>
 							</tr>
 						</table>
-								<div align="center" style="float: center">
-									<textarea id="txt${bc_dto.getBC_NUM()}" class="textAreaGreen" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
-									<br>
-									<input type="button" onclick="writeCmt(${bc_dto.getBC_NUM()});" value="[댓글등록]" class="btnGreen" style="width: 15%">
-									<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
-									<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
-									<input type="hidden" id="sessionID" value="${sessionScope.userInfo.getM_ID()}"/>
-								</div>
 							<br>
-							<br>
+									<div align="center" style="float: center">
+										<textarea id="txt${bc_dto.getBC_NUM()}" class="textAreaGreen" name="BC_CONTENT"  rows="2" cols="100"  placeHolder="댓글을 입력하세요"></textarea>
+										<br>
+										<input type="button" onclick="writeCmt(${bc_dto.getBC_NUM()});" value="[댓글등록]" class="btnGreen" style="width: 15%">
+										<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
+										<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}"> 
+										<input type="hidden" id="sessionID" value="${sessionScope.userInfo.getM_ID()}"/>
+									</div>
+							<br>	
 					<div id="${bc_dto.getBC_NUM()}"></div>
 					</div>
 				</c:forEach>

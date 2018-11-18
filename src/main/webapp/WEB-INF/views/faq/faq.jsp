@@ -135,7 +135,7 @@ $(document).ready(function () {
 	var other;	
 	
 	if (num.length != 0) {
-		$('#answer'+num).show("fast");
+		$('#answer'+num).toggle("fast");
 		for (var i = 0; i < 11; i++) {
 			 if (num != i) {
 			$('#answer'+ i).hide("slow");
@@ -344,6 +344,9 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
+			<%-- <div align="center" style="float:bottom">
+				<img  src="<%=cp%>/resources/images/gogak.jpg">
+			</div> --%>
 	</div>
 	 <jsp:include page="../include/footer.jsp" flush="false" /> 
 

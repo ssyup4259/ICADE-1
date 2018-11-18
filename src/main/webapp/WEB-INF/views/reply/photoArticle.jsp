@@ -223,6 +223,7 @@
 				<input type="hidden" id="BC_NUM" value="${bc_dto.getBC_NUM()}">
 				<input type="hidden" id="BC_BOARD" value="${bc_dto.getBC_BOARD()}">
 				<!-- 댓글 목록부분 -->
+				<br>
 				<div id="photoReply"></div>
 
 				<div class="row">
