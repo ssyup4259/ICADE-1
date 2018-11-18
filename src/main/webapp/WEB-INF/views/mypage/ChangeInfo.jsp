@@ -81,12 +81,12 @@
 					<div class="col-sm-6" style="text-align: right;">
 					</div>
 				</div>
-				
+				<br>
 				<div class="col-sm-8">
-					<hr style="border: 1px solid black; width:108%; margin-left: -9px">
+					<hr style="border: 1px solid black; width:150%; margin-left: -9px">
 				</div>
 				
-				<div class="col-sm-8" align="center">
+				<div class="col-sm-8" align="center" style="margin: 0 auto;">
 					<div class="row">
 						<div class="col-sm-2">
 							<p>아이디</p>
@@ -109,6 +109,7 @@
 							<input type="button" value="중복확인" style="width: 120px; display: none;" class="btnGray" id="user_id_checkBtn" />
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-2">
 							<p>패스워드</p>
@@ -121,7 +122,7 @@
 							</div>
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2">
 							<p>
@@ -135,7 +136,7 @@
 							<div class="alert alert-danger" id="alert-danger" style="display: none;">비밀번호가 일치하지 않습니다.</div>
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2">
 							<p>이름</p>
@@ -144,7 +145,7 @@
 							<input type="text" style="border-color: #8F9493" value="${sessionScope.userInfo.getM_NAME()}" readonly="readonly" name="M_NAME" id="name" maxlength="10" class="memberInputBoxGray" size="15"/>
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							닉네임
@@ -172,7 +173,7 @@
 							<input type="button" class="btnGray" style="width: 120px;" value="중복확인" id="user_nickName_checkBtn" />
 						</div>
 					</div>
-
+					<br>
 					<div class="row" style="margin-top: 30px;">
 						<div class="col-sm-2">
 							<p>이메일</p>
@@ -207,6 +208,7 @@
 							<input id="user_Email_checkBtn" class="btnGray" value="중복확인" style="width: 100%; position: absolute; margin-left:-45px;" type="button">
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-8" style="float: center;">
 							<div class="alert alert-emailequals" id="alert-emailequals" style="padding-bottom: 10px; display: none;">
@@ -223,6 +225,7 @@
 							</div>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-8" style="text-align: left;">
@@ -234,46 +237,62 @@
 					<div class="col-sm-8">
 						<hr style="border: 1px solid black; width:108%; margin-left: -9px">
 					</div>
-					
-					<div class="row">
+					<br>
+			<%-- 		<div class="row">
 						<div class="col-sm-2">
 							<p>전화번호</p>
 						</div>
 						<div class="col-sm-2" style="text-align: left;">
-							<input type="text" id="t1" value="${sessionScope.userInfo.getM_CELLPHONE1()}" name="M_CELLPHONE1" maxlength="3" class="memberInputBox" size="15" />
+							<input type="text" id="t1" value="${sessionScope.userInfo.getM_CELLPHONE1()}" name="M_CELLPHONE1" maxlength="3" class="memberInputBox" size="10" />
 						</div>
-						<div class="Dash">-</div>
-						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="4" class="memberInputBox" size="15" />
+						<div class="Dash" style="margin-left: 10px;margin-right:10px;padding-top: 3px">-</div>
+						<div class="col-sm-3" style="text-align: left;padding-right: 0px;padding-left: 0px" align="center">
+							<input type="text" id="t2" value="${sessionScope.userInfo.getM_CELLPHONE2()}" name="M_CELLPHONE2" maxlength="4" class="memberInputBox" size="10" style="width: 110px;padding-right: 0px"/>
 						</div>
-						<div class="Dash">-</div>
-						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="4" class="memberInputBox" size="15" />
+						<div class="Dash" style="padding-top: 3px">-</div>
+						<div class="col-sm-3" style="text-align: left;" align="left">
+							<input type="text" id="t3" value="${sessionScope.userInfo.getM_CELLPHONE3()}" name="M_CELLPHONE3" maxlength="4" class="memberInputBox" size="10"style="width: 110px" />
 						</div>
 					</div>
-
+				<br> --%>
+				<div class="row">
+						<div class="col-sm-2" style="margin-top: 11px">
+							전화번호
+						</div>
+						<div class="col-sm-2" style="text-align: left;padding-right: 22px">
+							<input type="text" class="memberInputBox" id="t1" placeholder="Ex) 010" name="M_CELLPHONE1" maxlength="3"  value="${sessionScope.userInfo.getM_CELLPHONE1()}" />
+						</div>
+						<span style="padding-top: 13px;padding-left: 4px">-</span>
+						<div class="col-sm-3" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;">
+							<input type="text" class="memberInputBox" id="t2" placeholder="Ex) 0000" name="M_CELLPHONE2" maxlength="4" style="width: 131px"  value="${sessionScope.userInfo.getM_CELLPHONE2()}"/>
+						</div>
+						<span style="padding-top: 13px;padding-right: 5px">-</span>
+						<div class="col-sm-3" style="text-align: left;">
+							<input type="text" class="memberInputBox" id="t3" placeholder="Ex) 1234" name="M_CELLPHONE3" maxlength="4" style="width: 133px;padding-left: 20px;padding-right: 10px"  value="${sessionScope.userInfo.getM_CELLPHONE3()}" />
+						</div>
+					</div>
+				<br>
 				<div class="row">
 					<div class="col-sm-2">
 						<p>주소</p>
 					</div>
-					<div class="col-sm-3" style="text-align: left">
+					<div class="col-sm-5" style="text-align: left" align="right">
 						<input type="text" name="M_ZIPCODE" readonly="readonly" class="memberInputBox" value="${sessionScope.userInfo.getM_ZIPCODE()}" id="sample6_postcode">
 					</div>
-					<div class="col-sm-5" style="text-align: left">
-					</div>
-					<div class="col-sm-2">
-						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;" class="btnGray" value="우편번호 찾기">
+					&nbsp;
+					<div class="col-sm-3" style="text-align: left;margin-left: 2px" align="left">
+						<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px;margin-left: 28px" class="btnGray" value="우편번호 찾기">
 					</div>
 				</div>
-
+				<br>
 				<div class="row">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-5" style="text-align: left">
 						<input type="text" name="M_ADDRESS1" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS1()}" id="sample6_address" readonly="readonly">
 					</div>
-					<div class="Dash">-</div>
+					<div class="Dash" style="padding-top: 2px">-</div>
 					<div class="col-sm-3" style="text-align: left">
-						<input type="text" name="M_ADDRESS2" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS2()}" id="sample6_address2" style="width:105%;">
+						<input type="text" name="M_ADDRESS2" class="memberInputBox" value="${sessionScope.userInfo.getM_ADDRESS2()}" id="sample6_address2" style="width:96%;">
 					</div>
 				</div>
 				<div class="row"></div>
@@ -281,12 +300,13 @@
 			<div class="col-sm-4"></div>
 			
 			<div class="col-sm-8">
-				<hr style="border: 1px solid black; width:108%; margin-left: -9px">
+				<hr style="border: 1px solid black; width:150%; margin-left: -9px">
 			</div>
 			
-			<div style="text-align: center; padding-bottom: 15px; margin-left: -39%;">
+			<div style="text-align: center; padding-bottom: 15px; margin: 0 auto;">
 				<input type="button" class="btnGreen" id="singUpBtn" value="정보수정" style="width: 200px; height: 40px;" onclick="" />
-				<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px" onclick="javascript:location.href='<%=cp%>'">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btnGreen" value="취소" style="width: 200px; height: 40px;margin-left: 10px" onclick="javascript:location.href='<%=cp%>'">
 			</div>
 		</div>
 	</div>

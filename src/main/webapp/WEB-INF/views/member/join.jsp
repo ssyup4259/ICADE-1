@@ -53,6 +53,7 @@
 				</div>
 				<hr style="border: 1px solid black;">
 				<div class="col-sm-8" style="margin: 0 auto;">
+				<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							
@@ -77,7 +78,7 @@
 						</div>
 					</div>
 
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							비밀번호
@@ -90,7 +91,7 @@
 							</div>
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 								비밀번호 확인
@@ -102,7 +103,7 @@
 							<div class="alert alert-danger" id="alert-danger"style="display: none"><font style="color: red">비밀번호가 일치하지 않습니다.</font></div>
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							이름
@@ -111,7 +112,7 @@
 							<input type="text" placeholder="이름 : Ex)박명성" class="memberInputBox" name="M_NAME" id="name" maxlength="10" size="15" />
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							닉네임
@@ -134,7 +135,7 @@
 							<input type="button" class="btnGray" style="width: 120px;" value="중복확인" id="user_nickName_checkBtn" />
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							이메일
@@ -166,6 +167,7 @@
 							<input type="button" style="width: 120px;" value="중복확인" class="btnGray" id="user_Email_checkBtn" />
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-8" style="float: center;">
 							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px;display: none">
@@ -179,6 +181,7 @@
 							</div>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-8" style="text-align: left;">
@@ -204,25 +207,28 @@
 							<input type="text" class="memberInputBox" id="t3" placeholder="Ex) 1234" name="M_CELLPHONE3" maxlength="30" style="width: 140px;padding-left: 20px;padding-right: 10px"  />
 						</div>
 					</div>
-
+					<br>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 11px">
 							주소
 						</div>
-						<div class="col-sm-3" style="text-align: right">
+						<div class="col-sm-5" style="text-align: right;padding-right: 0px;margin-left: 30px" align="right">
 							<input type="text" class="memberInputBox" name="M_ZIPCODE" readonly="readonly" placeholder="우편번호" id="sample6_postcode">
 						</div>
-						<div class="col-sm-5" style="text-align: right">
-							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px; padding-left: 15px;margin-left: 48px;" class="btnGray" value="우편번호 찾기">
+						&nbsp;
+						<div class="col-sm-3" style="text-align: left;" align="left">
+							<input type="button" onclick="sample6_execDaumPostcode()" style="width: 120px; padding-left: 15px;margin-left: none" class="btnGray" value="우편번호 찾기">
 						</div>
 						<br>
 					</div>
+					<br>
 					<div class="row">	
 					<div class="col-sm-2"></div>					
 						<div class="col-sm-8" style="text-align: center;">
 							<input type="text" class="memberInputBox" name="M_ADDRESS1" readonly="readonly" placeholder="주소" id="sample6_address">
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-8" style="text-align: left">
