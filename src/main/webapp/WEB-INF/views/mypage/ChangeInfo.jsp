@@ -117,7 +117,7 @@
 							<input type="password" name="M_PW" id="pw1" maxlength="30" class="memberInputBox" size="15" onkeypress="caps_lock(event);">
 							<br>
 							<div class="alert alert-capslock" id="alert-capslock" style="display: none;">
-								<font style="color: red;">capslock키가 눌려 있습니다.</font>
+								<font style="color: red;">capslock키가 켜져 있습니다.</font>
 							</div>
 						</div>
 					</div>

@@ -61,13 +61,13 @@
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="text" id="user_Id" class="memberInputBox" placeholder="아이디 : 8글자이상 입력하세요(한글 불가)" name="M_ID" value="" maxlength="30" />
 							<br>
-							<div class="alert alert-idsuccess" id="alert-idsuccess">
+							<div class="alert alert-idsuccess" id="alert-idsuccess" style="display: none">
 								<font style="color: blue">사용할 수 있는 아이디 입니다</font>
 							</div>
-							<div class="alert alert-iddanger" id="alert-iddanger">
+							<div class="alert alert-iddanger" id="alert-iddanger" style="display: none">
 								<font style="color: red">사용할 수 없는 아이디 입니다</font>
 							</div>
-							<div class="alert alert-idrefresh" id="alert-idrefresh">
+							<div class="alert alert-idrefresh" id="alert-idrefresh" style="display: none">
 								<font style="color: red">중복검사를 실행해주세요</font>
 							</div>
 							<input type="hidden" id="checkId" name="checkId" value="">
@@ -83,9 +83,9 @@
 							비밀번호
 						</div>
 						<div class="col-sm-8" style="text-align: left;">
-							<input type="password" name="M_PW" id="pw1" class="memberInputBox" maxlength="30" size="15" placeholder="비밀번호는 8~16자리로 작성해주세요" />
+							<input type="password" name="M_PW" id="pw1" class="memberInputBox" maxlength="30" size="15" placeholder="비밀번호는 8~16자리로 작성해주세요" onkeypress="caps_lock(event);"/>
 							<br>
-							<div class="alert alert-capslock" id="alert-capslock">
+							<div class="alert alert-capslock" id="alert-capslock" style="display: none">
 								<font style="color: red">capslock키가 켜져 있습니다.</font>
 							</div>
 						</div>
@@ -98,8 +98,8 @@
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="password" name="M_PWCorre" class="memberInputBox" id="pw2" maxlength="30" size="15" placeholder="작성하신 비밀번호와 일치해야합니다"/>
 							<br>
-							<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
-							<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+							<div class="alert alert-success" id="alert-success" style="display: none"><font style="color: blue">비밀번호가 일치합니다.</font></div>
+							<div class="alert alert-danger" id="alert-danger"style="display: none"><font style="color: red">비밀번호가 일치하지 않습니다.</font></div>
 						</div>
 					</div>
 
@@ -119,13 +119,13 @@
 						<div class="col-sm-8" style="text-align: left;">
 							<input type="text" id="user_NickName" class="memberInputBox" placeholder="닉네임 : 2글자 이상 입력하세요" name="M_NICKNAME" maxlength="30" size="15" />
 							<br>
-							<div class="alert alert-nicksuccess" id="alert-nicksuccess">
+							<div class="alert alert-nicksuccess" id="alert-nicksuccess" style="display: none">
 								<font style="color: blue">사용할 수 있는 닉네임 입니다</font>
 							</div>
-							<div class="alert alert-nickdanger" id="alert-nickdanger">
+							<div class="alert alert-nickdanger" id="alert-nickdanger" style="display: none">
 								<font style="color: red">사용할 수 없는 닉네임 입니다</font>
 							</div>
-							<div class="alert alert-nickfresh" id="alert-nickfresh">
+							<div class="alert alert-nickfresh" id="alert-nickfresh" style="display: none">
 								<font style="color: red">중복검사를 실행해주세요</font>
 							</div>
 							<input type="hidden" id="checkNick" name="checkNick" value="">
@@ -148,7 +148,6 @@
 						<font style="font-size: 30px;border: 0px">@</font>
 						</div>
 						<div class="col-sm-3" >
-							<!-- <input id="email2" class="memberInputBox" name="M_EMAIL_DOMAIN" placeholder="Ex) hanmail.net" maxlength="30" style="width: 100%;;margin-left: 0px"/> -->
 							<select id="email2" name="M_EMAIL_DOMAIN" class="memberInputBox">
 			                <option value="" selected="selected">- 이메일 선택 -</option>
 			                <option value="naver.com">naver.com</option>
@@ -169,13 +168,13 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-8" style="float: center;">
-							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px">
-								<font style="color: blue">사용할 수 있는 이메일 입니다</font>
+							<div class="alert alert-emailsuccess" id="alert-emailsuccess" style="padding-bottom: 10px;display: none">
+								<font style="color: blue" >사용할 수 있는 이메일 입니다</font>
 							</div>
-							<div class="alert alert-emaildanger" id="alert-emaildanger" style="padding-bottom: 10px;text-align: center">
+							<div class="alert alert-emaildanger" id="alert-emaildanger" style="padding-bottom: 10px;text-align: center;display: none">
 								<font style="color: red">사용할 수 없는 이메일 입니다</font>
 							</div>
-							<div class="alert alert-emailfresh" id="alert-emailfresh" style="padding-bottom: 10px">
+							<div class="alert alert-emailfresh" id="alert-emailfresh" style="padding-bottom: 10px;display: none">
 								<font style="color: red">중복검사를 실행해주세요</font>
 							</div>
 						</div>
@@ -251,26 +250,13 @@
 	<!-- 스크립트 부분 -->
 
 	<script>
-$("#alert-idsuccess").hide();
-$("#alert-iddanger").hide();
-$("#alert-idrefresh").hide();
-
-$("#alert-nicksuccess").hide();
-$("#alert-nickdanger").hide();
-$("#alert-nickfresh").hide();
-
-$("#alert-emailsuccess").hide();
-$("#alert-emaildanger").hide();
-$("#alert-emailfresh").hide();
-
-
 $(document).ready(function() {
 	
 	$("#user_Id").change(function() {
 		
 		$('#checkId').val('2');
-		$("#alert-idsuccess").hide();
-		$("#alert-idrefresh").show();
+		$("#alert-idsuccess").css("display","none");
+		$("#alert-idrefresh").css("display","");
 		
 	});
 });
@@ -280,8 +266,8 @@ $(document).ready(function () {
 	$("#checkNiCK,#user_NickName").change(function() {
 		
 		$('#checkNick').val('2');
-		$("#alert-nicksuccess").hide();
-		$("#alert-nickfresh").show();
+		$("#alert-nicksuccess").css("display","none");
+		$("#alert-nickfresh").css("display","");
 	});
 });
 
@@ -290,9 +276,9 @@ $(document).ready(function () {
 	$("#checkEmail,#email1,#email2").change(function() {
 		
 		$('#checkEmail').val('2');
- 		$("#alert-emailsuccess").hide();
-		$("#alert-emailfresh").show();
-		$("#alert-emaildanger").hide();
+ 		$("#alert-emailsuccess").css("display","none");
+		$("#alert-emailfresh").css("display","");
+		$("#alert-emaildanger").css("display","none");
 	});
 	
 });
@@ -300,10 +286,6 @@ $(document).ready(function () {
 
 	<!-- 아이디확인 -->
 	<script>
-		$("#alert-idsuccess").hide();
-		$("#alert-iddanger").hide();
-		$("#alert-refresh").hide();
-	
 	 	//한글입력방지
 		 $("#user_Id").keyup(function(event){
 		    if (!(event.keyCode >=37 && event.keyCode<=40)) {
@@ -343,15 +325,15 @@ $(document).ready(function () {
 				},
 				success : function(result) {
 					if (result == 0) {
-						$("#alert-idsuccess").show();
-						$("#alert-iddanger").hide(); 
-						$("#alert-idrefresh").hide();
+						$("#alert-idsuccess").css("display","");
+						$("#alert-iddanger").css("display","none");
+						$("#alert-idrefresh").css("display","none");
 						
 						$('input[id=checkId]').attr('value','1'	);
 						
 					}else if(result ==1 ){
-						$("#alert-idsuccess").hide();
-						$("#alert-iddanger").show();
+						$("#alert-idsuccess").css("display","none");
+						$("#alert-iddanger").css("display","");
 						
 					}else{
 						alert("에러가 발생했습니다.");
@@ -368,30 +350,20 @@ $(document).ready(function () {
 	<script>
 //capslock 검사
 
-  $("#alert-capslock").hide();
 
-    function caps_lock(e) {
+    function caps_lock(event) {
             var keyCode = 0;
             var shiftKey = false;
-            keyCode = e.keyCode;
-            shiftKey = e.shiftKey;
+            keyCode = event.keyCode;
+            shiftKey = event.shiftKey;
             if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
                     || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
-                show_caps_lock();
-                setTimeout("hide_caps_lock()", 3500);
+                $("#alert-capslock").css("display","");
+                return;
             } else {
-                hide_caps_lock();
+            	$("#alert-capslock").css("display","none");
             }
         }
- 
-    function show_caps_lock() {
-         $("#alert-capslock").show();
-    }
- 
-    function hide_caps_lock() {
-         $("#alert-capslock").hide();
-    }
-    
 	//한글입력방지
 	 $("#pw1").keyup(function(event){
 	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
@@ -406,8 +378,8 @@ $(document).ready(function () {
 		    }
 		}); 
  $(function () {
-	$("#alert-success").hide();
-	$("#alert-danger").hide();
+	$("#alert-success"). css("display","none");
+	$("#alert-danger").css("display","none");
 	$("input").keyup(function() {
 		
 		var pw1 =$("#pw1").val();
@@ -415,11 +387,11 @@ $(document).ready(function () {
 		
 		 if (pw1 !="" || pw2 != ""){		
 			if (pw1 ==pw2) {
-				$("#alert-success").show();
-				$("#alert-danger").hide();
+				$("#alert-success").css("display","");
+				$("#alert-danger").css("display","none");
 			}else{
-				$("#alert-success").hide();
-				$("#alert-danger").show();
+				$("#alert-success").css("display","none");
+				$("#alert-danger").css("display","");
 			}
 		}
 	});
@@ -429,10 +401,6 @@ $(document).ready(function () {
 
 	<!-- 닉네임 중복확인 시작 -->
 	<script>
-
-$("#alert-nicksuccess").hide();
-$("#alert-nickdanger").hide();
-$("#alert-nickfresh").hide();
 
 $(document).ready(function() {
 	$("#user_nickName_checkBtn").unbind("click").click(function(e) {
@@ -447,11 +415,14 @@ function nickCheck() {
 	var checkNick =$("#checkNick").val();
 	
 	if (userNick.length <1) {
-		swal("닉네임을 입력해주세요.")
+		swal("닉네임을 입력해주세요.");
+		return;
 	}else if(userNick.length<2){
-		swal("닉네임은 최소 2글자 이상입니다.")
+		swal("닉네임은 최소 2글자 이상입니다.");
+		return;
 	}else if(userNick.length>12){
-		swal("닉네임은 12글자 이하입니다.")
+		swal("닉네임은 12글자 이하입니다.");
+		return;
 	}else{
 		$.ajax({
 			type : "POST",
@@ -464,13 +435,13 @@ function nickCheck() {
 			},
 			success : function(result) {
 				if (result==0) {
-					$("#alert-nicksuccess").show();
-					$("#alert-nickdanger").hide();
-					$("#alert-nickfresh").hide();
+					$("#alert-nicksuccess").css("display","");
+					$("#alert-nickdanger").css("display","none");
+					$("#alert-nickfresh").css("display","none");
 					$('input[id=checkNick]').attr('value','1');
 				}else if(result==1){
-					$("#alert-nicksuccess").hide();
-					$("#alert-nickdanger").show();
+					$("#alert-nicksuccess").css("display","none");
+					$("#alert-nickdanger").css("display","");
 				}else{
 					alert("에러가 발생했습니다.");					
 				}
@@ -533,10 +504,6 @@ function nickCheck() {
 
 <!-- 이메일 중복 및 정규식 확인 -->
 <script>
-$("#alert-emailsuccess").hide();
-$("#alert-emaildanger").hide();
-$("#alert-emailfresh").hide();
-
 $(document).ready(function(){
     $('#email2').change(function(){
         var email = $("#email2").val(); //id선택자로 email select box값 추출하여 저장
@@ -552,6 +519,7 @@ $(document).ready(function(){
 
 $(document).ready(function() {
 	$("#user_Email_checkBtn").unbind("click").click(function(e) {
+		$("#checkNum").val("0");
 		e.preventDefault();
 		check();		
 	});
@@ -593,10 +561,20 @@ function check() {
 	if (email1.length < 1) {
 		swal("이메일을 입력해주세요")
 		f.M_EMAIL_ID.focus();
+		return;
 	}
 	if (email2.length < 1) {
 		swal("정확한 형식을 기입해주세요.")
 		f.M_EMAIL_DOMAIN.focus();
+		return;
+	}else if($("#email1").val().length<1){
+		swal("이메일을 작성해주세요");
+		$('#email1').focus();
+		return;
+	}else if($("#email2").val().length<1){
+		swal("이메일을 작성해주세요");
+		$('#email1').focus();
+		return;
 	}else{
 	  $.ajax({
 			type : "POST",
@@ -608,14 +586,14 @@ function check() {
 			},
 			success : function(result) {
 				if (result==0) {
-					$("#alert-emailsuccess").show();
-					$("#alert-emaildanger").hide();
-					$("#alert-emailfresh").hide();
+					$("#alert-emailsuccess").css("display","");
+					$("#alert-emaildanger").css("display","none");
+					$("#alert-emailfresh").css("display","none");
 					$("#checkEmail").attr('value','1');
 				}else if(result==1){
-					$("#alert-emailsuccess").hide();
-					$("#alert-emaildanger").show();
-					$("#alert-emailfresh").hide();
+					$("#alert-emailsuccess").css("display","none");
+					$("#alert-emaildanger").css("display","");
+					$("#alert-emailfresh").css("display","none");
 				}else{
 					alert("에러가 발생했습니다.");					
 				}
@@ -629,11 +607,27 @@ function check() {
 <!-- 이메일 보내기 -->
 <script>
  	function sendMail(email1,email2){
- 		
-		
 		var email1 =document.getElementById("email1").value; 
 		var email2 =document.getElementById("email2").value; 
 		var email = email1+ "@" + email2;
+ 		if (email1.length < 1) {
+ 			swal("이메일을 입력해주세요")
+ 			f.M_EMAIL_ID.focus();
+ 			return;
+ 		}
+ 		if (email2.length < 1) {
+ 			swal("정확한 형식을 기입해주세요.")
+ 			f.M_EMAIL_DOMAIN.focus();
+ 			return;
+ 		}else if($("#email1").val().length<1){
+ 			swal("이메일을 작성해주세요");
+ 			$('#email1').focus();
+ 			return;
+ 		}else if($("#email2").val().length<1){
+ 			swal("이메일을 작성해주세요");
+ 			$('#email1').focus();
+ 			return;
+ 		}else{
 		
 		var xhttp = new XMLHttpRequest();
 		
@@ -652,6 +646,7 @@ function check() {
 		
 		//팝업창 열기
 		window.open("<%=cp%>/sendMail_ok.action","이메일 인증","width=400, height=300, left=100,top=50");
+ 		}
 	}  
 </script>
 
@@ -683,6 +678,8 @@ function signUp() {
 	}else if($("#user_Id").val().length>16){
 		swal("아이디는 16자리 이하로 입력해주세요")
 		$('#user_Id').focus();
+	}else if($("#checkId").val() == 2){
+		swal("아이디 중복검사를 해주세요");
 		
 	}else if($("#pw1").val().length<1){
 		swal("비밀번호를 작성해주세요");
@@ -710,6 +707,10 @@ function signUp() {
 		swal("이름을 최소 1자리 이상 입력해주세요.");
 		$('#name').focus();
 		
+	}else if($("#name").val().length<2){
+		swal("이름을 정확히 입력해주세요.");
+		$('#name').focus();	
+		
 	}else if($("#user_NickName").val().length<1){
 		swal("닉네임을 작성해주세요");
 		$('#user_NickName').focus();
@@ -721,6 +722,8 @@ function signUp() {
 	}else if($("#user_NickName").val().length>12){
 		swal("닉네임은 12글자 이하입니다.");
 		$('#user_NickName').focus();
+	}else if($("#checkNick").val() == 2){
+		swal("닉네임 중복검사를 해주세요");	
 		
 	}else if($("#email1").val().length<1){
 		swal("이메일을 작성해주세요");
@@ -729,11 +732,17 @@ function signUp() {
 	}else if($("#email2").val().length<1){
 		swal("이메일을 작성해주세요");
 		$('#email1').focus();
-		
+	}else if($("#checkEmail").val() == 2){
+		swal("이메일 중복검사를 해주세요");
+	}else if($("#checkNum").val() != 1){
+		swal("이메일 인증을 완료해주세요")	
 	}else if($("#t1").val().length<1){
 		swal("전화번호를 작성해주세요");
 		$('#t1').focus();
-		
+	
+	}else if($("#t1").val().length<1){
+		swal("전화번호를 작성해주세요");
+		$('#t1').focus();
 	}else if($("#t1").val().length<2){
 		swal("전화번호를 최소 한 자리 이상 입력해주세요");
 		$('#t1').focus();
@@ -748,7 +757,7 @@ function signUp() {
 		
 	}else if($("#t2").val().length<2){
 		swal("전화번호를 최소 한 자리 이상 입력해주세요");
-		$('#t1').focus();
+		$('#t2').focus();
 		
 	}else if($("#t2").val().length>5){
 		swal("전화번호 형식에 맞지 않습니다. 다시 입력해주세요")
@@ -772,17 +781,6 @@ function signUp() {
 	}else if($("#sample6_address").val().length<1){
 		swal("상세주소를 작성해주세요");
 		$('#sample6_address').focus();
-		
-	}else if($("#checkId").val() == 2){
-		swal("아이디 중복검사를 해주세요");
-		
-	}else if($("#checkNick").val() == 2){
-		swal("닉네임 중복검사를 해주세요");
-		
-	}else if($("#checkEmail").val() == 2){
-		swal("이메일 중복검사를 해주세요");
-	}else if($("#checkNum").val() != 1){
-		swal("이메일 인증을 완료해주세요")
 	}else if($("#sample6_address2").val().length<1){
 		swal("상세주소를 작성해주세요");
 		$('#sample6_address2').focus();
