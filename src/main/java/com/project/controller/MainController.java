@@ -85,6 +85,14 @@ public class MainController {
 		return mav;
 	
 	}
+	@RequestMapping(value="/member/welcome.action")
+	public ModelAndView welcome(HttpServletRequest request) throws Exception {
+		
+		c_service.cookieList(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/joinComplete");
+		return mav;
+	}
 	
 	@ModelAttribute
 	public HttpServletRequest addAttributes(HttpServletRequest req) throws Exception {

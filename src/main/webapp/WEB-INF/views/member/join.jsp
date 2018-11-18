@@ -257,6 +257,7 @@ $(document).ready(function() {
 		$('#checkId').val('2');
 		$("#alert-idsuccess").css("display","none");
 		$("#alert-idrefresh").css("display","");
+		$("#alert-iddanger").css("display","none");
 		
 	});
 });
@@ -267,6 +268,7 @@ $(document).ready(function () {
 		
 		$('#checkNick').val('2');
 		$("#alert-nicksuccess").css("display","none");
+		$("#alert-nickdanger").css("display","none");
 		$("#alert-nickfresh").css("display","");
 	});
 });
@@ -334,6 +336,7 @@ $(document).ready(function () {
 					}else if(result ==1 ){
 						$("#alert-idsuccess").css("display","none");
 						$("#alert-iddanger").css("display","");
+						$("#alert-idrefresh").css("display","none");
 						
 					}else{
 						alert("에러가 발생했습니다.");
@@ -442,6 +445,7 @@ function nickCheck() {
 				}else if(result==1){
 					$("#alert-nicksuccess").css("display","none");
 					$("#alert-nickdanger").css("display","");
+					$("#alert-nickfresh").css("display","none");
 				}else{
 					alert("에러가 발생했습니다.");					
 				}
@@ -626,6 +630,9 @@ function check() {
  		}else if($("#email2").val().length<1){
  			swal("이메일을 작성해주세요");
  			$('#email1').focus();
+ 			return;
+ 		}else if($('#checkEmail').val() != 1){
+ 			swal("이메일 중복검사를 실행해주세요");
  			return;
  		}else{
 		

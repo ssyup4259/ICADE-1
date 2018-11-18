@@ -51,7 +51,7 @@ public class MemberController {
 		
 		memberService.insertMember(m_dto);
 		
-		return "redirect:/";
+		return "redirect:/member/welcome.action";
 	}
 
 	@RequestMapping(value="/idcheck.action")
