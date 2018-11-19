@@ -349,6 +349,3 @@ insert into GOODS_COLOR values (6, '실버');
 insert into GOODS_COLOR values (999, '투명');
 
 commit;
-
-
-
