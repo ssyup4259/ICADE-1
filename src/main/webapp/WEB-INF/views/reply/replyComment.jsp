@@ -64,7 +64,7 @@
 				<!-- 댓글 목록 -->
 					<tr height="60px;" class="even">
 						<!-- 아이디, 작성날짜 -->
-						<td width="15%" valign="top">
+						<td width="15%" valign="top" style="border-right: none;border-bottom: none;border-top: none;border-left: none">
 							<div style="width: 120px; height: 40px;">
 							<div style="margin-top: 15%"></div>
 								${rp_dto.getBC_ID()}<br> <font color="b3cccc" size="2">${rp_dto.getBC_DATE()}</font>
@@ -75,16 +75,17 @@
 							${rp_dto.getBC_CONTENT()}
 						</td>
 						<!-- 버튼 -->
-						<td width="15%">
+						<td width="15%" style="border-right: none;border-bottom: none;border-top: none;border-left: none">
 							<div id="btn" style="text-align: center;">
 								<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->
 								<c:if test="${rp_dto.getBC_ID() == sessionScope.userInfo.getM_ID()}">
-									<button type="button"  onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGreen">수정</button>
+									<button type="button"  onclick="cmUpdateOpen(${rp_dto.getBC_NUM()})" class="btnGray" style="width: 100%;height: 70px">수정하기</button>
 								</c:if>
 							</div> 
 									<input type="hidden" id="BC_UPDATE" value="${rp_dto.getBC_PARENT()}">
 						</td>
 					</tr>
+					<br>
 				</table>
 		</c:forEach>
 			<table style="border: none;background: transparent;color: black;font-size: 17px;padding-left: 3px">
