@@ -353,7 +353,12 @@ table{
 
 							<tr>
 								<td>배송지 선택</td>
-								<td align="left"><input type="radio" id="test1" name="test" checked="checked" onclick="deliveryAddr();" /> <label for="test1">주문자 정보와 동일</label> <input type="radio" id="test2" name="test" onclick="newAddr();" /> <label for="test2">새로운배송지</label></td>
+								<td align="left">
+								<input type="radio" id="test1" name="test" checked="checked" onclick="deliveryAddr();" />
+								<label for="test1" style="cursor: pointer;"><span></span>&nbsp;주문자 정보와 동일&nbsp;</label>
+								<input type="radio" id="test2" name="test" onclick="newAddr();" />
+								<label for="test2" style="cursor: pointer;"><span></span>&nbsp;새로운배송지&nbsp;</label>
+								</td>
 							</tr>
 
 							<tr>
