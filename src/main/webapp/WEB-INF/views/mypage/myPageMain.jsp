@@ -256,7 +256,16 @@ td{
 					<input type="button" value="주문내역조회" id="orderHistory" onclick="location.href='orderHistory.action'" class="btnGreen" style="width: 170px;">
 					<input type="button" value="최근보낸주소" id="opener" class="btnGreen" style="width: 170px;">
 					<div id="dialog" title="최근 보낸 주소">
-  						<p></p>
+  						<p>
+  							<c:if test="${!empty myPageLists}">
+	  							<c:forEach var="dto" items="${myPageLists}">
+	  								<li> 우편번호 : ${dto.getO_ZIPCODE()} <br/> ${dto.getO_ADDRESS1()} - ${dto.getO_ADDRESS2()}</li> 
+	  							</c:forEach>
+	  						</c:if>
+  							<c:if test="${empty myPageLists}">
+	  							<li> 주문 내역이 없습니다. </li>
+  							</c:if>
+  						</p>
 					</div>
 					<br>
 					<br>
@@ -338,7 +347,8 @@ td{
 		$("#dialog").dialog({
 			bgiframe: true,
 	        autoOpen: false,
-	        height: 300,
+	        height: 250,
+	        width : 330,
 	        modal: true,
 			show: {
 			effect: "blind",
@@ -347,8 +357,9 @@ td{
 			hide: {
 			effect: "explode",
 			duration: 1000
-		}
-	});
+			}
+		});
+		
 		$("#opener").on( "click", function(e) {
 			var x = e.pageX;
 		    var y = e.pageY;
