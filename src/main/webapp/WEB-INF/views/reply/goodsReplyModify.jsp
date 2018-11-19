@@ -84,7 +84,7 @@ $("#btnReplyDelete").click(function() {
 
 <body>
 	<div align="center">
-	<textarea id="updateReply" name="updateReply" rows="5" cols="82" class="textAreaGreen">${bc_dto.getBC_CONTENT()}</textarea>
+	<textarea id="updateReply" name="updateReply" rows="5" cols="82" class="textAreaGray">${bc_dto.getBC_CONTENT()}</textarea>
 	</div>
 	<div style="text-align: center;" align="center">
 		<!-- 작성자만 댓글 수정 삭제가 가능하도록 처리 -->
