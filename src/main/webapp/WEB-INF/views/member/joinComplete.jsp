@@ -21,13 +21,29 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<style type="text/css">
+.animation1{
+	position: relative;
+    animation-name: example1;
+    animation-duration: 6s;
+}
+
+@keyframes example1 {
+    0%   {width: 50%; height: 50%;}
+    30%  {left:-400px; top:0px;width: 100%; height: 100%;}
+    60%  {left:400px; top:0px;width: 70%; height: 70%;}
+    100% {left:0px; top:0px;width: 70%; height: 70%;}
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+</style>
 <title>환영합니다!</title>
 </head>
 <body>
 	<jsp:include page="../include/header2.jsp" flush="false" />
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
-			<img src="<%=cp%>/resources/images/logo1.png" style="width: 40%; height: 360px">
+			<img src="<%=cp%>/resources/images/logo1.png" class="animation1">
 			<p style="font-size: 50px">Icade의 가족이 되신걸 환영합니다.</p>
 			<input type="button" class="btnGreen" value="로그인하기" style="width: 20%" onclick="javascript:location.href='<%=cp%>/login.action'">
 			<input type="button" class="btnGray" value="메인으로" style="width: 20%" onclick="javascript:location.href='<%=cp%>/'">
