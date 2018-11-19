@@ -274,6 +274,7 @@ ALTER TABLE Board_Comment add(BC_SUBJECT VARCHAR(30));
 ALTER TABLE Board_Comment add(BC_SAVE1 VARCHAR(200));
 ALTER TABLE Board_Comment add(BC_SAVE2 VARCHAR(200));
 ALTER TABLE Board_Comment add(BC_SAVE3 VARCHAR(200));
+ALTER TABLE Board_Comment MODIFY(BC_SUBJECT VARCHAR(200));
 
 ALTER TABLE Board_Comment DROP COLUMN BC_KIND;
 
@@ -348,6 +349,3 @@ insert into GOODS_COLOR values (6, '실버');
 insert into GOODS_COLOR values (999, '투명');
 
 commit;
-
-
-

@@ -113,7 +113,7 @@
 							<div class="panel panel-primary">
 								<div class="panel-heading">${g_dto.getG_NAME()}</div>
 								<div class="panel-body text-center">
-									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 60%" alt="Image">
+									<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img id="opacity" src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 300px; width: 70%" alt="Image">
 									</a>
 								</div>
 								<div class="panel-footer" style="text-align: right;">
@@ -149,8 +149,8 @@
 
 						<div class="col-sm-3">
 							<div class="thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px; text-align: center">
-								<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="margin: auto; margin-top: 20px;" id="goodsImage">
-									<div style="padding-left: 10%">
+								<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 25%; margin: auto; margin-top: 20px;" id="goodsImage">
+									<div>
 										<p>${g_dto.getG_NAME()}</p>
 									</div>
 									<div class="row">

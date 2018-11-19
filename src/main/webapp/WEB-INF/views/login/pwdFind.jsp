@@ -116,9 +116,9 @@ function idFind() {
 				<br/>
 				<div style="padding: 10px 0px 10px 0px; width: 170px; margin: 0 auto;">
 					<input id="check_email" name="check" value="2" type="radio" checked="checked" onclick="change('email')">
-					<label for="check_email"><span></span>&nbsp;이메일</label>
+					<label for="check_email" style="cursor: pointer;"><span></span>&nbsp;이메일</label>
 					<input id="check_phone" name="check" value="3" type="radio" onclick="change('phone')">
-					<label for="check_phone">
+					<label for="check_phone" style="cursor: pointer;">
 						<span></span>&nbsp;휴대폰번호
 					</label>
 				</div>

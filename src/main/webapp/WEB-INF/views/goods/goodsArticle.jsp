@@ -406,10 +406,10 @@ function like_func(g_num) {
 	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
 		<div class="container">
 			<form id="myForm" name="myForm" method="get" action="" enctype="multipart/form-data">
-				<div align="left" style="font-size: 30px; margin-bottom: 10px; padding-left: 80px;">${g_dto.getG_NAME()}</div>
+				<div align="left" style="font-size: 30px; margin-bottom: 10px; padding-left: 10px;">${g_dto.getG_NAME()}</div>
 				<div class="row">
 					<div class="col-sm-5">
-						<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="border-radius: 15px; height: 90%; width: 70%;">
+						<img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="border-radius: 15px; height: 85%; width: 100%;">
 					</div>
 					<div class="col-sm-7" style="font-size: 20px;">
 						<div class="row" style="height: 60px;">
