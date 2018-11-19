@@ -196,15 +196,15 @@
 							전화번호
 						</div>
 						<div class="col-sm-2" style="text-align: left;padding-right: 22px">
-							<input type="text" class="memberInputBox" id="t1" placeholder="Ex) 010" name="M_CELLPHONE1" maxlength="30"  />
+							<input type="text" class="memberInputBox" id="t1" placeholder="Ex) 010" name="M_CELLPHONE1" maxlength="30" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 						</div>
 						<span style="padding-top: 11px">-</span>
 						<div class="col-sm-3" style="text-align: center;left;margin-right: 0px;margin-left: 0px;padding-left: 0px;padding-right: 0px;">
-							<input type="text" class="memberInputBox" id="t2" placeholder="Ex) 0000" name="M_CELLPHONE2" maxlength="30" style="width: 135px" />
+							<input type="text" class="memberInputBox" id="t2" placeholder="Ex) 0000" name="M_CELLPHONE2" maxlength="30" style="width: 135px" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 						</div>
 						<span style="padding-top: 11px">-</span>
 						<div class="col-sm-3" style="text-align: left;">
-							<input type="text" class="memberInputBox" id="t3" placeholder="Ex) 1234" name="M_CELLPHONE3" maxlength="30" style="width: 140px;padding-left: 20px;padding-right: 10px"  />
+							<input type="text" class="memberInputBox" id="t3" placeholder="Ex) 1234" name="M_CELLPHONE3" maxlength="30" style="width: 140px;padding-left: 20px;padding-right: 10px" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 						</div>
 					</div>
 					<br>
