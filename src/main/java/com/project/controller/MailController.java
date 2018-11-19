@@ -33,7 +33,7 @@ public class MailController {
 		
 		String joinCode = String.valueOf(ran);
 		
-		String subject ="회원가입 인증코드 발급 안내입니다.";
+		String subject ="ICADE 회원가입 인증코드 발급 안내입니다.";
 		StringBuilder sb = new StringBuilder();
 		sb.append("귀하의 인증코드는 " + joinCode + " 입니다.");
 		
