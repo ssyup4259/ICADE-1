@@ -87,12 +87,12 @@ table {
 
 							<td>${dto.getOD_COUNT()}</td>
 							<!--1 노출갯수-->
-							<td><fmt:formatNumber value="${dto.getO_TOT()}" pattern="#,###" />원</td>
+							<td><fmt:formatNumber value="${dto.getOD_PRICE()}" pattern="#,###" />원</td>
 							<td rowspan="1">
 								<div class="buy_dl_info">0원(배송비)</div>
 							</td>
-							<td class="cont2" rowspan="1">배송완료</td>
-							<td><a class="btn_flexible btn_flexible02" onclick="window.open('http://www.deliverytracking.kr/','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;"> <span class="inner">배송조회</span>
+							<td class="cont2" rowspan="1">${Recipientdto.getO_STATUS()}</td>
+							<td><a class="btn_flexible btn_flexible02" onclick="window.open('http://www.deliverytracking.kr/?dummy=one&deliverytype={택배사코드}&keyword=${Recipientdto.getO_TNUM()}','delivery_popup','width=0, height=0, toolbar=no, menubar=no, scrollbars=yes, status=no, resizable=yes');" href="javascript:;"><span class="inner">배송조회</span>
 							</a></td>
 						</tr>
 					</c:forEach>
@@ -120,15 +120,11 @@ table {
 					</tr>
 					<tr>
 						<th scope="row" class="fst">주소</th>
-						<td colspan="3" id="addr">${Recipientdto.getO_ZIPCODE()}<br /> ${Recipientdto.getO_ADDRESS1()} - ${Recipientdto.getO_ADDRESS2()} <span class="way_name">
-								<span class="w_icon">도로명</span>
-								<span>도로명 주소입력</span>
+						<td colspan="3" id="addr"> 
+							<span class="way_name">
+								${Recipientdto.getO_ZIPCODE()}<br /> ${Recipientdto.getO_ADDRESS1()} - ${Recipientdto.getO_ADDRESS2()}
 							</span>
 						</td>
-					</tr>
-					<tr>
-						<th scope="row" class="fst">배송 메시지</th>
-						<td colspan="3" id="ship_message">메세지 입력</td>
 					</tr>
 				</tbody>
 			</table>
@@ -143,7 +139,7 @@ table {
 				<tbody>
 					<tr class="">
 						<th scope="" class="">주문금액</th>
-						<td>35,200원</td>
+						<td><fmt:formatNumber value="${Recipientdto.getO_TOT()+Recipientdto.getO_POINT()}" pattern="#,###" />원</td>
 						<td>상품금액 <fmt:formatNumber value="${Recipientdto.getO_TOT()}" pattern="#,###" />원 (사용포인트 ${Recipientdto.getO_POINT()} Point)
 						</td>
 					</tr>

@@ -32,5 +32,7 @@ public interface MyPageDAO {
 	public int selectSumTot(String O_ID) throws Exception;
 	//해당 아이디의 총 주문 횟수
 	public int selectCountOnum(String O_ID) throws Exception;
+	//최근 보낸 주소
+	public List<OrdersDTO> RecentlySentAddr(String O_ID) throws Exception;
 	
 }
