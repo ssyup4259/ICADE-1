@@ -39,6 +39,18 @@
 		select nvl(count(o_NUM),0) from orders where o_id = #{O_ID}
 	</select>
 	
+	<!-- 최근 보낸 주소 -->
+	<select id="RecentlySentAddr" parameterType="String" resultType="com.project.dto.OrdersDTO">
+		select DISTINCT O_ZIPCODE,O_ADDRESS1,O_ADDRESS2 from(
+		select ROWNUM rnum,O_ID,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2 from (
+		select * from(
+			select O_NUM, o_date,O_ID,O_ZIPCODE,O_ADDRESS1,O_ADDRESS2 from ORDERS
+			where O_ID = #{O_ID}
+	<![CDATA[ 
+		)order by O_date desc) data) where rnum>= 1 and rnum <= 3
+	]]>
+	</select>
+	
 
 <!-- 회원탈퇴 -->
 

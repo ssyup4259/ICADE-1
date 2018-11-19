@@ -83,6 +83,8 @@ public class MyPageServiceImpl implements MyPageService {
 
 		String M_ID = vo.getM_ID();
 		
+		List<OrdersDTO> myPageLists =  my_dao.RecentlySentAddr(M_ID);
+		
 		int point = my_dao.pointCheck(M_ID);
 		
 		int o_Tot = my_dao.selectSumTot(M_ID);
@@ -91,6 +93,7 @@ public class MyPageServiceImpl implements MyPageService {
 		int usedPoint = my_dao.usedPointCheck(M_ID);
 		String jsonM_id = new Gson().toJson(M_ID);
 		
+		request.setAttribute("myPageLists", myPageLists);
 		request.setAttribute("SellCount", SellCount);
 		request.setAttribute("usedPoint", usedPoint);
 		request.setAttribute("jsonM_id", jsonM_id);

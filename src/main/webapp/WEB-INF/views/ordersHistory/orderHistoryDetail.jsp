@@ -120,15 +120,11 @@ table {
 					</tr>
 					<tr>
 						<th scope="row" class="fst">주소</th>
-						<td colspan="3" id="addr">${Recipientdto.getO_ZIPCODE()}<br /> ${Recipientdto.getO_ADDRESS1()} - ${Recipientdto.getO_ADDRESS2()} <span class="way_name">
-								<span class="w_icon">도로명</span>
-								<span>도로명 주소입력</span>
+						<td colspan="3" id="addr"> 
+							<span class="way_name">
+								${Recipientdto.getO_ZIPCODE()}<br /> ${Recipientdto.getO_ADDRESS1()} - ${Recipientdto.getO_ADDRESS2()}
 							</span>
 						</td>
-					</tr>
-					<tr>
-						<th scope="row" class="fst">배송 메시지</th>
-						<td colspan="3" id="ship_message">메세지 입력</td>
 					</tr>
 				</tbody>
 			</table>

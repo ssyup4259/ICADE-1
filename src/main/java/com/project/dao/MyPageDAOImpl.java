@@ -94,4 +94,14 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public int selectCountOnum(String O_ID) throws Exception {
 		return sessionTemplate.selectOne("com.project.mybatis.myPageMapper.selectCountOnum",O_ID);
 	}
+
+	@Override
+	public List<OrdersDTO> RecentlySentAddr(String O_ID) throws Exception {
+
+		List<OrdersDTO> lists = new ArrayList<OrdersDTO>(); 
+		
+		lists = sessionTemplate.selectList("com.project.mybatis.myPageMapper.RecentlySentAddr",O_ID);
+		
+		return lists;
+	}
 }
