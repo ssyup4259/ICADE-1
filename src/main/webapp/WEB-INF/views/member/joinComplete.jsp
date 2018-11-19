@@ -24,13 +24,15 @@
 <title>환영합니다!</title>
 </head>
 <body>
-<jsp:include page="../include/header2.jsp" flush="false" />
-<div align="center">
- 	<img src="<%=cp%>/resources/images/logo3.png" style="width: 40%;height: 360px">
- 	<p style="font-size: 50px">Icade의 가족이 되신걸 환영합니다.</p>
- 	<input type="button" class="btnGreen" value="로그인하기" style="width: 20%" onclick="javascript:location.href='<%=cp%>/login.action'">
- 	<input type="button" class="btnGray" value="메인으로" style="width: 20%" onclick="javascript:location.href='<%=cp%>/'">
-</div>
+	<jsp:include page="../include/header2.jsp" flush="false" />
+	<div class="container-fluid text-center" style="background-color: #F2F1F0; padding-top: 50px; padding-bottom: 50px;">
+		<div class="container">
+			<img src="<%=cp%>/resources/images/logo1.png" style="width: 40%; height: 360px">
+			<p style="font-size: 50px">Icade의 가족이 되신걸 환영합니다.</p>
+			<input type="button" class="btnGreen" value="로그인하기" style="width: 20%" onclick="javascript:location.href='<%=cp%>/login.action'">
+			<input type="button" class="btnGray" value="메인으로" style="width: 20%" onclick="javascript:location.href='<%=cp%>/'">
+		</div>
+	</div>
 
 	<jsp:include page="../include/footer.jsp" flush="false" />
 </body>

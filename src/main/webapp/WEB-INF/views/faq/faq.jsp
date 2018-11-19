@@ -322,12 +322,12 @@ $(document).ready(function () {
 						<div style="text-align: left; margin-top: 30px;">
 						<table style="text-align: center;" cellpadding="10" cellspacing="0">
 							<c:forEach var="n_dto" items="${n_lists }">
-								<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}" style="color: black;">${n_dto.getBN_NUM() }. ${n_dto.getBN_SUBJECT() }</a>
+								<a href="<%=cp%>/notice/noticeDetail.action?BN_NUM=${n_dto.getBN_NUM()}" style="color: #8F9493; font-size: 20px;">${n_dto.getBN_NUM() }. ${n_dto.getBN_SUBJECT() }</a>
 								<hr style="border: 1px solid #8F9493;">
 								<br>
 							</c:forEach>
 							<tr>
-								<td colspan="9" style="border: 0;">
+								<td colspan="9" style="border: 0; border-radius: 12px;">
 									<c:if test="${dataCount!=0 }">
 										${pageIndexList }
 									</c:if> <c:if test="${dataCount==0 }">
