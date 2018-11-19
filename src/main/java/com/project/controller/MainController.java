@@ -86,11 +86,20 @@ public class MainController {
 	
 	}
 	@RequestMapping(value="/member/welcome.action")
-	public ModelAndView welcome(HttpServletRequest request) throws Exception {
+	public ModelAndView welcome(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		c_service.cookieList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/joinComplete");
+		
+		MemberDTO m_dto = (MemberDTO)session.getAttribute("userInfo");
+		
+		if (m_dto == null) {
+			mav.setViewName("member/joinComplete");
+		} else {
+			mav.setViewName("home");
+		}
+		
 		return mav;
 	}
 	
