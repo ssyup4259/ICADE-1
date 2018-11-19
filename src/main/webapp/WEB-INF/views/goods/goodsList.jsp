@@ -86,7 +86,7 @@
 
 						<div class="col-sm-3">
 							<div class="thumbnail" style="border-radius: 30px; padding: 6px; margin: 0px;">
-								<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}&GK_KIND_NUM=${gdKindNum}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="height: 30%; margin: auto; margin-top: 20px;"" id="goodsImage">
+								<a href="<%=cp%>/goods/goodsArticle.action?G_NUM=${g_dto.getG_NUM()}&GK_KIND_NUM=${gdKindNum}"> <img src="<%=cp%>/resources/goodsImage/${g_dto.getG_SAVEFILENAME()}" style="width: 100%; height: 30%; margin: auto; margin-top: 20px;"" id="goodsImage">
 									<div style="padding-left: 10%">
 										<p>${g_dto.getG_NAME()}</p>
 									</div>
