@@ -117,7 +117,7 @@
 				<input type="hidden" name="M_RANK" value="${M_RANK}" />
 				<input type="hidden" name="searchKey" value="${searchKey}" />
 				<input type="hidden" name="searchValue" value="${searchValue}" />
-				<table cellpadding="10" cellspacing="0" style="margin: auto; width: 80%;">
+				<table cellpadding="10" cellspacing="0" style="margin: auto; width: 90%;">
 					<thead style="border: none;">
 						<tr>
 							<th>회원 권한</th>
