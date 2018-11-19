@@ -179,7 +179,7 @@ $(document).ready(function () {
 						<div style="float: left; font-size: 11px; background: transparent;">
 							<ul style="" class="ab">
 								<li class="dropbtn" style="text-align: left; background: transparent;">
-									<a href="#answer1" class="ab" onclick="faqMove(1);" style="background: transparent; background-color: transparent;">1.주문방법</a>
+									<a href="#answer" class="ab" onclick="faqMove(1);" style="background: transparent; background-color: transparent;">1.주문방법</a>
 									<ul id="answer1">
 										<li class="" style="">
 											상품검색 → 장바구니에 담기 → 회원ID 로그인 또는 비회원 주문 → 주문서 작성 → 결제방법선택 및 결제 → 주문 성공 화면 (주문번호)
@@ -191,7 +191,7 @@ $(document).ready(function () {
 							</ul>
 							<ul style="border-radius: 6px; padding-top: 0px; margin-top: 0px" class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer2" onclick="faqMove(2);">2. 결제안내</a>
+									<a href="#answer" onclick="faqMove(2);">2. 결제안내</a>
 									<ul id="answer2">
 										<li class="" style="text-align: left;">
 											상품검색 → 장바구니에 담기 → 회원ID 로그인 또는 비회원 주문 → 주문서 작성 → 결제방법선택 및 결제 → 주문 성공 화면 (주문번호)
@@ -203,7 +203,7 @@ $(document).ready(function () {
 							</ul>
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer3" onclick="faqMove(3);">3. 주문조회</a>
+									<a href="#answer" onclick="faqMove(3);">3. 주문조회</a>
 									<ul id="answer3">
 										<li class="" style="text-align: left;">
 											상품검색 → 장바구니에 담기 → 회원ID 로그인 또는 비회원 주문 → 주문서 작성 → 결제방법선택 및 결제 → 주문 성공 화면 (주문번호)
@@ -215,7 +215,7 @@ $(document).ready(function () {
 							</ul>
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer4" onclick="faqMove(4);">4. 주문 후 옵션변경</a>
+									<a href="#answer" onclick="faqMove(4);">4. 주문 후 옵션변경</a>
 									<ul id="answer4">
 										<li class="" style="text-align: left;">
 											상품검색 → 장바구니에 담기 → 회원ID 로그인 또는 비회원 주문 → 주문서 작성 → 결제방법선택 및 결제 → 주문 성공 화면 (주문번호)
@@ -230,7 +230,7 @@ $(document).ready(function () {
 						<div style="float: left; font-size: 14px; background: transparent;">
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer5" onclick="faqMove(5);"><font style="font-size: 13">배송</font></a>
+									<a href="#answer" onclick="faqMove(5);"><font style="font-size: 13">배송</font></a>
 									<ul id="answer5">
 										<li class="">배송안내 배송안내 월요일 오전10시 , 화요일~금요일 오후2시 이전 결제완료 주문건은 당일발송이진행되며,발송후 1일-2일정도의 배송기간이 소요됩니다. 우체국택배를 이용하여,일요일,공휴일은 쉽니다. ※상품의 재고상황에따라 당일발송이 불가능할수있습니다.※ 2.주문상품 배송안내 주문제작상품의 제작기간은 주문후 익일로부터 주말,공휴일 제외 1일~3일 정도 소요되며, 제작상황에따라 제작기간이 변동될수있습니다. 제작기간동안 배송상태는 [배송보류]로 표시되며, 제작후 발송기간은 1일-2일정도 소요됩니다.</li>
 									</ul>
@@ -241,39 +241,39 @@ $(document).ready(function () {
 						<div style="float: left; font-size: 14px; background: transparent;">
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer6" onclick="faqMove(6);"><font style="font-size: 13">1.교환/환불</font></a>
+									<a href="#answer" onclick="faqMove(6);"><font style="font-size: 13">1.교환/환불</font></a>
 									<ul id="answer6">
 										<li class="">
 											1.교환/환불 안내
 											<br>
 											단순변심,기종/옵션변경 등 교환/환불을 원하실 경우 고객님께서 받아보신 상품의
 											<br>
-											구성품과 포장상태가 온전한 상태로 배송완료후 10일 이내 아이몰에 도착을 해야 교환/ 환불이 가능하십니다.
+											구성품과 포장상태가 온전한 상태로 배송완료후 10일 이내 icade에 도착을 해야 교환/ 환불이 가능하십니다.
 										</li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer7" onclick="faqMove(7);"><font style="font-size: 13">2.불량 교환/환불안내</font></a>
+									<a href="#answer" onclick="faqMove(7);"><font style="font-size: 13">2.불량 교환/환불안내</font></a>
 									<ul id="answer7">
 										<li class="">
-											아이몰의 판매제품은 소모품으로 수령즉시 확인된 불량 상품에대해서만 교환/환불 처리가 가능하십니다. 사용중 발생된 손상은 교환/환불 또는 A/S가 불가능한점 양해부탁드립니다.
+											icade의 판매제품은 소모품으로 수령즉시 확인된 불량 상품에대해서만 교환/환불 처리가 가능하십니다. 사용중 발생된 손상은 교환/환불 또는 A/S가 불가능한점 양해부탁드립니다.
 											<br>
 
-											불량상품 또는 오배송 확인시 해당제품은 약식서를 작성후 상품과 함께포장하여 우체국택배를통해 착불접수후 아이몰반품주소로 보내주시면 제품확인후 교환 또는 환불 처리를 도와드리도록하겠습니다. 보내주실때 꼭 약식서를 필수로 작성부탁드립니다! 우체국 반품택배접수 ☎ 1588-1300
+											불량상품 또는 오배송 확인시 해당제품은 약식서를 작성후 상품과 함께포장하여 우체국택배를통해 착불접수후 icade반품주소로 보내주시면 제품확인후 교환 또는 환불 처리를 도와드리도록하겠습니다. 보내주실때 꼭 약식서를 필수로 작성부탁드립니다! 우체국 반품택배접수 ☎ 1588-1300
 										</li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer8" onclick="faqMove(8);"><font style="font-size: 13">3.교환/환불 처리 일정 </font></a>
+									<a href="#answer" onclick="faqMove(8);"><font style="font-size: 13">3.교환/환불 처리 일정 </font></a>
 									<ul id="answer8">
 										<li class="">
-											교환_제품을 아이몰에서 수령후 , 1일-2일후 교환상품이 출고가 진행됩니다.
+											교환_제품을 icade에서 수령후 , 1일-2일후 교환상품이 출고가 진행됩니다.
 											<br>
-											환불_제품을 아이몰에서 수령후 ,1일-2일후 환불처리가 진행됩니다.
+											환불_제품을 icade에서 수령후 ,1일-2일후 환불처리가 진행됩니다.
 											<br>
 											환불금액은 결제상태에 따라 3일-7일정도 후 환급처리가 될수있으며,
 											<br>
@@ -290,7 +290,7 @@ $(document).ready(function () {
 						<div style="float: left; font-size: 14px; background: transparent;">
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer9" onclick="faqMove(9);"><font style="font-size: 13"> 1. 적립금</font></a>
+									<a href="#answer" onclick="faqMove(9);"><font style="font-size: 13"> 1. 적립금</font></a>
 									<ul id="answer9">
 										<li class="">출석체크 , 더 러너(모바일게임) , 결제금액 , 이벤트, 포토리뷰작성 등을 통해 적립이 가능하며, 5000원이상 적립금부터 사용 가능합니다.</li>
 									</ul>
@@ -298,7 +298,7 @@ $(document).ready(function () {
 							</ul>
 							<ul class="ab">
 								<li class="dropbtn" style="text-align: left">
-									<a href="#answer10" onclick="faqMove(10);"><font style="font-size: 13">2. 회원혜택</font></a>
+									<a href="#answer" onclick="faqMove(10);"><font style="font-size: 13">2. 회원혜택</font></a>
 									<ul id="answer10">
 										<li class="dropdown" style="font-size: 13">
 											[silver] 첫 회원가입시 적용, 구매금액의 10%가 적립금으로 적립이 됩니다.
